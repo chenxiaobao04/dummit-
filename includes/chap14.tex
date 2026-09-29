@@ -1,0 +1,2968 @@
+
+\setcounter{chapter}{13}
+
+\chapter{伽罗瓦理论}
+
+\section{基本定义}
+
+上一章我们证明了存在域 \(F\) 的有限扩张，它含有系数在 \(F\) 中的给定多项式 \(f(x)\) 的所有根。伽罗瓦理论（以 Evariste Galois，1811--1832 命名）的主要想法是考虑 \(f(x)\) 的根的置换群与它的分裂域的代数结构之间的关系。这个联系由下一节的\textbf{基本定理}给出。它可以看作数学中一个重要思想的又一个（极其漂亮的）应用：一个对象（在这里是代数对象）作用在另一个对象上，会给出关于两者的结构信息。
+
+本节我们引入所关心的对象的术语与基本性质。设 \(K\) 是域。
+
+\begin{definition}
+（1）\(K\) 到自身的同构 \(\sigma\) 称为 \(K\) 的\textbf{自同构}。\(K\) 的所有自同构的集合记作 \(\operatorname{Aut}(K)\). 若 \(a \in K\)，我们记 \(a^\sigma = \sigma(a)\).
+
+（2）自同构 \(\sigma \in \operatorname{Aut}(K)\) 称为\textbf{固定}元素 \(a \in K\)，若 \(a^\sigma = a\). 若 \(F\) 是 \(K\) 的子集（例如子域），则称自同构 \(\sigma\) \textbf{固定 \(F\)}，若它固定 \(F\) 的所有元素，即对所有 \(a \in F\) 有 \(a^\sigma = a\).
+\end{definition}
+
+注意任何域至少有一个自同构，即恒等映射，记作 1，有时称为\textbf{平凡自同构}。
+
+\(K\) 的素域由 \(1 \in K\) 生成，而由于任何自同构 \(\sigma\) 把 1 映到 1（把 0 映到 0），即 \(\sigma(1) = 1\)，可知对素域中的所有 \(a\) 有 \(a^\sigma = a\). 故域 \(K\) 的任何自同构都固定其素子域。特别地我们看到 \(\mathbb{Q}\) 与 \(\mathbb{F}_p\) 只有平凡自同构：\(\operatorname{Aut}(\mathbb{Q}) = \{1\}\)、\(\operatorname{Aut}(\mathbb{F}_p) = \{1\}\).
+
+\begin{definition}
+设 \(K/F\) 是域扩张。用 \(\operatorname{Aut}(K/F)\) 表示 \(K\) 的固定 \(F\) 的自同构的集合。
+\end{definition}
+
+注意若 \(F\) 是 \(K\) 的素子域，则 \(\operatorname{Aut}(K) = \operatorname{Aut}(K/F)\)，因为 \(K\) 的每个自同构都自动固定 \(F\).
+
+若 \(\sigma\) 与 \(\tau\) 是 \(K\) 的自同构，则复合 \(\sigma\tau\)（以及复合 \(\tau\sigma\)，它们可能不同）有定义，且仍是 \(K\) 的自同构。
+
+\begin{proposition}\label{pro:14.1}
+\(\operatorname{Aut}(K)\) 在复合下是群，\(\operatorname{Aut}(K/F)\) 是它的子群。
+\end{proposition}
+
+\begin{proof}
+显然 \(\operatorname{Aut}(K)\) 是群。若 \(\sigma\) 与 \(\tau\) 是 \(K\) 的固定 \(F\) 的自同构，则 \(\sigma\tau\) 与 \(\sigma^{-1}\) 在 \(F\) 上也是恒等映射，这表明 \(\operatorname{Aut}(K/F)\) 是子群。
+\end{proof}
+
+下面这个命题对确定代数扩张的自同构极其有用。
+
+\begin{proposition}\label{pro:14.2}
+设 \(K/F\) 是域扩张，\(\alpha \in K\) 在 \(F\) 上代数。则对任意 \(\sigma \in \operatorname{Aut}(K/F)\)，\(\alpha^\sigma\) 是 \(\alpha\) 在 \(F\) 上极小多项式的根，即 \(\operatorname{Aut}(K/F)\) 置换不可约多项式的根。等价地，任何系数在 \(F\) 中、以 \(\alpha\) 为根的多项式也以 \(\alpha^\sigma\) 为根。
+\end{proposition}
+
+\begin{proof}
+假设 \(\alpha\) 满足方程
+\[
+\alpha^n+a_{n-1}\alpha^{n-1}+\cdots+a_1\alpha+a_0 = 0,
+\]
+其中 \(a_0, a_1, \ldots, a_{n-1}\) 是 \(F\) 的元素。对两端施加自同构 \(\sigma\)（利用 \(\sigma\) 是加法同态）得到
+\[
+\sigma(\alpha^n)+\sigma(a_{n-1}\alpha^{n-1})+\cdots+\sigma(a_1\alpha)+\sigma(a_0) = \sigma(0) = 0.
+\]
+再利用 \(\sigma\) 也是乘法同态，这变成
+\[
+(\alpha^\sigma)^n+\sigma(a_{n-1})(\alpha^\sigma)^{n-1}+\cdots+\sigma(a_1)(\alpha^\sigma)+\sigma(a_0) = 0.
+\]
+由假设 \(\sigma\) 固定 \(F\) 的所有元素，故 \(\sigma(a_i) = a_i\)（\(i = 0, 1, \ldots, n-1\)）。于是
+\[
+(\alpha^\sigma)^n+a_{n-1}(\alpha^\sigma)^{n-1}+\cdots+a_1(\alpha^\sigma)+a_0 = 0.
+\]
+但这正说明 \(\alpha^\sigma\) 是与 \(\alpha\) 相同的 \(F\) 上多项式的根。这证明了命题。
+\end{proof}
+
+\begin{example}
+（1）设 \(K = \mathbb{Q}(\sqrt{2})\). 若 \(\tau \in \operatorname{Aut}(\mathbb{Q}(\sqrt{2})) = \operatorname{Aut}(\mathbb{Q}(\sqrt{2})/\mathbb{Q})\)，则 \(\tau(\sqrt{2}) = \pm\sqrt{2}\)，因为这是 \(\sqrt{2}\) 的极小多项式的两个根。由于 \(\tau\) 固定 \(\mathbb{Q}\)，这就完全确定了 \(\tau\)：
+\[
+\tau(a+b\sqrt{2}) = a \pm b\sqrt{2}.
+\]
+映射 \(\sqrt{2} \mapsto \sqrt{2}\) 就是 \(\mathbb{Q}(\sqrt{2})\) 的恒等自同构 1. 映射 \(\sigma : \sqrt{2} \mapsto -\sqrt{2}\) 是推论 \ref{cor:13.7} 之后例 2 中考虑过的同构。故 \(\operatorname{Aut}(\mathbb{Q}(\sqrt{2})) = \operatorname{Aut}(\mathbb{Q}(\sqrt{2})/\mathbb{Q}) = \{1, \sigma\}\) 是由 \(\sigma\) 生成的 2 阶循环群。
+
+（2）设 \(K = \mathbb{Q}(\sqrt[3]{2})\). 和前面一样，若 \(\tau \in \operatorname{Aut}(K/\mathbb{Q})\)，则 \(\tau\) 由它在 \(\sqrt[3]{2}\) 上的作用完全确定，因为
+\[
+\tau(a+b\sqrt[3]{2}+c(\sqrt[3]{2})^2) = a+b\tau\sqrt[3]{2}+c(\tau\sqrt[3]{2})^2.
+\]
+由于 \(\tau\sqrt[3]{2}\) 必是 \(x^3-2\) 的根，而这个方程的其他两个根不是 \(K\) 的元素（回忆这个多项式的分裂域在 \(\mathbb{Q}\) 上次数为 6），唯一可能是 \(\tau\sqrt[3]{2} = \sqrt[3]{2}\)，即 \(\tau = 1\). 故 \(\operatorname{Aut}(\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q}) = 1\) 是平凡群。
+\end{example}
+
+一般地，若 \(K\) 由 \(F\) 上一族元素生成，则任何自同构 \(\sigma \in \operatorname{Aut}(K/F)\) 由它在这些生成元上的作用完全确定。若 \(K/F\) 有限，则 \(K\) 由有限多个代数元素在 \(F\) 上有限生成，故由命题，固定 \(F\) 的 \(K\) 的自同构的数目有限，即 \(\operatorname{Aut}(K/F)\) 是有限群。特别地，有限扩张的自同构可以看作有限多个方程的根的置换（然而并非每个置换都给出自同构，上面例 2 表明了这一点）。正是对方程根的置换的研究引导 Galois 得出我们正在描述的理论。
+
+我们已经对每个域扩张 \(K/F\)（等价地，对 \(K\) 的每个子域 \(F\)）关联了一个群 \(\operatorname{Aut}(K/F)\)，即 \(K\) 的固定 \(F\) 的自同构群。人们也可以反过来，对每个自同构群关联一个域扩张。
+
+\begin{proposition}\label{pro:14.3}
+设 \(H \subseteq \operatorname{Aut}(K)\) 是 \(K\) 的自同构群的子群。则 \(K\) 中被 \(H\) 的所有元素固定的元素集合 \(F\) 是 \(K\) 的子域。
+\end{proposition}
+
+\begin{proof}
+设 \(h \in H\)，\(a, b \in F\). 则按定义 \(h(a) = a\)、\(h(b) = b\)，故 \(h(a\pm b) = h(a)\pm h(b) = a\pm b\)、\(h(ab) = h(a)h(b) = ab\)、\(h(a^{-1}) = h(a)^{-1} = a^{-1}\)，故 \(F\) 封闭，从而是 \(K\) 的子域。
+\end{proof}
+
+注意这个命题中 \(H\) 不必是 \(\operatorname{Aut}(K)\) 的子群——被 \(\operatorname{Aut}(K)\) 的某个子集的所有元素固定的 \(K\) 中元素集合也是 \(K\) 的子域。
+
+\begin{definition}
+若 \(H\) 是 \(K\) 的自同构群的子群，则 \(K\) 中被 \(H\) 的所有元素固定的子域称为 \(H\) 的\textbf{固定域}。
+\end{definition}
+
+\begin{proposition}\label{pro:14.4}
+上面定义的「域到群」与「群到域」的对应是反包含的，即
+
+（1）若 \(F_1 \subseteq F_2 \subseteq K\) 是 \(K\) 的两个子域，则 \(\operatorname{Aut}(K/F_2) \subseteq \operatorname{Aut}(K/F_1)\)；
+
+（2）若 \(H_1 \subseteq H_2 \subseteq \operatorname{Aut}(K)\) 是两个自同构子群，相应的固定域分别为 \(F_1\) 与 \(F_2\)，则 \(F_2 \subseteq F_1\).
+\end{proposition}
+
+\begin{proof}
+\(K\) 中任何固定 \(F_2\) 的自同构也固定它的子域 \(F_1\)，这给出（1）。第二个断言类似证明。
+\end{proof}
+
+\begin{example}
+（1）假设 \(K = \mathbb{Q}(\sqrt{2})\) 如上面例 1. 则 \(\operatorname{Aut}(\mathbb{Q}(\sqrt{2})) = \operatorname{Aut}(\mathbb{Q}(\sqrt{2})/\mathbb{Q}) = \{1, \sigma\}\) 的固定域将是 \(\mathbb{Q}(\sqrt{2})\) 中满足
+\[
+\sigma(a+b\sqrt{2}) = a+b\sqrt{2}
+\]
+的元素集合（因为所有元素都被恒等自同构固定）。这是方程 \(a-b\sqrt{2} = a+b\sqrt{2}\)，它等价于 \(b = 0\)，故 \(\operatorname{Aut}(\mathbb{Q}(\sqrt{2})/\mathbb{Q})\) 的固定域就是 \(\mathbb{Q}\).
+
+（2）现在假设 \(K = \mathbb{Q}(\sqrt[3]{2})\) 如上面例 2. 此时 \(\operatorname{Aut}(K) = 1\)，故 \(K\) 的每个元素都被固定，即 \(\operatorname{Aut}(\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q})\) 的固定域是 \(\mathbb{Q}(\sqrt[3]{2})\).
+\end{example}
+
+给定 \(K\) 的子域 \(F\)，关联的群是 \(K\) 的固定 \(F\) 的自同构的集合。给定 \(K\) 的一个自同构群，关联的扩张由取这些自同构的固定域得到。在上面第一个例子中，从 \(\mathbb{Q}(\sqrt{2})\) 的子域 \(\mathbb{Q}\) 出发得到群 \(\{1, \sigma\}\)，而从群 \(\{1, \sigma\}\) 出发得到子域 \(\mathbb{Q}\)，故两者之间存在一种“对偶”。然而在第二个例子中，从 \(\mathbb{Q}(\sqrt[3]{2})\) 的子域 \(\mathbb{Q}\) 出发只得到平凡群，而从平凡群出发得到整个域 \(\mathbb{Q}(\sqrt[3]{2})\).
+
+考察这两个例子表明，对第二个例子而言“自同构不够多”，无法迫使固定域为 \(\mathbb{Q}\) 而不是整个 \(\mathbb{Q}(\sqrt[3]{2})\). 这似乎又是由于 \(x^3-2\) 的其他根（它们是 \(\sqrt[3]{2}\) 在自同构下唯一可能的像）不是 \(\mathbb{Q}(\sqrt[3]{2})\) 的元素。（尽管即使它们是，我们还必须验证可以定义的额外映射确实是自同构。）现在我们精确地给出具有“足够多”自同构的域的概念（引出伽罗瓦扩张的定义）。正如从这两个例子可以猜到的（我们将在下一节证明），这些与分裂域有关。
+
+我们首先考察分裂域情形下自同构群的大小。设 \(F\) 是域，\(E\) 是 \(f(x) \in F[x]\) 在 \(F\) 上的分裂域。主要工具是关于同构延拓存在性的定理 \ref{thm:13.27}，它断言 \(F\) 与 \(F'\) 的任何同构 \(\varphi : F \to F'\) 都可以延拓为 \(E\) 与 \(f'(x) = \varphi(f(x)) \in F'[x]\) 的分裂域 \(E'\) 之间的同构 \(\sigma : E \to E'\).
+
+现在我们通过对 \([E:F]\) 归纳证明这种延拓的数目至多为 \([E:F]\)，且当 \(f(x)\) 在 \(F\) 上可分时取等号。若 \([E:F] = 1\)，则 \(E = F\)、\(E' = F'\)，\(\sigma = \varphi\)，延拓的数目为 1. 若 \([E:F] > 1\)，则 \(f(x)\) 至少有一个次数 \(> 1\) 的不可约因子 \(p(x)\)，相应地有 \(f'(x)\) 的不可约因子 \(p'(x)\). 设 \(\alpha\) 是 \(p(x)\) 的固定根。若 \(\sigma\) 是 \(\varphi\) 到 \(E\) 的任何延拓，则 \(\sigma\) 在 \(E\) 的子域 \(F(\alpha)\) 上的限制是 \(F(\alpha)\) 与 \(E'\) 的某个子域的同构 \(\tau\).
+
+同构 \(\tau\) 由它在 \(\alpha\) 上的作用（即由 \(\tau\alpha\)）完全确定，因为 \(\alpha\) 在 \(F\) 上生成 \(F(\alpha)\). 正如命题 \ref{pro:14.2} 中那样，我们看到 \(\tau\alpha\) 必是 \(p'(x)\) 的某个根 \(\beta\). 于是我们有图形
+\[
+\begin{array}{ccc}
+\sigma : E & \longrightarrow & E'\\
+\big\downarrow & & \big\downarrow\\
+\tau : F(\alpha) & \longrightarrow & F'(\beta)\\
+\big\downarrow & & \big\downarrow\\
+\varphi : F & \longrightarrow & F'
+\end{array}
+\]
+反之，对 \(p'(x)\) 的任何根 \(\beta\) 都存在给出这样图形的延拓 \(\tau\) 与 \(\sigma\)（这是定理 \ref{thm:13.8} 与定理 \ref{thm:13.27}）。故为计算延拓 \(\sigma\) 的数目，只需计算这种图形的可能数目。
+
+\(\varphi\) 到同构 \(\tau\) 的延拓数目等于 \(p'(x)\) 的互异根的数目。由于 \(p(x)\) 与 \(p'(x)\) 的次数都等于 \([F(\alpha):F]\)，我们看到 \(\varphi\) 到 \(\tau\) 的延拓数目至多为 \([F(\alpha):F]\)，且当 \(p(x)\) 的根互异时取等号。
+
+由于 \(E\) 也是 \(f(x)\) 在 \(F(\alpha)\) 上的分裂域，\(E'\) 是 \(f'(x)\) 在 \(F'(\beta)\) 上的分裂域，且 \([E:F(\alpha)] < [E:F]\)，我们可以对这两个域扩张应用归纳假设。由归纳，\(\tau\) 到 \(\sigma\) 的延拓数目 \(\leq [E:F(\alpha)]\)，且当 \(f(x)\) 的根互异时取等号。
+
+由 \([E:F] = [E:F(\alpha)][F(\alpha):F]\) 可知 \(\varphi\) 到 \(\sigma\) 的延拓数目 \(\leq [E:F]\). 当 \(p(x)\) 与 \(f(x)\) 的根互异时取等号，而这等价于 \(f(x)\) 的根互异（因为 \(p(x)\) 是 \(f(x)\) 的因子），完成归纳证明。
+
+在 \(F = F'\)、\(\varphi\) 为恒等映射的特殊情形，我们有 \(f(x) = f'(x)\)、\(E = E'\)，故 \(E\) 到 \(E'\) 的、在 \(F\) 上限制为 \(\varphi\) 的同构就是固定 \(F\) 的 \(E\) 的自同构。我们把它陈述为：
+
+\begin{proposition}\label{pro:14.5}
+设 \(E\) 是多项式 \(f(x) \in F[x]\) 在 \(F\) 上的分裂域。则
+\[
+|\operatorname{Aut}(E/F)| \leq [E:F],
+\]
+且当 \(f(x)\) 在 \(F\) 上可分时取等号。
+\end{proposition}
+
+\noindent\textbf{注：}虽然我们主要关心计算固定 \(F\) 的 \(E\) 的自同构（即上面 \(F = F'\)、\(\varphi = 1\) 的情形），但由于证明中的归纳步骤（它涉及同一个多项式 \(p(x)\) 的两个根对应的域 \(F(\alpha)\) 与 \(F'(\beta)\)）涉及不同的域 \(F'\)），仍然必须考虑更一般的 \(\varphi\) 的情形。
+
+可以修改上面的证明，更一般地证明对任何有限扩张 \(K/F\) 有 \(|\operatorname{Aut}(K/F)| \leq [K:F]\)（我们将在下一节从稍有不同的角度证明这一点）。这给出具有“足够多”自同构的域扩张的概念。
+
+\begin{definition}
+设 \(K/F\) 是有限扩张。若 \(|\operatorname{Aut}(K/F)| = [K:F]\)，则称 \(K\) 在 \(F\) 上\textbf{伽罗瓦}，且 \(K/F\) 是\textbf{伽罗瓦扩张}。若 \(K/F\) 是伽罗瓦的，则自同构群 \(\operatorname{Aut}(K/F)\) 称为 \(K/F\) 的\textbf{伽罗瓦群}，记作 \(\operatorname{Gal}(K/F)\).
+\end{definition}
+
+\noindent\textbf{注：}扩张 \(K/F\) 的伽罗瓦群有时定义为自同构群 \(\operatorname{Aut}(K/F)\)（对一切 \(K/F\)）。我们选择上面的定义，使记号 \(\operatorname{Gal}(K/F)\) 强调扩张 \(K/F\) 有最大数目的自同构。
+
+\begin{corollary}\label{cor:14.6}
+若 \(K\) 是可分多项式 \(f(x)\) 在 \(F\) 上的分裂域，则 \(K/F\) 是伽罗瓦的。
+\end{corollary}
+
+我们将在下一节看到其逆也成立，这将完全刻画伽罗瓦扩张。
+
+还要注意推论 \ref{cor:14.6} 蕴涵 \(\mathbb{Q}\) 上任何多项式的分裂域都是伽罗瓦的，因为 \(f(x)\) 的分裂域显然与 \(f(x)\) 的各不可约因子之积（即除去重因子所得的多项式）的分裂域相同，而后者是可分的（推论 \ref{cor:13.34}）。
+
+\begin{definition}
+若 \(f(x)\) 是 \(F\) 上的可分多项式，则 \(f(x)\) 在 \(F\) 上的\textbf{伽罗瓦群}是 \(f(x)\) 在 \(F\) 上的分裂域的伽罗瓦群。
+\end{definition}
+
+\begin{example}
+（1）扩张 \(\mathbb{Q}(\sqrt{2})/\mathbb{Q}\) 是伽罗瓦的，伽罗瓦群 \(\operatorname{Gal}(\mathbb{Q}(\sqrt{2})/\mathbb{Q}) = \{1, \sigma\} \cong \mathbb{Z}/2\mathbb{Z}\)，其中 \(\sigma\) 是自同构
+\[
+\sigma : \mathbb{Q}(\sqrt{2}) \to \mathbb{Q}(\sqrt{2}), \qquad a+b\sqrt{2} \mapsto a-b\sqrt{2}.
+\]
+
+（2）更一般地，任何特征不等于 2 的域 \(F\) 的任何二次扩张 \(K\) 都是伽罗瓦的。这由推论 \ref{cor:13.13} 之后关于二次扩张的讨论推出：它表明 \(F\) 的任何 2 次扩张 \(K\) 都有形式 \(F(\sqrt{D})\)（某个 \(D\)），从而是 \(x^2-D\) 的分裂域（因为若 \(\sqrt{D} \in K\) 则也有 \(-\sqrt{D} \in K\)）。
+
+（3）扩张 \(\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q}\) 不是伽罗瓦的，因为它的自同构群只有 1 阶。
+
+（4）扩张 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 在 \(\mathbb{Q}\) 上是伽罗瓦的，因为它是多项式 \((x^2-2)(x^2-3)\) 的分裂域。任何自同构 \(\sigma\) 由它在生成元 \(\sqrt{2}\) 与 \(\sqrt{3}\) 上的作用完全确定，而这两个元素必被映到 \(\pm\sqrt{2}\) 与 \(\pm\sqrt{3}\). 故自同构只有映射
+\[
+\sqrt{2} \mapsto \pm\sqrt{2}, \qquad \sqrt{3} \mapsto \pm\sqrt{3}
+\]
+这四种可能。由于伽罗瓦群的阶为 4，这些元素事实上都是 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 在 \(\mathbb{Q}\) 上的自同构。
+
+定义自同构 \(\sigma\) 与 \(\tau\)，更显式地，由
+\[
+\sigma : a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6} \mapsto a-b\sqrt{2}+c\sqrt{3}-d\sqrt{6},
+\]
+\[
+\tau : a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6} \mapsto a+b\sqrt{2}-c\sqrt{3}-d\sqrt{6}
+\]
+给出（因为例如 \(\sigma(\sqrt{6}) = \sigma(\sqrt{2}\sqrt{3}) = \sigma(\sqrt{2})\sigma(\sqrt{3}) = (-\sqrt{2})(\sqrt{3}) = -\sqrt{6}\)）。则 \(\sigma^2(\sqrt{2}) = \sigma(-\sqrt{2}) = \sqrt{2}\)，且显然 \(\sigma^2(\sqrt{3}) = \sqrt{3}\). 故 \(\sigma^2 = 1\) 是恒等自同构。类似地 \(\tau^2 = 1\). 容易计算自同构 \(\sigma\tau\)：
+\[
+\sigma\tau(\sqrt{2}) = \sigma(\tau(\sqrt{2})) = \sigma(\sqrt{2}) = -\sqrt{2},
+\]
+\[
+\sigma\tau(\sqrt{3}) = \sigma(\tau(\sqrt{3})) = \sigma(-\sqrt{3}) = -\sqrt{3},
+\]
+故 \(\sigma\tau\) 是伽罗瓦群中剩下的非平凡自同构。由于这个自同构在伽罗瓦群中也显然有 2 阶，我们有
+\[
+\operatorname{Gal}(\mathbb{Q}(\sqrt{2}, \sqrt{3})/\mathbb{Q}) = \{1, \sigma, \tau, \sigma\tau\},
+\]
+即伽罗瓦群同构于 Klein 四元群。
+
+对 \(\operatorname{Gal}(\mathbb{Q}(\sqrt{2}, \sqrt{3})/\mathbb{Q})\) 的每个子群，都有一个相应的 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 的固定子域。例如，\(\{1, \sigma\tau\}\) 对应的子域是被映射
+\[
+\sigma\tau : a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6} \mapsto a-b\sqrt{2}-c\sqrt{3}+d\sqrt{6}
+\]
+固定的元素集合，即元素 \(a+d\sqrt{6}\) 的集合，也就是域 \(\mathbb{Q}(\sqrt{6})\). 类似地可以确定伽罗瓦群其他子群的固定域：
+\[
+\begin{array}{ll}
+\text{子群} & \text{固定域}\\ \hline
+\{1\} & \mathbb{Q}(\sqrt{2}, \sqrt{3})\\
+\{1, \sigma\} & \mathbb{Q}(\sqrt{3})\\
+\{1, \sigma\tau\} & \mathbb{Q}(\sqrt{6})\\
+\{1, \tau\} & \mathbb{Q}(\sqrt{2})\\
+\{1, \sigma, \tau, \sigma\tau\} & \mathbb{Q}
+\end{array}
+\]
+
+（5）\(x^3-2\) 在 \(\mathbb{Q}\) 上的分裂域是次数为 6 的伽罗瓦扩张。这个方程的根是
+\[
+\sqrt[3]{2}, \qquad \rho\sqrt[3]{2}, \qquad \rho^2\sqrt[3]{2},
+\]
+其中 \(\rho = \zeta_3 = \frac{-1+\sqrt{-3}}{2}\) 是本原 3 次单位根。故分裂域可以写成 \(\mathbb{Q}(\sqrt[3]{2}, \rho\sqrt[3]{2})\). 任何自同构把这两个元素中的每一个映到 \(x^3-2\) 的某个根，给出 9 种可能，但由于伽罗瓦群的阶为 6，并非每个这样的映射都是域的自同构。为确定伽罗瓦群，我们使用一组更方便的生成元，即 \(\sqrt[3]{2}\) 与 \(\rho\). 则任何自同构 \(\sigma\) 把 \(\sqrt[3]{2}\) 映到 \(\sqrt[3]{2}, \rho\sqrt[3]{2}, \rho^2\sqrt[3]{2}\) 之一，把 \(\rho\) 映到 \(\rho\) 或 \(\rho^2 = \frac{-1-\sqrt{-3}}{2}\)，因为这些是分圆多项式 \(\Phi_3(x) = x^2+x+1\) 的根。由于 \(\sigma\) 由它在这两个元素上的作用完全确定，这只给出 6 种可能，故这些可能中每一个实际上都是自同构。为显式地给出这些自同构，设 \(\sigma\) 与 \(\tau\) 是由
+\[
+\sigma : \sqrt[3]{2} \mapsto \rho\sqrt[3]{2}, \quad \rho \mapsto \rho; \qquad \tau : \sqrt[3]{2} \mapsto \sqrt[3]{2}, \quad \rho \mapsto \rho^2 = -1-\rho
+\]
+定义的自同构。和前面一样，它们可以显式地给出在 \(\mathbb{Q}(\sqrt[3]{2}, \rho)\) 的元素（它们是基 \(\{1, \sqrt[3]{2}, (\sqrt[3]{2})^2, \rho, \rho\sqrt[3]{2}, \rho(\sqrt[3]{2})^2\}\) 的线性组合）上的作用。例如
+\[
+\sigma(\rho\sqrt[3]{2}) = (\rho)(\rho\sqrt[3]{2}) = \rho^2\sqrt[3]{2} = (-1-\rho)\sqrt[3]{2} = -\sqrt[3]{2}-\rho\sqrt[3]{2},
+\]
+我们可以类似地确定 \(\sigma\) 在其他基元素上的作用。这给出
+\begin{equation}
+\sigma : a+b\sqrt[3]{2}+c\sqrt[3]{4}+d\rho+e\rho\sqrt[3]{2}+f\rho\sqrt[3]{4} \mapsto a-e\sqrt[3]{2}+(f-c)\sqrt[3]{4}+d\rho+(b-e)\rho\sqrt[3]{2}-c\rho\sqrt[3]{4}. \tag{14.1}
+\end{equation}
+伽罗瓦群的其他元素是恒等映射，以及计算 \(\sigma\tau\) 得：\(\sqrt[3]{2} \mapsto \rho\sqrt[3]{2} \mapsto \rho^2\sqrt[3]{2}\)、\(\rho \mapsto \rho^2 \mapsto \rho^2\)，即 \(\sigma\tau\) 把 \(\sqrt[3]{2}\) 映到 \(\rho^2\sqrt[3]{2}\)、把 \(\rho\) 映到 \(\rho^2\). 于是 \(\sigma\tau = \tau\sigma^2\). 类似地可以算出 \(\sigma^3 = \tau^2 = 1\). 故
+\[
+\operatorname{Gal}(\mathbb{Q}(\sqrt[3]{2}, \rho)/\mathbb{Q}) = \langle \sigma, \tau \rangle \cong S_3
+\]
+是 3 个字母上的对称群。另一种（不那么依赖计算）的论证是：由于 \(G = \operatorname{Gal}(\mathbb{Q}(\sqrt[3]{2}, \rho)/\mathbb{Q})\) 作为 \(x^3-2\) 的 3 个根的置换作用，\(G\) 是 \(S_3\) 的子群，从而由于它的阶为 6 必是 \(S_3\). 上面的计算显式地识别了 \(G\) 中的自同构，并给出 \(G\) 与 \(S_3\) 的显式同构。
+
+与上一例一样，我们可以确定伽罗瓦群任何子群的固定域。例如考虑由 \(\sigma\) 生成的子群 \(\{1, \sigma, \sigma^2\}\) 的固定域。这些正是被 \(\sigma\)（由（14.1）式显式给出）固定的元素，因为若一个元素被 \(\sigma\) 固定则它也被 \(\sigma^2\) 固定。（一般地，某个子群的固定域是该子群的一组生成元所固定的域。）被 \(\sigma\) 固定的元素满足
+\[
+a = a,\quad b = -e,\quad c = f-c,\quad d = d,\quad e = b-e,\quad f = -c,
+\]
+这等价于 \(b = c = f = e = 0\). 故 \(\{1, \sigma, \sigma^2\}\) 的固定域是域 \(\mathbb{Q}(\rho)\).
+
+\noindent\textbf{注：}这个例子表明在由生成元的作用确定伽罗瓦群时必须小心。如前面提到的，并非每个把 \(\sqrt[3]{2}\) 与 \(\rho\) 映到 \(x^3-2\) 的根的映射都会给出域的自同构（例如映射 \(\sqrt[3]{2} \mapsto \rho\sqrt[3]{2}\)、\(\rho\sqrt[3]{2} \mapsto \rho\sqrt[3]{2}\) 显然不可能是自同构，因为它显然不是单射）。关键在于生成元之间可能存在（有时非常微妙的）代数关系，而这些关系必须被自同构保持。例如这里生成元的商是 \(\rho\)，它被映到 1，而不是映到 \(\rho\) 的极小多项式的根。换一种说法，这些生成元的商满足一个二次方程，而这个映射不保持这个性质。
+
+（6）如例 3 那样，域 \(\mathbb{Q}(\sqrt[4]{2})\) 在 \(\mathbb{Q}\) 上不是伽罗瓦的，因为任何自同构由它把 \(\sqrt[4]{2}\) 映到何处确定，而四种可能 \(\{\pm\sqrt[4]{2}, \pm i\sqrt[4]{2}\}\) 中只有两种是该域的元素（两个实根）。
+
+注意我们有 \(\mathbb{Q}(\sqrt{2}) \subset \mathbb{Q}(\sqrt[4]{2})\)，其中 \(\mathbb{Q}(\sqrt{2})/\mathbb{Q}\) 与 \(\mathbb{Q}(\sqrt[4]{2})/\mathbb{Q}(\sqrt{2})\) 由例 2 都是伽罗瓦扩张，因为它们都是二次扩张。这表明伽罗瓦扩张的伽罗瓦扩张不必是伽罗瓦的。
+
+（7）命题 \ref{pro:13.37} 之后构造的有限域扩张 \(\mathbb{F}_{p^n}/\mathbb{F}_p\) 由推论 \ref{cor:14.6} 是伽罗瓦的，因为 \(\mathbb{F}_{p^n}\) 是可分多项式 \(x^{p^n}-x\) 在 \(\mathbb{F}_p\) 上的分裂域。由此这个扩张的自同构群的阶为 \(n\).
+
+命题 \ref{pro:13.35} 中的单同态在此情形是满射，因为 \(\mathbb{F}_{p^n}\) 有限，从而是同构。这给出 \(\mathbb{F}_{p^n}\) 的一个自同构，称为 \textbf{Frobenius 自同构}，我们记作 \(\sigma_p\). 迭代 \(\sigma_p\) 得 \(\sigma_p^2(a) = \sigma_p(\sigma_p(a)) = (a^p)^p = a^{p^2}\). 类似地有 \(\sigma_p^i(a) = a^{p^i}\)（\(i = 0, 1, 2, \ldots\)）。由于 \(a^{p^n} = a\)，我们看到 \(\sigma_p^n = 1\) 是恒等自同构。\(\sigma_p\) 的任何更低次幂都不可能是恒等映射，因为那将蕴涵对某个 \(i < n\) 与所有 \(a \in \mathbb{F}_{p^n}\) 有 \(a^{p^i} = a\)，而这是不可能的，因为这个方程只有 \(p^i\) 个根。由此 \(\sigma_p\) 在伽罗瓦群中的阶为 \(n\)，这意味着 \(\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p)\) 是 \(n\) 阶循环群，以 Frobenius 自同构为生成元。
+
+（8）第 13.5 节考虑过的不可分扩张 \(\mathbb{F}_2(x)\) 在 \(\mathbb{F}_2(t)\) 上（其中 \(x^2-t = 0\)）不是伽罗瓦的。这个 2 次扩张的任何自同构由它在 \(x\) 上的作用确定，而 \(x\) 必被映到方程 \(x^2-t\) 的某个根。由于我们在特征为 2 的域中，我们已经看到这个方程只有一个根（重数为 2）。故这个扩张只有平凡自同构。注意 \(\mathbb{F}_2(x)\) 是 \(x^2-t\) 在 \(\mathbb{F}_2(t)\) 上的分裂域，故这个例子表明推论 \ref{cor:14.6} 中的可分性条件是必要的。
+\end{example}
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item （a）证明若域 \(K\) 由元素 \(\alpha_1, \ldots, \alpha_n\) 在 \(F\) 上生成，则固定 \(F\) 的 \(K\) 的自同构 \(\sigma\) 由 \(\sigma(\alpha_1), \ldots, \sigma(\alpha_n)\) 唯一确定。特别地证明一个自同构固定 \(K\) 当且仅当它固定 \(K\) 的一组生成元。
+
+（b）设 \(G = \operatorname{Gal}(K/F)\) 是扩张 \(K/F\) 的伽罗瓦群的子群，并假设 \(\sigma_1, \ldots, \sigma_k\) 是 \(G\) 的生成元。证明子域 \(E \subseteq K\) 被 \(G\) 固定当且仅当它被生成元 \(\sigma_1, \ldots, \sigma_k\) 固定。
+
+\item 设 \(\tau\) 是由 \(\tau(a+bi) = a-bi\)（复共轭）定义的映射 \(\mathbb{C} \to \mathbb{C}\). 证明 \(\tau\) 是 \(\mathbb{C}\) 的自同构。
+
+\item 确定复共轭在 \(\mathbb{C}\) 上的固定域。
+
+\item 证明 \(\mathbb{Q}(\sqrt{2})\) 与 \(\mathbb{Q}(\sqrt{3})\) 不同构。
+
+\item 显式确定扩张 \(\mathbb{Q}(\sqrt[4]{2})/\mathbb{Q}(\sqrt{2})\) 的自同构。
+
+\item 设 \(k\) 是域。
+
+（a）证明对固定的 \(a, b \in k\)（\(a \neq 0\)），由 \(\varphi(f(t)) = f(at+b)\) 定义的映射 \(\varphi : k[t] \to k[t]\) 是 \(k[t]\) 的、在 \(k\) 上为恒等的自同构。
+
+（b）反之，设 \(\varphi\) 是 \(k[t]\) 的、在 \(k\) 上为恒等的自同构。证明存在 \(a, b \in k\)（\(a \neq 0\)）使如（a）中那样 \(\varphi(f(t)) = f(at+b)\).
+
+\item 本习题确定 \(\operatorname{Aut}(\mathbb{R}/\mathbb{Q})\).
+
+（a）证明任何 \(\sigma \in \operatorname{Aut}(\mathbb{R}/\mathbb{Q})\) 把平方映到平方、把正实数映到正实数。断定 \(a < b\) 蕴涵对每个 \(a, b \in \mathbb{R}\) 有 \(a^\sigma < b^\sigma\).
+
+（b）证明对每个正整数 \(m\)，\(-\frac{1}{m} < a-b < \frac{1}{m}\) 蕴涵 \(-\frac{1}{m} < a^\sigma-b^\sigma < \frac{1}{m}\). 断定 \(\sigma\) 是 \(\mathbb{R}\) 上的连续映射。
+
+（c）证明 \(\mathbb{R}\) 上任何在 \(\mathbb{Q}\) 上为恒等的连续映射是恒等映射，故 \(\operatorname{Aut}(\mathbb{R}/\mathbb{Q}) = 1\).
+
+\item 证明有理函数域 \(k(t)\) 的固定 \(k\) 的自同构正是由 \(t \mapsto \frac{at+b}{ct+d}\)（\(a, b, c, d \in k\)，\(ad-bc \neq 0\)）给出的分式线性变换（故 \(f(t) \in k(t)\) 映到 \(f\left(\frac{at+b}{ct+d}\right)\)）（参见第 13.2 节习题 18）。
+
+\item 确定 \(k(t)\) 的自同构 \(t \mapsto t+1\) 的固定域。
+
+\item 设 \(K\) 是域 \(F\) 的扩张，\(\varphi : K \to K'\) 是 \(K\) 与把 \(F\) 映到 \(K'\) 的子域 \(F'\) 的域 \(K'\) 的同构。证明映射 \(\sigma \mapsto \varphi\sigma\varphi^{-1}\) 定义了群同构 \(\operatorname{Aut}(K/F) \cong \operatorname{Aut}(K'/F')\).
+\end{enumerate}
+
+\section{伽罗瓦理论基本定理}
+
+在上一节考虑的伽罗瓦扩张 \(\operatorname{Gal}(\mathbb{Q}(\sqrt{2}, \sqrt{3})/\mathbb{Q})\) 中，伽罗瓦群的子群图与相应固定域的图之间有很强的相似性（由于对应的反包含性，我们把子群格倒过来画）：
+\[
+\begin{array}{ccc}
+& G = \{1, \sigma, \tau, \sigma\tau\} & \\
+& \swarrow\ \downarrow\ \searrow & \\
+\{1, \tau\} & \{1, \sigma\tau\} & \{1, \sigma\}\\
+& \searrow\ \downarrow\ \swarrow & \\
+& \{1\} &
+\end{array}
+\qquad
+\begin{array}{ccc}
+& \mathbb{Q} & \\
+& \swarrow\ \downarrow\ \searrow & \\
+\mathbb{Q}(\sqrt{2}) & \mathbb{Q}(\sqrt{6}) & \mathbb{Q}(\sqrt{3})\\
+& \searrow\ \downarrow\ \swarrow & \\
+& \mathbb{Q}(\sqrt{2}, \sqrt{3}) &
+\end{array}
+\]
+
+注意这也是这个扩张的所有已知子域的图，且此时每个子域都是 \(\mathbb{Q}\) 的伽罗瓦扩张。
+
+类似地，\(x^3-2\) 的分裂域的伽罗瓦群的子群图与已知子域的图之间也有很强的相似性，第二个图中的子域正是第一个图中子群的固定域。注意在这对图中只有由 \(\sigma\) 生成的子群 \(\langle \sigma \rangle\) 在 \(S_3\) 中正规，而且子域 \(\mathbb{Q}(\rho)\) 是唯一在 \(\mathbb{Q}\) 上伽罗瓦的子域。
+
+伽罗瓦理论基本定理断言，上面两个例子中观察到的关系并非巧合，而是对任何伽罗瓦扩张都成立。在证明它之前，我们首先发展一些关于群特征（域自同构是其特例）的预备结果。
+
+\begin{definition}
+群 \(G\) 的、取值在域 \(L\) 中的\textbf{特征} \(\chi\) 是从 \(G\) 到 \(L\) 的乘法群的同态：
+\[
+\chi : G \to L^\times,
+\]
+即对所有 \(g_1, g_2 \in G\) 有 \(\chi(g_1g_2) = \chi(g_1)\chi(g_2)\)，且对所有 \(g \in G\)，\(\chi(g)\) 是 \(L\) 的非零元素。
+\end{definition}
+
+\begin{definition}
+\(G\) 的特征 \(\chi_1, \chi_2, \ldots, \chi_n\) 称为在 \(L\) 上\textbf{线性无关}，若它们作为 \(G\) 上的函数线性无关，即不存在非平凡关系
+\begin{equation}
+a_1\chi_1+a_2\chi_2+\cdots+a_n\chi_n = 0 \quad (a_1, \ldots, a_n \in L \text{ 不全为 } 0) \tag{14.2}
+\end{equation}
+作为 \(G\) 上的函数（即对所有 \(g \in G\) 有 \(a_1\chi_1(g)+a_2\chi_2(g)+\cdots+a_n\chi_n(g) = 0\)）。
+\end{definition}
+
+\begin{theorem}\label{thm:14.7}
+（\textbf{特征的线性无关性}）若 \(\chi_1, \chi_2, \ldots, \chi_n\) 是 \(G\) 的取值在 \(L\) 中的互异特征，则它们在 \(L\) 上线性无关。
+\end{theorem}
+
+\begin{proof}
+假设这些特征线性相关。在所有上面的线性相关关系（14.2）中，选取非零系数 \(a_i\) 的个数 \(m\) 最小者。必要时重新编号，我们可以假设这 \(m\) 个非零系数是 \(a_1, a_2, \ldots, a_m\)：
+\[
+a_1\chi_1+a_2\chi_2+\cdots+a_m\chi_m = 0.
+\]
+则对任意 \(g \in G\) 有
+\begin{equation}
+a_1\chi_1(g)+a_2\chi_2(g)+\cdots+a_m\chi_m(g) = 0. \tag{14.3}
+\end{equation}
+取元素 \(g_0\) 使 \(\chi_1(g_0) \neq \chi_m(g_0)\)（由于 \(\chi_1 \neq \chi_m\)，这样的元素存在）。由于（14.3）对 \(G\) 的每个元素成立，特别地有
+\[
+a_1\chi_1(g_0g)+a_2\chi_2(g_0g)+\cdots+a_m\chi_m(g_0g) = 0,
+\]
+即
+\begin{equation}
+a_1\chi_1(g_0)\chi_1(g)+a_2\chi_2(g_0)\chi_2(g)+\cdots+a_m\chi_m(g_0)\chi_m(g) = 0. \tag{14.4}
+\end{equation}
+把等式（14.3）乘以 \(\chi_m(g_0)\)，再从等式（14.4）中减去，我们得到
+\[
+[\chi_m(g_0)-\chi_1(g_0)]a_1\chi_1(g)+[\chi_m(g_0)-\chi_2(g_0)]a_2\chi_2(g)+\cdots+[\chi_m(g_0)-\chi_{m-1}(g_0)]a_{m-1}\chi_{m-1}(g) = 0,
+\]
+它对所有 \(g \in G\) 成立。但第一个系数非零，而这是非零系数更少的关系，矛盾。
+\end{proof}
+
+现在考虑域 \(K\) 到域 \(L\) 的单同态 \(\sigma\)，称为 \(K\) 到 \(L\) 的\textbf{嵌入}。则特别地 \(\sigma\) 是乘法群 \(G = K^\times\) 到乘法群 \(L^\times\) 的同态，故 \(\sigma\) 可以看作 \(K^\times\) 的取值在 \(L\) 中的特征。还要注意这个特征包含了把 \(\sigma\) 看作 \(K\) 上函数时的全部有用信息，因为 \(K\) 中唯一不被 \(K^\times\) 考虑的点是 0，而我们知道 \(\sigma\) 把 0 映到 0.
+
+\begin{corollary}\label{cor:14.8}
+若 \(\sigma_1, \sigma_2, \ldots, \sigma_n\) 是域 \(K\) 到域 \(L\) 的互异嵌入，则它们作为 \(K\) 上的函数线性无关。特别地，域 \(K\) 的互异自同构作为 \(K\) 上的函数线性无关。
+\end{corollary}
+
+现在我们用推论 \ref{cor:14.8} 证明域 \(K\) 的自同构群的子群阶数与其固定域上扩张次数之间的基本关系。
+
+\begin{theorem}\label{thm:14.9}
+设 \(G = \{\sigma_1 = 1, \sigma_2, \ldots, \sigma_n\}\) 是域 \(K\) 的自同构的子群，\(F\) 是固定域。则
+\[
+[K:F] = n = |G|.
+\]
+\end{theorem}
+
+\begin{proof}
+首先假设 \(n > [K:F]\)，设 \(w_1, w_2, \ldots, w_m\) 是 \(K\) 在 \(F\) 上的基（\(m = [K:F]\)）。则 \(m\) 个方程、\(n\) 个未知量的方程组
+\[
+\sigma_1(w_1)x_1+\sigma_2(w_1)x_2+\cdots+\sigma_n(w_1)x_n = 0,
+\]
+\[
+\vdots
+\]
+\[
+\sigma_1(w_m)x_1+\sigma_2(w_m)x_2+\cdots+\sigma_n(w_m)x_n = 0
+\]
+在 \(K\) 中有非平凡解 \(\beta_1, \beta_2, \ldots, \beta_n\)，因为按假设未知量比方程多。
+
+设 \(a_1, a_2, \ldots, a_m\) 是 \(F\) 的 \(m\) 个任意元素。按定义域 \(F\) 被 \(\sigma_1, \ldots, \sigma_n\) 固定，故这些元素中每一个都被每个 \(\sigma_j\) 固定，即 \(\sigma_j(a_i) = a_i\)（\(i = 1, 2, \ldots, m\)，\(j = 1, 2, \ldots, n\)）。把上面第一个方程乘以 \(a_1\)、第二个乘以 \(a_2\)、……、最后一个乘以 \(a_m\)，再把所得方程相加，我们看到有 \(K\) 中的元素 \(\beta_1, \ldots, \beta_n\)（不全为 0）满足
+\[
+\sigma_1(a_1w_1+a_2w_2+\cdots+a_mw_m)\beta_1+\cdots+\sigma_n(a_1w_1+a_2w_2+\cdots+a_mw_m)\beta_n = 0
+\]
+对所有 \(F\) 中的 \(a_1, \ldots, a_m\) 成立。由于 \(w_1, \ldots, w_m\) 是 \(K\) 的 \(F\)-基，每个 \(a \in K\) 都具有 \(a_1w_1+a_2w_2+\cdots+a_mw_m\) 的形式，故上面的方程意味着对所有 \(a \in K\) 有
+\[
+\sigma_1(a)\beta_1+\cdots+\sigma_n(a)\beta_n = 0.
+\]
+但这意味着互异自同构 \(\sigma_1, \ldots, \sigma_n\) 在 \(K\) 上线性相关，与推论 \ref{cor:14.8} 矛盾。
+
+我们已证明 \(n \leq [K:F]\). 注意至今我们还没有用到 \(\sigma_1, \sigma_2, \ldots, \sigma_n\) 是某个群的元素这一事实。
+
+现在假设 \(n < [K:F]\). 则 \(K\) 中有多于 \(n\) 个 \(F\)-线性无关的元素，比如 \(a_1, \ldots, a_{n+1}\). \(n\) 个方程、\(n+1\) 个未知量的方程组
+\begin{equation}
+\sigma_1(a_1)x_1+\sigma_1(a_2)x_2+\cdots+\sigma_1(a_{n+1})x_{n+1} = 0, \quad \ldots \tag{14.5}
+\end{equation}
+在 \(K\) 中有解 \(\beta_1, \ldots, \beta_{n+1}\)，其中并非所有 \(\beta_i\)（\(i = 1, 2, \ldots, n+1\)）都为 0. 若解 \(\beta_1, \ldots, \beta_{n+1}\) 的所有元素都在 \(F\) 中，则第一个方程（回忆 \(\sigma_1 = 1\) 是恒等自同构）将与 \(a_1, a_2, \ldots, a_{n+1}\) 在 \(F\) 上的线性无关性矛盾。故至少有一个 \(\beta_i\)（\(i = 1, 2, \ldots, n+1\)）不是 \(F\) 的元素。
+
+在方程组（14.5）的所有非平凡解 \((\beta_1, \ldots, \beta_{n+1})\) 中，选取非零 \(\beta_i\) 的个数 \(r\) 最小者。必要时重新编号，我们可以假设 \(\beta_1, \ldots, \beta_r\) 非零。把方程除以 \(\beta_r\)，我们还可以假设 \(\beta_r = 1\). 我们已经看到 \(\beta_1, \ldots, \beta_{r-1}\) 中至少有一个不是 \(F\) 的元素（这特别表明 \(r > 1\)），比如说 \(\beta_1 \notin F\). 则我们的方程组读作
+\begin{equation}
+\sigma_1(a_1)\beta_1+\cdots+\sigma_1(a_{r-1})\beta_{r-1}+\sigma_1(a_r) = 0, \ldots \tag{14.6}
+\end{equation}
+或更简洁地
+\begin{equation}
+\sigma_i(a_1)\beta_1+\cdots+\sigma_i(a_{r-1})\beta_{r-1}+\sigma_i(a_r) = 0, \quad i = 1, 2, \ldots, n. \tag{14.7}
+\end{equation}
+由于 \(\beta_1 \notin F\)，存在自同构 \(\sigma_{k_0}\)（\(k_0 \in \{1, 2, \ldots, n\}\)）使 \(\sigma_{k_0}\beta_1 \neq \beta_1\).
+
+若我们把自同构 \(\sigma_{k_0}\) 施加到（14.6）中的方程上，就得到方程组
+\begin{equation}
+\sigma_{k_0}\sigma_i(a_1)\sigma_{k_0}(\beta_1)+\cdots+\sigma_{k_0}\sigma_i(a_{r-1})\sigma_{k_0}(\beta_{r-1})+\sigma_{k_0}\sigma_i(a_r) = 0 \tag{14.8}
+\end{equation}
+（\(i = 1, 2, \ldots, n\)）。但元素 \(\sigma_{k_0}\sigma_1, \ldots, \sigma_{k_0}\sigma_n\) 只不过是把元素 \(\sigma_1, \ldots, \sigma_n\) 重新排列，因为这些元素构成群。换句话说，若定义指标 \(i\) 使 \(\sigma_{k_0}\sigma_j = \sigma_i\)，则 \(i\) 与 \(j\) 都取遍集合 \(\{1, 2, \ldots, n\}\). 故（14.8）中的方程可以写成
+\begin{equation}
+\sigma_i(a_1)\sigma_{k_0}(\beta_1)+\cdots+\sigma_i(a_{r-1})\sigma_{k_0}(\beta_{r-1})+\sigma_i(a_r) = 0. \tag{14.8′}
+\end{equation}
+若我们从（14.7）中的方程减去（14.8′）中的方程，就得到方程组
+\[
+\sigma_i(a_1)(\beta_1-\sigma_{k_0}(\beta_1))+\cdots+\sigma_i(a_{r-1})(\beta_{r-1}-\sigma_{k_0}(\beta_{r-1})) = 0
+\]
+（\(i = 1, 2, \ldots, n\)）。但这是方程组（14.5）的一个解，其中
+\[
+x_1 = \beta_1-\sigma_{k_0}(\beta_1) \neq 0
+\]
+（由 \(k_0\) 的选取），从而是非平凡的，且非零 \(x_i\) 少于 \(r\) 个。这是矛盾，完成证明。
+\end{proof}
+
+我们对这个结果的第一个应用是证明命题 \ref{pro:14.5} 的不等式对任何有限扩张 \(K/F\) 成立。
+
+\begin{corollary}\label{cor:14.10}
+设 \(K/F\) 是任何有限扩张。则
+\[
+|\operatorname{Aut}(K/F)| \leq [K:F],
+\]
+且取等号当且仅当 \(F\) 是 \(\operatorname{Aut}(K/F)\) 的固定域。换一种说法，\(K/F\) 是伽罗瓦的当且仅当 \(F\) 是 \(\operatorname{Aut}(K/F)\) 的固定域。
+\end{corollary}
+
+\begin{proof}
+设 \(F_1\) 是 \(\operatorname{Aut}(K/F)\) 的固定域，故 \(F \subseteq F_1 \subseteq K\). 由定理 \ref{thm:14.9}，\([K:F_1] = |\operatorname{Aut}(K/F)|\). 故 \([K:F] = |\operatorname{Aut}(K/F)|[F_1:F]\)，这证明了推论。
+\end{proof}
+
+\begin{corollary}\label{cor:14.11}
+设 \(G\) 是域 \(K\) 的自同构的有限子群，\(F\) 是固定域。则固定 \(F\) 的 \(K\) 的每个自同构都属于 \(G\)，即 \(\operatorname{Aut}(K/F) = G\)，从而 \(K/F\) 是伽罗瓦的，伽罗瓦群为 \(G\).
+\end{corollary}
+
+\begin{proof}
+按定义 \(F\) 被 \(G\) 的所有元素固定，故 \(G \subseteq \operatorname{Aut}(K/F)\)（问题在于是否存在不在 \(G\) 中、但固定 \(F\) 的 \(K\) 的自同构，即这个包含是否为真包含）。于是 \(|G| \leq |\operatorname{Aut}(K/F)|\). 由定理有 \(|G| = [K:F]\)，而由上一推论 \(|\operatorname{Aut}(K/F)| \leq [K:F]\). 这给出
+\[
+[K:F] = |G| \leq |\operatorname{Aut}(K/F)| \leq [K:F],
+\]
+故必须处处取等号，这证明了推论。
+\end{proof}
+
+\begin{corollary}\label{cor:14.12}
+若 \(G_1 \neq G_2\) 是域 \(K\) 的自同构的两个不同的有限子群，则它们的固定域也不同。
+\end{corollary}
+
+\begin{proof}
+假设 \(F_1\) 是 \(G_1\) 的固定域、\(F_2\) 是 \(G_2\) 的固定域。若 \(F_1 = F_2\)，则按定义 \(F_1\) 被 \(G_2\) 固定。由上一推论，任何固定 \(F_1\) 的自同构都属于 \(G_1\)，故 \(G_2 \subseteq G_1\). 类似地 \(G_1 \subseteq G_2\)，故 \(G_1 = G_2\).
+\end{proof}
+
+由上面这些推论我们看到，对 \(\operatorname{Aut}(K)\) 的互异有限子群取固定域，得到 \(K\) 的互异子域，且 \(K\) 在它们上都是伽罗瓦的。进一步，这些扩张的次数由子群的阶给出。我们在上面关于域 \(K = \mathbb{Q}(\sqrt{2}, \sqrt{3})\) 与 \(K = \mathbb{Q}(\sqrt[3]{2}, \rho)\) 的例子中显式地看到了这一点。基本定理的一部分断言这些就是 \(K\) 的全部子域。
+
+下一个结果给出命题 \ref{pro:14.5} 的逆，并刻画伽罗瓦扩张。
+
+\begin{theorem}\label{thm:14.13}
+扩张 \(K/F\) 是伽罗瓦的当且仅当 \(K\) 是 \(F\) 上某个可分多项式的分裂域。进一步，若确实如此，则系数在 \(F\) 中、在 \(K\) 中有根的每个不可约多项式都可分，且它的所有根都在 \(K\) 中（故特别地 \(K/F\) 是可分扩张）。
+\end{theorem}
+
+\begin{proof}
+命题 \ref{pro:14.5} 证明了可分多项式的分裂域是伽罗瓦的。
+
+现在证明若 \(K/F\) 是伽罗瓦的，则 \(F[x]\) 中任何在 \(K\) 中有根的不可约多项式 \(p(x)\) 在 \(K\) 中完全分裂。令 \(G = \operatorname{Gal}(K/F)\). 设 \(\alpha \in K\) 是 \(p(x)\) 的根，并考虑元素
+\begin{equation}
+\alpha, \sigma_2(\alpha), \ldots, \sigma_n(\alpha) \in K, \tag{14.9}
+\end{equation}
+其中 \(\{1, \sigma_2, \ldots, \sigma_n\}\) 是 \(\operatorname{Gal}(K/F)\) 的元素。用 \(\alpha_1, \alpha_2, \ldots, \alpha_r\) 表示（14.9）中互异的元素。若 \(\tau \in G\)，则由于 \(G\) 是群，元素 \(\{\tau, \tau\sigma_2, \ldots, \tau\sigma_n\}\) 不过是元素 \(\{1, \sigma_2, \ldots, \sigma_n\}\) 的重新排列。由此把 \(\tau \in G\) 施加到（14.9）中的元素上只是把它们置换，故特别地把 \(\tau\) 施加到 \(\alpha_1, \alpha_2, \alpha_3, \ldots, \alpha_r\) 也只是置换这些元素。因此多项式
+\[
+f(x) = (x-\alpha_1)(x-\alpha_2)\cdots(x-\alpha_r)
+\]
+的系数被 \(G\) 的所有元素固定，因为 \(G\) 的元素只是置换各因子。故这些系数在 \(G\) 的固定域中，而由推论 \ref{cor:14.10} 这个域就是 \(F\). 因此 \(f(x) \in F[x]\).
+
+由于 \(p(x)\) 不可约且以 \(\alpha\) 为根，\(p(x)\) 是 \(\alpha\) 在 \(F\) 上的极小多项式，从而整除任何系数在 \(F\) 中且以 \(\alpha\) 为根的多项式（这是命题 \ref{pro:13.9}）。由此 \(p(x)\) 在 \(F[x]\) 中整除 \(f(x)\)，而由命题 \ref{pro:14.2} 显然 \(f(x)\) 在 \(K[x]\) 中整除 \(p(x)\)，故
+\[
+p(x) = f(x).
+\]
+特别地这表明 \(p(x)\) 可分，且它的所有根都在 \(K\) 中（事实上它们就在元素 \(\alpha_1, \sigma_2\alpha, \ldots, \sigma_n\alpha\) 之中），这证明了定理的最后一个论断。
+
+为完成证明，假设 \(K/F\) 是伽罗瓦的，并设 \(w_1, w_2, \ldots, w_n\) 是 \(K\) 的 \(F\)-基。设 \(p_i(x)\) 是 \(w_i\) 在 \(F\) 上的极小多项式（\(i = 1, 2, \ldots, n\)）。则由刚才证明的结果，\(p_i(x)\) 可分，且它的所有根都在 \(K\) 中。设 \(g(x)\) 是去掉乘积 \(p_1(x)\cdots p_n(x)\) 中所有重因子后所得的多项式（“无平方部分”）。则这两个多项式的分裂域相同，而这个域是 \(K\)（所有根都在 \(K\) 中，故 \(K\) 含有分裂域；但 \(w_1, w_2, \ldots, w_n\) 都是这些根中的成员，故分裂域含有 \(K\)）。因此 \(K\) 是可分多项式 \(g(x)\) 的分裂域。
+\end{proof}
+
+\begin{definition}
+设 \(K/F\) 是伽罗瓦扩张。若 \(\alpha \in K\)，则对 \(\sigma \in \operatorname{Gal}(K/F)\) 的元素 \(\sigma\alpha\) 称为 \(\alpha\) 在 \(F\) 上的\textbf{共轭}（或\textbf{伽罗瓦共轭}）。若 \(E\) 是 \(K\) 的含 \(F\) 的子域，则域 \(\sigma(E)\) 称为 \(E\) 在 \(F\) 上的\textbf{共轭域}。
+\end{definition}
+
+定理的证明表明在伽罗瓦扩张 \(K/F\) 中，任何元素 \(\alpha \in K\) 在 \(F\) 上的极小多项式的其他根正是 \(\alpha\) 在 \(K/F\) 的伽罗瓦群下的互异共轭。
+
+这个定理的第二个断言还表明，只要我们能找到 \(F\) 上一个在 \(K\) 中有根但并非所有根都在 \(K\) 中的不可约多项式，\(K\) 就不在 \(F\) 上伽罗瓦。这以很强的意义证实了前面例子中的直觉：伽罗瓦扩张是具有「足够多」不可约多项式的互异根的扩张（即：若它含有其中一个根，则它含有所有根）。
+
+最后注意我们现在有伽罗瓦扩张 \(K/F\) 的 4 个刻画：
+
+（1）\(F\) 上可分多项式的分裂域；
+
+（2）使 \(F\) 恰为 \(\operatorname{Aut}(K/F)\) 所固定元素集合的域（一般地，固定域可能大于 \(F\)）；
+
+（3）满足 \([K:F] = |\operatorname{Aut}(K/F)|\) 的域（原来的定义）；
+
+（4）有限、正规且可分的扩张。
+
+\begin{theorem}\label{thm:14.14}
+（\textbf{伽罗瓦理论基本定理}）设 \(K/F\) 是伽罗瓦扩张，令 \(G = \operatorname{Gal}(K/F)\). 则存在双射
+\[
+\left\{\begin{array}{c} K \text{ 的含 } F \text{ 的子域 } E\end{array}\right\} \longleftrightarrow \left\{\begin{array}{c} G \text{ 的子群 } H\end{array}\right\},
+\]
+由下列对应给出：\(E \mapsto G\) 中固定 \(E\) 的元素，\(H \mapsto H\) 的固定域；它们互为逆映射。在这个对应下，
+
+（1）（反包含）若 \(E_1, E_2\) 分别对应 \(H_1, H_2\)，则 \(E_1 \subseteq E_2\) 当且仅当 \(H_2 \subseteq H_1\)；
+
+（2）\([K:E] = |H|\) 且 \([E:F] = |G:H|\)（\(H\) 在 \(G\) 中的指数）；
+
+（3）\(K/E\) 总是伽罗瓦的，伽罗瓦群 \(\operatorname{Gal}(K/E) = H\)；
+
+（4）\(E\) 在 \(F\) 上伽罗瓦当且仅当 \(H\) 是 \(G\) 的正规子群。此时伽罗瓦群同构于商群：
+\[
+\operatorname{Gal}(E/F) \cong G/H.
+\]
+更一般地，即使 \(H\) 在 \(G\) 中不必正规，\(E\) 的（映入包含 \(K\) 的 \(F\) 的固定代数闭包的）固定 \(F\) 的同构也与 \(H\) 在 \(G\) 中的陪集 \(\{\sigma H\}\) 一一对应。
+
+（5）若 \(E_1, E_2\) 分别对应 \(H_1, H_2\)，则交 \(E_1 \cap E_2\) 对应由 \(H_1\) 与 \(H_2\) 生成的群 \(\langle H_1, H_2 \rangle\)，而合成域 \(E_1E_2\) 对应交 \(H_1 \cap H_2\). 故 \(K\) 的含 \(F\) 的子域格与 \(G\) 的子群格是「对偶」的（一个格图是另一个格图倒转过来的格图）。
+\end{theorem}
+
+\begin{proof}
+给定 \(G\) 的任何子群 \(H\)，由推论 \ref{cor:14.12} 我们得到唯一的固定域 \(E = K^H\). 这表明上面的对应从右到左是单射。
+
+若 \(K\) 是可分多项式 \(f(x) \in F[x]\) 的分裂域，则对 \(K\) 的任何含 \(F\) 的子域 \(E\)，我们也可以把 \(f(x)\) 看作 \(E[x]\) 的元素。此时 \(K\) 也是 \(f(x)\) 在 \(E\) 上的分裂域，故扩张 \(K/E\) 是伽罗瓦的。由推论 \ref{cor:14.10}，\(E\) 是 \(\operatorname{Aut}(K/E) \subseteq G\) 的固定域，这表明 \(K\) 的每个含 \(F\) 的子域都作为 \(G\) 的某个子群的固定域出现。故上面的对应从右到左是满射，从而是双射。这两个对应互为逆映射，因为固定 \(E\) 的自同构正是 \(\operatorname{Aut}(K/E)\)（由推论 \ref{cor:14.10}）。
+
+我们已在命题 \ref{pro:14.4} 中看到伽罗瓦对应是反包含的，这给出（1）。
+
+若 \(E = K^H\) 是 \(H\) 的固定域，则由定理 \ref{thm:14.9} 有 \([K:E] = |H|\)，且 \([K:F] = |G|\). 取商得 \([E:F] = |G:H|\)，这证明了（2）。
+
+推论 \ref{cor:14.11} 立即给出（3）。
+
+假设 \(E = K^H\) 是子群 \(H\) 的固定域。每个 \(\sigma \in G = \operatorname{Gal}(K/F)\) 限制到 \(E\) 上得到 \(E\) 与 \(K\) 的子域 \(\sigma(E)\) 的嵌入 \(\sigma|_E\). 反之，设 \(\tau : E \to \overline{F}\) 是任何（映入含 \(K\) 的 \(F\) 的固定代数闭包 \(\overline{F}\) 的）固定 \(F\) 的 \(E\) 的嵌入。则 \(\tau(E)\) 事实上含于 \(K\)：若 \(\alpha \in E\) 在 \(F\) 上的极小多项式是 \(m_\alpha(x)\)，则 \(\tau(\alpha)\) 是 \(m_\alpha(x)\) 的另一个根，而由定理 \ref{thm:14.13}，\(K\) 含有所有这些根。如上所述，\(K\) 是 \(f(x)\) 在 \(E\) 上的分裂域，从而是 \(\tau f(x)\)（它与 \(f(x)\) 相同，因为 \(f(x)\) 的系数在 \(F\) 中）在 \(\tau(E)\) 上的分裂域。关于同构延拓的定理 \ref{thm:13.27} 于是表明我们可以把 \(\tau\) 延拓为同构 \(\sigma : K \to K\)。由于 \(\sigma\) 固定 \(F\)（因为 \(\tau\) 固定 \(F\)），可知 \(E\) 的每个固定 \(F\) 的嵌入都是某个固定 \(F\) 的 \(K\) 的自同构 \(\sigma\) 在 \(E\) 上的限制，换句话说，\(E\) 的每个嵌入都有形式 \(\sigma|_E\)（某个 \(\sigma \in G\)）。
+
+两个自同构 \(\sigma, \sigma' \in G\) 限制到 \(E\) 上给出相同的嵌入，当且仅当 \(\sigma^{-1}\sigma'\) 是 \(E\) 上的恒等映射。但此时 \(\sigma^{-1}\sigma' \in H\)（即 \(\sigma' \in \sigma H\)），因为由（3），固定 \(E\) 的 \(K\) 的自同构正是 \(H\) 中的元素。故 \(E\) 的互异嵌入与 \(H\) 在 \(G\) 中的陪集 \(\sigma H\) 一一对应。特别地这给出
+\[
+|\operatorname{Emb}(E/F)| = |G:H| = [E:F],
+\]
+其中 \(\operatorname{Emb}(E/F)\) 表示 \(E\) 的（映入 \(F\) 的固定代数闭包的）固定 \(F\) 的嵌入的集合。注意 \(\operatorname{Emb}(E/F)\) 含有 \(\operatorname{Aut}(E/F)\).
+
+扩张 \(E/F\) 是伽罗瓦的当且仅当 \(|\operatorname{Aut}(E/F)| = [E:F]\). 由上面的等式，这将成立当且仅当 \(E\) 的每个嵌入实际上都是 \(E\) 的自同构，即当且仅当对所有 \(\sigma \in G\) 有 \(\sigma(E) = E\).
+
+若 \(\sigma \in G\)，则固定域 \(\sigma(E)\) 的 \(G\) 的子群是群 \(\sigma H\sigma^{-1}\)，即 \(\sigma(E) = K^{\sigma H\sigma^{-1}}\).
+
+为看出这一点，注意若 \(\alpha^\sigma \in \sigma(E)\)，则
+\[
+(\sigma h\sigma^{-1})(\alpha^\sigma) = \sigma(h\alpha) = \alpha^\sigma \quad \text{对所有 } h \in H,
+\]
+因为 \(h\) 固定 \(\alpha \in E\)，这表明 \(\sigma H\sigma^{-1}\) 固定 \(\sigma(E)\). 固定 \(\sigma(E)\) 的群的阶等于 \(K\) 在 \(\sigma(E)\) 上的次数。但由于这两个域同构，这与 \(K\) 在 \(E\) 上的次数相同，从而与 \(H\) 的阶相同。故由已证明的包含关系与阶相同可知 \(\sigma H\sigma^{-1}\) 正是固定 \(\sigma(E)\) 的群。
+
+由于已证明的伽罗瓦对应的双射性，我们知道 \(K\) 的两个含 \(F\) 的子域相等当且仅当它们在 \(G\) 中的固定子群相等。故对所有 \(\sigma \in G\) 有 \(\sigma(E) = E\) 当且仅当对所有 \(\sigma \in G\) 有 \(\sigma H\sigma^{-1} = H\)，换句话说 \(E\) 在 \(F\) 上伽罗瓦当且仅当 \(H\) 是 \(G\) 的正规子群。
+
+我们已经把 \(E\) 在 \(F\) 上的嵌入识别为 \(H\) 在 \(G\) 中的陪集的集合，且当 \(H\) 在 \(G\) 中正规时看到这些嵌入都是自同构。由此此时陪集的群 \(G/H\) 按群运算的定义（自同构的复合）与伽罗瓦扩张 \(E/F\) 的自同构群等同。故当 \(H\) 在 \(G\) 中正规时有 \(G/H \cong \operatorname{Gal}(E/F)\)，这完成了（4）的证明。
+
+假设 \(H_1\) 是 \(G\) 中固定子域 \(E_1\) 的元素构成的子群，\(H_2\) 是 \(G\) 中固定子域 \(E_2\) 的子群。\(H_1 \cap H_2\) 中的任何元素都同时固定 \(E_1\) 与 \(E_2\)，故固定合成 \(E_1E_2\) 中的每个元素，因为这个域的元素是 \(E_1\) 与 \(E_2\) 的元素的代数组合。反之，若自同构 \(\sigma\) 固定合成 \(E_1E_2\)，则特别地 \(\sigma\) 固定 \(E_1\)（即 \(\sigma \in H_1\)），且 \(\sigma\) 固定 \(E_2\)（即 \(\sigma \in H_2\)），故 \(\sigma \in H_1 \cap H_2\). 这证明合成 \(E_1E_2\) 对应交 \(H_1 \cap H_2\). 类似地，交 \(E_1 \cap E_2\) 对应由 \(H_1\) 与 \(H_2\) 生成的群 \(\langle H_1, H_2 \rangle\)，完成定理的证明。
+\end{proof}
+
+\noindent\textbf{例：（\(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 与 \(\mathbb{Q}(\sqrt[3]{2}, \rho)\)）}
+
+我们在本节开头已经看到这个定理的例子。现在我们看到，前面给出的域 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 与 \(\mathbb{Q}(\sqrt[3]{2}, \rho)\) 的子域图已经指明了这两个域的全部子域。
+
+由于 Klein 四元群的每个子群都正规，\(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 的所有子域都是 \(\mathbb{Q}\) 的伽罗瓦扩张。
+
+类似地，由于 \(S_3\) 的唯一非平凡正规子群是 3 阶子群，我们看到 \(K = \mathbb{Q}(\sqrt[3]{2}, \rho)\) 中只有在 \(\mathbb{Q}\) 上伽罗瓦，伽罗瓦群同构于 \(S_3/\langle \sigma \rangle\)，即 2 阶循环群。例如 \(\mathbb{Q}(\rho)\) 的非平凡自同构通过把 \(\langle \sigma \rangle\) 的非平凡陪集中的任何元素（比如 \(\tau\)）限制到 \(\mathbb{Q}(\rho)\) 上诱导得到。这从前面对这些自同构的显式描述可以看出——这个陪集中的每个元素 \(\tau, \tau\sigma, \tau\sigma^2\) 都把 \(\rho\) 映到 \(\rho^2\). \(\operatorname{Gal}(K/\mathbb{Q})\) 的元素限制到（非伽罗瓦的）三次子域上一般不会给出这些域的自同构，而是给出这些域彼此之间的同构，这与定理的（4）一致。
+
+\noindent\textbf{例：（\(\mathbb{Q}(\sqrt{2}+\sqrt{3})\)）}
+
+考虑域 \(\mathbb{Q}(\sqrt{2}+\sqrt{3})\). 它显然是伽罗瓦扩张 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 的子域。故 \(\sqrt{2}+\sqrt{3}\) 在 \(\mathbb{Q}\) 上极小多项式的其他根就是它在伽罗瓦群下的互异共轭。这些共轭是 \(\pm\sqrt{2}\pm\sqrt{3}\)，容易看出它们互异。故极小多项式是
+\[
+[x-(\sqrt{2}+\sqrt{3})][x-(\sqrt{2}-\sqrt{3})][x-(-\sqrt{2}+\sqrt{3})][x-(-\sqrt{2}-\sqrt{3})],
+\]
+快速计算得到多项式 \(x^4-10x^2+1\). 由此这个多项式不可约，且
+\[
+\mathbb{Q}(\sqrt{2}, \sqrt{3}) = \mathbb{Q}(\sqrt{2}+\sqrt{3}),
+\]
+这或者由次数考虑得到，或者由「\(\{1, \sigma, \tau, \sigma\tau\}\) 中只有恒等自同构 1 固定 \(\sqrt{2}+\sqrt{3}\)，故这个域的固定群与 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\) 的固定群相同」得到。
+
+\noindent\textbf{例：（\(x^8-2\) 的分裂域）}
+
+\(x^8-2\) 在 \(\mathbb{Q}\) 上的分裂域由 \(\theta = \sqrt[8]{2}\)（某个固定的 8 次根，比如实根）与本原 8 次单位根 \(\zeta = \zeta_8\) 生成。回忆第 13.6 节中 \(\mathbb{Q}(\zeta_8) = \mathbb{Q}(i, \sqrt{2})\). 由于 \(\theta^4 = \sqrt{2}\)，我们看到分裂域由 \(\theta\) 与 \(i\) 生成。子域 \(\mathbb{Q}(\theta)\) 在 \(\mathbb{Q}\) 上次数为 8（因为 \(x^8-2\) 由艾森斯坦判别法不可约），而这个域的所有元素都是实的。故 \(i \notin \mathbb{Q}(\theta)\)，而由于 \(i\) 至多生成这个域的一个二次扩张，分裂域
+\[
+\mathbb{Q}(\sqrt[8]{2}, \zeta_8) = \mathbb{Q}(\sqrt[8]{2}, i)
+\]
+在 \(\mathbb{Q}\) 上的次数为 16.
+
+伽罗瓦群由它在生成元 \(\theta\) 与 \(i\) 上的作用确定，这给出可能 \(\theta \mapsto \zeta^a\theta\)（\(a = 0, 1, 2, \ldots, 7\)）与 \(i \mapsto \pm i\). 由于我们已经看到这个扩张的次数为 16，而这样的映射恰有 16 个可能，可知事实上上面每个映射都是 \(\mathbb{Q}(\sqrt[8]{2}, i)\) 在 \(\mathbb{Q}\) 上的自同构。
+
+定义自同构 \(\sigma\)（由 \(\theta \mapsto \zeta\theta\)、\(i \mapsto i\) 给出）与 \(\tau\)（由 \(\theta \mapsto \theta\)、\(i \mapsto -i\) 给出，即复共轭诱导的映射）。注意我们之所以还要追踪在元素 \(i\) 上的作用，是因为在计算自同构的复合时需要它，例如计算
+\[
+\sigma^2(\theta) = \sigma(\zeta\theta) = \sigma(\zeta)\sigma(\theta) = (-\zeta)(\zeta\theta) = -\zeta^2\theta = -i\theta.
+\]
+类似地可以算出所有自同构，并看出 \(\sigma\) 与 \(\tau\) 生成伽罗瓦群。为确定这些元素满足的关系，我们首先注意到显然 \(\tau^2 = 1\) 且 \((\sigma^4)^2 = 1\)，即 \(\sigma^8 = 1\)；进一步计算给出
+\[
+\sigma\tau = \tau\sigma^3.
+\]
+不难证明这些关系完全确定这个群，即
+\[
+\operatorname{Gal}(\mathbb{Q}(\sqrt[8]{2}, i)/\mathbb{Q}) = \langle \sigma, \tau \mid \sigma^8 = \tau^2 = 1,\ \sigma\tau = \tau\sigma^3 \rangle.
+\]
+这样的群称为\textbf{拟二面体群}（回忆 16 阶二面体群的关系是 \(\sigma\tau = \tau\sigma^7\) 而不是 \(\sigma\tau = \tau\sigma^3\)），它是 \(S_8\) 的子群，因为这个伽罗瓦群是 \(x^8-2\) 的 8 个根的置换群的子群。
+
+这个例子再次表明，由生成元的作用确定伽罗瓦群时必须小心。我们首先计算了上面这个伽罗瓦扩张的次数以确定伽罗瓦群中元素的个数。若直接由原来的生成元 \(\theta\) 与 \(\zeta\) 出发，我们可能（错误地）断定伽罗瓦群共有 32 个元素，因为第一个生成元可以映到 \(x^8-2\) 的 8 个可能的根中的任何一个，第二个生成元可以映到它的极小多项式 \(\Phi_4(x) = x^4+1\) 的 4 个可能的根中的任何一个。如前面所指出的，问题在于这些选择并不独立。这里的原因由生成元之间的代数关系提供（\(\zeta^2 = i\)、\(\theta^4 = \sqrt{2}\)），它表明不能独立地指定 \(\theta\) 与 \(\zeta\) 的像——它们的像必须仍然满足这个代数关系。这个关系或许微妙到足以提醒我们：不要草率地断定映射是自同构。我们指出，一般必须给出映射是自同构的理由，这可以通过例如使用延拓定理，或者像我们这里这样使用次数考虑来完成。
+
+确定这个群 \(G\) 的子群格是直接的问题。确定这些子群相应的子域（由基本定理，这些就是 \(\mathbb{Q}(\sqrt[8]{2}, i)\) 的全部子域）对上面许多子群而言相当简单，可利用基本定理的（2）：扩张在 \(\mathbb{Q}\) 上的次数等于固定子群的指数。此时只需找出次数正确且被所论子群固定的子域。还要记住若一个子域被一个子群的生成元固定，则它被这个子群固定。
+
+例如，由自同构 \(\sigma\) 的显式描述我们看到 \(\mathbb{Q}(i)\) 被由 \(\sigma\) 生成的群固定。由于这是一个指数为 2 的子群，而 \(\mathbb{Q}(i)\) 在 \(\mathbb{Q}\) 上次数为 2，它必是完全固定域。上面大多数子群的固定域都可以用同样简单的方法确定。
+
+对某些 4 阶子群（例如由 \(\tau\sigma^3\) 生成的子群），确定相应的固定域可能不那么容易。对由 \(H = \langle \tau\sigma^3 \rangle\) 生成的子群，我们可以如下进行：元素 \(\rho = \sqrt{2}\) 显然被 \(\sigma^4\) 固定。由子群图，\(\sigma^4\) 是 \(H\) 的指数为 2 的正规子群，陪集代表元可取 \(1\) 与 \(\tau\sigma^3\). 考虑元素
+\[
+\alpha = (1+\tau\sigma^3)\theta^2 = \sqrt{2}+\tau\sigma^3\sqrt{2}.
+\]
+则 \(\alpha\) 被 \(\sigma^4\) 固定（我们在 4 阶交换群 \(H\) 中，故 \(\sigma^4\) 与 \(1\)、\(\tau\sigma^3\) 交换，而我们已经知道 \(\sqrt{2}\) 被 \(\sigma^4\) 固定）。但（这正是要点）\(\alpha\) 也被 \(\tau\sigma^3\) 固定：
+\[
+\tau\sigma^3\alpha = \tau\sigma^3(1+\tau\sigma^3)\theta^2 = [\tau\sigma^3+(\tau\sigma^3)^2]\theta^2 = [\tau\sigma^3+\sigma^4]\theta^2,
+\]
+而最后一个表达式就是 \(\alpha\)，因为 \(\sigma^4\theta^2 = \theta^2\). 故 \(\alpha\) 是 \(H\) 的固定域的元素。显式地
+\[
+\alpha = \sqrt{2}+i\sqrt{2} = (1+i)\sqrt[4]{2}.
+\]
+快速验证表明 \(\alpha\) 不被自同构 \(\sigma^2\) 固定，故由上面的子群图，域 \(\mathbb{Q}(\alpha)\) 的固定子群不超过 \(H\)，从而恰为 \(H\)，这给出了我们所要的固定域。这也给出了 \(\langle \tau\sigma \rangle\) 的固定域：回忆一般地若 \(E\) 是 \(H\) 的固定域，则 \(\tau H\tau^{-1}\) 的固定域是域 \(\tau(E)\). 对 \(H = \langle \tau\sigma^3 \rangle\) 有 \(\tau H\tau^{-1} = \langle \tau\sigma \rangle\)，其固定域由 \(\tau(\alpha) = (1-i)\sqrt[4]{2}\) 给出。
+
+一般地，人们尝试确定被伽罗瓦群的给定子群 \(H\) 固定的元素（参见习题，它们指出上面这个元素的来源），并尝试生成足够大的域以给出完全固定域。在我们的情形中，我们能够用单个生成元完成这一点。我们以后将看到 \(\mathbb{Q}\) 的每个有限扩张都是单扩张，故存在这样的单个生成元，但一般可能难以直接给出它。元素 \(\alpha\) 是多项式 \(x^4+8\) 的根，因此这个多项式必不可约，因为我们已经确定它的一个根生成 \(\mathbb{Q}\) 的次数为 4 的扩张。
+
+用类似的方法可以补全 \(\mathbb{Q}(\sqrt[8]{2}, i)\) 的子域图（我们把它倒过来画，以强调它与上面子群图的关系，其中 \(\theta = \sqrt[8]{2}\)）。注意群 \(\langle \sigma^4 \rangle\) 在 \(G\) 中正规（事实上它是 \(G\) 的中心），商群 \(G/\langle \sigma^4 \rangle \cong D_8\)，故相应的固定域 \(\mathbb{Q}(i, \sqrt{2})\) 在 \(\mathbb{Q}\) 上伽罗瓦，伽罗瓦群为 \(D_8\). 由于它是伽罗瓦的，它是某个多项式的分裂域，显然就是 \(x^4-2\) 的分裂域。这个域的子域格于是立即由上面的格得到。
+
+我们以这个伽罗瓦扩张的一个有趣侧面来结束这个例子。容易验证
+\[
+\langle \sigma^2, \tau \rangle \cong D_8, \qquad \langle \sigma \rangle \cong \mathbb{Z}/8\mathbb{Z}, \qquad \langle \sigma^2, \tau\sigma^3 \rangle \cong Q_8,
+\]
+其中 \(D_8\) 是 8 阶二面体群、\(Q_8\) 是 8 阶四元数群。由此域 \(\mathbb{Q}(\sqrt[8]{2}, i)\) 在它的三个二次子域 \(\mathbb{Q}(\sqrt{2})\)、\(\mathbb{Q}(i)\)、\(\mathbb{Q}(\sqrt{-2})\) 上都是次数为 8 的伽罗瓦扩张，伽罗瓦群分别为二面体群、循环群与四元数群，故 8 阶群的 5 种可能中（以及两个非阿贝尔群）有三个作为伽罗瓦群出现在这个扩张中。
+
+我们将在随后几节考虑更多的例子与应用。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 确定元素 \(\sqrt{2}+\sqrt{5}\) 在 \(\mathbb{Q}\) 上的极小多项式。
+
+\item 确定元素 \(\frac{1}{2}\sqrt{2}+\sqrt[3]{2}+\sqrt[4]{2}\) 在 \(\mathbb{Q}\) 上的极小多项式。
+
+\item 确定 \((x^2-2)(x^2-3)(x^2-5)\) 的伽罗瓦群，并确定这个多项式的分裂域的所有子域。
+
+\item 设 \(p\) 是素数。确定 \(x^p-2\) 的伽罗瓦群的元素。
+
+\item 证明 \(p\) 为素数时 \(x^p-2\) 的伽罗瓦群同构于矩阵群 \(\left\{\begin{pmatrix} a & b \\ 0 & 1 \end{pmatrix} \mid a, b \in \mathbb{F}_p,\ a \neq 0\right\}\).
+
+\item 设 \(K = \mathbb{Q}(\sqrt{2}, i)\)，\(F_1 = \mathbb{Q}(i)\)、\(F_2 = \mathbb{Q}(\sqrt{2})\)、\(F_3 = \mathbb{Q}(\sqrt{-2})\). 证明 \(\operatorname{Gal}(K/F_1) \cong \mathbb{Z}_8\)、\(\operatorname{Gal}(K/F_2) \cong D_8\)、\(\operatorname{Gal}(K/F_3) \cong Q_8\).
+
+\item 确定 \(x^8-2\) 的分裂域中所有在 \(\mathbb{Q}\) 上伽罗瓦的子域。
+
+\item 假设 \(K\) 是 \(F\) 的次数为 \(p^n\)（\(p\) 为素数，\(n \geq 1\)）的伽罗瓦扩张。证明 \(K\) 中含有 \(F\) 的、次数分别为 \(p\) 与 \(p^{n-1}\) 的伽罗瓦扩张。
+
+\item 给出域 \(F_1, F_2, F_3\) 的例子，满足 \(\mathbb{Q} \subset F_1 \subset F_2 \subset F_3\)、\([F_3:\mathbb{Q}] = 8\)，且 \(F_3\) 对它的所有子域都伽罗瓦，例外是 \(F_2\) 在 \(\mathbb{Q}\) 上不伽罗瓦。
+
+\item 确定 \(x^8-3\) 在 \(\mathbb{Q}\) 上的分裂域的伽罗瓦群。
+
+\item 假设 \(f(x) \in \mathbb{Z}[x]\) 是不可约四次多项式，其分裂域在 \(\mathbb{Q}\) 上的伽罗瓦群为 \(S_4\)（这样的四次多项式有很多，参见第 14.6 节）。设 \(\theta\) 是 \(f(x)\) 的根，令 \(K = \mathbb{Q}(\theta)\). 证明 \(K\) 是 \(\mathbb{Q}\) 的次数为 4 的扩张，且没有真子域。是否存在次数为 4、没有真子域的 \(\mathbb{Q}\) 的伽罗瓦扩张？
+
+\item 确定 \(x^4-14x^2+9\) 在 \(\mathbb{Q}\) 上的分裂域的伽罗瓦群。
+
+\item 证明若 \(\mathbb{Q}\) 上三次多项式的分裂域的伽罗瓦群是 3 阶循环群，则这个三次多项式的所有根都是实的。
+
+\item 证明 \(\mathbb{Q}(\sqrt{2+\sqrt{2}})\) 是循环四次域，即次数为 4、伽罗瓦群循环的伽罗瓦扩张。
+
+\item （\textbf{双二次扩张}）设 \(F\) 是特征 \(\neq 2\) 的域。
+
+（a）若 \(K = F(\sqrt{D_1}, \sqrt{D_2})\)，其中 \(D_1, D_2 \in F\) 具有性质：\(D_1\)、\(D_2\)、\(D_1D_2\) 中没有一个在 \(F\) 中是平方，证明 \(K/F\) 是伽罗瓦扩张，且 \(\operatorname{Gal}(K/F)\) 同构于 Klein 四元群。
+
+（b）反之，假设 \(K/F\) 是伽罗瓦扩张且 \(\operatorname{Gal}(K/F)\) 同构于 Klein 四元群。证明 \(K = F(\sqrt{D_1}, \sqrt{D_2})\)，其中 \(D_1, D_2 \in F\) 具有性质：\(D_1\)、\(D_2\)、\(D_1D_2\) 中没有一个在 \(F\) 中是平方。
+
+\item （a）证明 \(x^4-2x^2-2\) 在 \(\mathbb{Q}\) 上不可约。
+
+（b）证明这个四次多项式的根是 \(\alpha_1 = \sqrt{1+\sqrt{3}}\)、\(\alpha_2 = \sqrt{1-\sqrt{3}}\)、\(\alpha_3 = -\sqrt{1+\sqrt{3}}\)、\(\alpha_4 = -\sqrt{1-\sqrt{3}}\).
+
+（c）令 \(K_1 = \mathbb{Q}(\alpha_1)\)、\(K_2 = \mathbb{Q}(\alpha_2)\). 证明 \(K_1 \neq K_2\)，且 \(K_1 \cap K_2 = \mathbb{Q}(\sqrt{3}) = F\).
+
+（d）证明 \(K_1\)、\(K_2\) 与 \(K_1K_2\) 在 \(F\) 上伽罗瓦，\(\operatorname{Gal}(K_1K_2/F)\) 是 Klein 四元群。显式写出 \(\operatorname{Gal}(K_1K_2/F)\) 的元素，确定伽罗瓦群的所有子群，并给出它们相应的、含 \(F\) 的 \(K_1K_2\) 的固定子域。
+
+（e）证明 \(x^4-2x^2-2\) 在 \(\mathbb{Q}\) 上的分裂域次数为 8，伽罗瓦群为二面体群。
+\end{enumerate}
+
+\noindent 下面几个习题指出在给定域的子域中构造元素的一种方法，它在许多计算中相当有用。
+
+\begin{enumerate}
+\setcounter{enumi}{16}
+\item 设 \(K/F\) 是任意有限扩张，\(\alpha \in K\)，\(L\) 是含 \(K\) 的 \(F\) 的伽罗瓦扩张，\(H = \operatorname{Gal}(L/F)\). 定义 \(\alpha\) 从 \(K\) 到 \(F\) 的\textbf{范数}为
+\[
+N_{K/F}(\alpha) = \prod_{\sigma}\sigma(\alpha),
+\]
+其中乘积遍历 \(K\) 映入 \(F\) 的代数闭包的所有嵌入（由基本定理，即遍历 \(H\) 在 \(\operatorname{Gal}(L/F)\) 中的一组陪集代表元）。这是 \(\alpha\) 的伽罗瓦共轭之积。特别地若 \(K/F\) 伽罗瓦，这就是 \(\prod_{\sigma \in \operatorname{Gal}(K/F)}\sigma(\alpha)\).
+
+（a）证明 \(N_{K/F}(\alpha) \in F\).
+
+（b）证明 \(N_{K/F}(\alpha\beta) = N_{K/F}(\alpha)N_{K/F}(\beta)\)，故范数是从 \(K\) 到 \(F\) 的乘法映射。
+
+（c）设 \(K = F(\sqrt{D})\) 是 \(F\) 的二次扩张。证明 \(N_{K/F}(a+b\sqrt{D}) = a^2-Db^2\).
+
+（d）设 \(m_\alpha(x) = x^d+a_{d-1}x^{d-1}+\cdots+a_1x+a_0 \in F[x]\) 是 \(\alpha \in K\) 在 \(F\) 上的极小多项式，\(n = [K:F]\). 证明 \(d\) 整除 \(n\)，\(\alpha\) 有 \(d\) 个互异的伽罗瓦共轭且每个在上面的乘积中出现 \(n/d\) 次，并断定 \(N_{K/F}(\alpha) = (-1)^na_0^{n/d}\).
+
+\item 沿用上一习题的记号，定义 \(\alpha\) 从 \(K\) 到 \(F\) 的\textbf{迹}为
+\[
+\operatorname{Tr}_{K/F}(\alpha) = \sum_{\sigma}\sigma(\alpha),
+\]
+即 \(\alpha\) 的伽罗瓦共轭之和。
+
+（a）证明 \(\operatorname{Tr}_{K/F}(\alpha) \in F\).
+
+（b）证明 \(\operatorname{Tr}_{K/F}(\alpha+\beta) = \operatorname{Tr}_{K/F}(\alpha)+\operatorname{Tr}_{K/F}(\beta)\)，故迹是从 \(K\) 到 \(F\) 的加法映射。
+
+（c）设 \(K = F(\sqrt{D})\) 是 \(F\) 的二次扩张。证明 \(\operatorname{Tr}_{K/F}(a+b\sqrt{D}) = 2a\).
+
+（d）设 \(m_\alpha(x)\) 如上一习题。证明 \(\operatorname{Tr}_{K/F}(\alpha) = -\frac{n}{d}a_{d-1}\).
+
+\item 沿用前面各习题的记号，证明对所有 \(a\) 在基域 \(F\) 中有 \(N_{K/F}(a\alpha) = a^nN_{K/F}(\alpha)\) 与 \(\operatorname{Tr}_{K/F}(a\alpha) = a\operatorname{Tr}_{K/F}(\alpha)\). 特别地证明对所有 \(a \in F\) 有 \(N_{K/F}(a) = a^n\) 与 \(\operatorname{Tr}_{K/F}(a) = na\).
+
+\item 沿用前面各习题的记号，更一般地证明 \(\prod_{\sigma}(x-\sigma(\alpha)) = (m_\alpha(x))^{n/d}\).
+
+\item 用特征的线性无关性证明对任何伽罗瓦扩张 \(K/F\) 存在元素 \(\alpha \in K\) 使 \(\operatorname{Tr}_{K/F}(\alpha) \neq 0\).
+
+\item 假设 \(K/F\) 是伽罗瓦扩张，\(\sigma\) 是伽罗瓦群的元素。
+
+（a）假设 \(\alpha \in K\) 具有形式 \(\alpha = \frac{\beta}{\sigma\beta}\)（某个非零 \(\beta \in K\)）。证明 \(N_{K/F}(\alpha) = 1\).
+
+（b）假设 \(\alpha \in K\) 具有形式 \(\alpha = \beta-\sigma\beta\)（某个 \(\beta \in K\)）。证明 \(\operatorname{Tr}_{K/F}(\alpha) = 0\).
+
+\item （\textbf{Hilbert 定理 90}）设 \(K\) 是 \(F\) 的伽罗瓦扩张，伽罗瓦群是 \(n\) 阶循环群，由 \(\sigma\) 生成。假设 \(a \in K\) 满足 \(N_{K/F}(a) = 1\). 证明 \(a\) 具有形式 \(a = \frac{\beta}{\sigma\beta}\)（某个非零 \(\beta \in K\)）。〔由特征的线性无关性证明存在 \(\delta \in K\) 使
+\[
+\beta = \delta+a\sigma(\delta)+(a\sigma a)\sigma^2(\delta)+\cdots+(a\sigma a\cdots\sigma^{n-1}a)\sigma^{n-1}(\delta)
+\]
+非零。利用 \(a\) 从 \(K\) 到 \(F\) 的范数为 1 这一事实计算 \(\frac{\beta}{\sigma\beta}\)。〕
+
+\item 证明 Pythagoras 方程 \(a^2+b^2 = 1\) 的有理解 \(a, b \in \mathbb{Q}\) 具有形式
+\[
+a = \frac{s^2-t^2}{s^2+t^2}, \qquad b = \frac{2st}{s^2+t^2}
+\]
+（\(s, t \in \mathbb{Q}\)），并由此证明任何边长为整数的直角三角形都有边长 \((m^2-n^2,\ 2mn,\ m^2+n^2)\)（\(m, n\) 为整数）。〔注意 \(a^2+b^2 = 1\) 等价于 \(N_{\mathbb{Q}(i)/\mathbb{Q}}(a+ib) = 1\)，然后对上式用上面的 Hilbert 定理 90，取 \(\beta = s+it\)。〕
+
+\item 推广上一题，确定方程
+\[
+a^2+Db^2 = 1
+\]
+的所有有理解，其中 \(D \in \mathbb{Z}\)，\(D > 0\)，且 \(D\) 不是 \(\mathbb{Z}\) 中的完全平方。
+
+\item （\textbf{加性 Hilbert 定理 90}）设 \(K\) 是 \(F\) 的伽罗瓦扩张，伽罗瓦群是 \(n\) 阶循环群，由 \(\sigma\) 生成。假设 \(a \in K\) 满足 \(\operatorname{Tr}_{K/F}(a) = 0\). 证明 \(a\) 具有形式 \(a = \beta-\sigma\beta\)（某个 \(\beta \in K\)）。〔由前面的习题取 \(\theta \in K\) 使 \(\operatorname{Tr}_{K/F}(\theta) \neq 0\)，令
+\[
+\beta = \frac{1}{\operatorname{Tr}_{K/F}(\theta)}\left[a\sigma(\theta)+(a+\sigma a)\sigma^2(\theta)+\cdots+(a+\sigma a+\cdots+\sigma^{n-2}a)\sigma^{n-1}(\theta)\right],
+\]
+并计算 \(\beta-\sigma\beta\)。〕
+
+\item 设 \(a = \sqrt{(2+\sqrt{2})(3+\sqrt{3})}\)（为具体起见取正实平方根），并考虑扩张 \(E = \mathbb{Q}(a)\).
+
+（a）证明 \(a^2 = (2+\sqrt{2})(3+\sqrt{3})\) 不是 \(F = \mathbb{Q}(\sqrt{2}, \sqrt{3})\) 中的平方。〔若 \(a^2 = c^2\)（\(c \in F\)），则对固定 \(\mathbb{Q}(\sqrt{2})\) 的自同构 \(\varphi \in \operatorname{Gal}(F/\mathbb{Q})\) 有 \(a\varphi(a) = (2+\sqrt{2})^2(6) = (c\varphi c)^2\). 由于 \(c\varphi c = N_{F/\mathbb{Q}(\sqrt{2})}(c) \in \mathbb{Q}(\sqrt{2})\)，推断这将给出 \(\sqrt{3} \in \mathbb{Q}(\sqrt{2})\)，矛盾。〕
+
+（b）由（a）推出 \([E:\mathbb{Q}] = 8\). 证明 \(a\) 在 \(\mathbb{Q}\) 上的极小多项式的根是 8 个元素 \(\pm\sqrt{(2\pm\sqrt{2})(3\pm\sqrt{3})}\).
+
+（c）设 \(\beta = \sqrt{(2-\sqrt{2})(3+\sqrt{3})}\). 证明 \(a\beta = \sqrt{2}(3+\sqrt{3}) \in F\)，从而 \(\beta \in E\). 类似地证明其余各根也都是 \(E\) 的元素，从而 \(E\) 是 \(\mathbb{Q}\) 的伽罗瓦扩张。证明伽罗瓦群的元素恰是把 \(a\) 映到（b）中 8 个元素之一的那些映射。
+
+（d）设 \(\sigma \in \operatorname{Gal}(E/\mathbb{Q})\) 是把 \(a\) 映到 \(\beta\) 的自同构。证明由 \(\sigma(a^2) = \beta^2\) 可得 \(\sigma(\sqrt{2}) = -\sqrt{2}\)、\(\sigma(\sqrt{3}) = \sqrt{3}\). 由 \(a\beta = \sqrt{2}(3+\sqrt{3})\) 推出 \(\sigma(a\beta) = -a\beta\)，从而 \(\sigma(\beta) = -a\). 证明 \(\sigma\) 是 \(\operatorname{Gal}(E/\mathbb{Q})\) 中的 4 阶元素。
+
+（e）类似地证明由 \(\tau(a) = \sqrt{(2+\sqrt{2})(3-\sqrt{3})}\) 定义的映射 \(\tau\) 是 \(\operatorname{Gal}(E/\mathbb{Q})\) 中的 4 阶元素。证明 \(\sigma\) 与 \(\tau\) 生成伽罗瓦群，且 \(\sigma^4 = \tau^4 = 1\)、\(\sigma^2 = \tau^2\)、\(\sigma\tau = \tau\sigma^3\).
+
+（f）由此证明 \(\operatorname{Gal}(E/\mathbb{Q}) \cong Q_8\)，即 8 阶四元数群。
+
+\item 设 \(f(x) \in F[x]\) 是域 \(F\) 上次数为 \(n\) 的不可约多项式，\(L\) 是 \(f(x)\) 在 \(F\) 上的分裂域，\(a\) 是 \(f(x)\) 在 \(L\) 中的一个根。若 \(K\) 是包含在 \(L\) 中的任意 \(F\) 的伽罗瓦扩张，证明 \(f(x)\) 在 \(K\) 上分裂为 \(m\) 个次数均为 \(d\) 的不可约多项式之积，其中 \(m = [F(a) \cap K:F]\)、\(d = [K(a):K]\)（另见第 14.4 节习题 4 中的推广）。〔若 \(H\) 是 \(L\) 在 \(F\) 上的伽罗瓦群中对应于 \(K\) 的子群，则 \(f(x)\) 在 \(K\) 上的因式对应于 \(H\) 在 \(f(x)\) 的根上的轨道，然后利用第 4.1 节习题 9。〕
+
+\item 设 \(k\) 是域，\(k(t)\) 是变量 \(t\) 的有理函数域。对 \(f(t) \in k(t)\)，定义 \(k(t)\) 到自身的映射
+\[
+\sigma f(t) = f\left(\frac{1}{1-t}\right), \qquad \tau f(t) = f\left(\frac{1}{t}\right).
+\]
+
+（a）证明 \(\sigma\) 与 \(\tau\) 是 \(k(t)\) 的自同构（参见第 14.1 节习题 8），且它们生成的群 \(G = \langle\sigma, \tau\rangle\) 同构于 \(S_3\).
+
+（b）证明元素
+\[
+\eta = \frac{(t^2-t+1)^3}{t^2(t-1)^2}
+\]
+被 \(G\) 的所有元素固定。
+
+（c）证明 \(k(\eta)\) 恰为 \(G\) 在 \(k(t)\) 中的不动域〔计算这个扩张的次数〕。
+
+\item 证明上一题中由 \(\tau\) 生成的子自同构群的不动域是 \(k\left(t+\frac{1}{t}\right)\). 证明由自同构 \(\tau\sigma\)（它把 \(t\) 映到 \(1-t\)）生成的子群的不动域是 \(k(t(1-t))\). 确定由 \(\tau\sigma^2\) 生成的子群的不动域，以及由 \(\sigma\) 生成的子群的不动域。
+
+\item 设 \(K\) 是 \(F\) 的 \(n\) 次有限扩张，\(a \in K\).
+
+（a）证明 \(a\) 通过左乘作用在 \(K\) 上给出 \(K\) 的一个 \(F\)-线性变换 \(T_a\).
+
+（b）证明 \(a\) 在 \(F\) 上的极小多项式与线性变换 \(T_a\) 的极小多项式相同。
+
+（c）证明迹 \(\operatorname{Tr}_{K/F}(a)\) 就是由 \(T_a\) 定义的 \(n \times n\) 矩阵的迹（这解释了「迹」这个词的两种用法）；证明范数 \(N_{K/F}(a)\) 就是 \(T_a\) 的行列式。
+\end{enumerate}
+
+\section{有限域}
+
+有限域 \(\mathbb{F}\) 对某个素数 \(p\) 有特征 \(p\)，从而是 \(\mathbb{F}_p\) 上的有限维向量空间。若维数为 \(n\)，即 \([\mathbb{F}:\mathbb{F}_p] = n\)，则 \(\mathbb{F}\) 恰有 \(p^n\) 个元素。我们已经在命题 \ref{pro:13.37} 之后看到，此时 \(\mathbb{F}\) 同构于多项式 \(x^{p^n}-x\) 的分裂域，从而在同构意义下唯一。我们用 \(\mathbb{F}_{p^n}\) 表示阶为 \(p^n\) 的有限域。
+
+域 \(\mathbb{F}_{p^n}\) 在 \(\mathbb{F}_p\) 上伽罗瓦，伽罗瓦群是 \(n\) 阶循环群，由 Frobenius 自同构 \(\sigma_p\) 生成：\(\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p) = \langle \sigma_p \rangle \cong \mathbb{Z}/n\mathbb{Z}\)（推论 \ref{cor:14.6} 之后的例 7）。由基本定理，\(\mathbb{F}_{p^n}\) 的每个子域对应 \(\mathbb{Z}/n\mathbb{Z}\) 的一个子群。故对 \(n\) 的每个因子 \(d\)，\(\mathbb{F}_{p^n}\) 恰有一个在 \(\mathbb{F}_p\) 上次数为 \(d\) 的子域，即阶为 \(n/d\) 的子群 \(\langle \sigma_p^d \rangle\) 的固定域，而没有其他子域。这个域同构于 \(\mathbb{F}_{p^d}\)，即阶为 \(p^d\) 的唯一有限域。
+
+由于伽罗瓦群是阿贝尔群，每个子群都正规，故每个子域 \(\mathbb{F}_{p^d}\)（\(d\) 是 \(n\) 的因子）在 \(\mathbb{F}_p\) 上伽罗瓦（由这些域本身都是分裂域也可以看出）。进一步，伽罗瓦群 \(\operatorname{Gal}(\mathbb{F}_{p^d}/\mathbb{F}_p)\) 由 \(\sigma_p\) 在商群 \(\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p)/\langle \sigma_p^d \rangle\) 中的像生成。若我们把这个元素仍记作 \(\sigma_p\)，就重新得到扩张 \(\mathbb{F}_{p^d}/\mathbb{F}_p\) 的 Frobenius 自同构。（但要注意 \(\sigma_p\) 在 \(\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p)\) 中的阶为 \(n\)，而在 \(\operatorname{Gal}(\mathbb{F}_{p^d}/\mathbb{F}_p)\) 中的阶为 \(d\)。）我们把这个总结为下面命题。
+
+\begin{proposition}\label{pro:14.15}
+任何有限域都同构于某个素数 \(p\) 与某个整数 \(n \geq 1\) 的 \(\mathbb{F}_{p^n}\). 域 \(\mathbb{F}_{p^n}\) 是 \(x^{p^n}-x\) 在 \(\mathbb{F}_p\) 上的分裂域，伽罗瓦群是 \(n\) 阶循环群，由 Frobenius 自同构 \(\sigma_p\) 生成。\(\mathbb{F}_{p^n}\) 的子域都在 \(\mathbb{F}_p\) 上伽罗瓦，并与 \(n\) 的因子 \(d\) 一一对应：它们是域 \(\mathbb{F}_{p^d}\)，即 \(\sigma_p^d\) 的固定域。
+\end{proposition}
+
+关于任何有限域的有限扩张的相应陈述是命题 \ref{pro:14.15} 的简单推论，在习题中概述。
+
+作为一个初等应用，我们有以下关于 \(\mathbb{Z}[x]\) 中多项式 \(x^4+1\) 的结果。
+
+\begin{corollary}\label{cor:14.16}
+不可约多项式 \(x^4+1 \in \mathbb{Z}[x]\) 模每个素数 \(p\) 都可约。
+\end{corollary}
+
+\begin{proof}
+考虑素数 \(p\) 的 \(\mathbb{F}_p[x]\) 中的多项式 \(x^4+1\). 若 \(p = 2\)，我们有 \(x^4+1 = (x+1)^4\)，这个多项式可约。现在假设 \(p\) 是奇素数。则 \(p^2-1\) 被 8 整除，因为 \(p\) 模 8 同余于 1、3、5 或 7，而这些数的平方都模 8 同余于 1. 故 \(x^{p^2-1}-1\) 被 \(x^8-1\) 整除。于是我们有整除关系
+\[
+x^4+1 \mid x^8-1 \mid x^{p^2-1}-1 \mid x^{p^2}-x,
+\]
+这表明 \(x^4+1\) 的所有根都是 \(x^{p^2}-x\) 的根。（等价地，这些根被 Frobenius 自同构的平方 \(\sigma_p^2\) 固定。）由于 \(x^{p^2}-x\) 的根是域 \(\mathbb{F}_{p^2}\)，可知由 \(x^4+1\) 的任何根生成的扩张在 \(\mathbb{F}_p\) 上的次数至多为 2，这意味着 \(x^4+1\) 不可能在 \(\mathbb{F}_p\) 上不可约。
+\end{proof}
+
+乘法群 \(\mathbb{F}_{p^n}^\times\) 显然是域的乘法群的有限子群。由命题 \ref{pro:9.18}，它是循环群。若 \(\theta\) 是任意生成元，则显然 \(\mathbb{F}_{p^n} = \mathbb{F}_p(\theta)\). 这证明了下面结果。
+
+\begin{proposition}\label{pro:14.17}
+有限域 \(\mathbb{F}_{p^n}\) 是单扩张。特别地，对每个 \(n \geq 1\) 存在 \(\mathbb{F}_p\) 上次数为 \(n\) 的不可约多项式。
+\end{proposition}
+
+上面我们把有限域描述为多项式 \(x^{p^n}-x\) 的分裂域。由上一命题，这个域也可以描述为 \(\mathbb{F}_p[x]\) 的商，即由 \(\theta\) 的极小多项式给出的商。由于 \(\theta\) 必是 \(x^{p^n}-x\) 的根，我们看到 \(\theta\) 的极小多项式是 \(x^{p^n}-x\) 的次数为 \(n\) 的因子。
+
+反之，设 \(p(x)\) 是任何次数为 \(d\) 的不可约多项式，比如整除 \(x^{p^n}-x\). 若 \(\alpha\) 是 \(p(x)\) 的根，则扩张 \(\mathbb{F}_p(\alpha)\) 是 \(\mathbb{F}_{p^n}\) 的次数为 \(d\) 的子域。故 \(d\) 是 \(n\) 的因子，且由命题 \ref{pro:14.15} 这个扩张是伽罗瓦的（事实上就是扩张 \(\mathbb{F}_{p^d}/\mathbb{F}_p\)），故特别地 \(p(x)\) 的所有根都含于 \(\mathbb{F}_p(\alpha)\).
+
+\(\mathbb{F}_{p^n}\) 的元素正是 \(x^{p^n}-x\) 的根。若我们按这些根在 \(\mathbb{F}_p\) 上极小多项式的次数 \(d\) 把因子 \(x-\alpha\) 归在一起，就得到
+
+\begin{proposition}\label{pro:14.18}
+多项式 \(x^{p^n}-x\) 恰是 \(\mathbb{F}_p[x]\) 中所有次数为 \(d\) 的互异不可约多项式之积，其中 \(d\) 取遍 \(n\) 的所有因子。
+\end{proposition}
+
+这个命题可以用来递归地产生 \(\mathbb{F}_p\) 上的不可约多项式。例如 \(\mathbb{F}_2\) 上的不可约二次式是
+\[
+\frac{x^4-x}{x(x-1)}
+\]
+的因子，这给出唯一的多项式 \(x^2+x+1\). 类似地，这个域上的不可约三次式是
+\[
+\frac{x^8-x}{x(x-1)(x^2+x+1)}
+\]
+的因子，它分解为两个三次式 \(x^3+x+1\) 与 \(x^3+x^2+1\). 不可约四次式由 \(x^{16}-x\) 除以 \(x(x-1)\) 与上面的不可约二次式 \(x^2+x+1\) 后分解为不可约四次式得到：
+\[
+\frac{x^{16}-x}{x(x-1)(x^2+x+1)} = (x^4+x^3+x^2+x+1)(x^4+x^3+1)(x^4+x+1).
+\]
+这给出确定 \(\mathbb{F}_p\) 上给定次数的所有不可约多项式之积的方法。存在分解模 \(p\) 多项式的高效算法，它们在实践中给出单个的不可约多项式（参见习题）。手头有不可约多项式的重要性在于它们给出有限域 \(\mathbb{F}_{p^n}\) 的表示（作为商 \(\mathbb{F}_p[x]/(f(x))\)，其中 \(f(x)\) 是次数 \(n\) 的不可约多项式），这便于显式计算。
+
+还要注意由于有限域 \(\mathbb{F}_{p^n}\) 在同构意义下唯一，\(\mathbb{F}_p[x]\) 关于任何次数为 \(n\) 的不可约多项式的商都同构。若 \(f_1(x)\) 与 \(h(x)\) 都是 \(n\) 次不可约的，则 \(h(x)\) 在域 \(\mathbb{F}_{p^n} \cong \mathbb{F}_p[x]/(f_1(x))\) 中完全分裂。若我们用 \(a(x)\) 表示 \(h(x)\) 的一个根（以强调它是 \(\mathbb{F}_p[x]/(f_1(x))\) 中次数 \(< n\) 的 \(x\) 的多项式），则同构由
+\[
+\mathbb{F}_p[x]/(h(x)) \to \mathbb{F}_p[x]/(f_1(x)), \qquad x \mapsto a(x)
+\]
+给出（我们把第一个域中 \(h(x)\) 的一个根映到第二个域中 \(h(x)\) 的一个根）。
+
+例如，若上面的 \(\mathbb{F}_2\) 上的两个不可约四次式是 \(f_1(x) = x^4+x^3+1\)、\(h(x) = x^4+x+1\)，则简单计算验证
+\[
+a(x) = x^3+x^2
+\]
+是 \(\mathbb{F}_1 = \mathbb{F}_2[x]/(x^4+x^3+1)\) 中 \(h(x)\) 的根。于是我们有
+\[
+\mathbb{F}_2[x]/(x^4+x+1) \cong \mathbb{F}_2[x]/(x^4+x^3+1)\ (\cong \mathbb{F}_{16}), \qquad x \mapsto x^3+x^2.
+\]
+
+若我们假定初等数论中的一个结果，就可以给出次数为 \(n\) 的不可约多项式个数的公式。用
+\[
+\mu(n) = \begin{cases} 1, & \text{若 } n = 1, \\ 0, & \text{若 } n \text{ 有平方因子}, \\ (-1)^r, & \text{若 } n \text{ 有 } r \text{ 个不同的素因子} \end{cases}
+\]
+定义 \textbf{Möbius \(\mu\)-函数}。若 \(f(n)\) 是对所有非负整数 \(n\) 定义的函数、\(F(n)\) 由 \(F(n) = \sum_{d \mid n}f(d)\)（\(n = 1, 2, \ldots\)）定义，则 \textbf{Möbius 反演公式}断言可以从 \(F(n)\) 恢复 \(f(n)\)：
+\[
+f(n) = \sum_{d \mid n}\mu(d)F\left(\frac{n}{d}\right), \quad n = 1, 2, \ldots.
+\]
+这是数论中的一个初等结果，我们把它当作已知。定义 \(\psi(n) = \mathbb{F}_p[x]\) 中次数为 \(n\) 的不可约多项式的个数。在命题 \ref{pro:14.18} 中数次数，我们有
+\[
+p^n = \sum_{d \mid n}d\psi(d).
+\]
+对 \(f(n) = n\psi(n)\) 应用 Möbius 反演公式，我们得到
+\[
+n\psi(n) = \sum_{d \mid n}\mu(d)p^{n/d},
+\]
+这给出 \(\mathbb{F}_p\) 上次数为 \(n\) 的不可约多项式个数的公式：
+\[
+\psi(n) = \frac{1}{n}\sum_{d \mid n}\mu(d)p^{n/d}.
+\]
+例如在 \(p = 2\)、\(n = 4\) 的情形我们有
+\[
+\psi(4) = \frac{1}{4}[\mu(1)2^4+\mu(2)2^2+\mu(4)2^1] = \frac{1}{4}(16-4+0) = 3,
+\]
+正如我们上面直接确定的那样。
+
+我们在上面看到 \(\mathbb{F}_{p^m} \subseteq \mathbb{F}_{p^n}\) 当且仅当 \(m\) 整除 \(n\). 特别地，给定任意两个有限域 \(\mathbb{F}_{p^{n_1}}\) 与 \(\mathbb{F}_{p^{n_2}}\)，存在第三个含有它们（的同构拷贝）的有限域，即 \(\mathbb{F}_{p^{n_1n_2}}\). 这给出这些域上的一个偏序，并使我们能考虑它们的并。由于这些给出 \(\mathbb{F}_p\) 的所有有限扩张，我们看到所有 \(\mathbb{F}_{p^n}\) 的并是 \(\mathbb{F}_p\) 的代数闭包，在同构意义下唯一。这给出 \(\mathbb{F}_p\) 的代数闭包的一个简单描述。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 把 \(x^8-x\) 分解为 \(\mathbb{Z}[x]\) 中与 \(\mathbb{F}_2[x]\) 中的不可约因子。
+
+\item 写出 \(\mathbb{F}_4\) 与 \(\mathbb{F}_9\) 的乘法表。
+
+\item 证明代数闭域必是无限的。
+
+\item 构造有 16 个元素的有限域，并求出乘法群的一个生成元。有多少个生成元？
+
+\item 给出 \(x^3-x+1\) 与 \(x^3-x-1\) 在 \(\mathbb{F}_3\) 上的分裂域之间的一个显式同构。
+
+\item 假设 \(K = \mathbb{Q}(\theta) = \mathbb{Q}(\sqrt{D_1}, \sqrt{D_2})\)（\(D_1, D_2 \in \mathbb{Z}\)）是双二次扩张，且 \(\theta = a+b\sqrt{D_1}+c\sqrt{D_2}+d\sqrt{D_1D_2}\)（\(a, b, c, d \in \mathbb{Z}\)）。证明 \(\theta\) 在 \(\mathbb{Q}\) 上的极小多项式 \(m_\theta(x)\) 在 \(\mathbb{Q}\) 上次数为 4 且不可约，但模每个素数 \(p\) 都可约。特别地证明多项式 \(x^4-10x^2+1\) 在 \(\mathbb{Z}[x]\) 中不可约但模每个素数都可约。〔利用有限域上没有双二次扩张这一事实。〕
+
+\item 证明对每个素数 \(p\)，\(2, 3, 6\) 中有一个是 \(\mathbb{F}_p\) 中的平方。由此断定多项式
+\[
+x^6-11x^4+36x^2-36 = (x^2-2)(x^2-3)(x^2-6)
+\]
+模每个素数 \(p\) 都有根，但在 \(\mathbb{Z}\) 中没有根。
+
+\item 确定 \(x^p-x-a\) 在 \(\mathbb{F}_p\) 上的分裂域（其中 \(a \neq 0\)，\(a \in \mathbb{F}_p\)）。显式证明它的伽罗瓦群是循环群。〔证明 \(\alpha \mapsto \alpha+1\) 是自同构。〕这样的扩张称为 \textbf{Artin--Schreier 扩张}（参见第 14.7 节习题 9）。
+
+\item 设 \(q = p^m\) 是素数 \(p\) 的幂，\(\mathbb{F}_q = \mathbb{F}_{p^m}\) 是有 \(q\) 个元素的有限域。设 \(\sigma_q = \sigma_p^m\) 是 Frobenius 自同构 \(\sigma_p\) 的 \(m\) 次幂，称为 \textbf{\(q\)-Frobenius 自同构}。
+
+（a）证明 \(\sigma_q\) 固定 \(\mathbb{F}_q\).
+
+（b）证明 \(\mathbb{F}_q\) 的任何 \(n\) 次有限扩张都是 \(x^{q^n}-x\) 在 \(\mathbb{F}_q\) 上的分裂域，从而是唯一的。
+
+（c）证明 \(\mathbb{F}_q\) 的任何 \(n\) 次有限扩张都是循环的，以 \(\sigma_q\) 为生成元。
+
+（d）证明 \(\mathbb{F}_q\) 的唯一 \(n\) 次扩张的子域与 \(n\) 的因子 \(d\) 一一对应。
+
+\item 证明 \(n\) 整除 \(\varphi(p^n-1)\).〔注意 \(\varphi(p^n-1)\) 是 \(p^n-1\) 阶循环群的自同构群的阶。〕
+
+\item 证明 \(x^{p^n}-x+1\) 在 \(\mathbb{F}_p\) 上不可约仅当 \(n = 1\) 或 \(n = p\).〔注意若 \(a\) 是根，则对任意 \(a \in \mathbb{F}_{p^n}\)，\(a+a\) 也是根。证明这蕴涵 \(\mathbb{F}_p(a)\) 含有 \(\mathbb{F}_{p^n}\) 且 \([\mathbb{F}_p(a):\mathbb{F}_{p^n}] = p\).〕
+\end{enumerate}
+
+\noindent（\textbf{Berlekamp 分解算法}）下面各习题概述 \(\mathbb{F}_p[x]\) 中多项式的 Berlekamp 分解算法。这个算法的效率基于用欧几里得算法计算 \(\mathbb{F}_p[x]\) 中最大公因子的效率，以及解线性方程组的行约化矩阵算法的效率。
+
+\noindent 设 \(f(x) \in \mathbb{F}_p[x]\) 是次数为 \(n\) 的首一多项式，且 \(f(x) = p_1(x)p_2(x)\cdots p_k(x)\)，其中 \(p_1(x), p_2(x), \ldots, p_k(x)\) 是 \(\mathbb{F}_p[x]\) 中互异首一不可约多项式的幂。
+
+\begin{enumerate}
+\setcounter{enumi}{11}
+\item 证明为把 \(f(x)\) 写成 \(\mathbb{F}_p[x]\) 中不可约多项式之积，只需确定因子 \(p_1(x), \ldots, p_k(x)\).〔若 \(p(x) = q(x)^N \in \mathbb{F}_p[x]\)，其中 \(q(x)\) 首一不可约，证明可以通过检查 \(p\) 次幂并与导数计算最大公因子，从 \(p(x)\) 确定 \(q(x)\).〕
+
+\item 设 \(g(x) \in \mathbb{F}_p[x]\) 是任意次数 \(< n\) 的多项式，用 \(R(h(x))\) 表示 \(h(x)\) 被 \(f(x)\) 除后的余式。证明下列命题等价：
+
+（a）\(R(g(x^p)) = g(x)\)；
+
+（b）\(f(x)\) 整除 \([g(x)-0][g(x)-1]\cdots[g(x)-(p-1)]\)〔利用 \(g(x^p) = g(x)^p\) 以及 \(x^p-x\) 在 \(\mathbb{F}_p[x]\) 中的分解〕；
+
+（c）对 \(i = 1, 2, \ldots, k\)，\(p_i(x)\) 整除（b）中的乘积；
+
+（d）对每个 \(i = 1, 2, \ldots, k\)，存在 \(s_i \in \mathbb{F}_p\) 使 \(p_i(x)\) 整除 \(g(x)-s_i\)，即 \(g(x) \equiv s_i \pmod{p_i(x)}\).
+
+\item 证明满足上一习题等价条件的次数 \(< n\) 的多项式 \(g(x)\) 构成 \(\mathbb{F}_p\) 上的维数为 \(k\) 的向量空间 \(V\).〔对（13）（d）中 \(s_i\) 的 \(p^k\) 种可能选择应用中国剩余定理。〕
+
+\item 设 \(g(x) = b_0+b_1x+\cdots+b_{n-1}x^{n-1} \in V\). 对 \(j = 0, 1, \ldots, n-1\) 令 \(R(x^{pj}) = a_{0,j}+a_{1,j}x+\cdots+a_{n-1,j}x^{n-1}\)，并设 \(A\) 是 \(n \times n\) 矩阵
+\[
+A = \begin{pmatrix} a_{0,0} & a_{0,1} & \cdots & a_{0,n-1} \\ a_{1,0} & a_{1,1} & \cdots & a_{1,n-1} \\ \vdots & & & \vdots \\ a_{n-1,0} & a_{n-1,1} & \cdots & a_{n-1,n-1} \end{pmatrix}.
+\]
+证明习题 13 中 \(g(x) \in V\) 的条件（a）等价于 \((A-I)B = 0\)，其中 \(B\) 是元素为 \(b_0, b_1, \ldots, b_{n-1}\) 的列矩阵。断定矩阵 \(A-I\) 的秩为 \(n-k\). 注意这已经足以判断 \(f(x)\) 是否不可约，而不必真正确定各因子。
+
+\item 设 \(g_1(x), g_2(x), \ldots, g_k(x)\) 是（\*\*）的解的一组基（即 \(V\) 的一组基），其中我们可以取 \(g_1(x) = 1\). 从 \(w(x) = f(x)\) 开始，对 \(i = 2, 3, \ldots, k\) 与 \(s \in \mathbb{F}_p\)，对 \(f(x)\) 的每个已算出的因子计算最大公因子 \((w(x), g_i(x)-s)\). 注意由习题 13（d），\(f(x)\) 的每个因子 \(p_i(x)\) 都整除这样一个最大公因子。当 \(k\) 个互素因子都被确定时过程终止。
+
+证明这个过程确实给出所有因子 \(p_1(x), p_2(x), \ldots, p_k(x)\)，即可以用这个过程分离出单个因子 \(p_1(x), p_2(x), \ldots, p_k(x)\)，如下：
+
+若不然，则对其中两个因子，比如 \(p_1(x)\) 与 \(p_2(x)\)，对每个 \(i = 1, 2, \ldots, k\) 都存在 \(s_i \in \mathbb{F}_p\) 使 \(g_i(x)-s_i\) 同时被 \(p_1(x)\) 与 \(p_2(x)\) 整除。由中国剩余定理，选取满足 \(g(x) \equiv 0 \pmod{p_1(x)}\) 且 \(g(x) \equiv 1 \pmod{p_2(x)}\) 的 \(g(x) \in V\). 用 \(V\) 的基把 \(g(x)\) 写成 \(g(x) = \sum_{i=1}^k c_ig_i(x)\)，并令 \(s = \sum_{i=1}^kc_is_i(x) \in \mathbb{F}_p\). 证明 \(s \equiv 0 \pmod{p_1(x)}\) 从而 \(s = 0\)，且 \(s \equiv 1 \pmod{p_2(x)}\) 从而 \(s = 1\)，矛盾。
+
+\item 本习题按照前面各习题概述的 Berlekamp 分解算法确定 \(f(x) = x^5+x^2+4x+6\) 在 \(\mathbb{F}_7[x]\) 中的分解。
+
+（a）证明 \(x^7 \equiv x^2+3x^3+6x^4 \pmod{f(x)}\). 类似地计算 \(x^{14}, x^{21}\) 与 \(x^{28}\) 模 \(f(x)\)（注意 \(x^{14}\) 最容易通过把 \(x^7\) 的结果平方再约化得到，等等），以证明此时习题 15 中的矩阵 \(A\) 是某个 \(5 \times 5\) 矩阵。
+
+（b）证明 \(A-I\) 的约化行阶梯形是某个矩阵，并断定 \(k = 2\)（故 \(f(x)\) 恰是不可约多项式的幂的两个因子之积），且 \(g_1(x) = 1\) 与 \(g_2(x) = x^4+5x^3+x^2+x\) 给出习题 15 中（\*\*）的解的一组基。
+
+（c）按习题 16 的步骤，证明 \((f(x), g_2(x)-1) = x^2+3x+5 = p_1(x)\)，且 \(f(x)/p_1(x) = x^3+4x^2+4x+4 = p_2(x)\)，这给出了 \(\mathbb{F}_7[x]\) 中整除 \(f(x)\) 的不可约多项式的幂。证明这两个因子都不是 \(\mathbb{F}_7[x]\) 中的 7 次幂，且每个都与它的导数互素，从而断定两个因子都是不可约多项式，给出 \(f(x)\) 分解为不可约多项式的完全分解：
+\[
+f(x) = (x^2+3x+5)(x^3+4x^2+4x+4) \in \mathbb{F}_7[x].
+\]
+\end{enumerate}
+
+\section{合成扩张与单扩张}
+
+现在我们考虑与伽罗瓦扩张作合成的影响。第一个结果断言把伽罗瓦扩张「向上滑动」得到伽罗瓦扩张。
+
+\begin{proposition}\label{pro:14.19}
+假设 \(K/F\) 是伽罗瓦扩张，\(F'/F\) 是任意扩张。则 \(KF'/F'\) 是伽罗瓦扩张，伽罗瓦群
+\[
+\operatorname{Gal}(KF'/F') \cong \operatorname{Gal}(K/K \cap F')
+\]
+同构于 \(\operatorname{Gal}(K/F)\) 的子群。
+\end{proposition}
+
+\begin{proof}
+若 \(K/F\) 是伽罗瓦的，则 \(K\) 是 \(F[x]\) 中某个可分多项式 \(f(x)\) 的分裂域。此时 \(KF'/F'\) 是把 \(f(x)\) 看作 \(F'[x]\) 中多项式时的分裂域，故此扩张是伽罗瓦的。由于 \(K/F\) 伽罗瓦，固定 \(F\) 的 \(K\) 的每个嵌入都是 \(K\) 的自同构，故由把自同构 \(\sigma\) 限制到子域 \(K\) 定义的映射
+\[
+\varphi : \operatorname{Gal}(KF'/F') \to \operatorname{Gal}(K/F), \qquad \sigma \mapsto \sigma|_K
+\]
+有定义。它显然是同态，其核为
+\[
+\ker\varphi = \{\sigma \in \operatorname{Gal}(KF'/F') \mid \sigma|_K = 1\}.
+\]
+由于 \(\operatorname{Gal}(KF'/F')\) 中的元素在 \(F'\) 上平凡，核中的元素在 \(K\) 与 \(F'\) 上都平凡，从而在它们的合成上平凡，故核只含恒等自同构。因此 \(\varphi\) 是单射。
+
+用 \(H\) 表示 \(\varphi\) 在 \(\operatorname{Gal}(K/F)\) 中的像，\(K^H\) 是对应的含 \(F\) 的 \(K\) 的固定子域。由于 \(H\) 中每个元素都固定 \(F'\)，\(K^H\) 含有 \(K \cap F'\). 另一方面，合成 \(K^HF'\) 被 \(\operatorname{Gal}(KF'/F')\) 固定（任何 \(\sigma \in \operatorname{Gal}(KF'/F')\) 固定 \(F'\)，而它在 \(K^H \subseteq K\) 上的作用通过其限制 \(\sigma|_K \in H\) 给出，按定义 \(H\) 固定 \(K^H\)）。由基本定理可知 \(K^HF' = F'\)，从而 \(K^H \subseteq F'\)，这给出反向包含 \(K^H \subseteq K \cap F'\). 故 \(K^H = K \cap F'\)，因此再次由基本定理 \(H = \operatorname{Gal}(K/K \cap F')\)，完成证明。
+\end{proof}
+
+\begin{corollary}\label{cor:14.20}
+假设 \(K/F\) 是伽罗瓦扩张，\(F'/F\) 是任意有限扩张。则
+\[
+[KF':F] = \frac{[K:F][F':F]}{[K \cap F':F]}.
+\]
+\end{corollary}
+
+\begin{proof}
+这由上一命题与等式 \([KF':F'] = [K:K \cap F']\)（它由命题中各伽罗瓦群的阶给出）推出。
+\end{proof}
+
+例子 \(F = \mathbb{Q}\)、\(K = \mathbb{Q}(\sqrt[3]{2})\)、\(F' = \mathbb{Q}(\rho\sqrt[3]{2})\)（\(\rho\) 是本原 3 次单位根）表明若两个扩张都不伽罗瓦，推论 \ref{cor:14.20} 的公式一般不再成立。
+
+\begin{proposition}\label{pro:14.21}
+设 \(K_1\) 与 \(K_2\) 是域 \(F\) 的伽罗瓦扩张。则
+
+（1）交 \(K_1 \cap K_2\) 在 \(F\) 上伽罗瓦。
+
+（2）合成 \(K_1K_2\) 在 \(F\) 上伽罗瓦。伽罗瓦群同构于直积 \(\operatorname{Gal}(K_1/F) \times \operatorname{Gal}(K_2/F)\) 的子群
+\[
+H = \{(\sigma, \tau) \mid \sigma|_{K_1 \cap K_2} = \tau|_{K_1 \cap K_2}\},
+\]
+即限制到交 \(K_1 \cap K_2\) 上相等的元素组成的子群。
+\end{proposition}
+
+\begin{proof}
+（1）假设 \(p(x)\) 是 \(F[x]\) 中的不可约多项式，在 \(K_1 \cap K_2\) 中有根 \(\alpha\). 由于 \(\alpha \in K_1\) 且 \(K_1/F\) 伽罗瓦，\(p(x)\) 的所有根都在 \(K_1\) 中。类似地所有根都在 \(K_2\) 中，故 \(p(x)\) 的所有根都在 \(K_1 \cap K_2\) 中。如定理 \ref{thm:14.13} 中那样容易推出 \(K_1 \cap K_2\) 是伽罗瓦的。
+
+（2）若 \(K_1\) 是可分多项式 \(f_1(x)\) 的分裂域、\(K_2\) 是可分多项式 \(f_2(x)\) 的分裂域，则合成是多项式 \(f_1(x)f_2(x)\) 的无平方部分的分裂域，从而在 \(F\) 上伽罗瓦。
+
+映射
+\[
+\varphi : \operatorname{Gal}(K_1K_2/F) \to \operatorname{Gal}(K_1/F) \times \operatorname{Gal}(K_2/F), \qquad \sigma \mapsto (\sigma|_{K_1}, \sigma|_{K_2})
+\]
+显然是同态。其核由在 \(K_1\) 与 \(K_2\) 上都平凡的元素组成，从而在合成上平凡，故这个映射是单射。像含于子群 \(H\) 中，因为
+\[
+(\sigma|_{K_1})|_{K_1 \cap K_2} = \sigma|_{K_1 \cap K_2} = (\sigma|_{K_2})|_{K_1 \cap K_2}.
+\]
+\(H\) 的阶可以这样计算：注意到对每个 \(\sigma \in \operatorname{Gal}(K_1/F)\)，存在 \(|\operatorname{Gal}(K_2/K_1 \cap K_2)|\) 个元素 \(\tau \in \operatorname{Gal}(K_2/F)\)，它们在 \(K_1 \cap K_2\) 上的限制等于 \(\sigma|_{K_1 \cap K_2}\). 故
+\[
+|H| = \frac{|\operatorname{Gal}(K_1/F)| \cdot |\operatorname{Gal}(K_2/K_1 \cap K_2)|}{|\operatorname{Gal}(K_2/F)|} = \frac{|\operatorname{Gal}(K_1/F)|}{|\operatorname{Gal}(K_1 \cap K_2/F)|}.
+\]
+由推论 \ref{cor:14.20} 与上面的图我们看到 \(H\) 与 \(\operatorname{Gal}(K_1K_2/F)\) 的阶都等于
+\[
+[K_1K_2:F] = \frac{[K_1:F][K_2:F]}{[K_1 \cap K_2:F]}.
+\]
+故 \(\varphi\) 的像恰为 \(H\)，完成证明。
+\end{proof}
+
+\begin{corollary}\label{cor:14.22}
+设 \(K_1\) 与 \(K_2\) 是域 \(F\) 的伽罗瓦扩张，\(K_1 \cap K_2 = F\). 则
+\[
+\operatorname{Gal}(K_1K_2/F) \cong \operatorname{Gal}(K_1/F) \times \operatorname{Gal}(K_2/F).
+\]
+反之，若 \(K\) 在 \(F\) 上伽罗瓦且 \(G = \operatorname{Gal}(K/F) = G_1 \times G_2\) 是两个子群的直积，则 \(K\) 是 \(F\) 的两个伽罗瓦扩张 \(K_1\) 与 \(K_2\) 的合成，且 \(K_1 \cap K_2 = F\).
+\end{corollary}
+
+\begin{proof}
+第一部分由上一命题立即推出。对于第二部分，设 \(K_1\) 是 \(G_1 \subseteq G\) 的固定域、\(K_2\) 是 \(G_2 \subseteq G\) 的固定域。则 \(K_1 \cap K_2\) 是对应子群 \(G_1G_2\) 的域，而这里 \(G_1G_2\) 就是整个 \(G\)，故 \(K_1 \cap K_2 = F\). 合成 \(K_1K_2\) 是对应子群 \(G_1 \cap G_2\) 的域，而这里 \(G_1 \cap G_2\) 是平凡子群，故 \(K_1K_2 = K\)，完成证明。
+\end{proof}
+
+\begin{corollary}\label{cor:14.23}
+设 \(E/F\) 是任意有限可分扩张。则 \(E\) 含于某个在 \(F\) 上伽罗瓦的扩张 \(K\) 中，且 \(K\) 在「在 \(K\) 的固定代数闭包中，任何其他含有 \(E\) 的 \(F\) 的伽罗瓦扩张都含有 \(K\)」的意义下是最小的。
+\end{corollary}
+
+\begin{proof}
+存在含 \(E\) 的 \(F\) 的伽罗瓦扩张，例如取 \(E\) 在 \(F\) 上一组基的极小多项式的分裂域的合成（由于 \(E\) 在 \(F\) 上可分，这些极小多项式都可分）。则所有含 \(E\) 的 \(F\) 的伽罗瓦扩张之交就是域 \(K\).
+\end{proof}
+
+\begin{definition}
+上一推论中含 \(E\) 的 \(F\) 的伽罗瓦扩张 \(K\) 称为 \(E\) 在 \(F\) 上的\textbf{伽罗瓦闭包}。
+\end{definition}
+
+在伽罗瓦扩张中工作常常更简单（例如像推论 \ref{cor:14.20} 中那样计算次数）。可分扩张的伽罗瓦闭包的存在性常常有助于把计算化归为对伽罗瓦扩张的考虑。
+
+回忆扩张 \(K/F\) 称为\textbf{单扩张}，若对某个元素 \(\theta\) 有 \(K = F(\theta)\)，此时 \(\theta\) 称为 \(K\) 的\textbf{本原元}。
+
+\begin{proposition}\label{pro:14.24}
+设 \(K/F\) 是有限扩张。则 \(K = F(\theta)\) 当且仅当 \(K\) 中含 \(F\) 的子域只有有限多个。
+\end{proposition}
+
+\begin{proof}
+首先假设 \(K = F(\theta)\) 是单扩张。设 \(E\) 是 \(K\) 的含 \(F\) 的子域：\(F \subseteq E \subseteq K\). 设 \(f(x) \in F[x]\) 是 \(\theta\) 在 \(F\) 上的极小多项式，\(g(x) \in E[x]\) 是 \(\theta\) 在 \(E\) 上的极小多项式。则 \(g(x)\) 在 \(E[x]\) 中整除 \(f(x)\). 设 \(E'\) 是由 \(g(x)\) 的系数在 \(F\) 上生成的域。则 \(E' \subseteq E\)，且显然 \(\theta\) 在 \(E'\) 上的极小多项式仍是 \(g(x)\). 但此时
+\[
+[K:E'] = \deg g(x) = [K:E]
+\]
+蕴涵 \(E = E'\). 由此 \(K\) 的含 \(F\) 的子域是由 \(f(x)\) 的首一因子的系数生成的子域，故这样的子域只有有限多个。
+
+反之，假设 \(K\) 中含 \(F\) 的子域只有有限多个。若 \(F\) 是有限域，则我们已经看到 \(K\) 是单扩张（命题 \ref{pro:14.17}）。故我们可以假设 \(F\) 是无限域。由于 \(K\) 在 \(F\) 上有限生成，显然只需证明 \(F(\alpha, \beta)\) 由单个元素生成。考虑子域
+\[
+F(\alpha+c\beta), \quad c \in F.
+\]
+则由于 \(c \in F\) 有无限多种选择而这样的子域只有有限多个，存在 \(F\) 中 \(c \neq c'\) 使
+\[
+F(\alpha+c\beta) = F(\alpha+c'\beta).
+\]
+则 \(\alpha+c\beta\) 与 \(\alpha+c'\beta\) 都在 \(F(\alpha+c\beta)\) 中，取它们的差表明 \((c-c')\beta \in F(\alpha+c\beta)\). 故 \(\beta \in F(\alpha+c\beta)\)，从而也有 \(\alpha \in F(\alpha+c\beta)\). 因此 \(F(\alpha, \beta) \subseteq F(\alpha+c\beta)\)，而反向包含显然，故 \(F(\alpha, \beta) = F(\alpha+c\beta)\)，完成证明。
+\end{proof}
+
+\begin{theorem}\label{thm:14.25}
+（\textbf{本原元定理}）若 \(K/F\) 有限且可分，则 \(K/F\) 是单扩张。特别地，特征为 0 的域的有限扩张都是单扩张。
+\end{theorem}
+
+\begin{proof}
+设 \(L\) 是 \(K\) 在 \(F\) 上的伽罗瓦闭包。则 \(K\) 中含 \(F\) 的任何子域由基本定理对应 \(\operatorname{Gal}(L/F)\) 的某个子群。由于这样的子群只有有限多个，上一命题表明 \(K/F\) 是单扩张。最后一个断言由特征为 0 的域的有限扩张都可分推出。
+\end{proof}
+
+如命题的证明所示，扩张的本原元可以作为扩张的各生成元的简单线性组合得到。在伽罗瓦扩张的情形，只需确定一个不被伽罗瓦群任何非平凡元素固定的线性组合，因为由基本定理这样的线性组合不可能落在任何真子域中。
+
+\begin{example}
+（1）元素 \(\sqrt{2}+\sqrt{3}\) 生成域 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\)，如我们已经看到的（它不被这个域的四个伽罗瓦自同构中的任何一个固定）。
+
+（2）\(\mathbb{F}_p\) 的代数闭包上变量 \(x\) 与 \(y\) 的有理函数域 \(\mathbb{F}_p(x, y)\) 不是子域 \(F = \mathbb{F}_p(x^p, y^p)\) 的单扩张。容易看出 \([F(x,y):F] = p^2\)，且子域
+\[
+F(x+cy), \quad c \in \mathbb{F}_p
+\]
+在 \(\mathbb{F}_p(x^p, y^p)\) 上都为 \(p\) 次（注意 \((x+cy)^p = x^p+c^py^p \in \mathbb{F}_p(x^p, y^p)\)）。若这些子域中有两个相等，则正如命题 \ref{pro:14.24} 的证明中那样将有 \(\mathbb{F}_p(x, y) = F(x+cy)\)，而由次数考虑这是不可能的。故这样的子域有无限多个，这个扩张不可能是单扩张。
+\end{example}
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 确定域 \(\mathbb{Q}(\sqrt{1+\sqrt{2}})\) 在 \(\mathbb{Q}\) 上的伽罗瓦闭包。
+
+\item 求 \(\mathbb{Q}(\sqrt{2}, \sqrt{3}, \sqrt{5})\) 在 \(\mathbb{Q}\) 上的一个本原生成元。
+
+\item 设 \(F\) 是 \(\mathbb{Q}\) 上 \(n \times n\) 矩阵环中含有的域。证明 \([F:\mathbb{Q}] \leq n\).（注意由第 13.2 节习题 19，\(\mathbb{Q}\) 上 \(n \times n\) 矩阵环确实含有 \(\mathbb{Q}\) 上次数为 \(n\) 的域。）
+
+\item 设 \(f(x) \in F[x]\) 是域 \(F\) 上次数为 \(n\) 的不可约多项式，\(L\) 是 \(f(x)\) 在 \(F\) 上的分裂域，\(\alpha\) 是 \(L\) 中 \(f(x)\) 的一个根。若 \(K\) 是 \(F\) 的任意伽罗瓦扩张，证明多项式 \(f(x)\) 在 \(K\) 上分解为 \(m\) 个次数都为 \(d\) 的不可约多项式之积，其中 \(d = [K(\alpha):K] = [(L \cap K)(\alpha):L \cap K]\)，\(m = n/d = [F(\alpha) \cap K:F]\).〔首先证明 \(f(x)\) 在 \(K\) 上的分解与它在 \(L \cap K\) 上的分解相同。然后若 \(H\) 是 \(L\) 在 \(F\) 上的伽罗瓦群中对应于 \(L \cap K\) 的子群，则 \(f(x)\) 在 \(L \cap K\) 上的因子对应 \(H\) 在 \(f(x)\) 的根上的轨道。利用第 4.1 节习题 9。〕
+
+\item 设 \(p\) 是素数，\(F\) 是域。设 \(K\) 是 \(F\) 的伽罗瓦扩张，其伽罗瓦群是 \(p\)-群（即次数 \([K:F]\) 是 \(p\) 的幂）。这样的扩张称为 \textbf{\(p\)-扩张}（注意按定义 \(p\)-扩张是伽罗瓦的）。
+
+（a）设 \(L\) 是 \(K\) 的 \(p\)-扩张。证明 \(L\) 在 \(F\) 上的伽罗瓦闭包是 \(F\) 的 \(p\)-扩张。
+
+（b）给出一个例子表明若 \([K:F]\) 是 \(p\) 的幂但 \(K/F\) 不伽罗瓦，（a）不必成立。
+
+\item 通过显式给出无限多个中间子域，证明 \(\mathbb{F}_p(x, y)/\mathbb{F}_p(x^p, y^p)\) 不是单扩张。
+
+\item 设 \(F \subseteq K \subseteq L\)，\(\theta \in L\) 且 \(p(x) = m_{\theta,F}(x)\). 证明作为 \(K\)-代数有 \(K \otimes_F F(\theta) \cong K[x]/(p(x))\).
+
+\item 设 \(K_1\) 与 \(K_2\) 是特征为 0 的域 \(F\) 的两个含于域 \(L\) 的代数扩张。证明 \(F\)-代数 \(K_1 \otimes_F K_2\) 没有非零幂零元。〔利用上一习题。〕
+\end{enumerate}
+
+\section{\(\mathbb{Q}\) 上的分圆扩张与阿贝尔扩张}
+
+我们已经确定 \(n\) 次单位根的分圆域 \(\mathbb{Q}(\zeta_n)\) 是 \(\mathbb{Q}\) 的伽罗瓦扩张，次数为 \(\varphi(n)\)，其中 \(\varphi\) 表示欧拉 \(\varphi\)-函数。这个域的每个自同构由它在 \(\zeta_n\) 上的作用唯一确定。元素 \(\zeta_n\) 必被映到另一个本原 \(n\) 次单位根（回忆这些是 \(n\) 次不可约分圆多项式 \(\Phi_n(x)\) 的根）。故对某个与 \(n\) 互素的整数 \(a\)（\(1 \leq a < n\)）有 \(\sigma(\zeta_n) = \zeta_n^a\). 由于恰有 \(\varphi(n)\) 个这样的整数，可知事实上每一个这样的映射 \(a\) 都确实是 \(\mathbb{Q}(\zeta_n)\) 的自同构。还要注意我们可以对任何与 \(n\) 互素的整数 \(a\) 用同样的公式定义 \(\sigma_a\)，且 \(\sigma_a\) 只依赖于 \(a\) 模 \(n\) 的剩余类。
+
+\begin{theorem}\label{thm:14.26}
+\(n\) 次单位根的分圆域 \(\mathbb{Q}(\zeta_n)\) 的伽罗瓦群同构于乘法群 \((\mathbb{Z}/n\mathbb{Z})^\times\). 这个同构由映射
+\[
+(\mathbb{Z}/n\mathbb{Z})^\times \to \operatorname{Gal}(\mathbb{Q}(\zeta_n)/\mathbb{Q}), \qquad a \bmod n \mapsto \sigma_a
+\]
+显式给出，其中 \(\sigma_a\) 是由 \(\sigma_a(\zeta_n) = \zeta_n^a\) 定义的自同构。
+\end{theorem}
+
+\begin{proof}
+上面的讨论表明对任何 \(a\)（模 \(n\)）\(\sigma_a\) 都是自同构，故上面的映射有定义。它是同态，因为
+\[
+(\sigma_a\sigma_b)(\zeta_n) = \sigma_a(\zeta_n^b) = (\zeta_n^b)^a = \zeta_n^{ab},
+\]
+这表明 \(\sigma_a\sigma_b = \sigma_{ab}\). 由上面的讨论这个映射是双射，因为我们知道每个自同构都有形式 \(\sigma_a\)（\(a\) 模 \(n\) 唯一确定）。故这个映射是同构。
+\end{proof}
+
+\begin{example}
+（1）域 \(\mathbb{Q}(\zeta_5)\) 在 \(\mathbb{Q}\) 上伽罗瓦，伽罗瓦群为 \((\mathbb{Z}/5\mathbb{Z})^\times \cong \mathbb{Z}/4\mathbb{Z}\). 这是我们第一个伽罗瓦群为循环群的、\(\mathbb{Q}\) 上次数为 4 的伽罗瓦扩张的例子。按上面的记号，伽罗瓦群的元素是 \(\{1, \sigma_2, \sigma_3, \sigma_4\}\). 这个循环群的一个生成元是 \(\sigma_2 : \zeta_5 \mapsto \zeta_5^2\)（因为 2 在 \((\mathbb{Z}/5\mathbb{Z})^\times\) 中的阶为 4）。
+
+恰有一个非平凡子域，即子群 \(\{1, \sigma_4 = \sigma_{-1}\}\) 的固定域的二次扩张。这个子域中的一个元素由
+\[
+\alpha = \zeta_5+\sigma_{-1}\zeta_5 = \zeta_5+\zeta_5^{-1}
+\]
+给出，因为这个元素显然被 \(\sigma_{-1}\) 固定。元素 \(\zeta_5\) 满足
+\[
+\zeta_5^4+\zeta_5^3+\zeta_5^2+\zeta_5+1 = 0.
+\]
+于是注意
+\[
+\alpha^2+\alpha-1 = (\zeta_5^2+2+\zeta_5^{-2})+(\zeta_5+\zeta_5^{-1})-1 = \zeta_5^2+2+\zeta_5^3+\zeta_5+\zeta_5^4-1 = 0.
+\]
+显式解出 \(\alpha\)，我们看到由 \(\alpha\) 生成的 \(\mathbb{Q}\) 的二次扩张是 \(\mathbb{Q}(\sqrt{5})\)：
+\[
+\mathbb{Q}(\zeta_5+\zeta_5^{-1}) = \mathbb{Q}(\sqrt{5}).
+\]
+可以证明一般地（这一点并不完全平凡）对奇素数 \(p\)，域 \(\mathbb{Q}(\zeta_p)\) 含有二次域 \(\mathbb{Q}(\sqrt{(-1)^{(p-1)/2}p})\)，其中当 \(p \equiv 1 \bmod 4\) 时取 \(+1\)，当 \(p \equiv 3 \bmod 4\) 时取 \(-1\)（参见第 14.7 节习题 11）。
+
+（2）对奇素数 \(p\)，我们可以如上构造 \(\mathbb{Q}(\zeta_p)\) 的任何子域的一个本原元。\(\mathbb{Q}(\zeta_p)\) 在 \(\mathbb{Q}\) 上的一组基由
+\[
+1, \zeta_p, \zeta_p^2, \ldots, \zeta_p^{p-2}
+\]
+给出。由于 \(\zeta_p^{p-1}+\zeta_p^{p-2}+\cdots+\zeta_p+1 = 0\)，我们看到元素
+\[
+\zeta_p, \zeta_p^2, \ldots, \zeta_p^{p-2}, \zeta_p^{p-1}
+\]
+也构成一组基。选择这组基的原因是：\(\operatorname{Gal}(\mathbb{Q}(\zeta_p)/\mathbb{Q})\) 中的任何 \(\sigma\) 只是置换这些基元素，因为它们正是本原 \(p\) 次单位根。注意正是在这里我们需要 \(p\) 是素数——一般地，本原 \(n\) 次单位根并不构成分圆域在 \(\mathbb{Q}\) 上的基（例如本原 4 次单位根 \(\pm i\) 线性无关不成立）。
+
+设 \(H\) 是 \(\mathbb{Q}(\zeta_p)\) 在 \(\mathbb{Q}\) 上的伽罗瓦群的任意子群，并设
+\begin{equation}
+\alpha = \sum_{\sigma \in H}\sigma(\zeta_p) \tag{14.10}
+\end{equation}
+为 \(\zeta_p\) 在 \(H\) 中元素的共轭之和。对任意 \(\tau \in H\)，当 \(\sigma\) 遍历 \(H\) 的元素时 \(\tau\sigma\) 也遍历 \(H\) 的元素。由此 \(\tau\alpha = \alpha\)，故 \(\alpha\) 在 \(H\) 的固定域中。若现在 \(\tau\) 不是 \(H\) 的元素，则 \(\tau\alpha\) 是基元素之和（回忆这里任何自同构都置换基元素），其中一个是 \(\tau(\zeta_p)\). 若 \(\tau\alpha = \alpha\)，则由于这些元素构成基，必有 \(\tau(\zeta_p)\) 等于（14.10）中某一项 \(\sigma\zeta_p\). 但这蕴涵 \(\tau\sigma^{-1} = 1\)，因为这个自同构在 \(\zeta_p\) 上是恒等。于是 \(\tau = \sigma \in H\)，矛盾。这表明 \(\alpha\) 不被任何不在 \(H\) 中的自同构固定，故 \(\mathbb{Q}(\alpha)\) 恰是 \(H\) 的固定域。
+
+作为一个具体例子，考虑 \(\mathbb{Q}(\zeta_{13})\) 的子域，它们对应 \((\mathbb{Z}/13\mathbb{Z})^\times \cong \mathbb{Z}/12\mathbb{Z}\) 的子群。这个循环群的一个生成元是把 \(\zeta_{13}\) 映到 \(\zeta_{13}^2\) 的自同构 \(\sigma = \sigma_2\). 非平凡子群对应 12 的非平凡因子，从而阶分别为 2、3、4、6，生成元分别为 \(\sigma^6, \sigma^4, \sigma^3, \sigma^2\). 相应的固定域在 \(\mathbb{Q}\) 上的次数分别为 6、4、3、2. 生成元由下式给出（记 \(\zeta = \zeta_{13}\)）：
+\[
+\zeta+\sigma^6\zeta = \zeta+\zeta^{26} = \zeta+\zeta^{-1},
+\]
+\[
+\zeta+\sigma^4\zeta+\sigma^8\zeta = \zeta+\zeta^{24}+\zeta^{2^8} = \zeta+\zeta^3+\zeta^9,
+\]
+\[
+\zeta+\sigma^3\zeta+\sigma^6\zeta+\sigma^9\zeta = \zeta+\zeta^8+\zeta^{12}+\zeta^5,
+\]
+\[
+\zeta+\sigma^2\zeta+\sigma^4\zeta+\sigma^6\zeta+\sigma^8\zeta+\sigma^{10}\zeta = \zeta+\zeta^4+\zeta^3+\zeta^{12}+\zeta^9+\zeta^{10}.
+\]
+
+（14.10）式中构造的元素及其共轭称为 \(\zeta\) 的\textbf{周期}，它们在分圆域的算术研究中很有用。对它们的组合性质的研究称为\textbf{分圆术}（cyclotomy）。
+\end{example}
+
+假设 \(n = p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_k^{\alpha_k}\) 是 \(n\) 分解为互异素幂之积。由于
+\[
+\zeta_{p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_k^{\alpha_k}}/\zeta_{p_2^{\alpha_2}\cdots p_k^{\alpha_k}}
+\]
+是本原 \(p_1^{\alpha_1}\) 次单位根，域 \(K_1 = \mathbb{Q}(\zeta_{p_1^{\alpha_1}})\) 是 \(\mathbb{Q}(\zeta_n)\) 的子域。类似地，每个域 \(K_i = \mathbb{Q}(\zeta_{p_i^{\alpha_i}})\)（\(i = 1, 2, \ldots, k\)）都是 \(\mathbb{Q}(\zeta_n)\) 的子域。这些域的合成含有乘积 \(\zeta_{p_1^{\alpha_1}}\zeta_{p_2^{\alpha_2}}\cdots\zeta_{p_k^{\alpha_k}}\)，它是本原 \(n\) 次单位根，故合成域就是 \(\mathbb{Q}(\zeta_n)\). 由于扩张次数 \([K_i:\mathbb{Q}]\) 等于 \(\varphi(p_i^{\alpha_i})\)（\(i = 1, 2, \ldots, k\)）且 \(\varphi(n) = \varphi(p_1^{\alpha_1})\varphi(p_2^{\alpha_2})\cdots\varphi(p_k^{\alpha_k})\)，这些域 \(K_i\) 的合成次数恰为各 \(K_i\) 次数之积。由命题 \ref{pro:14.21}（以及从命题中考虑的两个域到这里的 \(k\) 个域的简单归纳）可知所有这些域的交恰为 \(\mathbb{Q}\). 于是推论 \ref{cor:14.22} 表明 \(\mathbb{Q}(\zeta_n)\) 的伽罗瓦群是各子域 \(K_i\) 在 \(\mathbb{Q}\) 上的伽罗瓦群的直积。我们把它总结为下面推论。
+
+\begin{corollary}\label{cor:14.27}
+设 \(n = p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_k^{\alpha_k}\) 是正整数 \(n\) 分解为互异素幂之积。则分圆域 \(\mathbb{Q}(\zeta_{p_i^{\alpha_i}})\)（\(i = 1, 2, \ldots, k\)）只在域 \(\mathbb{Q}\) 中相交，而它们的合成是分圆域 \(\mathbb{Q}(\zeta_n)\). 我们有
+\[
+\operatorname{Gal}(\mathbb{Q}(\zeta_n)/\mathbb{Q}) \cong \prod_{i=1}^k\operatorname{Gal}(\mathbb{Q}(\zeta_{p_i^{\alpha_i}})/\mathbb{Q}),
+\]
+它在定理 \ref{thm:14.26} 的同构下就是中国剩余定理：
+\[
+(\mathbb{Z}/n\mathbb{Z})^\times \cong (\mathbb{Z}/p_1^{\alpha_1}\mathbb{Z})^\times \times \cdots \times (\mathbb{Z}/p_k^{\alpha_k}\mathbb{Z})^\times.
+\]
+\end{corollary}
+
+\begin{proof}
+唯一尚未证明的断言是把伽罗瓦群的同构与中国剩余定理在群 \((\mathbb{Z}/n\mathbb{Z})^\times\) 上的陈述联系起来，这相当简单，留作习题。
+\end{proof}
+
+由定理 \ref{thm:14.26}，\(\mathbb{Q}(\zeta_n)/\mathbb{Q}\) 的伽罗瓦群特别是阿贝尔群。
+
+\begin{definition}
+扩张 \(K/F\) 称为\textbf{阿贝尔扩张}，若 \(K/F\) 伽罗瓦且 \(\operatorname{Gal}(K/F)\) 是阿贝尔群。
+\end{definition}
+
+由于阿贝尔群的所有子群与商群都阿贝尔，由伽罗瓦理论基本定理我们看到 \(F\) 的阿贝尔扩张的任何含 \(F\) 的子域都是 \(F\) 的阿贝尔扩张。由上一节关于扩张合成的结果，我们还看到阿贝尔扩张的合成仍是阿贝尔扩张（因为合成域的伽罗瓦群同构于各伽罗瓦群的直积的一个子群，从而是阿贝尔群）。
+
+确定哪些群作为 \(\mathbb{Q}\) 的伽罗瓦扩张的伽罗瓦群出现是一个未解决的问题。用上面的结果我们可以看到每个阿贝尔群都作为 \(\mathbb{Q}\) 的某个扩张的伽罗瓦群出现，事实上作为某个分圆域的某个子域的伽罗瓦群出现。
+
+设 \(n = p_1p_2\cdots p_k\) 是互异素数之积。则由中国剩余定理
+\begin{equation}
+(\mathbb{Z}/n\mathbb{Z})^\times \cong (\mathbb{Z}/p_1\mathbb{Z})^\times \times (\mathbb{Z}/p_2\mathbb{Z})^\times \times \cdots \times (\mathbb{Z}/p_k\mathbb{Z})^\times \cong Z_{p_1-1} \times Z_{p_2-1} \times \cdots \times Z_{p_k-1}. \tag{14.11}
+\end{equation}
+现在假设 \(G\) 是任意有限阿贝尔群。由阿贝尔群基本定理，
+\[
+G \cong Z_{n_1} \times Z_{n_2} \times \cdots \times Z_{n_k}
+\]
+（某些整数 \(n_1, n_2, \ldots, n_k\)）。我们把以下事实当作已知：对任意整数 \(m\) 存在无穷多个满足 \(p \equiv 1 \bmod m\) 的素数 \(p\)（参见第 13.6 节之后的习题，那里用分圆多项式给出了一个证明）。由这个结果，选取互异素数 \(p_1, p_2, \ldots, p_k\) 使 \(p_1 \equiv 1 \bmod n_1\)、\(p_2 \equiv 1 \bmod n_2\)、……，并令 \(n = p_1p_2\cdots p_k\) 如上。
+
+由构造，\(n_i\) 整除 \(p_i-1\)（\(i = 1, 2, \ldots, k\)），故群 \(Z_{p_i-1}\) 有阶为 \(\frac{p_i-1}{n_i}\) 的子群 \(H_i\)，而关于这个子群的商是 \(n_i\) 阶循环群。故（14.11）中的 \((\mathbb{Z}/n\mathbb{Z})^\times\) 关于 \(H_1 \times H_2 \times \cdots \times H_k\) 的商同构于群 \(G\).
+
+由定理 \ref{thm:14.26} 与伽罗瓦理论基本定理，我们看到存在 \(\mathbb{Q}(\zeta_{p_1p_2\cdots p_k})\) 的一个子域，它在 \(\mathbb{Q}\) 上伽罗瓦且伽罗瓦群为 \(G\). 我们把它总结为下面推论。
+
+\begin{corollary}\label{cor:14.28}
+设 \(G\) 是任意有限阿贝尔群。则存在某个分圆域的子域 \(K\) 使 \(\operatorname{Gal}(K/\mathbb{Q}) \cong G\).
+\end{corollary}
+
+这个结果有一个逆（其证明超出我们的范围），即著名的 \textbf{Kronecker--Weber 定理}：
+
+\noindent\textbf{定理（Kronecker--Weber）}\quad 设 \(K\) 是 \(\mathbb{Q}\) 的有限阿贝尔扩张。则 \(K\) 含于 \(\mathbb{Q}\) 的某个分圆扩张中。
+
+\(\mathbb{Q}\) 的阿贝尔扩张是「最容易」的伽罗瓦扩张（至少就其伽罗瓦群的结构而言），而上一结果表明它们可以由 \(\mathbb{Q}\) 的分圆扩张分类。对于其他作为基域的 \(\mathbb{Q}\) 的有限扩张，描述阿贝尔扩张更困难。对 \(\mathbb{Q}\) 的任意有限扩张 \(F\) 的阿贝尔扩张的研究称为\textbf{类域论}。\(F\) 的阿贝尔扩张由与 \(F\) 相关的某些不变量分类，这大大推广了关于 \(\mathbb{Q}\) 上分圆域的结果。然而一般地，阿贝尔扩张的构造并不像分圆域的情形那样显式。可以这样描述的一个情形是虚二次域（\(\mathbb{Q}(\sqrt{D})\)，\(D > 0\)）的阿贝尔扩张，那里阿贝尔扩张可以通过添加某些椭圆函数的值来构造（这是添加单位根——即指数函数在某些 \(x\) 处的值——的类似物）。对这类阿贝尔扩张的算术的研究，以及对非阿贝尔扩张的类似结果的探索，是当前数学研究中丰富而迷人的领域。
+
+我们以用直尺与圆规作正 \(n\) 边形的可能性问题来结束关于分圆域的讨论。
+
+回忆（参见第 13.3 节）元素 \(\alpha\) 在 \(\mathbb{Q}\) 上可作当且仅当域 \(\mathbb{Q}(\alpha)\) 含于经过一系列二次扩张得到的域 \(K\)：
+\begin{equation}
+\mathbb{Q} = K_0 \subset K_1 \subset \cdots \subset K_i \subset K_{i+1} \subset \cdots \subset K_m = K \tag{14.12}
+\end{equation}
+其中 \([K_{i+1}:K_i] = 2\)（\(i = 0, 1, \ldots, m-1\)）。
+
+在 \(\mathbb{R}^2\) 中作正 \(n\) 边形显然等价于作 \(n\) 次单位根，因为 \(n\) 次单位根构成 \(\mathbb{C}\) 中单位圆上正 \(n\) 边形的顶点，其中一个顶点在点 1.
+
+作 \(\zeta_n\) 等价于 \(\zeta_n\) 在 \(\mathbb{R}^2\) 中的第一个坐标 \(x\) 的可作性，即 \(\zeta_n\) 的实部。由于 \(\zeta_n\) 的复共轭就是 \(\zeta_n^{-1}\)，\(\zeta_n\) 的实部是 \(x = \frac{1}{2}(\zeta_n+\zeta_n^{-1})\). 注意 \(\zeta_n\) 在 \(\mathbb{Q}(x)\) 上满足二次方程 \(\zeta_n^2-2x\zeta_n+1 = 0\). 由于 \(\mathbb{Q}(x)\) 只由实数组成，可知 \([\mathbb{Q}(\zeta_n):\mathbb{Q}(x)] = 2\)，故 \(\mathbb{Q}(x)\) 是 \(\mathbb{Q}\) 的次数为 \(\varphi(n)/2\) 的扩张。
+
+由此若正 \(n\) 边形可以用直尺与圆规作出，则 \(\varphi(n)\) 必是 2 的幂。反之，若 \(\varphi(n) = 2^m\) 是 2 的幂，则伽罗瓦群 \(\operatorname{Gal}(\mathbb{Q}(\zeta_n)/\mathbb{Q})\) 是阶为 2 的幂的阿贝尔群，故伽罗瓦群 \(\operatorname{Gal}(\mathbb{Q}(x)/\mathbb{Q})\) 也如此。由有限阿贝尔群基本定理容易看出阶为 \(2^m\) 的阿贝尔群有一列子群
+\[
+G = G_m > G_{m-1} > \cdots > G_{i+1} > G_i > \cdots > G_0 = 1
+\]
+其中 \([G_{i+1}:G_i] = 2\)（\(i = 0, 1, \ldots, m-1\)）。把它应用于群 \(G = \operatorname{Gal}(\mathbb{Q}(x)/\mathbb{Q})\)，并对子群 \(G_i\)（\(i = 0, 1, \ldots, m-1\)）取固定域，我们（由伽罗瓦理论基本定理）得到如（14.12）中那样的一系列二次扩张。
+
+我们断定正 \(n\) 边形可以用直尺与圆规作出当且仅当 \(\varphi(n)\) 是 2 的幂。把 \(n\) 分解为素幂以计算 \(\varphi(n)\)，我们看到这意味着 \(n = 2^kp_1\cdots p_r\) 是一个 2 的幂与互异奇素数之积，其中每个 \(p_i-1\) 是 2 的幂。容易验证 \(p-1\) 是 2 的幂的素数 \(p\) 必具有形式
+\[
+p = 2^{2^s}+1
+\]
+（某个整数 \(s\)）。这样的素数称为 \textbf{Fermat 素数}。前几个是
+\[
+3 = 2^1+1, \quad 5 = 2^2+1, \quad 17 = 2^4+1, \quad 257 = 2^8+1, \quad 65537 = 2^{16}+1
+\]
+（但 \(2^{32}+1\) 不是素数，因为它被 641 整除）。至今不知道 Fermat 素数是否有无穷多个。我们把这个总结为下面命题。
+
+\begin{proposition}\label{pro:14.29}
+正 \(n\) 边形可以用直尺与圆规作出当且仅当 \(n = 2^kp_1\cdots p_r\) 是一个 2 的幂与互异 Fermat 素数之积。
+\end{proposition}
+
+上面的证明事实上指出了通过一系列开平方来作正 \(n\) 边形的步骤。例如，作正 17 边形（由 Gauss 在 1796 年他 19 岁时解决）需要构造 \(\mathbb{Q}(\zeta_{17})\) 中次数为 2、4、8、16 的子域。这些子域可以通过像上面 13 次单位根的例子那样作 \(\zeta_{17}\) 的周期来构造。此时 \(\mathbb{Q}(\zeta_{17})\) 由一系列二次扩张得到这一事实反映在周期可以逐次「折半」上（即若 \(H_1 < H_2\) 是满足 \([H_2:H_1] = 2\) 的子群，则 \(H_1\) 的周期满足一个二次方程，其系数涉及 \(H_2\) 的周期）。例如，伽罗瓦群中指数为 2 的子群（由 \(\sigma_2\) 生成）的周期是（\(\zeta = \zeta_{17}\)）
+\[
+\eta_1 = \zeta+\zeta^2+\zeta^4+\zeta^8+\zeta^9+\zeta^{13}+\zeta^{15}+\zeta^{16},
+\]
+\[
+\eta_2 = \zeta^3+\zeta^5+\zeta^6+\zeta^7+\zeta^{10}+\zeta^{11}+\zeta^{12}+\zeta^{14},
+\]
+它们把整个伽罗瓦群的周期「折半」，且满足
+\[
+\eta_1+\eta_2 = -1
+\]
+（由 \(\zeta_{17}\) 满足的极小多项式）与
+\[
+\eta_1\eta_2 = -4
+\]
+（这需要计算——由伽罗瓦理论我们知道它必是有理数，因为这个乘积被伽罗瓦群的所有元素固定）。故这两个周期是二次方程
+\[
+x^2+x-4 = 0
+\]
+的根，我们可以显式解出它。类似地，指数为 4 的子群（由 \(\sigma_4\) 生成）的周期自然地使这些周期折半，从而在它们上二次，等等。这样可以用迭代的开平方显式确定 \(\zeta_{17}\). 例如，可以算得 \(\frac{1}{8}(\zeta_{17}+\zeta_{17}^{-1}) = \cos\frac{2\pi}{17}\)（这已足以构造正 17 边形）由下式显式给出：
+\[
+\frac{1}{16}\left(-1+\sqrt{17}+\sqrt{34-2\sqrt{17}}+2\sqrt{17+3\sqrt{17}-\sqrt{34-2\sqrt{17}}-2\sqrt{34+2\sqrt{17}}}\right).
+\]
+
+习题中指出了正 17 边形的一个相对简单的构造（由 J. H. Conway 向我们展示）。
+
+虽然我们看到一般不能用逐次开平方解出 \(\zeta_n\)，但按定义可以逐次开更高次方得到 \(\zeta_n\)（即取 1 的 \(n\) 次根）。对一般 \(n\) 次方程的解则不是这样，那里一般不能用根式确定解，我们将在随后几节看到这一点。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 确定正文中给出的 \(\mathbb{Q}(\zeta_{13})\) 各子域的本原生成元所满足的极小多项式。
+
+\item 确定由 \(\zeta_8\) 的周期生成的 \(\mathbb{Q}(\zeta_8)\) 的子域，并特别证明并非每个子域都以这样的周期为本原元。
+
+\item 确定 5 次单位根 \(\zeta_5\) 的周期 \(\alpha = \zeta_5+\zeta_5^{-1}\) 所满足的二次方程。确定 \(\zeta_5\) 在 \(\mathbb{Q}(\alpha)\) 上满足的二次方程，并用它显式解出 5 次单位根。
+
+\item 用 \(\sigma_a \in \operatorname{Gal}(\mathbb{Q}(\zeta_n)/\mathbb{Q})\) 表示把 \(\zeta_n\) 映到 \(\zeta_n^a\) 的自同构（\(a\) 与 \(n\) 互素，\(\zeta_n\) 是本原 \(n\) 次单位根）。证明对每个 \(n\) 次单位根 \(\zeta\) 有 \(\sigma_a(\zeta) = \zeta^a\).
+
+\item 设 \(p\) 是素数，\(\varepsilon_1, \varepsilon_2, \ldots, \varepsilon_{p-1}\) 是 \(p\) 次本原单位根。令 \(P_n = \varepsilon_1^n+\varepsilon_2^n+\cdots+\varepsilon_{p-1}^n\)（\(\varepsilon_i\) 的 \(n\) 次幂之和）。证明若 \(p\) 不整除 \(n\) 则 \(P_n = -1\)，若 \(p\) 整除 \(n\) 则 \(P_n = p-1\).〔一种途径：由 \(\Phi_p(x)\) 得 \(P_1 = -1\)；证明对不被 \(p\) 整除的 \(n\)，\(P_n\) 是 \(P_1\) 的伽罗瓦共轭，从而也是 \(-1\).〕
+
+\item 设 \(\zeta_n\) 是本原 \(n\) 次单位根，\(K = \mathbb{Q}(\zeta_n)\) 是相应的分圆域。用 \(\alpha\) 表示 \(\zeta_n\) 从 \(K\) 到 \(\mathbb{Q}\) 的迹（参见第 14.2 节习题 18）。证明：若 \(n = 1\) 则 \(\alpha = 1\)；若 \(n\) 被某个素数的平方整除则 \(\alpha = 0\)；若 \(n\) 是 \(r\) 个互异素数之积则 \(\alpha = (-1)^r\).
+
+\item 证明复共轭限制为 \(n\) 次单位根的分圆域的自同构 \(\sigma_{-1} \in \operatorname{Gal}(\mathbb{Q}(\zeta_n)/\mathbb{Q})\). 证明域 \(K^+ = \mathbb{Q}(\zeta_n+\zeta_n^{-1})\) 是 \(K = \mathbb{Q}(\zeta_n)\) 的实元素子域，称为 \(K\) 的\textbf{极大实子域}。
+
+\item 设 \(K_n = \mathbb{Q}(\zeta_{2^{n+2}})\) 是 \(2^{n+2}\) 次单位根的分圆域（\(n \geq 0\)）。令 \(\alpha_n = \zeta_{2^{n+2}}+\zeta_{2^{n+2}}^{-1}\)，\(K_n^+ = \mathbb{Q}(\alpha_n)\) 是 \(K_n\) 的极大实子域。
+
+（a）证明对所有 \(n \geq 0\) 有 \([K_n:\mathbb{Q}] = 2^{n+1}\)、\([K_n:K_n^+] = 2\)、\([K_n^+:\mathbb{Q}] = 2^n\)，且 \([K_{n+1}^+:K_n^+] = 2\).
+
+（b）用 \(\alpha_n\) 确定 \(\zeta_{2^{n+2}}\) 在 \(K_n^+\) 上满足的二次方程。
+
+（c）证明对 \(n \geq 0\) 有 \(\alpha_{n+1}^2 = 2+\alpha_n\)，从而证明
+\[
+\alpha_n = \sqrt{2+\sqrt{2+\cdots+\sqrt{2}}} \quad (n \text{ 个 } 2),
+\]
+这给出（可作的）\(2^{n+2}\) 次单位根的显式公式。
+
+\item 记号同上一习题。
+
+（a）证明 \(K_n^+\) 是 \(\mathbb{Q}\) 的 \(2^n\) 次循环扩张。〔利用作为阿贝尔群的显式同构 \((\mathbb{Z}/2^{n+2}\mathbb{Z})^\times \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2^n\mathbb{Z}\)（即 \((\mathbb{Z}/2^{n+2}\mathbb{Z})^\times\) 同构于一个 2 阶循环群与一个 \(2^n\) 阶循环群的直积——参见第 2.3 节习题 22 和 23）。〕
+
+（b）证明 \(K_n\) 是 \(K_{n-1}^+\) 的双二次扩张，且三个中间子域中有两个是 \(K_n^+\) 与 \(K_{n-1}\)；证明介于 \(K_{n-1}^+\) 与 \(K_n\) 之间的剩余域是 \(\mathbb{Q}\) 的 \(2^n\) 次循环扩张。
+
+\item 证明 \(\mathbb{Q}(\sqrt[3]{2})\) 不是 \(\mathbb{Q}\) 的任何分圆域的子域。
+
+\item 证明本原 \(n\) 次单位根构成 \(n\) 次单位根的分圆域在 \(\mathbb{Q}\) 上的基当且仅当 \(n\) 无平方因子（即 \(n\) 不被任何素数的平方整除）。
+
+\item 设 \(\sigma_p\) 是 \(q = p^n\) 个元素的有限域 \(\mathbb{F}_q\) 的 Frobenius 自同构 \(x \mapsto x^p\). 把 \(\mathbb{F}_q\) 看作 \(\mathbb{F}_p\) 上 \(n\) 维向量空间 \(V\)，我们可以把 \(\sigma_p\) 看作 \(V\) 到 \(V\) 的线性变换。确定 \(\sigma_p\) 的特征多项式，并证明线性变换 \(\sigma_p\) 在 \(\mathbb{F}_p\) 上可对角化当且仅当 \(n\) 整除 \(p-1\)；在 \(\mathbb{F}_p\) 的代数闭包上可对角化当且仅当 \((n, p) = 1\).
+
+\item 设 \(n = p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_k^{\alpha_k}\) 是 \(n\) 的素因子分解，\(\zeta_n\) 是本原 \(n\) 次单位根。对每个 \(i = 1, 2, \ldots, k\)，由 \(n = p_i^{\alpha_i}d_i\) 定义 \(d_i\)，并令 \(\zeta_{p_i^{\alpha_i}} = \zeta_n^{d_i}\)，故 \(\zeta_{p_i^{\alpha_i}}\) 是一个特定的本原 \(p_i^{\alpha_i}\) 次单位根。设 \(\sigma_a \in \operatorname{Gal}(\mathbb{Q}(\zeta_n)/\mathbb{Q})\) 是把 \(\zeta_n\) 映到 \(\zeta_n^a\) 的自同构（\(a\) 与 \(n\) 互素）。
+
+（a）证明对 \(i = 1, 2, \ldots, k\)，\(\sigma_a\) 把 \(\zeta_{p_i^{\alpha_i}}\) 映到 \(\zeta_{p_i^{\alpha_i}}^a\)，并给出 \(\mathbb{Q}(\zeta_{p_i^{\alpha_i}})/\mathbb{Q}\) 的一个自同构，它只依赖于 \(a \pmod{p_i^{\alpha_i}}\)，我们可以把它记作 \(\sigma_{a \pmod{p_i^{\alpha_i}}}\).
+
+（b）证明映射 \(\sigma_a \mapsto (\sigma_{a \pmod{p_1^{\alpha_1}}}, \ldots, \sigma_{a \pmod{p_k^{\alpha_k}}})\) 就是推论 \ref{cor:14.27} 中对应于 \((\mathbb{Z}/n\mathbb{Z})^\times\) 的中国剩余定理的同构。
+\end{enumerate}
+
+\noindent 下面习题 14 到 18 确定与本原 17 次单位根相联系的周期，并为习题 17 中指出的正 17 边形的简单几何构造给出证明。设 \(\zeta = \zeta_{17} = \cos\frac{2\pi}{17}+i\sin\frac{2\pi}{17}\) 是 \(\mathbb{C}\) 中固定的本原 17 次单位根。
+
+\begin{enumerate}
+\setcounter{enumi}{13}
+\item 如下定义 \(\zeta\) 的周期：
+\[
+\eta_1 = \zeta+\zeta^2+\zeta^4+\zeta^8+\zeta^9+\zeta^{13}+\zeta^{15}+\zeta^{16}, \qquad \eta_2 = \zeta^3+\zeta^5+\zeta^6+\zeta^7+\zeta^{10}+\zeta^{11}+\zeta^{12}+\zeta^{14},
+\]
+\[
+\eta_1' = \zeta+\zeta^4+\zeta^{13}+\zeta^{16}, \qquad \eta_2' = \zeta^3+\zeta^5+\zeta^{12}+\zeta^{14},
+\]
+\[
+\eta_1'' = \zeta+\zeta^{16}, \qquad \eta_2'' = \zeta^2+\zeta^8+\zeta^9+\zeta^{15},
+\]
+\[
+\eta_1''' = \zeta+\zeta^4+\zeta^{13}+\zeta^{16}, \qquad \eta_2''' = \zeta^3+\zeta^5+\zeta^{12}+\zeta^{14},
+\]
+\[
+\eta_1'''' = \zeta+\zeta^{16}, \qquad \eta_2'''' = \zeta^4+\zeta^{13}.
+\]
+
+（a）证明所有这些周期都是实数，且 \(\eta_1'''' = 2\cos\frac{2\pi}{17}\). 证明作为实数这些周期近似为 \(\eta_1 \approx 1.562\)、\(\eta_2 \approx -2.562\)、\(\eta_1' \approx 2.049\)、\(\eta_2' \approx -0.488\)、\(\eta_1'' \approx -2.906\)、\(\eta_2'' \approx 0.344\)、\(\eta_1''' \approx 1.865\)、\(\eta_2''' \approx 0.185\).
+
+（b）证明 \(\eta_1\) 与 \(\eta_2\) 是方程 \(x^2+x-4 = 0\) 的根。
+
+（c）证明 \(\eta_1'\) 与 \(\eta_2'\) 是方程 \(x^2-\eta_1x-1 = 0\) 的根，且 \(\eta_1''\) 与 \(\eta_2''\) 是方程 \(x^2-\eta_2x-1 = 0\) 的根。
+
+（d）证明 \(\eta_1'''\) 与 \(\eta_2'''\) 是方程 \(x^2-\eta_1'x+\eta_1'' = 0\) 的根。
+
+\item 证明若 \(\tan 2\theta = a\)（\(0 < \theta < \frac{\pi}{2}\)），则 \(\tan\theta\) 满足方程 \(x^2-\frac{a+1}{a}x-1 = 0\).
+
+\item 设 \(\mathcal{C}\) 是以点 \((h, k)\) 与 \((0, 1)\) 为直径的 \(\mathbb{R}^2\) 中的圆。证明这个圆与 \(x\) 轴相交当且仅当 \(h^2-4k \geq 0\)，此时两个交点截距是方程 \(x^2-hx+k = 0\) 的根。
+
+\item （\textbf{正 17 边形的构造}）以原点为圆心、半径 2 作圆。
+
+（a）连接点 \((4, 0)\) 与点 \((0, 1)\)，并构造平分这条直线与 \(y\) 轴之间夹角的直线 \(\ell_1\). 构造垂直于 \(\ell_1\) 的直线 \(\ell_2\).
+
+（b）以 \(\ell_1\) 与 \(x\) 轴的交点为圆心、以到 \((0, 1)\) 的距离为半径作圆 \(\mathcal{C}_1\)，设 \(A = (s, 0)\) 是 \(\mathcal{C}_1\) 与 \(x\) 轴交点的右端。类似地，设 \(B = (t, 0)\) 表示 \(x\) 轴与圆 \(\mathcal{C}_2\) 交点的右端，其中 \(\mathcal{C}_2\) 的圆心是 \(\ell_2\) 与 \(x\) 轴的交点、半径等于到 \((0, 1)\) 的距离。
+
+（c）在点 \(A\) 处作 \(x\) 轴的垂线，并在其上截取从 \((0, 0)\) 到 \(B\) 的距离 \(t\)，构造点 \((s, t)\). 以 \((s, t)\) 与 \((0, 1)\) 为直径作圆，设 \(P\) 表示这个圆与 \(x\) 轴交点的右端。在 \(P\) 处作 \(x\) 轴的垂线，它与半径 2 的圆交于正 17 边形的第二个顶点（第一个顶点在 \((2, 0)\)），从而用直尺与圆规作出正 17 边形。
+
+\item 记号同前面各习题。
+
+（a）证明 \(\ell_1\) 与 \(x\) 轴交于点 \((\eta_1/2, 0)\)，\(\ell_2\) 与 \(x\) 轴交于点 \((\eta_2/2, 0)\).
+
+（b）证明圆 \(\mathcal{C}_1\) 是以 \((\eta_1, -1)\) 与 \((0, 1)\) 为直径的圆（其与 \(x\) 轴的交点是 \((\eta_1'/2, 0)\) 与点 \((0, 0)\)），并证明 \(s = \eta_1'\)；证明 \(\mathcal{C}_2\) 是以 \((\eta_2, -1)\) 与 \((0, 1)\) 为直径的圆，且 \(t = \eta_2''\).
+
+（c）证明 \(P\) 的坐标是 \((\eta_1'''', 0)\)，从而上一习题中的构造用直尺与圆规作出正 17 边形。
+\end{enumerate}
+
+\section{多项式的伽罗瓦群}
+
+回忆可分多项式 \(f(x) \in F[x]\) 的伽罗瓦群定义为 \(f(x)\) 在 \(F\) 上的分裂域的伽罗瓦群。
+
+若 \(K\) 是 \(F\) 的伽罗瓦扩张，则 \(K\) 是 \(F\) 上某个可分多项式 \(f(x)\) 的分裂域。任何自同构 \(\sigma \in \operatorname{Gal}(K/F)\) 把 \(f(x)\) 的不可约因子的一个根映到这个不可约因子的另一个根，并由它在这些根上的作用唯一确定（因为它们生成 \(K\) 在 \(F\) 上的扩张）。若我们固定 \(f(x)\) 的根 \(\alpha_1, \ldots, \alpha_n\) 的一个标号，我们看到任何 \(\sigma \in \operatorname{Gal}(K/F)\) 定义 \(\alpha_1, \ldots, \alpha_n\) 的一个置换，从而定义下标集合 \(\{1, 2, \ldots, n\}\) 的一个置换（它依赖于根的固定标号）。这给出伽罗瓦群到 \(n\) 个字母上的对称群的单射
+\[
+\operatorname{Gal}(K/F) \hookrightarrow S_n,
+\]
+它显然是同态（两种群运算都是复合）。因此我们可以把伽罗瓦群看作对称群的子群。由于由基本定理分裂域的次数等于伽罗瓦群的阶，从群论方面解释了为什么 \(F\) 上 \(n\) 次多项式的分裂域在 \(F\) 上的次数至多为 \(n!\)（命题 \ref{pro:13.26}）。
+
+一般地，若 \(f(x)\) 分解为不可约因子 \(f(x) = f_1(x)\cdots f_k(x)\)，其中 \(f_i(x)\) 的次数为 \(n_i\)（\(i = 1, 2, \ldots, k\)），则由于伽罗瓦群把每个不可约因子的根在自身内置换，我们有 \(\operatorname{Gal}(K/F) \subseteq S_{n_1} \times \cdots \times S_{n_k}\).
+
+若 \(f(x)\) 不可约，则给定 \(f(x)\) 的任意两个根，\(f(x)\) 的伽罗瓦群 \(G\) 中存在把第一个根映到第二个根的自同构（这由延拓定理 \ref{thm:13.27} 推出）。这样的群称为在根上\textbf{传递}，即可以通过施加 \(G\) 的某个元素从任何给定的根到达任何其他根。伽罗瓦群必须在根的块（即各不可约因子的根）上是传递的，这一事实常常有助于减少 \(G\) 的结构可能性（参见下面关于 4 次多项式的伽罗瓦群的讨论）。
+
+\begin{example}
+（1）考虑 \(\mathbb{Q}\) 上的双二次扩张 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\)，它是 \((x^2-2)(x^2-3)\) 的分裂域。把根标号为 \(\alpha_1 = \sqrt{2}\)、\(\alpha_2 = -\sqrt{2}\)、\(\alpha_3 = \sqrt{3}\)、\(\alpha_4 = -\sqrt{3}\). 伽罗瓦群的元素是 \(\{1, \sigma, \tau, \sigma\tau\}\)，其中 \(\sigma\) 把 \(\sqrt{2}\) 映到 \(-\sqrt{2}\) 并固定 \(\sqrt{3}\)，\(\tau\) 固定 \(\sqrt{2}\) 并把 \(\sqrt{3}\) 映到 \(-\sqrt{3}\). 作为根在这个标号下的置换，我们看到 \(\sigma\) 交换前两个并固定后两个，\(\tau\) 固定前两个并交换后两个，即作为 \(S_4\) 的元素有 \(\sigma = (1\ 2)\)、\(\tau = (3\ 4)\)，并由此 \(\sigma\tau = (1\ 2)(3\ 4)\)。故
+\[
+\operatorname{Gal}(\mathbb{Q}(\sqrt{2}, \sqrt{3})/\mathbb{Q}) \cong \{1, (1\ 2), (3\ 4), (1\ 2)(3\ 4)\} \subseteq S_4,
+\]
+把这个伽罗瓦群等同于 \(S_4\) 的 Klein 四元子群。注意若我们改变上面根的标号，就会得到伽罗瓦群作为 \(S_4\) 的子群的另一个（同构的）表示（例如交换第二和第三个根会给出子群 \(\{1, (1\ 3), (2\ 4), (1\ 3)(2\ 4)\}\)）。
+
+（2）\(x^3-2\) 的伽罗瓦群作为 3 个根 \(\sqrt[3]{2}\)、\(\rho\sqrt[3]{2}\)、\(\rho^2\sqrt[3]{2}\)（\(\rho\) 是本原 3 次单位根）上的置换作用。按这个次序，我们前面定义的生成元 \(\sigma\) 与 \(\tau\) 给出置换
+\[
+\sigma = (1\ 2\ 3), \qquad \tau = (2\ 3),
+\]
+由此 \(\{1, \sigma, \sigma^2, \tau, \sigma\tau, \sigma^2\tau\} = \{1, (1\ 2\ 3), (1\ 3\ 2), (2\ 3), (1\ 3), (1\ 2)\} = S_3\)，即此时是 3 个字母上的完全对称群。
+\end{example}
+
+回忆每个有限群都同构于某个对称群 \(S_n\) 的子群。确定是否每个有限群都作为 \(\mathbb{Q}\) 上某个多项式的伽罗瓦群出现是一个未解决的问题。我们在上一节看到每个阿贝尔群都是 \(\mathbb{Q}\) 上的伽罗瓦群（作为分圆域的某个子域）。下面我们将显式确定小次数（\(\leq 4\)）多项式的伽罗瓦群，这将特别表明 \(S_4\) 的每个子群都作为伽罗瓦群出现。
+
+我们首先引入一些定义，并证明「一般的」\(n\) 次多项式以 \(S_n\) 为伽罗瓦群（故上面第二个例子应看作「典型的」）。
+
+\begin{definition}
+设 \(x_1, x_2, \ldots, x_n\) 是未定元。\textbf{初等对称函数} \(s_1, s_2, \ldots, s_n\) 定义为
+\[
+s_1 = x_1+x_2+\cdots+x_n,
+\]
+\[
+s_2 = x_1x_2+x_1x_3+\cdots+x_2x_3+x_2x_4+\cdots+x_{n-1}x_n,
+\]
+\[
+\vdots
+\]
+\[
+s_n = x_1x_2\cdots x_n,
+\]
+即第 \(i\) 个对称函数是 \(x_1, x_2, \ldots, x_n\) 中所有 \(i\) 个元素的乘积之和。
+\end{definition}
+
+\begin{definition}
+\textbf{一般的 \(n\) 次多项式}是以未定元 \(x_1, x_2, \ldots, x_n\) 为根的多项式 \((x-x_1)(x-x_2)\cdots(x-x_n)\).
+\end{definition}
+
+容易用归纳证明一般的 \(n\) 次多项式的系数由根的初等对称函数给出：
+\begin{equation}
+(x-x_1)(x-x_2)\cdots(x-x_n) = x^n-s_1x^{n-1}+s_2x^{n-2}+\cdots+(-1)^ns_n. \tag{14.13}
+\end{equation}
+对任何域 \(F\)，扩张 \(F(x_1, x_2, \ldots, x_n)\) 是域 \(F(s_1, s_2, \ldots, s_n)\) 的伽罗瓦扩张，因为它是这个一般的 \(n\) 次多项式的分裂域。
+
+若 \(\sigma \in S_n\) 是 \(\{1, 2, \ldots, n\}\) 的任意置换，则 \(\sigma\) 通过置换变量 \(x_1, x_2, \ldots, x_n\) 的下标作用在 \(F(x_1, x_2, \ldots, x_n)\) 中有理函数上。显然这给出 \(F(x_1, x_2, \ldots, x_n)\) 的自同构。把 \(\sigma \in S_n\) 与 \(F(x_1, \ldots, x_n)\) 的这个自同构等同，就把 \(S_n\) 等同于 \(\operatorname{Aut}(F(x_1, \ldots, x_n))\) 的子群。
+
+初等对称函数 \(s_1, s_2, \ldots, s_n\) 在下标的任意置换下不变（这就是它们被称为对称的原因），这表明子域 \(F(s_1, s_2, \ldots, s_n)\) 含于 \(S_n\) 的固定域中。由伽罗瓦理论基本定理，\(S_n\) 的固定域在 \(F(x_1, x_2, \ldots, x_n)\) 中的指数恰为 \(n!\). 由于 \(F(x_1, x_2, \ldots, x_n)\) 是（14.13）中次数 \(n\) 的多项式在 \(F(s_1, s_2, \ldots, s_n)\) 上的分裂域，我们有
+\begin{equation}
+n! = [F(x_1, \ldots, x_n):F(s_1, \ldots, s_n)] \geq |S_n| = n!. \tag{14.14}
+\end{equation}
+由此事实上取等号，且 \(F(s_1, s_2, \ldots, s_n)\) 恰是 \(S_n\) 的固定域。这证明了下面结果。
+
+\begin{proposition}\label{pro:14.30}
+对称群 \(S_n\) 作用在 \(n\) 个变量的有理函数域 \(F(x_1, x_2, \ldots, x_n)\) 上时的固定域是初等对称函数的有理函数域 \(F(s_1, s_2, \ldots, s_n)\).
+\end{proposition}
+
+\begin{definition}
+有理函数 \(f(x_1, x_2, \ldots, x_n)\) 称为\textbf{对称的}，若它不被变量 \(x_1, x_2, \ldots, x_n\) 的任何置换改变。
+\end{definition}
+
+\begin{corollary}\label{cor:14.31}
+（\textbf{对称函数基本定理}）变量 \(x_1, x_2, \ldots, x_n\) 中的任何对称函数都是初等对称函数 \(s_1, s_2, \ldots, s_n\) 的有理函数。
+\end{corollary}
+
+\begin{proof}
+对称函数落在上面 \(S_n\) 的固定域中，从而是 \(s_1, \ldots, s_n\) 的有理函数。
+\end{proof}
+
+这个推论解释了为什么这些函数被称为初等对称函数。
+
+\noindent\textbf{注：}若 \(f(x_1, \ldots, x_n)\) 是 \(x_1, x_2, \ldots, x_n\) 中的对称\textbf{多项式}，则可以证明 \(f\) 事实上是 \(s_1, s_2, \ldots, s_n\) 的多项式，这加强了推论的陈述。事实上确实有：系数在 \(R\)（\(R\) 是任意带单位元的交换环）中的对称多项式是初等对称函数的、系数在 \(R\) 中的多项式。这一事实的证明隐含在习题中概述的、把对称多项式写成初等对称函数的多项式的算法中。
+
+\begin{example}
+（1）表达式 \((x_1-x_2)^2\) 关于 \(x_1, x_2\) 对称。我们有 \((x_1-x_2)^2 = (x_1+x_2)^2-4x_1x_2 = s_1^2-4s_2\)，这是初等对称函数的多项式。
+
+（2）多项式 \(x_1^3+x_2^3+x_3^3\) 关于 \(x_1, x_2, x_3\) 对称，此时我们有 \(x_1^3+x_2^3+x_3^3 = (x_1+x_2+x_3)^3-2(x_1x_2+x_1x_3+x_2x_3) = s_1^3-2s_2\).
+
+（3）多项式 \(x_1^2x_2^2+x_1^2x_3^2+x_2^2x_3^2\) 对称。由于
+\[
+(x_1x_2+x_1x_3+x_2x_3)^2 = x_1^2x_2^2+x_1^2x_3^2+x_2^2x_3^2+2(x_1^2x_2x_3+x_1x_2^2x_3+x_1x_2x_3^2),
+\]
+我们有 \(x_1^2x_2^2+x_1^2x_3^2+x_2^2x_3^2 = s_2^2-2s_1s_3\).
+\end{example}
+
+现在假设我们从域 \(F(s_1, s_2, \ldots, s_n)\) 上的一般多项式
+\[
+x^n-s_1x^{n-1}+s_2x^{n-2}+\cdots+(-1)^ns_n
+\]
+出发，其中我们把 \(s_i\)（\(i = 1, 2, \ldots, n\)）看作未定元。若我们定义这个多项式的根为 \(x_1, x_2, \ldots, x_n\)，则 \(s_i\) 恰是根 \(x_1, \ldots, x_n\) 的初等对称函数。此外，这些根也是未定元，其意义是它们之间没有 \(F\) 上的多项式关系。因为假设 \(p(t_1, \ldots, t_n)\) 是 \(n\) 个变量的、系数在 \(F\) 中的非零多项式，且 \(p(x_1, \ldots, x_n) = 0\). 则 \(p\) 在所有 \(\sigma \in S_n\) 上的乘积 \(\prod_{\sigma}p(t_{\sigma(1)}, \ldots, t_{\sigma(n)})\) 是非零对称多项式且 \(p(x_1, \ldots, x_n) = 0\). 这给出 \(s_1, \ldots, s_n\) 之间的一个非零多项式关系，矛盾。
+
+反之，若一个多项式 \(f(x)\) 的根是 \(F\) 上独立的未定元，则 \(f(x)\) 的系数也是（参见第 9 章开头）。故把 \(F\) 上的一般多项式定义为具有未定元根或未定元系数是等价的。从这个观点出发，我们的结果可以陈述为下面形式。
+
+\begin{theorem}\label{thm:14.32}
+域 \(F(s_1, s_2, \ldots, s_n)\) 上的一般多项式 \(x^n-s_1x^{n-1}+s_2x^{n-2}+\cdots+(-1)^ns_n\) 可分，且伽罗瓦群为 \(S_n\).
+\end{theorem}
+
+这个结果说，若 \(n\) 次多项式的系数之间没有关系（这就是上面 \(s_i\) 是未定元的意思），则这个多项式在由它的系数生成的域上的伽罗瓦群是完全对称群 \(S_n\). 粗略地说，这意味着「一般的」\(n\) 次多项式将以 \(S_n\) 为伽罗瓦群。然而注意在有限域上每个多项式都有循环伽罗瓦群（有限域的所有扩张都是循环的），故在这种意义下「一般的」多项式并不存在。在 \(\mathbb{Q}\) 上可以精确化「一般的」多项式的概念，此时确实大多数多项式以完全对称群为伽罗瓦群。
+
+对 \(n \geq 5\)，\(S_n\) 只有一个正规子群，即指数为 2 的子群 \(A_n\). 故一般地，\(F(x_1, x_2, \ldots, x_n)\) 中只有唯一一个含 \(F(s_1, s_2, \ldots, s_n)\) 的正规子域，且它是次数为 2 的扩张。
+
+\begin{definition}
+用公式 \(D = \prod_{i<j}(x_i-x_j)^2\) 定义 \(x_1, x_2, \ldots, x_n\) 的\textbf{判别式} \(D\). 多项式 \(f(x)\) 的\textbf{判别式}定义为它的根的判别式。
+\end{definition}
+
+判别式 \(D\) 是 \(x_1, \ldots, x_n\) 的对称函数，从而是 \(K = F(s_1, s_2, \ldots, s_n)\) 的元素。
+
+我们第一次定义交错群 \(A_n\) 时看到：置换 \(\sigma \in S_n\) 是子群 \(A_n\) 的元素当且仅当 \(\sigma\) 固定乘积
+\[
+\Delta = \prod_{i<j}(x_i-x_j) \in \mathbb{Z}[x_1, x_2, \ldots, x_n].
+\]
+由此（由基本定理）若 \(F\) 的特征不等于 2，则 \(\Delta\) 生成 \(A_n\) 的固定域，\(\sqrt{D}\) 生成 \(K\) 的二次扩张。这证明了下面命题。
+
+\begin{proposition}\label{pro:14.33}
+若 \(\operatorname{ch}(F) \neq 2\)，则置换 \(\sigma \in S_n\) 是 \(A_n\) 的元素当且仅当它固定判别式的平方根 \(\sqrt{D}\).
+\end{proposition}
+
+现在我们考虑小次数（\(\leq 4\)）可分多项式在域 \(F\)（我们假设其特征不等于 2 与 3）上的伽罗瓦群。注意在 \(\mathbb{Q}\) 上或在有限域上（或更一般地在任意完全域上），任意多项式 \(f(x)\) 的分裂域与 \(f(x)\) 的各不可约因子之积（每个因子只取一次）的分裂域相同，后者是可分多项式。
+
+若多项式 \(f(x) = x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\) 的根是 \(\alpha_1, \alpha_2, \ldots, \alpha_n\)，则 \(f(x)\) 的判别式是
+\[
+D = \prod_{i<j}(\alpha_i-\alpha_j)^2.
+\]
+注意 \(D \neq 0\) 当且仅当 \(f(x)\) 不可分，即根 \(\alpha_1, \ldots, \alpha_n\) 不互异。回忆在完全域上（例如 \(\mathbb{Q}\) 或有限域）这蕴涵 \(f(x)\) 可约，因为完全域上每个不可约多项式都可分。
+
+判别式 \(D\) 关于 \(f(x)\) 的各根对称，从而被 \(f(x)\) 的伽罗瓦群的所有自同构固定。由基本定理可知 \(D \in F\). 判别式一般可以写成 \(f(x)\) 的系数的多项式（由推论 \ref{cor:14.31}），对较大次数这些多项式相当复杂（下面我们给出 \(n \leq 4\) 的公式）。最后注意由于 \(\Delta = \prod_{i<j}(\alpha_i-\alpha_j)\)，我们有这个有用的事实：\(\sqrt{D}\) 总含于 \(f(x)\) 的分裂域中。
+
+若 \(f(x)\) 的根互异，固定根的一个次序，并如上把 \(f(x)\) 的伽罗瓦群看作 \(S_n\) 的子群。
+
+\begin{proposition}\label{pro:14.34}
+\(f(x) \in F[x]\) 的伽罗瓦群是 \(A_n\) 的子群当且仅当判别式 \(D \in F\) 是 \(F\) 中某个元素的平方。
+\end{proposition}
+
+\begin{proof}
+这是命题 \ref{pro:14.33} 在此情形的重述。伽罗瓦群含于 \(A_n\) 中当且仅当伽罗瓦群的每个元素都固定 \(\sqrt{D} = \prod_{i<j}(\alpha_i-\alpha_j)\)，即当且仅当 \(\sqrt{D} \in F\).
+\end{proof}
+
+这个性质连同「\(D = 0\) 判定重根是否出现」这一事实，就是 \(D\) 被称为判别式的原因。
+
+\noindent\textbf{2 次多项式}
+
+考虑多项式 \(x^2+ax+b\)，其根为 \(\alpha, \beta\). 这个多项式的判别式是 \((\alpha-\beta)^2\)，它可以写成根的初等对称函数的多项式。我们在上面例 1 中做过：
+\[
+D = s_1^2-4s_2 = (-a)^2-4(b) = a^2-4b,
+\]
+即二次多项式的通常判别式。
+
+这个多项式可分当且仅当 \(a^2-4b \neq 0\). 伽罗瓦群是 \(S_2\)（2 阶循环群）的子群，它是平凡群（此时即 \(A_2\)）当且仅当 \(a^2-4b\) 是 \(F\) 中的平方，这完全确定了可能的伽罗瓦群。
+
+（这重述了我们先前通过显式解根得到的结果：若这个多项式可约（即 \(D\) 是 \(F\) 中的平方），则伽罗瓦群平凡（分裂域就是 \(F\)）；而若这个多项式不可约，则伽罗瓦群同构于 \(\mathbb{Z}/2\mathbb{Z}\)，因为分裂域是二次扩张 \(F(\sqrt{D})\)。）
+
+\noindent\textbf{3 次多项式}
+
+假设三次多项式是
+\begin{equation}
+f(x) = x^3+ax^2+bx+c. \tag{14.15}
+\end{equation}
+若作代换 \(x = y-\frac{a}{3}\)，这个多项式变为
+\begin{equation}
+g(y) = y^3+py+q, \tag{14.16}
+\end{equation}
+其中
+\begin{equation}
+p = \frac{1}{3}(3b-a^2), \qquad q = \frac{1}{27}(2a^3-9ab+27c). \tag{14.17}
+\end{equation}
+这两个多项式的分裂域相同，因为它们的根相差常数 \(\frac{a}{3} \in F\)；而由于判别式的公式涉及根之差，我们看到这两个多项式也有相同的判别式。
+
+设（14.16）中多项式的根为 \(\alpha, \beta, \gamma\). 我们首先用 \(p\) 与 \(q\) 计算这个多项式的判别式。注意 \(g(y) = (y-\alpha)(y-\beta)(y-\gamma)\)，故求导得
+\[
+D_yg(y) = (y-\alpha)(y-\beta)+(y-\alpha)(y-\gamma)+(y-\beta)(y-\gamma).
+\]
+则
+\[
+D_yg(\alpha) = (\alpha-\beta)(\alpha-\gamma), \quad D_yg(\beta) = (\beta-\alpha)(\beta-\gamma), \quad D_yg(\gamma) = (\gamma-\alpha)(\gamma-\beta).
+\]
+取乘积我们看到
+\[
+D = [(\alpha-\beta)(\alpha-\gamma)(\beta-\gamma)]^2 = -D_yg(\alpha)D_yg(\beta)D_yg(\gamma).
+\]
+由于 \(D_yg(y) = 3y^2+p\)，我们有
+\[
+-D = (3\alpha^2+p)(3\beta^2+p)(3\gamma^2+p) = 27\alpha^2\beta^2\gamma^2+9p(\alpha^2\beta^2+\alpha^2\gamma^2+\beta^2\gamma^2)+3p^2(\alpha^2+\beta^2+\gamma^2)+p^3.
+\]
+根的初等对称函数中相应的表达式在上面例 2 与例 3 中已经确定。注意这里 \(s_1 = 0\)、\(s_2 = p\)、\(s_3 = -q\). 我们得到
+\begin{equation}
+D = -4p^3-27q^2. \tag{14.18}
+\end{equation}
+这与（14.15）中 \(f(x)\) 的判别式相同。用（14.17）把 \(D\) 用 \(a, b, c\) 表示，我们得到
+\begin{equation}
+D = a^2b^2-4b^3-4a^3c-27c^2+18abc. \tag{14.18′}
+\end{equation}
+
+\noindent\textbf{（三次多项式的伽罗瓦群）}
+
+\textbf{a.} 若三次多项式 \(f(x)\) 可约，则它或分解为三个线性因子，或分解为一个线性因子与一个不可约二次式。在第一种情形伽罗瓦群平凡，在第二种情形伽罗瓦群的阶为 2.
+
+\textbf{b.} 若三次多项式 \(f(x)\) 不可约，则 \(f(x)\) 的一个根生成 \(F\) 的次数为 3 的扩张，故分裂域在 \(F\) 上的次数被 3 整除。由于伽罗瓦群是 \(S_3\) 的子群，只有两种可能，即 \(A_3\) 或 \(S_3\). 伽罗瓦群是 \(A_3\)（即 3 阶循环群）当且仅当（14.18）中的判别式 \(D\) 是平方。
+
+显式地，若 \(D\) 是 \(F\) 中某个元素的平方，则不可约三次多项式 \(f(x)\) 的分裂域通过把 \(f(x)\) 的任意一个根添加到 \(F\) 得到。所得的域在 \(F\) 上伽罗瓦，次数为 3，伽罗瓦群为 3 阶循环群。若 \(D\) 不是 \(F\) 中元素的平方，则 \(f(x)\) 的分裂域在 \(F\) 上的次数为 6，从而是域 \(F(\theta, \sqrt{D})\)（\(\theta\) 是 \(f(x)\) 的任意一个根）。这个扩张在 \(F\) 上伽罗瓦，伽罗瓦群为 \(S_3\)（生成元由把 \(\theta\) 映到 \(f(x)\) 的另一个根并固定 \(\sqrt{D}\) 的 \(\sigma\)，以及把 \(\sqrt{D}\) 映到 \(-\sqrt{D}\) 并固定 \(\theta\) 的 \(\tau\) 给出）。
+
+我们看到两种情形下不可约三次多项式 \(f(x)\) 的分裂域都通过把 \(\sqrt{D}\) 与 \(f(x)\) 的一个根添加到 \(F\) 得到。
+
+我们将在下一节引入 Lagrange 预解式的概念之后，给出（14.16）的根的显式公式（卡尔达诺公式）。
+
+\noindent\textbf{4 次多项式}
+
+设四次多项式是
+\[
+f(x) = x^4+ax^3+bx^2+cx+d,
+\]
+它在代换 \(x = y-\frac{a}{4}\) 下变为四次多项式
+\[
+g(y) = y^4+py^2+qy+r,
+\]
+其中
+\[
+p = \frac{1}{8}(-3a^2+8b), \qquad q = \frac{1}{8}(a^3-4ab+8c), \qquad r = \frac{1}{256}(-3a^4+16a^2b-64ac+256d).
+\]
+设 \(g(y)\) 的根为 \(\alpha_1, \alpha_2, \alpha_3, \alpha_4\)，用 \(G\) 表示 \(g(y)\)（或 \(f(x)\)）的分裂域的伽罗瓦群。
+
+首先假设 \(g(y)\) 可约。若 \(g(y)\) 分解为一个线性因子与一个三次式，则 \(G\) 是这个三次式的伽罗瓦群，我们上面已经确定它。假设 \(g(y)\) 分解为两个不可约二次式，则分裂域是扩张 \(F(\sqrt{D_1}, \sqrt{D_2})\)，其中 \(D_1\) 与 \(D_2\) 是两个二次式的判别式。若 \(D_1\) 与 \(D_2\) 不相差一个平方因子，则这个扩张是双二次扩张，\(G\) 同构于 \(S_4\) 的 Klein 四元子群。若 \(D_1\) 是 \(D_2\) 的平方倍，则这个扩张是二次扩张，\(G\) 同构于 \(\mathbb{Z}/2\mathbb{Z}\).
+
+我们化归为 \(g(y)\) 不可约的情形。此时回忆伽罗瓦群在根上传递，即可以通过施加伽罗瓦群的某个自同构从给定的根到达任何其他根。考察各种可能，我们看到 \(S_4\) 的传递子群（从而是我们的伽罗瓦群 \(G\) 的可能情形）只有
+\[
+S_4, \qquad A_4, \qquad D_8 = \{1, (1\ 3\ 2\ 4), (1\ 2)(3\ 4), (1\ 4\ 2\ 3), (1\ 3)(2\ 4), (1\ 4)(2\ 3), (1\ 2), (3\ 4)\} \text{ 及其共轭},
+\]
+\[
+V = \{1, (1\ 2)(3\ 4), (1\ 3)(2\ 4), (1\ 4)(2\ 3)\}, \qquad C = \{1, (1\ 2\ 3\ 4), (1\ 3)(2\ 4), (1\ 4\ 3\ 2)\} \text{ 及其共轭}.
+\]
+（\(D_8\) 是二面体群，是 \(S_4\) 的 Sylow 2-子群，在 \(S_4\) 中有 3 个（同构的）共轭子群；\(V\) 是 \(S_4\) 的 Klein 四元子群，在 \(S_4\) 中正规；\(C\) 是循环群，在 \(S_4\) 中有 3 个（同构的）共轭。）
+
+考虑 \(g(y)\) 的分裂域中的元素
+\[
+\theta_1 = (\alpha_1+\alpha_2)(\alpha_3+\alpha_4), \qquad \theta_2 = (\alpha_1+\alpha_3)(\alpha_2+\alpha_4), \qquad \theta_3 = (\alpha_1+\alpha_4)(\alpha_2+\alpha_3).
+\]
+这些元素被 \(S_4\) 中的置换在彼此之间置换。\(\theta_1\) 在 \(S_4\) 中的稳定化子是二面体群 \(D_8\). \(\theta_2\) 与 \(\theta_3\) 在 \(S_4\) 中的稳定化子是阶为 8 的共轭二面体子群。稳定这三个元素的 \(S_4\) 的子群是这些子群的交，即 Klein 四元群 \(V\).
+
+由于 \(S_4\) 只是置换 \(\theta_1, \theta_2, \theta_3\)，可知 \(\theta\) 中的初等对称函数被 \(S_4\) 的所有元素固定，从而在 \(F\) 中。对称函数中的初等计算表明这些初等对称函数是 \(2p\)、\(p^2-4r\) 与 \(-q^2\)，这表明 \(\theta_1, \theta_2, \theta_3\) 是多项式
+\[
+h(x) = x^3-2px^2+(p^2-4r)x+q^2
+\]
+的根，它称为四次多项式 \(g(y)\) 的\textbf{预解三次式}。由于
+\[
+\theta_1-\theta_2 = \alpha_1\alpha_3+\alpha_2\alpha_4-\alpha_1\alpha_2-\alpha_3\alpha_4 = -(\alpha_1-\alpha_4)(\alpha_2-\alpha_3),
+\]
+类似地 \(\theta_1-\theta_3 = -(\alpha_1-\alpha_3)(\alpha_2-\alpha_4)\)、\(\theta_2-\theta_3 = -(\alpha_1-\alpha_2)(\alpha_3-\alpha_4)\)，我们看到预解三次式的判别式与四次多项式 \(g(y)\)（从而是四次多项式 \(f(x)\)）的判别式相同。用我们关于三次式判别式的公式，容易用 \(p, q, r\) 计算这个判别式：
+\[
+D = 16p^4r-4p^3q^2-128p^2r^2+144pq^2r-27q^4+256r^3,
+\]
+由此可以给出 \(D\) 用 \(a, b, c, d\) 表示的公式。
+
+预解三次式的分裂域是四次多项式的分裂域的子域，故预解三次式的伽罗瓦群是 \(G\) 的商群。因此知道伽罗瓦群在预解三次式 \(h(x)\) 的根上的作用会给出关于 \(g(y)\) 的伽罗瓦群的信息，如下：
+
+\noindent\textbf{（四次多项式的伽罗瓦群）}
+
+\textbf{a.} 首先假设预解三次式不可约。若 \(D\) 不是平方，则 \(G\) 不含于 \(A_4\) 中，而预解三次式的伽罗瓦群是 \(S_3\)，这蕴涵 \(g(y)\) 的分裂域的次数被 6 整除。此时唯一可能是 \(G = S_4\).
+
+\textbf{b.} 若预解三次式不可约且 \(D\) 是平方，则 \(G\) 是 \(A_4\) 的子群且 3 整除 \(G\) 的阶（预解三次式的伽罗瓦群是 \(A_3\)）。唯一可能是 \(G = A_4\).
+
+\textbf{c.} 剩下预解三次式可约的情形。
+
+\textbf{c1.} 第一种可能是 \(h(x)\) 在 \(F\) 中有 3 个根（即完全分裂）。由于元素 \(\theta_1, \theta_2, \theta_3\) 都在 \(F\) 中，\(G\) 的每个元素都固定这三个元素，这意味着 \(G \subseteq V\). 唯一可能是 \(G = V\).
+
+\textbf{c2.} 若 \(h(x)\) 分解为一个线性因子与一个二次式，则 \(\theta_1, \theta_2, \theta_3\) 中恰有一个在 \(F\) 中，比如说 \(\theta_1\). 则 \(G\) 稳定 \(\theta_1\) 但不稳定 \(\theta_2\) 与 \(\theta_3\)，故 \(G \subseteq D_8\) 且 \(G \not\subseteq V\). 这留下两种可能：\(G = D_8\) 或 \(G = C\). 区分它们的一种方法是注意 \(F(\sqrt{D})\) 是 \(G\) 中在 \(A_4\) 里的元素的固定域。对正在考虑的两种情形，我们有 \(D_8 \cap A_4 = V\)、\(C \cap A_4 = \{1, (1\ 3)(2\ 4)\}\). 第一个群在 \(g(y)\) 的根上传递，第二个不传递。由此第一种情形成立当且仅当 \(g(y)\) 在 \(F(\sqrt{D})\) 上不可约。故我们可以通过在 \(F(\sqrt{D})\) 中分解 \(g(y)\) 来完全确定 \(G\)，从而在所有情形下完全确定伽罗瓦群。（参见随后的习题以及下一节的习题，那里证明了在 \(\mathbb{Q}\) 上若 \(D\) 不是两平方之和则伽罗瓦群不可能是 4 次循环群——故特别地当 \(D < 0\) 时不可能。）
+
+我们将在下一节末尾给出四次多项式根的显式公式。
+
+\noindent\textbf{代数基本定理}
+
+我们以代数基本定理的两个证明结束本节。我们需要关于域 \(\mathbb{C}\) 的两个事实：
+
+（a）每个奇次实系数多项式在实数中有根。等价地，\(\mathbb{R}\) 没有非平凡的奇次有限扩张。
+
+（b）系数在 \(\mathbb{C}\) 中的二次多项式在 \(\mathbb{C}\) 中有根。等价地，\(\mathbb{C}\) 没有二次扩张。
+
+第一个结果由微积分中的介值定理推出，因为奇次首一多项式 \(f(x) \in \mathbb{R}[x]\) 的图像在 \(x\) 取足够小的负值时取负、在 \(x\) 取足够大的正值时取正，从而在某处穿过坐标轴。与第二个陈述的等价性由以下事实推出：\(\mathbb{R}\) 的有限扩张是单扩张，而本原元的极小多项式将有奇次数，从而既在 \(\mathbb{R}\) 上不可约又在 \(\mathbb{R}\) 中有根，故次数必为 1.
+
+第二个结果由直接计算推出。由求根公式，只需证明每个复数都有平方根。写出 \(a = a+bi\)（\(a, b \in \mathbb{R}\)）。则 \(\sqrt{a^2+b^2}+a\) 与 \(\sqrt{a^2+b^2}-a\) 都是非负数，故有实平方根。令 \(c \in \mathbb{R}\) 是实数 \(\frac{\sqrt{a^2+b^2}+a}{2}\) 的平方根，令 \(d \in \mathbb{R}\) 是实数 \(\frac{\sqrt{a^2+b^2}-a}{2}\) 的平方根，其中两个平方根的符号取得使 \(cd\) 与 \(b\) 同号。则（展开计算可知）\((c+di)^2 = a+bi\).
+
+\begin{theorem}\label{thm:14.35}
+（\textbf{代数基本定理}）每个 \(n\) 次多项式 \(f(x) \in \mathbb{C}[x]\) 在 \(\mathbb{C}\) 中恰有 \(n\) 个根（按重数计）。等价地，\(\mathbb{C}\) 是代数闭的。
+\end{theorem}
+
+\noindent\textbf{证明 I.} 只需证明每个多项式 \(f(x) \in \mathbb{C}[x]\) 在 \(\mathbb{C}\) 中有根。
+
+用 \(\tau\) 表示复共轭自同构。若 \(f(x)\) 在 \(\mathbb{C}\) 中没有根，则把 \(\tau\) 作用于 \(f(x)\) 的系数所得的多项式 \(\overline{f}(x) = \tau f(x)\) 也没有根（因为它的根是 \(f(x)\) 的根的共轭）。乘积 \(f(x)\overline{f}(x)\) 的系数在复共轭下不变，从而有实系数。故只需证明实系数多项式在 \(\mathbb{C}\) 中有根。
+
+假设 \(f(x)\) 是 \(n\) 次实系数多项式，写 \(n = 2^km\)，其中 \(m\) 是奇数。我们对 \(k\) 归纳证明 \(f(x)\) 在 \(\mathbb{C}\) 中有根。
+
+对 \(k = 0\)，\(f(x)\) 有奇次数，由上面的（a）它在 \(\mathbb{R}\) 中有根，故结论成立。现在假设 \(k \geq 1\). 设 \(\alpha_1, \alpha_2, \ldots, \alpha_n\) 是 \(f(x)\) 的根，令 \(K = \mathbb{R}(\alpha_1, \alpha_2, \ldots, \alpha_n, i)\). 则 \(K\) 是 \(\mathbb{R}\) 的含 \(\mathbb{C}\) 与 \(f(x)\) 的根的伽罗瓦扩张。对任意 \(t \in \mathbb{R}\) 考虑多项式
+\[
+L_t = \prod_{1 \leq i < j \leq n}[x-(\alpha_i+\alpha_j+t\alpha_i\alpha_j)].
+\]
+\(K/\mathbb{R}\) 的任何自同构都置换这个乘积中的各项，故 \(L_t\) 的系数在 \(\operatorname{Gal}(K/\mathbb{R})\) 的所有元素下不变。因此 \(L_t\) 是实系数多项式。\(L_t\) 的次数是
+\[
+\frac{n(n-1)}{2} = 2^{k-1}m(2^km-1) = 2^{k-1}m',
+\]
+其中 \(m'\) 是奇数（因为 \(k \geq 1\)）。故这个次数中 2 的幂小于 \(k\)，从而由归纳假设多项式 \(L_t\) 在 \(\mathbb{C}\) 中有根。故对每个 \(t \in \mathbb{R}\)，对某对 \(i, j\)（\(1 \leq i < j \leq n\)）元素 \(\alpha_i+\alpha_j+t\alpha_i\alpha_j\) 在 \(\mathbb{C}\) 中。由于 \(t\) 有无穷多种选择而 \(i, j\) 只有有限多对，我们看到对某对 \(i, j\)（比如 \(i = 1\)、\(j = 2\)）存在不同的实数 \(s\) 与 \(t\) 使
+\[
+\alpha_1+\alpha_2+s\alpha_1\alpha_2 \in \mathbb{C}, \qquad \alpha_1+\alpha_2+t\alpha_1\alpha_2 \in \mathbb{C}.
+\]
+由于 \(s \neq t\)，由此 \(a = \alpha_1+\alpha_2 \in \mathbb{C}\) 且 \(b = \alpha_1\alpha_2 \in \mathbb{C}\). 但此时 \(\alpha_1\) 与 \(\alpha_2\) 是系数在 \(\mathbb{C}\) 中的二次方程 \(x^2-ax+b\) 的根，从而由上面的（b）它们是 \(\mathbb{C}\) 的元素，完成证明。
+
+\noindent\textbf{证明 II.} 第二个证明再次使用上面的（a）与（b），但把关于多项式 \(L_t\) 的计算替换为一个涉及伽罗瓦群的 Sylow 2-子群的幂零性的简单群论论证：
+
+设 \(f(x)\) 是实系数 \(n\) 次多项式，\(K\) 是 \(f(x)\) 在 \(\mathbb{R}\) 上的分裂域。则 \(K(i)\) 是 \(\mathbb{R}\) 的伽罗瓦扩张。用 \(G\) 表示它的伽罗瓦群，\(P_2\) 表示 \(G\) 的一个 Sylow 2-子群。\(P_2\) 的固定域是 \(\mathbb{R}\) 的奇次扩张，故由（a）它是平凡的。
+
+由此 \(\operatorname{Gal}(K(i)/\mathbb{C})\) 是 2-群。由于 2-群有各种阶的子群（回忆这对任何素数 \(p\) 的有限 \(p\)-群都成立，参见定理 6.1），若这个群非平凡，则存在 \(\mathbb{C}\) 的二次扩张，由（b）这是不可能的，完成证明。
+
+代数基本定理由 Gauss 在 1816 年首次严格证明（他 1798 年的博士论文给出了一个使用几何考虑、需要一些拓扑论证的证明）。上面第一个证明本质上属于 Laplace（1795 年）（这就是多项式 \(L_t\) 命名的由来）。Laplace 的证明被认为不可接受的原因是他假定了多项式的分裂域存在（即根在某个域中存在），而这在当时尚未建立。第二个优雅的证明是 Artin 给出的简化。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 证明有重根的三次多项式有一个线性因子。四次多项式是否也有同样的结论？
+
+\item 确定下列多项式的伽罗瓦群：
+
+（a）\(x^3-x-4\)；（b）\(x^3-2x+4\)；（c）\(x^3-x+1\)；（d）\(x^3+x^2-2x-1\).
+
+\item 证明对任意 \(a, b \in \mathbb{F}_p^\times\)，若 \(x^3+ax+b\) 不可约，则 \(-4a^3-27b^2\) 是 \(\mathbb{F}_p^\times\) 中的平方。
+
+\item 确定 \(x^4-25\) 的伽罗瓦群。
+
+\item 确定 \(x^4+4\) 的伽罗瓦群。
+
+\item 确定 \(x^4+3x^3-3x^2-2\) 的伽罗瓦群。
+
+\item 确定 \(x^4+2x^2+x+3\) 的伽罗瓦群。
+
+\item 确定 \(x^4+8x+12\) 的伽罗瓦群。
+
+\item 确定 \(x^4+4x-1\) 的伽罗瓦群（参见习题 19）。
+
+\item 确定 \(x^5+x-1\) 的伽罗瓦群。
+
+\item 设 \(F\) 是 \(\mathbb{Q}\) 的 4 次扩张，且不是 \(\mathbb{Q}\) 上的伽罗瓦扩张。证明 \(F\) 的伽罗瓦闭包的伽罗瓦群或者是 \(S_4\)、\(A_4\)，或者是 8 阶二面体群 \(D_8\). 证明该伽罗瓦群是二面体群当且仅当 \(F\) 包含 \(\mathbb{Q}\) 的一个二次扩张。
+
+\item 证明 \(\mathbb{Q}\) 的 4 次扩张 \(F\) 可以由 \(\mathbb{Q}\) 上不可约的双二次多项式 \(x^4+ax^2+b\) 的一个根生成，当且仅当 \(F\) 包含 \(\mathbb{Q}\) 的一个二次扩张。
+
+\item （a）设 \(\pm\alpha, \pm\beta\) 是多项式 \(f(x) = x^4+ax^2+b \in \mathbb{Z}[x]\) 的根。证明 \(f(x)\) 不可约当且仅当 \(\alpha^2, \alpha\pm\beta\) 都不是 \(\mathbb{Q}\) 的元素。
+
+（b）假设 \(f(x)\) 不可约，设 \(G\) 是 \(f(x)\) 的伽罗瓦群。证明
+
+（i）\(G \cong\) Klein 四元群，当且仅当 \(b\) 是 \(\mathbb{Q}\) 中的平方，当且仅当 \(\alpha\beta \in \mathbb{Q}\)（即 \(\sqrt{b}\) 是有理数）。
+
+（ii）\(G \cong C\)，即 4 阶循环群，当且仅当 \(b(a^2-4b)\) 是 \(\mathbb{Q}\) 中的平方，当且仅当 \(\mathbb{Q}(\alpha\beta) = \mathbb{Q}(\alpha^2)\).
+
+（iii）\(G \cong D_8\)，即 8 阶二面体群，当且仅当 \(b\) 与 \(b(a^2-4b)\) 都不是 \(\mathbb{Q}\) 中的平方，当且仅当 \(\alpha\beta \notin \mathbb{Q}(\alpha^2)\).
+
+\item 证明对任意不同的奇素数 \(p\) 与 \(q\)，多项式 \(x^4-px+q \in \mathbb{Q}[x]\) 不可约，且其伽罗瓦群是 8 阶二面体群。
+
+\item 证明对每个素数 \(p\)，多项式 \(x^4+px+p \in \mathbb{Q}[x]\) 不可约，且当 \(p \neq 3, 5\) 时其伽罗瓦群为 \(S_4\). 证明 \(p = 3\) 时伽罗瓦群是 8 阶二面体群，\(p = 5\) 时是 4 阶循环群。
+
+\item 确定多项式 \(x^4+8x^3+8x^2+4\) 在 \(\mathbb{Q}\) 上的伽罗瓦群。确定这个域中哪些子域在 \(\mathbb{Q}\) 上是伽罗瓦的；对那些伽罗瓦子域，求一个多项式 \(f(x) \in \mathbb{Q}[x]\)，使它们恰为 \(f(x)\) 在 \(\mathbb{Q}\) 上的分裂域。
+
+\item 显式求出 \(x^4-7\) 在 \(\mathbb{Q}\) 上的伽罗瓦群（作为根上的置换群）。
+
+\item 设 \(\theta\) 是 \(x^3-3x+1\) 的一个根。证明这个多项式的分裂域是 \(\mathbb{Q}(\theta)\)，且伽罗瓦群是 3 阶循环群。特别地，这个多项式的另外两个根可以写成 \(a+b\theta+c\theta^2\) 的形式（\(a, b, c \in \mathbb{Q}\)）。用 \(\theta\) 显式确定另外两个根。
+
+\item 设 \(f(x)\) 是 \(\mathbb{Q}[x]\) 中次数为 4 的不可约多项式，判别式为 \(D\)。设 \(K\) 表示 \(f(x)\) 的分裂域，看作复数域 \(\mathbb{C}\) 的子域。
+
+（a）证明 \(\mathbb{Q}(\sqrt{D}) \subseteq K\).
+
+（b）设 \(\tau\) 表示复共轭，\(\tau_K\) 表示复共轭在 \(K\) 上的限制。证明 \(\tau_K\) 是 \(\operatorname{Gal}(K/\mathbb{Q})\) 的元素，其阶为 1 或 2，取决于 \(K\) 的每个元素是否为实数。
+
+（c）证明若 \(D < 0\)，则 \(K\) 不可能是 \(\mathbb{Q}\) 上 4 次循环扩张（即 \(\operatorname{Gal}(K/\mathbb{Q})\) 不可能是 4 阶循环群）。
+
+（d）一般地证明：对无平方因子且 \(D < 0\) 的 \(D\)，\(\mathbb{Q}(\sqrt{D})\) 不是任何 4 次循环域的子域（另见第 14.7 节习题 19）。
+
+\item 确定 \((x^3-2)(x^3-3)\) 在 \(\mathbb{Q}\) 上的伽罗瓦群。确定所有包含 \(\mathbb{Q}(\rho)\) 的子域，其中 \(\rho\) 是本原 3 次单位根。
+
+\item 设 \(G \leq S_n\) 是对称群的子群，假设 \(\sigma_1, \ldots, \sigma_k\) 是 \(G\) 的生成元。若函数 \(f(x_1, x_2, \ldots, x_n)\) 被每个生成元 \(\sigma_i\) 固定，证明它被 \(G\) 固定。
+
+\item （\textbf{牛顿公式}）设 \(f(x)\) 是次数为 \(n\) 的首一多项式，根为 \(\alpha_1, \alpha_2, \ldots, \alpha_n\). 设 \(s_i\) 是根上的 \(i\) 次初等对称函数，并对 \(i > n\) 定义 \(s_i = 0\). 设 \(p_i = \alpha_1^i+\cdots+\alpha_n^i\)（\(i \geq 0\)）是 \(f(x)\) 的根的 \(i\) 次幂之和。证明牛顿公式：
+\[
+p_1-s_1 = 0, \qquad p_2-s_1p_1+2s_2 = 0, \qquad p_3-s_1p_2+s_2p_1-3s_3 = 0, \qquad \ldots
+\]
+
+\item （a）若 \(x+y+z = 1\)、\(x^2+y^2+z^2 = 2\)、\(x^3+y^3+z^3 = 3\)，求 \(x^4+y^4+z^4\).
+
+（b）一般地证明 \(x, y, z\) 不是有理数，但对每个正整数 \(n\)，\(x^n+y^n+z^n\) 都是有理数。
+
+\item 证明特征为 0 的域上的 \(n \times n\) 矩阵 \(A\) 是幂零的，当且仅当对所有 \(k \geq 0\) 有 \(\operatorname{tr}(A^k) = 0\).
+
+\item 证明特征为 0 的域上的两个 \(n \times n\) 矩阵 \(A\) 与 \(B\) 有相同的特征多项式，当且仅当对所有 \(k \geq 0\) 有 \(\operatorname{tr}(A^k) = \operatorname{tr}(B^k)\).
+
+\item 利用「对任意两个 \(n \times n\) 矩阵 \(A\) 与 \(B\) 都有 \(\operatorname{tr}(AB) = \operatorname{tr}(BA)\)」这一事实，证明在特征为 0 的域上 \(AB\) 与 \(BA\) 有相同的特征多项式（同样的结论对任意特征的域也成立）。
+
+\item 设 \(f(x)\) 是次数为 \(n\) 的首一多项式，根为 \(\alpha_1, \alpha_2, \ldots, \alpha_n\).
+
+（a）证明 \(f(x)\) 的判别式 \(D\) 是 Vandermonde 行列式
+\[
+\begin{vmatrix}
+1 & \alpha_1 & \alpha_1^2 & \cdots & \alpha_1^{n-1}\\
+1 & \alpha_2 & \alpha_2^2 & \cdots & \alpha_2^{n-1}\\
+\vdots & \vdots & \vdots & & \vdots\\
+1 & \alpha_n & \alpha_n^2 & \cdots & \alpha_n^{n-1}
+\end{vmatrix}
+ = \prod_{i>j}(\alpha_i-\alpha_j)
+\]
+的平方。
+
+（b）取上面的 Vandermonde 矩阵，在左边乘以它的转置并取行列式，证明可得
+\[
+D = \begin{vmatrix}
+p_0 & p_1 & p_2 & \cdots & p_{n-1}\\
+p_1 & p_2 & p_3 & \cdots & p_n\\
+\vdots & & & & \vdots\\
+p_{n-1} & p_n & p_{n+1} & \cdots & p_{2n-2}
+\end{vmatrix},
+\]
+其中 \(p_i = \alpha_1^i+\cdots+\alpha_n^i\) 是 \(f(x)\) 的根的 \(i\) 次幂之和，可以用上面的牛顿公式由 \(f(x)\) 的系数算出。这给出了计算多项式判别式的一种有效方法。
+
+\item 设 \(a\) 是不可约多项式 \(f(x) \in F[x]\) 的一个根，\(K = F(a)\)，\(D\) 是 \(f(x)\) 的判别式。证明
+\[
+D = (-1)^{\frac{n(n-1)}{2}}N_{K/F}(f'(a)),
+\]
+其中 \(n = \deg f\)，且 \(f'(x) = D_xf(x)\) 是 \(f(x)\) 的导数。
+
+\noindent 下面的习题描述两个多项式的结式，并特别给出计算多项式判别式的另一种有效方法。
+
+\item 设 \(F\) 是域，\(f(x) = a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\) 与 \(g(x) = b_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0\) 是 \(F[x]\) 中的两个多项式。
+
+（a）证明 \(f(x)\) 与 \(g(x)\) 有公共根（等价地，在 \(F[x]\) 中有公共因子）的充要条件是：存在次数至多为 \(m-1\) 的多项式 \(a(x) \in F[x]\) 与次数至多为 \(n-1\) 的多项式 \(b(x) \in F[x]\)，使 \(a(x)f(x) = b(x)g(x)\).
+
+（b）把 \(a(x)\) 与 \(b(x)\) 显式地写成多项式，证明在等式 \(a(x)f(x) = b(x)g(x)\) 中比较系数，得到关于 \(a(x)\) 与 \(b(x)\) 的系数的一个 \(n+m\) 元线性方程组。证明这个方程组有非平凡解（从而 \(f(x)\) 与 \(g(x)\) 有公共零点）当且仅当行列式
+\[
+R(f,g) = \begin{vmatrix}
+a_n & a_{n-1} & \cdots & a_0 & & & \\
+& a_n & a_{n-1} & \cdots & a_0 & & \\
+& & \ddots & & & \ddots & \\
+& & & a_n & a_{n-1} & \cdots & a_0\\
+b_m & b_{m-1} & \cdots & b_0 & & & \\
+& b_m & b_{m-1} & \cdots & b_0 & & \\
+& & \ddots & & & \ddots & \\
+& & & b_m & b_{m-1} & \cdots & b_0
+\end{vmatrix}
+\]
+为零。这里 \(R(f,g)\) 称为这两个多项式的\textbf{结式}，它是一个 \((n+m) \times (n+m)\) 矩阵 \(R\) 的行列式，其中 \(m\) 行涉及 \(f(x)\) 的系数，\(n\) 行涉及 \(g(x)\) 的系数。
+
+\item （a）记号同上题，证明有矩阵方程
+\[
+R\begin{pmatrix} x^{n+m-1}\\ x^{n+m-2}\\ \vdots\\ x\\ 1\end{pmatrix} = \begin{pmatrix} x^{m-1}f(x)\\ x^{m-2}f(x)\\ \vdots\\ f(x)\\ x^{n-1}g(x)\\ x^{n-2}g(x)\\ \vdots\\ g(x)\end{pmatrix}.
+\]
+
+（b）设 \(R'\) 表示 \(R\) 的代数余子式矩阵（如第 11.4 节定理 30 中那样），故 \(R'R = R(f,g)I\)，其中 \(I\) 是单位矩阵。把上面的矩阵方程两边左乘 \(R'\)，并令所得列矩阵最下面的一个分量相等，证明存在多项式 \(r(x), s(x) \in F[x]\) 使 \(R(f,g) = r(x)f(x)+s(x)g(x)\)，即两个多项式的结式是这两个多项式在 \(F[x]\) 中的线性组合。
+
+\item 把 \(f(x)\) 与 \(g(x)\) 看作一般多项式，设 \(f(x)\) 的根为 \(x_1, \ldots, x_n\)，\(g(x)\) 的根为 \(y_1, \ldots, y_m\). \(f(x)\) 的系数是 \(a_n\) 的幂与 \(x_1, \ldots, x_n\) 的初等对称函数之积，\(g(x)\) 的系数是 \(b_m\) 的幂与 \(y_1, \ldots, y_m\) 的初等对称函数之积。
+
+（a）展开行列式证明：\(R(f,g)\) 关于系数 \(a_i\) 是 \(m\) 次齐次的，关于系数 \(b_j\) 是 \(n\) 次齐次的。
+
+（b）证明 \(R(f,g)\) 等于 \(a_n^mb_m^n\) 乘以 \(x_1, \ldots, x_n\) 与 \(y_1, \ldots, y_m\) 的一个对称函数。
+
+（c）由于 \(f(x)\) 与 \(g(x)\) 有公共根（比如 \(x_i = y_j\)）时 \(R(f,g) = 0\)，证明 \(R(f,g)\) 被 \(x_i-y_j\) 整除（\(i = 1, 2, \ldots, n\)，\(j = 1, 2, \ldots, m\)）。由次数考虑证明
+\[
+R(f,g) = a_n^mb_m^n\prod_{i=1}^{n}\prod_{j=1}^{m}(x_i-y_j).
+\]
+
+（d）证明（c）中的乘积也可以写成
+\[
+R(f,g) = a_n^m\prod_{i=1}^{n}g(x_i) = (-1)^{nm}b_m^n\prod_{j=1}^{m}f(y_j).
+\]
+这给出了「把 \(g\) 在 \(f\) 的根处求值所得之积」与「把 \(f\) 在 \(g\) 的根处求值所得之积」之间一个有趣的互反关系。
+
+\item 现在考虑 \(g(x) = f'(x)\) 是多项式 \(f(x) = x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\) 的导数这一特殊情形，并设 \(f(x)\) 的根为 \(\alpha_1, \alpha_2, \ldots, \alpha_n\). 利用上一习题的公式
+\[
+R(f,f') = \prod_{i=1}^{n}f'(\alpha_i)
+\]
+证明
+\[
+D = (-1)^{\frac{n(n-1)}{2}}R(f,f'),
+\]
+其中 \(D\) 是 \(f(x)\) 的判别式。
+
+\item （a）证明奇素数 \(p\) 的 \(p\) 次单位根的分圆多项式 \(\Phi_p(x)\) 的判别式是 \((-1)^{(p-1)/2}p^{p-2}\).〔一种途径：利用上一节习题 5，以及用幂和 \(p_i\) 表示判别式的行列式形式。〕
+
+（b）证明对奇素数 \(p\) 有 \(\mathbb{Q}\left(\sqrt{(-1)^{(p-1)/2}p}\right) = \mathbb{Q}(\zeta_p)\).（另见第 14.7 节习题 11。）
+
+\item 用上一习题证明 \(\mathbb{Q}\) 的每个二次扩张都包含在某个分圆扩张中（Kronecker--Weber 定理的一个特殊情形）。
+
+\item 证明多项式 \(x^n+px+q\) 的判别式 \(D\) 由公式
+\[
+(-1)^{\frac{n(n-1)}{2}}n^nq^{n-1}+(-1)^{\frac{(n-1)(n-2)}{2}}(n-1)^{n-1}p^n
+\]
+给出。
+
+\item 证明多项式 \(x^n+nx^{n-1}+n(n-1)x^{n-2}+\cdots+n(n-1)\cdots(3)(2)x+n!\) 的判别式是
+\[
+(-1)^{\frac{n(n-1)}{2}}(n!)^n.
+\]
+
+\noindent 下面习题 37 到 43 概述把对称函数写成初等对称函数的多项式的两种方法。设 \(f(x_1, \ldots, x_n)\) 是 \(x_1, \ldots, x_n\) 上的对称多项式。回忆单项式 \(Ax_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}\)（\(a_i \geq 0\)）的次数（有时称为\textbf{权}）是 \(a_1+a_2+\cdots+a_n\)，且若每个单项式都有相同的次数 \(m\)，则称多项式是\textbf{齐次}的（次数为 \(m\)）。
+
+\item （a）证明每个多项式 \(f(x_1, \ldots, x_n)\) 都可以写成齐次多项式之和。证明若 \(f(x_1, \ldots, x_n)\) 是对称的，则每个这样的齐次多项式也是对称的。
+
+（b）证明初等对称函数中的单项式 \(Bs_1^{a_1}s_2^{a_2}\cdots s_n^{a_n}\) 是 \(x_1, x_2, \ldots, x_n\) 的次数为 \(a_1+2a_2+\cdots+na_n\) 的齐次多项式。
+
+因此，在把 \(f(x_1, \ldots, x_n)\) 写成对称函数的多项式时，只需假设 \(f(x_1, \ldots, x_n)\) 是齐次的。
+
+\noindent 回忆第 9.6 节定义的字典序单项序 \(x_1 > x_2 > \cdots > x_n\)：指数为 \((a_1, a_2, \ldots, a_n)\) 的非零单项式项排在指数为 \((b_1, b_2, \ldots, b_n)\) 的非零单项式项之前，若这两个指数 \(n\) 元组的初始分量相同，且第一个不同的分量满足 \(a_i > b_i\). 若 \(f(x_1, \ldots, x_n)\) 含有单项式 \(Ax_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}\)，则由于 \(f(x_1, \ldots, x_n)\) 是对称的，它也含有所有置换后的单项式。在这些单项式中取字典序最大者，它满足 \(a_1 \geq a_2 \geq \cdots \geq a_n \geq 0\).
+
+\item （a）证明初等对称函数中的单项式 \(As_1^{a_1-a_2}s_2^{a_2-a_3}\cdots s_n^{a_n}\) 有相同的字典序首项。
+
+（b）证明从 \(f(x)\) 中减去 \(As_1^{a_1-a_2}s_2^{a_2-a_3}\cdots s_n^{a_n}\) 后，得到 0，或者一个同次数的对称多项式，其各项在字典序下都小于 \(f(x_1, \ldots, x_n)\) 中的各项。
+
+（c）证明这一过程（按字典序排序、取字典序最大项、减去初等对称函数中相应的单项式）的迭代会终止，从而把 \(f(x_1, \ldots, x_n)\) 表示为初等对称函数的多项式。
+
+\item 用习题 38 中描述的算法证明：在 \(x_1, \ldots, x_n\) 上对称的多项式 \(f(x_1, \ldots, x_n)\) 可以唯一地表示为初等对称函数的多项式。
+
+\item 用习题 38 的方法把下列每个对称函数表示为初等对称函数的多项式：
+
+（a）\((x_1-x_2)^2\)；（b）\(x_1^2+x_2^2+x_3^2\)；（c）\(x_1^2x_2^2+x_1^2x_3^2+x_2^2x_3^2\).
+
+\item 用习题 38 的方法把 \(\sum_{i \neq j}x_i^2x_j\) 表示为初等对称函数的多项式。
+
+\noindent 我们现在知道对称多项式 \(f(x_1, \ldots, x_n)\) 可以唯一地写成初等对称函数的多项式。利用这一存在性与唯一性，我们可以描述另一种在计算上有用的方法，用来确定这个多项式中初等对称函数的系数。如同习题 37，我们可以假设 \(f(x_1, \ldots, x_n)\) 是次数为 \(M\) 的齐次多项式。设 \(N\) 为 \(f(x_1, \ldots, x_n)\) 中变量 \(x_1, \ldots, x_n\) 的最高次数。
+
+（a）由约束条件 \(a_1+2a_2+\cdots+na_n = M\)、\(a_1+a_2+\cdots+a_n \leq N\) 确定 \(f(x_1, \ldots, x_n)\) 中可能出现的所有单项式 \(A_is_1^{a_1}s_2^{a_2}\cdots s_n^{a_n}\).
+
+（b）由于 \(f(x_1, \ldots, x_n) = \sum_iA_is_1^{a_1}s_2^{a_2}\cdots s_n^{a_n}\) 是多项式恒等式，它对 \(x_1, \ldots, x_n\) 的任意取值代入都成立。每次代入都给出关于系数 \(A_i\) 的一个线性关系，因此足够多次代入即可确定 \(A_i\).
+
+\item 证明函数 \((x_1+x_2-x_3-x_4)(x_1+x_3-x_2-x_4)(x_1+x_4-x_2-x_3)\) 在 \(x_1, x_2, x_3, x_4\) 上对称，并用上面描述的方法证明它可以表示为初等对称函数的多项式
+\[
+s_1^3-4s_1s_2+8s_3.
+\]
+
+\item 把下列每个式子用初等对称函数表示：
+
+（a）\(\sum_{i \neq j}x_i^2x_j\)；（b）\(\sum_{i,j,k\text{ 互异}}x_i^2x_jx_k\)；（c）\(\sum_{i,j,k\text{ 互异}}x_i^2x_jx_k^2\).
+
+\item 设 \(a_1, a_2, a_3, a_4\) 是 \(\mathbb{Q}\) 上四次多项式 \(f(x)\) 的根。证明量 \(a_1a_2+a_3a_4\)、\(a_1a_3+a_2a_4\)、\(a_1a_4+a_2a_3\) 被 \(f(x)\) 的伽罗瓦群置换。由此证明这三个元素是系数在 \(\mathbb{Q}\) 中的三次多项式的根（有时称为 \(f(x)\) 的\textbf{预解三次式}）。
+
+\item 若 \(f(x) = x^3+px+q \in \mathbb{Z}[x]\) 不可约，证明其判别式 \(D = -4p^3-27q^2\) 是不等于 \(0, \pm 1\) 的整数。
+
+\item 证明每个有限群都作为形如 \(F(x_1, x_2, \ldots, x_n)/F\) 的域扩张的伽罗瓦群出现。
+
+\item 设 \(F\) 是特征为 0 的域，其中每个三次多项式都有根。设 \(f(x)\) 是 \(F\) 上不可约的四次多项式，其判别式是 \(F\) 中的平方。确定 \(f(x)\) 的伽罗瓦群。
+
+\item 本习题确定多项式 \(f(x) = x^6-2x^3-2\) 在 \(\mathbb{Q}\) 上的分裂域 \(K\)（另见第 14.8 节习题 2）。
+
+（a）证明 \(f(x)\) 在 \(\mathbb{Q}\) 上不可约，其根是 \(1\pm\sqrt{3}\) 的三个立方根。
+
+（b）证明 \(K\) 包含 3 次单位根域 \(\mathbb{Q}(\sqrt{-3})\)，且包含 \(\mathbb{Q}(\sqrt{3})\)，从而包含双二次域 \(F = \mathbb{Q}(i, \sqrt{3})\). 把（a）中两个根相乘，证明 \(K\) 包含 \(\theta\)，并由此证明 \(K\) 是域 \(L = \mathbb{Q}(\theta, i, \sqrt{3})\) 的扩张。
+
+（c）证明 \([L:\mathbb{Q}] = 12\)，且 \(K\) 可由 \(L\) 添加 \(L\) 中某个元素的立方根得到，故 \([K:\mathbb{Q}] = 12\) 或 36.
+
+（d）证明若 \([K:\mathbb{Q}] = 12\)，则 \(K = \mathbb{Q}(\theta, i, \sqrt{3})\)，且 \(\operatorname{Gal}(K/\mathbb{Q})\) 同构于 2 阶循环群与 \(S_3\) 的直积。证明若 \([K:\mathbb{Q}] = 12\)，则 \(K\) 中有唯一的实三次子域，即 \(\mathbb{Q}(\theta)\).
+
+（e）把（a）中两个实根相除，证明 \(\sqrt{2+\sqrt{3}}\) 与 \(\sqrt{2-\sqrt{3}}\)（实根）都是 \(K\) 的元素。证明 \(a = \sqrt{2+\sqrt{3}}+\sqrt{2-\sqrt{3}}\) 是不可约三次方程 \(x^3-3x-4\) 的实根，该方程的判别式是 \(-2^23^4\). 由此证明 \(\mathbb{Q}(a)\) 的伽罗瓦闭包包含 \(\mathbb{Q}(i)\)，特别地 \(\mathbb{Q}(a) \neq \mathbb{Q}(\theta)\).
+
+（f）由（e）证明 \(G = \operatorname{Gal}(K/\mathbb{Q})\) 的阶为 36. 显式确定 \(G\) 的所有元素，并特别证明 \(G\) 同构于 \(S_3 \times S_3\).
+
+\item 证明 \(x^6-4x^3+1\) 在 \(\mathbb{Q}\) 上的伽罗瓦群同构于 12 阶二面体群。〔注意两个实根互为倒数。〕
+
+\item （\textbf{任意域上不可约三次多项式的伽罗瓦群判别法}）设 \(K\) 是域，\(f(x) = x^3+ax^2+bx+c \in K[x]\) 不可约，故 \(f(x)\) 在 \(K\) 上的伽罗瓦群是 \(S_3\) 或 \(A_3\).
+
+（a）证明 \(f(x)\) 的伽罗瓦群是 \(A_3\) 当且仅当二次多项式 \(g(x) = x^2+(ab-3c)x+(b^3+a^3c-6abc+9c^2)\) 在 \(K\) 中有根。〔若 \(\alpha, \beta, \gamma\) 是 \(f(x)\) 的根，证明伽罗瓦群是 \(A_3\) 当且仅当元素 \(\theta = \alpha\beta^2+\beta\gamma^2+\gamma\alpha^2\) 是 \(K\) 的元素，且 \(\theta\) 是 \(g(x)\) 的根。〕证明 \(g(x)\) 的判别式与 \(f(x)\) 的判别式相同。
+
+（b）（\(\operatorname{ch}(K) \neq 2\)）若 \(K\) 的特征不为 2，由（a）或直接由判别式的定义证明：\(f(x)\) 的伽罗瓦群是 \(A_3\) 当且仅当 \(f(x)\) 的判别式是 \(K\) 中的平方。
+
+（c）（\(\operatorname{ch}(K) = 2\)）若 \(K\) 的特征为 2，证明 \(f(x)\) 的判别式总是平方。证明可设 \(f(x)\) 具有形式 \(x^3+px+q\)，且 \(f(x)\) 的伽罗瓦群是 \(A_3\) 当且仅当二次式 \(x^2+qx+(p^3+q^2)\) 在 \(K\) 中有根（等价地，\((p^3+q^2)/q^2 \in K\) 属于 Artin--Schreier 映射 \(x \mapsto x^2-x\)（把 \(K\) 映到 \(K\)）的像）。
+
+（d）设 \(t\) 在 \(\mathbb{F}_2\) 上超越，\(K = \mathbb{F}_2(t)\). 证明多项式 \(x^3+t^2x+t^3\)、\(x^3+(t^2+t+1)x+(t^2+t+1)\) 与 \(x^3+(t^2+t+1)x+(t^3+t^2+t)\) 的伽罗瓦群为 \(A_3\)，而 \(x^3+t^2x+t\) 与 \(x^3+x+t\) 的伽罗瓦群为 \(S_3\).
+
+\item 本习题证明 \textbf{Sturm 定理}，它确定实系数多项式 \(f(x) \in \mathbb{R}[x]\) 在区间 \([a, b]\) 中实根的个数。\(f(x)\) 的重根是 \(f(x)\) 与其导数 \(f'(x)\) 的最大公因子的零点，因此为确定 \(f(x)\) 在 \([a, b]\) 中的实根，我们可以假设 \(f(x)\) 的根都是单根。
+
+对 \(f_0(x) = f(x)\) 与其导数 \(f_1(x) = f'(x)\) 施行欧几里得算法，每一步取余式的相反数，得到多项式序列 \(f(x), f'(x), f_2(x), \ldots, f_n(x)\)，满足
+\[
+f_{i-1}(x) = q_i(x)f_i(x)-f_{i+1}(x), \qquad i = 0, 1, \ldots, n-1,
+\]
+其中 \(f_n(x) \in \mathbb{R}\) 是一个非零常数。
+
+（a）证明相邻的多项式 \(f_i(x), f_{i+1}(x)\)（\(i = 0, 1, \ldots, n-1\)）没有公共零点。〔证明否则 \(f_{i+2}(c) = f_{i+3}(c) = \cdots = 0\)，导出矛盾。〕
+
+（b）若 \(f_i(c) = 0\)（\(i = 0, 1, \ldots, n-1\)），证明 \(f_{i-1}(c)\) 与 \(f_{i+1}(c)\) 这两个值中一个是严格负的、另一个是严格正的。
+
+对任意实数 \(a\)，用 \(V(a)\) 表示实数序列
+\[
+f(a), f'(a), f_2(a), \ldots, f_n(a)
+\]
+（称为 \textbf{Sturm 序列}）中符号变化的次数，忽略其中出现的 0（例如 \(-1, -2, 0, +3, -4\) 的符号为 \(--+-\)（忽略 0 后），故有 2 次符号变化，第一次从 \(-2\) 到 \(+3\)，第二次从 \(+3\) 到 \(-4\)）。
+
+（c）设 \(a < \beta\)，且 \(a\) 与 \(\beta\) 的 Sturm 序列中所有元素都非零。证明：除非对某个 \(a < c < \beta\) 与某个 \(i = 0, 1, \ldots, n-1\) 有 \(f_i(c) = 0\)，否则这两个 Sturm 序列中所有元素的符号都相同，特别地 \(V(a) = V(\beta)\).
+
+（d）若 \(f_j(c) = 0\)，证明存在包含 \(c\) 的充分小区间 \((a, \beta)\)，使 \(f_j(x)\) 在 \(a < x < \beta\) 中没有除 \(c\) 以外的零点。
+
+（e）若（d）中 \(j \geq 1\)，证明 \(f_{j-1}(a), f_j(a), f_{j+1}(a)\) 中符号变化的次数与 \(f_{j-1}(\beta), f_j(\beta), f_{j+1}(\beta)\) 中的相同。〔注意由（b）知 \(f_{j-1}(c)\) 与 \(f_{j+1}(c)\) 异号，且 \(f_{j-1}(x)\) 与 \(f_{j+1}(x)\) 在 \((a, \beta)\) 中不变号。〕
+
+（f）若（d）中 \(j = 0\)，证明 \(f(a), f'(a)\) 中符号变化的次数比 \(f(\beta), f'(\beta)\) 中的多 1.〔若 \(f'(c) > 0\) 则 \(f(x)\) 在 \(c\) 处递增，故 \(f(a) < 0\)、\(f(\beta) > 0\)，且 \(f'(x)\) 在 \((a, \beta)\) 中不变号，于是符号从 \(-+\) 变为 \(++\)。\(f'(c) < 0\) 时类似。〕
+
+（g）证明 \textbf{Sturm 定理}：若实系数多项式 \(f(x)\) 的所有实根都是单根，则在 \(f(a)\) 与 \(f(b)\) 都非零的区间 \([a, b]\) 中，\(f(x)\) 的实零点个数由 \(V(a)-V(b)\) 给出。〔用（c）、（e）、（f）说明：当 \(a\) 从 \(a\) 变到 \(b\) 时，符号变化次数 \(V(a)\) 保持不变，除非 \(a\) 经过 \(f(x)\) 的一个零点，此时它恰好减少 1.〕
+
+（h）设 \(f(x) = x^5+px+q \in \mathbb{R}[x]\) 的根都是单根。证明上面的多项式序列为 \(f(x)\)、\(5x^4+p\)、\((-4p/5)x+q\)、\(-D/(256p^4)\)，其中 \(D = 256p^5+3125q^4\) 是 \(f(x)\) 的判别式。由此证明：当 \(p > 0\) 时 \(f(x)\) 恰有一个实根；当 \(p < 0\) 时 \(f(x)\) 恰有 1 个或 3 个实根，取决于 \(D > 0\) 还是 \(D < 0\).〔例如，若 \(p < 0\) 且 \(D < 0\)，则在 \(-\infty\) 处符号为 \(-+-+\)，有 3 次符号变化，在 \(+\infty\) 处符号为 \(++++\)，没有符号变化。〕
+\end{enumerate}
+
+\section{可解扩张与根式扩张：五次方程的不可解性}
+
+本节我们研究用根式求多项式根的问题，即在加、减、乘、除以及开 \(n\) 次方这些代数运算的意义下求根。2 次多项式的求根公式是初等代数中熟悉的，下面我们将对 3 次与 4 次多项式的根导出类似的公式。然而对 5 次多项式我们将看到这样的公式是不可能的——这就是关于一般五次方程不可解的 \textbf{Abel 定理}。其原因相当简单：我们将证明多项式可用根式解当且仅当其伽罗瓦群是\textbf{可解群}（这也解释了「可解」这一术语），而当 \(n \geq 5\) 时群 \(S_n\) 不是可解群。
+
+我们先讨论单根式扩张，即由向域 \(F\) 添加元素 \(a \in F\) 的 \(n\) 次方根所得到的扩张。由于多项式 \(x^n-a\)（\(a \in F\)）的所有根相差 \(n\) 次单位根因子，添加其中一个根所得到的域是伽罗瓦扩张当且仅当这个域包含 \(n\) 次单位根。当基域 \(F\) 已含有适当的单位根时，单根式扩张的性质最好。对 \(a \in F\)，符号 \(\sqrt[n]{a}\) 将用来表示多项式 \(x^n-a \in F[x]\) 的任意一个根。
+
+\begin{definition}
+若扩张 \(K/F\) 是伽罗瓦扩张且其伽罗瓦群是循环群，则称它为\textbf{循环}扩张。
+\end{definition}
+
+\begin{proposition}\label{pro:14.36}
+设 \(F\) 是特征不整除 \(n\) 且含有 \(n\) 次单位根的域。则对 \(a \in F\)，扩张 \(F(\sqrt[n]{a})\) 是 \(F\) 上的循环扩张，其次数整除 \(n\).
+\end{proposition}
+
+\begin{proof}
+若 \(F\) 含有 \(n\) 次单位根，则扩张 \(K = F(\sqrt[n]{a})\) 是 \(F\) 上的伽罗瓦扩张，因为它是 \(x^n-a\) 的分裂域。对任意 \(\sigma \in \operatorname{Gal}(K/F)\)，\(\sigma(\sqrt[n]{a})\) 是这个多项式的另一个根，故 \(\sigma(\sqrt[n]{a}) = \zeta_\sigma\sqrt[n]{a}\)，其中 \(\zeta_\sigma\) 是某个 \(n\) 次单位根。这给出映射
+\[
+\operatorname{Gal}(K/F) \to \mu_n, \qquad \sigma \mapsto \zeta_\sigma,
+\]
+其中 \(\mu_n\) 表示 \(n\) 次单位根群。由于 \(F\) 包含 \(\mu_n\)，每个 \(n\) 次单位根都被 \(\operatorname{Gal}(K/F)\) 的每个元素固定。因此
+\[
+\sigma\tau(\sqrt[n]{a}) = \sigma(\zeta_\tau\sqrt[n]{a}) = \zeta_\tau\sigma(\sqrt[n]{a}) = \zeta_\tau\zeta_\sigma\sqrt[n]{a},
+\]
+这表明 \(\zeta_{\sigma\tau} = \zeta_\tau\zeta_\sigma = \zeta_\sigma\zeta_\tau\)，故上述映射是同态。其核恰由固定 \(\sqrt[n]{a}\) 的自同构组成，即恒等映射。这给出 \(\operatorname{Gal}(K/F)\) 到 \(n\) 阶循环群 \(\mu_n\) 的单射，命题得证。
+\end{proof}
+
+现在设 \(K\) 是特征不整除 \(n\) 且含有 \(n\) 次单位根的域 \(F\) 上的 \(n\) 次循环扩张。设 \(\sigma\) 是循环群 \(\operatorname{Gal}(K/F)\) 的一个生成元。
+
+\begin{definition}
+对 \(a \in K\) 与任意 \(n\) 次单位根 \(\zeta\)，定义 \textbf{Lagrange 预解式} \((a,\zeta) \in K\) 为
+\[
+(a,\zeta) = a+\zeta\sigma(a)+\zeta^2\sigma^2(a)+\cdots+\zeta^{n-1}\sigma^{n-1}(a).
+\]
+\end{definition}
+
+若对 \((a,\zeta)\) 施加自同构 \(\sigma\)，得到
+\[
+\sigma(a,\zeta) = \sigma(a)+\zeta\sigma^2(a)+\zeta^2\sigma^3(a)+\cdots+\zeta^{n-1}\sigma^n(a).
+\]
+由于 \(\zeta\) 是基域 \(F\) 的元素，它被 \(\sigma\) 固定。又 \(\zeta^n = 1\) 且 \(\sigma^n = 1\)（在 \(\operatorname{Gal}(K/F)\) 中），故上式可写成
+\[
+\sigma(a,\zeta) = \sigma(a)+\zeta\sigma^2(a)+\zeta^2\sigma^3(a)+\cdots+\zeta^{n-1}a = \zeta^{-1}\left(a+\zeta\sigma(a)+\zeta^2\sigma^2(a)+\cdots+\zeta^{n-1}\sigma^{n-1}(a)\right) = \zeta^{-1}(a,\zeta). \tag{14.19}
+\]
+由此可知
+\[
+\sigma(a,\zeta)^n = (\zeta^{-1})^n(a,\zeta)^n = (a,\zeta)^n,
+\]
+故 \((a,\zeta)^n\) 被 \(\operatorname{Gal}(K/F)\) 固定，从而对任意 \(a \in K\) 都是 \(F\) 的元素。
+
+设 \(\zeta\) 是本原 \(n\) 次单位根。由自同构 \(1, \sigma, \ldots, \sigma^{n-1}\) 的线性无关性（定理 \ref{thm:14.7}），存在 \(a \in K\) 使 \((a,\zeta) \neq 0\). 迭代 (19) 我们得到
+\[
+\sigma^i(a,\zeta) = \zeta^{-i}(a,\zeta), \qquad i = 0, 1, \ldots,
+\]
+由此可知对任何 \(i < n\)，\(\sigma^i\) 都不固定 \((a,\zeta)\). 因此这个元素不可能落在 \(K\) 的任何真子域中，故 \(K = F((a,\zeta))\). 由于上面已证明 \((a,\zeta)^n = a \in F\)，我们有 \(F(\sqrt[n]{a}) = F((a,\zeta)) = K\). 这就证明了命题 \ref{pro:14.36} 的下述逆命题。
+
+\begin{proposition}\label{pro:14.37}
+特征不整除 \(n\) 且含有 \(n\) 次单位根的域 \(F\) 上的任意 \(n\) 次循环扩张都具有形式 \(F(\sqrt[n]{a})\)，其中 \(a \in F\).
+\end{proposition}
+
+\begin{remark}
+上面两个命题构成了所谓 \textbf{Kummer 理论}的一部分。若群 \(G\) 的每个元素 \(g\) 都满足 \(g^n = 1\)，则称 \(G\) 的\textbf{指数}为 \(n\). 设 \(F\) 是特征不整除 \(n\) 且含有 \(n\) 次单位根的域。若取元素 \(a_1, \ldots, a_k \in F^\times\)，则如命题 \ref{pro:14.36} 那样可以看出扩张
+\[
+F\left(\sqrt[n]{a_1}, \sqrt[n]{a_2}, \ldots, \sqrt[n]{a_k}\right) \tag{14.20}
+\]
+是 \(F\) 的阿贝尔扩张，其伽罗瓦群的指数为 \(n\). 反之，任何指数为 \(n\) 的阿贝尔扩张都具有这种形式。
+
+用 \((F^\times)^n\) 表示乘法群 \(F^\times\) 中由 \(F\) 的非零元素的 \(n\) 次幂组成的子群。商群 \(F^\times/(F^\times)^n\) 是指数为 \(n\) 的阿贝尔群。(20) 中扩张的伽罗瓦群同构于 \(F^\times/(F^\times)^n\) 中由 \(a_1, \ldots, a_k\) 生成的群，且 (20) 中两个扩张相等当且仅当它们在 \(F^\times/(F^\times)^n\) 中对应的群相等。
+
+因此，\(F^\times/(F^\times)^n\) 的（有限生成）子群分类了含 \(n\) 次单位根（且特征不整除 \(n\)）的域上指数为 \(n\) 的阿贝尔扩张。这样的扩张称为 \textbf{Kummer 扩张}。这些结果推广了上面 \(k = 1\) 的情形，并可用类似方法证明。
+\end{remark}
+
+为简单起见，下面我们考虑基域 \(F\) 特征为 0 的情形。如同前面的命题，这些结果对特征不整除所需根的阶的域也成立。
+
+\begin{definition}
+（1）在 \(F\) 上代数的元素 \(a\) 称为\textbf{可用根式表示}或\textbf{可用根式求解}，若 \(a\) 是某个域 \(K\) 的元素，而 \(K\) 可以由一串单根式扩张得到
+\[
+F = K_0 \subset K_1 \subset \cdots \subset K_i \subset K_{i+1} \subset \cdots \subset K_s = K, \tag{14.21}
+\]
+其中 \(K_{i+1} = K_i(\sqrt[n_i]{a_i})\)，\(a_i \in K_i\)（\(i = 0, 1, \ldots, s-1\)）。这里 \(\sqrt[n_i]{a_i}\) 表示多项式 \(x^{n_i}-a_i\) 的某个根。这样的域 \(K\) 称为 \(F\) 的\textbf{根扩张}。
+
+（2）多项式 \(f(x) \in F[x]\) 称为\textbf{可用根式解}，若它的所有根都可用根式表示。
+\end{definition}
+
+这给出了「\(a\) 由逐次代数运算（加、减、乘、除）与逐次开方得到」这一直观概念的精确含义。例如，第 5 节末尾遇到（用于构造正 17 边形）的元素可以用根式表示，并包含在域 \(K_4\) 中，其中
+\[
+\begin{aligned}
+K_0 &= \mathbb{Q},\\
+K_1 &= K_0(\sqrt{a_0}), & a_0 &= 17,\\
+K_2 &= K_1(\sqrt{a_1}), & a_1 &= 2(17-\sqrt{17}),\\
+K_3 &= K_2(\sqrt{a_2}), & a_2 &= 2(17+\sqrt{17}),\\
+K_4 &= K_3(\sqrt{a_3}), & a_3 &= 17+3\sqrt{17}-\sqrt{34-2\sqrt{17}}-2\sqrt{34+2\sqrt{17}}.
+\end{aligned}
+\]
+这些扩张中的每一个都是根式扩张。不需要除平方根以外的根，这反映了正 17 边形可用直尺与圆规构造这一事实。
+
+在考虑根式扩张时总可以添加单位根，因为按定义单位根就是根式。这一点很有用，因为此时循环扩张就成为根式扩张，反之亦然。特别地有：
+
+\begin{lemma}\label{lem:14.38}
+若 \(a\) 包含在 (21) 中的根扩张 \(K\) 中，则 \(a\) 包含在 \(F\) 上的某个根扩张中，该扩张在 \(F\) 上是伽罗瓦的，并且其中每个扩张 \(K_{i+1}/K_i\) 都是循环的。
+\end{lemma}
+
+\begin{proof}
+设 \(L\) 是 \(K\) 在 \(F\) 上的伽罗瓦闭包。对任意 \(\sigma \in \operatorname{Gal}(L/F)\)，有子域链
+\[
+F = \sigma K_0 \subset \sigma K_1 \subset \cdots \subset \sigma K_i \subset \sigma K_{i+1} \subset \cdots \subset \sigma K_s = \sigma K,
+\]
+其中 \(\sigma K_{i+1}/\sigma K_i\) 仍是单根式扩张（因为它由元素 \(\sigma(\sqrt[n_i]{a_i})\) 生成，而后者是 \(\sigma(K_i)\) 上方程 \(x^{n_i}-\sigma(a_i)\) 的根）。容易看出两个根扩张的合成仍是根扩张（若 \(K'\) 是另一个根扩张，其子域为 \(K'_j\)，先取 \(K_1\) 与 \(K'_0\) 的合成，再与 \(K'_1\) 合成，如此继续，则过程中每个单独的扩张都是单根式扩张）。由此可知，所有共轭域 \(\sigma(K)\)（\(\sigma \in \operatorname{Gal}(L/F)\)）的合成仍是根扩张。由于这个域恰好是 \(L\)，我们看到 \(a\) 包含在一个伽罗瓦根扩张中。
+
+现在我们向 \(F\) 添加伽罗瓦根扩张 \(K/F\) 中各单根式扩张的根 \(\sqrt[n_i]{a_i}\) 的 \(n_i\) 次单位根，得到域 \(F'\)，然后取 \(F'\) 与根扩张的合成：
+\[
+F \subset F' = F'K_0 \subset F'K_1 \subset \cdots \subset F'K_i \subset F'K_{i+1} \subset \cdots \subset F'K_s = F'K.
+\]
+域 \(F'K\) 是 \(F\) 的伽罗瓦扩张，因为它是两个伽罗瓦扩张的合成。从 \(F\) 到 \(F' = F'K_0\) 的扩张可以给出一串子域，使其中每个单独的扩张都是循环的（对任何阿贝尔扩张这都是对的）。每个扩张 \(F'K_{i+1}/F'K_i\) 是单根式扩张，且由于现在基域中已有适当的单位根，由命题 \ref{pro:14.36} 其中每个从 \(F'\) 出发的扩张都是循环扩张。故 \(F'K/F\) 是 \(F\) 上的一个伽罗瓦根扩张，且中间扩张都是循环的，证明完毕。
+\end{proof}
+
+回忆第 3.4 节（另见第 6.1 节）：有限群 \(G\) 称为\textbf{可解}的，若存在子群链
+\[
+1 = G_s \unlhd G_{s-1} \unlhd \cdots \unlhd G_{i+1} \unlhd G_i \unlhd \cdots \unlhd G_0 = G \tag{14.22}
+\]
+使 \(G_i/G_{i+1}\) 是循环群（\(i = 0, 1, \ldots, s-1\)）。我们已经证明：可解群的子群与商群是可解的；且若 \(H \unlhd G\) 而 \(H\) 与 \(G/H\) 都可解，则 \(G\) 可解。
+
+下面我们证明 Galois 关于「用根式求解多项式根」与「多项式的伽罗瓦群」之间的基本联系。我们仍在特征为 0 的域 \(F\) 上工作，但容易看出证明对任何特征不整除伽罗瓦群的阶或所涉根式的阶的域都成立。
+
+\begin{theorem}\label{thm:14.39}
+多项式 \(f(x)\) 可用根式解，当且仅当其伽罗瓦群是可解群。
+\end{theorem}
+
+\begin{proof}
+先设 \(f(x)\) 可用根式解。则 \(f(x)\) 的每个根都包含在引理中所描述的那类扩张中。由命题 \ref{pro:14.21}，这种扩张的合成 \(L\) 仍是同类型的。设 \(G_i\) 是对应于子域 \(K_i\) 的子群（\(i = 0, 1, \ldots, s-1\)）。由于
+\[
+G_i/G_{i+1} \cong \operatorname{Gal}(K_{i+1}/K_i) \quad \text{是循环群},\qquad i = 0, 1, \ldots, s-1,
+\]
+可知伽罗瓦群 \(G = \operatorname{Gal}(L/F)\) 是可解群。域 \(L\) 包含 \(f(x)\) 的分裂域，故 \(f(x)\) 的伽罗瓦群是可解群 \(G\) 的商群，从而是可解的。
+
+反之，设 \(f(x)\) 的伽罗瓦群 \(G\) 是可解群，\(K\) 是 \(f(x)\) 的分裂域。取 (22) 中 \(G\) 的子群链的不动域，得到链
+\[
+F = K_0 \subset K_1 \subset \cdots \subset K_i \subset K_{i+1} \subset \cdots \subset K_s = K,
+\]
+其中 \(K_{i+1}/K_i\) 是次数为 \(n_i\) 的循环扩张（\(i = 0, 1, \ldots, s-1\)）。设 \(F'\) 是 \(F\) 上所有阶为 \(n_i\)（\(i = 0, 1, \ldots, s-1\)）的单位根的分圆域，并作合成域 \(K'_i = F'K_i\). 我们得到扩张序列
+\[
+F \subset F' = F'K_0 \subset F'K_1 \subset \cdots \subset F'K_i \subset F'K_{i+1} \subset \cdots \subset F'K_s = F'K.
+\]
+扩张 \(F'K_{i+1}/F'K_i\) 是次数整除 \(n_i\) 的循环扩张（\(i = 0, 1, \ldots, s-1\)，由命题 \ref{pro:14.19}）。由于现在基域中已有适当的单位根，由命题 \ref{pro:14.37} 其中每个循环扩张都是单根式扩张。于是 \(f(x)\) 的每个根都包含在根扩张 \(F'K\) 中，故 \(f(x)\) 可用根式解。
+\end{proof}
+
+\begin{corollary}\label{cor:14.40}
+当 \(n \geq 5\) 时，一般的 \(n\) 次方程不能用根式解。
+\end{corollary}
+
+\begin{proof}
+当 \(n \geq 5\) 时，如我们在第 4 章所证明的，群 \(S_n\) 不是可解群。由定理 \ref{thm:14.32} 与定理 \ref{thm:14.39} 立即得到推论。
+\end{proof}
+
+这个推论表明，对 5 次多项式的根，不存在类似 2 次多项式求根公式那样的根式公式。为了给出 \(\mathbb{Q}\) 上一个具体的 5 次多项式的例子，说明其根不能用根式表示，我们必须证明一个有理系数 5 次多项式以 \(S_5\)（或 \(A_5\)，它也不可解）为伽罗瓦群（另见习题 21，那里给出五次方程可解性的判别法）。
+
+\begin{example}
+考虑多项式 \(f(x) = x^5-6x+3 \in \mathbb{Q}[x]\). 这个多项式不可约，因为它在 3 处是 Eisenstein 的。因此这个多项式的分裂域 \(K\) 的次数被 5 整除，因为向 \(\mathbb{Q}\) 添加 \(f(x)\) 的一个根生成 5 次扩张。故伽罗瓦群 \(G\) 是 \(S_5\) 中阶被 5 整除的子群，从而含有 5 阶元素。\(S_5\) 中唯一的 5 阶元素是 5-轮换，故 \(G\) 含有一个 5-轮换。
+
+由于 \(f(-2) = -17\)、\(f(0) = 3\)、\(f(1) = -2\)、\(f(2) = 23\)，我们看到 \(f(x)\) 在区间 \((-2, 0)\)、\((0, 1)\)、\((1, 2)\) 中各有一个实根。由中值定理，若有 4 个实根，则导数 \(f'(x) = 5x^4-6\) 将至少有 3 个实零点，而这是不可能的。故这些就是全部的实根。（由 Descartes 符号法则也容易得到这一点。）由代数基本定理，\(f(x)\) 在 \(\mathbb{C}\) 中有 5 个根。故 \(f(x)\) 有两个非实的复根。设 \(\tau\) 表示 \(\mathbb{C}\) 中的复共轭自同构。由于 \(f(x)\) 的系数是实数，\(\tau\) 必交换这两个复根（它们不是实的，故不被固定）。因此复共轭在 \(K\) 上的限制固定 \(f(x)\) 的三个根而交换另外两个。作为 \(G\) 的元素，\(\tau|_K\) 是一个对换。
+
+容易验证任意一个 5-轮换与任意一个对换生成整个 \(S_5\). 故 \(G = S_5\)，因此 \(x^5-6x+3\) 的根不能用根式表示。
+\end{example}
+
+正如这个例子所表明的，通过理解 \(G\) 中自同构（看作 \(S_n\) 的子群）的轮换型，可以获得关于伽罗瓦群的大量信息。在实际中这是确定 5 次多项式伽罗瓦群的最有效方法（当然，次数越大越困难，仅因为 \(S_n\) 的可能子群要多得多）。我们在下一节描述这一方法。
+
+由定理 \ref{thm:14.39}，任何次数 \(n \leq 4\) 的多项式都可用根式解，因为这些 \(n\) 对应的 \(S_n\) 是可解群。当 \(n = 2\) 时这就是熟悉的二次求根公式。当 \(n = 3\) 时公式称为 \textbf{Cardano 公式}（以 Geronimo Cardano（1501--1576）命名），而 \(n = 4\) 的公式可以化归到它。这些公式对任意特征 \(\neq 2, 3\) 的域 \(F\) 都成立，这两个特征整除必要根式的阶以及可能的伽罗瓦群（它们是 \(S_3\) 与 \(S_4\) 的子群）的阶。为简单起见，我们在 \(\mathbb{Q}\) 上导出这些公式。
+
+\noindent\textbf{用根式解三次方程：Cardano 公式}
+
+由定理 \ref{thm:14.39} 的证明，以及 \(S_3\) 如 (22) 那样的合成列 \(1 \unlhd A_3 \unlhd S_3\)，我们应当预期三次方程
+\[
+f(x) = x^3+ax^2+bx+c
+\]
+（等价地，在代换 \(x = y-a/3\) 下，
+\[
+g(y) = y^3+py+q,
+\]
+其中
+\[
+p = \frac{1}{3}(3b-a^2), \qquad q = \frac{1}{27}(2a^3-9ab+27c)
+\]
+）
+的解涉及添加 3 次单位根，以及构造涉及这些单位根的 Lagrange 预解式。
+
+设 \(\rho\) 表示本原 3 次单位根，故 \(\rho^2+\rho+1 = 0\). 设 \(g(y)\) 的根为 \(\alpha, \beta, \gamma\)，故
+\[
+\alpha+\beta+\gamma = 0
+\]
+（这正是把 \(f(x)\) 换成 \(g(x)\) 的原因之一）。在域 \(\mathbb{Q}(\sqrt{D})\) 上（\(D\) 是上一节算出的判别式），\(g(y)\) 的伽罗瓦群是 \(A_3\)，即 3 阶循环群。若我们添加 \(\rho\)，则这个扩张是 3 次根式扩张，其生成元由 Lagrange 预解式给出，正如命题 \ref{pro:14.37} 的证明中那样。因此考虑元素
+\[
+(a, 1) = \alpha+\beta+\gamma = 0, \qquad e_1 = (\alpha,\rho) = \alpha+\rho\beta+\rho^2\gamma, \qquad e_2 = (\alpha,\rho^2) = \alpha+\rho^2\beta+\rho\gamma.
+\]
+注意这些预解式之和是
+\[
+e_1+e_2 = 3\alpha \tag{14.23}
+\]
+因为 \(1+\rho+\rho^2 = 0\). 类似地
+\[
+\rho e_1+\rho^2e_2 = 3\beta, \qquad \rho^2e_1+\rho e_2 = 3\gamma. \tag{14.23′}
+\]
+我们还在命题 \ref{pro:14.37} 之前一般地证明了这些预解式的立方必属于 \(\mathbb{Q}(\sqrt{D}, \rho)\). 展开 \(e_1^3\) 我们得到
+\[
+e_1^3 = \alpha^3+\beta^3+\gamma^3+3\rho(\alpha^2\beta+\beta^2\gamma+\alpha\gamma^2)+3\rho^2(\alpha\beta^2+\beta\gamma^2+\alpha^2\gamma)+6\alpha\beta\gamma. \tag{14.24}
+\]
+我们有
+\[
+\sqrt{D} = (\alpha-\beta)(\alpha-\gamma)(\beta-\gamma) = (\alpha^2\beta+\beta^2\gamma+\alpha\gamma^2)-(\alpha\beta^2+\beta\gamma^2+\alpha^2\gamma).
+\]
+利用这个等式我们看到 (24) 可以写成
+\[
+e_1^3 = \alpha^3+\beta^3+\gamma^3+3\rho\left[\frac{1}{2}(S+\sqrt{D})\right]+3\rho^2\left[\frac{1}{2}(S-\sqrt{D})\right]+6\alpha\beta\gamma \tag{14.24′}
+\]
+为简单起见我们用 \(S\) 记表达式
+\[
+S = (\alpha^2\beta+\beta^2\gamma+\alpha\gamma^2)+(\alpha\beta^2+\beta\gamma^2+\alpha^2\gamma).
+\]
+由于 \(S\) 在根上是对称的，(24′) 中每个表达式都是 \(\alpha, \beta, \gamma\) 的对称多项式，从而是初等对称函数 \(s_1 = 0\)、\(s_2 = p\)、\(s_3 = -q\) 的多项式。经过简短计算可得 \(S = 3q\)（同时 \(\alpha^3+\beta^3+\gamma^3 = -3q\)），于是由 (24′) 得到（利用 \(\rho+\rho^2 = -1\) 与 \(\rho-\rho^2 = \sqrt{-3}\)）
+\[
+e_1^3 = -\frac{27}{2}q+\frac{3}{2}\sqrt{-3D}. \tag{14.25}
+\]
+类似地可得
+\[
+e_2^3 = -\frac{27}{2}q-\frac{3}{2}\sqrt{-3D}. \tag{14.25′}
+\]
+
+方程 (25) 与 (23) 基本上给出了三次方程的解法。不过还剩一个小问题：从 (25) 中的表达式开立方得到 \(e_1\) 与 \(e_2\) 时有 3 种可能的立方根，这似乎会给出总共 9 个表达式。事实并非如此，因为 \(e_1\) 与 \(e_2\) 并不独立（添加其中一个就已给出包含所有根的伽罗瓦扩张）。与上面类似（但更简单）的计算表明
+\[
+e_1e_2 = -3p, \tag{14.26}
+\]
+这表明 \(e_1\) 的立方根的选取决定了 \(e_2\). 利用 \(D = -4p^3-27q^2\)，我们得到如下 Cardano 显式公式。
+
+令
+\[
+A = \sqrt[3]{-\frac{27}{2}q+\frac{3}{2}\sqrt{-3D}}, \qquad B = \sqrt[3]{-\frac{27}{2}q-\frac{3}{2}\sqrt{-3D}},
+\]
+其中立方根取得使 \(AB = -3p\). 则方程 \(y^3+py+q = 0\) 的根为
+\[
+\alpha = \frac{A+B}{3}, \qquad \beta = \frac{\rho A+\rho^2 B}{3}, \qquad \gamma = \frac{\rho^2A+\rho B}{3}, \tag{14.27}
+\]
+其中 \(\rho = \frac{-1+\sqrt{-3}}{2}\).
+
+\noindent\textbf{例}
+
+（1）考虑三次方程 \(x^3-x+1 = 0\). 这个三次方程的判别式是
+\[
+D = -4(-1)^3-27(1)^2 = -23,
+\]
+它不是有理数的平方，故这个多项式的伽罗瓦群是 \(S_3\). 代入上面的公式得
+\[
+A = \sqrt[3]{-\frac{27}{2}+\frac{3}{2}\sqrt{69}\,i}, \qquad B = \sqrt[3]{-\frac{27}{2}-\frac{3}{2}\sqrt{69}\,i},
+\]
+其中我们取 \(A\) 为实立方根，于是由 \(AB = -3p = 3\) 可知 \(B\) 也是实的。三次方程的根由 (27) 给出，我们看到有一个实根和两个（共轭的）复根（当然，不实际求根也可以确定这一点）。
+
+（2）考虑方程 \(x^3+x^2-2x-1 = 0\). 令 \(x = s-\frac{1}{3}\)，方程变为 \(s^3-\frac{7}{3}s-\frac{7}{27} = 0\). 两边乘以 27 以消去分母，并令 \(y = 3s\)，我们看到 \(y\) 满足三次方程
+\[
+y^3-21y-7 = 0.
+\]
+这个三次方程的判别式是
+\[
+D = -4(-21)^3-27(-7)^2 = 3672,
+\]
+表明这个（在 7 处 Eisenstein 的）三次方程的伽罗瓦群是 \(A_3\). 代入上面的公式得
+\[
+A = \sqrt[3]{\frac{7}{2}+\frac{21}{2}\sqrt{-3}}, \qquad B = \sqrt[3]{\frac{7}{2}-\frac{21}{2}\sqrt{-3}},
+\]
+而我们的三次方程的根可以用上面的公式由 \(A\) 与 \(B\) 表示。这个三次方程来自试图用根式表示本原 7 次单位根 \(\zeta_7\)，类似于小阶单位根的显式公式（参见习题）。
+
+注意在这个情形中我们有 \(g(-5) = -27\)、\(g(-1) = 13\)、\(g(0) = -7\)、\(g(5) = 13\)，故这些根是复数的共轭之和。我们将在后面看到这是必要的，即不可能只用涉及实数的根式求解这些实根。
+
+系数为有理数的三次方程或者有一个实根和两个复共轭虚根，或者有三个实根。这两种情形可以由判别式的符号区分：
+
+假设第一种情形中根为 \(a\) 与 \(b \pm ic\)，其中 \(a, b, c\) 是实数且 \(c \neq 0\). 则
+\[
+\sqrt{D} = [a-(b+ic)][a-(b-ic)][(b+ic)-(b-ic)] = 2ic\left[(a-b)^2+c^2\right]
+\]
+是纯虚数，故判别式 \(D\) 是负的。于是上面 \(A\) 与 \(B\) 的公式中我们可以取二者都是实数。此时 (27) 中的第一个根是实的，另外两个是复共轭的。
+
+若三个根都是实根，则显然 \(\sqrt{D}\) 是实数，故 \(D \geq 0\) 是非负实数。若 \(D = 0\) 则三次方程有重根。对 \(D > 0\)（有时称为 \textbf{casus irreducibilis}（不可约情形）），根的公式涉及非实数的根式，如例 2 中那样。下面我们证明对不可约三次方程这是必要的。
+
+习题概述了下面这个推广的证明：若不可约多项式 \(f(x) \in \mathbb{Q}[x]\) 的所有根都是实数，且其中一个根可以用实根式表示，则 \(f(x)\) 的次数是 2 的幂，\(f(x)\) 的伽罗瓦群是 2-群，且 \(f(x)\) 的根可以用直尺与圆规构造。
+
+假设不可约三次方程 \(f(x)\) 有三个实根，并且可以用只涉及实数的根式表示其中一个根。则这个三次方程的分裂域将包含在根扩张
+\[
+\mathbb{Q} = K_0 \subset K_1 = \mathbb{Q}(\sqrt{D}) \subset \cdots \subset K_i \subset K_{i+1} \subset \cdots \subset K_s = K
+\]
+中，其中每个域 \(K_i\)（\(i = 0, 1, \ldots, s\)）都包含在实数 \(\mathbb{R}\) 中，且 \(s \geq 2\)，因为二次扩张 \(\mathbb{Q}(\sqrt{D})\) 不能包含不可约三次方程的根。我们已经用 \(\mathbb{Q}(\sqrt{D})\) 开始这个根扩张，因为在这个域上多项式的伽罗瓦群是 3 次循环群。
+
+注意到对任何域 \(F\)，扩张 \(F(\sqrt[n]{a})\) 都可以由两个更小的单根式扩张得到：令 \(F_1 = F(\sqrt[p]{a})\)（\(p \mid n\)），并令 \(b = \sqrt[p]{a} \in F_1\)，于是 \(F(\sqrt[n]{a}) = F_1(\sqrt[n/p]{b})\). 因此我们总可以假设根式扩张具有形式 \(F(\sqrt[p]{a})\)，其中 \(p\) 是素数。
+
+设 \(F\) 是实数域 \(\mathbb{R}\) 的子域，\(a \in F\). 设 \(p\) 是素数，\(\sqrt[p]{a}\) 表示 \(a\) 的实 \(p\) 次根。则 \([F(\sqrt[p]{a}):F]\) 必为 1 或 \(p\)：\(\sqrt[p]{a}\) 在 \(F\) 上的共轭都与它相差一个 \(p\) 次单位根因子，故 \([F(\sqrt[p]{a}):F]\) 整除 \(p\). 特别地，若 \(\sqrt[p]{a}\) 的极小多项式次数 \(d \neq p\)，则 \(d = 1\)，即 \(\sqrt[p]{a} \in F\).
+
+因此对于上面的根式扩张，我们可以假设 \([K_{i+1}:K_i]\) 是素数 \(p_i\)，且 \(K_{i+1} = K_i(\sqrt[p_i]{a_i})\)，其中 \(a_i \in K_i\)（\(i = 0, 1, \ldots, s-1\)）。换句话说，原来的实根式扩张塔可以细化为每个相继的根式扩张都有素数次的塔。
+
+若任何包含 \(\sqrt{D}\) 的域含有 \(f(x)\) 的一个根，则它含有 \(f(x)\) 的分裂域，从而含有三次方程的所有根。我们假设 \(s\) 取得使 \(K_{s-1}\) 不含三次方程的任何根。
+
+考虑扩张 \(K_s/K_{s-1}\). 域 \(K_s\) 含有三次方程 \(f(x)\) 的所有根，而域 \(K_{s-1}\) 不含这些根中的任何一个。由此 \(f(x)\) 在 \(K_{s-1}\) 上不可约，故 \([K_s:K_{s-1}]\) 被 3 整除。由于我们已化归到扩张次数为素数的情形，可知扩张次数恰为 3，且扩张 \(K_s/K_{s-1}\) 是伽罗瓦扩张（作为 \(f(x)\) 在 \(K_{s-1}\) 上的分裂域）。又 \(K_s = K_{s-1}(\sqrt[p]{a})\)（\(a \in K_{s-1}\)），故伽罗瓦扩张 \(K_s\) 还必须含有 \(a\) 的另外两个立方根（因为 \(p = 3\)）。这意味着 \(K_s\) 含有一个本原 3 次单位根。这与 \(K_s\) 是 \(\mathbb{R}\) 的子域相矛盾，说明不可能只用实根式表示这个三次方程的根。
+
+\noindent\textbf{用根式解四次方程}
+
+现在考虑四次多项式
+\[
+f(x) = x^4+ax^3+bx^2+cx+d
+\]
+的情形，它在代换 \(x = y-a/4\) 下变为四次多项式
+\[
+g(y) = y^4+py^2+qy+r
+\]
+其中
+\[
+p = \frac{1}{8}(-3a^2+8b), \qquad q = -\frac{1}{8}(a^3-4ab+8c), \qquad r = \frac{1}{256}(-3a^4+16a^2b-64ac+256d).
+\]
+设 \(g(y)\) 的根为 \(\alpha_1, \alpha_2, \alpha_3, \alpha_4\). 上一节对这个四次多项式引入的预解三次式是
+\[
+h(x) = x^3-2px^2+(p^2-4r)x+q^2,
+\]
+它的根为
+\[
+\theta_1 = (\alpha_1+\alpha_2)(\alpha_3+\alpha_4), \qquad \theta_2 = (\alpha_1+\alpha_3)(\alpha_2+\alpha_4), \qquad \theta_3 = (\alpha_1+\alpha_4)(\alpha_2+\alpha_3).
+\]
+\(f(x)\)（或 \(g(y)\)）的分裂域在预解三次式 \(h(x)\) 的分裂域上的伽罗瓦群是 Klein 四元群。这样的扩张是双二次的，这意味着可以用预解三次式的根 \(\theta_1, \theta_2, \theta_3\) 的平方根来表示根 \(\alpha_1, \alpha_2, \alpha_3, \alpha_4\). 此时显然有
+\[
+(\alpha_1+\alpha_2)(\alpha_3+\alpha_4) = \theta_1, \qquad (\alpha_1+\alpha_2)+(\alpha_3+\alpha_4) = 0,
+\]
+由此得
+\[
+\alpha_1+\alpha_2 = \sqrt{\theta_1}, \qquad \alpha_3+\alpha_4 = -\sqrt{\theta_1}.
+\]
+类似地，
+\[
+\alpha_1+\alpha_3 = \sqrt{\theta_2}, \qquad \alpha_2+\alpha_4 = -\sqrt{\theta_2}, \qquad \alpha_1+\alpha_4 = \sqrt{\theta_3}, \qquad \alpha_2+\alpha_3 = -\sqrt{\theta_3}.
+\]
+容易算出 \(\sqrt{\theta_1}\sqrt{\theta_2}\sqrt{\theta_3} = -q\)，故三个平方根中两个的选取决定了第三个。由于 \(\alpha_1+\alpha_2+\alpha_3+\alpha_4 = 0\)，把上面左边的等式相加得到 \(2\alpha_1\)，类似地可以解出 \(g(y)\) 的其余根。我们得到
+\[
+2\alpha_1 = \sqrt{\theta_1}+\sqrt{\theta_2}+\sqrt{\theta_3}, \qquad 2\alpha_2 = \sqrt{\theta_1}-\sqrt{\theta_2}-\sqrt{\theta_3},
+\]
+\[
+2\alpha_3 = -\sqrt{\theta_1}+\sqrt{\theta_2}-\sqrt{\theta_3}, \qquad 2\alpha_4 = -\sqrt{\theta_1}-\sqrt{\theta_2}+\sqrt{\theta_3},
+\]
+这把四次方程的求解化归为求解相应的预解三次式。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 用 Cardano 公式解方程 \(x^3+x^2-2 = 0\). 特别证明这个方程有实根
+\[
+\frac{1}{3}\left(\sqrt[3]{26+15\sqrt{3}}+\sqrt[3]{26-15\sqrt{3}}-1\right).
+\]
+直接证明这个三次方程的根是 \(1, -1\pm i\). 并通过证明
+\[
+\sqrt[3]{26+15\sqrt{3}} = 2+\sqrt{3}, \qquad \sqrt[3]{26-15\sqrt{3}} = 2-\sqrt{3}
+\]
+来解释这一点，从而
+\[
+\sqrt[3]{26+15\sqrt{3}}+\sqrt[3]{26-15\sqrt{3}} = 4.
+\]
+
+\item 设 \(\zeta_7\) 是本原 7 次单位根，令 \(a = \zeta_7+\zeta_7^{-1}\).
+
+（a）证明 \(\zeta_7\) 是 \(\mathbb{Q}(a)\) 上二次多项式 \(z^2-az+1\) 的根。
+
+（b）利用 \(\zeta_7\) 的极小多项式证明 \(a\) 是三次多项式 \(x^3+x^2-2x-1\) 的根。
+
+（c）用（a）、（b）以及正文中（b）里三次方程的显式解，把 \(\zeta_7\) 用根式表示出来，类似于前面给出的其他小阶单位根的表达式。（这个表达式的复杂程度解释了为什么我们早先没有把 \(\zeta_7\) 列入单位根的显式根表中。）
+
+\item 设 \(F\) 是特征不等于 2 的域。给出并证明 \(a, \beta \in F\) 使 \(F(\sqrt{a}) = F(\sqrt{\beta})\) 的充要条件。用它判断是否有 \(\mathbb{Q}(\sqrt{1-\sqrt{2}}) = \mathbb{Q}(i, \sqrt{2})\).
+
+\item 设 \(E = \mathbb{Q}\)，\(K = \mathbb{Q}(\sqrt[n]{a})\)，其中 \(a \in \mathbb{Q}\)，\(a > 0\)，并设 \([K:\mathbb{Q}] = d\). 证明 \(N_{K/E}(\sqrt[n]{a}) \in E\).
+
+\item 设 \(K\) 同上题。证明：若 \(n\) 是奇数，则 \(K\) 没有非平凡的、在 \(\mathbb{Q}\) 上伽罗瓦的子域；若 \(n\) 是偶数，则 \(K\) 中唯一的非平凡、在 \(\mathbb{Q}\) 上伽罗瓦的子域是 \(\mathbb{Q}(\sqrt{a})\).
+
+\item 设 \(L\) 是前两题中 \(K\) 的伽罗瓦闭包（即 \(x^n-a\) 的分裂域）。证明 \([L:\mathbb{Q}] = d\varphi(n)\) 或 \(\frac{1}{2}d\varphi(n)\)，其中 \(d = [K:\mathbb{Q}]\).〔注意 \(\mathbb{Q}(\zeta_n) \cap K\) 是 \(\mathbb{Q}\) 的伽罗瓦扩张。〕
+
+\item （\textbf{循环扩张的 Kummer 生成元}）设 \(F\) 是特征不整除 \(n\) 且含有 \(n\) 次单位根的域，\(K\) 是次数为 \(d\)（\(d \mid n\)）的循环扩张。则 \(K = F(\sqrt[d]{a})\)，其中 \(a \in F^\times\). 设 \(\sigma\) 是循环群 \(\operatorname{Gal}(K/F)\) 的一个生成元。
+
+（a）证明 \(\sigma(\sqrt[d]{a}) = \zeta\sqrt[d]{a}\)，其中 \(\zeta\) 是某个本原 \(d\) 次单位根（事实上 \(\sigma\) 在 \(\sqrt[d]{a}\) 上的作用由 \(\zeta\) 给出）。
+
+（b）假设 \(K = F(\sqrt[d]{a}) = F(\sqrt[d]{b})\). 用（a）证明 \(\frac{\sqrt[d]{a}}{\sqrt[d]{b}} = \zeta^i\)，其中 \(i\) 是与 \(d\) 互素的某个整数。由此证明 \(\sigma\) 固定元素 \(\frac{\sqrt[d]{a}}{\sqrt[d]{b}}\)，故它是 \(F\) 的元素。
+
+（c）证明 \(K = F(\sqrt[d]{a}) = F(\sqrt[d]{b})\) 当且仅当存在 \(c, e \in F\) 使 \(a = b^ic^d\) 且 \(b = a^je^d\)，即当且仅当 \(a\) 与 \(b\) 在 \(F^\times\) 模去 \(d\) 次幂后生成同一个子群。
+
+\item 设 \(p, q, r\) 是 \(\mathbb{Z}\) 中的素数，且 \(q \neq r\). 设 \(\sqrt[p]{q}\) 表示 \(x^p-q\) 的任意根，\(\sqrt[p]{r}\) 表示 \(x^p-r\) 的任意根。证明 \(\mathbb{Q}(\sqrt[p]{q}) \neq \mathbb{Q}(\sqrt[p]{r})\).
+
+\item （\textbf{Artin--Schreier 扩张}）设 \(F\) 是特征为 \(p\) 的域，\(K\) 是 \(F\) 的 \(p\) 次循环扩张。证明 \(K = F(a)\)，其中 \(a\) 是多项式 \(x^p-x-c\) 的根（\(c \in F\)）。〔注意由于 \(F\) 的特征为 \(p\)，有 \(T_{K/F}(-1) = 0\)，故由第 14.2 节习题 26，存在 \(a \in K\) 使 \(-1 = \sigma(a)-a\)，其中 \(\sigma\) 是 \(\operatorname{Gal}(K/F)\) 的生成元。证明 \(c = a^p-a\) 是 \(F\) 的元素。〕注意由于 \(F\) 含有 \(p\) 次单位根（即 1），这就在所有特征下完成了对含 \(p\) 次单位根的域上素数次 \(p\) 循环扩张的描述。
+
+\item 设 \(K = \mathbb{Q}(\zeta_p)\) 是素数 \(p\) 的 \(p\) 次单位根的分圆域，\(G = \operatorname{Gal}(K/\mathbb{Q})\). 设 \(\zeta\) 表示任意 \(p\) 次单位根。证明 \(\sum_{\sigma \in G}\sigma(\zeta)\)（\(\zeta\) 从 \(K\) 到 \(\mathbb{Q}\) 的迹）是 \(-1\) 或 \(p-1\)，取决于 \(\zeta\) 是否为本原 \(p\) 次单位根。
+
+\item （\textbf{经典 Gauss 和}）设 \(K = \mathbb{Q}(\zeta_p)\) 是奇素数 \(p\) 的 \(p\) 次单位根的分圆域，看作 \(\mathbb{C}\) 的子域，\(G = \operatorname{Gal}(K/\mathbb{Q})\). 设 \(H\) 是循环群 \(G\) 中指数为 2 的子群。定义
+\[
+\eta_0 = \sum_{\sigma \in H}\sigma(\zeta_p), \qquad \eta_1 = \sum_{\sigma \in \sigma_0H}\sigma(\zeta_p),
+\]
+其中 \(\sigma_0\) 是 \(\operatorname{Gal}(K/\mathbb{Q})\) 的生成元（这是 \(\zeta_p\) 关于 \(H\) 的两个周期，即 \(\zeta_p\) 关于 \(G\) 中 \(H\) 的两个陪集的共轭之和，参见第 5 章）。
+
+（a）证明 \(\sigma_0(\eta_0) = \eta_1\)、\(\sigma_0(\eta_1) = \eta_0\)，且
+\[
+\eta_0 = \sum_{a = \text{平方}}\zeta_p^a, \qquad \eta_1 = \sum_{b \neq \text{平方}}\zeta_p^b,
+\]
+其中求和分别取遍 \((\mathbb{Z}/p\mathbb{Z})^\times\) 中的平方元与非平方元。〔注意 \(H\) 就是 \((\mathbb{Z}/p\mathbb{Z})^\times\) 中由平方元组成的子群。〕
+
+（b）证明 \(\eta_0+\eta_1 = (\zeta_p, 1) = -1\)，且 \(\eta_0-\eta_1 = (\zeta_p, -1)\)，其中 \((\zeta_p, 1)\) 与 \((\zeta_p, -1)\) 是 \(\zeta_p\) 的两个 Lagrange 预解式。
+
+（c）设 \(g = \sum_{a=0}^{p-1}\zeta_p^{a^2}\)（经典的 Gauss 和）。证明
+\[
+g = (\zeta_p, -1) = \sum_{i=0}^{p-2}(-1)^i\sigma_0^i(\zeta_p).
+\]
+
+（d）证明：若 \(\tau \in H\) 则 \(\tau g = g\)，若 \(\tau \notin H\) 则 \(\tau g = -g\). 特别地证明 \([\mathbb{Q}(g):\mathbb{Q}] = 2\). 回忆复共轭是 \(K\) 上的自同构 \(\sigma_{-1}\)（参见第 14.5 节习题 7）。证明：若 \(-1\) 是模 \(p\) 的平方（即 \(p \equiv 1 \pmod 4\)）则 \(\bar g = g\)；若 \(-1\) 不是模 \(p\) 的平方（即 \(p \equiv 3 \pmod 4\)）则 \(\bar g = -g\)，其中 \(\bar g\) 表示 \(g\) 的复共轭。
+
+（e）证明 \(g\bar g = p\).〔单位根的复共轭是它的倒数。于是由 \(g = \sum_i(-1)^i\left(\sigma_0^i(\zeta_p)\right)^{-1}\) 可得
+\[
+g\bar g = \sum_{i,j=0}^{p-2}(-1)^{i-j}\frac{\sigma_0^i(\zeta_p)}{\sigma_0^j(\zeta_p)} = \sum_{k=0}^{p-2}(-1)^k\sum_{j=0}^{p-2}\sigma_0^j\left(\frac{\sigma_0^k(\zeta_p)}{\zeta_p}\right),
+\]
+其中 \(k = i-j\). 若 \(k = 0\) 则被求和的元素为 1，若 \(k \neq 0\) 则它是本原 \(p\) 次单位根。利用上一习题证明内和当 \(k = 0\) 时为 \(p-1\)，否则为 \(-1\).〕
+
+（f）由此证明 \(g^2 = (-1)^{(p-1)/2}p\)，且 \(\mathbb{Q}\left(\sqrt{(-1)^{(p-1)/2}p}\right)\) 是 \(\mathbb{Q}(\zeta_p)\) 唯一的二次子域。（另见第 14.6 节习题 33。）
+
+\item 设 \(L\) 是 \(\mathbb{Q}\) 的有限扩张 \(\mathbb{Q}(a)\) 的伽罗瓦闭包。对任意整除 \(\operatorname{Gal}(L/\mathbb{Q})\) 的阶的素数 \(p\)，证明存在 \(L\) 的子域 \(F\) 使 \([L:F] = p\) 且 \(L = F(a)\).
+
+\item 设 \(F\) 是实数域 \(\mathbb{R}\) 的子域，\(a \in F\)，\(K = F(\sqrt[n]{a})\)，其中 \(\sqrt[n]{a}\) 表示 \(a\) 的实 \(n\) 次根。证明：若 \(L\) 是包含在 \(K\) 中的任意 \(F\) 的伽罗瓦扩张，则 \([L:F] \leq 2\).
+
+\item 本习题说明：一般地，用根式表示实根时必须使用复数，并推广了三次方程的 casus irreducibilis.
+
+设 \(f(x) \in \mathbb{Q}[x]\) 是不可约多项式，其所有根都是实数。再设 \(f(x)\) 的一个根 \(a\) 可以用实根式表示（即存在由实域构成的根扩张 \(\mathbb{Q} = K_0 \subset K_1 \subset \cdots \subset K_m \subset \mathbb{R}\)，其中 \(K_{i+1} = K_i(\sqrt[n_i]{a_i})\)（\(i = 1, 2, \ldots, m-1\)），对某些整数 \(n_i\) 与某些 \(a_i \in K_i\) 成立，且 \(a \in K_m\)）。证明 \(f(x)\) 的伽罗瓦群是 2-群。特别地证明 \(f(x)\) 的次数是 2 的幂，且这样的多项式的实根可以完全用实根式表示当且仅当这些根可以用直尺与圆规构造。
+
+〔论证与三次方程的情形类似。设 \(L \subseteq \mathbb{R}\) 是 \(\mathbb{Q}(a)\) 的伽罗瓦闭包，并假设 \(\operatorname{Gal}(L/\mathbb{Q})\) 的阶被某个奇素数 \(p\) 整除。由习题 12，存在 \(L\) 的子域 \(F\) 使 \([L:F] = p\) 且 \(L = F(a)\). 考虑合成域 \(K'_i = FK_i\)（\(i = 0, 1, \ldots, m\)）。它们仍是实根式扩张，且由正文中关于 casus irreducibilis 的论证，可以假设每个 \([K'_{i+1}:K'_i]\) 都是素数。由于 \(a \notin F = FK_0\)，存在整数 \(i\) 使 \(a \notin K'_{i-1}\) 而 \(a \in K'_i\). 由于这些扩张都是素数次的，有 \(K'_i = K'_{i-1}(a)\). 由于 \(L = F(a)\) 是 \(p\) 次伽罗瓦扩张，\(K'_i\) 是 \(K'_{i-1}\) 的 \(p\) 次伽罗瓦扩张，与上一习题矛盾。〕
+
+\item （\textbf{特征 2 中三次方程的「Cardano 公式」}）设 \(f(x) = x^3+px+q\) 是特征为 2 的域上的不可约三次多项式。设 \(\rho\) 是本原 3 次单位根，\(e, e'\) 是二次多项式 \(x^2+qx+(p^3+q^2)\) 的根（参见第 14.6 节习题 50）。设 \(\theta_1\) 与 \(\theta_2\) 分别是 \(pq+e\) 与 \(pq+e'\) 的立方根，其中立方根取得使 \(\theta_1\theta_2 = p\). 证明 \(f(x)\) 的根由
+\[
+\alpha = \theta_1+\theta_2, \qquad \beta = \rho\alpha+\theta_1, \qquad \gamma = \rho\alpha+\theta_2 = \alpha+\beta
+\]
+给出。
+
+\item 设 \(a\) 是非零有理数。
+
+（a）确定何时扩张 \(\mathbb{Q}(\sqrt{ai})\)（\(i^2 = -1\)）在 \(\mathbb{Q}\) 上是 4 次扩张。
+
+（b）当 \(K = \mathbb{Q}(\sqrt{ai})\) 在 \(\mathbb{Q}\) 上是 4 次扩张时，证明 \(K\) 是 \(\mathbb{Q}\) 上的伽罗瓦扩张，且伽罗瓦群是 Klein 四元群。此时确定 \(K\) 中包含的 \(\mathbb{Q}\) 的二次扩张。
+
+\item 设 \(D \in \mathbb{Z}\) 是无平方因子的整数，\(a \in \mathbb{Q}\) 是非零有理数。证明 \(\mathbb{Q}(\sqrt{a}, \sqrt{D})\) 不可能是 \(\mathbb{Q}\) 上 4 次循环扩张。
+
+\item 设 \(D \in \mathbb{Z}\) 是无平方因子的整数，\(a \in \mathbb{Q}\) 是非零有理数。证明：若 \(\mathbb{Q}(\sqrt{a}, \sqrt{D})\) 在 \(\mathbb{Q}\) 上是伽罗瓦扩张，则 \(D = -1\).
+
+\item 设 \(D \in \mathbb{Z}\) 是无平方因子的整数，\(K = \mathbb{Q}(\sqrt{D})\).
+
+（a）证明：若 \(D = s^2+t^2\) 是两个有理数平方之和，则存在包含 \(K\) 的扩张 \(L/\mathbb{Q}\)，它在 \(\mathbb{Q}\) 上是伽罗瓦扩张且伽罗瓦群是 4 阶循环群。〔考虑扩张 \(\mathbb{Q}(\sqrt{D+s\sqrt{D}})\).〕（还要注意 \(D\) 是两个有理数平方之和当且仅当 \(D\) 也是两个整数平方之和，故不妨假设 \(s\) 与 \(t\) 都是整数。）
+
+（b）反之证明：若 \(K\) 可以嵌入（a）中那样的 4 次循环扩张 \(L\)，则 \(D\) 是两个平方之和。〔一种途径：（i）先注意 \(L\) 在 \(K\) 上是二次的，故 \(L = K(\sqrt{a+b\sqrt{D}})\)（\(a, b \in \mathbb{Q}\)）；（ii）证明 \(L\) 包含二次子域 \(\mathbb{Q}(\sqrt{a^2-b^2D})\)，若 \(L/\mathbb{Q}\) 是循环的则它必为 \(\mathbb{Q}(\sqrt{D})\)，并利用习题 7。〕
+
+（c）特别地证明 \(\mathbb{Q}(\sqrt{3})\) 不是 \(\mathbb{Q}\) 上任何 4 次循环扩张的子域。类似地证明：对无平方因子且 \(D < 0\) 的整数 \(D\)，域 \(\mathbb{Q}(\sqrt{D})\) 从不包含在 \(\mathbb{Q}\) 的 4 次循环扩张中（这给出了第 14.6 节习题 19 的另一种证明）。
+
+\item 设 \(p\) 是素数。证明 \(S_p\) 的任意阶被 \(p\) 整除的可解子群都包含在 \(S_p\) 的一个 Sylow \(p\)-子群的正规化子中（一个 \(p(p-1)\) 阶 Frobenius 群）中。由此证明：\(\mathbb{Q}[x]\) 中次数为 \(p\) 的不可约多项式 \(f(x)\) 可用根式解当且仅当其伽罗瓦群包含在 \(p(p-1)\) 阶 Frobenius 群中。〔设 \(G \leq S_p\) 是阶被 \(p\) 整除的可解子群。则 \(G\) 含有 \(p\)-轮换，从而在 \(\{1, 2, \ldots, p\}\) 上传递。设 \(H < G\) 是 \(G\) 中元素 1 的稳定化子，故 \(H\) 在 \(G\) 中的指数为 \(p\). 证明 \(H\) 不含 \(G\) 的非平凡正规子群（注意 \(H\) 的共轭是其余点的稳定化子）。设 \(G^{(n-1)}\) 是 \(G\) 的导列中最后一个非平凡子群。证明 \(H \cap G^{(n-1)} = 1\)，并由此得出 \(|G^{(n-1)}| = p\)，从而 \(G\) 的 Sylow \(p\)-子群（它同时是 \(S_p\) 的 Sylow \(p\)-子群）在 \(G\) 中正规。〕
+
+\item （\textbf{五次方程可解性判别法}）由上一习题，\(\mathbb{Q}[x]\) 中次数为 5 的不可约多项式 \(f(x)\) 可用根式解当且仅当其伽罗瓦群（看作 \(S_5\) 的子群）包含在 20 阶 Frobenius 群中。已知这等价于某个 6 次多项式 \(g(x)\) 有有理根（参见 Dummit, \textit{Solving Solvable Quintics}, Math. Comp., 57(1991), pp. 387--401）。若五次多项式具有一般形式（即作平移使 \(x^4\) 的系数为零）
+\[
+f(x) = x^5+px^3+qx^2+rx+s \qquad p, q, r, s \in \mathbb{Q},
+\]
+则相应的 6 次多项式是
+\[
+\begin{aligned}
+g(x) = {}& x^6+8rx^5+\left(2pq^2-6p^2r+40r^2-50qs\right)x^4\\
+&+\left(-2q^4+21pq^2r-40p^2r^2+160r^3-15p^2qs-400qrs+125ps^2\right)x^3\\
+&+\left(p^2q^4-8q^4r+9p^4r^2-136p^2r^3+625q^2s^2+400r^4-6p^3q^2r\right.\\
+&\qquad\left.+76pq^2r^2-50pq^3s-140q^2r^2s+500prs^2+90p^2qrs\right)x^2\\
+&+\left(-108p^5s^2+32p^4r^3-256p^2r^4-3125s^4+512r^5-2pq^6+3q^4r^2-58q^5s\right.\\
+&\qquad+2750q^2rs^2-31p^3q^3s-500pr^2s^2+19p^2q^4r-51p^3q^2r^2+76pq^2r^3\\
+&\qquad\left.-2400qr^3s-325p^2q^2s^2+525p^3rs^2+625pqs^3+117p^4qrs+105pq^3rs+260p^2qr^2s\right)x\\
+&+\left(q^8+256r^6+17q^4r^3-27p^7s^2-4p^6r^3+48p^4r^4-192p^2r^5+3125p^2s^4\right.\\
+&\qquad-9375rs^4-1600qr^4s-99p^5rs^2-125pq^4s^2-124q^5rs+3250q^2r^2s^2-2000pr^3s^2\\
+&\qquad-13pq^6r+p^5q^2r^2+65p^2q^4r^2-128p^3q^2r^3-16pq^2r^4-4p^5q^3s-12p^2q^5s\\
+&\qquad-150p^4q^2s^2+1200p^3r^2s^2+18p^6qrs+12p^3q^3rs+196p^4qr^2s+590pq^3r^2s\\
+&\qquad\left.-160p^2qr^3s-725p^2q^2rs^2-1250pqrs^3\right).
+\end{aligned}
+\]
+在 \(f(x) = x^5+Ax+B\) 的特殊情形，这个多项式简化为
+\[
+g(x) = x^6+8Ax^5+40A^2x^4+160A^3x^3+400A^4x^2+\left(512A^5-3125B^4\right)x-9375AB^4+256A^6.
+\]
+
+（a）用这个判别法证明多项式 \(x^5-5x+12\) 在 \(\mathbb{Q}\) 上的伽罗瓦群是 10 阶二面体群。〔证明相应的 6 次多项式是
+\[
+x^6-40x^5+1000x^4-20000x^3+250000x^2-66400000x+976000000,
+\]
+且 \(x = 40\) 是它的有理根。另见第 14.6 节习题 35。〕
+
+（b）用这个判别法证明 \(x^5-x-1\) 不能用根式解。
+\end{enumerate}
+
+\section{\(\mathbb{Q}\) 上伽罗瓦群的计算}
+
+在第 6 节确定次数至多 4 的多项式的伽罗瓦群、以及上一节确定多项式 \(x^5-6x+3\) 的伽罗瓦群时，我们看到由自同构作为 \(S_n\) 的元素的轮换型可以获得关于伽罗瓦群的有用信息。这对计算 \(\mathbb{Q}\) 上多项式的伽罗瓦群非常有用，我们现在简要描述其理论依据。
+
+设 \(f(x)\) 是有理系数多项式。在确定 \(f(x)\) 的伽罗瓦群时，我们可以假设 \(f(x)\) 是可分的且有整数系数。则 \(f(x)\) 的判别式 \(D\) 是非零整数。
+
+对任意素数 \(p\)，考虑 \(f(x)\) 模 \(p\) 的约化 \(\bar f(x) \in \mathbb{F}_p[x]\). 若 \(p\) 整除 \(D\)，则约化多项式的判别式在 \(\mathbb{F}_p\) 中为 \(0\)，故 \(\bar f(x)\) 不可分。
+
+若 \(p\) 不整除 \(D\)，则 \(\bar f(x)\) 是 \(\mathbb{F}_p\) 上的可分多项式，我们可以把 \(\bar f(x)\) 分解为互不相同的不可约因式
+\[
+\bar f(x) = \bar f_1(x)\bar f_2(x)\cdots\bar f_k(x).
+\]
+设 \(n_i\) 是 \(\bar f_i(x)\) 的次数（\(i = 1, 2, \ldots, k\)）。
+
+这种约化的重要性由代数数论中的下述定理给出，它是研究 \(\mathbb{Q}\) 的有限扩张中的算术的一个初等推论（我们把它当作已知事实）。
+
+\noindent\textbf{定理。} 对任意不整除 \(f(x) \in \mathbb{Z}[x]\) 的判别式 \(D\) 的素数 \(p\)，约化 \(\bar f(x) = f(x) \pmod p\) 在 \(\mathbb{F}_p\) 上的伽罗瓦群作为置换群同构于 \(f(x)\) 在 \(\mathbb{Q}\) 上的伽罗瓦群的一个子群。
+
+定理中「作为置换群同构」的含义是：不仅 \(\bar f(x) = f(x) \bmod p\) 的伽罗瓦群同构于 \(f(x)\) 的伽罗瓦群的一个子群，而且存在 \(\bar f(x)\) 与 \(f(x)\) 的根的一种排序（依赖 \(p\)），使在这个同构下相应自同构作为这些根上的置换的作用相同。特别地，\(f(x)\) 的伽罗瓦群中含有与 \(\bar f(x)\) 的自同构有相同轮换型的自同构。
+
+\(\bar f(x)\) 的伽罗瓦群是循环群，因为 \(\mathbb{F}_p\) 的每个有限扩张都是循环扩张。设 \(\sigma\) 是这个 \(\mathbb{F}_p\) 上的伽罗瓦群的一个生成元（例如 Frobenius 自同构）。\(\bar f_1(x)\) 的根在伽罗瓦群的作用下彼此置换，且给定其中任意两个根都存在把第一个根映到第二个根的伽罗瓦自同构（回忆当出现这种情况时称该群在根上\textbf{传递}）。类似地，伽罗瓦群传递地置换每个因式 \(\bar f_i(x)\) 的根（\(i = 1, 2, \ldots, k\)）。由于这些因式互素，我们还看到伽罗瓦群的任何元素都不会把一个因式的根映到另一个因式的根。
+
+把 \(\sigma\) 看作 \(S_n\) 的元素（通过给 \(\bar f(x)\) 的根标号），考虑 \(\sigma\) 的轮换分解：由于 \(\sigma\) 在每个因式 \(\bar f_i(x)\) 的根内部置换，它是 \(k\) 个互不相交置换的乘积。由刚才的观察，\(\sigma\) 在 \(\bar f_1(x)\) 的根上的作用必是一个长度 \(n_1\) 的轮换，否则 \(\sigma\) 的幂不可能在 \(\bar f_1(x)\) 的根上传递。类似地，\(\sigma\) 在 \(\bar f_i(x)\) 的根上的作用给出一个长度 \(n_i\) 的轮换（\(i = 1, 2, \ldots, k\)）。
+
+我们看到，生成 \(\bar f(x)\) 的伽罗瓦群的自同构 \(\sigma\) 的轮换分解为 \((n_1, n_2, \ldots, n_k)\)，其中 \(n_1, n_2, \ldots, n_k\) 是 \(f(x)\) 模 \(p\) 约化后各不可约因式的次数。这给出下述结果。
+
+\begin{corollary}\label{cor:14.41}
+对任意不整除 \(f(x) \in \mathbb{Z}[x]\) 的判别式的素数 \(p\)，\(f(x)\) 在 \(\mathbb{Q}\) 上的伽罗瓦群含有轮换分解为 \((n_1, n_2, \ldots, n_k)\) 的元素，其中 \(n_1, n_2, \ldots, n_k\) 是 \(f(x)\) 模 \(p\) 约化后各不可约因式的次数。
+\end{corollary}
+
+\begin{example}
+考虑多项式 \(x^5-x-1\). 这个多项式的判别式是 \(-2869 = -19\cdot151\)，故我们在素数 \(\neq 19, 151\) 处约化。模 2 约化，这个多项式分解为
+\[
+(x^2+x+1)(x^3+x^2+1) \pmod 2,
+\]
+故伽罗瓦群含有 \((2,3)\)-轮换。把这个元素取立方，我们看到伽罗瓦群含有对换。
+
+模 3 约化，这个多项式不可约，理由如下：它在模 3 下没有根，故若它在模 3 下可约，则它有一个不可约二次因式，从而与 \(x^9-x\)（\(\mathbb{F}_3\) 上所有次数为 1 与 2 的不可约多项式之积）有公共因式。又 \(x^9-x\) 模 \(x^5-x-1\) 等于 \(x^4+1\)，故这又要求 \(x^4+1\) 与 \(x^5-x-1\) 有公共因式，而直接验证可知它们没有公共因式。这说明 \(x^5-x-1\) 在 \(\mathbb{Z}[x]\) 中不可约，且其伽罗瓦群中有一个 5-轮换。
+
+由于 \(S_5\) 由任意一个 5-轮换与任意一个对换生成，可知 \(x^5-x-1\) 的伽罗瓦群是 \(S_5\)（特别地这个多项式不能用根式解，参见第 14.7 节习题 21）。
+\end{example}
+
+上述例子中的论证说明了如何构造以 \(S_n\) 为伽罗瓦群的多项式。我们利用这一事实：\(S_n\) 的含有一个对换与一个 \((n-1)\)-轮换的传递子群就是 \(S_n\). 设 \(\pi\) 是 \(\mathbb{F}_2\) 上次数为 \(n\) 的不可约多项式。设 \(h \in \mathbb{F}_3[x]\) 是一个 2 次不可约多项式与若干奇次不可约多项式之积（例如：当 \(n\) 为偶数时取一个 \(n-3\) 次不可约多项式与 \(x\)；当 \(n\) 为奇数时取一个 \(n-2\) 次不可约多项式）。设 \(\theta \in \mathbb{F}_5[x]\) 是 \(x\) 与一个 \(n-1\) 次不可约多项式之积。最后，设 \(f(x) \in \mathbb{Z}[x]\) 是满足
+\[
+f(x) \equiv \pi(x) \pmod 2, \qquad f(x) \equiv h(x) \pmod 3, \qquad f(x) \equiv \theta(x) \pmod 5
+\]
+的任意多项式。\(f(x)\) 模 2 的约化表明 \(f(x)\) 在 \(\mathbb{Z}[x]\) 中不可约，故伽罗瓦群在 \(f(x)\) 的 \(n\) 个根上传递。把 \(f(x)\) 模 3 的分解所给出的元素取适当的奇次幂，表明伽罗瓦群含有对换。模 5 的分解表明伽罗瓦群含有一个 \((n-1)\)-轮换，故伽罗瓦群是 \(S_n\).
+
+\begin{proposition}\label{pro:14.42}
+对每个 \(n \in \mathbb{Z}\)，存在无穷多个多项式 \(f(x) \in \mathbb{Z}[x]\)，使得它们在 \(\mathbb{Q}\) 上的伽罗瓦群为 \(S_n\).
+\end{proposition}
+
+存在极其有效的算法把多项式 \(f(x) \in \mathbb{Z}[x]\) 模 \(p\) 分解（参见第 14.3 节习题 12 到 17），故上面的推论是确定伽罗瓦群元素某些轮换型的有效程序。
+
+在使用推论 \ref{cor:14.41} 时应当注意，不要假定某个特定的轮换就是伽罗瓦群的元素。例如，一个分解可能蕴涵存在一个 \((2,2)\)-轮换，比如 \((12)(34)\)，而另一个分解蕴涵存在一个对换。但不能由此断定这个对换必然是 \((12)\)（也不能断定是 \((34)\)、\((13)\) 等等）。用 \((12)(34)\) 表示第一个轮换固定了根的一种特定排序，而在这个排序下对换未必表现为 \((12)\).
+
+推论 \ref{cor:14.41} 在判定伽罗瓦群很大（例如 \(S_n\)）时特别有效，因为含有足够多轮换型的传递群必为 \(S_n\)（例如，含有一个对换与一个 \((n-1)\)-轮换的 \(S_n\) 的传递子群就是 \(S_n\)，正如上面所用地那样）。用这种方法最难确定的是小的伽罗瓦群（例如 \(n\) 阶循环群），因为一次接一次地分解只会产生阶整除 \(n\) 的元素，而不能确定是否还会出现某个素数 \(p\) 给出与「伽罗瓦群是循环群」这一假设不一致的轮换型。若能「永远计算下去」，至少可以确定伽罗瓦群各元素轮换型的精确分布，其含义如下：设伽罗瓦群 \(G \leq S_n\) 的阶为 \(N\)，且有 \(n_T\) 个元素的轮换型为 \(T\)（例如 \((2,2)\)-轮换、对换等），故轮换型 \(T\) 在 \(G\) 中的「密度」为 \(d_T = n_T/N\). 则可以在素数集合上定义密度（从而可以谈论「二分之一的素数」等等），并且有下述结果（它依赖于代数数论中的 Tchebotarev 密度定理）。
+
+\noindent\textbf{定理。} 使 \(f(x)\) 模 \(p\) 分解为型 \(T\) 的素数 \(p\) 的密度恰为 \(d_T\).
+
+这说明：若我们已知 \(f(x)\) 模每个素数的分解，至少可以确定 \(G\) 中具有给定轮换型的元素个数。遗憾的是，即便这样也不足以（在同构意义下）确定 \(G\)：已知存在具有相同轮换型元素个数的不同构的群（在 \(S_8\) 中有两个 96 阶的不同构群，它们的轮换型分布都是：1 个 1-轮换、6 个 \((2,2)\)-轮换、13 个 \((2,2,2,2)\)-轮换、32 个 \((3,3)\)-轮换、12 个 \((4,4)\)-轮换、32 个 \((2,6)\)-轮换）。这样的例子有无穷多个（阶为 \(p^3\) 的初等阿贝尔群的正则表示，与阶为 \(p^3\)、指数为 \(p\) 的非阿贝尔群，给出 \(S_{p^3}\) 中两个不同构的群，它们的非恒等元素都是 \(p^2\) 个 \(p\)-轮换之积，对任意素数 \(p\) 成立）。
+
+在实际中，人们用小素数的分解来猜测可能的伽罗瓦群（基于前面的结果），然后试图证明它确实是伽罗瓦群——这往往是一个困难的问题。对次数较小的多项式存在确定的算法，部分基于预解多项式的计算。它们是前几节用于确定四次多项式伽罗瓦群的预解三次式的类似物。这些预解多项式具有有理系数，其根是 \(f(x)\) 的根的某些组合（类似于预解三次式的组合 \((\alpha_1+\alpha_2)(\alpha_3+\alpha_4)\)）。然后人们确定这些预解多项式的分解，以获得关于 \(f(x)\) 的伽罗瓦群的信息——例如，线性因子的存在蕴涵伽罗瓦群落在 \(S_n\) 中固定所选 \(f(x)\) 的根的组合的稳定化子中（例如对我们的预解三次式而言是 8 阶二面体群）。不过应当注意：与四次多项式预解三次式的情形不同，所构造的预解多项式的次数一般远大于 \(f(x)\) 的次数。这种计算技术的有效性还严重依赖于对 \(S_n\) 的可能传递子群的显式了解。对 \(n = 2, 3, \ldots, 8\)，\(S_n\) 的传递子群的同构类个数分别为 1, 2, 5, 5, 16, 7, 50. 伽罗瓦群的计算有大量的研究兴趣，部分动机来自确定哪些群能作为 \(\mathbb{Q}\) 上的伽罗瓦群出现这一未解决问题。
+
+我们用一些较容易的例子来说明这些技巧（取自 The Computation of Galois Groups, L. Soicher, Master's Thesis, Concordia University, Montreal, 1981）。
+
+\noindent\textbf{例}
+
+（1）\(S_5\) 的传递子群有 5 个同构类，分别是群 \(Z_5\)、\(D_{10}\)、\(F_{20}\)（即所谓的 20 阶 Frobenius 群，它是 \(x^5-2\) 的伽罗瓦群，在 \(S_5\) 中由 \((1\ 2\ 3\ 4\ 5)\) 与 \((2\ 3\ 5\ 4)\) 生成）、\(A_5\) 与 \(S_5\). 这些群的轮换型分布如下：
+
+\begin{center}
+\begin{tabular}{lccccccc}
+\hline
+轮换型 & 1 & 2 & \((2,2)\) & 3 & \((2,3)\) & 4 & 5\\
+\hline
+\(Z_5\) & 1 & & & & & & 4\\
+\(D_{10}\) & 1 & 5 & & & & & 4\\
+\(F_{20}\) & 1 & 5 & 10 & & & & 4\\
+\(A_5\) & 1 & & 15 & 20 & & & 24\\
+\(S_5\) & 1 & 10 & 15 & 20 & 20 & 30 & 24\\
+\hline
+\end{tabular}
+\end{center}
+
+给定这些信息，\(x^5-x-1\) 的不可约性（给出在 5 个根上的传递性）与轮换型 \((2,3)\) 立即表明 \(x^5-x-1\) 的伽罗瓦群是 \(S_5\).
+
+现在考虑多项式 \(x^5+15x+12\). 它的判别式是 \(2^{10}3^45^5\)，故伽罗瓦群不包含在 \(A_5\) 中。有两种可能：\(S_5\) 或 \(F_{20}\). 通过把多项式模若干小素数分解，并把轮换型的分布与上表比较，容易判断哪一种更可能。这并不能证明推测的伽罗瓦群确实正确。要确定 \(S_5\) 与 \(F_{20}\) 中哪一个是正确的，可以计算 15 次预解多项式 \(R(x)\)，其根是 \((\alpha_1+\alpha_2-\alpha_3-\alpha_4)^2\) 在 \(S_5\) 作用下（对 \(f(x)\) 的 4 个根 \(\alpha_1, \alpha_2, \alpha_3, \alpha_4\)）得到的互不相同的值。按定义，\(S_5\) 在 \(R(x)\) 的根上传递，而利用上面给出的 \(F_{20}\) 的显式生成元不难验证 \(F_{20}\) 在这 15 个值上不传递。由此，\(R(x)\) 在 \(\mathbb{Q}\) 上可约当且仅当这个五次多项式的伽罗瓦群是 \(F_{20}\). 可以发现，对 \(x^5+15x+12\)，预解多项式 \(R(x)\) 分解为一个 5 次多项式与一个 10 次多项式，故这个五次多项式的伽罗瓦群是 \(F_{20}\). 也可以使用上一节的习题 21（参见习题 6），它也基于相关预解多项式的计算。
+
+（2）考虑多项式 \(x^7-14x^5+56x^3-56x+22\). 其判别式计算为 \(2^67^{10}\)，故伽罗瓦群包含在 \(A_7\) 中。
+
+对 3 到 193 之间不等于 7 的 42 个素数分解这个多项式，得到轮换型分布为：1 个 1-轮换（2.38%）、30 个 \((3,3)\)-轮换（71.43%）、11 个 7-轮换（26.19%）。\(S_7\) 的传递子群有 7 个同构类，其中有 4 个包含在 \(A_7\) 中。在这些之中有一个不含 \((3,3)\)-轮换，剩下三种可能：\(A_7\)、\(\operatorname{GL}_3(\mathbb{F}_2)\) 与 \(F_{21}\)（21 阶 Frobenius 群，在 \(S_7\) 中由 \((1\ 2\ 3\ 4\ 5\ 6\ 7)\) 与 \((2\ 3\ 5)(4\ 7\ 6)\) 生成）。这三个群的轮换型分布如下：
+
+\begin{center}
+\begin{tabular}{lccccccccc}
+\hline
+轮换型 & 1 & 2 & \((2,2)\) & 3 & \((2,2,3)\) & \((3,3)\) & \((2,4)\) & 5 & 7\\
+\hline
+\(F_{21}\) & 1 & & & & & 14 & & & 6\\
+\(\operatorname{GL}_3(\mathbb{F}_2)\) & 1 & & 21 & & & 56 & 42 & & 48\\
+\(A_7\) & 1 & & 105 & 70 & 210 & 280 & 630 & 504 & 720\\
+\hline
+\end{tabular}
+\end{center}
+
+由此有很强的可能性这个多项式的伽罗瓦群是 21 阶 Frobenius 群。事实确实如此（验证需要计算一个 35 次预解式并在 \(\mathbb{Q}\) 上分解它：有三个因式，次数分别为 7、7、21）。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(p\) 是素数。利用推论 \ref{cor:14.41}，以及这个多项式的伽罗瓦群是 Klein 四元群这一事实，证明多项式 \(x^4+1\) 模 \(p\) 或者分解为两个不可约二次式，或者分解为 4 个线性因式。
+
+\item （参见第 14.6 节习题 48。）
+
+（a）设 \(K\) 是 \(x^6-2x^3-2\) 的分裂域。证明：若 \([K:\mathbb{Q}] = 12\)，则 \(K = \mathbb{Q}(\sqrt[3]{2}, i, \sqrt{3})\)，且 \(K\) 由双二次域 \(F = \mathbb{Q}(i, \sqrt{3})\) 添加 \(\alpha = \sqrt[3]{1+\sqrt{3}}\) 与 \(\beta = \sqrt[3]{1-\sqrt{3}}\) 得到。证明若果真如此，则 \(\operatorname{Gal}(K/\mathbb{Q})\) 中阶为 3 的元素都落在 \(\operatorname{Gal}(K/F)\) 中。由此证明 \(\operatorname{Gal}(K/\mathbb{Q})\) 的任意 3 阶元素把 \(\alpha\) 映到 \(1+\sqrt{3}\) 的另一个立方根，把 \(\beta\) 映到 \(1-\sqrt{3}\) 的另一个立方根；并且若它在 \(\alpha\) 或 \(\beta\) 上是恒等映射，则它在整个 \(K\) 上是恒等映射。
+
+（b）证明 \(f(x)\) 在 \(\mathbb{F}_{13}\) 上的不可约分解是多项式 \((x-7)(x-8)(x-11)(x^3+3)\)，并用推论 \ref{cor:14.41} 证明 \([K:\mathbb{Q}] = 36\).
+
+（c）已知 \(G = \operatorname{Gal}(K/\mathbb{Q})\) 的阶为 36，显式确定 \(G\) 的所有元素，并特别证明 \(G\) 同构于 \(S_3 \times S_3\).
+
+\item 证明 \(x^5+20x+16\) 的伽罗瓦群是 \(A_5\).
+
+\item 证明 \(x^5+x^4-4x^3-3x^2+3x+1\) 的伽罗瓦群是 5 阶循环群。〔证明它是 \(\zeta_{11}+\zeta_{11}^{-1}\) 的极小多项式。〕
+
+\item 证明 \(x^5+11x+44\) 的伽罗瓦群是二面体群 \(D_{10}\)（参见第 14.7 节习题 21）。
+
+\item 证明 \(x^5+15x+12\) 的伽罗瓦群是 \(F_{20}\)，即 20 阶 Frobenius 群（参见第 14.7 节习题 21）。
+
+\item 证明 \(x^6+24x-20\) 的伽罗瓦群是 \(A_6\).
+
+\item 证明 \(x^7+7x^4+14x+3\) 的伽罗瓦群是 \(A_7\).
+
+\item 求一个 7 次多项式，使其伽罗瓦群是 7 阶循环群。
+
+\item 确定 \(x^7-7x+3\) 可能的伽罗瓦群。
+\end{enumerate}
+
+\section{超越扩张、不可分扩张与无限伽罗瓦群}
+
+本节汇集关于任意扩张 \(E/F\) 的一些结果。这些结果补充了前几节的内容，并完善了关于任意（可能无限）扩张如何分解的基本图景。由于本节主要是一份综述，我们不给出任何证明；当读者容易补出这些证明时，我们在正文中指明，或者在习题中给出提示。
+
+本节始终设 \(E/F\) 是域扩张。回忆 \(E\) 中在 \(F\) 上不代数的元素称为 \(F\) 上的\textbf{超越元素}。请记住，涉及超越元素的扩张总是无限次的。当我们考虑对 \(t\) 取值时，通常保留「\(t\) 是 \(F\) 上的『未定元』」这一说法。然而从域论角度看，超越元与未定元是同义词（例如 \(\mathbb{C}\) 的子域 \(\mathbb{Q}(\pi)\) 与域 \(\mathbb{Q}(t)\) 同构）。
+
+\begin{definition}
+（1）\(E\) 的子集 \(\{a_1, a_2, \ldots, a_n\}\) 称为在 \(F\) 上\textbf{代数无关}，若不存在非零多项式 \(f(x_1, x_2, \ldots, x_n) \in F[x_1, x_2, \ldots, x_n]\) 使 \(f(a_1, a_2, \ldots, a_n) = 0\). \(E\) 的任意子集 \(S\) 称为在 \(F\) 上代数无关，若 \(S\) 的每个有限子集都代数无关。\(S\) 的元素称为 \(F\) 上的\textbf{独立超越元}。
+
+（2）\(E/F\) 的\textbf{超越基}是 \(E\) 中在 \(F\) 上代数无关的极大子集（关于包含关系极大）。
+\end{definition}
+
+注意若 \(E/F\) 是代数扩张，则 \(E\) 中唯一的代数无关子集是空集。特别地，代数无关集合中的元素必为超越元。此外容易验证 \(S \subseteq E\) 在 \(F\) 上代数无关当且仅当每个 \(s \in S\) 在 \(F(S-\{s\})\) 上超越。同样容易验证 \(S\) 是 \(E/F\) 的超越基当且仅当 \(S\) 是 \(F\) 上代数无关的超越元集合，且 \(E\) 在 \(F(S)\) 上代数。
+
+\noindent\textbf{定理。} 扩张 \(E/F\) 有超越基，且 \(E/F\) 的任意两个超越基有相同的基数。
+
+\noindent\textbf{证明：} 第一个命题是标准的 Zorn 引理论证。第二个命题的证明使用与「向量空间的任意两个基有相同基数」相同的「替换引理」思想。
+
+\begin{definition}
+\(E/F\) 的一个超越基的基数称为 \(E/F\) 的\textbf{超越次数}。
+\end{definition}
+
+代数扩张恰为超越次数为 0 的扩张。
+
+这个定理的一个特殊情形是 \(E\) 在 \(F\) 上有限生成，即 \(E = F(a_1, a_2, \ldots, a_n)\)，其中 \(a_1, \ldots, a_n\) 是 \(E\) 的（不必代数无关的）元素。显然我们可以重新编号 \(a_1, \ldots, a_n\)，使 \(a_1, \ldots, a_m\) 是独立超越元，而 \(a_{m+1}, \ldots, a_n\) 在 \(F(a_1, \ldots, a_m)\) 上代数（故 \(E\) 是后一个域的有限扩张）。这种情形下 \(E\) 称为 \(F\) 上的 \(m\) 元\textbf{函数域}。这类域在代数几何中作为 \(m\) 维曲面上的函数域起着基本作用。例如当 \(F = \mathbb{C}\) 且 \(m = 1\) 时，这些域在分析中作为紧 Riemann 曲面上的亚纯函数域出现。
+
+注意若 \(S_1\) 与 \(S_2\) 都是 \(E/F\) 的超越基，未必有 \(F(S_1) = F(S_2)\). 例如，若 \(t\) 在 \(\mathbb{Q}\) 上超越，则 \(\{t\}\) 与 \(\{t^2\}\) 都是 \(\mathbb{Q}(t)/\mathbb{Q}\) 的超越基，但（如我们很快将看到的）\(\mathbb{Q}(t^2)\) 是 \(\mathbb{Q}(t)\) 的真子域。
+
+现在我们看到，若 \(x_1, x_2, \ldots, x_n\) 是 \(F\) 上的未定元且
+\[
+f(x) = (x-x_1)(x-x_2)\cdots(x-x_n) \tag{14.28}
+\]
+是 \(n\) 次一般多项式，则 \(x_i\) 的 \(n\) 个初等对称函数 \(s_1, s_2, \ldots, s_n\) 也是 \(F\) 上的独立超越元。这是因为 \(x_1, \ldots, x_n\) 是 \(E = F(x_1, \ldots, x_n)\) 在 \(F\) 上的超越基（故超越次数为 \(n\)），而 \(E\) 在 \(F(s_1, \ldots, s_n)\) 上代数（次数为 \(n!\)）。定理迫使 \(s_1, \ldots, s_n\) 也是这个扩张的超越基（特别地它们是独立超越元）。因此 \(F\) 上次数为 \(n\) 的一般多项式也可以等价地定义为：取 \(a_1, \ldots, a_n\) 为任意独立超越元（或未定元），并令
+\[
+f(x) = x^n+a_1x^{n-1}+\cdots+a_n, \tag{14.29}
+\]
+其中 \(f\) 的根记为 \(x_1, \ldots, x_n\)（且 \(s_i = (-1)^ia_i\)）。
+
+\begin{definition}
+扩张 \(E/F\) 称为\textbf{纯超越}的，若它有超越基 \(S\) 使 \(E = F(S)\).
+\end{definition}
+
+在上面的讨论中，\(F(x_1, \ldots, x_n)\) 与 \(F(s_1, \ldots, s_n)\) 都在 \(F\) 上纯超越。作为一个习题（见后面）可以证明 \(\mathbb{Q}(t, \sqrt{t^3-t})\) 不是 \(\mathbb{Q}\) 的纯超越扩张，尽管它除了 \(\mathbb{Q}\) 本身的元素外不含有在 \(\mathbb{Q}\) 上代数的元素（即，把一般扩张分解为先纯超越扩张、再代数扩张的做法一般不能反过来，使代数部分先出现）。
+
+若 \(E\) 是 \(F\) 的、超越次数 \(n = 1\) 或 2 的纯超越扩张，而 \(L\) 是中间域 \(F \subseteq L \subseteq E\) 且具有相同的超越次数，则 \(L\) 也是 \(F\) 的纯超越扩张（Lüroth（\(n = 1\)）、Castelnuovo（\(n = 2\)））。但当超越次数 \(\geq 3\) 时这个结果不成立，尽管 \(L\) 不是纯超越扩张的例子很难构造。对超越次数为 1 的扩张，中间域由下述定理描述。
+
+\noindent\textbf{定理。} 设 \(t\) 在 \(F\) 上超越。
+
+（1）（Lüroth）若 \(F \subseteq K \subseteq F(t)\)，则 \(K = F(r)\)，其中 \(r \in F(t)\). 特别地，\(F(t)\) 中 \(F\) 的任何非平凡扩张都是 \(F\) 的纯超越扩张。
+
+（2）若 \(P = P(t)\)、\(Q = Q(t)\) 是 \(F[t]\) 中非零、互素且不同时为常数的多项式，则
+\[
+[F(t):F(P/Q)] = \max(\deg P, \deg Q).
+\]
+
+\noindent\textbf{证明：} （2）的证明在第 13.2 节习题 18 中概述。
+
+由这个定理的（2）可知 \(F(P/Q) = F(t)\) 当且仅当 \(P, Q\) 是次数为 1 的非零互素多项式（不同时为常数）。因此
+\[
+F(r) = F(t) \iff r = \frac{at+b}{ct+d}, \qquad a, b, c, d \in F,\ ad-bc \neq 0
+\]
+（称为 \(t\) 的\textbf{分式线性变换}）。对任意 \(r \in F(t)-F\)，映射 \(t \mapsto r\) 可以延拓为 \(F(t)\) 到自身的、在 \(F\) 上是恒等映射的嵌入。这个嵌入是满射（即是 \(F(t)\) 的自同构）恰好对分式线性变换成立。此外，映射
+\[
+\operatorname{GL}_2(F) \to \operatorname{Aut}(F(t)/F), \qquad A = \begin{pmatrix} a & b\\ c & d\end{pmatrix} \mapsto \sigma_A,
+\]
+其中 \(\sigma_A\) 表示把 \(t\) 映到 \((at+b)/(ct+d)\) 所定义的 \(F(t)\) 的自同构，是满同态，其核由标量矩阵组成。因此
+\[
+\operatorname{Aut}(F(t)/F) \cong \operatorname{PGL}_2(F),
+\]
+其中 \(\operatorname{PGL}_2(F) = \operatorname{GL}_2(F)/\{\lambda I \mid \lambda \in F^\times\}\) 给出这个超越扩张的自同构群（参见第 14.1 节习题 8）。
+
+当 \(F\) 是 \(q\) 元有限域时，\(\operatorname{Aut}(F(t)/F) \cong \operatorname{PGL}_2(F)\) 是 \(q(q-1)(q+1)\) 阶有限群。由推论 \ref{cor:14.11}，若 \(K\) 是 \(\operatorname{Aut}(F(t)/F)\) 的不动域，则 \(F(t)\) 在 \(K\) 上是伽罗瓦扩张，伽罗瓦群等于 \(\operatorname{Aut}(F(t)/F)\). 特别地，此时 \(\operatorname{Aut}(F(t)/F)\) 的不动域不是 \(F\).
+
+这也给出伽罗瓦对应的更多例子，对小的 \(q\) 可以完全写出。例如，若 \(q = |\mathbb{F}| = 2\)，则 \(\operatorname{PGL}_2(\mathbb{F})\) 是 6 阶非阿贝尔群，从而同构于 \(S_3\)，并有下述子群格：
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node (T) at (0,2.3) {\(\operatorname{PGL}_2(\mathbb{F}_2)\)};
+\node (A) at (-2.4,1.1) {\(\langle a\rangle\)};
+\node (B) at (0,1.1) {\(\langle b\rangle\)};
+\node (C) at (2.4,1.1) {\(\langle c\rangle\)};
+\node (D) at (0,0.0) {\(A_3\)};
+\node (E) at (0,-1.3) {\(\{1\}\)};
+\draw (T)--(A); \draw (T)--(B); \draw (T)--(C); \draw (T)--(D);
+\draw (A)--(E); \draw (B)--(E); \draw (C)--(E); \draw (D)--(E);
+\end{tikzpicture}
+
+（图 5：\(\operatorname{PGL}_2(\mathbb{F}_2) \cong S_3\) 的子群格；其中 \(\langle a\rangle, \langle b\rangle, \langle c\rangle\) 是三个 2 阶子群，\(A_3\) 是 3 阶子群。）
+\end{center}
+
+域 \(F(t)\) 在 \(\operatorname{Aut}(F(t)/F)\) 的不动域 \(K\) 上的次数为 6，且子域 \(K \subseteq L \subseteq F(t)\) 的格与 \(S_3\) 的子群格对偶。循环子群 \(\langle\sigma\rangle\) 的不动域容易通过（前述定理）找到一个被 \(\sigma\) 固定的有理函数 \(r\) 使 \([F(t):F(r)] = |\sigma|\) 来求出。例如，若 \(\sigma : t \mapsto 1/(1+t)\)，则 \(\sigma\) 的阶为 3. 有理函数
+\[
+r = t+\sigma(t)+\sigma^2(t) = \frac{t^3+t+1}{t(t+1)}
+\]
+被 \(\sigma\) 固定，且（由定理的（2））\([F(t):F(r)] = 3\). 由于 \(F(r)\) 包含在 \(\langle\sigma\rangle\) 的不动域中，而 \(F(t)\) 在其不动域上的次数为 3，故 \(F(r)\) 就是 \(\langle\sigma\rangle\) 的不动域。这样就显式描述了图 6 中 \(F(t)\) 的含 \(K\) 的所有子域。
+
+\begin{center}
+（图 6：\(F(t)\)（\(F = \mathbb{F}_2\)）的含 \(K\) 的子域格。顶端为 \(F(t)\)，它在 \(K\) 上的次数为 6；其下为三个 2 次中间域，分别是以 \(\langle a\rangle\)、\(\langle b\rangle\)、\(\langle c\rangle\) 的不动域形式给出的域 \(F(r)\)；再下面是与 \(A_3\) 对应的 3 次子域 \(K\)。）
+\end{center}
+
+\(\mathbb{Q}\) 的纯超越扩张在把有限群实现为 \(\mathbb{Q}\) 上的伽罗瓦群这一问题中起着重要作用。我们描述 Hilbert 的一个深刻结果，它是这一研究领域的基础。若 \(a_1, a_2, \ldots, a_n\) 是域 \(F\) 上的独立未定元，我们可以在 \(F\) 的任意元素处求值（或特化）\(a_1, \ldots, a_n\)，即把 \(F\) 中的值代入「变量」\(a_1, a_2, \ldots, a_n\). 若 \(E\) 是 \(F(a_1, \ldots, a_n)\) 的伽罗瓦扩张，则 \(E\) 是某个系数在 \(F[a_1, \ldots, a_n]\) 中的多项式的分裂域。把 \(a_1, \ldots, a_n\) 特化到 \(F\) 中，就把这个多项式映为系数在 \(F\) 中的多项式。\(E\) 的特化就是这个特化后多项式的分裂域。
+
+\noindent\textbf{定理（Hilbert）。} 设 \(x_1, x_2, \ldots, x_n\) 是 \(\mathbb{Q}\) 上的独立超越元，\(E = \mathbb{Q}(x_1, \ldots, x_n)\)，设 \(G\) 是 \(E\) 的有限自同构群，其不动域为 \(K\). 若 \(K\) 是 \(\mathbb{Q}\) 的纯超越扩张，且以 \(a_1, a_2, \ldots, a_n\) 为超越基，则有无穷多个 \(a_1, \ldots, a_n\) 在 \(\mathbb{Q}\) 中的特化，使 \(E\) 特化为 \(\mathbb{Q}\) 的伽罗瓦扩张，且其伽罗瓦群同构于 \(G\).
+
+Hilbert 定理给出了特化后的扩张不「塌缩」的一个充分条件。一般地，特化后扩张的伽罗瓦群是 \(G\) 的子群（参见命题 \ref{pro:14.19}），可能是 \(G\) 的真子群。还已知不动域 \(K\) 并不总是 \(\mathbb{Q}\) 的纯超越扩张。当 \(G\) 是 47 阶循环群时就出现这样的例子。
+
+这个定理可以用来给出命题 \ref{pro:14.42} 的另一个证明：
+
+\noindent\textbf{推论。} 对所有的 \(n\)，\(S_n\) 都是 \(\mathbb{Q}\) 上的伽罗瓦群。
+
+\noindent\textbf{推论的证明：} 我们已经证明，\(S_n\) 以显然方式作用在 \(\mathbb{Q}(x_1, \ldots, x_n)\) 上时的不动域是 \(\mathbb{Q}\) 的纯超越扩张（以初等对称函数为超越基），故 Hilbert 定理立即给出推论。
+
+假设 \(K\) 是 \(\mathbb{Q}\) 的纯超越扩张，这对 Hilbert 定理的证明至关重要。每个有限群都同构于某个 \(S_n\) 的子群，从而对某个 \(n\) 作用在 \(\mathbb{Q}(x_1, \ldots, x_n)\) 上。然而，即使对 \(S_n\) 的子群 \(A_n\)，也不知道它在显然作用下的不动域是否是 \(\mathbb{Q}\) 的纯超越扩张（尽管通过其他途径已知对所有的 \(n\)，\(A_n\) 都是 \(\mathbb{Q}\) 上的伽罗瓦群）。因此这个研究领域中有若干重要的未解决问题。
+
+还应当注意，当基域 \(\mathbb{Q}\) 换成任意域 \(F\) 时 Hilbert 定理不成立（例如假设 \(F\) 是代数闭域）。特别地，如前所述，第 6 节中的一般多项式 \(f(x)\) 对任意 \(F\) 都在 \(F(a_1, \ldots, a_n)\) 上有伽罗瓦群 \(S_n\)，但当 \(F\) 是有限域时，由其分裂域得到的特化扩张总是循环的。
+
+下面我们展开第 13.5 节中描述过的不可分扩张理论。设 \(p\) 是素数，\(F\) 是特征为 \(p\) 的域。
+
+\begin{definition}
+代数扩张 \(E/F\) 称为\textbf{纯不可分}的，若对每个 \(a \in E\)，\(a\) 在 \(F\) 上的极小多项式只有一个不同的根。
+\end{definition}
+
+容易看出下述命题等价：
+
+（1）\(E/F\) 是纯不可分的；
+
+（2）若 \(a \in E\) 在 \(F\) 上可分，则 \(a \in F\)；
+
+（3）若 \(a \in E\)，则对某个 \(n\)（依赖于 \(a\)）有 \(a^{p^n} \in F\)，且 \(m_{a,F}(x) = x^{p^n}-a^{p^n}\).
+
+下面这个容易的命题描述可分扩张与纯不可分扩张的合成。
+
+\noindent\textbf{命题。} 若 \(E_1\) 与 \(E_2\) 是 \(E\) 的子域，且都是 \(F\) 的可分（或都是 \(F\) 的纯不可分）扩张，则它们的合成 \(E_1E_2\) 分别在 \(F\) 上可分（或纯不可分）。
+
+\noindent\textbf{证明：} 留作习题。
+
+由此立即得到下述结果。
+
+\noindent\textbf{命题。} 设 \(E/F\) 是代数扩张。则存在唯一的域 \(E_{\mathrm{sep}}\)，满足 \(F \subseteq E_{\mathrm{sep}} \subseteq E\)，使 \(E_{\mathrm{sep}}\) 在 \(F\) 上可分，且 \(E\) 在 \(E_{\mathrm{sep}}\) 上纯不可分。域 \(E_{\mathrm{sep}}\) 就是 \(E\) 中在 \(F\) 上可分的元素组成的集合。
+
+\(E_{\mathrm{sep}}/F\) 的次数称为 \(E/F\) 的\textbf{可分次数}，\(E/E_{\mathrm{sep}}\) 的次数称为 \(E/F\) 的\textbf{不可分次数}（通常分别记作 \([E:F]_s\) 与 \([E:F]_i\)）。这两个次数的乘积就是（通常的）次数。上面的命题立即给出下述推论。
+
+\noindent\textbf{推论。} 可分次数（分别地，不可分次数）是可乘的。
+
+当 \(E\) 由不可约多项式 \(p(x) \in F[x]\) 的根在 \(F\) 上生成时，扩张 \(E/F\) 的可分次数与不可分次数就是第 13.5 节中定义的 \(p(x)\) 的可分次数与不可分次数。
+
+上面命题断言任何代数扩张都可以分解为可分扩张后接纯不可分扩张。本节末尾的习题 3 概述了一个例子，说明这种分解一般不能反过来，即存在不是某个纯不可分扩张的可分扩张的扩张。我们很快将给出使这一分解可以反过来（即可分部分与纯不可分部分互换）的条件。
+
+现在我们知道任意扩张 \(E/F\) 可以分解为 \(F\) 的纯超越扩张 \(F(S)\)，后接 \(F(S)\) 的可分扩张 \(E_1\)，后接 \(E_1\) 的纯不可分扩张 \(E\). 在某些情形下，「顶部」代数扩张中的不可分性可以通过明智地选取超越基来消除：
+
+\noindent\textbf{命题。} 若 \(E\) 是完美域 \(F\) 的有限生成扩张，则存在 \(E/F\) 的超越基 \(T\)，使 \(E\) 是 \(F(T)\) 的可分（代数）扩张。
+
+命题中描述的超越基 \(T\) 称为\textbf{可分超越基}。本节末尾的习题 4 用一个非平凡的例子说明了这一点。
+
+回忆扩张 \(E/F\) 称为\textbf{正规}的，若它是 \(F[x]\) 中某个（可能无限的）多项式集合的分裂域（特别地，正规扩张是代数的，但不必有限或可分）。我们先前使用了同义词「分裂域」，这里在任意代数扩张的背景下重新引入「正规」这一术语，因为它在文献中经常出现，常常出现在把域嵌入代数闭包的情形中。尽管下面这组等价命题可以从前面几节中整理出来，读者应当写出完整的证明，并检查论证对无限扩张与不可分扩张都成立：
+
+\noindent\textbf{命题。} 设 \(E/F\) 是任意代数扩张，\(\Omega\) 是 \(E\) 的代数闭包。下述命题等价：
+
+（1）\(E/F\) 是正规扩张（即它是 \(F[x]\) 中某个多项式集合在 \(F\) 上的分裂域）；
+
+（2）只要有嵌入 \(\sigma : E \to \Omega\) 使 \(\sigma|_F\) 是恒等映射，就有 \(\sigma(E) = E\)；
+
+（3）只要不可约多项式 \(f(x) \in F[x]\) 在 \(E\) 中有一个根，它就在 \(E\) 中有全部根。
+
+一般地，正规扩张 \(E/F\) 到 \(E\) 的代数闭包中、延拓 \(F\) 的恒等嵌入的任何嵌入都是 \(E\) 的自同构，即属于 \(\operatorname{Aut}(E/F)\). 此外，这样的自同构的个数等于 \(E/F\) 的可分次数（当后者有限时）：
+\[
+\text{若 } E/F \text{ 是正规扩张且 } [E:F] < \infty， \quad \text{则 } |\operatorname{Aut}(E/F)| = [E:F]_s.
+\]
+若 \([E:F]_s\) 无限，我们很快将看到 \(|\operatorname{Aut}(E/F)|\) 也是无限的，但未必有相同的基数。
+
+若 \(E/F\) 是正规扩张且可分次数有限，设 \(E_0\) 是 \(\operatorname{Aut}(E/F)\) 的不动域。由推论 \ref{cor:14.11}，\(E/E_0\) 是（可分的）伽罗瓦扩张，其次数等于 \(|\operatorname{Aut}(E/F)|\). 由此 \(E_0/F\) 必是纯不可分的（次数等于 \([E:F]_i\)），即对正规扩张可以互换扩张的可分部分与纯不可分部分。更精确地，我们容易得到下述命题。
+
+\noindent\textbf{命题。} 若 \(E/F\) 正规且 \([E:F]_s < \infty\)，则 \(E = E_{\mathrm{sep}}E_{pi}\)，其中 \(E_{pi}\) 是 \(F\) 的纯不可分扩张（\(E_{pi}\) 由 \(E\) 中在 \(F\) 上纯不可分的所有元素组成），且 \(E_{\mathrm{sep}} \cap E_{pi} = F\).
+
+最后，我们提一下伽罗瓦理论如何推广到无限扩张。
+
+\begin{definition}
+扩张 \(E/F\) 称为\textbf{伽罗瓦}的，若它是代数的、正规的且可分的。此时 \(\operatorname{Aut}(E/F)\) 称为该扩张的伽罗瓦群，记作 \(\operatorname{Gal}(E/F)\).
+\end{definition}
+
+对无限扩张，伽罗瓦群的全体子群与 \(E\) 中含 \(F\) 的全体子域之间不必有双射，如下例所示。
+
+设 \(E\) 是 \(\mathbb{R}\) 中由向 \(\mathbb{Q}\) 添加所有正有理数的平方根得到的子域。容易看出 \(E\) 也可以描述为多项式集合 \(\{x^2-p\}\) 的分裂域，其中 \(p\) 取遍 \(\mathbb{Z}^+\) 中所有素数。注意 \(E\) 是 \(\mathbb{Q}\) 的（可数）无限伽罗瓦扩张。由于 \(E\) 的每个自同构 \(\sigma\) 由它在素数的平方根上的作用决定，而 \(\sigma\) 或者固定或者变号每个这样的平方根，故 \(\sigma^2\) 是恒等自同构。由此 \(\operatorname{Aut}(E)\) 是无限的初等阿贝尔 2-群。于是 \(\operatorname{Aut}(E)\) 是 \(\mathbb{F}_2\) 上的无限维向量空间。由对偶空间那一节（第 11.3 节）中的一个习题，\(\operatorname{Aut}(E)\) 到 \(\mathbb{F}_2\) 的非零同态有不可数多个，从而它们的核（余维数为 1 的子空间）也有不可数多个（且互不相同）。因此 \(\operatorname{Aut}(E)\) 有不可数多个指数为 2 的子群，而 \(\mathbb{Q}\) 只有可数多个二次扩张。
+
+基本问题在于 \(\operatorname{Gal}(E/F)\) 的许多（大多数）子群并不（以双射的方式）对应于 \(E\) 中含 \(F\) 的子域。为了挑出「正确的」那组 \(\operatorname{Gal}(E/F)\) 的子群，我们必须在这个群上引入一个拓扑（称为 \textbf{Krull 拓扑}）。拓扑空间中（拓扑）闭子集族所满足的公理正是挑出相关子群所需的记账工具（这些公理列在第 15.2 节）。有限扩张的伽罗瓦理论迫使某些有限指数的子群是闭集，而这些闭集又决定了整个群上的拓扑（这也许在我们的意料之中，因为 \(E\) 中 \(F\) 的每个扩张都是有限扩张的合成）。此外，\(E/F\) 的伽罗瓦群是有限群族 \(\operatorname{Gal}(K/F)\) 的逆向极限，其中 \(K\) 取遍 \(E\) 中 \(F\) 的所有有限伽罗瓦扩张（参见第 7.6 节习题 10）。
+
+\noindent\textbf{定理（Krull）。} 设 \(E/F\) 是伽罗瓦扩张，伽罗瓦群为 \(G\). 取 \(G\) 中作为 \(E\) 里 \(F\) 的有限扩张的固定子群的那些子群，连同这些子群的所有左、右陪集，作为闭集的一个基，给 \(G\) 赋予拓扑。则在此（「Krull」）拓扑下，\(G\) 的闭子群与 \(E\) 中含 \(F\) 的子域一一对应，且相应的格是对偶的。\(G\) 的闭正规子群对应于 \(E\) 中 \(F\) 的正规扩张。
+
+当前研究的一个重要方向是把某些域扩张的伽罗瓦群（作为拓扑群）描述出来，例如 \(\bar F/F\)，其中 \(\bar F\) 是 \(F\) 的代数闭包。当 \(F = \mathbb{Q}\) 时，对后一个群所知甚少（特别是，它的有限指数的正规子群，即哪些有限群作为 \(\mathbb{Q}\) 上的伽罗瓦群出现，是未知的）。若 \(E\) 是有限域 \(\mathbb{F}_p\) 的代数闭包，则这个扩张的伽罗瓦群是以 Frobenius 自同构为拓扑生成元的拓扑循环群 \(\hat{\mathbb{Z}}\). 这个群是不可数群（特别地不同构于 \(\mathbb{Z}\)），并且具有性质：每个有限指数的闭子群都是正规的且商群循环。注意 \(\hat{\mathbb{Z}}\) 还必须含有非平凡的无限闭子群（与 \(\mathbb{Z}\) 不同），因为 \(E\) 含有在 \(\mathbb{F}_p\) 上无限的子域（例如所有 \(q\) 次幂次扩张的合成，对任意素数 \(q\)——这个 \(\mathbb{F}_p\) 的伽罗瓦扩张的伽罗瓦群是 \(q\)-进整数 \(\mathbb{Z}_q\)，如第 7.6 节习题 11 所述）。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 证明每个纯不可分扩张都是正规扩张。
+
+\item 设 \(p\) 是素数，\(K = \mathbb{F}_p(x, y)\)，其中 \(x\) 与 \(y\) 是 \(\mathbb{F}_p\) 上的独立超越元。设 \(F = \mathbb{F}_p(x^p-x,\ y^p-x)\).
+
+（a）证明 \([K:F] = p^2\)，且 \(K/F\) 的可分次数与不可分次数都等于 \(p\).
+
+（b）证明存在 \(K\) 的含 \(F\) 的子域 \(E\)，它在 \(F\) 上纯不可分且次数为 \(p\)（于是 \(K\) 是 \(E\) 的 \(p\) 次可分扩张）。〔设 \(s = x^p-x \in F\)、\(t = y^p-x \in F\)，考虑 \(y-x\)（其 \(p\) 次幂为 \(t-s\)）。〕
+
+\item 设 \(p\) 是奇素数，\(s\) 与 \(t\) 是 \(\mathbb{F}_p\) 上的独立超越元，\(F = \mathbb{F}_p(s, t)\). 设 \(\beta\) 是 \(x^2-sx+t = 0\) 的一个根，\(a\) 是 \(x^p-\beta = 0\) 的一个根（在 \(F\) 的某个代数闭包中）。令 \(E = F(\beta)\)、\(K = F(a)\).
+
+（a）证明 \(E\) 是 \(F\) 的 2 次伽罗瓦扩张，且 \(K\) 是 \(E\) 的 \(p\) 次纯不可分扩张。
+
+（b）证明 \(K\) 不是 \(F\) 的正规扩张。〔若它是，把 \(\beta\) 在 \(F\) 上共轭，证明 \(K\) 将含有 \(s\) 的 \(p\) 次根，从而也含有 \(t\) 的 \(p\) 次根，于是 \([K:F] \geq p^2\)，矛盾。〕
+
+（c）证明不存在域 \(K_0\) 使 \(F \subseteq K_0 \subseteq K\)，且 \(K_0/F\) 纯不可分、\(K/K_0\) 可分。〔若存在这样的域，利用习题 1 以及两个正规扩张的合成仍正规这一事实，证明 \(K\) 将是 \(F\) 的正规扩张。〕
+
+\item 在上一习题的记号下，证明 \(a, s\) 是 \(K\) 在 \(\mathbb{F}_p\) 上的可分超越基。
+
+\item 设 \(p\) 是素数，\(t\) 在 \(\mathbb{F}_p\) 上超越，\(K\) 由向 \(\mathbb{F}_p(t)\) 添加 \(t\) 的所有 \(p\) 幂次根得到。证明 \(K\) 在 \(\mathbb{F}_p\) 上的超越次数为 1，且没有可分超越基。
+
+\item 证明若 \(t\) 在 \(\mathbb{Q}\) 上超越，则 \(\mathbb{Q}(t, \sqrt{t^3-t})\) 不是 \(\mathbb{Q}\) 的纯超越扩张。（这是所谓\textbf{椭圆函数域}的一个例子。）
+
+\item 设 \(k\) 是含 4 个元素的域，\(t\) 在 \(k\) 上超越，\(F = k(t^4+t)\)，\(K = k(t)\).
+
+（a）证明 \([K:F] = 4\).
+
+（b）证明 \(K\) 在 \(F\) 上可分。
+
+（c）证明 \(K\) 在 \(F\) 上是伽罗瓦扩张。
+
+（d）描述伽罗瓦群的子群格，以及 \(K\) 的相应子域格，把每个子域写成 \(k(r)\) 的形式（\(r\) 是某个有理函数）。
+
+\item 设 \(p\) 是奇素数，\(k\) 是特征为 \(p\) 的代数闭域，\(t\) 在 \(k\) 上超越。设 \(F\) 是 \(k(t)\) 的 2 次域扩张。证明 \(F\) 可以写成 \(k(t, y)\) 的形式，其中 \(y \in F\)，\(y \notin k(t)\) 且 \(y\) 在 \(k\) 上超越。若 \(y^2 = 4t^3-t-1\)，求 \([F:k(y)]\)，并把 \(k(t) \cap k(y)\) 写成 \(k(r)\) 的形式（\(r \in k(t)\)）。
+
+\item 设 \(t\) 在 \(\mathbb{F}_3\) 上超越，\(K = \mathbb{F}_3(t)\)，\(G = \operatorname{Aut}(K/\mathbb{F}_3)\)，\(F\) 是 \(G\) 的不动域。
+
+（a）证明 \(G \cong S_4\)，并由此推出存在唯一的域 \(E\) 使 \(F \subseteq E \subseteq K\) 且 \([E:F] = 2\).〔回忆 \(G \cong \operatorname{PGL}_2(\mathbb{F}_3)\)；证明 \(\operatorname{GL}_2(\mathbb{F}_3)\) 置换 \(\mathbb{F}_3\) 上二维向量空间中的 4 条直线，且这个置换表示的核由标量矩阵组成。〕
+
+（b）完成对 \(K\) 中含 \(E\) 的子域格的描述：给出每个子域形如 \(E(r)\) 的形式（对某个有理函数 \(r\)），并说明与元素
+\[
+\frac{(t^6+t^4+t^2+1)^2}{(t^3+t)^3}
+\]
+相对应的子域。（\(A_4\) 的子群格见第 3.5 节。）
+
+\item 证明域的纯超越真扩张永远不是代数闭的。
+
+\item 设 \(S\) 是域 \(F\) 上的独立超越元集合，\(\Omega\) 是 \(F(S)\) 的代数闭包。证明 \(S\) 上的任意置换都可以延拓为 \(\operatorname{Aut}(F(S)/F)\) 的元素。证明 \(F(S)\) 的任意这样的自同构都可以延拓为 \(\Omega\) 的自同构。由此证明 \(\mathbb{C}\) 有无穷多个自同构。
+
+\item 设 \(K\) 是 \(\mathbb{C}\) 的子域，它关于性质「\(\sqrt{2} \notin K\)」是极大的。
+
+（a）证明这样的域 \(K\) 存在。
+
+（b）证明 \(\mathbb{C}\) 在 \(K\) 上代数。
+
+（c）证明 \(K\) 在 \(\mathbb{C}\) 中的每个有限扩张都是伽罗瓦扩张，且其伽罗瓦群是循环 2-群。
+
+（d）由此证明 \([\mathbb{C}:K]\) 是可数的（且不是有限的）。
+
+\item 设 \(K\) 是 \(\mathbb{C}\) 中某个 \(\mathbb{C}\) 的自同构的不动域。证明 \(K\) 在 \(\mathbb{C}\) 中的每个有限扩张都是循环的。
+
+\item 设 \(K_n\) 是 \((x^2-p_1)(x^2-p_2)\cdots(x^2-p_n)\) 在 \(\mathbb{Q}\) 上的分裂域，其中 \(p_1, \ldots, p_n\) 是前 \(n\) 个素数。证明 \(K_n/\mathbb{Q}\) 的伽罗瓦群是 \(2^n\) 阶初等阿贝尔 2-群。
+
+\item 设 \(K_0 = \mathbb{Q}\)，并对 \(n \geq 0\) 定义 \(K_{n+1}\) 为由向 \(K_n\) 添加 \(K_n\) 上所有三次多项式的所有根所得的扩张。设 \(K\) 是子域 \(K_n\)（\(n \geq 0\)）的并。证明 \(K\) 是 \(\mathbb{Q}\) 的伽罗瓦扩张。证明 \(K\) 上每个三次多项式都在 \(K\) 上完全分裂。证明 \(K\) 有非平凡的代数扩张。
+
+\item 设 \(F\) 是 \(\mathbb{Q}\) 上所有不可约三次多项式的分裂域的合成。证明 \(F\) 不包含 \(\mathbb{Q}\) 的所有二次扩张。
+
+\item 设 \(K_0 = \mathbb{Q}\)，并对 \(n \geq 0\) 定义 \(K_{n+1}\) 为由向 \(K_n\) 添加 \(K_n\) 中所有元素的根式所得的扩张。设 \(K\) 是子域 \(K_n\)（\(n \geq 0\)）的并。证明 \(K\) 是 \(\mathbb{Q}\) 的伽罗瓦扩张。证明 \(K\) 没有非平凡的可解伽罗瓦扩张。证明 \(K\) 有非平凡的伽罗瓦扩张。
+
+\item 设 \(F_0 = \mathbb{Q}\)，并对 \(n \geq 0\) 定义 \(F_{n+1}\) 为由向 \(F_n\) 添加 \(F_n\) 中所有元素的实根式所得的扩张。设 \(F\) 是子域 \(F_n\)（\(n \geq 0\)）的并。设 \(K^+\) 是上一习题中域 \(K\) 上复共轭限制的不动域（\(K\) 的极大实子域）。证明 \(F \neq K^+\).
+
+\item 本习题证明：若 \(K/F\) 是域的伽罗瓦扩张，则 \(\operatorname{Gal}(K/F)\) 同构于 \(\varprojlim \operatorname{Gal}(L/F)\)，其中逆向极限取遍 \(K\) 中含 \(F\) 的所有有限伽罗瓦扩张 \(L\).
+
+（a）证明 \(K\) 是各个域 \(L\) 的并。
+
+（b）证明映射 \(\varphi : \operatorname{Gal}(K/F) \to \varprojlim \operatorname{Gal}(L/F)\)（把 \(\sigma \in \operatorname{Gal}(K/F)\) 映到 \((\ldots, \sigma|_L, \ldots)\)，其中 \(\sigma|_L\) 是 \(\sigma\) 在 \(L\) 上的限制）是同态。
+
+（c）证明 \(\varphi\) 是单射。
+
+（d）若 \((\ldots, \sigma_L, \ldots) \in \varprojlim \operatorname{Gal}(L/F)\)，定义 \(\sigma \in \operatorname{Gal}(K/F)\) 为：当 \(a \in L\) 时 \(\sigma(a) = \sigma_L(a)\). 证明 \(\sigma\) 是良定义的自同构，并由此证明 \(\varphi\) 是满射。
+\end{enumerate}

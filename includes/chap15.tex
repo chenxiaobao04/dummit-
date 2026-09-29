@@ -1,0 +1,2857 @@
+
+\setcounter{chapter}{14}
+
+\chapter{交换环与代数几何}
+
+本章始终设 \(R\) 是满足 \(1 \neq 0\) 的交换环。
+
+\section{诺特环与仿射代数集}
+
+本节我们更详细地研究诺特环。它们是主理想整环的自然推广，在第 12 章中已简要引入。注意当把 \(R\) 看作其上的左模时，它的 \(R\)-子模恰好是它的理想，故第 12 章中的定义可以写成下述形式：
+
+\begin{definition}
+交换环 \(R\) 称为\textbf{诺特}的，或满足理想上的\textbf{升链条件}（简记 A.C.C.），若 \(R\) 中不存在理想的无限递增链，即只要
+\[
+I_1 \subseteq I_2 \subseteq I_3 \subseteq \cdots
+\]
+是 \(R\) 的理想的递增链，就存在正整数 \(m\) 使对所有 \(k \geq m\) 有 \(I_k = I_m\).
+\end{definition}
+
+\begin{proposition}\label{pro:15.1}
+若 \(I\) 是诺特环 \(R\) 的理想，则商环 \(R/I\) 是诺特环。诺特环的任何同态像都是诺特环。
+\end{proposition}
+
+\begin{proof}
+若 \(R\) 是环、\(I\) 是 \(R\) 的理想，则商环 \(R/I\) 中任何理想的无限递增链按格同构定理对应于 \(R\) 中理想的无限递增链。这给出第一个论断，第二个论断由第一同构定理得到。
+\end{proof}
+
+\begin{theorem}\label{thm:15.2}
+下述命题等价：
+
+（1）\(R\) 是诺特环；
+
+（2）\(R\) 的任意非空理想集合在包含关系下有极大元；
+
+（3）\(R\) 的每个理想都是有限生成的。
+\end{theorem}
+
+\begin{proof}
+其证明与第 12.1 节定理 1 在 \(R\)-模 \(M = R\)（此时子模就是理想）这一特殊情形的证明完全相同。
+\end{proof}
+
+\noindent\textbf{例}
+
+每个主理想整环都是诺特环，因为它满足定理 2 的条件（3）。特别地，\(\mathbb{Z}\)、\(k\) 为域时的多项式环 \(k[x]\)、以及 Gauss 整数环 \(\mathbb{Z}[i]\) 都是诺特环。环 \(\mathbb{Z}[x_1, x_2, \ldots]\) 不是诺特环，因为理想 \((x_1, x_2, \ldots)\) 不能由任何有限集生成（任何有限生成元组只涉及有限多个 \(x_i\)）。第 7.4 节习题 33（d）表明 \([0,1]\) 上连续实值函数的环不是诺特环。
+
+诺特环可以有任意长的理想递增链，也可以有无限长的理想递减链。例如 \(\mathbb{Z}\) 有无限递减链
+\[
+(2) \supsetneq (4) \supsetneq (8) \supsetneq \cdots,
+\]
+即诺特环不必满足理想上的降链条件（D.C.C.）。但我们将会看到，满足理想上 D.C.C. 的交换环必然也满足 A.C.C.，即是诺特环；这样的环称为 \textbf{Artin 环}，将在第 16 章中研究。
+
+下面的定理及其推论（在此为完整起见列出）已在第 9.6 节中证明（分别对应定理 21 与推论 22）。
+
+\begin{theorem}\label{thm:15.3}
+（\textbf{Hilbert 基定理}）若 \(R\) 是诺特环，则多项式环 \(R[x]\) 也是诺特环。
+\end{theorem}
+
+注意 Hilbert 基定理表明可以由已有的诺特环构造更大的诺特环，其方式类似于第 9.3 节定理 7（它证明若 \(R\) 是唯一分解整环，则 \(R[x]\) 也是唯一分解整环）。
+
+\begin{corollary}\label{cor:15.4}
+以域 \(k\) 为系数的多项式环 \(k[x_1, x_2, \ldots, x_n]\) 是诺特环。
+\end{corollary}
+
+设 \(k\) 是域。回忆若 \(k\) 含于 \(R\) 的中心且 \(k\) 的单位元就是 \(R\) 的单位元，则称环 \(R\) 是 \(k\)-代数。
+
+\begin{definition}
+（1）若 \(R\) 作为环由 \(k\) 与 \(R\) 中某个有限集 \(r_1, r_2, \ldots, r_n\) 生成，则称 \(R\) 是\textbf{有限生成} \(k\)-代数。
+
+（2）设 \(R\) 与 \(S\) 是 \(k\)-代数。映射 \(\psi : R \to S\) 称为 \(k\)-\textbf{代数同态}，若 \(\psi\) 是环同态且在 \(k\) 上是恒等映射。
+\end{definition}
+
+若 \(R\) 是 \(k\)-代数，则 \(R\) 既是环又是 \(k\) 上的向量空间，区分 \(R\) 的元素作为 \(R\) 生成元的含义很重要。例如有限多个变量上的多项式环 \(k[x_1, \ldots, x_n]\) 是有限生成 \(k\)-代数，因为 \(x_1, \ldots, x_n\) 是环生成元，但当 \(n > 0\) 时这个环是 \(k\) 上的无限维向量空间。
+
+\begin{corollary}\label{cor:15.5}
+环 \(R\) 是有限生成 \(k\)-代数当且仅当存在满 \(k\)-代数同态
+\[
+\varphi : k[x_1, x_2, \ldots, x_n] \to R,
+\]
+它从有限多个变量的多项式环映到 \(R\) 上且在 \(k\) 上是恒等映射。因此任何有限生成 \(k\)-代数都是诺特环。
+\end{corollary}
+
+\begin{proof}
+若 \(R\) 作为 \(k\)-代数由 \(r_1, \ldots, r_n\) 生成，则我们可以定义映射 \(\varphi : k[x_1, \ldots, x_n] \to R\)，取 \(\varphi(x_i) = r_i\)（对所有 \(i\)）、\(\varphi(a) = a\)（对所有 \(a \in k\)）。则 \(\varphi\) 唯一地延拓为满环同态。反之，给定满同态 \(\varphi\)，\(x_1, \ldots, x_n\) 在 \(\varphi\) 下的像作为 \(k\)-代数生成 \(R\)，这说明 \(R\) 有限生成。由于由上一推论 \(k[x_1, \ldots, x_n]\) 是诺特环，任何有限生成 \(k\)-代数都是诺特环的商环，从而由命题 1 也是诺特环。
+\end{proof}
+
+\begin{example}
+假设 \(k\)-代数 \(R\) 作为 \(k\) 上的向量空间是有限维的，例如 \(R = k[x]/(f(x))\)，其中 \(f\) 是 \(k[x]\) 中任意非零多项式。则特别地 \(R\) 是有限生成 \(k\)-代数，因为向量空间的一组基也作为环生成 \(R\)。此时由于理想也是 \(k\)-子空间，任何理想递增链或递减链至多有 \(\dim_kR+1\) 个不同的项，故 \(R\) 同时满足理想上的 A.C.C. 与 D.C.C.
+\end{example}
+
+「代数几何」背后的基本想法是把几何问题等同于涉及 \(k[x_1, \ldots, x_n]\) 这类环中理想的代数问题。这些环的诺特性质把许多问题化归为考虑有限多个代数方程（这正是 Hilbert 基定理最初的动机之一）。我们先考虑这一领域中最基本的几何对象——点集的「代数集」概念。
+
+\noindent\textbf{仿射代数集}
+
+回忆 \(k\) 中元素的 \(n\) 元组构成的集合 \(\mathbb{A}^n\) 称为 \(k\) 上的\textbf{仿射 \(n\) 维空间}（参见第 10.1 节）。若 \(x_1, x_2, \ldots, x_n\) 是 \(k\) 上的独立变量，则 \(k[x_1, x_2, \ldots, x_n]\) 中的多项式 \(f\) 可以通过在 \(\mathbb{A}^n\) 的点处求值而看作 \(\mathbb{A}^n\) 上的 \(k\)-值函数
+\[
+f : (a_1, a_2, \ldots, a_n) \mapsto f(a_1, a_2, \ldots, a_n) \in k.
+\]
+这给出 \(\mathbb{A}^n\) 上一个 \(k\)-值函数环，记作 \(k[\mathbb{A}^n]\)，称为 \(\mathbb{A}^n\) 的\textbf{坐标环}。例如当 \(k = \mathbb{R}\) 且 \(n = 2\) 时，Euclid 平面 \(\mathbb{R}^2\) 的坐标环记作 \(\mathbb{R}[\mathbb{A}^2]\)，它是两个变量（比如 \(x\) 与 \(y\)）的多项式环，这些多项式作为 \(\mathbb{R}^2\) 上的实值函数（即通常的「坐标函数」）作用。
+
+坐标环 \(k[\mathbb{A}^n]\) 的每个函数子集 \(S\) 都确定仿射空间的一个子集 \(Z(S)\)，即 \(S\) 中所有函数同时取零的点的集合：
+\[
+Z(S) = \{(a_1, a_2, \ldots, a_n) \in \mathbb{A}^n \mid f(a_1, a_2, \ldots, a_n) = 0 \text{ 对所有 } f \in S\},
+\]
+其中 \(Z(\varnothing) = \mathbb{A}^n\).
+
+\begin{definition}
+\(\mathbb{A}^n\) 的子集 \(V\) 称为\textbf{仿射代数集}（或简称\textbf{代数集}），若 \(V\) 是某个多项式集合 \(S\) 的公共零点集，即 \(V = Z(S)\)（某个 \(S \subseteq k[\mathbb{A}^n]\)）。此时称 \(V = Z(S)\) 是 \(S\) 在 \(\mathbb{A}^n\) 中的\textbf{零点轨迹}。
+\end{definition}
+
+若 \(S = \{f\}\) 或 \(\{f_1, \ldots, f_m\}\)，我们简记 \(Z(S)\) 为 \(Z(f)\) 或 \(Z(f_1, \ldots, f_m)\)，并分别称它为 \(f\) 或 \(f_1, \ldots, f_m\) 的零点轨迹。注意形如 \(f-g\) 的单个多项式的零点轨迹与方程 \(f = g\) 在仿射 \(n\) 空间中的解集相同，故仿射代数集是多项式方程组的解集，因而在数学中经常出现。
+
+\noindent\textbf{例}
+
+（1）若 \(n = 1\)，则单个多项式 \(f \in k[x]\) 的零点轨迹是 \(f\) 在 \(k\) 中的根集。\(\mathbb{A}^1\) 中的代数集是 \(\varnothing\)、任何有限集以及 \(k\)（参见习题）。
+
+（2）对任何 \(n\)，\(\mathbb{A}^n\) 的单点子集都是仿射代数集，因为 \(\{(a_1, a_2, \ldots, a_n)\} = Z(x_1-a_1, x_2-a_2, \ldots, x_n-a_n)\). 更一般地，\(\mathbb{A}^n\) 的任何有限子集都是仿射代数集。
+
+（3）可以定义 \(\mathbb{A}^n\) 中的直线、平面等——它们是线性代数集，即 \(k[x_1, \ldots, x_n]\) 中若干线性（1 次）多项式集合的零点轨迹。例如 \(\mathbb{A}^2\) 中的直线由方程 \(ax+by = c\) 定义（它是多项式 \(f(x,y) = ax+by-c \in k[x,y]\) 的零点轨迹）。\(\mathbb{A}^3\) 中的直线是 \(k[x,y,z]\) 中两个互不为倍数的线性多项式的零点轨迹。特别地，\(\mathbb{A}^n\) 中的坐标轴、坐标平面等都是仿射代数集。例如 \(\mathbb{A}^3\) 中的 \(x\) 轴是零点集 \(Z(y,z)\)，\(x,y\) 平面是零点集 \(Z(z)\).
+
+（4）一般地，非常数多项式 \(f\) 的代数集 \(Z(f)\) 称为 \(\mathbb{A}^n\) 中的\textbf{超曲面}。圆锥曲线是 Euclid 平面 \(\mathbb{R}^2\) 中熟悉的代数集。例如 \(y-x^2\) 的零点轨迹是抛物线 \(y = x^2\)，\(x^2+y^2-1\) 的零点轨迹是单位圆，而 \(Z(xy-1)\) 是双曲线 \(y = 1/x\)。\(x\) 轴与 \(y\) 轴分别是代数集 \(Z(y)\) 与 \(Z(x)\)。同样，诸如由方程 \(x^2+\frac{y^2}{4}+\frac{z^2}{9} = 1\) 定义的椭球面这样的二次曲面都是 \(\mathbb{R}^3\) 中的仿射代数集。
+
+下面关于仿射代数集的性质，其直接验证留作习题。设 \(S\) 与 \(T\) 是 \(k[\mathbb{A}^n]\) 的子集。
+
+（1）若 \(S \subseteq T\) 则 \(Z(T) \subseteq Z(S)\)（即 \(Z\) 是反包含的，或反变的）。
+
+（2）\(Z(S) = Z(I)\)，其中 \(I = (S)\) 是由子集 \(S\) 在 \(k[\mathbb{A}^n]\) 中生成的理想。
+
+（3）两个仿射代数集的交仍是仿射代数集，事实上 \(Z(S) \cap Z(T) = Z(S \cup T)\). 更一般地，仿射代数集的任意交都是代数集：若 \(\{S_j\}\) 是 \(k[\mathbb{A}^n]\) 的任意子集族，则 \(\bigcap_j Z(S_j) = Z(\bigcup_j S_j)\).
+
+（4）两个仿射代数集的并仍是仿射代数集，事实上 \(Z(I) \cup Z(J) = Z(IJ)\)，其中 \(I\) 与 \(J\) 是理想，\(IJ\) 是它们的乘积。
+
+（5）\(Z(0) = \mathbb{A}^n\) 且 \(Z(1) = \varnothing\)（这里 0 与 1 表示常函数）。
+
+由（2），每个仿射代数集都对应于坐标环的某个理想。因此我们可以考虑
+\[
+Z : \{k[\mathbb{A}^n] \text{ 的理想}\} \to \{\mathbb{A}^n \text{ 中的仿射代数集}\}.
+\]
+由于诺特环 \(k[x_1, x_2, \ldots, x_n]\) 的每个理想 \(I\) 都是有限生成的，设 \(I = (f_1, f_2, \ldots, f_q)\)，由（3）可得 \(Z(I) = Z(f_1) \cap Z(f_2) \cap \cdots \cap Z(f_q)\)，即每个仿射代数集都是 \(\mathbb{A}^n\) 中有限多个超曲面的交。注意仿射 \(n\) 空间中的这个「几何」性质是相应坐标环的一个「代数」性质（即 Hilbert 基定理）的推论。
+
+若 \(V\) 是 \(\mathbb{A}^n\) 中的代数集，则可能有许多理想 \(I\) 满足 \(V = Z(I)\). 例如在 \(\mathbb{R}\) 上的仿射 2 空间中，\(y\) 轴是 \(\mathbb{R}[x,y]\) 的理想 \((x)\) 的零点轨迹，也是 \((x^2)\)、\((x^3)\) 等的零点轨迹。更一般地，任何多项式的零点与它所有正次幂的零点相同，由此 \(Z(I) = Z(I^k)\) 对所有 \(k \geq 1\) 成立。我们将在下一节讨论理想的根时研究确定同一仿射代数集的理想之间的关系。
+
+虽然零点轨迹确定特定代数集 \(V\) 的理想不唯一，但存在唯一的最大理想确定 \(V\)，即在 \(V\) 上取零的所有多项式之集。一般地，对 \(\mathbb{A}^n\) 的任何子集 \(A\) 定义
+\[
+I(A) = \{f \in k[x_1, \ldots, x_n] \mid f(a_1, a_2, \ldots, a_n) = 0 \text{ 对所有 } (a_1, a_2, \ldots, a_n) \in A\}.
+\]
+显然 \(I(A)\) 是理想，且是在 \(A\) 上恒为零的函数的唯一最大理想。这给出对应
+\[
+I : \{\mathbb{A}^n \text{ 的子集}\} \to \{k[\mathbb{A}^n] \text{ 的理想}\}.
+\]
+
+\noindent\textbf{例}
+
+（1）在 Euclid 平面中，\(I(x\text{ 轴})\) 是坐标环 \(\mathbb{R}[x,y]\) 中由 \(y\) 生成的理想。
+
+（2）在任何域 \(k\) 上，在点 \((a_1, a_2, \ldots, a_n) \in \mathbb{A}^n\) 处取零的函数理想都是极大理想，因为它是满环同态 \(k[x_1, \ldots, x_n] \to k\)（由在 \((a_1, a_2, \ldots, a_n)\) 处求值给出）的核。由此
+\[
+I(\{(a_1, a_2, \ldots, a_n)\}) = (x_1-a_1, x_2-a_2, \ldots, x_n-a_n).
+\]
+
+（3）设 \(V = Z(x^3-y^2) \subset \mathbb{A}^2\). 若 \((a,b) \in V\) 则 \(a^3 = b^2\). 若 \(a \neq 0\) 则也有 \(b \neq 0\)，且可写 \(a = (b/a)^2\)、\(b = (b/a)^3\)。由此 \(V\) 是集合 \(\{(a^2, a^3) \mid a \in k\}\). 对任何多项式 \(f(x,y) \in k[x,y]\)，我们可以写 \(f(x,y) = f_0(x)+f_1(x)y+(x^3-y^2)g(x,y)\). 若 \(f(x,y) \in I(V)\)，即 \(f(a^2,a^3) = 0\) 对所有 \(a \in k\) 成立，则 \(f_0(a^2)+f_1(a^2)a^3 = 0\) 对所有 \(a \in k\) 成立。若 \(f_0(x) = a_rx^r+\cdots+a_0\)、\(f_1(x) = b_sx^s+\cdots+b_0\)，则
+\[
+f_0(x^2)+x^3f_1(x^2) = (a_rx^{2r}+\cdots+a_0)+(b_sx^{2s+3}+\cdots+b_0x^3),
+\]
+而这是对每个 \(a \in k\) 都取零的多项式。若 \(k\) 无限，则这个多项式有无穷多个零点，这只有当所有系数为零时才可能。偶次项的系数是 \(f_0(x)\) 的系数，奇次项的系数是 \(f_1(x)\) 的系数，故 \(f_0(x)\) 与 \(f_1(x)\) 都是 0. 于是 \(f(x,y) = (x^3-y^2)g(x,y)\)，从而
+\[
+I(V) = (x^3-y^2) \subset k[x,y].
+\]
+然而当 \(k\) 有限时，\(I(V)\) 中可能有不在理想 \((x^3-y^2)\) 中的元素。例如若 \(k = \mathbb{F}_2\)，则 \(V\) 就是集合 \(\{(0,0), (1,1)\}\)，故 \(I(V)\) 含有多项式 \(x(x-1)\)（参见习题 15）。
+
+关于映射 \(I\) 的下列性质是非常容易的习题。设 \(A\) 与 \(B\) 是 \(\mathbb{A}^n\) 的子集。
+
+（6）若 \(A \subseteq B\) 则 \(I(B) \subseteq I(A)\)（即 \(I\) 也是反变的）。
+
+（7）\(I(A \cup B) = I(A) \cap I(B)\).
+
+（8）\(I(\varnothing) = k[x_1, \ldots, x_n]\)；且若 \(k\) 无限，则 \(I(\mathbb{A}^n) = 0\).
+
+此外，映射 \(Z\) 与 \(I\) 之间容易验证有下列关系：
+
+（9）若 \(A\) 是 \(\mathbb{A}^n\) 的任意子集，则 \(A \subseteq Z(I(A))\)；若 \(I\) 是任意理想，则 \(I \subseteq I(Z(I))\).
+
+（10）若 \(V = Z(I)\) 是仿射代数集，则 \(V = Z(I(V))\)；若 \(I = I(A)\)，则 \(I(Z(I)) = I\)，即 \(Z(I(Z(I))) = Z(I)\) 且 \(I(Z(I(A))) = I(A)\).
+
+最后一个关系表明，只要把 \(Z\) 与 \(I\) 限制在 \(\mathbb{A}^n\) 中形如 \(V = Z(I)\) 的仿射代数集族与 \(k[\mathbb{A}^n]\) 中形如 \(I(V)\) 的理想集上，它们就互为逆映射。在域 \(k\) 代数闭的情形，我们将（在随后两节中）用理想 \(I\) 的纯环论性质刻画那些形如 \(I(V)\)（某个仿射代数集 \(V\)）的理想 \(I\)（这就是著名的 Hilbert「零点定理」，参见定理 32）。
+
+\begin{definition}
+若 \(V \subseteq \mathbb{A}^n\) 是仿射代数集，则商环 \(k[\mathbb{A}^n]/I(V)\) 称为 \(V\) 的\textbf{坐标环}，记作 \(k[V]\).
+\end{definition}
+
+注意当 \(V = \mathbb{A}^n\) 且 \(k\) 无限时 \(I(V) = 0\)，故这个定义推广了前面的术语。\(k[\mathbb{A}^n]\) 中的多项式通过把 \(\mathbb{A}^n\) 上的函数限制到子集 \(V\) 而定义了 \(V\) 上的 \(k\)-值函数。两个这样的多项式函数 \(f\) 与 \(g\) 在 \(V\) 上定义同一个函数当且仅当 \(f-g\) 在 \(V\) 上恒为 0，即 \(f-g \in I(V)\). 因此商环 \(k[V]\) 的元素所对应的陪集 \(\bar f = f+I(V)\) 正是一般多项式函数 \(f\)（从 \(\mathbb{A}^n\) 到 \(k\)）在 \(V\) 上的限制（这有助于解释记号 \(k[V]\)）。若 \(x_i\) 表示 \(\mathbb{A}^n\) 上的第 \(i\) 个坐标函数（把一个 \(n\) 元组投影到其第 \(i\) 个分量），则 \(\bar x_i\)（即 \(x_i\) 在 \(V\) 上的限制，它也恰是 \(V\) 的元素作为 \(\mathbb{A}^n\) 子集的第 \(i\) 个分量）是 \(k[V]\) 的元素，且 \(k[V]\) 作为 \(k\)-代数由 \(\bar x_1, \ldots, \bar x_n\) 有限生成（虽然这未必是极小生成集）。
+
+\begin{example}
+若 \(V = Z(xy-1)\) 是 \(\mathbb{R}^2\) 中的双曲线 \(y = 1/x\)，则 \(\mathbb{R}[V] = \mathbb{R}[x,y]/(xy-1)\). 多项式 \(f(x,y) = x\)（\(x\)-坐标函数）与 \(g(x,y) = x+(xy-1)\) 在 \(\mathbb{R}^2\) 上是不同的函数，但它们限制到子集 \(V\) 上得到同一个函数。例如在点 \((1/2, 2) \in V\) 处二者都取值 \(1/2\). 在商环 \(\mathbb{R}[V]\) 中有 \(xy = 1\)，故 \(\mathbb{R}[V] \simeq \mathbb{R}[x, 1/x]\). 对任意函数 \(\bar f \in \mathbb{R}[V]\) 与任意 \((a,b) \in V\) 有 \(\bar f(a,b) = f(a, 1/a)\)，其中 \(f \in k[x,y]\) 是映射到商环中 \(\bar f\) 的任意多项式。
+\end{example}
+
+现在设 \(V \subseteq \mathbb{A}^n\) 与 \(W \subseteq \mathbb{A}^m\) 是两个仿射代数集。由于 \(V\) 与 \(W\) 由多项式取零定义，\(V\) 与 \(W\) 之间最自然的代数映射是由多项式定义的映射：
+
+\begin{definition}
+映射 \(\varphi : V \to W\) 称为代数集的\textbf{态射}（或\textbf{多项式映射}、\textbf{正则映射}），若存在多项式 \(\varphi_1, \ldots, \varphi_m \in k[x_1, x_2, \ldots, x_n]\) 使
+\[
+\varphi((a_1, \ldots, a_n)) = (\varphi_1(a_1, \ldots, a_n), \ldots, \varphi_m(a_1, \ldots, a_n))
+\]
+对所有 \((a_1, \ldots, a_n) \in V\) 成立。映射 \(\varphi : V \to W\) 称为代数集的\textbf{同构}，若存在态射 \(\psi : W \to V\) 使 \(\varphi \circ \psi = 1_W\) 且 \(\psi \circ \varphi = 1_V\).
+\end{definition}
+
+注意一般地 \(\varphi_1, \varphi_2, \ldots, \varphi_m\) 不是唯一确定的。例如上例中 \(f = x\) 与 \(g = x+(xy-1)\) 都定义了从 \(V = Z(xy-1)\) 到 \(W = \mathbb{A}^1\) 的同一态射。
+
+设 \(F\) 是 \(k[x_1, \ldots, x_m]\) 中的多项式。则 \(F \circ \varphi = F(\varphi_1, \varphi_2, \ldots, \varphi_m)\) 是 \(k[x_1, \ldots, x_n]\) 中的多项式，因为 \(\varphi_1, \varphi_2, \ldots, \varphi_m\) 是 \(x_1, \ldots, x_n\) 的多项式。若 \(F \in I(W)\)，则对每个 \((a_1, a_2, \ldots, a_n) \in V\) 有 \(F \circ \varphi((a_1, \ldots, a_n)) = 0\)，因为 \(\varphi((a_1, \ldots, a_n)) \in W\). 故 \(F \circ \varphi \in I(V)\). 由此 \(\varphi\) 诱导出商环 \(k[x_1, \ldots, x_m]/I(W)\) 到商环 \(k[x_1, \ldots, x_n]/I(V)\) 的良定义映射
+\[
+\bar\varphi : k[W] \to k[V], \qquad \bar f \mapsto \bar f \circ \varphi,
+\]
+其中 \(\bar f \circ \varphi\) 由 \(F \circ \varphi + I(V)\) 给出，而 \(F = F(x_1, \ldots, x_m)\) 是满足 \(\bar f = F+I(W)\) 的任意多项式。容易验证 \(\bar\varphi\) 是 \(k\)-代数同态（例如 \(\bar\varphi(\bar f+\bar g) = (f+g)\circ\varphi = f\circ\varphi+g\circ\varphi = \bar\varphi(\bar f)+\bar\varphi(\bar g)\) 表明 \(\bar\varphi\) 是可加的）。
+
+还要注意 \(\bar\varphi\) 的反变性质：从 \(V\) 到 \(W\) 的态射诱导出从 \(k[W]\) 到 \(k[V]\) 的 \(k\)-代数同态。
+
+反之，设 \(\Phi\) 是从坐标环 \(k[W] = k[x_1, \ldots, x_m]/I(W)\) 到 \(k[V] = k[x_1, \ldots, x_n]/I(V)\) 的任意 \(k\)-代数同态。设 \(F_i \in k[x_1, \ldots, x_n]\) 是 \(\Phi\) 在 \(\bar x_i \in k[W]\) 上的像的一个代表元（即 \(\Phi(\bar x_i)\) 是 \(F_i \bmod I(V)\)）。则 \(\varphi = (F_1, \ldots, F_m)\) 定义了从 \(\mathbb{A}^n\) 到 \(\mathbb{A}^m\) 的多项式映射，事实上 \(\varphi\) 是从 \(V\) 到 \(W\) 的态射。要看清这一点，只需检验 \(\varphi\) 把 \(V\) 的点映到 \(W\) 的点，因为按定义 \(\varphi\) 已经由多项式定义。若 \(g \in I(W) \subseteq k[x_1, \ldots, x_m]\)，则在 \(k[W]\) 中
+\[
+g(\bar x_1, \ldots, \bar x_m) = g(x_1, \ldots, x_m)+I(W) = I(W) = 0 \in k[W],
+\]
+故 \(\Phi(g(\bar x_1, \ldots, \bar x_m)) = 0 \in k[V]\). 由于 \(\Phi\) 是 \(k\)-代数同态，可知
+\[
+g(\Phi(\bar x_1), \ldots, \Phi(\bar x_m)) = 0 \in k[V].
+\]
+按定义 \(\Phi(\bar x_i) = F_i \bmod I(V)\)，故
+\[
+g(F_1 \bmod I(V), \ldots, F_m \bmod I(V)) = 0 \in k[V],
+\]
+即 \(g(F_1, \ldots, F_m) \in I(V)\). 于是对 \(V\) 中每个 \((a_1, \ldots, a_n)\) 有
+\[
+g(F_1(a_1, \ldots, a_n), \ldots, F_m(a_1, \ldots, a_n)) = 0.
+\]
+这表明若 \((a_1, \ldots, a_n) \in V\)，则 \(I(W)\) 中每个多项式都在 \(\varphi(a_1, \ldots, a_n)\) 处取零。由上面 \(Z\) 与 \(I\) 的性质（10），这意味着 \(\varphi(a_1, \ldots, a_n) \in Z(I(W)) = W\)，即 \(\varphi\) 把 \(V\) 的点映到 \(W\) 的点。由此 \(\varphi = (F_1, \ldots, F_m)\) 是从 \(V\) 到 \(W\) 的态射。由于 \(F_i\) 在模 \(I(V)\) 意义下良定义，这个从 \(V\) 到 \(W\) 的态射不依赖于 \(F_i\) 的选取。此外，态射 \(\varphi\) 诱导出原来的 \(k\)-代数同态 \(\Phi\)，即 \(\bar\varphi = \Phi\)，因为这两个同态在 \(\bar x_i \in k[W]\) 上都取值 \(F_i+I(V)\). 这就证明了下面定理中的前两个论断。
+
+\begin{theorem}\label{thm:15.6}
+设 \(V \subseteq \mathbb{A}^n\) 与 \(W \subseteq \mathbb{A}^m\) 是仿射代数集。则存在双射
+\[
+\{\text{从 } V \text{ 到 } W \text{ 的代数集态射}\} \longleftrightarrow \{k\text{-代数同态 } k[W] \to k[V]\}.
+\]
+更精确地：
+
+（1）每个态射 \(\varphi : V \to W\) 诱导出相应的 \(k\)-代数同态 \(\bar\varphi : k[W] \to k[V]\)，定义为 \(\bar\varphi(\bar f) = \bar f \circ \varphi\).
+
+（2）每个 \(k\)-代数同态 \(\Phi : k[W] \to k[V]\) 由唯一的态射 \(\varphi : V \to W\) 诱导，即 \(\Phi = \bar\varphi\).
+
+（3）若 \(\varphi : V \to W\) 与 \(\psi : W \to U\) 是仿射代数集的态射，则 \(\overline{\psi \circ \varphi} = \bar\varphi \circ \bar\psi : k[U] \to k[V]\).
+
+（4）态射 \(\varphi : V \to W\) 是同构当且仅当 \(\bar\varphi : k[W] \to k[V]\) 是 \(k\)-代数同构。
+\end{theorem}
+
+\begin{proof}
+（3）的证明留作习题，（4）则立即推出。
+\end{proof}
+
+\begin{example}
+对任何无限域 \(k\)，设 \(V = \mathbb{A}^1\)、\(W = Z(x^3-y^2) = \{(a^2,a^3) \mid a \in k\}\). 由 \(\varphi(a) = (a^2,a^3)\) 定义的映射 \(\varphi : V \to W\) 是从 \(V\) 到 \(W\) 的态射。注意 \(\varphi\) 是双射。坐标环是 \(k[V] = k[x]\) 与 \(k[W] = k[x,y]/(x^3-y^2)\)（由上例的计算——正是在这里我们需要 \(k\) 无限），而相应的坐标环 \(k\)-代数同态由
+\[
+\bar\varphi : k[W] \to k[V], \qquad x \mapsto x^2, \quad y \mapsto x^3
+\]
+确定。\(\bar\varphi\) 的像是子代数 \(k[x^2, x^3] = k+x^2k[x] \subset k[x]\)，故特别地 \(\bar\varphi\) 不是满射。因此 \(\bar\varphi\) 不是坐标环的同构，从而 \(\varphi\) 不是代数集的同构，尽管态射 \(\varphi\) 是双射。逆映射由 \(\psi(0,0) = 0\)、\(\psi(a,b) = b/a\)（\(b \neq 0\)）给出，而它不能由多项式映射实现。
+\end{example}
+
+定理 6 中的双射把两个几何定义的代数集 \(V\) 与 \(W\) 之间的映射翻译为它们的坐标环之间的代数映射。它还允许我们不用显式引用包含 \(V\) 与 \(W\) 的外围仿射空间，而用 \(V\) 与 \(W\) 内蕴地定义态射：
+
+\begin{corollary}\label{cor:15.7}
+设 \(\varphi : V \to W\) 是仿射代数集之间的映射。则 \(\varphi\) 是态射当且仅当对每个 \(f \in k[W]\)，复合映射 \(f \circ \varphi\) 是 \(k[V]\) 的元素（作为 \(V\) 上的 \(k\)-值函数）。当 \(\varphi\) 是态射时，对 \(v \in V\)、\(w \in W\) 有 \(\varphi(v) = w\) 当且仅当 \(\bar\varphi^{-1}(I(\{v\})) = I(\{w\})\).
+\end{corollary}
+
+\begin{proof}
+我们先证明：若 \(\lambda\) 是任何从 \(V\) 到 \(W\) 的映射，且 \(\bar\lambda\) 是 \(k\)-代数同态，则 \(\lambda(v) = w\) 当且仅当 \(\bar\lambda^{-1}(I(\{v\})) = I(\{w\})\)，这将特别给出第二个论断。注意 \(\lambda(v) = w\) 当且仅当每个在 \(w\) 处取零的多项式 \(f\) 都在 \(\lambda(v)\) 处取零（由上面的性质（10）：\(\{w\} = Z(I(\{w\}))\)）。由于 \(f\) 在 \(\lambda(v)\) 处取零当且仅当 \(\bar\lambda(f)\) 在 \(v\) 处取零，这等价于：对每个 \(f \in I(\{w\})\) 有 \(\bar\lambda(f) \in I(\{v\})\)，即 \(\bar\lambda(I(\{w\})) \subseteq I(\{v\})\)，或 \(I(\{w\}) \subseteq \bar\lambda^{-1}(I(\{v\}))\). 由于 \(I(\{w\})\) 与 \(I(\{v\})\) 都是极大理想，这等价于 \(\bar\lambda^{-1}(I(\{v\})) = I(\{w\})\).
+
+现在证明第一个论断。若 \(\varphi\) 是态射，则对每个 \(f \in k[W]\) 有 \(f \circ \varphi \in k[V]\). 反之，先注意与任何映射 \(\lambda : V \to W\) 复合都定义了一个 \(k\)-代数同态 \(\bar\lambda\)，从 \(W\) 上 \(k\)-值函数的 \(k\)-代数到 \(V\) 上 \(k\)-值函数的 \(k\)-代数（这由函数加法与乘法的逐点定义立即得到）。若对每个 \(f \in k[W]\) 有 \(f\circ\lambda \in k[V]\)，则 \(\bar\lambda\) 是从 \(k[W]\) 到 \(k[V]\) 的 \(k\)-代数同态，故由定理 6，存在唯一的态射 \(\varphi : V \to W\) 使 \(\bar\varphi = \bar\lambda\). 又由上面已证的部分，\(\varphi(v) = w\) 当且仅当 \(\bar\varphi^{-1}(I(\{v\})) = I(\{w\})\)；由于 \(\bar\varphi = \bar\lambda\)，这当且仅当 \(\bar\lambda^{-1}(I(\{v\})) = I(\{w\})\)，而后者当且仅当 \(\lambda(v) = w\). 因此 \(\lambda\) 与 \(\varphi\) 在 \(V\) 上定义同一个映射，故 \(\lambda\) 是态射，证明完毕。
+\end{proof}
+
+推论 7 与定理 6 的最后部分表明，\(V\) 的坐标环的同构型（作为 \(k\)-代数）不依赖于 \(V\) 在特定仿射 \(n\) 空间中的嵌入方式。
+
+\noindent\textbf{仿射代数集与 \(k\)-代数中的计算}
+
+第 9.6 节发展起来的 Gröbner 基理论在涉及仿射代数集的计算中非常有用，例如在坐标环 \(k[\mathbb{A}^n]/I(V)\) 中进行计算。当 \(n > 1\) 时，显式描述这个商环中的元素可能很困难。由第 9.6 节定理 23，\(k[\mathbb{A}^n]\) 中每个多项式在用 \(I(V)\) 的 Gröbner 基的元素作一般多项式除法后都有唯一的余式，故这个余式可以作为 \(f\) 在商环 \(k[\mathbb{A}^n]/I(V)\) 中陪集的唯一代表元。
+
+\noindent\textbf{例}
+
+（1）在上面的例 \(W = Z(x^3-y^2)\) 中，我们证明了当 \(k\) 无限时 \(I = I(W) = (x^3-y^2)\)，故 \(k[W] = k[x,y]/(x^3-y^2)\). 这里 \(x^3-y^2\) 给出 \(I\) 关于字典序 \(y > x\) 的 Gröbner 基，故每个多项式 \(\bar f = f(x,y)\) 都可以唯一地写成 \(f(x,y) = f_0(x)+f_1(x)y+\bar f\) 的形式，其中 \(f_0(x), f_1(x) \in k[x]\)、\(\bar f \in I\). 于是 \(f_0(x)+f_1(x)y\) 给出 \(\bar f\) 在 \(k[W]\) 中的唯一代表元。关于字典序 \(x > y\)，\(x^3-y^2\) 同样是 \(I\) 的 Gröbner 基，但此时代表 \(\bar f\) 在 \(k[W]\) 中的余式具有形式 \(h_0(y)+h_1(y)x+h_2(y)x^2\).
+
+（2）设 \(V = Z(I) \subset \mathbb{C}^3\) 与 \(W = Z(J) \subset \mathbb{C}^2\)，其中
+\[
+I = (xz+y^2+z^2,\ xy-xz+yz-2z^2), \qquad J = (u^3-uv^2+v^3).
+\]
+我们将在后面证明 \(I = I(V)\)、\(J = I(W)\). 此时与上一例类似，\(u^3-uv^2+v^3\) 给出 \(J\) 的一个 Gröbner 基。\(I\) 的情形更为复杂：关于字典序 \(x > y > z\)，\(I\) 的约化 Gröbner 基为
+\[
+xz+y^2+z^2, \qquad xy+y^2+yz-z^2, \qquad y^3-y^2z+z^3.
+\]
+\(\mathbb{C}[V] = \mathbb{C}[x,y,z]/(xz+y^2+z^2,\ xy-xz+yz-2z^2)\) 中元素的唯一代表元由用 \(\{g_1, g_2, g_3\}\) 作一般多项式除法所得的余式给出。
+
+我们在第 9.6 节已经看到，Gröbner 基与消元理论可以用来显式计算仿射代数集 \(Z(S)\)，等价地，可以用来显式求解代数方程组。同样的理论可以用来显式确定 \(k\)-代数同态
+\[
+\Phi : k[y_1, \ldots, y_m]/J \to k[x_1, \ldots, x_n]/I
+\]
+的像与核的一组生成元，其中 \(I\) 与 \(J\) 是理想。特别地，当 \(I = I(V)\)、\(J = I(W)\) 是与仿射代数集 \(V \subseteq \mathbb{A}^n\)、\(W \subseteq \mathbb{A}^m\) 相关联的理想时，由定理 6，\(k\)-代数同态 \(\Phi\) 对应于从 \(V\) 到 \(W\) 的态射，我们将把这里的结果应用于第 3 节中的仿射代数集。
+
+对 \(1 \leq i \leq m\)，设 \(\varphi_i \in k[x_1, \ldots, x_n]\) 是表示陪集 \(\bar\Phi(\bar y_i)\) 的任意多项式，这里照例用横线表示商环中元素的陪集。多项式 \(\varphi_1, \ldots, \varphi_m\) 在相差 \(I\) 的元素的意义下唯一。则陪集 \(\bar f(y_1, \ldots, y_m)+J\) 在 \(\Phi\) 下的像是陪集 \(f(\varphi_1, \ldots, \varphi_m)+I\). 给定任何 \(\varphi_1, \ldots, \varphi_m\)，把 \(y_i\) 映到 \(\varphi_i\) 的映射诱导出 \(k\)-代数同态 \(\Phi\) 当且仅当对每个 \(f \in J\) 有 \(f(\varphi_1, \ldots, \varphi_m) \in I\)，而这个条件只需在 \(J\) 的一组生成元上验证。
+
+\begin{proposition}\label{pro:15.8}
+沿用上面的记号，设 \(R = k[y_1, \ldots, y_m, x_1, \ldots, x_n]\)，设 \(A\) 是由 \(y_1-\varphi_1, \ldots, y_m-\varphi_m\) 连同 \(I\) 的生成元生成的理想。设 \(G\) 是 \(A\) 关于字典序 \(x_1 > \cdots > x_n > y_1 > \cdots > y_m\) 的约化 Gröbner 基。则
+
+（a）\(\Phi\) 的核是 \(A \cap k[y_1, \ldots, y_m]\) 模 \(J\)。\(G\) 中属于 \(k[y_1, \ldots, y_m]\) 的元素（模 \(J\)）生成 \(\ker\Phi\).
+
+（b）若 \(f \in k[x_1, \ldots, x_n]\)，则 \(\bar f\) 属于 \(\Phi\) 的像当且仅当 \(f\) 用 \(G\) 中元素作一般多项式除法所得的余式是元素 \(h \in k[y_1, \ldots, y_m]\)，此时 \(\Phi(\bar h) = \bar f\).
+\end{proposition}
+
+\begin{proof}
+若我们能证明 \(\ker\Phi = A \cap k[y_1, \ldots, y_m]\) 模 \(J\)，则由第 9.6 节命题 30 得到（a）。先设 \(f \in A \cap k[y_1, \ldots, y_m]\). 若 \(f_1, \ldots, f_s\) 是 \(I\) 在 \(k[x_1, \ldots, x_n]\) 中的生成元，则
+\[
+f(y_1, \ldots, y_m) = \sum_{i=1}^{m}a_i(y_i-\varphi_i)+\sum_{j=1}^{s}b_jf_j
+\]
+作为 \(R\) 中的多项式，其中 \(a_1, \ldots, a_m, b_1, \ldots, b_s \in R\). 代入 \(y_i = \varphi_i\)，我们看到 \(f(\varphi_1, \ldots, \varphi_m)\) 是 \(I\) 的元素。由于 \(\Phi(\bar f) = f(\varphi_1, \ldots, \varphi_m)\) 模 \(I\)，可知 \(f\) 表示 \(\Phi\) 的核中的一个陪集。反之，设 \(f \in k[y_1, \ldots, y_m]\) 表示 \(\ker\Phi\) 中的一个元素。则 \(f(\varphi_1, \ldots, \varphi_m) \in I\)（在 \(k[x_1, \ldots, x_n]\) 中），故也在 \(A\) 中（在 \(R\) 中）。由于 \(y_i-\varphi_i \in A\)，
+\[
+f(y_1, \ldots, y_m) = f(\varphi_1, \ldots, \varphi_m) = 0 \bmod A,
+\]
+故 \(f \in A \cap k[y_1, \ldots, y_m]\).
+
+对（b），先设 \(f \in k[x_1, \ldots, x_n]\) 表示 \(\Phi\) 的像中的一个元素，即 \(\bar f = \Phi(\bar h)\)（某个多项式 \(h \in k[y_1, \ldots, y_m]\)）。则
+\[
+f(x_1, \ldots, x_n)-h(\varphi_1, \ldots, \varphi_m) \in I
+\]
+作为 \(k[x_1, \ldots, x_n]\) 中的多项式，从而 \(f(x_1, \ldots, x_n)-h(\varphi_1, \ldots, \varphi_m) \in A\) 作为 \(R\) 中的多项式。如前，由于每个 \(y_i-\varphi_i \in A\)，可知
+\[
+f(x_1, \ldots, x_n)-h(y_1, \ldots, y_m) \in A.
+\]
+于是 \(f(x_1, \ldots, x_n)\) 与 \(h(y_1, \ldots, y_m)\) 在用 \(G\) 中元素作一般多项式除法后余式相同。由于 \(x_1 > \cdots > x_n > y_1 > \cdots > y_m\)，\(h(y_1, \ldots, y_m)\) 的余式仍是只涉及 \(y_1, \ldots, y_m\) 的多项式 \(h_0\). 还要注意 \(h-h_0 \in A \cap k[y_1, \ldots, y_m]\)，故由（a）\(h\) 与 \(h_0\) 相差 \(\ker\Phi\) 的元素，于是 \(\Phi(\bar h_0) = \Phi(\bar h) = \bar f\). 反之，若 \(f\) 用 \(G\) 中元素作一般多项式除法后留下余式 \(h \in k[y_1, \ldots, y_m]\)，则 \(f(x_1, \ldots, x_n)-h(y_1, \ldots, y_m) \in A\)，即
+\[
+f(x_1, \ldots, x_n)-h(y_1, \ldots, y_m) = \sum_{i=1}^{m}a_i(y_i-\varphi_i)+\sum_{j=1}^{s}b_jf_j
+\]
+作为 \(R\) 中的多项式，其中 \(a_1, \ldots, a_m, b_1, \ldots, b_s \in R\). 代入 \(y_i = \varphi_i\) 得到
+\[
+f(x_1, \ldots, x_n)-h(\varphi_1, \ldots, \varphi_m) \in I
+\]
+作为 \(x_1, \ldots, x_n\) 中的多项式，于是 \(\bar f = \Phi(\bar h)\).
+\end{proof}
+
+由命题 8 特别可知，\(\Phi\) 是满同态当且仅当对每个 \(i = 1, 2, \ldots, n\)，把 \(x_i\) 用 Gröbner 基 \(G\) 的元素作除法后留下 \(k[y_1, \ldots, y_m]\) 中的余式 \(h_i\). 特别地，\(x_n-h_n\) 的余式为 0. 但这意味着 \(G\) 中某个元素 \(g_n\) 的首项整除 \(x_n-h_n\) 的首项，而由于按序的选取有 \(x_1 > \cdots > x_n > y_1 > \cdots > y_m\)，\(x_n-h_n\) 的首项就是 \(x_n\). 由此 \(\operatorname{LT}(g_n) = x_n\)，故 \(g_n = x_n-h_{n,0} \in G\)（某个 \(h_{n,0} \in k[y_1, \ldots, y_m]\)；事实上 \(h_{n,0}\) 就是 \(h_n\) 用 \(G\) 中元素作除法后的余式）。其次，由于 \(x_{n-1}-h_{n-1}\) 的余式为 0，\(G\) 中存在首项为 \(x_{n-1}\) 的元素 \(g_{n-1}\). 由于 \(G\) 是约化 Gröbner 基且 \(g_n \in G\)，\(g_n\) 的首项即 \(x_n\) 不整除 \(g_{n-1}\) 的任何单项式项；与前面类似的论证表明 \(g_{n-1} = x_{n-1}-h_{n-1,0} \in G\)（某个 \(h_{n-1,0} \in k[y_1, \ldots, y_m]\)）。继续下去，可以看出 \(\Phi\) 是否满射可以立即从约化 Gröbner 基的元素看出。
+
+\begin{corollary}\label{cor:15.9}
+映射 \(\Phi\) 是满射当且仅当对每个 \(i\)（\(1 \leq i \leq n\)），约化 Gröbner 基 \(G\) 含有多项式 \(x_i-h_i\)，其中 \(h_i \in k[y_1, \ldots, y_m]\).
+\end{corollary}
+
+\noindent\textbf{例}
+
+（1）设 \(\phi : \mathbb{Q}[u,v] \to \mathbb{Q}[x]\) 由 \(\phi(u) = x^2+x\)、\(\phi(v) = x^3\) 定义。理想 \(A = (u-x^2-x,\ v-x^3)\) 关于字典序 \(x > u > v\) 的约化 Gröbner 基 \(G\) 为
+\[
+g_1 = x^2+x-u, \qquad g_2 = ux+x-u-v, \qquad g_3 = vx-x-u^2+u+2v, \qquad g_4 = u^3-3uv-v^2-v.
+\]
+\(\phi\) 的核是由 \(G \cap \mathbb{Q}[u,v] = \{g_4\}\) 生成的理想。由推论 9 我们看到 \(\phi\) 不是满射。把 \(x^4\) 用 \(\{g_1, g_3, g_4\}\) 作一般多项式除法所得的余式为 \(x+u^2-u-2v \notin \mathbb{Q}[u,v]\)，故 \(x^4\) 不在 \(\phi\) 的像中。\(x^5+x\) 的余式为 \(-u^2+uv+u+2v \in \mathbb{Q}[u,v]\)，故 \(x^5+x = \phi(-u^2+uv+u+2v)\) 在 \(\phi\) 的像中，简单验算即可确认。
+
+（2）设 \(V = Z(I) \subset \mathbb{C}^3\)、\(W = Z(J) \subset \mathbb{C}^2\)，其中 \(I = (xz+y^2+z^2,\ xy-xz+yz-2z^2)\)、\(J = (u^3-uv^2+v^3)\)，如推论 7 之后的例 2 中那样。则由 \(\varphi((a,b,c)) = (c,b)\) 定义的映射 \(V \to W\) 是从 \(V\) 到 \(W\) 的态射。要看清这一点，我们必须检验若 \((a,b,c) \in V\) 则 \((c,b) \in W\). 等价地，由定理 6，我们必须检验由 \(u \mapsto z\)、\(v \mapsto y\) 诱导的映射
+\[
+\phi : \mathbb{C}[u,v]/(u^3-uv^2+v^3) \to \mathbb{C}[x,y,z]/(xz+y^2+z^2,\ xy-xz+yz-2z^2)
+\]
+是 \(\mathbb{C}\)-代数同态。这又等价于验证 \(f = z^3-zy^2+y^3\) 是理想 \(I\) 的元素。此时 \(f\) 事实上是 \(I\) 的约化 Gröbner 基中的元素：
+\[
+\{xz+y^2+z^2,\ xy+y^2+yz-z^2,\ y^3-y^2z+z^3\},
+\]
+故当然 \(f \in I\).（注意把 \(f\) 用 \(I\) 原来的两个生成元作除法会留下非零余式 \(f\)，由此很不清楚 \(f \in I\)，故在坐标环中工作时使用 Gröbner 基很重要。）
+
+（3）在上一例中，设 \(A = (u-z,\ v-y,\ xz+y^2+z^2,\ xy-xz+yz-2z^2) \subset \mathbb{C}[u,v,x,y,z]\) 如命题 8 中那样。关于字典序 \(x > y > z > u > v\)，\(A\) 的约化 Gröbner 基 \(G\) 为
+\[
+xu+u^2+v^2, \qquad xv-u^2+uv+v^2, \qquad y-v, \qquad z-u, \qquad u^3-uv^2+v^3.
+\]
+由命题 8 我们看到 \(\ker\varphi\) 由 \(u^3-uv^2+v^3 \equiv 0 \bmod J\) 生成，故 \(\varphi\) 是单射。由于 \(G\) 中没有形如 \(x-h(u,v)\) 的元素，\(\varphi\) 不是满射（事实上 \(x\) 不在像中）。
+
+作为最后一个例子，我们用 \(k\)-代数同态的核的确定来计算单代数域扩张中元素的极小多项式。
+
+\begin{proposition}\label{pro:15.10}
+设 \(\alpha\) 是不可约多项式 \(p(x) \in k[x]\) 的一个根，\(\beta \in k(\alpha)\)，比如 \(\beta = f(\alpha)\)（某个多项式 \(f \in k[x]\)）。设 \(G\) 是理想 \((p,\ y-f)\) 在 \(k[x,y]\) 中关于字典序 \(x > y\) 的约化 Gröbner 基。则 \(\beta\) 在 \(k\) 上的极小多项式是 \(G \cap k[y]\) 中的首一多项式。
+\end{proposition}
+
+\begin{proof}
+把 \(y\) 先映到 \(f\)、再映到 \(\beta\) 所定义的 \(k\)-代数同态 \(k[y] \to k[x]/(p) \to k(\alpha)\) 的核是 \(k[y]\) 中由 \(\beta\) 的极小多项式生成的主理想，结论由命题 8 得到。
+\end{proof}
+
+\begin{example}
+取 \(k = \mathbb{Q}\)，设 \(\beta = 1+\sqrt[3]{2}+3\sqrt[3]{4} \in \mathbb{Q}(\theta)\). 则 \(\mathbb{Q}[x,y]\) 中的理想 \((x^3-2,\ y-(1+x+3x^2))\) 关于字典序 \(x > y\) 的约化 Gröbner 基为
+\[
+\{53x-3y^2+7y+32,\ y^3-3y^2-15y-93\},
+\]
+故 \(\beta\) 的极小多项式是 \(y^3-3y^2-15y-93\).
+\end{example}
+
+\subsection*{习题}
+
+设 \(R\) 是满足 \(1 \neq 0\) 的交换环，\(k\) 是域。
+
+\begin{enumerate}
+\item 证明 Hilbert 基定理的逆命题：若多项式环 \(R[x]\) 是诺特环，则 \(R\) 是诺特环。
+
+\item 通过给出显式的理想无限递增链，证明下列环都不是诺特环：
+
+（a）\([0,1]\) 上连续实值函数的环；
+
+（b）从任意无限集 \(X\) 到 \(\mathbb{Z}/2\mathbb{Z}\) 的所有函数的环。
+
+\item 证明 \(k\) 上变量 \(x\) 的有理函数域 \(k(x)\) 不是有限生成 \(k\)-代数。（回忆 \(k(x)\) 是多项式环 \(k[x]\) 的分式域。注意 \(k(x)\) 是 \(k\) 的有限生成\emph{域}扩张。）
+
+\item 证明若 \(R\) 是诺特环，则变量 \(x\) 上以 \(R\) 为系数的形式幂级数环 \(R[[x]]\) 也是诺特环（参见第 7.2 节习题 3）。〔模仿 Hilbert 基定理的证明。〕
+
+\item （\textbf{Fitting 引理}）设 \(M\) 是诺特 \(R\)-模，\(\theta : M \to M\) 是 \(M\) 的 \(R\)-模自同态。证明当 \(n\) 充分大时 \(\ker(\theta^n) \cap \operatorname{image}(\theta^n) = 0\). 证明若 \(\theta\) 是满射，则 \(\theta\) 是同构。〔注意 \(\ker(\theta) \subseteq \ker(\theta^2) \subseteq \cdots\)〕
+
+\item 设 \(0 \to M' \to M \to M'' \to 0\) 是 \(R\)-模的正合序列。证明 \(M\) 是诺特 \(R\)-模当且仅当 \(M'\) 与 \(M''\) 都是诺特 \(R\)-模。
+
+\item 证明诺特 \(R\)-模的子模、商模与有限直和仍是诺特 \(R\)-模。
+
+\item 若 \(R\) 是诺特环，证明 \(M\) 是诺特 \(R\)-模当且仅当 \(M\) 是有限生成 \(R\)-模。（因此诺特环上有限生成模的子模也是有限生成的。）
+
+\item 设 \(k\) 是域。证明多项式环 \(k[x]\) 的任何含 \(k\) 的子环都是诺特环。举例说明这样的子环不必是唯一分解整环。〔若 \(k \subsetneq R \subseteq k[x]\) 且 \(y \in R-k\)，证明 \(k[x]\) 是有限生成 \(k[y]\)-模；然后利用上两题。第二问可考虑 \(k[x^2,x^3]\)。〕
+
+\item 证明 \(k[x,y]\) 的子环
+\[
+k[x,\ x^2y,\ x^3y^2,\ \ldots,\ x^iy^{i-1},\ \ldots]
+\]
+不是诺特环，从而不是有限生成 \(k\)-代数。（因此诺特环的子环不必是诺特环，有限生成 \(k\)-代数的子代数不必是有限生成的。）
+
+\item 设 \(R\) 是交换环，其中所有素理想都是有限生成的。本习题证明 \(R\) 是诺特环。
+
+（a）证明若 \(R\) 中非有限生成的理想构成的集合非空，则它含有极大元 \(I\)，且 \(R/I\) 是诺特环。
+
+（b）证明存在包含 \(I\) 的有限生成理想 \(I_1\) 与 \(I_2\)，使 \(I_1I_2 \subseteq I\)，且 \(I_1/(I_1I_2)\) 是有限生成的。〔注意 \(I\) 不是素理想。〕
+
+（c）证明 \(I/I_1I_2\) 是 \(I_1/I_1I_2\) 的有限生成 \(R/I\)-子模。〔利用习题 8。〕
+
+（d）证明（c）蕴涵矛盾：\(I\) 在 \(R\) 上将是有限生成的；由此推出 \(R\) 是诺特环。
+
+\item 设 \(R\) 是诺特环，\(S\) 是有限生成 \(R\)-代数。若 \(T \subseteq S\) 是 \(R\)-代数且 \(S\) 是有限生成 \(T\)-模，证明 \(T\) 是有限生成 \(R\)-代数。〔若 \(s_1, \ldots, s_r\) 作为 \(R\)-代数生成 \(S\)，而 \(s'_1, \ldots, s'_m\) 作为 \(T\)-模生成 \(S\)，证明元素 \(s_i\) 与 \(s'_js_i\) 都可以写成 \(s'_i\) 的有限 \(T\)-线性组合。若 \(T_0\) 是由这些线性组合的系数生成的 \(R\)-子代数，证明 \(S\)（从而 \(T_0\)）作为 \(T_0\)-模由 \(s'_i\) 有限生成，并由此得出 \(T\) 作为 \(R\)-代数是有限生成的。〕
+
+\item 验证映射 \(Z\) 与 \(I\) 的性质（1）至（10）。
+
+\item 证明在任何域 \(k\) 上，\(\mathbb{A}^1\) 中的仿射代数集是 \(\varnothing\)、\(k\) 以及 \(k\) 的有限子集。
+
+\item 若 \(k = \mathbb{F}_2\) 且 \(V = \{(0,0), (1,1)\} \subset \mathbb{A}^2\)，证明 \(I(V)\) 是乘积理想 \(\mathfrak{m}_1\mathfrak{m}_2\)，其中 \(\mathfrak{m}_1 = (x,y)\)、\(\mathfrak{m}_2 = (x-1, y-1)\).
+
+\item 设 \(V\) 是 \(\mathbb{A}^n\) 中的有限代数集。若 \(V\) 有 \(m\) 个点，证明 \(k[V]\) 作为 \(k\)-代数同构于 \(k^m\).〔利用中国剩余定理。〕
+
+\item 若 \(k\) 是有限域，证明 \(\mathbb{A}^n\) 的每个子集都是仿射代数集。
+
+\item 若 \(k = \mathbb{F}_q\) 是含 \(q\) 个元素的有限域，证明 \(I(\mathbb{A}^1) = (x^q-x)k[x]\).
+
+\item 对每个非常数 \(f \in k[x]\)，用 \(f\) 在 \(k[x]\) 中的唯一分解描述 \(Z(f) \subseteq \mathbb{A}^1\)，然后用它描述 \(I(Z(f))\)。由此证明 \(I(Z(f)) = (f)\) 当且仅当 \(f\) 是 \(k[x]\) 中互不相同的线性因子之积。
+
+\item 若 \(f\) 与 \(g\) 是 \(k[x,y]\) 中互不相伴（互不整除）的不可约多项式，证明 \(Z((f,g))\) 在 \(\mathbb{A}^2\) 中或者是 \(\varnothing\)，或者是有限集。〔若 \((f,g) \neq (1)\)，先令 \(R = k[x]\)、\(F = k(x)\)，用 Gauss 引理证明 \(f\) 与 \(g\) 在 \(F[y]\) 中互素，从而 \((f,g)\) 含有 \(k[x]\) 中的非零多项式（类似地也含有 \(k[y]\) 中的非零多项式）。〕
+
+\item 把每个以 \(k\) 中元素为元素的 \(2 \times 2\) 矩阵 \(\begin{pmatrix}a & b\\ c & d\end{pmatrix}\) 与 \(\mathbb{A}^4\) 中的点 \((a,b,c,d)\) 等同起来。证明行列式为 1 的矩阵群 \(SL_2(k)\) 是 \(\mathbb{A}^4\) 中的代数集。
+
+\item 证明 \(SL_n(k)\) 是 \(\mathbb{A}^{n^2}\) 中的仿射代数集。〔推广上一习题。〕
+
+\item 设 \(V\) 是 \(\mathbb{R}^2\) 中的任意直线（任何非零线性多项式 \(ax+by-c\) 的零点集）。证明 \(\mathbb{R}[V]\) 作为 \(\mathbb{R}\)-代数同构于多项式环 \(\mathbb{R}[x]\)，并给出相应的从 \(\mathbb{A}^1\) 到 \(V\) 的同构。
+
+\item 设 \(V = Z(xy-z) \subset \mathbb{A}^3\). 证明 \(V\) 同构于 \(\mathbb{A}^2\)，并给出显式的同构以及相应的从 \(k[V]\) 到 \(k[\mathbb{A}^2]\) 的 \(k\)-代数同构 \(\varphi\) 及其逆映射。\(V = Z(xy-z^2)\) 是否同构于 \(\mathbb{A}^2\)？
+
+\item 设 \(V \subseteq \mathbb{A}^n\) 是仿射代数集，\(f \in k[V]\). \(f\) 的\textbf{图像}是 \(\mathbb{A}^{n+1}\) 中的点集 \(\{(a_1, \ldots, a_n, f(a_1, \ldots, a_n))\}\). 证明 \(f\) 的图像是同构于 \(V\) 的仿射代数集。〔一个方向的态射把 \((a_1, \ldots, a_n)\) 映到 \((a_1, \ldots, a_n, f(a_1, \ldots, a_n))\).〕
+
+\item 设 \(V = Z(xz-y^2,\ yz-x^3,\ x^2y-z^2) \subset \mathbb{A}^3\).
+
+（a）证明由 \(\varphi(t) = (t^3, t^4, t^5)\) 定义的映射 \(\varphi : \mathbb{A}^1 \to V\) 是满态射。〔对满射性，若 \((x,y,z) \neq (0,0,0)\)，令 \(t = y/x\).〕
+
+（b）显式描述相应的 \(k\)-代数同态 \(\bar\varphi : k[V] \to k[\mathbb{A}^1]\).
+
+（c）证明 \(\varphi\) 不是同构。
+
+\item 设 \(\varphi : V \to W\) 是仿射代数集的态射。若 \(W'\) 是 \(W\) 的仿射代数子集，证明 \(W'\) 在 \(V\) 中的原像 \(V' = \varphi^{-1}(W')\) 是 \(V\) 的仿射代数子集。若 \(W' = Z(I)\)，证明 \(V' = Z(\bar\varphi(I))\)，其中 \(\bar\varphi : k[W] \to k[V]\) 是相应的态射。
+
+\item 证明若 \(V\) 与 \(W\) 是仿射代数集，则 \(V \times W\) 也是仿射代数集，且 \(k[V \times W] \cong k[V] \otimes_k k[W]\).
+
+\noindent 下面七个习题引入 \(R\)-模 \(M\) 的相伴素理想的概念。另见第 4 章习题 30--40 与第 5 章习题 25--30.
+
+\noindent\textbf{定义。} \(R\) 的素理想 \(P\) 称为与 \(R\)-模 \(M\) \textbf{相伴}（有时称为 \(M\) 的「assassin」），若 \(P\) 是 \(M\) 的某个元素 \(m\) 的零化子，即 \(M\) 含有同构于 \(R/P\) 的子模 \(Rm\). \(M\) 的相伴素理想的集合记作 \(\operatorname{Ass}_R(M)\).
+
+当 \(M = I\) 是 \(R\) 的理想时，习惯上（略微滥用术语）把 \(\operatorname{Ass}_R(R/I)\) 的元素（而不是较无趣的 \(\operatorname{Ass}_R(I)\)）称为与 \(I\) 相伴的素理想。（参见第 5 章习题 28--29。）
+
+\item 若 \(R = \mathbb{Z}\)、\(M = \mathbb{Z}/n\mathbb{Z}\)，证明 \(\operatorname{Ass}_R(M)\) 由 \(n\) 的素因子 \(p\) 对应的素理想 \((p)\) 组成。
+
+\item 若 \(M\) 是若干子模 \(M_i\) 的并，证明 \(\operatorname{Ass}_R(M)\) 是这些 \(\operatorname{Ass}_R(M_i)\) 的并。
+
+\item 假设 \(\operatorname{Ann}(m) = P\)，即 \(Rm \cong R/P\). 证明若 \(0 \neq m' \in Rm\) 则 \(\operatorname{Ann}(m') = P\). 由此证明 \(\operatorname{Ass}_R(R/P) = \{P\}\).〔注意 \(R/P\) 是整环。〕
+
+\item 假设 \(M\) 是 \(R\)-模，\(P\) 是形如 \(\operatorname{Ann}(m)\)（\(m \in M\)）的理想的集合中的极大元。证明 \(P\) 是素理想。〔若 \(P = \operatorname{Ann}(m)\) 且 \(ab \in P\)，证明 \(bm \neq 0\) 蕴涵 \(\operatorname{Ann}(m) \subseteq \operatorname{Ann}(bm)\)，并利用 \(P\) 的极大性推出 \(a \in \operatorname{Ann}(bm) = P\).〕
+
+\item 设 \(R\) 是诺特环，\(M \neq 0\) 是 \(R\)-模。证明 \(\operatorname{Ass}_R(M) \neq \varnothing\).〔利用习题 32。〕
+
+\item 若 \(L\) 是 \(M\) 的子模且商为 \(N \cong M/L\)，证明有包含关系
+\[
+\operatorname{Ass}_R(N) \subseteq \operatorname{Ass}_R(M) \subseteq \operatorname{Ass}_R(L) \cup \operatorname{Ass}_R(N),
+\]
+并证明这两个包含关系都可能严格。〔若 \(Rm \cong R/P\)，证明 \(Rm \cap L = 0\) 蕴涵 \(P \in \operatorname{Ass}_R(N)\)；若 \(Rm \cap L \neq 0\) 则由习题 31 有 \(P \in \operatorname{Ass}_R(L)\). 对第二个断言，考虑 \(n\mathbb{Z} \subset \mathbb{Z}\).〕
+
+\item 设 \(M\) 是 \(R\)-模，\(S\) 是 \(\operatorname{Ass}_R(M)\) 的素理想的子集。证明存在 \(M\) 的子模 \(N\)，使 \(\operatorname{Ass}_R(N) = S\) 且 \(\operatorname{Ass}_R(M/N) = \operatorname{Ass}_R(M)-S\).〔考虑 \(\operatorname{Ass}_R(N') \subseteq S\) 的 \(M\) 的子模 \(N'\) 构成的集合。利用习题 30 与 Zorn 引理证明存在满足 \(\operatorname{Ass}_R(N) \subseteq S\) 的极大子模 \(N\). 若 \(P \in \operatorname{Ass}_R(M/N)\)，则有子模 \(M'/N \cong R/P\). 用上一习题证明 \(\operatorname{Ass}_R(M') \subseteq \operatorname{Ass}_R(N) \cup \{P\}\)，然后利用 \(N\) 的极大性证明 \(P \in \operatorname{Ass}_R(M)-S\)，于是 \(\operatorname{Ass}_R(M/N) \subseteq \operatorname{Ass}_R(M)-S\) 且 \(\operatorname{Ass}_R(N) \subseteq S\). 再次利用上一习题即可推出两者都取等号。〕
+
+\noindent 设 \(M\) 是交换环 \(R\) 上由 \(m_1, \ldots, m_n\) 生成的有限生成模。\(M\) 的 \textbf{Fitting 理想} \(\mathcal{F}_R(M)\)（0 级 Fitting 理想，也称行列式理想）是 \(R\) 中由所有 \(n \times n\) 矩阵 \(A = (r_{ij})\)（其中 \(r_{ij} \in R\) 且 \(r_{i1}m_1+\cdots+r_{in}m_n = 0\) 在 \(M\) 中成立，即 \(A\) 的各行由生成元 \(m_i\) 之间关系的 \(R\)-系数组成；称 \(A\) 为 \(M\) 的一个 \(n \times n\)「关系矩阵」）的行列式生成的理想。下面五个习题概述 Fitting 理想的一些性质。
+
+\item （a）证明 \(M\) 的 Fitting 理想也等于 \(R\) 中由所有 \(p \times n\) 矩阵 \(A = (r_{ij})\)（\(p \geq 1\)，其各行由生成元 \(m_i\) 之间关系的 \(R\)-系数组成）的所有 \(n \times n\) 子式生成的理想。
+
+（b）设 \(A\) 是（a）中固定的 \(p \times n\) 矩阵，\(A'\) 是 \(A\) 经过任意初等行或列运算得到的 \(p \times n\) 矩阵。证明由 \(A\) 的所有 \(n \times n\) 子式生成的理想等于由 \(A'\) 的所有 \(n \times n\) 子式生成的理想。
+
+\item 设 \(m_1, \ldots, m_n\) 与 \(m'_1, \ldots, m'_{n'}\) 是 \(M\) 的两组 \(R\)-模生成元。用 \(m_1, \ldots, m_n\) 计算出的 Fitting 理想记作 \(\mathcal{F}\)，用 \(m_1, \ldots, m_n, m'_1, \ldots, m'_{n'}\) 计算出的 Fitting 理想记作 \(\mathcal{F}'\).
+
+（a）证明 \(m'_s = a_{s1}m_1+\cdots+a_{sn}m_n\)（某些 \(a_{s1}, \ldots, a_{sn} \in R\)），由此证明 \((-a_{s1}, \ldots, -a_{sn}, 0, \ldots, 0, 1, 0, \ldots, 0)\) 是 \(m_1, \ldots, m_n, m'_1, \ldots, m'_{n'}\) 之间的一个关系。
+
+（b）若 \(A = (r_{ij})\) 是各行由 \(m_1, \ldots, m_n\) 之间关系的系数组成的 \(n \times n\) 矩阵，证明 \(\det A = \det A'\)，其中 \(A'\) 是各行由 \(m_1, \ldots, m_n, m'_1, \ldots, m'_{n'}\) 之间关系的系数组成的 \((n+n') \times (n+n')\) 矩阵。由此证明 \(\mathcal{F} \subseteq \mathcal{F}'\).〔用（a）找出一个分块上三角矩阵 \(A'\)，其左上块为 \(A\)，右下块为 \(n' \times n'\) 单位矩阵。〕
+
+（c）证明 \(\mathcal{F}' \subseteq \mathcal{F}\)，并得出 \(\mathcal{F}' = \mathcal{F}\).〔利用上一习题。〕
+
+（d）由（c）推出 \(M\) 的 Fitting 理想 \(\mathcal{F}_R(M)\) 是 \(M\) 的不变量，不依赖于用来计算它的 \(M\) 的生成元的选取。
+
+\noindent 本习题中所有模都假设是有限生成的。
+
+\item （a）若 \(M\) 可由 \(n\) 个元素生成，证明 \((\operatorname{Ann}(M))^n \subseteq \mathcal{F}_R(M) \subseteq \operatorname{Ann}(M)\)，其中 \(\operatorname{Ann}(M)\) 是 \(M\) 在 \(R\) 中的零化子。〔若 \(A\) 是 \(M\) 的 \(n \times n\) 关系矩阵，则 \(AX = 0\)，其中 \(X\) 是元素为 \(m_1, \ldots, m_n\) 的列矩阵。用 \(A\) 的伴随矩阵左乘即可推出 \(\det A\) 零化 \(M\).〕
+
+（b）若 \(M = M_1 \times M_2\) 是 \(R\)-模 \(M_1\) 与 \(M_2\) 的直积，证明 \(\mathcal{F}_R(M) = \mathcal{F}_R(M_1)\mathcal{F}_R(M_2)\).
+
+（c）若 \(M = (R/I_1) \times \cdots \times (R/I_n)\) 是循环 \(R\)-模的直积（\(I_i\) 是 \(R\) 的理想），证明 \(\mathcal{F}_R(M) = I_1I_2\cdots I_n\).
+
+（d）若 \(R = \mathbb{Z}\) 且 \(M\) 是有限生成阿贝尔群，证明当 \(M\) 无限时 \(\mathcal{F}_{\mathbb{Z}}(M) = 0\)，当 \(M\) 有限时 \(\mathcal{F}_{\mathbb{Z}}(M) = |M|\mathbb{Z}\).
+
+（e）若 \(I\) 是 \(R\) 的理想，证明 \(\mathcal{F}_R(M)\) 在商环 \(R/I\) 中的像是 \(\mathcal{F}_{R/I}(M/IM)\).
+
+（f）证明 \(\mathcal{F}_R(M/IM) \supseteq (\mathcal{F}_R(M)+I)/I \cdot R\).
+
+（g）若 \(\varphi : M \to M'\) 是满 \(R\)-模同态，证明 \(\mathcal{F}_R(M) \subseteq \mathcal{F}_R(M')\).
+
+（h）若 \(0 \to L \to M \to N \to 0\) 是 \(R\)-模的短正合序列，证明 \(\mathcal{F}_R(L)\mathcal{F}_R(N) \subseteq \mathcal{F}_R(M)\).
+
+（i）设 \(R\) 是域 \(k\) 上的多项式环 \(k[x,y,z]\). 令 \(M = R/(x, y^2, yz, z^2)\)，\(L\) 是 \(M\) 的子模 \((x,y,z)/(x,y^2,yz,z^2)\). 证明 \(\mathcal{F}_R(M)\) 是 \((x,y^2,yz,z^2)\)，而 \(\mathcal{F}_R(L)\) 是 \((x,y,z)^2\).（这表明一般地，\(M\) 的子模 \(L\) 的 Fitting 理想不必包含 \(M\) 的 Fitting 理想。）
+
+\item 设 \(M\) 是 \(R\)-模，\(\varphi : R^n \to M\) 是满 \(R\)-模同态（即 \(M\) 可由 \(n\) 个元素生成）。令 \(L = \ker\varphi\). 证明由 \(L\) 在 \(R^n\) 中的包含映射诱导的 \(R\)-模同态 \(\wedge^n(L) \to \wedge^n(R^n) \cong R\) 的像是 Fitting 理想 \(\mathcal{F}_R(M)\).
+
+\item 设 \(R\) 与 \(S\) 是交换环，\(\varphi : R \to S\) 是环同态，\(M\) 是有限生成 \(R\)-模，\(M' = S \otimes_R M\) 是由 \(R\) 到 \(S\) 的纯量扩张得到的 \(S\)-模。证明 \(M'\) 在 \(S\) 上的 Fitting 理想 \(\mathcal{F}_S(M')\) 是 \(M\) 在 \(R\) 上的 Fitting 理想 \(\mathcal{F}_R(M)\) 到 \(S\) 的扩张。
+
+\noindent 下面两个习题说明如何用第 9 章定理 23 中的余式在多项式环的商环中进行计算。
+
+\item 设 \(\{g_1, \ldots, g_m\}\) 是 \(k[x_1, \ldots, x_n]\) 中理想 \(I\) 的 Gröbner 基。证明不被任何 \(\operatorname{LT}(g_i)\)（\(1 \leq i \leq m\)）整除的单项式 \(m\) 给出商 \(k[x_1, \ldots, x_n]/I\) 的一组 \(k\)-向量空间基。
+
+\item 设 \(I = (x^3y-xy^2+1,\ x^2y^2-y^3-1)\)，如第 9.6 节命题 26 之后的例 1 中那样。
+
+（a）用上一习题证明 \(\{1, y, y^2, y^3\}\) 是 \(k\)-向量空间 \(k[x,y]/I\) 的一组基。
+
+（b）计算（a）中基向量的 \(4 \times 4\) 乘法表。
+
+\item 设 \(K[x_1, \ldots, x_n]\) 是域 \(K\) 上 \(n\) 个变量的多项式环，\(k\) 是 \(K\) 的子域。若 \(I\) 是 \(k[x_1, \ldots, x_n]\) 中的理想，设 \(I'\) 是 \(I\) 在 \(K[x_1, \ldots, x_n]\) 中生成的理想。
+
+（a）若 \(G\) 是理想 \(I\) 在 \(k[x_1, \ldots, x_n]\) 中关于某个单项序的 Gröbner 基，证明 \(G\) 也是理想 \(I'\) 在 \(K[x_1, \ldots, x_n]\) 中关于同一单项序的 Gröbner 基。〔利用 Buchberger 判别法。〕
+
+（b）证明商 \(k[x_1, \ldots, x_n]/I\) 作为 \(k\) 上向量空间的维数等于商 \(K[x_1, \ldots, x_n]/I'\) 作为 \(K\) 上向量空间的维数。〔一种方法：利用（a）与习题 41。〕
+
+（c）证明 \(I = k[x_1, \ldots, x_n]\) 当且仅当 \(I' = K[x_1, \ldots, x_n]\).
+
+\item 设 \(V = Z(x^3-x^2z-y^2z)\)、\(W = Z(x^2+y^2-z^2)\) 都在 \(\mathbb{C}^3\) 中。则 \(I(V) = (x^3-x^2z-y^2z)\) 且 \(I(W) = (x^2+y^2-z^2)\)（参见第 3 节习题 23）。证明 \(\varphi((a,b,c)) = (a^2c-b^2c,\ 2abc,\ -a^3)\) 定义了从 \(V\) 到 \(W\) 的态射。
+
+\item 设 \(V = Z(x^3+y^3+7z^3) \subset \mathbb{C}^3\). 则 \(I(V) = (x^3+y^3+7z^3)\)（参见第 3 节习题 24）。
+
+（a）证明
+\[
+\varphi(z) = z(x^3-1)
+\]
+定义了从 \(k[V]\) 到自身的 \(\mathbb{C}\)-代数同态。
+
+（b）设 \(\varphi : V \to V\) 是对应于 \(\varphi\) 的态射。注意 \((-2,1,1) \in V\)，计算 \(\varphi((-2,1,1)) \in V\).
+
+（c）证明 \(V\) 上有无限多个点 \((a,b,c)\) 满足 \(a, b, c \in \mathbb{Z}\) 且 \(a, b, c\) 的最大公因数为 1.
+
+\item 设 \(V = Z(xz+y^2+z^2,\ xy-xz+yz-2z^2) \subset \mathbb{C}^3\)（与推论 9 之后的例 2 中相同的 \(V\)）以及 \(W = Z(u^3-uv^2+v^3) \subset \mathbb{C}^2\). 证明映射 \(\varphi((a,b)) = (-2a^2+ab,\ ab-b^2,\ a^2-ab)\) 定义了从 \(W\) 到 \(V\) 的态射。证明相应的从 \(k[V]\) 到 \(k[W]\) 的 \(\mathbb{C}\)-代数同态的核由 \(x^2-3y^2+yz\) 生成。
+
+\item 定义 \(\phi : \mathbb{Q}[u,v,w] \to \mathbb{Q}[x,y]\)，取 \(\phi(u) = x^2+y\)、\(\phi(v) = x+y^2\)、\(\phi(w) = x-y\). 证明 \(x\) 与 \(y\) 都不在 \(\phi\) 的像中。证明 \(f = x^3-4xy-2y^3-4y\) 在 \(\phi\) 的像中，并找出一个映射到 \(f\) 的 \(\mathbb{Q}[u,v,w]\) 中的多项式。证明 \(\ker\phi\) 是由
+\[
+u^2-2uv-2uw^2+4uw+v^2-2vw^2-4vw+w^4+3w^2
+\]
+生成的理想。
+
+\item 设 \(\alpha\) 是不可约多项式 \(p(x) \in k[x]\) 的一个根，\(\beta = f(\alpha)/g(\alpha)\)，其中 \(f(x), g(x) \in k[x]\) 且 \(g(\alpha) \neq 0\).
+
+（a）证明存在多项式 \(a, b \in k[x]\) 使 \(ag+bp = 1\)，并证明 \(\beta = h(\alpha)\)，其中 \(h = af\).
+
+（b）证明理想 \((p,\ y-h)\) 与 \((p,\ gy-f)\) 在 \(k[x,y]\) 中相等。
+
+（c）由此证明 \(\beta\) 的极小多项式是 \(G \cap k[y]\) 中的首一多项式，其中 \(G\) 是理想 \((p,\ gy-f)\) 在 \(k[x,y]\) 中关于字典序 \(x > y\) 的约化 Gröbner 基。
+
+（d）求 \((3-\sqrt[3]{2}+\sqrt[3]{4})/(1+3\sqrt[3]{2}-3\sqrt[3]{4})\) 在 \(\mathbb{Q}\) 上的极小多项式。
+\end{enumerate}
+
+\section{根与仿射簇}
+
+由于多项式 \(f\) 的零点与它的幂 \(f^2, f^3, \ldots\) 的零点相同，一般地环 \(k[x_1, x_2, \ldots, x_n]\) 中有许多不同的理想其零点轨迹定义仿射 \(n\) 空间中同一个代数集 \(V\). 这就引出理想的根的概念，它可以在任何交换环中定义：
+
+\begin{definition}
+设 \(I\) 是交换环 \(R\) 中的理想。
+
+（1）\(I\) 的\textbf{根}，记作 \(\operatorname{rad}I\)，是 \(R\) 中某些幂属于 \(I\) 的元素之集，即
+\[
+\operatorname{rad}I = \{a \in R \mid a^k \in I \text{ 对某个 } k \geq 1\}.
+\]
+
+（2）零理想的根称为 \(R\) 的\textbf{幂零根}。
+
+（3）若 \(I = \operatorname{rad}I\)，则称理想 \(I\) 是\textbf{根理想}。
+\end{definition}
+
+注意 \(a \in R\) 属于 \(R\) 的幂零根当且仅当 \(a\) 的某个幂为 0，故 \(R\) 的幂零根就是 \(R\) 的所有幂零元素之集。
+
+\begin{proposition}\label{pro:15.11}
+设 \(I\) 是交换环 \(R\) 中的理想。则 \(\operatorname{rad}I\) 是包含 \(I\) 的理想，且 \((\operatorname{rad}I)/I\) 是 \(R/I\) 的幂零根。特别地，\(R/I\) 没有幂零元素当且仅当 \(I = \operatorname{rad}I\) 是根理想。
+\end{proposition}
+
+\begin{proof}
+显然 \(I \subseteq \operatorname{rad}I\). 按定义，\(R/I\) 的幂零根由商环中某个幂为 0 的元素组成。由环的格同构定理，这个元素集合对应于 \(R\) 中某个幂属于 \(I\) 的元素，即 \(\operatorname{rad}I\). 因此只需证明任何交换环 \(R\) 的幂零根 \(N\) 是理想。由于 \(0 \in N\)，\(N \neq \varnothing\). 若 \(a \in N\)、\(r \in R\)，由于对某个 \(n \geq 1\) 有 \(a^n = 0\)，\(R\) 的交换性给出 \((ra)^n = r^na^n = 0\)，故 \(ra \in N\). 还需证明若 \(a, b \in N\) 则 \(a+b \in N\). 设 \(a^n = 0\)、\(b^m = 0\). 由于二项式定理在交换环 \(R\) 中成立（参见第 7.3 节习题 25），
+\[
+(a+b)^{n+m} = \sum_{i=0}^{n+m}r_ia^ib^{n+m-i}
+\]
+（其中 \(r_i\) 是 \(R\) 中的元素，即 \(R\) 中的二项式系数）。对这个和中的每一项，或者 \(i \geq n\)（此时 \(a^i = 0\)），或者 \(n+m-i \geq m\)（此时 \(b^{n+m-i} = 0\)）。故 \((a+b)^{n+m} = 0\)，这表明 \(a+b\) 幂零，即 \(a+b \in N\).
+\end{proof}
+
+\begin{proposition}\label{pro:15.12}
+真理想 \(I\) 的根是所有包含 \(I\) 的素理想的交。特别地，幂零根是 \(R\) 中所有素理想的交。
+\end{proposition}
+
+\begin{proof}
+过渡到 \(R/I\)，命题 11 表明只需对 \(I = 0\) 证明这个结果，此时命题断言 \(R\) 的幂零根 \(N\) 是 \(R\) 中所有素理想的交。设 \(N'\) 表示 \(R\) 中所有素理想的交。
+
+设 \(a\) 是 \(R\) 中任意幂零元素，\(P\) 是任意素理想。由于对某个 \(k\) 有 \(a^k = 0\)，存在最小的正整数 \(n\) 使 \(a^n \in P\). 则乘积 \(a^{n-1}a \in P\)，由于 \(P\) 是素理想，或者 \(a^{n-1} \in P\)，或者 \(a \in P\)。前者与 \(n\) 的最小性矛盾，故 \(a \in P\). 由于 \(P\) 任意，\(a \in N'\)，这表明 \(N \subseteq N'\).
+
+我们通过证明若 \(a \notin N\) 则 \(a \notin N'\) 来证明反向包含 \(N' \subseteq N\)。若 \(a\) 是 \(R\) 中不属于 \(N\) 的元素，设 \(\mathcal{S}\) 是所有不含 \(a\) 的任何正整数次幂的真理想构成的族。由于 \(0 \in \mathcal{S}\)，这个族非空。又若 \(a^k\) 不含于链 \(I_1 \subseteq I_2 \subseteq \cdots\) 中的任何理想，则 \(a^k\) 也不含于这些理想的并，这表明 \(\mathcal{S}\) 中的链有上界。由 Zorn 引理，\(\mathcal{S}\) 有极大元 \(P\). 事实上理想 \(P\) 必是素理想，理由如下。假设对某些 \(x, y \notin P\) 有 \(xy \in P\). 由 \(P\) 的极大性，对某些正整数 \(n, m\) 有 \(a^n \in (x)+P\)、\(a^m \in (y)+P\). 则 \(a^{n+m} \in (xy)+P = P\)，与 \(P \in \mathcal{S}\) 矛盾。这表明 \(P\) 确实是不含 \(a\) 的素理想，从而 \(a \notin N'\)，证明完毕。
+\end{proof}
+
+注意在诺特环中，可以用定理 2 来避免上述证明中对 Zorn 引理的引用。
+
+\begin{corollary}\label{cor:15.13}
+素理想（从而极大理想）都是根理想。
+\end{corollary}
+
+\begin{proof}
+若 \(P\) 是素理想，则 \(P\) 显然是所有包含 \(P\) 的素理想的交，故由命题 12 有 \(P = \operatorname{rad}P\).
+\end{proof}
+
+\noindent\textbf{例}
+
+（1）在整数环 \(\mathbb{Z}\) 中，理想 \((a)\) 是根理想当且仅当 \(a\) 无平方因子或为零。更一般地，若 \(a = p_1^{a_1}p_2^{a_2}\cdots p_r^{a_r}\)（对所有 \(i\) 有 \(a_i \geq 1\)）是正整数 \(a\) 的素因子分解，则 \(\operatorname{rad}(a) = (p_1p_2\cdots p_r)\). 例如 \(\operatorname{rad}(180) = (30)\). 注意 \((p_1), (p_2), \ldots, (p_r)\) 恰是包含理想 \((a)\) 的素理想，而它们的交是理想 \((p_1p_2\cdots p_r)\). 更一般地，在任何唯一分解整环 \(R\) 中，若 \(a = p_1^{a_1}p_2^{a_2}\cdots p_r^{a_r}\) 是 \(a\) 分解为互不相同的不可约元素之积的唯一分解，则 \(\operatorname{rad}(a) = (p_1p_2\cdots p_r)\).
+
+（2）\(k[x,y]\) 中的理想 \((x^3-y^2)\) 是素理想（第 9.1 节习题 14），从而是根理想。
+
+（3）若 \(l_1, \ldots, l_m\) 是 \(k[x_1, x_2, \ldots, x_n]\) 中的线性多项式，则 \(I = (l_1, \ldots, l_m)\) 或者是 \(k[x_1, \ldots, x_n]\)，或者是素理想，故 \(I\) 是根理想。
+
+\begin{proposition}\label{pro:15.14}
+若 \(R\) 是诺特环，则对任何理想 \(I\)，\(\operatorname{rad}I\) 的某个正整数次幂包含在 \(I\) 中。特别地，诺特环 \(R\) 的幂零根 \(N\) 是幂零理想：对某个 \(k \geq 1\) 有 \(N^k = 0\).
+\end{proposition}
+
+\begin{proof}
+对任何理想 \(I\)，由于 \(R\) 是诺特环，\(\operatorname{rad}I\) 是有限生成的。若 \(a_1, \ldots, a_m\) 是 \(\operatorname{rad}I\) 的生成元，则按根的定义，对每个 \(i\) 有 \(a_i^{k_i} \in I\)（某个正整数 \(k_i\)）。设 \(k\) 是所有 \(k_i\) 的最大值。则理想 \((\operatorname{rad}I)^{km}\) 由形如 \(a_1^{d_1}a_2^{d_2}\cdots a_m^{d_m}\)（\(d_1+\cdots+d_m = km\)）的元素生成，而每个这样的元素至少有一个因子 \(a_i^{d_i}\) 满足 \(d_i \geq k\). 此时 \(a_i^{d_i} \in I\)，故 \((\operatorname{rad}I)^{km}\) 的每个生成元都属于 \(I\)，于是 \((\operatorname{rad}I)^{km} \subseteq I\).
+\end{proof}
+
+\noindent\textbf{Zariski 拓扑}
+
+我们在上一节看到，若把 \(k[\mathbb{A}^n]\) 的理想限制为与某个代数集 \(V\) 相关联的理想，即 \(I = I(V)\)，则映射 \(Z\)（从这样的理想到代数集）与 \(I\)（从代数集到理想）互为逆映射：\(Z(I(V)) = V\) 且 \(I(Z(I)) = I\). 环 \(k[\mathbb{A}^n]/I(V)\) 的元素给出 \(V\) 上的 \(k\)-值函数，而由于 \(k\) 没有幂零元素，非零函数的幂也是非零函数。换一种说法，环 \(k[\mathbb{A}^n]/I(V)\) 没有幂零元素，故由命题 11，理想 \(I(V)\) 总是根理想。
+
+对一般的域 \(k\)，并非每个根理想都是某个代数集的理想，即形如 \(I(V)\)（某个代数集 \(V\)）。例如 \(\mathbb{R}[x]\) 中的理想 \((x^2+1)\) 是极大理想，从而是根理想（由推论 13），但它不是任何代数集的理想——若它是，则 \(x^2+1\) 必须在该集合上取零，而 \(x^2+1\) 在 \(\mathbb{R}\) 中没有零点。对任何非代数闭域 \(k\) 都有类似的构造——\(k[x]\) 中存在次数至少为 2 的不可约多项式 \(p(x)\)，它生成 \(k[x]\) 中的极大（从而是根）理想 \((p(x))\)，而这个理想在 \(k\) 中没有零点。也许令人惊讶的是，单变量无零点多项式的存在是根理想（无论多少个变量）不具形式 \(I(V)\) 的唯一障碍。这由下面这个定理表明，它给出了「几何」与「代数」之间的一个基本联系，并表明在代数闭域（如 \(\mathbb{C}\)）上每个根理想都具有形式 \(I(V)\). 在这样的域上，「几何定义的」理想 \(I = I(V)\) 因此与根理想相同，而后者是 \(I\) 的一个「纯代数」性质（即 \(I = \operatorname{rad}I\)）。
+
+\noindent\textbf{定理（Hilbert 零点定理）。} 设 \(E\) 是代数闭域。则对 \(E[x_1, x_2, \ldots, x_n]\) 的每个理想 \(I\) 有 \(I(Z(I)) = \operatorname{rad}I\). 此外，在对应
+\[
+\{\text{仿射代数集}\} \underset{Z}{\overset{I}{\longleftrightarrow}} \{\text{根理想}\}
+\]
+中，映射 \(Z\) 与 \(I\) 是互逆的双射。
+
+\noindent\textbf{证明：} 这将在下一节证明（参见定理 32）。
+
+\noindent\textbf{例}
+
+零点定理中的映射 \(I\) 与 \(Z\) 对任何域 \(k\) 都有定义，而如前所述，若 \(k\) 不是代数闭域则它们不是双射。然而对任何域 \(k\)，映射 \(Z\) 总是满射，映射 \(I\) 总是单射（参见习题 9）。
+
+零点定理的一个特别推论是：对任何真理想 \(I\) 有 \(Z(I) \neq \varnothing\)，因为 \(\operatorname{rad}I \neq k[\mathbb{A}^n]\). 因此在代数闭域上，真理想中包含的所有多项式总存在至少一个公共零点（德文「nullstellen」）。
+
+下面我们看到仿射代数集定义了仿射 \(n\) 空间上的一个拓扑。回忆拓扑空间是集合 \(X\) 连同 \(X\) 的一族子集 \(\mathcal{T}\)（称为 \(X\) 中的闭集）满足下述公理：
+
+（i）闭集的任意交是闭集：若 \(S_i \in \mathcal{T}\)（\(i\) 取遍任意指标集），则 \(\bigcap_iS_i \in \mathcal{T}\)；
+
+（ii）闭集的有限并是闭集：若 \(S_1, \ldots, S_q \in \mathcal{T}\)，则 \(S_1 \cup \cdots \cup S_q \in \mathcal{T}\)；
+
+（iii）空集与全空间是闭集：\(\varnothing, X \in \mathcal{T}\).
+
+\(X\) 的子集 \(U\) 称为\textbf{开集}，若它的补集 \(X-U\) 是闭集（即 \(X-U \in \mathcal{T}\)）。拓扑空间的公理常常（等价地）用 \(X\) 中开集族来表述。
+
+拓扑空间有许多例子，也有大量关于拓扑的书籍。固定的集合 \(X\) 上可以有若干不同的拓扑，而这些不同结构中闭集族之间未必有联系。在任何集合 \(X\) 上总至少有两种拓扑：使 \(X\) 的每个子集都是闭集的所谓\textbf{离散拓扑}（即 \(\mathcal{T}\) 是 \(X\) 的所有子集之族），以及只有公理（iii）所要求的 \(\varnothing\) 与 \(X\) 是闭集的所谓\textbf{平凡拓扑}。
+
+现在设 \(X = \mathbb{A}^n\) 是任意域 \(k\) 上的仿射 \(n\) 空间。则由 \(\mathbb{A}^n\) 中所有仿射代数集构成的族 \(\mathcal{T}\) 满足拓扑空间的三条公理——这正是上一节中代数集的性质（3）、（4）、（5）。由此这些集合可以取作 \(\mathbb{A}^n\) 上某个拓扑的闭集：
+
+\begin{definition}
+任意域 \(k\) 上仿射 \(n\) 空间上的 \textbf{Zariski 拓扑}是以 \(\mathbb{A}^n\) 中的仿射代数集为闭集的拓扑。
+\end{definition}
+
+Zariski 拓扑相当「粗糙」，即闭集（或开集）「相对较少」。例如对 \(\mathbb{A}^1\) 上的 Zariski 拓扑，只有 \(\varnothing\)、\(k\) 与有限集是闭集（参见第 1 节习题 14），故非空开集是有限集的补集。若 \(k\) 是无限域，则由此可知在 Zariski 拓扑中 \(\mathbb{A}^1\) 的任何两个非空开集都有非空交。用点集拓扑的语言说，Zariski 拓扑总是 \(T_1\)（点都是闭集），但对无限域 Zariski 拓扑从不是 \(T_2\)（Hausdorff）的，即两个不同的点从不属于两个不相交的开集（参见习题）。例如当 \(k = \mathbb{R}\) 时，非空的 Zariski 开集就是实直线去掉有限多个点所得的集合，而任何两个这样的集合都有（无限多个）公共点。还要注意 \(\mathbb{R}\) 中的 Zariski 开（分别地，闭）集在通常的 Euclid 拓扑下也是开（分别地，闭）集。反之不成立；例如区间 \([0,1]\) 在 Euclid 拓扑中是闭集，但在 Zariski 拓扑中不是闭集。在这个意义上 \(\mathbb{R}\) 上的 Euclid 拓扑要「精细」得多：Euclid 开集多得多，事实上 Euclid 开（分别地，闭）集族真包含 Zariski 开（分别地，闭）集族。
+
+\(\mathbb{A}^n\) 上的 Zariski 拓扑是这样定义的，使 \(\mathbb{A}^n\) 的仿射代数子集是闭集。换句话说，这个拓扑由 \(\mathbb{A}^n\) 的坐标环中理想的零点集定义。用类似的定义可以在 \(\mathbb{A}^n\) 中的任何代数集 \(V\) 上定义 Zariski 拓扑，如下。若 \(k[V]\) 是 \(V\) 的坐标环，则 \(k[V]\) 的不同元素定义 \(V\) 上不同的 \(k\)-值函数，并且正如 \(V = \mathbb{A}^n\) 的情形那样，有自然的方式定义
+\[
+Z : \{k[V] \text{ 中的理想}\} \to \{V \text{ 的代数子集}\}, \qquad I : \{V \text{ 的子集}\} \to \{k[V] \text{ 中的理想}\}.
+\]
+例如若 \(J\) 是 \(k[V]\) 中的理想，则 \(Z(J)\) 是 \(V\) 中作为理想 \(J\) 中所有函数的公共零点的元素之集。容易验证 \(V\) 中所得的零点集满足拓扑空间的三条公理，从而定义了 \(V\) 上的 Zariski 拓扑，其中闭集是代数子集 \(Z(J)\)（\(J\) 是 \(k[V]\) 的任意理想）。由格同构定理，\(k[V]\) 的理想是 \(k[x_1, \ldots, x_n]\) 中包含 \(I(V)\) 的理想模 \(I(V)\). 若 \(J\) 是 \(k[x_1, \ldots, x_n]\) 中理想 \(\bar J\) 的完全原像，则 \(J\) 在 \(\mathbb{A}^n\) 中的零点轨迹与 \(\bar J\) 在 \(V\) 中的零点轨迹相同。由此可知 \(V\) 上 Zariski 拓扑的这个定义就是 \(V \subseteq \mathbb{A}^n\) 的子空间拓扑。（回忆在拓扑空间 \(X\) 中，子空间 \(Y\) 的子空间拓扑下的闭集定义为 \(C \cap Y\)，其中 \(C\) 是 \(X\) 中的闭集。）上面 \(V\) 上 Zariski 拓扑定义的好处在于它是用 \(V\) 的坐标环 \(k[V]\) 内蕴定义的，而由于 \(k[V]\) 的同构型不依赖于包含 \(V\) 的仿射空间 \(\mathbb{A}^n\)，\(V\) 上的 Zariski 拓扑也只依赖于 \(V\)，而不依赖于 \(V\) 所嵌入的外围仿射空间。
+
+若 \(V\) 与 \(W\) 是两个仿射代数集，则由于态射 \(\varphi : V \to W\) 由多项式函数定义，容易看出 \(\varphi\) 关于 \(V\) 与 \(W\) 上的 Zariski 拓扑是连续的（参见第 1 节习题 27，它表明态射下 Zariski 闭集的原像是 Zariski 闭集）。事实上 Zariski 拓扑是使点都是闭集且使多项式映射连续的最粗糙的拓扑。然而存在关于 Zariski 拓扑连续但不是态射的映射（参见习题 17）。
+
+关于 Zariski 拓扑，我们有通常的闭包与稠密性的拓扑概念。
+
+\begin{definition}
+对 \(\mathbb{A}^n\) 的任何子集 \(A\)，\(A\) 的 \textbf{Zariski 闭包}是包含 \(A\) 的最小代数集。若对代数集 \(V\) 有 \(A \subseteq V\)，则称 \(A\) 在 \(V\) 中 \textbf{Zariski 稠密}，若 \(A\) 的 Zariski 闭包是 \(V\).
+\end{definition}
+
+例如若 \(k = \mathbb{R}\)，由第 1 节习题 14，\(\mathbb{A}^1\) 中的代数集是 \(\varnothing\)、\(\mathbb{R}\) 与 \(\mathbb{R}\) 的有限子集。则任何实数无限集 \(A\) 的 Zariski 闭包是整个 \(\mathbb{A}^1\)，且 \(A\) 在 \(\mathbb{A}^1\) 中 Zariski 稠密。
+
+\begin{proposition}\label{pro:15.15}
+\(\mathbb{A}^n\) 中子集 \(A\) 的 Zariski 闭包是 \(Z(I(A))\).
+\end{proposition}
+
+\begin{proof}
+当然 \(A \subseteq Z(I(A))\). 设 \(V\) 是任何包含 \(A\) 的代数集：\(A \subseteq V\). 则 \(I(V) \subseteq I(A)\) 且 \(Z(I(A)) \subseteq Z(I(V)) = V\)，故 \(Z(I(A))\) 是包含 \(A\) 的最小代数集。
+\end{proof}
+
+若 \(\varphi : V \to W\) 是代数集的态射，则 \(V\) 的像 \(\varphi(V)\) 不必是 \(W\) 的代数子集，即不必在 \(W\) 中 Zariski 闭。例如把 \(\mathbb{R}^2\) 中的双曲线 \(V = Z(xy-1)\) 投影到 \(x\) 轴，其像是 \(\mathbb{R}^1-\{0\}\)，而正如我们刚看到的，它不是仿射代数集。
+
+下一个结果表明，态射的像的 Zariski 闭包由相应的 \(k\)-代数同态的核决定。
+
+\begin{proposition}\label{pro:15.16}
+设 \(\varphi : V \to W\) 是代数集的态射，\(\bar\varphi : k[W] \to k[V]\) 是相应的坐标环 \(k\)-代数同态。则
+
+（1）\(\bar\varphi\) 的核是 \(I(\varphi(V))\).
+
+（2）\(\varphi(V)\) 的 Zariski 闭包是 \(\ker\bar\varphi\) 在 \(W\) 中的零点集。特别地，同态 \(\bar\varphi\) 是单射当且仅当 \(\varphi(V)\) 在 \(W\) 中 Zariski 稠密。
+\end{proposition}
+
+\begin{proof}
+由于 \(\bar\varphi(\bar f) = f\circ\varphi\)，我们有 \(\bar\varphi(\bar f) = 0\) 当且仅当对所有 \(P \in V\) 有 \((f\circ\varphi)(P) = 0\)，即对所有 \(Q = \varphi(P) \in \varphi(V)\) 有 \(f(Q) = 0\)，这正是 \(f \in I(\varphi(V))\)，从而证明了第一个论断。由上一命题，\(\varphi(V)\) 的 Zariski 闭包是 \(I(\varphi(V))\) 的零点集，故（2）的第一个论断成立。
+
+若 \(\bar\varphi\) 是单射，则 \(\varphi(V)\) 的 Zariski 闭包是 \(Z(0) = W\)，故 \(\varphi(V)\) 在 \(W\) 中 Zariski 稠密。反之，设 \(\varphi(V)\) 在 \(W\) 中 Zariski 稠密，即 \(Z(I(\varphi(V))) = W\). 则 \(I(\varphi(V)) = I(Z(I(\varphi(V)))) = I(W) = 0\)，故 \(\ker\bar\varphi = 0\).
+\end{proof}
+
+由命题 16，定义态射 \(\varphi\) 的像的 Zariski 闭包的多项式理想就是定理 6 中相应的 \(k\)-代数同态 \(\bar\varphi\) 的核。命题 8（a）允许我们用 Gröbner 基计算这个核。
+
+\noindent\textbf{例（隐式化）}
+
+态射 \(\varphi : \mathbb{A}^n \to \mathbb{A}^m\) 就是映射
+\[
+\varphi((a_1, a_2, \ldots, a_n)) = (\varphi_1(a_1, a_2, \ldots, a_n), \ldots, \varphi_m(a_1, a_2, \ldots, a_n)),
+\]
+其中 \(\varphi_i\) 是多项式。若 \(k\) 是无限域，则 \(I(\mathbb{A}^m)\) 与 \(I(\mathbb{A}^n)\) 都是 0，故我们可以写 \(k[\mathbb{A}^m] = k[y_1, \ldots, y_m]\)、\(k[\mathbb{A}^n] = k[x_1, \ldots, x_n]\). 对应于 \(\varphi\) 的 \(k\)-代数同态 \(\bar\varphi : k[\mathbb{A}^m] \to k[\mathbb{A}^n]\) 于是由把 \(y_i\) 映到 \(\varphi_i = \varphi_i(x_1, \ldots, x_n)\) 定义。像 \(\varphi(\mathbb{A}^n)\) 由点 \((b_1, \ldots, b_m)\) 组成，其中
+\[
+b_1 = \varphi_1(a_1, a_2, \ldots, a_n), \quad \ldots, \quad b_m = \varphi_m(a_1, a_2, \ldots, a_n),
+\]
+而 \(a_i \in k\). 这是 \(\mathbb{A}^m\) 中由函数 \(\varphi_1, \ldots, \varphi_m\) 参数化（以 \(a_i\) 为参数）的点集。一般地这样的参数化点集不是代数集。求包含这些点的最小代数集的方程称为\textbf{隐式化}，因为它相当于求 \(b_i\) 所满足的（「隐式」代数关系的）一组（「最小的」）方程。
+
+由命题 16，这个代数集是 \(\varphi(\mathbb{A}^n)\) 的 Zariski 闭包，是 \(\ker\bar\varphi\) 的零点集。由命题 8，这个核由 \(A \cap k[y_1, \ldots, y_m]\) 给出，其中 \(A\) 是 \(k[x_1, \ldots, x_n, y_1, \ldots, y_m]\) 中由多项式 \(y_1-\varphi_1, \ldots, y_m-\varphi_m\) 生成的理想。若我们计算 \(A\) 关于字典序 \(x_1 > \cdots > x_n > y_1 > \cdots > y_m\) 的约化 Gröbner 基 \(G\)，则 \(G\) 中属于 \(k[y_1, \ldots, y_m]\) 的多项式生成 \(\ker\bar\varphi\). 这些多项式的零点集定义了 \(\varphi(\mathbb{A}^n)\) 的 Zariski 闭包，因此给出隐式化。
+
+作为一个显式的例子，考虑 \(\mathbb{R}^2\) 中的点集 \(A = \{(a^2, a^3) \mid a \in \mathbb{R}\}\). 用 \(x, y\) 作为 \(\mathbb{R}^2\) 的坐标、\(t\) 作为 \(\mathbb{R}^1\) 的坐标，则 \(\mathbb{R}[x,y,t]\) 中的理想 \(A\) 是 \((x-t^2,\ y-t^3)\). 关于序 \(t > x > y\)，\(A\) 的约化 Gröbner 基中属于 \(\mathbb{R}[x,y]\) 的唯一元素是 \(x^3-y^2\)，故 \(Z(x^3-y^2)\) 是包含 \(A\) 的最小代数集。
+
+\noindent\textbf{例（代数集的投影）}
+
+设 \(V \subseteq \mathbb{A}^n\) 是代数集，\(m < n\). 设 \(\pi : V \to \mathbb{A}^m\) 是投影到前 \(m\) 个坐标的态射：
+\[
+\pi((a_1, a_2, \ldots, a_n)) = (a_1, a_2, \ldots, a_m).
+\]
+若我们用 \(x_1, \ldots, x_n\) 作为 \(k[V]\) 中的坐标、\(y_1, \ldots, y_m\) 作为 \(k[\mathbb{A}^m]\) 中的坐标，则对应于 \(\pi\) 的 \(k\)-代数同态由
+\[
+\bar\pi : k[y_1, \ldots, y_m] \to k[x_1, \ldots, x_n]/I(V), \qquad y_i \mapsto x_i
+\]
+给出。设 \(V = Z(I)\) 且 \(I = (f_1, \ldots, f_s)\). \(\pi(V)\) 的 Zariski 闭包是 \(\ker\bar\pi = A \cap k[y_1, \ldots, y_m]\) 的零点集，其中 \(A\) 是 \(k[x_1, \ldots, x_n, y_1, \ldots, y_m]\) 中由多项式 \(y_1-x_1, \ldots, y_m-x_m\) 连同 \(I(V)\) 的一组生成元生成的理想。约化 Gröbner 基 \(G\)（关于字典序 \(x_1 > \cdots > x_n > y_1 > \cdots > y_m\)）中只涉及 \(y_1, \ldots, y_m\) 的多项式是 \(\pi(V)\) 的 Zariski 闭包的生成元。
+
+若 \(k\) 是代数闭的，借助零点定理我们可以做得更好，它给出 \(I(V) = \operatorname{rad}I\). 此时容易看出，若在理想 \(A\) 中把 \(I(V)\) 的生成元替换为 \(I\) 的生成元 \(f_1, \ldots, f_s\)，所得的零点集相同（参见习题 46）。
+
+作为一个显式的例子，考虑 \(V = Z(xy-z^2,\ xz-y,\ x^2-z) \subset \mathbb{C}^3\) 投影到前两个坐标。用 \(u, v\) 作为 \(\mathbb{C}^2\) 的坐标，我们发现理想 \((u-x,\ v-y,\ xy-z^2,\ xz-y,\ x^2-z)\) 关于序 \(x > y > z > u > v\) 的约化 Gröbner 基 \(G\) 中属于 \(\mathbb{C}[u,v]\) 的只有多项式 \(u^3-v\). 包含 \(\pi(V)\) 的最小代数集于是是三次曲线 \(v = u^3\).
+
+\noindent\textbf{仿射簇}
+
+下面我们考虑代数集能否分解为更小的代数集，以及相应的在其坐标环中的代数表述。
+
+\begin{definition}
+非空仿射代数集 \(V\) 称为\textbf{不可约}的，若它不能写成 \(V = V_1 \cup V_2\)，其中 \(V_1\) 与 \(V_2\) 是 \(V\) 的真代数子集。不可约的仿射代数集称为\textbf{仿射簇}。
+\end{definition}
+
+等价地，代数集（它是 Zariski 拓扑中的闭集）是不可约的，若它不能写成两个真闭子集的并。
+
+\begin{proposition}\label{pro:15.17}
+（1）仿射代数集 \(V\) 不可约当且仅当 \(I(V)\) 是素理想。
+
+（2）每个非空仿射代数集 \(V\) 都可以唯一地写成
+\[
+V = V_1 \cup V_2 \cup \cdots \cup V_q
+\]
+的形式，其中每个 \(V_i\) 不可约，且对所有 \(j \neq i\) 有 \(V_i \nsubseteq V_j\)（即这个分解是「极小」或「无冗余」的）。
+\end{proposition}
+
+\begin{proof}
+设 \(I = I(V)\). 先设 \(V = V_1 \cup V_2\) 可约，其中 \(V_1\) 与 \(V_2\) 是真闭子集。由于 \(V_1 \neq V\)，存在在 \(V_1\) 上取零但在 \(V\) 上不取零的函数 \(f_1\)，即 \(f_1 \in I(V_1)-I\). 类似地存在函数 \(f_2 \in I(V_2)-I\). 则 \(f_1f_2\) 在 \(V_1 \cup V_2 = V\) 上取零，故 \(f_1f_2 \in I\)，这表明 \(I\) 不是素理想。
+
+反之，若 \(I\) 不是素理想，则存在 \(f_1, f_2 \in k[\mathbb{A}^n]\) 使 \(f_1f_2 \in I\) 但 \(f_1\) 与 \(f_2\) 都不属于 \(I\). 令 \(V_1 = Z(f_1) \cap V\)、\(V_2 = Z(f_2) \cap V\). 由于闭集的交是闭集，\(V_1\) 与 \(V_2\) 是代数集。由于 \(f_1\) 与 \(f_2\) 都不在 \(V\) 上取零，\(V_1\) 与 \(V_2\) 都是 \(V\) 的真子集。由于 \(f_1f_2 \in I\)，有 \(V \subseteq Z(f_1f_2) = Z(f_1) \cup Z(f_2)\)，故 \(V\) 可约。这证明了（1）。
+
+为证明（2），设 \(\mathcal{S}\) 是不能写成不可约代数集的有限并的非空代数集之族，并反设 \(\mathcal{S} \neq \varnothing\). 设 \(I_0\) 是相应的理想集 \(\{I(V) \mid V \in \mathcal{S}\}\) 的极大元，它存在（由定理 2），因为 \(k[\mathbb{A}^n]\) 是诺特环。则 \(V_0 = Z(I_0)\) 是 \(\mathcal{S}\) 的极小元。由于 \(V_0 \in \mathcal{S}\)，按 \(\mathcal{S}\) 的定义它不可约。另一方面，若 \(V_0 = V_1 \cup V_2\)（\(V_1, V_2\) 是 \(V_0\) 的真闭子集），则由 \(V_0\) 的极小性，\(V_1\) 与 \(V_2\) 都可以写成不可约代数集的有限并。于是 \(V_0\) 可以写成不可约代数集的有限并，矛盾。这证明了 \(\mathcal{S} = \varnothing\)，即每个仿射代数集都可以分解为仿射簇。
+
+为证明唯一性，设 \(V\) 有两种仿射簇分解（其中已去掉每个分解中的冗余项）：
+\[
+V = V_1 \cup V_2 \cup \cdots \cup V_r = U_1 \cup U_2 \cup \cdots \cup U_s.
+\]
+则 \(V_1\) 包含在 \(U_j\) 的并中。由于对每个 \(i\)，\(V_1 \cap U_i\) 是代数集，我们得到 \(V_1\) 分解为代数子集：
+\[
+V_1 = (V_1 \cap U_1) \cup (V_1 \cap U_2) \cup \cdots \cup (V_1 \cap U_s).
+\]
+由于 \(V_1\) 不可约，必有某个 \(j\) 使 \(V_1 = V_1 \cap U_j\)，即 \(V_1 \subseteq U_j\). 由对称的论证，有某个 \(j'\) 使 \(U_j \subseteq V_{j'}\). 于是 \(V_1 \subseteq U_j \subseteq V_{j'}\)，故 \(V_1 = V_{j'}\)，即 \(j' = 1\)。类似地对每个 \(V_i\) 进行讨论即得 \(r = s\) 且（在适当重排后）\(U_i = V_i\).
+\end{proof}
+
+\begin{corollary}\label{cor:15.18}
+仿射代数集 \(V\) 是簇当且仅当其坐标环 \(k[V]\) 是整环。
+\end{corollary}
+
+\begin{proof}
+这立即推出，因为 \(I(V)\) 是素理想当且仅当商环 \(k[V] = k[\mathbb{A}^n]/I(V)\) 是整环（第 7 章命题 13）。
+\end{proof}
+
+\begin{definition}
+若 \(V\) 是簇，则整环 \(k[V]\) 的分式域称为 \(V\) 上的\textbf{有理函数域}，记作 \(k(V)\). 簇 \(V\) 的\textbf{维数}（记作 \(\dim V\)）定义为 \(k(V)\) 在 \(k\) 上的超越次数。
+\end{definition}
+
+\noindent\textbf{例}
+
+（1）\(\mathbb{A}^n\) 中的单点集是仿射簇，因为它们在 \(k[\mathbb{A}^n]\) 中对应的理想是极大理想。一个点的坐标环同构于 \(k\)，它也是有理函数域。单点的维数是 0. 任何有限集都是它的单点子集的并，这是它分解为仿射子簇的唯一分解。
+
+（2）\(\mathbb{R}^2\) 中的 \(x\) 轴不可约，因为它的坐标环是 \(\mathbb{R}[x,y]/(y) \cong \mathbb{R}[x]\)，是整环。类似地，\(y\) 轴以及更一般地 \(\mathbb{R}^2\) 中的直线也不可约（参见第 1 节习题 23）。\(\mathbb{R}^n\) 中的线性集是仿射簇。\(x\) 轴上的有理函数域是 \(\mathbb{R}[x]\) 的分式域 \(\mathbb{R}(x)\)，这正是 \(\mathbb{R}(x)\) 被称为有理函数域的原因。\(x\) 轴（或更一般地任何直线）的维数是 1.
+
+（3）\(\mathbb{R}^2\) 中 \(x\) 轴与 \(y\) 轴的并，即 \(Z(xy)\)，不是簇：\(Z(xy) = Z(x) \cup Z(y)\) 是它分解为子簇的唯一分解。相应的坐标环 \(\mathbb{R}[x,y]/(xy)\) 含有零因子。
+
+（4）\(\mathbb{R}^2\) 中的双曲线 \(xy = 1\) 是簇，因为我们在第 1 节看到它的坐标环是整环 \(\mathbb{R}[x, 1/x]\). 注意双曲线两个不相交的分支（由 \(x > 0\) 与 \(x < 0\) 定义）不是子簇（另见习题 12--13）。
+
+（5）若 \(V = Z(l_1, l_2, \ldots, l_m)\) 是 \(k[x_1, \ldots, x_n]\) 中线性多项式 \(l_1, \ldots, l_m\) 的零点集且 \(V \neq \varnothing\)，则 \(V\) 是仿射簇（称为\textbf{线性簇}）。注意判断 \(V \neq \varnothing\) 是一个线性代数问题。
+
+本节最后给出一些一般性的环论结果，它们最初是由与几何中分解问题的联系所激励的。
+
+\noindent\textbf{诺特环中理想的准素分解}
+
+命题 17 的第二个论断表明，\(k[\mathbb{A}^n]\) 中任何形如 \(I(V)\) 的理想都可以唯一地写成素理想的有限交，而由 Hilbert 零点定理，当 \(k\) 代数闭时这特别适用于所有根理想。在一大类交换环（包括所有诺特环）中，每个理想都有准素分解，这是一个类似的分解，但允许出现类似于「素理想的幂」的理想（但请参见下面的例子）。这个分解可以看作整数 \(n \in \mathbb{Z}\) 分解为素幂之积的推广。我们主要关注诺特环的情形。
+
+\begin{definition}
+交换环 \(R\) 中的真理想 \(Q\) 称为\textbf{准素}的，若只要 \(ab \in Q\) 且 \(a \notin Q\)，就有某个正整数 \(n\) 使 \(b^n \in Q\). 等价地，若 \(ab \in Q\) 且 \(a \notin Q\)，则 \(b \in \operatorname{rad}Q\).
+\end{definition}
+
+准素理想的一些基本性质由下述命题给出。
+
+\begin{proposition}\label{pro:15.19}
+设 \(R\) 是含 1 的交换环。
+
+（1）素理想是准素的。
+
+（2）理想 \(Q\) 是准素的当且仅当 \(R/Q\) 中每个零因子都是幂零的。
+
+（3）若 \(Q\) 是准素的，则 \(\operatorname{rad}Q\) 是素理想，且是包含 \(Q\) 的唯一最小素理想。
+
+（4）若 \(Q\) 的根是极大理想，则 \(Q\) 是准素理想。
+
+（5）设 \(M\) 是极大理想，\(Q\) 是满足 \(M^n \subseteq Q \subseteq M\)（某个 \(n \geq 1\)）的理想。则 \(Q\) 是准素理想且 \(\operatorname{rad}Q = M\).
+\end{proposition}
+
+\begin{proof}
+前两个论断由准素理想的定义立即得到。对（3），设 \(ab \in \operatorname{rad}Q\). 则 \(a^mb^m = (ab)^m \in Q\)，而由于 \(Q\) 准素，或者 \(a^m \in Q\)（此时 \(a \in \operatorname{rad}Q\)），或者对某个正整数 \(n\) 有 \((b^m)^n \in Q\)（此时 \(b \in \operatorname{rad}Q\)）。这证明了 \(\operatorname{rad}Q\) 是素理想，由此可知 \(\operatorname{rad}Q\) 是包含 \(Q\) 的最小素理想（命题 12）。
+
+为证明（4）我们过渡到商环 \(R/Q\)；由（2），只需证明这个商环中每个零因子都是幂零的。我们化归到 \(Q = (0)\) 且 \(M = \operatorname{rad}Q = \operatorname{rad}(0)\)（即幂零根）是极大理想的情形。由于幂零根包含在每个素理想中（命题 12），可知 \(M\) 是唯一的素理想，从而是唯一的极大理想。若 \(d\) 是零因子，则理想 \((d)\) 是真理想，从而包含在某个极大理想中。这意味着 \(d \in M\)，故每个零因子确实都是幂零的。
+
+最后设对某个 \(n \geq 1\) 有 \(M^n \subseteq Q \subseteq M\)，其中 \(M\) 是极大理想。则 \(Q \subseteq M\)，故 \(\operatorname{rad}Q \subseteq \operatorname{rad}M = M\). 反之，\(M^n \subseteq Q\) 表明 \(M \subseteq \operatorname{rad}Q\)，故 \(\operatorname{rad}Q = M\) 是极大理想，由（4）\(Q\) 是准素的。
+\end{proof}
+
+\begin{definition}
+若 \(Q\) 是准素理想，则素理想 \(P = \operatorname{rad}Q\) 称为\textbf{与 \(Q\) 相伴的素理想}，并称 \(Q\) \textbf{属于} \(P\)（或 \(Q\) 是 \(P\)-准素的）。
+\end{definition}
+
+容易验证 \(P\)-准素理想的有限交仍是 \(P\)-准素理想（参见习题）。
+
+\noindent\textbf{例}
+
+（1）\(\mathbb{Z}\) 中的准素理想是 \(0\) 以及理想 \((p^m)\)（\(p\) 为素数，\(m \geq 1\)）。
+
+（2）对任何域 \(k\)，\(k[x,y]\) 中的理想 \((x)\) 是准素的，因为它是素理想。对任何 \(n \geq 1\)，理想 \((x,y)^n\) 是准素的，因为它是极大理想 \((x,y)\) 的幂。
+
+（3）多项式环 \(k[x,y]\) 中的理想 \(Q = (x^2,y)\) 是准素的，因为 \((x,y)^2 \subseteq (x^2,y) \subseteq (x,y)\). 类似地，\(\mathbb{Z}[x]\) 中的 \(Q' = (4,x)\) 是 \((2,x)\)-准素理想。
+
+（4）准素理想不必是素理想的幂。例如上一例中的准素理想 \(Q\) 不是素理想的幂，理由如下。若 \((x^2,y) = P^k\)（某个素理想 \(P\) 与某个 \(k \geq 1\)），则 \(x^2, y \in P\)，故 \(x, y \in P\). 于是 \(P = (x,y)\)，而由于 \(y \notin (x,y)^2\)，将得到 \(k = 1\) 且 \(Q = (x,y)\). 由于 \(x \notin (x^2,y)\)，这是不可能的。
+
+（5）若 \(R\) 是诺特环，\(Q\) 是属于素理想 \(P\) 的准素理想，则由命题 14 有 \(P^m \subseteq Q \subseteq P\)（某个 \(m \geq 1\)）。若 \(P\) 是极大理想，则命题 19 的最后一个论断表明其逆也成立。当 \(P\) 是素理想但不是极大理想时这未必成立。例如考虑 \(k[x,y]\) 中的理想 \(I = (x^2,xy)\). 此时 \((x)^2 \subsetneq I \subsetneq (x)\)，而 \((x)\) 是素理想，但 \(I\) 不是准素的：\(xy \in I\) 且 \(x \notin I\)，但 \(y\) 的任何正整数次幂都不是 \(I\) 的元素。这个例子也表明根为素理想（但不像命题（4）中那样是极大理想）的理想不必是准素的。
+
+（6）素理想的幂不必是准素的。例如考虑商环 \(R = \mathbb{R}[x,y,z]/(xy-z^2)\)，即 \(\mathbb{R}^3\) 中锥面 \(z^2 = xy\) 的坐标环，并设 \(P = (x,z)R\)（即由 \(x\) 与 \(z\) 的像生成的理想）。这是一个素理想（因为 \(R/P \cong \mathbb{R}[y]\)）。但理想
+\[
+P^2 = (x^2, xz, z^2) = (x^2, xz, xy) = x(x,y,z)
+\]
+不是准素的：\(\bar x\bar y = \bar z^2 \in P^2\)，但 \(\bar x \notin P^2\)，且 \(\bar y\) 的任何幂都不在 \(P^2\) 中。注意这是另一个「根为素理想但不是准素理想」的例子。
+
+（7）设 \(R\) 是唯一分解整环，\(\pi\) 是 \(R\) 的不可约元素。则容易看出幂 \((\pi^n)\)（\(n = 1, 2, \ldots\)）都是 \((\pi)\)-准素理想。反之，设 \(Q\) 是 \((\pi)\)-准素理想，设 \(n\) 是使 \(Q \subseteq (\pi^n)\) 的最大整数（这样的整数存在，例如因为对某个 \(k \geq 1\) 有 \(\pi^k \in Q\)，故 \(n \leq k\)）。若 \(q \in Q\) 且 \(q \notin (\pi^{n+1})\)，则 \(q = r\pi^n\)（某个 \(r \in R\)），且 \(r \notin (\pi)\). 由于 \(r \notin (\pi)\) 且 \(Q\) 是 \((\pi)\)-准素的，可知 \(\pi^n \in Q\). 这表明 \(Q = (\pi^n)\).
+
+在上面的例子中，\(k[x,y]\) 中的理想 \((x^2,xy)\) 不是准素理想，但它可以写成准素理想的交：\((x^2,xy) = (x) \cap (x,y)^2\).
+
+\begin{definition}
+（1）\(R\) 中的理想 \(I\) 有\textbf{准素分解}，若它可以写成准素理想的有限交：
+\[
+I = \bigcap_{i=1}^{m}Q_i, \qquad Q_i \text{ 是准素理想}.
+\]
+
+（2）若上述准素分解满足
+
+（a）没有准素理想包含其余准素理想的交，即对所有 \(i\) 有 \(Q_i \nsupseteq \bigcap_{j \neq i}Q_j\)，且
+
+（b）相伴素理想互不相同：对 \(i \neq j\) 有 \(\operatorname{rad}Q_i \neq \operatorname{rad}Q_j\)，
+
+则称该分解是\textbf{极小}的，并称 \(Q_i\) 是 \(I\) 的\textbf{准素分量}。
+\end{definition}
+
+下面我们证明在诺特环中每个真理想都有极小准素分解。这个结果常称为 \textbf{Lasker--Noether 分解定理}，因为它最初由国际象棋大师 Emanuel Lasker 对多项式环证明，其证明后来由 Emmy Noether 大大简化并推广。
+
+\begin{definition}
+交换环 \(R\) 中的真理想 \(I\) 称为\textbf{不可约}的，若它不能非平凡地写成另外两个理想的交，即若 \(I = J \cap K\)（\(J, K\) 是理想）则 \(I = J\) 或 \(I = K\).
+\end{definition}
+
+容易看出素理想是不可约的（参见第 7.4 节习题 11）。前面例 2 中 \(k[x,y]\) 里的理想 \((x,y)^2\) 表明准素理想不必是不可约的，因为它是理想 \((x)+(x,y)^2 = (x,y^2)\) 与 \((y)+(x,y)^2 = (y,x^2)\) 的交。然而在诺特环中不可约理想必是准素的：
+
+\begin{proposition}\label{pro:15.20}
+设 \(R\) 是诺特环。则
+
+（1）每个不可约理想是准素的；
+
+（2）\(R\) 中每个真理想都是不可约理想的有限交。
+\end{proposition}
+
+\begin{proof}
+为证明（1），设 \(Q\) 是不可约理想，假设 \(ab \in Q\) 且 \(b \notin Q\). 容易验证对任何固定的 \(n\)，满足 \(a^nx \in Q\) 的元素 \(x \in R\) 之集是 \(R\) 的理想 \(A_n\). 显然 \(A_1 \subseteq A_2 \subseteq \cdots\)，而由于 \(R\) 是诺特环，这个理想递增链必稳定，即对某个 \(n > 0\) 有 \(A_n = A_{n+1} = \cdots\). 考虑 \(R\) 的两个理想 \(I = (a^n)+Q\) 与 \(J = (b)+Q\)，它们都包含 \(Q\). 若 \(y \in I \cap J\)，则 \(y = a^nz+q\)（某些 \(z \in R\)、\(q \in Q\)）。由于 \(ab \in Q\)，可知 \(a \in A_1\)，特别地 \(ay \in Q\). 于是 \(a^{n+1}z = ay-aq \in Q\)，故 \(z \in A_{n+1} = A_n\). 但 \(z \in A_n\) 意味着 \(a^nz \in Q\)，故 \(y \in Q\). 由此 \(I \cap J = Q\). 由于 \(Q\) 不可约且 \((b)+Q \neq Q\)（因为 \(b \notin Q\)），必有 \(a^n \in Q\)，这表明 \(Q\) 是准素的。
+
+（2）的证明与命题 17 第二个论断的证明相同。设 \(\mathcal{S}\) 是 \(R\) 中不能写成不可约理想的有限交的理想之族。若 \(\mathcal{S}\) 非空，则由于 \(R\) 是诺特环，\(\mathcal{S}\) 中有极大元 \(I\). 则 \(I\) 本身可约，故 \(I = J \cap K\)（某些不同于 \(I\) 的理想 \(J, K\)）。此时 \(I \subsetneq J\)、\(I \subsetneq K\)，而由 \(I\) 的极大性，\(J\) 与 \(K\) 都不属于 \(\mathcal{S}\). 但这意味着 \(J\) 与 \(K\) 都可以写成不可约理想的有限交，从而 \(I\) 也可以。这是矛盾，故 \(\mathcal{S} = \varnothing\)，即命题得证。
+\end{proof}
+
+由上一命题立即得到：在诺特环中每个真理想都有准素分解。若这个分解中的某个准素理想包含其余准素理想的交，则我们可以直接删去这个理想，因为这不改变交。故可以假设分解满足极小分解定义中的（a）。由于 \(P\)-准素理想的有限交仍是 \(P\)-准素的（习题 31），把分解中属于同一素理想的所有准素理想替换为它们的交，我们也可以假设分解满足极小分解定义中的（b）。这就证明了下面结果的第一部分：
+
+\begin{theorem}\label{thm:15.21}
+（\textbf{准素分解定理}）设 \(R\) 是诺特环。则 \(R\) 中每个真理想 \(I\) 都有极小准素分解。若
+\[
+I = \bigcap_{i=1}^{m}Q_i = \bigcap_{i=1}^{n}Q'_i
+\]
+是 \(I\) 的两个极小准素分解，则两个分解中相伴素理想的集合相同：
+\[
+\{\operatorname{rad}Q_1, \operatorname{rad}Q_2, \ldots, \operatorname{rad}Q_m\} = \{\operatorname{rad}Q'_1, \operatorname{rad}Q'_2, \ldots, \operatorname{rad}Q'_n\}.
+\]
+此外，属于这个相伴素理想集合中极小元素的准素分量 \(Q_i\) 由 \(I\) 唯一确定。
+\end{theorem}
+
+\begin{proof}
+相伴素理想集合的唯一性的证明在习题中概述，与极小素理想相伴的准素分量的唯一性的证明将在第 4 节给出。
+\end{proof}
+
+\begin{definition}
+若 \(I\) 是诺特环 \(R\) 中的理想，则 \(I\) 的任何准素分解中的相伴素理想称为 \(I\) 的\textbf{相伴素理想}。若 \(I\) 的相伴素理想 \(P\) 不包含 \(I\) 的任何其他相伴素理想，则称 \(P\) 是\textbf{孤立素理想}；\(I\) 的其余相伴素理想称为\textbf{嵌入素理想}。
+\end{definition}
+
+与理想 \(I\) 相伴的素理想提供了关于理想 \(I\) 的大量信息（例如参见习题 41 与 43）：
+
+\begin{corollary}\label{cor:15.22}
+设 \(I\) 是诺特环 \(R\) 中的真理想。
+
+（1）素理想 \(P\) 包含理想 \(I\) 当且仅当 \(P\) 包含 \(I\) 的一个相伴素理想，从而当且仅当 \(P\) 包含 \(I\) 的一个孤立素理想，即 \(I\) 的孤立素理想恰是包含 \(I\) 的所有素理想所成集合中的极小元。特别地，包含 \(I\) 的素理想中只有有限多个极小元。
+
+（2）\(I\) 的根是 \(I\) 的相伴素理想的交，从而是 \(I\) 的孤立素理想的交。
+
+（3）存在素理想 \(P_1, \ldots, P_n\)（不必互不相同）包含 \(I\)，使 \(P_1P_2\cdots P_n \subseteq I\).
+\end{corollary}
+
+\begin{proof}
+（1）的第一个论断是一个习题（参见习题 37），（1）的其余部分随之推出。然后（2）由（1）与命题 12 推出，（3）由（2）与命题 14 推出。
+\end{proof}
+
+定理 21 的最后一个论断表明，不仅孤立素理想，而且属于孤立素理想的准素分量，都由 \(I\) 唯一确定。一般地，理想 \(I\) 的准素分解本身并不唯一。
+
+\noindent\textbf{例}
+
+（1）设 \(I = (x^2, xy) \subset \mathbb{R}[x,y]\). 则
+\[
+(x^2, xy) = (x) \cap (x,y)^2 = (x) \cap (x^2, y)
+\]
+是 \(I\) 的两个极小准素分解。\(I\) 的相伴素理想是 \((x)\) 与 \(\operatorname{rad}((x,y)^2) = \operatorname{rad}((x^2,y)) = (x,y)\). 素理想 \((x)\) 是唯一的孤立素理想，因为 \((x) \subsetneq (x,y)\)，而 \((x,y)\) 是嵌入素理想。素理想 \(P\) 包含 \(I\) 当且仅当 \(P\) 包含 \((x)\). 对应于这个孤立素理想的 \(I\) 的 \((x)\)-准素分量就是 \((x)\)，它在两个准素分解中都出现；对应于这个嵌入素理想的 \(I\) 的 \((x,y)\)-准素分量不唯一确定——在第一个分解中是 \((x,y)^2\)，在第二个分解中是 \((x^2,y)\). \(I\) 的根是孤立素理想 \((x)\).
+
+这个例子说明了术语的来源：一般地，由 \(I\) 定义的代数空间 \(Z(I)\) 的不可约分量是 \(I\) 的孤立素理想的零点集，而嵌入素理想的零点集是这些分量中的不可约子空间（因此是「嵌入」在不可约分量中的）。在本例中，\(Z(I)\) 是满足 \(x^2 = xy = 0\) 的点的集合，即 \(\mathbb{R}^2\) 中的 \(y\) 轴。这个代数空间只有一个不可约分量（即 \(y\) 轴），它是孤立素理想 \((x)\) 的零点轨迹。嵌入素理想 \((x,y)\) 的零点轨迹是原点 \((0,0)\)，它是嵌入在 \(y\) 轴中的一个不可约子空间。
+
+（2）设 \(R\) 是唯一分解整环。若 \(a = p_1^{e_1}\cdots p_m^{e_m}\) 是元素 \(a \in R\) 分解为互不相同的素幂的唯一分解，则 \((a) = (p_1)^{e_1} \cap \cdots \cap (p_m)^{e_m}\) 是主理想 \((a)\) 的极小准素分解。\((a)\) 的相伴素理想是 \((p_1), \ldots, (p_m)\)，它们都是孤立的。理想的准素分解是元素分解为素幂的推广。关于用极小准素分解刻画唯一分解整环，另见习题 44。
+
+对任何诺特环，理想 \(I\) 是根理想当且仅当 \(I\) 的极小准素分解的所有准素分量都是素理想（此时这个准素分解唯一），参见习题 43。这推广了前面所作的观察：命题 17 连同 Hilbert 零点定理表明，当域 \(k\) 代数闭时，\(k[\mathbb{A}^n]\) 中任何根理想都可以唯一地写成素理想的有限交——这就是「代数集可以唯一地分解为不可约代数集的并」这一代数陈述。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 通过考虑不含素理想之有限乘积的理想族 \(\mathcal{S}\)，直接证明推论 22 的（3）。〔若 \(I\) 是 \(\mathcal{S}\) 的极大元，证明由于 \(I\) 不是素理想，存在真包含 \(I\)（从而不属于 \(\mathcal{S}\)）的理想 \(J, K\) 使 \(JK \subseteq I\).〕
+
+\item 设 \(I\) 与 \(J\) 是环 \(R\) 中的理想。证明下列命题：
+
+（a）若对某个 \(k \geq 1\) 有 \(I^k \subseteq J\)，则 \(\operatorname{rad}I \subseteq \operatorname{rad}J\).
+
+（b）若对某个 \(k \geq 1\) 有 \(I^k \subseteq J \subseteq I\)，则 \(\operatorname{rad}I = \operatorname{rad}J\).
+
+（c）\(\operatorname{rad}(IJ) = \operatorname{rad}(I \cap J) = \operatorname{rad}I \cap \operatorname{rad}J\).
+
+（d）\(\operatorname{rad}(\operatorname{rad}I) = \operatorname{rad}I\).
+
+（e）\(\operatorname{rad}I+\operatorname{rad}J \subseteq \operatorname{rad}(I+J)\)，且 \(\operatorname{rad}(I+J) = \operatorname{rad}(\operatorname{rad}I+\operatorname{rad}J)\).
+
+\item 证明两个根理想的交仍是根理想。
+
+\item 设 \(I = \mathfrak{m}_1\mathfrak{m}_2\) 是 \(\mathbb{F}_2[x,y]\) 中理想 \(\mathfrak{m}_1 = (x,y)\) 与 \(\mathfrak{m}_2 = (x-1,y-1)\) 的乘积。证明 \(I\) 是根理想。证明理想 \((x^3-y^2)\) 是 \(\mathbb{F}_2[x,y]\) 中的根理想。
+
+\item 若 \(I = (xy, (x-y)z) \subseteq k[x,y,z]\)，证明 \(\operatorname{rad}I = (xy, xz, yz)\). 对这个理想直接证明 \(Z(I) = Z(\operatorname{rad}I)\)、\(Z(I)\) 不可约，且 \(\operatorname{rad}I\) 不是素理想。
+
+\item 举一个例子说明：在非代数闭域 \(k\) 上，即使 \(I\) 是根理想，包含关系 \(I \subseteq I(Z(I))\) 也可能严格。
+
+\item 设 \(R\) 与 \(S\) 是环，\(\varphi : R \to S\) 是环同态。若 \(I\) 是 \(R\) 的理想，证明 \(\varphi(\operatorname{rad}I) \subseteq \operatorname{rad}(\varphi(I))\). 若此外 \(\varphi\) 是满射且 \(I\) 包含 \(\varphi\) 的核，证明 \(\varphi(\operatorname{rad}I) = \operatorname{rad}(\varphi(I))\).
+
+\item 设素理想 \(P\) 包含理想 \(I\)。证明 \(P\) 包含 \(I\) 的根。
+
+\item 证明对任何域 \(k\)，零点定理中的映射 \(Z\) 总是满射，映射 \(I\) 总是单射。〔利用第 1 节中映射 \(Z\) 与 \(I\) 的性质（10）。〕举出（在非代数闭域 \(k\) 上的）例子说明 \(Z\) 不是单射、\(I\) 不是满射。
+
+\item 证明当 \(k\) 是有限域时 Zariski 拓扑与离散拓扑相同：每个子集都是闭集（也是开集）。
+
+\item 设 \(V\) 是 \(\mathbb{A}^n\) 中的簇，\(U_1\) 与 \(U_2\) 是 \(\mathbb{A}^n\) 中 Zariski 开集。证明若 \(V \cap U_1 \neq \varnothing\) 且 \(V \cap U_2 \neq \varnothing\)，则 \(V \cap U_1 \cap U_2 \neq \varnothing\). 由此证明簇的任何非空开子集在 Zariski 拓扑中处处稠密（即其闭包是整个 \(V\)）。
+
+\item 利用仿射簇的非空开集处处稠密这一事实，证明仿射簇在 Zariski 拓扑中是连通的。（拓扑空间称为\textbf{连通}的，若它不能写成两个不相交非空开子集之并。）
+
+\item 证明仿射代数集 \(V\) 在 Zariski 拓扑中连通当且仅当 \(k[V]\) 不是两个非零理想的直和。由此证明簇在 Zariski 拓扑中连通。
+
+\item 证明若 \(k\) 是无限域，则 \(\mathbb{A}^1\) 中的簇是空集、全空间与单点子集。在 \(k\) 为有限域的情形，\(\mathbb{A}^1\) 中的簇是什么？
+
+\item 设 \(V\) 是 \(\mathbb{A}^n\) 中的超曲面且 \(I(V) = (f)\)（某个非常数多项式 \(f \in k[x_1, x_2, \ldots, x_n]\)）。证明 \(V\) 是簇当且仅当 \(f\) 不可约。
+
+\item 设 \(V \subseteq \mathbb{A}^n\) 是仿射簇，\(f \in k[V]\). 证明 \(f\) 的图像（参见第 1 节习题 25）是仿射簇。
+
+\item 证明域 \(k\) 的元素上的任何置换都是 \(\mathbb{A}^1\) 到自身的 Zariski 连续映射（关于 \(\mathbb{A}^1\) 上的 Zariski 拓扑）。由此证明若 \(k\) 是无限域，则存在 \(\mathbb{A}^1\) 到自身的 Zariski 连续映射不是多项式。
+
+\item 设 \(V\) 是 \(k = \mathbb{C}\) 上 \(\mathbb{A}^n\) 中的仿射代数集。
+
+（a）证明 \(\mathbb{C}\) 上代数集的态射在 Euclid 拓扑下连续（这里的拓扑是把 \(\mathbb{C}^n\) 与具有通常 Euclid 拓扑的 \(\mathbb{R}^{2n}\) 等同所得的拓扑）。
+
+（b）证明 \(V\) 是 \(\mathbb{C}^n\) 的 Euclid 拓扑下的闭集（故 \(\mathbb{C}\) 上 \(\mathbb{A}^n\) 的 Zariski 闭集也是 Euclid 闭集）。
+
+（c）举出一个在 Euclid 拓扑下闭但在 Zariski 拓扑下不闭的集合的例子，即不是仿射代数集（故 Euclid 拓扑比 Zariski 拓扑「更精细」）。
+
+\item 举出一个单射 \(k\)-代数同态 \(\bar\varphi : k[W] \to k[V]\) 的例子，使相应的态射 \(\varphi : V \to W\) 不是满射。
+
+\item 设 \(\varphi : V \to W\) 是仿射代数集的满态射。证明若 \(V\) 是簇则 \(W\) 是簇。
+
+\item 设 \(V\) 是 \(\mathbb{A}^n\) 中的代数集，\(f \in k[V]\). 定义 \(V_f = \{v \in V \mid f(v) \neq 0\}\).
+
+（a）证明 \(V_f\) 是 \(V\) 中的 Zariski 开集（称为 \(V\) 中的\textbf{主开集}）。
+
+（b）设 \(J\) 是 \(k[x_1, \ldots, x_n, x_{n+1}]\) 中由 \(I(V)\) 与 \(x_{n+1}f-1\) 生成的理想，\(W = Z(J) \subseteq \mathbb{A}^{n+1}\). 证明投影到前 \(n\) 个坐标的映射是从 \(W\) 到 \(V_f\) 的 Zariski 连续双射（故 \(V\) 中的主开集 \(V_f\) 可以嵌入为某个（更大）仿射空间中的闭集）。
+
+（c）若 \(U\) 是 \(V\) 中的任意开集，证明 \(U = V_{f_1} \cup \cdots \cup V_{f_m}\)（某些 \(f_1, \ldots, f_m \in k[V]\)）。（这表明主开集构成 Zariski 拓扑的一个基。）
+
+\item 证明 \(GL_n(k)\) 是 \(\mathbb{A}^{n^2}\) 中的开仿射代数集，并且可以嵌入为 \(\mathbb{A}^{n^2+1}\) 中的闭仿射代数集。特别地，由此证明 \(k\) 的非零元素之集 \(k^\times\) 作为双曲线 \(xy = 1\) 嵌入到 \(\mathbb{A}^2\) 中。〔利用上一习题。〕
+
+\item 证明若 \(k\) 是无限域，则 \(\{(a, a^2, a^3) \mid a \in k\} \subset \mathbb{A}^3\) 是仿射代数簇。若 \(k\) 是有限域，证明这个集合总是可约的。
+
+\item 设 \(V = Z(xz-y^2,\ yz-x^3,\ z^2-x^2y) \subset \mathbb{A}^3\). 证明若 \(k\) 是无限域，则 \(V\) 是仿射簇。〔利用第 1 节习题 26 与习题 20。〕
+
+\item 设 \(f(x) = x^3+ax^2+bx+c\) 是 \(\mathbb{Q}[x]\) 中判别式为 \(D\) 的不可约三次多项式。令
+\[
+I = (x+y+z+a,\ xy+xz+yz-b,\ xyz+c) \subset \mathbb{Q}[x,y,z].
+\]
+
+（a）证明 \(I\) 是素理想当且仅当 \(D\) 不是 \(\mathbb{Q}\) 中的平方；此时 \(I\) 是极大理想，且 \(\mathbb{Q}[x,y,z]/I\) 是 \(f(x)\) 在 \(\mathbb{Q}\) 上的分裂域。
+
+（b）若 \(D = r^2\)，证明 \(I\) 的准素分解是 \(I = Q_+ \cap Q_-\)，其中
+\[
+Q_{\pm} = \left(I,\ (x-y)(x-z)(y-z) \pm r\right).
+\]
+证明 \(Q_+\) 与 \(Q_-\) 是极大理想，且 \(\mathbb{Q}[x,y,z]\) 模 \(Q_+\) 或 \(Q_-\) 是 \(f(x)\) 在 \(\mathbb{Q}\) 上的分裂域。
+
+\item 拓扑空间 \(X\) 称为\textbf{拟紧}的，若只要 \(X\) 的一族闭子集 \(V_i\) 的交为空，就有其中有限多个的交也为空，即
+\[
+\text{只要 } \bigcap_iV_i = \varnothing，\text{ 就存在 } V_{i_1}, V_{i_2}, \ldots, V_{i_N} \text{ 使 } \bigcap_{j=1}^{N}V_{i_j} = \varnothing.
+\]
+证明每个仿射代数集都是拟紧的。〔把这个定义翻译为 \(k[x_1, \ldots, x_n]\) 中理想的性质。〕（拟紧的 Hausdorff 空间称为\textbf{紧}的。）
+
+\item 当 \(k\) 是无限域时，证明 \(k^2\) 上的 Zariski 拓扑与「先在 \(k\) 上取 Zariski 拓扑、再在 \(k \times k\) 上取乘积拓扑」所得的拓扑不同。〔由第 1 节习题 14，在 \(k \times k\) 的乘积拓扑中，Zariski 闭集是形如 \(\{a\} \times \{b\}\)、\(\{a\} \times k\) 与 \(k \times \{b\}\)（\(a, b \in k\)）的集合的有限并。〕
+\end{enumerate}
+
+\begin{enumerate}
+\setcounter{enumi}{27}
+
+\item 证明下列环都有无限多个极小素理想，且 \((0)\) 不是其中任何有限多个的交（故这些环中 \((0)\) 没有准素分解）：
+
+（a）无限直积环 \(\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z} \times \cdots\)（它是布尔环，参见第 7.4 节习题 23）；
+
+（b）\(k[x_1, x_2, \ldots]/(x_1x_2, x_3x_4, \ldots, x_{2i-1}x_{2i}, \ldots)\)，其中 \(x_1, x_2, \ldots\) 是域 \(k\) 上的独立变量。
+
+\item 设 \(A\) 与 \(B\) 是理想，\(Q\) 是准素理想且 \(AB \subseteq Q\). 证明若 \(A \nsubseteq Q\) 则 \(B \subseteq \operatorname{rad}Q\).
+
+\item 设 \(Q\) 是 \(P\)-准素理想，\(A\) 是不包含在 \(Q\) 中的理想。定义 \(A' = \{r \in R \mid rA \subseteq Q\}\) 为 \(R\) 中与 \(A\) 的元素相乘后落入 \(Q\) 的元素之集。证明 \(A'\) 是 \(P\)-准素理想。
+
+\item 证明若 \(Q_1\) 与 \(Q_2\) 是属同一素理想 \(P\) 的准素理想，则 \(Q_1 \cap Q_2\) 是属 \(P\) 的准素理想。由此证明 \(P\)-准素理想的有限交仍是 \(P\)-准素理想。
+
+\item 证明若 \(Q_1\) 与 \(Q_2\) 是属同一极大理想 \(M\) 的准素理想，则 \(Q_1+Q_2\) 与 \(Q_1Q_2\) 都是属 \(M\) 的准素理想。由此证明 \(M\)-准素理想的有限和与有限积仍是 \(M\)-准素理想。
+
+\item 设 \(I = (x^2, xy, xz, yz) \subset k[x,y,z]\). 证明 \(I\) 的一个准素分解是 \(I = (x,y) \cap (x,z) \cap (x,y,z)^2\)，确定 \(I\) 的孤立素理想与嵌入素理想，并求 \(\operatorname{rad}I\).
+
+\item 设 \(\varphi : R \to S\) 是满环同态。证明 \(R\) 中包含 \(\varphi\) 的核的理想 \(Q\) 是准素的当且仅当 \(\varphi(Q)\) 在 \(S\) 中是准素的；此时与 \(\varphi(Q)\) 相伴的素理想就是与 \(Q\) 相伴的素理想 \(P\) 的像 \(\varphi(P)\).
+
+\item 设 \(\varphi : R \to S\) 是环同态。
+
+（a）设 \(I\) 是 \(R\) 中包含 \(\ker\varphi\) 的理想，其极小准素分解为 \(I = Q_1 \cap \cdots \cap Q_m\)，且 \(\operatorname{rad}Q_i = P_i\). 若 \(\varphi\) 是满同态，证明 \(\varphi(I) = \varphi(Q_1) \cap \cdots \cap \varphi(Q_m)\)（其中 \(\operatorname{rad}\varphi(Q_i)\) 由 \(\varphi(P_i)\) 给出）是 \(\varphi(I)\) 的极小准素分解。〔利用上一习题。〕
+
+（b）设 \(I\) 是 \(S\) 中的理想，其极小准素分解为 \(I = Q_1 \cap \cdots \cap Q_m\)，且 \(\operatorname{rad}Q_i = P_i\). 证明 \(\varphi^{-1}(I) = \varphi^{-1}(Q_1) \cap \cdots \cap \varphi^{-1}(Q_m)\)（其中 \(\operatorname{rad}\varphi^{-1}(Q_i)\) 由 \(\varphi^{-1}(P_i)\) 给出）是 \(\varphi^{-1}(I)\) 的准素分解，且当 \(\varphi\) 是满射时是极小的。
+
+\item 设 \(I = (xy, x^2-yz) \subset k[x,y,z]\). 证明 \((x,z) \cap (y^2, x-yz)\) 是 \(I\) 的极小准素分解。〔考虑由把 \(x\) 映到 \(yz\)、\(y\) 映到 \(y\)、\(z\) 映到 \(z\) 给出的环同态 \(\varphi : k[x,y,z] \to k[y,z]\)，并利用上一习题。〕
+
+\item 证明素理想 \(P\) 包含理想 \(I\) 当且仅当 \(P\) 包含 \(I\) 的某个极小准素分解中的一个相伴素理想。〔利用习题 3 与第 7.4 节习题 11。〕
+
+\item 证明根理想的每个相伴素理想都是孤立的。〔假设在根理想 \(I\) 的定理 21 的分解中有 \(P_2 = \operatorname{rad}Q_2 \subseteq P_1 = \operatorname{rad}Q_1\). 证明若 \(a \in Q_2 \cap \cdots \cap Q_m \subseteq P_2\)，则对某个 \(n \geq 1\) 有 \(a^n \in I\)，由此证明 \(a \in Q_1\)，并与准素分解的极小性矛盾。〕
+
+\item 固定环 \(R\) 中的元素 \(a\). 对环 \(R\) 中的任何理想 \(I\)，令 \(I_a = \{r \in R \mid ar \in I\}\).
+
+（a）证明 \(I_a\) 是理想，且 \(I_a = R\) 当且仅当 \(a \in I\).
+
+（b）证明对理想 \(I\) 与 \(J\) 有 \((I \cap J)_a = I_a \cap J_a\).
+
+（c）设 \(Q\) 是 \(P\)-准素理想且 \(a \notin Q\). 证明 \(Q_a\) 是 \(P\)-准素理想，且若 \(a \notin P\) 则 \(Q_a = Q\).
+
+\item 沿用上一习题的记号，设 \(I = Q_1 \cap \cdots \cap Q_m\) 是理想 \(I\) 的极小准素分解，\(P_i\) 是与 \(Q_i\) 相伴的素理想。
+
+（a）证明 \(I_a = (Q_1)_a \cap \cdots \cap (Q_m)_a\)，且 \(\operatorname{rad}(I_a) = \operatorname{rad}((Q_1)_a) \cap \cdots \cap \operatorname{rad}((Q_m)_a)\).
+
+（b）证明 \(\operatorname{rad}(I_a)\) 是使 \(a \notin Q_i\) 的那些素理想 \(P_i\) 的交。〔利用上一习题。〕
+
+（c）证明若 \(\operatorname{rad}(I_a)\) 是素理想，则 \(\operatorname{rad}(I_a) = P_j\)（某个 \(j\)）。〔利用素理想不可约这一事实。〕
+
+（d）对每个 \(i = 1, \ldots, m\)，证明存在 \(a \in R\) 使 \(\operatorname{rad}(I_a) = P_i\).〔证明存在 \(a \in R\) 使 \(a \notin Q_i\) 但对所有 \(j \neq i\) 有 \(a \in Q_j\).〕
+
+（e）由（c）与（d）证明极小准素分解的相伴素理想恰是理想族 \(\operatorname{rad}(I_a)\)（\(a \in R\)）中的素理想，并由此推出它们由 \(I\) 唯一确定，不依赖于极小准素分解。
+
+\item 设 \(P_1, \ldots, P_m\) 是诺特环 \(R\) 中理想 \((0)\) 的相伴素理想。
+
+（a）证明 \(P_1 \cap \cdots \cap P_m\) 是 \(R\) 中幂零元素之集。〔对 \(I = (0)\) 应用推论 22。〕
+
+（b）证明 \(P_1 \cup \cdots \cup P_m\) 是 \(R\) 中零因子之集。〔在上一习题中取 \(I = (0)\)，证明零因子之集由 \(\bigcup_{a \in R}\operatorname{rad}((0)_a) = \bigcup_{a \in R-\{0\}}\operatorname{rad}((0)_a)\) 给出。〕
+
+\item 设 \(R\) 是诺特环。证明 \(R\) 或者是整环，或者有非零幂零元素，或者至少有两条极小素理想。〔利用上一习题。〕
+
+\item 证明诺特环 \(R\) 中的理想 \(I\) 是根理想当且仅当它的极小准素分解的准素分量都是素理想，并由此证明此时极小准素分解唯一。〔若 \(I = Q_1 \cap \cdots \cap Q_m\) 是根理想的极小分解，\(Q_i\) 是 \(P_i\)-准素分量，证明若 \(a \in P_1 \cap \cdots \cap P_m\) 则 \(a\) 的某个幂属于 \(I\)，从而由 \(I\) 是根理想得 \(a \in I\). 由此推出 \(I = P_1 \cap \cdots \cap P_m\)，并证明这也是一个极小准素分解，即对任何 \(i\) 存在 \(b \notin P_i\) 但对 \(j \neq i\) 有 \(b \in P_j\). 若 \(a \in P_i\)，证明 \(ab \in Q_i\)，从而 \(a \in Q_i\). 于是 \(Q_i = P_i\).〕
+
+\item 证明诺特整环 \(R\) 是唯一分解整环当且仅当对每个 \(a \in R\)，与主理想 \((a)\) 相伴的孤立素理想都是主理想。〔参见推论 22 之后的例 2。为证明 \(R\) 是唯一分解整环，先证明不可约元素 \(a \in R\) 是素元素，然后沿用第 8.3 节定理 14 的证明。〕
+
+\item 设 \(R\) 是开区间 \((-1,1)\) 上所有具有各阶导数的实值函数之环（即 \(C^\infty\) 函数环）。令
+\[
+F(x) = \begin{cases} e^{-1/x^4}, & x \neq 0,\\ 0, & x = 0 \end{cases}
+\]
+（可以假设 \(F \in R\) 且对所有 \(n \geq 0\) 有 \(F^{(n)}(0) = 0\)）。设 \((F)\) 是由 \(F\) 生成的主理想，\(A = \operatorname{rad}((F))\). 设 \(M\) 是 \(R\) 中在 \(x = 0\) 处为零的所有函数构成的（极大）理想，并令 \(P = \bigcap_{n \geq 1}M^n\).
+
+（a）证明 \(M = (x)\) 是 \(R\) 中由函数 \(x\) 生成的理想，且 \(M^n = (x^n)\) 由在原点处前 \(n-1\) 阶导数都为零的函数组成。
+
+（b）证明 \(R\) 不是诺特环（与第 7.4 节习题 33 比较）。〔一种途径：设 \(G(x)\) 在 \(x \leq 0\) 时为 0、在 \(x > 0\) 时等于 \(F(x)\)。设 \(I_n\) 是 \(R\) 中对所有 \(x \leq 1/n\) 都为零的函数构成的理想。用 \(G(x)\) 的平移证明 \(I_1 \subsetneq I_2 \subsetneq I_3 \subsetneq \cdots\) 是无限递增链。〕
+
+（c）证明 \(P\) 由在 \(x = 0\) 处各阶导数都为零的所有函数组成（即在 \(x = 0\) 处的 Taylor 级数恒为零的函数），并证明 \(P\) 是素理想。
+
+（d）证明 \(F \in P\)，并由此 \(A \subseteq P\).
+
+（e）证明 \(A \neq P\).〔令 \(G(x) = e^{-1/x^2}\)（\(x \neq 0\)）、\(G(0) = 0\). 证明 \(G \in P\) 但 \(G \notin A\).〕
+
+（f）证明存在包含 \((F)\) 的素理想 \(Q\) 使 \(Q \subsetneq P\)，即存在真包含于 \(P\) 中的非零素理想。
+
+\item 设 \(A\) 是 \(R = k[x_1, \ldots, x_n, y_1, \ldots, y_m]\) 中的任意理想。
+
+（a）证明 \(\operatorname{rad}(A \cap k[y_1, \ldots, y_m]) = \operatorname{rad}A \cap k[y_1, \ldots, y_m]\).
+
+（b）设 \((f_1, \ldots, f_s)\) 是 \(k[x_1, \ldots, x_n]\) 中的理想，\(F_1, \ldots, F_t\) 是 \((f_1, \ldots, f_s)\) 的根在 \(k[x_1, \ldots, x_n]\) 中计算所得的生成元。设 \(J\) 是 \(R\) 中的理想，并在 \(R\) 中令 \(A = J+(f_1, \ldots, f_s)\)、\(B = J+(F_1, \ldots, F_t)\). 证明 \(\operatorname{rad}A = \operatorname{rad}B\).
+
+（c）由（a）与（b）推出：在代数闭域 \(k\) 上，\(A = (y_1-x_1, \ldots, y_m-x_m, f_1, \ldots, f_s) \cap k[y_1, \ldots, y_m]\) 与 \(B = (y_1-x_1, \ldots, y_m-x_m, F_1, \ldots, F_t) \cap k[y_1, \ldots, y_m]\) 有相同的零点集。〔利用 Hilbert 零点定理。〕
+
+\item 求曲线 \(\{(a^2, a^3, a^4) \mid a \in \mathbb{C}\}\) 上的点在 \(\mathbb{C}^3\) 中的 Zariski 闭包。
+
+\item 证明 \(Z(x^3-xyz+z^2)\) 是 \(\mathbb{R}^3\) 中包含点集 \(\{(st,\ s+t,\ s^2t) \mid s, t \in \mathbb{R}\}\) 的最小代数集。
+
+\item 证明 \(Z(x^3z^2-3xy^2z^2-y^6-z^4)\) 是 \(\mathbb{R}^3\) 中包含点集 \(\{(s^2+t^2,\ st,\ s^3) \mid s, t \in \mathbb{R}\}\) 的最小代数集。
+
+\item 求定义点集 \(\{(s^4,\ s^3t,\ st^3,\ t^4) \mid s, t \in \mathbb{R}\}\) 的 Zariski 闭包的方程。
+
+\item 证明 \(V = Z(x^2-y^2z)\)（Whitney 伞面）是 \(\mathbb{R}^3\) 中包含点集 \(S = \{(st,\ s,\ t^2) \mid s, t \in \mathbb{R}\}\) 的最小代数集。证明 \(S\) 在 \(V\) 中不是 Zariski 闭的（缺失的点解释了曲面的名称）。在 \(\mathbb{C}\) 上做同样的讨论，但证明此时 \(S = V\) 是闭的。
+
+\item 设 \(V = Z(xz^2-w^3,\ xw^2-y^4,\ y^4z^2-w^5) \subset \mathbb{C}^4\). 确定 \(V\) 在投影 \(\pi((x,y,z,w)) = (x,y,z)\) 下的像的 Zariski 闭包。
+
+\item 设 \(V = Z(xy-1) \subset \mathbb{A}^2\)，\(S\) 是 \(V\) 在 \(\mathbb{A}^1\) 的 \(x\) 轴上的投影。
+
+（a）若 \(k = \mathbb{R}\)，证明 \(I(V) = (xy-1) \subset \mathbb{R}[x,y]\)，且 \((u-x, xy-1) \cap \mathbb{R}[u] = 0\) 在 \(\mathbb{R}[x,y,u]\) 中成立。用命题 8 与命题 16 推出 \(S\) 的 Zariski 闭包是 \(\mathbb{A}^1\)，并证明 \(S\) 本身不是闭集。
+
+（b）若 \(k = \mathbb{F}_3\)，证明 \(I(V) = (xy-1,\ x^3-x,\ y^3-y) \subset \mathbb{F}_3[x,y]\)，且 \((u-x,\ xy-1,\ x^3-x,\ y^3-y) \cap \mathbb{F}_3[u] = (u^2-1)\) 在 \(\mathbb{F}_3[x,y,u]\) 中成立。用命题 8 与命题 16 推出 \(S\) 在 \(\mathbb{A}^1\) 中是 Zariski 闭的。
+
+\item 回忆环 \(R\) 中两个理想 \(I, J\) 的\textbf{理想商} \((I:J) = \{r \in R \mid rJ \subseteq I\}\)（参见第 9.6 节习题 34 及其后）。显然 \(I \subseteq (I:J)\).
+
+（a）证明 \(Z(I)-Z(J)\)（即 \(Z(I)\) 中不在 \(Z(J)\) 中的元素之集）包含在 \(Z((I:J))\) 中，并由此证明 \(Z(I)-Z(J)\) 的 Zariski 闭包包含在 \(Z((I:J))\) 中。
+
+（b）证明若 \(k\) 是代数闭的且 \(I\) 是根理想，则 \(Z((I:J))\) 恰是 \(Z(I)-Z(J)\) 的 Zariski 闭包。
+
+（c）证明若 \(V\) 与 \(W\) 是仿射代数集，则 \((I(V):I(W)) = I(V-W)\).
+\end{enumerate}
+
+\section{整扩张与 Hilbert 零点定理}
+
+本节我们考虑环的\textbf{整扩张}这一重要概念，它是域代数扩张在环上的推广。这引出了 \(\mathbb{Q}\) 的有限扩张中「整数」的定义（即所谓代数数论这一数学分支的基本主题），也与代数曲线切线的存在性有关。
+
+\begin{definition}
+设 \(R\) 是交换环 \(S\) 的子环，且 \(1_S \in R\).
+
+（1）元素 \(s \in S\) 称为在 \(R\) 上\textbf{整}，若 \(s\) 是 \(R[x]\) 中某个首一多项式的根。
+
+（2）若每个 \(s \in S\) 都在 \(R\) 上整，则称环 \(S\) 是 \(R\) 的\textbf{整扩张}，或 \(S\) 在 \(R\) 上整。
+
+（3）\(R\) 在 \(S\) 中的\textbf{整闭包}是 \(S\) 中在 \(R\) 上整的元素之集。
+
+（4）若 \(R\) 等于它在 \(S\) 中的整闭包，则称 \(R\) 在 \(S\) 中\textbf{整闭}。整环 \(R\) 在其分式域中的整闭包称为 \(R\) 的\textbf{正规化}。若整环在其分式域中整闭，则称它是\textbf{整闭的}或\textbf{正规的}。
+\end{definition}
+
+在给出整扩张的一些例子之前，我们先证明整元素的一些基本性质，它们类似于域上代数元素的性质。
+
+\begin{proposition}\label{pro:15.23}
+设 \(R\) 是交换环 \(S\) 的子环，\(1 \in R\)，\(s \in S\). 则下述命题等价：
+
+（1）\(s\) 在 \(R\) 上整；
+
+（2）\(R[s]\) 是有限生成 \(R\)-模（其中 \(R[s]\) 是 \(s\) 的幂的所有 \(R\)-线性组合构成的环）；
+
+（3）存在子环 \(T\)（\(R \subseteq T \subseteq S\)）使 \(s \in T\) 且 \(T\) 是有限生成 \(R\)-模。
+\end{proposition}
+
+\begin{proof}
+先设（1）成立，设 \(s\) 是首一多项式 \(x^n+a_{n-1}x^{n-1}+\cdots+a_0 \in R[x]\) 的根。则
+\[
+s^n = -(a_{n-1}s^{n-1}+a_{n-2}s^{n-2}+\cdots+a_0),
+\]
+故 \(s^n\) 以及 \(s\) 的所有更高次幂都可以表示为 \(s^{n-1}, \ldots, s, 1\) 的 \(R\)-线性组合。于是 \(R[s] = R+Rs+\cdots+Rs^{n-1}\) 作为 \(R\)-模有限生成，这给出（2）。
+
+若（2）成立，则取 \(T = R[s]\) 即得（3）。
+
+设（3）成立，\(v_1, v_2, \ldots, v_n\) 是 \(T\) 的有限生成集。则对 \(i = 1, 2, \ldots, n\)，由于 \(T\) 是环，元素 \(sv_i \in T\)，故可以写成 \(v_1, \ldots, v_n\) 的 \(R\)-线性组合：
+\[
+sv_i = \sum_{j=1}^{n}a_{ij}v_j,
+\]
+即
+\[
+0 = \sum_{j=1}^{n}(\delta_{ij}s-a_{ij})v_j, \qquad i = 1, 2, \ldots, n,
+\]
+其中 \(\delta_{ij}\) 是 Kronecker 符号。若 \(B\) 是 \(i, j\) 位置为 \(\delta_{ij}s-a_{ij}\) 的 \(n \times n\) 矩阵，\(v\) 是元素为 \(v_1, \ldots, v_n\) 的 \(n \times 1\) 列矩阵，则这些方程就是 \(Bv = 0\). 由 Cramer 法则可知对所有 \(i\) 有 \((\det B)v_i = 0\)（参见第 11.4 节习题 3）。由于 \(1 \in T\) 是 \(v_1, \ldots, v_n\) 的 \(R\)-线性组合，可知 \(\det B = 0\). 但 \(B = sI-A\)，其中 \(A\) 是矩阵 \((a_{ij})\). 故 \(s\) 是首一多项式 \(\det(xI-A) \in R[x]\)（\(A\) 的特征多项式）的根，即 \(s\) 是系数在 \(R\) 中的首一多项式的根，这给出（1），证明完毕。
+\end{proof}
+
+\begin{corollary}\label{cor:15.24}
+设 \(R \subseteq S\) 如命题 23 中那样，\(s, t \in S\).
+
+（1）若 \(s\) 与 \(t\) 在 \(R\) 上整，则 \(s \pm t\) 与 \(st\) 也在 \(R\) 上整。
+
+（2）\(R\) 在 \(S\) 中的整闭包是 \(S\) 的含 \(R\) 的子环。
+
+（3）整性是可传递的：设 \(S\) 是 \(T\) 的子环；若 \(T\) 在 \(S\) 上整且 \(S\) 在 \(R\) 上整，则 \(T\) 在 \(R\) 上整。
+\end{corollary}
+
+\begin{proof}
+设 \(s\) 与 \(t\) 在 \(R\) 上整。由命题 23，\(R[s]\) 与 \(R[t]\) 都是有限生成 \(R\)-模，比如
+\[
+R[s] = Rs_1+Rs_2+\cdots+Rs_n, \qquad R[t] = Rt_1+Rt_2+\cdots+Rt_m.
+\]
+则
+\[
+R[s,t] = Rs_1t_1+\cdots+Rs_it_j+\cdots+Rs_nt_m
+\]
+是含 \(s \pm t\) 与 \(st\) 的环，且也是有限生成 \(R\)-模。因此 \(s \pm t\) 与 \(st\) 也在 \(R\) 上整，这证明了（1），也证明了（2）。
+
+为证明（3），设 \(t \in T\). 由于 \(t\) 在 \(S\) 上整，它是某个首一多项式 \(p(x) = x^n+a_{n-1}x^{n-1}+\cdots+a_0 \in S[x]\) 的根。由于 \(a_i \in S\) 在 \(R\) 上整，每个环 \(R[a_i]\) 都是有限生成 \(R\)-模，故环 \(R_1 = R[a_0, a_1, \ldots, a_{n-1}]\) 也是有限生成 \(R\)-模。由于首一多项式 \(p(x)\) 的系数在 \(R_1\) 中，\(t\) 在 \(R_1\) 上整，由此环 \(R_1[t] = R[a_0, a_1, \ldots, a_{n-1}, t]\) 是有限生成 \(R\)-模。由命题 23，这意味着 \(t\) 在 \(R\) 上整，这给出（3）。
+\end{proof}
+
+推论 24 的第二个论断表明，取 \(S\) 中在 \(R\) 上整的元素得到一个（可能更大的）\(S\) 的子环；而推论 24 的最后一个论断表明，取整闭包的过程一步就停止：
+
+\begin{corollary}\label{cor:15.25}
+设 \(R\) 是交换环 \(S\) 的子环，\(1 \in R\). 则 \(R\) 在 \(S\) 中的整闭包在 \(S\) 中整闭。
+\end{corollary}
+
+\noindent\textbf{例}
+
+（1）若 \(R\) 与 \(S\) 是域，则 \(S\) 在 \(R\) 上整当且仅当 \(S\) 在 \(R\) 上代数——若 \(s \in S\) 是系数在 \(R\) 中的多项式 \(p(x)\) 的根，则它是把 \(p(x)\) 除以（非零的）首项系数所得的首一多项式的根。
+
+（2）设 \(S\) 是 \(R\) 的整扩张，\(I\) 是 \(S\) 中的理想。则 \(S/I\) 是 \(R/(R \cap I)\) 的整扩张（把 \(s \in S\) 所满足的 \(R\) 上首一多项式模 \(I\) 约化，得到 \(s \in S/I\) 在 \(R/(R \cap I)\) 上满足的首一多项式）。
+
+（3）若 \(R\) 是唯一分解整环，则 \(R\) 整闭，理由如下。设 \(a/b\) 是 \(R\) 的分式域中的元素（\(b \neq 0\)，且 \(a\) 与 \(b\) 没有公因子）且满足 \((a/b)^n+r_{n-1}(a/b)^{n-1}+\cdots+r_1(a/b)+r_0 = 0\)（其中 \(r_0, \ldots, r_{n-1} \in R\)）。则
+\[
+a^n = b(-r_{n-1}a^{n-1}-\cdots-r_1ab^{n-2}-r_0b^{n-1})
+\]
+表明整除 \(b\) 的任何不可约元素都整除 \(a^n\)，从而整除 \(a\). 由于 \(a/b\) 既约，这表明 \(b\) 必是单位，即 \(a/b \in R\).
+
+（4）域 \(k\) 上的多项式环 \(k[x,y]\) 由上面的例（3）在其分式域 \(k(x,y)\) 中整闭。理想 \((x^2-y^3)\) 是素理想（参见第 9.1 节习题 14），故商环 \(R = k[x,y]/(x^2-y^3)\) 是整环。然而这个整环不整闭，因为 \(x/y\) 是 \(R\) 的分式域中的元素，它在 \(R\) 上整（因为 \((x/y)^3-x = 0\)），但不是 \(R\) 的元素。特别地，由上一例 \(R\) 不是唯一分解整环。
+
+下面我们考虑整环扩张中理想的行为。
+
+\begin{definition}
+设 \(\varphi : R \to S\) 是交换环的同态。
+
+（a）若 \(I\) 是 \(R\) 中的理想，则 \(I\) 到 \(S\) 的\textbf{扩张}是 \(S\) 中由 \(I\) 的像生成的理想 \(\varphi(I)S\).
+
+（b）若 \(J\) 是 \(S\) 中的理想，则 \(J\) 到 \(R\) 的\textbf{收缩}是理想 \(\varphi^{-1}(J)\).
+\end{definition}
+
+在 \(R\) 是 \(S\) 的子环、\(\varphi\) 是自然嵌入这一特殊情形，理想 \(I \subseteq R\) 的扩张是 \(S\) 中的理想 \(IS\)，而理想 \(J \subseteq S\) 的收缩是 \(R\) 中的理想 \(J \cap R\).
+
+由定义立即得到
+
+（1）\(I \subseteq IS \cap R\)，更一般地，\(I\) 包含在其扩张的收缩中；
+
+（2）\((J \cap R)S \subseteq J\)，更一般地，\(J\) 含有其收缩的扩张。
+
+一般地，两种情形都不必取等号（参见习题）。
+
+若 \(Q\) 是 \(S\) 中的素理想，则其收缩在 \(R\) 中是素理想（尽管极大理想的收缩不必是极大理想）。另一方面，若 \(P\) 是 \(R\) 中的素理想，其扩张在 \(S\) 中不必是素理想（甚至不必是真理想）；而且一般地也不成立「\(P\) 是 \(S\) 的某个素理想的收缩」（参见习题）。然而对整环扩张，情况更为可控：
+
+\begin{theorem}\label{thm:15.26}
+设 \(R\) 是交换环 \(S\) 的子环，\(1 \in R\)，并设 \(S\) 在 \(R\) 上整。
+
+（1）假设 \(S\) 是整环。则 \(R\) 是域当且仅当 \(S\) 是域。
+
+（2）设 \(P\) 是 \(R\) 中的素理想。则存在 \(S\) 中的素理想 \(Q\) 使 \(P = Q \cap R\). 此外，\(P\) 是极大理想当且仅当 \(Q\) 是极大理想。
+
+（3）（\textbf{上升定理}）设 \(P_1 \subseteq P_2 \subseteq \cdots \subseteq P_n\) 是 \(R\) 中素理想链，并设有 \(S\) 中的素理想 \(Q_1 \subseteq Q_2 \subseteq \cdots \subseteq Q_m\) 使 \(P_i = Q_i \cap R\)（\(1 \leq i \leq m\)，\(m < n\)）。则可以将这个理想上升链补全：存在 \(S\) 中的素理想 \(Q_{m+1} \subseteq \cdots \subseteq Q_n\) 使对所有 \(i\) 有 \(P_i = Q_i \cap R\).
+
+（4）（\textbf{下降定理}）假设 \(S\) 是整环且 \(R\) 在 \(S\) 中整闭。设 \(P_1 \supseteq P_2 \supseteq \cdots \supseteq P_n\) 是 \(R\) 中素理想链，并设有 \(S\) 中的素理想 \(Q_1 \supseteq Q_2 \supseteq \cdots \supseteq Q_m\) 使 \(P_i = Q_i \cap R\)（\(1 \leq i \leq m\)，\(m < n\)）。则可以将这个理想下降链补全：存在 \(S\) 中的素理想 \(Q_{m+1} \supseteq \cdots \supseteq Q_n\) 使对所有 \(i\) 有 \(P_i = Q_i \cap R\).
+\end{theorem}
+
+\begin{proof}
+为证明（1），先设 \(R\) 是域，\(s\) 是 \(S\) 的非零元素。则 \(s\) 在 \(R\) 上整，故
+\[
+s^n+a_{n-1}s^{n-1}+\cdots+a_1s+a_0 = 0
+\]
+（某些 \(a_0, a_1, \ldots, a_{n-1} \in R\)）。由于 \(S\) 是整环，可以假设 \(a_0 \neq 0\)（否则约去 \(s\) 的因子）。则
+\[
+s(s^{n-1}+a_{n-1}s^{n-2}+\cdots+a_1) = -a_0,
+\]
+而由于 \((-1/a_0) \in R\)，这表明 \((-1/a_0)(s^{n-1}+a_{n-1}s^{n-2}+\cdots+a_1)\) 是 \(s\) 在 \(S\) 中的逆，故 \(S\) 是域。反之，设 \(S\) 是域，\(r\) 是 \(R\) 的非零元素。由于 \(r^{-1} \in S\) 在 \(R\) 上整，我们有
+\[
+r^{-m}+a_{m-1}r^{-m+1}+\cdots+a_1r^{-1}+a_0 = 0
+\]
+（某些 \(a_0, \ldots, a_{m-1} \in R\)）。则 \(r^{-1} = -(a_{m-1}+\cdots+a_1r^{m-2}+a_0r^{m-1}) \in R\)，故 \(R\) 是域。
+
+（2）第一个论断的证明将在推论 50 中给出。对第二个论断，注意整环 \(S/Q\) 是 \(R/P\) 的整扩张（推论 25 之后的例 2）。由（1），\(S/Q\) 是域当且仅当 \(R/P\) 是域，即 \(Q\) 是极大理想当且仅当 \(P\) 是极大理想。
+
+为证明（3），只需归纳地证明：若 \(P_1 \subseteq P_2\) 且 \(Q_1\) 是 \(S\) 的素理想满足 \(Q_1 \cap R = P_1\)，则存在 \(S\) 的素理想 \(Q_2\) 满足 \(Q_1 \subseteq Q_2\) 且 \(Q_2 \cap R = P_2\). 由于 \(S/Q_1\) 是 \(R/P_1\) 的整扩张，由（2）的第一部分，存在 \(S/Q_1\) 的素理想 \(\bar Q_2\) 使 \(\bar Q_2 \cap R/P_1 = P_2/P_1\). 则 \(\bar Q_2\) 在 \(S\) 中的原像 \(Q_2\) 是包含 \(Q_1\) 的素理想，且 \(Q_2 \cap R = P_2\).
+
+（4）的证明在第 4 节习题 24 中概述。
+\end{proof}
+
+\begin{corollary}\label{cor:15.27}
+设 \(R\) 是环 \(S\) 的子环，\(1 \in R\)，并假设 \(S\) 在 \(R\) 上整且（作为环）有限生成。若 \(P\) 是 \(R\) 中的极大理想，则只有有限多个（非零个）\(S\) 的极大理想 \(Q\) 满足 \(Q \cap R = P\).
+\end{corollary}
+
+\begin{proof}
+由定理的（2），至少存在一个位于 \(P\) 之上的极大理想 \(Q\)，故我们只需说明这样的极大理想在 \(S\) 中只有有限多个。若 \(Q\) 是 \(S\) 的极大理想且 \(Q \cap R = P\)，则 \(S/Q\) 是含域 \(R/P\) 的域。为证明可能的 \(Q\) 只有有限多个，只需证明从 \(S\) 到含 \(R/P\) 的域、延拓同态 \(R \to R/P\) 的同态只有有限多个。设 \(S = R[s_1, \ldots, s_n]\)，其中由假设各 \(s_i\) 在 \(R\) 上整，设 \(p_i(x)\) 是 \(s_i\) 满足的系数在 \(R\) 中的首一多项式。若 \(Q\) 是 \(S\) 的极大理想，则 \(S/Q = (R/P)[\bar s_1, \ldots, \bar s_n]\) 是域 \(R/P\) 的以 \(\bar s_1, \ldots, \bar s_n\) 为生成元的域扩张。元素 \(\bar s_i\) 是把 \(p_i(x)\) 的系数模 \(P\) 约化所得的系数在 \(R/P\) 中的首一多项式 \(\bar p_i(x)\) 的根。这个首一多项式（在 \(R/P\) 的某个固定代数闭包中）只有有限多个可能的根，故形如 \((R/P)[\bar s_1, \ldots, \bar s_n]\) 的域扩张只有有限多个，推论得证。
+\end{proof}
+
+\noindent\textbf{代数整数}
+
+我们可以用整环扩张的概念定义有理数域 \(\mathbb{Q}\) 的扩张域中的「整数」：
+
+\begin{definition}
+设 \(K\) 是 \(\mathbb{Q}\) 的扩张域。
+
+（1）元素 \(a \in K\) 称为\textbf{代数整数}，若 \(a\) 在 \(\mathbb{Z}\) 上整，即 \(a\) 是系数在 \(\mathbb{Z}\) 中的某个首一多项式的根。
+
+（2）\(\mathbb{Z}\) 在 \(K\) 中的整闭包称为 \(K\) 的\textbf{整数环}，记作 \(\mathcal{O}_K\).
+\end{definition}
+
+代数整数显然在 \(\mathbb{Q}\) 上代数，故所有代数整数构成的环是 \(\mathbb{Q}\) 的代数闭包 \(\overline{\mathbb{Q}}\) 中的整数环。代数整数的例子包括 \(\sqrt{2}\)、\(\sqrt{-1}\)、\(\sqrt{5}\) 等等，因为这些元素当然是系数在 \(\mathbb{Z}\) 中的首一多项式的根。代数整数 \(a\) 的定义是 \(a\) 是 \(\mathbb{Z}[x]\) 中某个首一多项式的根，这个条件似乎难以检验。下一个命题用 \(a\) 的极小多项式给出 \(a\) 是代数整数的简单判别法。
+
+\begin{proposition}\label{pro:15.28}
+\(\mathbb{Q}\) 的某个扩张域中的元素 \(a\) 是代数整数当且仅当 \(a\) 在 \(\mathbb{Q}\) 上代数，且其极小多项式 \(m_{a,\mathbb{Q}}(x)\) 的系数都是整数。特别地，\(\mathbb{Q}\) 中的代数整数就是整数 \(\mathbb{Z}\)，即 \(\mathcal{O}_{\mathbb{Q}} = \mathbb{Z}\).
+\end{proposition}
+
+\begin{proof}
+若 \(a\) 在 \(\mathbb{Q}\) 上代数且 \(m_{a,\mathbb{Q}}(x) \in \mathbb{Z}[x]\)，则按定义 \(a\) 在 \(\mathbb{Z}\) 上整。反之，设 \(a\) 在 \(\mathbb{Z}\) 上整，设 \(f(x)\) 是 \(\mathbb{Z}[x]\) 中以 \(a\) 为根的次数最小的首一多项式。若 \(f\) 在 \(\mathbb{Q}[x]\) 中可约，则由 Gauss 引理，\(f(x) = g(x)h(x)\)（\(g(x), h(x)\) 是 \(\mathbb{Z}[x]\) 中次数小于 \(\deg f\) 的首一多项式）。但此时 \(a\) 是 \(g\) 或 \(h\) 的根，与 \(f\) 的极小性矛盾。故 \(f\) 在 \(\mathbb{Q}[x]\) 中不可约，于是 \(f(x) = m_{a,\mathbb{Q}}(x)\)，从而 \(a\) 的极小多项式的系数在 \(\mathbb{Z}\) 中。最后，\(a = a/b \in \mathbb{Q}\)（既约且 \(b > 0\)）的极小多项式是 \(bx-a\)，它是首一多项式当且仅当 \(b = 1\)，故 \(a \in \mathbb{Q}\) 是代数整数当且仅当 \(a \in \mathbb{Z}\).
+\end{proof}
+
+由于整数 \(\mathbb{Z}\) 是 \(\mathbb{Q}\) 中的代数整数，为强调（并清楚起见），\(\mathbb{Z}\) 的元素有时称为「有理整数」，以区别于 \(\mathbb{Q}\) 的有限次扩张（称为\textbf{数域}）中的「整数」。
+
+下一个结果给出一般数域中整数环的一些基本结构。
+
+\begin{theorem}\label{thm:15.29}
+设 \(K\) 是 \(\mathbb{Q}\) 上次数为 \(n\) 的数域。
+
+（1）\(K\) 中的整数环 \(\mathcal{O}_K\) 是诺特环，且是秩为 \(n\) 的自由 \(\mathbb{Z}\)-模。
+
+（2）对每个 \(\beta \in K\)，存在非零的 \(d \in \mathbb{Z}\) 使 \(d\beta\) 是代数整数。特别地，\(K\) 是 \(\mathcal{O}_K\) 的分式域。
+
+（3）若 \(\beta_1, \beta_2, \ldots, \beta_n\) 是 \(K\) 的任意 \(\mathbb{Q}\)-基，则存在整数 \(d\) 使 \(d\beta_1, d\beta_2, \ldots, d\beta_n\) 是 \(\mathcal{O}_K\) 的某个秩为 \(n\) 的自由 \(\mathbb{Z}\)-子模的基。\(\mathbb{Z}\)-模 \(\mathcal{O}_K\) 的任何一组基也是 \(K\) 作为 \(\mathbb{Q}\) 上向量空间的基。
+\end{theorem}
+
+\begin{proof}
+先注意 \(\mathcal{O}_K\) 中元素之间的任何 \(\mathbb{Z}\)-线性相关关系都是 \(K\) 中的 \(\mathbb{Q}\)-线性相关关系，而把 \(K\) 中 \(\mathcal{O}_K\) 的元素之间的一个 \(\mathbb{Q}\)-线性相关关系乘以系数的一个公分母，就得到 \(\mathcal{O}_K\) 中的一个 \(\mathbb{Z}\)-线性相关关系。设 \(\beta\) 是 \(K\) 的任意元素，\(x^k+a_{k-1}x^{k-1}+\cdots+a_0\) 是 \(\beta\) 在 \(\mathbb{Q}\) 上的极小多项式。若 \(d\) 是各系数的一个公分母，则乘以 \(d^k\) 表明
+\[
+(d\beta)^k+da_{k-1}(d\beta)^{k-1}+\cdots+d^{k-1}a_1(d\beta)+d^ka_0 = 0,
+\]
+且 \(d^ka_0, d^{k-1}a_1, \ldots, da_{k-1} \in \mathbb{Z}\). 故 \(d\beta\) 是代数整数，这证明了（2）的第一部分，而（2）的第二个论断立即随之推出。
+
+若 \(\beta_1, \ldots, \beta_n\) 是 \(K\) 在 \(\mathbb{Q}\) 上的一组基，则存在非零整数 \(d\) 使 \(d\beta_1, \ldots, d\beta_n\) 都在 \(\mathcal{O}_K\) 中。这些元素在 \(\mathbb{Q}\) 上仍线性无关，从而在 \(\mathbb{Z}\) 上无关，因此生成 \(\mathcal{O}_K\) 的一个秩为 \(n\) 的自由子模，这证明了（3）的第一个论断。
+
+由于 \(\mathcal{O}_K\) 是域 \(K\) 的子环，它是无挠 \(\mathbb{Z}\)-模。若 \(\mathcal{O}_K\) 包含在某个有限生成 \(\mathbb{Z}\)-模中，则 \(\mathcal{O}_K\) 也在 \(\mathbb{Z}\) 上有限生成，从而是自由 \(\mathbb{Z}\)-模。设 \(L\) 是 \(K\) 的伽罗瓦闭包，则 \(\mathcal{O}_K \subseteq \mathcal{O}_L\)，故只需证明 \(\mathcal{O}_L\) 包含在某个有限生成 \(\mathbb{Z}\)-模中。设 \(\alpha_1, \ldots, \alpha_m\) 是 \(L\) 的 \(\mathbb{Q}\)-基。必要时乘以整数 \(d \in \mathbb{Z}\)，我们可以假设每个 \(\alpha_i\) 都是代数整数，即 \(\alpha_1, \ldots, \alpha_m \in \mathcal{O}_L\).
+
+对每个固定的 \(0 \neq \theta \in L\)，由 \(T_\theta(a) = \operatorname{Tr}_{L/\mathbb{Q}}(\theta a)\) 定义的映射 \(T_\theta : L \to \mathbb{Q}\)（其中 \(\operatorname{Tr}_{L/\mathbb{Q}}\) 表示从 \(L\) 到 \(\mathbb{Q}\) 的迹映射，参见第 14.2 节习题 18）是从 \(L\) 到 \(\mathbb{Q}\) 的 \(\mathbb{Q}\)-线性变换。这个线性变换非零，因为 \(T_\theta(\theta^{-1}) = \operatorname{Tr}_{L/\mathbb{Q}}(1) = m\). 由此把 \(\theta\) 映到 \(T_\theta\) 的映射 \(L \to \operatorname{Hom}_{\mathbb{Q}}(L, \mathbb{Q})\) 是 \(\mathbb{Q}\) 上向量空间的单同态。由于这两个空间在 \(\mathbb{Q}\) 上有相同的维数，这个映射是同构。换句话说，\(L\) 上每个线性泛函都具有形式 \(T_\theta\)（某个 \(\theta \in L\)）。特别地，存在元素 \(\alpha'_1, \ldots, \alpha'_m \in L\)，其相应的线性变换 \(T_{\alpha'_i}\) 给出 \(\alpha_1, \ldots, \alpha_m\) 的对偶基，即
+\[
+\operatorname{Tr}_{L/\mathbb{Q}}(\alpha_i\alpha'_j) = \begin{cases} 1, & i = j,\\ 0, & \text{否则}.\end{cases}
+\]
+由于 \(\alpha'_1, \ldots, \alpha'_m\) 线性无关，它们给出 \(L\) 在 \(\mathbb{Q}\) 上的一组基。于是每个元素 \(\gamma \in \mathcal{O}_L\) 都可以写成 \(\gamma = a_1\alpha'_1+\cdots+a_m\alpha'_m\)（\(a_1, \ldots, a_m \in \mathbb{Q}\)）。乘以 \(\alpha_i\) 并取迹可知
+\[
+\operatorname{Tr}_{L/\mathbb{Q}}(\gamma\alpha_i) = a_1\operatorname{Tr}_{L/\mathbb{Q}}(\alpha'_1\alpha_i)+\cdots+a_i\operatorname{Tr}_{L/\mathbb{Q}}(\alpha'_i\alpha_i)+\cdots+a_m\operatorname{Tr}_{L/\mathbb{Q}}(\alpha'_m\alpha_i) = a_i.
+\]
+但 \(\gamma\) 与 \(\alpha_i\) 都是 \(\mathcal{O}_L\) 的元素，故 \(\gamma\alpha_i\) 也是 \(\mathcal{O}_L\) 的元素，这意味着 \(a_i = \operatorname{Tr}_{L/\mathbb{Q}}(\gamma\alpha_i)\) 是 \(\mathbb{Z}\) 的元素（参见第 14.2 节习题 18（d））。于是 \(\mathcal{O}_L \subseteq \mathbb{Z}\alpha'_1+\cdots+\mathbb{Z}\alpha'_m\)，即 \(\mathcal{O}_L\) 包含在一个有限生成 \(\mathbb{Z}\)-模中，这证明了 \(\mathcal{O}_K\)（以及 \(\mathcal{O}_L\)）是自由 \(\mathbb{Z}\)-模。
+
+由于 \(K\) 作为 \(\mathbb{Q}\) 上向量空间的维数为 \(n\)，由第 12.1 节定理 5 可知 \(\mathcal{O}_K\) 是秩至多为 \(n\) 的自由 \(\mathbb{Z}\)-模。又由于 \(\mathcal{O}_K\) 还含有秩为 \(n\) 的自由 \(\mathbb{Z}\)-子模，可知 \(\mathcal{O}_K\) 的 \(\mathbb{Z}\)-秩恰为 \(n\)，这证明了（1），而（3）的第二个论断由关于 \(\mathbb{Z}\)-线性与 \(\mathbb{Q}\)-线性相关关系的说明得到。
+
+最后，\(\mathcal{O}_K\) 中的任何理想 \(I\) 都是秩为 \(n\) 的自由 \(\mathbb{Z}\)-模的 \(\mathbb{Z}\)-子模，从而是秩至多为 \(n\) 的自由 \(\mathbb{Z}\)-模，而 \(I\) 的一组 \(\mathbb{Z}\)-模生成元也是一组 \(\mathcal{O}_K\)-生成元。故 \(\mathcal{O}_K\) 的每个理想都可以由至多 \(n\) 个元素生成，这意味着 \(\mathcal{O}_K\) 是诺特环，证明完毕。
+\end{proof}
+
+\begin{definition}
+数域 \(K\) 的\textbf{整基}是 \(K\) 的整数环作为秩为 \([K:\mathbb{Q}]\) 的自由 \(\mathbb{Z}\)-模的一组基。
+\end{definition}
+
+若 \(P\) 是数域 \(K\) 的整数环 \(\mathcal{O}_K\) 中的非零素理想，则 \(P \cap \mathbb{Z}\) 是 \(\mathbb{Z}\) 中的素理想。若 \(a \in P\)，则 \(a\) 在 \(\mathbb{Q}\) 上的极小多项式的常数项是 \(P \cap \mathbb{Z}\) 的元素，这表明 \(P \cap \mathbb{Z} = p\mathbb{Z}\) 也是 \(\mathbb{Z}\) 中的非零素理想。由定理 26，\(\mathbb{Z}\) 中每个素理想 \((p)\) 都以这种方式出现。由于 \(p\mathbb{Z}\) 是极大理想，由定理 26 的（2）还可推出 \(\mathcal{O}_K\) 中的非零素理想都是极大理想，于是由推论 27，满足 \(P \cap \mathbb{Z} = p\mathbb{Z}\) 的理想 \(P\) 在 \(\mathcal{O}_K\) 中只有有限多个。我们将在后面看到（第 16.3 节推论 16），数域整数环中每个非零理想都可以唯一地写成素理想之积，而在理想 \(p\mathcal{O}_K\) 的情形，不同的素因子恰是满足 \(P \cap \mathbb{Z} = p\mathbb{Z}\) 的有限多个理想 \(P\). 这个性质取代了 \(\mathcal{O}_K\) 中元素分解为素元素的唯一分解（后者不必成立，因为 \(\mathcal{O}_K\) 不必是唯一分解整环）。我们还将看到 \(\mathcal{O}_K\) 中的准素理想都是素理想的幂（事实上这等价于 \(\mathcal{O}_K\) 的理想可以唯一地分解为素理想之积，参见习题）。
+
+\noindent\textbf{例（\(\mathbb{Q}\) 的二次扩张中的整数环）}
+
+若 \(K\) 是 \(\mathbb{Q}\) 的二次扩张，则 \(K = \mathbb{Q}(\sqrt{D})\)（某个无平方因子的整数 \(D\)）。则
+\[
+\mathcal{O}_K = \mathbb{Q}(\sqrt{D}) \cap \overline{\mathbb{Q}} \text{ 中的整数} = \mathbb{Z}[\omega] = \mathbb{Z}\cdot 1+\mathbb{Z}\cdot\omega,
+\]
+其中整基为 \(1, \omega\)，
+\[
+\omega = \begin{cases} \sqrt{D}, & D \equiv 2, 3 \pmod 4,\\ \dfrac{1+\sqrt{D}}{2}, & D \equiv 1 \pmod 4. \end{cases}
+\]
+这就是第 7.1 节引入的二次整数环。由于 \(\omega\) 满足 \(\omega^2-D = 0\)（相应地，\(\omega^2-\omega+(1-D)/4 = 0\)），对应 \(D \equiv 2, 3 \pmod 4\)（相应地，\(D \equiv 1 \pmod 4\)），可知 \(\omega\) 是 \(K\) 中的代数整数，故 \(\mathbb{Z}[\omega] \subseteq \mathcal{O}_K\). 为证明这就是 \(K\) 的整个整数环，设 \(a = a+b\sqrt{D}\)（\(a, b \in \mathbb{Q}\)），并假设 \(a\) 是代数整数。若 \(b = 0\)，则 \(a \in \mathbb{Q}\)，故 \(a \in \mathbb{Z}\). 若 \(b \neq 0\)，则 \(a\) 的极小多项式是 \(x^2-2ax+(a^2-b^2D)\). 于是命题 28 表明 \(2a\) 与 \(a^2-b^2D\) 都是 \(\mathbb{Z}\) 的元素。则 \(4(a^2-b^2D) = (2a)^2-(2b)^2D \in \mathbb{Z}\)，故 \(4b^2D \in \mathbb{Z}\). 由于 \(D\) 无平方因子，可知 \(2b\) 是整数。写 \(a = x/2\)、\(b = y/2\)（某些整数 \(x, y\)）。由于 \(a^2-b^2D\) 是整数，有 \(x^2-y^2D \equiv 0 \pmod 4\). 由于模 4 的平方只有 0 与 1 且 \(D\) 不被 4 整除，容易验证只有下列可能：
+
+（i）\(D \equiv 2, 3 \pmod 4\) 且 \(x, y\) 都是偶数；或
+
+（ii）\(D \equiv 1 \pmod 4\) 且 \(x, y\) 都是偶数或都是奇数。
+
+在情形（i）中，\(a, b \in \mathbb{Z}\)，故 \(a \in \mathbb{Z}[\omega]\). 在情形（ii）中，\(a+b\sqrt{D} = r+s\omega\)，其中 \(r = (x-y)/2\)、\(s = y\) 都是整数，故同样有 \(a \in \mathbb{Z}[\omega]\).
+
+\noindent\textbf{例（分圆域中的整数环）}
+
+\(n\) 次单位根的分圆域 \(\mathbb{Q}(\zeta_n)\) 中的整数环是 \(\mathbb{Z}[\zeta_n]\)，其中 \(\zeta_n\) 是任意本原 \(n\) 次单位根。元素 \(1, \zeta_n, \ldots, \zeta_n^{\varphi(n)-1}\) 是一组整基。显然 \(\zeta_n\) 是代数整数，因为它是 \(x^n-1\) 的根，故环 \(\mathbb{Z}[\zeta_n]\) 包含在整数环中。证明这就是 \(\mathbb{Q}(\zeta_n)\) 中全部的代数整数需要超出本书范围的代数数论技巧。
+
+\noindent\textbf{Noether 正规化引理与 Hilbert 零点定理}
+
+下面我们把整环扩张的代数理论中的一些技巧应用于仿射几何。
+
+\begin{definition}
+若 \(k\) 是域，某个 \(k\)-代数中的元素 \(y_1, y_2, \ldots, y_q\) 称为在 \(k\) 上\textbf{代数无关}，若不存在 \(q\) 个变量上的非零多项式 \(p\)（系数在 \(k\) 中）使 \(p(y_1, y_2, \ldots, y_q) = 0\).
+\end{definition}
+
+因此 \(y_1, y_2, \ldots, y_q\) 代数无关当且仅当由 \(x_i \mapsto y_i\) 定义的 \(k\)-代数同态 \(k[x_1, \ldots, x_q] \to k[y_1, \ldots, y_q]\) 是同构。域扩张 \(k\) 中的元素代数无关当且仅当它们是 \(k\) 上的独立超越元。
+
+\begin{theorem}\label{thm:15.30}
+（\textbf{Noether 正规化引理}）设 \(k\) 是域，假设 \(A = k[r_1, r_2, \ldots, r_m]\) 是有限生成 \(k\)-代数。则对某个 \(q\)（\(0 \leq q \leq m\)），存在代数无关的元素 \(y_1, y_2, \ldots, y_q \in A\) 使 \(A\) 在 \(k[y_1, y_2, \ldots, y_q]\) 上整。
+\end{theorem}
+
+\begin{proof}
+对 \(m\) 归纳。若 \(r_1, \ldots, r_m\) 在 \(k\) 上代数无关，则取 \(y_i = r_i\)（\(i = 1, \ldots, m\)）。否则存在 \(f(x_1, \ldots, x_m) \in k[x_1, \ldots, x_m]\) 使 \(f(r_1, \ldots, r_m) = 0\). 多项式 \(f\) 是形如 \(ax_1^{e_1}x_2^{e_2}\cdots x_m^{e_m}\) 的单项式之和，其中该单项式的次数是 \(e_1+\cdots+e_m\)，而 \(f\) 的次数 \(d\) 是其各单项式次数的最大值。必要时重新编号变量，我们可以假设 \(f\) 是 \(x_m\) 上系数在 \(k[x_1, x_2, \ldots, x_{m-1}]\) 中的非常数多项式。现在我们做一个变量替换，把 \(f\) 变换（或「正规化」）为 \(x_m\) 上的首一多项式，其系数来自 \(A\) 的一个由 \(k\) 上 \(m-1\) 个元素生成的子环，此时我们就能应用归纳假设。
+
+定义整数 \(\alpha_i = (1+d)^i\) 与新变量 \(X_i = x_i-x_m^{\alpha_i}\)（\(1 \leq i \leq m-1\)）。令
+\[
+g(X_1, X_2, \ldots, X_{m-1}, x_m) = f(X_1+x_m^{\alpha_1}, X_2+x_m^{\alpha_2}, \ldots, X_{m-1}+x_m^{\alpha_{m-1}}, x_m),
+\]
+故 \(g \in k[X_1, \ldots, X_{m-1}, x_m]\). \(f\) 的每个单项式项在 \(g\) 中只贡献一个形如「常数乘以 \(x_m^e\)」的项。也容易验证 \(\alpha_i\) 的选取保证了 \(f\) 中不同的单项式给出不同的 \(e\)（例如把新变量中单项式的次数看作以 \(d+1\) 为基的整数即知）。若 \(N\) 是出现的 \(x_m\) 的最高次幂，则由此
+\[
+g = cx_m^N+\sum_{i=0}^{N-1}h_i(X_1, \ldots, X_{m-1})x_m^i
+\]
+（某个非零 \(c \in k\)）。若现在 \(s_i = r_i-r_m^{\alpha_i}\)，则
+\[
+\frac{1}{c}g(s_1, s_2, \ldots, s_{m-1}, r_m) = \frac{1}{c}f(r_1, r_2, \ldots, r_{m-1}, r_m) = 0,
+\]
+这表明 \(r_m\) 在 \(B = k[s_1, \ldots, s_{m-1}]\) 上整。对 \(1 \leq i \leq m-1\)，每个 \(r_i\) 在 \(B[r_m]\) 上整，因为 \(r_i\) 是首一多项式 \(x-s_i-r_m^{\alpha_i}\) 的根，故 \(A\) 在 \(B[r_m]\) 上整。由整性的传递性，\(A\) 因此在 \(B\) 上整。由于 \(B\) 是由 \(m-1\) 个元素生成的 \(k\)-代数，归纳假设完成证明。
+\end{proof}
+
+Noether 正规化引理的一个更「几何」的解释见习题 15。下面我们用正规化引理证明：若 \(k\) 是代数闭域，则多项式环 \(k[x_1, x_2, \ldots, x_n]\) 的极大理想都具有形式 \((x_1-a_1, \ldots, x_n-a_n)\)（某些 \(a_1, \ldots, a_n \in k\)）。把 \(k[x_1, x_2, \ldots, x_n]\) 看作 \(\mathbb{A}^n\) 上的多项式函数环，这表明极大理想对应于 \(\mathbb{A}^n\) 的点的求值映射的核——类似于紧集上连续函数环的相应结果（参见第 7.4 节习题 33、34）。
+
+\begin{theorem}\label{thm:15.31}
+（\textbf{Hilbert 零点定理——弱形式}）设 \(k\) 是代数闭域。则 \(M\) 是多项式环 \(k[x_1, x_2, \ldots, x_n]\) 中的极大理想当且仅当 \(M = (x_1-a_1, \ldots, x_n-a_n)\)（某些 \(a_1, \ldots, a_n \in k\)）。等价地，映射 \(Z\) 与 \(I\) 给出双射对应
+\[
+\{\mathbb{A}^n \text{ 中的点}\} \underset{Z}{\overset{I}{\longleftrightarrow}} \{k[\mathbb{A}^n] \text{ 中的极大理想}\}.
+\]
+此外，若 \(I\) 是 \(k[x_1, x_2, \ldots, x_n]\) 中的任意真理想，则 \(Z(I) \neq \varnothing\).
+\end{theorem}
+
+\begin{proof}
+当然 \((x_1-a_1, \ldots, x_n-a_n)\) 是 \(k[x_1, x_2, \ldots, x_n]\) 中的极大理想。反之，对 \(k[x_1, x_2, \ldots, x_n]\) 中的任意极大理想 \(M\)，令 \(E = k[x_1, x_2, \ldots, x_n]/M\). 则 \(E\) 是含 \(k\) 且在 \(k\) 上（由 \(\bar x_1, \ldots, \bar x_n\)）有限生成的域。由 Noether 正规化引理，\(E\) 在某个多项式环 \(k[y_1, \ldots, y_q]\) 上整。则由定理 26（1），\(k[y_1, \ldots, y_q]\) 是域，而由于一个或多个变量上的多项式环从不是域，可知 \(q = 0\). 故 \(E\) 在 \(k\) 上整，从而 \(E\) 在 \(k\) 上代数。由于 \(k\) 代数闭，\(E = k\)，即 \(\bar x_i \in k\)（\(1 \leq i \leq n\)）。于是对 \(i = 1, \ldots, n\) 存在 \(a_i \in k\) 使 \(\bar x_i-a_i \in M\). 这意味着极大理想 \((x_1-a_1, \ldots, x_n-a_n)\) 包含在 \(M\) 中，故 \(M = (x_1-a_1, \ldots, x_n-a_n)\).
+
+最后，若 \(I\) 是 \(k[x_1, x_2, \ldots, x_n]\) 中的任意非零真理想，则 \(I\) 包含在某个极大理想 \(M = (x_1-a_1, \ldots, x_n-a_n)\) 中，故 \((a_1, \ldots, a_n) \in Z(I)\).
+\end{proof}
+
+\begin{theorem}\label{thm:15.32}
+（\textbf{Hilbert 零点定理}）设 \(k\) 是代数闭域。则对 \(k[x_1, x_2, \ldots, x_n]\) 的每个理想 \(I\) 有 \(I(Z(I)) = \operatorname{rad}I\). 此外，映射 \(Z\) 与 \(I\) 定义互逆的双射
+\[
+\{\text{仿射代数集}\} \underset{Z}{\overset{I}{\longleftrightarrow}} \{\text{根理想}\}.
+\]
+\end{theorem}
+
+\begin{proof}
+由于 \(\operatorname{rad}I \subseteq I(Z(I))\)，只需证明反向包含。由 Hilbert 基定理，\(I = (f_1, f_2, \ldots, f_m)\). 设 \(g \in I(Z(I))\). 引入新变量 \(x_{n+1}\)，考虑由 \(f_1, \ldots, f_m\) 与 \(x_{n+1}g-1\) 在 \(k[x_1, \ldots, x_n, x_{n+1}]\) 中生成的理想 \(I'\). 在 \(\mathbb{A}^{n+1}\) 中使 \(f_1, \ldots, f_m\) 取零的任何点上，多项式 \(g\) 也取零（因为 \(g \in I(Z(I))\)），故 \(x_{n+1}g-1\) 非零。因此 \(Z(I') = \varnothing\). 由零点定理的弱形式，\(I'\) 不能是真理想，即 \(1 \in I'\). 写出
+\[
+1 = \sum a_if_i+a_{m+1}(x_{n+1}g-1)
+\]
+（某些 \(a_i \in k[x_1, \ldots, x_{n+1}]\)）。令 \(y = 1/x_{n+1}\)，在这个等式中乘以 \(y\) 的高次幂表明
+\[
+y^N = c_1f_1+\cdots+c_mf_m+c_{m+1}(g-y)
+\]
+（某些 \(c_i \in k[x_1, \ldots, x_n, y]\)）。在这个多项式等式中用 \(g\) 代替 \(y\) 表明 \(g^N \in I\)（在 \(k[x_1, \ldots, x_n]\) 中），即 \(g \in \operatorname{rad}I\). 故 \(I(Z(I)) \subseteq \operatorname{rad}I\)，从而 \(I(Z(I)) = \operatorname{rad}I\)，证明完毕。
+\end{proof}
+
+由命题 12 与定理 26（2）直接推出：若 \(S\) 是 \(R\) 的整扩张（\(1 \in R\)）、\(I\) 是 \(R\) 的理想，则
+\[
+(\operatorname{rad}_S IS) \cap R = \operatorname{rad}_R I,
+\]
+其中 \(IS\) 是 \(I\) 在 \(S\) 中生成的理想，下标表示计算根所在的环。这有以下几何解释。
+
+\begin{corollary}\label{cor:15.33}
+（\textbf{Hilbert 零点定理的变形}）设 \(k\) 是任意域，\(\bar k\) 是其代数闭包，\(I\) 是 \(k[x_1, x_2, \ldots, x_n]\) 中的理想。则 \(I_{\bar k}(Z_{\bar k}(I)) = \operatorname{rad}I\)，其中 \(Z_{\bar k}(I)\) 是 \(I\) 中多项式在 \(\bar k^n\) 中的零点集，\(I_{\bar k}(Z_{\bar k}(I))\) 是在 \(Z_{\bar k}(I)\) 的所有点上取零的 \(k[x_1, x_2, \ldots, x_n]\) 中多项式构成的理想。特别地，\(I = (1)\) 当且仅当 \(I\) 中多项式在 \(\bar k^n\) 中没有公共零点。
+\end{corollary}
+
+\begin{proof}
+由于 \(\bar k[x_1, x_2, \ldots, x_n]\) 是 \(k[x_1, x_2, \ldots, x_n]\) 的整扩张（由整元素 \(\bar k\) 生成），推论由定理 32 与上面关于根的说明立即推出。
+\end{proof}
+
+由零点定理，我们现在在代数闭域 \(k\) 上得到几何对象与环论对象之间的一个「词典」：
+
+\[
+\begin{array}{ll}
+\textbf{几何} & \textbf{代数}\\
+\text{仿射代数集 } V & \text{坐标环 } k[V]\\
+V \text{ 的点} & k[V] \text{ 的极大理想}\\
+V \text{ 中的仿射代数子集} & k[V] \text{ 的根理想}\\
+V \text{ 中的子簇} & k[V] \text{ 中的素理想}\\
+\text{态射 } \varphi : V \to W & k\text{-代数同态 } \bar\varphi : k[W] \to k[V]
+\end{array}
+\]
+
+\noindent\textbf{计算根}
+
+用 Gröbner 基有多项式环中计算根与准素分解的算法。这些算法相对初等，但有些技术性，故我们在这里只讨论一些初步结果。
+
+对由单个多项式 \(f \in k[x_1, \ldots, x_n]\) 定义超曲面 \(V = Z(f)\)，确定 \(I(V) = \operatorname{rad}(f)\) 是直接的。由于 \(k[x_1, \ldots, x_n]\) 是唯一分解整环，\(f\) 唯一地分解为互不相伴的不可约元素的幂之积：\(f = p_1^{e_1}\cdots p_s^{e_s}\)，于是 \(\operatorname{rad}(f)\) 由 \(p_1\cdots p_s\) 生成（即 \(f\) 的「无平方部分」）。
+
+\begin{example}
+设 \(W = Z(J)\)，其中 \(J = (u^3-uv^2+v^3) \subset \mathbb{Q}[u,v]\). 多项式 \(x^3-x+1\) 在 \(\mathbb{Q}\) 上不可约，故 \(f = u^3-uv^2+v^3\) 在 \(\mathbb{Q}[u,v]\) 中不可约。因此 \(\operatorname{rad}J = J\)，且 \(I(W) = J\).
+\end{example}
+
+对非主理想 \(I\)，确定 \(\operatorname{rad}I\) 更为复杂。下面这个命题（基于 Hilbert 零点定理）给出判断元素是否属于 \(\operatorname{rad}I\) 的判别法。
+
+\begin{proposition}\label{pro:15.34}
+设 \(k\) 是任意域。若 \(I = (f_1, \ldots, f_s)\) 是 \(k[x_1, \ldots, x_n]\) 中的真理想，则 \(f \in \operatorname{rad}I\) 当且仅当 \((f_1, \ldots, f_s, 1-yf) = k[x_1, \ldots, x_n, y]\).
+\end{proposition}
+
+\begin{proof}
+由推论 33，\((f_1, \ldots, f_s, 1-yf) = k[x_1, \ldots, x_n, y]\) 当且仅当方程组
+\[
+1-yf(x_1, \ldots, x_n) = 0, \qquad f_1(x_1, \ldots, x_n) = 0, \quad \ldots, \quad f_s(x_1, \ldots, x_n) = 0
+\]
+在 \(k\) 的代数闭包 \(\bar k^n\) 中没有公共零点。对给定的 \((a_1, \ldots, a_n) \in \bar k^n\)，方程 \(1-yf(a_1, \ldots, a_n) = 0\) 有解 \(y\) 当且仅当 \(f(a_1, \ldots, a_n) \neq 0\). 因此这个方程组没有公共零点当且仅当对每个满足 \(f_1(a_1, \ldots, a_n) = \cdots = f_s(a_1, \ldots, a_n) = 0\) 的 \((a_1, \ldots, a_n) \in \bar k^n\)，也有 \(f(a_1, \ldots, a_n) = 0\). 等价地，若 \((a_1, \ldots, a_n) \in Z_{\bar k}(I)\) 则 \(f(a_1, \ldots, a_n) = 0\)，即由推论 33 有 \(f \in I_{\bar k}(Z_{\bar k}(I)) = \operatorname{rad}I\).
+\end{proof}
+
+由于约化 Gröbner 基（关于任何固定单项序）唯一，我们立即得到下述判断多项式何时属于理想之根的算法。
+
+\begin{corollary}\label{cor:15.35}
+设 \(I = (f_1, \ldots, f_s) \subset k[x_1, \ldots, x_n]\). 则 \(f \in \operatorname{rad}I\) 当且仅当 \(\{1\}\) 是理想 \((f_1, \ldots, f_s, 1-yf)\) 在 \(k[x_1, \ldots, x_n, y]\) 中关于任何单项序的约化 Gröbner 基。
+\end{corollary}
+
+\begin{example}
+考虑 \(k[x,y]\) 中的 \(I = (x^2-y^2, xy)\). \((x^2-y^2, xy, 1-tx)\) 在 \(k[x,y,t]\) 中关于序 \(x > y > t\) 的约化 Gröbner 基是 \(\{1\}\)，这表明 \(x \in \operatorname{rad}I\). 为确定属于 \(I\) 的 \(x\) 的最小幂，我们计算出 \(k[x,y]\) 中的理想 \((x^2-y^2, x^3y, x^3)\) 与 \(I\) 有相同的约化 Gröbner 基（即 \(\{x^2-y^2, xy, y^3\}\)），而 \((x^2-y^2, x^2, xy)\) 的基是 \(\{x^2, xy, y^2\}\). 由此 \(x^3 \in I\) 而 \(x^2 \notin I\)（等价地，\(x^3\) 用 \(\{x^2-y^2, xy, y^3\}\) 作一般多项式除法后余式非零，而 \(x^3\) 的余式为 0）。由类似的计算（或由对称性），\(y \in \operatorname{rad}I\)，且 \(y^3 \in I\) 而 \(y^2 \notin I\). 由于 \((x,y) \subseteq \operatorname{rad}I\)，可知 \(\operatorname{rad}I = (x,y)\).
+\end{example}
+
+计算根的一些进一步结果在习题中给出。
+
+\subsection*{习题}
+
+设 \(R\) 是交换环 \(S\) 的子环，\(1 \in R\).
+
+\begin{enumerate}
+\item 利用唯一分解整环整闭这一事实，证明 Gauss 整数环 \(\mathbb{Z}[i]\) 是 \(\mathbb{Q}(i)\) 的整数环。
+
+\item 设 \(k\) 是域，\(t = y/x\) 是整环 \(R = k[x,y]/(x^2-y^3)\) 分式域中的元素。证明 \(K = k(t)\) 是 \(R\) 的分式域，且 \(k[t]\) 是 \(R\) 在 \(K\) 中的整闭包。
+
+\item 设 \(k\) 是域，\(i\) 与 \(j\) 是互素的正整数。求整环 \(R = k[x,y]/(x^i-y^j)\) 的正规化（参见第 9.1 节习题 14）。
+
+\item 设 \(k\) 是域，\(P\) 是多项式环 \(k[x,y]\) 中的理想 \((y^2-x^3-x^2)\). 证明 \(P\) 是素理想，并求整环 \(R = k[x,y]/P\) 的正规化。〔为证明 \(P\) 是素理想，证明 \(y^2-x^3-x^2\) 在唯一分解整环 \(k[x,y]\) 中不可约。然后考虑 \(t = y/x \in R\).〕
+
+\item 若 \(R\) 是分式域为 \(F\) 的整环，证明 \(F\) 是有限生成 \(R\)-模当且仅当 \(R = F\).
+
+\item 对下列每种情形，给出具体的环 \(R \subseteq S\) 以及这些环中显式的理想，以展示所指出的关系：
+
+（a）\(R\) 的一个理想 \(I\) 使 \(I \neq IS \cap R\)（故理想 \(I\) 的扩张的收缩不必等于 \(I\)）；
+
+（b）\(R\) 的一个素理想 \(P\)，使不存在 \(S\) 的素理想 \(Q\) 满足 \(P = Q \cap R\)；
+
+（c）\(S\) 的一个极大理想 \(M\)，使 \(M \cap R\) 在 \(R\) 中不是极大理想；
+
+（d）\(R\) 的一个素理想 \(P\)，其到 \(S\) 的扩张 \(PS\) 在 \(S\) 中不是素理想；
+
+（e）\(S\) 的一个理想 \(J\) 使 \(J \neq (J \cap R)S\)（故理想 \(J\) 的收缩的扩张不必等于 \(J\)）。
+
+\item 设 \(\mathcal{O}_K\) 是数域 \(K\) 的整数环。
+
+（a）假设 \(\mathcal{O}_K\) 的每个非零理想 \(I\) 都可以写成素理想幂之积。证明 \(\mathcal{O}_K\) 的理想 \(Q\) 是 \(P\)-准素的当且仅当 \(Q = P^m\)（某个 \(m \geq 1\)）。〔先证明由于 \(\mathcal{O}_K\) 中非零素理想都是极大理想，对互不相同的非零素理想 \(P_1, P_2\)，由 \(P_1^{m_1} \subseteq P_2^{m_2}\) 可得 \(P_1 = P_2\)。〕
+
+（b）假设 \(\mathcal{O}_K\) 的理想 \(Q\) 是 \(P\)-准素的当且仅当 \(Q = P^m\)（某个 \(m \geq 1\)）。在假设定理 21 全部成立的前提下，证明 \(\mathcal{O}_K\) 的每个非零理想 \(I\) 都可以唯一地写成素理想幂之积。〔证明若 \(P_1\) 与 \(P_2\) 是互不相同的非零素理想，则 \(P_1^{m_1}\) 与 \(P_2^{m_2}\) 是互余理想，并利用中国剩余定理。〕
+
+\item 证明若 \(s_1, \ldots, s_n \in S\) 在 \(R\) 上整，则环 \(R[s_1, \ldots, s_n]\) 是有限生成 \(R\)-模。
+
+\item 设 \(S\) 在 \(R\) 上整，\(P\) 是 \(R\) 中的素理想。证明由 \(P\) 在 \(S\) 中生成的理想 \(PS\) 中的每个元素 \(s\) 都满足方程 \(s^n+a_{n-1}s^{n-1}+\cdots+a_1s+a_0 = 0\)，其中系数 \(a_0, a_1, \ldots, a_{n-1}\) 都是 \(P\) 的元素。〔若 \(s = p_1s_1+\cdots+p_ms_m \in PS\)，证明 \(T = R[s_1, \ldots, s_m]\) 满足命题 23（3）的假设。沿用命题 23 中证明 \(s\) 整的论证，注意此时 \(s \in PT\)，故各 \(a_{ij} \in P\).〕
+
+\item 证明命题 28 的下述推广：设 \(R\) 是分式域为 \(k\) 的整闭整环，\(a\) 是 \(k\) 的某个扩张域 \(K\) 中的元素。证明 \(a\) 在 \(R\) 上整当且仅当 \(a\) 在 \(k\) 上代数且 \(a\) 在 \(k\) 上的极小多项式 \(m_{a,k}(x)\) 的系数在 \(R\) 中。〔若 \(a\) 整，证明 \(a\) 的共轭（即 \(m_{a,k}(x)\) 的根）也都整，故这些共轭的初等对称函数是 \(k\) 中在 \(R\) 上整的元素。〕
+
+\item 设 \(R\) 是分式域为 \(k\) 的整闭整环，\(p(x) \in R[x]\) 是首一多项式。证明若 \(p(x) = a(x)b(x)\)（\(a(x), b(x) \in k[x]\) 是首一多项式），则 \(a(x), b(x) \in R[x]\)（与第 9.3 节命题 5 的 Gauss 引理比较）。〔参见上一习题。〕
+
+\item 设 \(S\) 是如上一习题中那样在环 \(R\) 上整的整环。若 \(P\) 是 \(R\) 中的素理想，\(s\) 是由 \(P\) 在 \(S\) 中生成的理想 \(PS\) 中的任意元素。证明除首项外，\(s\) 在 \(k\) 上的极小多项式 \(m_{s,k}(x)\) 的系数都是 \(P\) 的元素。〔由习题 10，\(m_{s,k}(x) \in R[x]\). 习题 9 表明 \(s\) 是某个首一多项式 \(p(x) = x^n+a_{n-1}x^{n-1}+\cdots+a_0\) 的根，其中 \(a_0, \ldots, a_{n-1} \in P\). 用上一习题证明 \(p(x) = m_{s,k}(x)b(x)\)（\(b(x) \in R[x]\)），并在整环 \((R/P)[x]\) 中考虑这个等式。〕
+
+\noindent 下面两个习题推广第 7.5 节习题 6，刻画那些不是其任何真子环的分式域的域。
+
+\item 设 \(K\) 是特征为 0 的域，\(A\) 是 \(K\) 的子环，它关于性质「\(1/2 \notin A\)」极大。（由 Zorn 引理这样的 \(A\) 存在。）设 \(F\) 是 \(A\) 在 \(K\) 中的分式域。
+
+（a）证明 \(K\) 在 \(F\) 上代数。〔若 \(t\) 在 \(F\) 上超越，证明 \(1/2 \notin A[t]\).〕
+
+（b）证明 \(A\) 在 \(K\) 中整闭。〔证明 \(1/2\) 不在 \(A\) 于 \(K\) 中的整闭包中。〕
+
+（c）由（a）与（b）推出 \(K = F\).
+
+\item 证明域 \(K\) 是 \(K\) 的某个真子环的分式域当且仅当 \(K\) 不是有限域的代数闭包的子域。〔若 \(K\) 含有在 \(\mathbb{F}_p\) 上超越的 \(t\)，把上一习题中的 \(1/2\) 换成 \(1/t\) 作类似论证，证明 \(K\) 是某个真子环的分式域。〕
+
+\noindent 下一习题给出 Noether 正规化引理的一个「几何」解释，表明每个仿射代数集都是某个仿射 \(n\) 空间的有限覆盖。
+
+\item 设 \(V\) 是代数闭域 \(k\) 上的仿射代数集。证明对某个 \(n\)，存在从 \(V\) 到 \(\mathbb{A}^n\) 的满态射且纤维有限；并证明若 \(V\) 是簇，则 \(n\) 可以取为 \(V\) 的维数。〔由 Noether 正规化引理，有限生成 \(k\)-代数 \(S = k[V]\) 含有多项式子代数 \(R = k[x_1, x_2, \ldots, x_n]\) 使 \(S\) 在 \(R\) 上整。对 \(R\) 到 \(S\) 的包含映射应用定理 6 得到从 \(V\) 到 \(\mathbb{A}^n\) 的态射 \(\varphi\). 为看出 \(\varphi\) 是满射且纤维有限，对相应于 \(\mathbb{A}^n\) 中点 \((a_1, \ldots, a_n)\) 的 \(R\) 的极大理想 \((x_1-a_1, \ldots, x_n-a_n)\) 应用推论 27。〕
+
+\item 设 \(V\) 是 \(\mathbb{C}^n\) 中的仿射代数集。证明 \(V\) 在 Euclid 拓扑中是紧的（即闭且有界）当且仅当它是有限的。〔利用第 2 节习题 18、上一习题，以及紧集在连续函数下的行为。〕
+
+\item 设 \(R\) 是交换环 \(S\) 的子环，\(1_S \in R\)，并假设 \(S\) 在 \(R\) 上整。本习题证明 \(R\) 与 \(S\) 有相同的 Krull 维数（参见第 16.1 节）。
+
+（a）若 \(P_1 \subsetneq P_2 \subsetneq \cdots \subsetneq P_n\) 是 \(R\) 中互不相同的素理想链，证明存在 \(S\) 中互不相同的素理想链 \(Q_1 \subsetneq Q_2 \subsetneq \cdots \subsetneq Q_n\) 使 \(Q_i \cap R = P_i\).
+
+（b）反之证明：若 \(Q_1 \subsetneq Q_2 \subsetneq \cdots \subsetneq Q_n\) 是 \(S\) 中互不相同的素理想链，且 \(P_i = Q_i \cap R\)，则 \(P_1 \subsetneq P_2 \subsetneq \cdots \subsetneq P_n\) 是 \(R\) 中互不相同的素理想链。〔为证明各 \(P_i\) 互不相同，过渡到一个商环，把问题化归为证明：若 \(Q\) 是整环 \(S\) 中的非零素理想，则 \(Q \cap R\) 是 \(R\) 中的非零素理想。此时若 \(0 \neq s \in Q\)，证明 \(\mathbb{R}[x]\) 中以 \(s\) 为根的次数最小的多项式的常数项是 \(Q \cap R\) 中的非零元素。〕
+
+\item 设 \(V = Z(I)\)、\(W = Z(J)\)，其中 \(I\) 是 \(\mathbb{C}[u,v]\) 中的理想 \((uv+v^2)\)，\(J\) 是 \(\mathbb{C}[x,y,z]\) 中的理想 \((-2y-y^2+2z+z^2,\ yz-z^2)\).
+
+（a）证明 \(I\) 与 \(J\) 是素理想。由此 \(I = I(V)\)、\(J = I(W)\)，且 \(V\) 与 \(W\) 是簇。
+
+（b）证明由 \(\varphi((a_1, a_2)) = (a_1^2+a_2,\ a_1^2+a_2^2,\ a_1^2-a_2^2)\) 定义的映射 \(\varphi : V \to W\) 是同构。
+
+\item 设 \(I = (x^3+y^3+z^3,\ x^2+y^2+z^2,\ (x+y+z)^3) \subset k[x,y,z]\). 用 Gröbner 基证明若 \(\operatorname{ch}(k) \neq 2, 3\) 则 \(x, y, z \in \operatorname{rad}I\).
+
+\item 设 \(I = (x^3+y^3+z^3,\ xy+xz+yz,\ xyz) \subset k[x,y,z]\). 用 Gröbner 基证明 \(x, y, z \in \operatorname{rad}I\).
+
+\item 设 \(I = (x^4+y^4+z^4,\ x+y+z) \subset k[x,y,z]\).
+
+（a）用 Gröbner 基证明若 \(\operatorname{ch}(k) \neq 2\) 则 \(xy+xz+yz \in \operatorname{rad}I\)，并确定属于 \(I\) 的 \(xy+xz+yz\) 的最小幂。证明 \(x, y, z\) 都不属于 \(\operatorname{rad}I\).
+
+（b）若 \(J = (x^4+y^4+z^4,\ x+y+z,\ xy+xz+yz)\)，证明 \(J\) 关于字典序 \(x > y > z\) 的约化 Gröbner 基是 \(\{x+y+z,\ y^2+yz+z^2\}\). 由此 \(k[x,y,z]/J \cong k[y,z]/(y^2+yz+z^2)\)，且若 \(\operatorname{ch}(k) \neq 3\) 则 \(J\) 是根理想。
+
+（c）若 \(\operatorname{ch}(k) \neq 2, 3\)，证明 \(\operatorname{rad}I = J\).
+
+（d）若 \(\operatorname{ch}(k) = 3\)，证明 \(\operatorname{rad}I = (x-y,\ y-z)\).
+
+（e）若 \(\operatorname{ch}(k) = 2\)，证明 \(I = (x+y+z)\) 是素理想，从而是根理想。
+
+\item 设 \(I = (x^2y+z^3,\ x+y^3-z,\ 2y^4z-yz^2-z^3) \subset k[x,y,z]\). 用 Gröbner 基证明 \(x, y, z \in \operatorname{rad}I\)，并由此 \(\operatorname{rad}I = (x,y,z)\). 证明 \(x^9, y^7, z^9\) 分别是属于 \(I\) 的 \(x, y, z\) 的最小幂。
+
+\item 设 \(V = Z(x^3-x^2z-y^2z)\)、\(W = Z(x^2+y^2-z^2)\) 在 \(\mathbb{C}^3\) 中。证明在 \(\mathbb{C}[x,y,z]\) 中 \(I(V) = (x^3-x^2z-y^2z)\)，且 \(I(W) = (x^2+y^2-z^2)\).
+
+\item 设 \(V = Z(x^3+y^3+7z^3) \subset \mathbb{C}^3\). 证明在 \(\mathbb{C}[x,y,z]\) 中 \(I(V) = (x^3+y^3+7z^3)\).
+
+\item 设 \(I = (xz+y^2+z^2,\ xy-xz+yz-2z^2)\)，\(K = I+(x^2-3y^2+yz) \subset \mathbb{C}[x,y,z]\).
+
+（a）由第 1 节习题 46，存在单射 \(\mathbb{C}\)-代数同态从 \(\mathbb{C}[x,y,z]/K\) 到 \(\mathbb{C}[u,v]/(u^3-uv^2+v^3)\). 利用这一点以及命题 34 之前的例子，证明 \(K\) 是根理想，并由此 \(\operatorname{rad}I \subseteq K\).
+
+（b）证明 \(\operatorname{rad}I \subseteq (y,z)\).
+
+（c）证明 \(K \cap (y,z) = I\)，并由此 \(I\) 是根理想，故当 \(V = Z(I)\) 时 \(I(V) = I\).
+
+（d）证明 \(y(x^2-3y^2+yz)\) 与 \(z(x^2-3y^2+yz)\) 都是 \(I\) 的元素，但 \(y\)、\(z\) 与 \(x^2-3y^2+yz\) 都不在 \(I\) 中。
+
+\item 设 \(I\) 是 \(k[x_1, \ldots, x_n]\) 中的理想。证明下述命题等价（满足其中任何一条的理想称为\textbf{零维理想}，这正是（d）的由来）：
+
+（a）商 \(k[x_1, \ldots, x_n]/I\) 作为 \(k\) 上向量空间是有限维的；
+
+（b）对每个 \(i = 1, 2, \ldots, n\) 有 \(I \cap k[x_i] \neq 0\)；
+
+（c）若 \(G\) 是 \(I\) 的任意约化 Gröbner 基，则对每个 \(i = 1, \ldots, n\)，存在 \(g_i \in G\) 使 \(g_i\) 的首项为 \(x_i^{n_i}\)（某个 \(n_i \geq 1\)）；
+
+（d）\(I\) 中多项式的公共零点集 \(Z_{\bar k}(I)\)（在 \(k\) 的代数闭包 \(\bar k\) 中）是有限集。
+
+〔（a）\(\Rightarrow\)（b）利用单射 \(k[x_i]/(I \cap k[x_i]) \to k[x_1, \ldots, x_n]/I\).（b）\(\Rightarrow\)（c）注意某个 \(\operatorname{LT}(g_i)\) 整除 \(I \cap k[x_i]\) 的生成元的首项。（c）\(\Rightarrow\)（a）利用第 9.6 节习题 37。证明（b）\(\Rightarrow\)（d）。（d）\(\Rightarrow\)（b）：证明 \(Z_{\bar k}(I)\) 中各点的第 \(i\) 个坐标 \(a_1, \ldots, a_N\) 的极小多项式之积 \(m_{a_1,\bar k}(x_i)\cdots m_{a_N,\bar k}(x_i)\) 是 \(I(Z_{\bar k}(I))\) 中的非零多项式，并应用推论 33。〕
+
+\item 设 \(I\) 是 \(k[x_1, \ldots, x_n]\) 中的零维理想，\(I'\) 是 \(I\) 在 \(\bar k[x_1, \ldots, x_n]\) 中生成的理想（\(\bar k\) 是 \(k\) 的代数闭包）。设 \(Z_{\bar k}(I)\) 是 \(I\)（等价地，\(I'\)）在 \(\bar k^n\) 中的零点集。
+
+（a）证明 \(|Z_{\bar k}(I)| = \dim_{\bar k}\bar k[x_1, \ldots, x_n]/\operatorname{rad}I'\).〔证明 \(\operatorname{rad}I'\) 是对应于 \(Z_{\bar k}(I)\) 中各点的极大理想之积，并利用中国剩余定理。〕
+
+（b）证明 \(|Z_{\bar k}(I)| \leq \dim_kk[x_1, \ldots, x_n]/I\).〔一种途径：利用第 1 节习题 43，并注意 \(\dim_{\bar k}\bar k[x_1, \ldots, x_n]/\operatorname{rad}I' \leq \dim_{\bar k}\bar k[x_1, \ldots, x_n]/I'\).〕
+
+\item 设 \(I\) 是 \(k[x_1, \ldots, x_n]\) 中的零维理想，并设 \(I \cap k[x_i]\) 由非零多项式 \(h_i\) 生成（参见习题 26）。设 \(r_i\) 是 \(h_i\) 的不可约因子之积（即 \(h_i\) 的「无平方部分」）。
+
+（a）证明 \(I+(r_1, \ldots, r_n) \subseteq \operatorname{rad}I\).
+
+（b）（\textbf{完美域上零维理想的根}）若 \(k\) 是完美域，证明 \(\operatorname{rad}I = I+(r_1, \ldots, r_n)\).〔对 \(n\) 归纳。把 \(r_1 = p_1\cdots p_t\) 写成 \(k[x_1]\) 中互不相同的不可约多项式 \(p_i\) 之积。若 \(J = I+(r_1, \ldots, r_n)\)，证明 \(J = J_1 \cap \cdots \cap J_t\)，其中 \(J_i = I+(p_i)\). 对每个 \(i\) 证明模 \(p_i\) 的约化诱导出同构 \(k[x_1, \ldots, x_n]/J \cong K[x_2, \ldots, x_n]/J^K_i\)，其中 \(K\) 是扩张域 \(k[x_1]/(p_i)\)，\(J^K_i \subseteq K[x_2, \ldots, x_n]\) 是理想 \(J_i\) 模 \((p_i)\) 的约化。利用第 13.5 节习题 11 证明由于 \(k\) 完美，\(r_j\) 在 \(J^K_i \cap K[x_j]\) 中的像对每个 \(j = 2, \ldots, n\) 仍是（非零的）无平方多项式。由归纳得出 \(J^K_i\) 是根理想，从而 \(J\) 是根理想。〕
+
+（c）分别求出 \(\mathbb{Q}[x,y]\) 中理想 \((x^7+x^3y, x^4+y^3+y)\)、\((x^3-xy^2+x, x^2y+ay^3)\) 与 \((x^4+y^3,\ x^3-xy+y^2)\) 的根，以及 \(\mathbb{Q}[x,y,z]\) 中理想 \((x^2+y^2z,\ x^2y^2+z^3,\ y^2+z^2)\) 的根。
+
+（d）设 \(k = \mathbb{F}_p(t)\). 证明 \(I = (x^p+t,\ y^p-t)\) 是 \(k[x,y]\) 中的零维理想，使 \(I \cap k[x]\) 与 \(I \cap k[y]\) 都含有非零无平方多项式，但 \(I\) 不是根理想（故当 \(k\) 不完美时（b）的结果不必成立）。〔证明 \(x+y \in \operatorname{rad}I\) 但 \(x+y \notin I\).〕
+\end{enumerate}
+
+\section{局部化}
+
+环中「在素理想处局部化」的想法是代数中用于分离环中理想行为的一个极其强大且普遍的工具。它是分析中熟悉的「在一点处局部化」的想法（例如考虑实直线上函数 \(f(x)\) 的可微性时）的代数类比。事实上这一技巧的重要应用之一（也是它最初发展的动机之一）就是把仿射代数空间几何中的这类「局部」性质翻译为坐标环的相应性质。
+
+我们先考虑「分式环」的一个非常一般的构造。设 \(D\) 是 \(R\) 的含 1 的乘法封闭子集（即 \(1 \in D\)，且若 \(a, b \in D\) 则 \(ab \in D\)）。下一个结果构造出一个新环 \(D^{-1}R\)，它是使 \(D\) 的元素成为单位元的「最小」的环。这推广了第 7.5 节中分式环的构造，因为它允许 \(D\) 含零或零因子，故此时 \(R\) 不必作为子环嵌入 \(D^{-1}R\).
+
+\begin{theorem}\label{thm:15.36}
+设 \(R\) 是含 1 的交换环，\(D\) 是 \(R\) 中含 1 的乘法封闭子集。则存在交换环 \(D^{-1}R\) 与环同态 \(\pi : R \to D^{-1}R\)，满足下述泛性质：对任何把 1 映到 1 的交换环同态 \(\psi : R \to S\)，若对每个 \(d \in D\) 有 \(\psi(d)\) 是 \(S\) 中的单位，则存在唯一的同态 \(\Psi : D^{-1}R \to S\) 使 \(\Psi \circ \pi = \psi\).
+\end{theorem}
+
+\begin{proof}
+证明与第 7.5 节定理 15 的证明非常相似。此时我们在 \(R \times D\) 上定义关系
+\[
+(r, d) \sim (s, e) \iff x(er-ds) = 0 \text{ 对某个 } x \in D.
+\]
+这个关系显然自反且对称。若 \((r,d) \sim (s,e)\) 且 \((s,e) \sim (t,f)\)，则有 \(x(er-ds) = 0\)、\(y(fs-et) = 0\)（某些 \(x, y \in D\)）。把第一个等式乘以 \(fy\)、第二个乘以 \(dx\) 并相加得 \(exy(fr-dt) = 0\). 由于 \(D\) 对乘法封闭，\((r,d) \sim (t,f)\)，故 \(\sim\) 是传递的。
+
+用 \(r/d\) 表示 \((r,d)\) 在 \(\sim\) 下的等价类，\(D^{-1}R\) 表示这些等价类之集。在 \(D^{-1}R\) 中定义加法与乘法为
+\[
+\frac{a}{b}+\frac{c}{d} = \frac{ad+bc}{bd}, \qquad \frac{a}{b}\cdot\frac{c}{d} = \frac{ac}{bd}.
+\]
+验证这些运算良定义、并使 \(D^{-1}R\) 成为含 \(1 = 1/1\) 的交换环，是一个习题。对每个 \(d \in D\)，\(d/1\) 是 \(D^{-1}R\) 中的单位（即使在 \(D^{-1}R\) 是零环的退化情形）。
+
+最后定义 \(\pi : R \to D^{-1}R\) 为 \(\pi(r) = r/1\). 容易推出 \(\pi\) 是环同态。设 \(\psi : R \to S\) 是把 1 映到 1 的交换环同态，且对每个 \(d \in D\) 有 \(\psi(d)\) 是 \(S\) 中的单位。定义 \(\Psi : D^{-1}R \to S\) 为 \(\Psi(r/d) = \psi(r)\psi(d)^{-1}\). 这个映射良定义：若 \(r/d = s/e\)，则对某个 \(x \in D\) 有 \(x(er-ds) = 0\)，故在 \(S\) 中 \(\psi(x)(\psi(er)-\psi(ds)) = 0\)，而由于 \(\psi(x)\) 是 \(S\) 中的单位，得 \(\psi(er)-\psi(ds) = 0\)，于是 \(\psi(r)\psi(d)^{-1} = \psi(s)\psi(e)^{-1}\). 显然 \(\Psi\) 是环同态且 \(\Psi \circ \pi = \psi\).
+
+最后，\(\Psi\) 唯一：\(D^{-1}R\) 的每个元素都可以写成乘积 \((r/1)(d/1)^{-1}\)；\(\Psi\) 在形如 \(x/1\) 的元素上的值由 \(\psi\) 唯一确定，即 \(\Psi(x/1) = \Psi(\pi(x)) = \psi(x)\)；由于 \(\Psi\) 是环同态，它在任意单位 \(u\) 的逆 \(u^{-1}\) 上的值由 \(\Psi(u)\) 唯一确定。故 \(\Psi\) 在 \(D^{-1}R\) 的每个元素上唯一确定，证明完毕。
+\end{proof}
+
+\begin{corollary}\label{cor:15.37}
+沿用定理 36 的记号，
+
+（1）\(\ker\pi = \{r \in R \mid xr = 0 \text{ 对某个 } x \in D\}\)；特别地，\(\pi : R \to D^{-1}R\) 是单射当且仅当 \(D\) 不含 \(R\) 的零因子；
+
+（2）\(D^{-1}R = 0\) 当且仅当 \(0 \in D\)，从而当且仅当 \(D\) 含有幂零元素。
+\end{corollary}
+
+\begin{proof}
+按定义 \(\pi(r) = 0\) 当且仅当 \((r,1) \sim (0,1)\)，即当且仅当对某个 \(x \in D\) 有 \(xr = 0\)，这正是（1）。对（2），注意 \(D^{-1}R = 0\) 当且仅当这个环的 1 为零，即 \((1,1) \sim (0,1)\). 这当且仅当对某个 \(x \in D\) 有 \(x\cdot1 = 0\)，即当且仅当 \(0 \in D\).
+\end{proof}
+
+\begin{definition}
+环 \(D^{-1}R\) 称为 \(R\) 关于 \(D\) 的\textbf{分式环}，或 \(R\) 在 \(D\) 处的\textbf{局部化}。
+\end{definition}
+
+\noindent\textbf{例}
+
+（1）设 \(R\) 是整环，\(D = R-\{0\}\). 则 \(D^{-1}R\) 就是第 7.5 节中描述的 \(R\) 的分式域 \(Q\). 更一般地，若 \(D\) 是 \(R-\{0\}\) 的任意乘法封闭子集，则 \(D^{-1}R\) 是 \(Q\) 的子环，由形如 \(r/d\)（\(r \in R\)，\(d \in D\)）的元素组成。
+
+（2）设 \(R\) 是任意含 1 的交换环，\(f\) 是 \(R\) 的任意元素。设 \(D\) 是 \(R\) 中 \(f\) 的非负次幂构成的乘法集 \(\{f^n \mid n \geq 0\}\). 定义 \(R_f = D^{-1}R\). 注意 \(R_f = 0\) 当且仅当 \(f\) 幂零。若 \(f\) 不幂零，则 \(f\) 在 \(R_f\) 中成为单位。不难看出
+\[
+R_f \cong R[x]/(xf-1),
+\]
+其中 \(R[x]\) 是变量 \(x\) 上的多项式环（参见习题）。还要注意对任何 \(n \geq 1\)，\(R_f\) 与 \(R_{f^n}\) 自然同构，因为 \(f\) 与 \(f^n\) 在这两个环中都是单位。若 \(f\) 是零因子，则由推论的第一部分，\(R \to R_f\) 不把 \(R\) 嵌入 \(R_f\). 例如设 \(R = k[x,y]/(xy)\)，取 \(f = x\). 则 \(x\) 在 \(R_x\) 中是单位，而由推论的第一部分 \(y\) 被映到 0（具体地：在 \(R_x\) 中 \(y = xy/x = 0\)）。此时 \(\pi(R) = k[x] \subsetneq R_x = k[x, x^{-1}]\).
+
+（3）（\textbf{在素理想处局部化}）设 \(P\) 是任意环 \(R\) 中的素理想，\(D = R-P\). 按素理想的定义，\(D\) 是乘法封闭的。此时过渡到分式环 \(D^{-1}R\) 称为把 \(R\) \textbf{在 \(P\) 处局部化}，环 \(D^{-1}R\) 记作 \(R_P\). 不在 \(P\) 中的每个 \(R\) 的元素在 \(R_P\) 中成为单位。例如若 \(R = \mathbb{Z}\)、\(P = (p)\) 是素理想，则
+\[
+\mathbb{Z}_{(p)} = \left\{\frac{a}{b} \in \mathbb{Q} \;\middle|\; p \nmid b\right\} \subseteq \mathbb{Q},
+\]
+且每个不被 \(p\) 整除的整数 \(b\) 都是单位。
+
+（4）若 \(V\) 是任意非空集、\(k\) 是域，设 \(R\) 是 \(V\) 上任意含常函数的 \(k\)-值函数环（例如闭区间 \([0,1]\) 上所有连续实值函数的环）。对任意 \(a \in V\)，设 \(M_a\) 是 \(R\) 中在 \(a\) 处取零的函数构成的理想。则 \(M_a\) 是由在 \(a\) 处求值给出的环同态 \(R \to k\) 的核。由于 \(R\) 含常函数，求值是满射，故 \(M_a\) 是极大（从而是素）理想。\(R\) 在这个素理想处的局部化是
+\[
+R_{M_a} = \{f/g \mid f, g \in R,\ g(a) \neq 0\}.
+\]
+\(R_{M_a}\) 中的每个函数都可以通过在 \(a\) 处求值而赋值，\((f/g)(a) = f(a)/g(a)\)，且这个值不依赖于类 \(f/g\) 代表元的选取，故 \(R_{M_a}\) 成为在 \(a\) 处有定义的 \(k\)-值「有理函数」环。
+
+下面我们考虑定理 36 中映射 \(\pi : R \to D^{-1}R\) 下理想的扩张与收缩。为简化记号，若 \(I\) 是 \(R\) 的理想，用 \(eI\) 表示 \(I\) 到 \(D^{-1}R\) 的扩张（而不是更繁琐的 \(D^{-1}R\,\pi(I)\)）；若 \(J\) 是 \(D^{-1}R\) 的理想，用 \(cJ\) 表示 \(J\) 到 \(R\) 的收缩。
+
+若 \(I\) 是 \(R\) 的理想，则容易看出 \(eI\) 的每个元素都可以写成 \(a/d\)（某些 \(a \in I\)、\(d \in D\)），故 \(I\) 到 \(D^{-1}R\) 的扩张也常记作 \(D^{-1}I\).
+
+\begin{proposition}\label{pro:15.38}
+沿用上面的记号，我们有
+
+（1）对 \(D^{-1}R\) 的任何理想 \(J\) 有 \(J = e(cJ)\). 特别地，\(D^{-1}R\) 的每个理想都是 \(R\) 的某个理想的扩张，且 \(D^{-1}R\) 的不同理想在 \(R\) 中有不同的收缩。
+
+（2）对 \(R\) 的任何理想 \(I\) 有
+\[
+c(eI) = \{r \in R \mid dr \in I \text{ 对某个 } d \in D\}.
+\]
+此外，\(eI = D^{-1}R\) 当且仅当 \(I \cap D \neq \varnothing\).
+
+（3）扩张与收缩给出双射对应
+\[
+\{\text{与 } D \text{ 不交的 } R \text{ 的素理想}\} \underset{c}{\overset{e}{\longleftrightarrow}} \{D^{-1}R \text{ 的素理想}\}.
+\]
+
+（4）若 \(R\) 是诺特环（或 Artin 环），则 \(D^{-1}R\) 是诺特环（分别是 Artin 环）。
+\end{proposition}
+
+\begin{proof}
+我们总有 \(e(cJ) \subseteq J\). 对反向包含，设 \(a/d \in J\). 则 \(a/1 = d(a/d) \in J\)，故 \(a \in \pi^{-1}(J) = cJ\). 于是 \(a/1 \in e(cJ)\)，故 \((a/1)(1/d) = a/d \in e(cJ)\)，从而 \(J = e(cJ)\). 这证明了（1）的第一个论断，第二个论断立即推出。
+
+令 \(I' = \{r \in R \mid dr \in I \text{ 对某个 } d \in D\}\). 先证明 \(I' \subseteq c(eI)\). 若 \(r \in I'\)，则有某个 \(d \in D\) 使 \(dr = a \in I\). 于是 \(r/1 = a/d \in eI\)，故 \(r \in c(eI)\). 为证明反向包含 \(c(eI) \subseteq I'\)，设 \(r \in c(eI)\)，即 \(r/1 = a/d\)（某些 \(a \in I\)、\(d \in D\)）。则对某个 \(x \in D\) 有 \(x(dr-a) = 0\)，故 \(xdr = xa \in I\)，而由于 \(xd \in D\)，可知 \(r \in I'\). 这证明了（2）的第一个论断。现在 \(eI = D^{-1}R\) 当且仅当 \(1/1 \in eI\)，当且仅当 \(1 \in c(eI) = I'\). （2）的第二个论断于是由 \(I'\) 的定义推出。
+
+为证明（3），先注意若 \(Q\) 是 \(D^{-1}R\) 的素理想，则它在任何把 1 映到 1 的同态下的原像都是素理想（参见第 7.4 节习题 13），故 \(c\) 把 \(D^{-1}R\) 的素理想映到与 \(D\) 不交的 \(R\) 的素理想。反之，设 \(P\) 是与 \(D\) 不交的 \(R\) 的素理想，令 \(Q = eP\)，并设 \((a/d_1)(b/d_2) \in Q\). 则 \((ab)/(d_1d_2) \in Q\)，故对某些 \(c \in P\)、\(d \in D\) 有 \(ab/(d_1d_2) = c/d\). 于是对某个 \(x \in D\) 有 \(x(dab-d_1d_2c) = 0\). 由于 \(c \in P\)，有 \(xdab \in P\)，而由于 \(P\) 是与 \(D\) 不交的素理想，得 \(ab \in P\). 由于 \(P\) 是素理想，或者 \(a \in P\) 或者 \(b \in P\)，故 \(a/d_1 \in Q\) 或 \(b/d_2 \in Q\). 这证明 \(Q\) 是素理想，并表明 \(e\) 把与 \(D\) 不交的 \(R\) 的素理想映到 \(D^{-1}R\) 的素理想。最后，由（2）立即推出对每个与 \(D\) 不交的 \(R\) 的素理想 \(P\) 有 \(P = c(eP)\). 因此 \(c\) 与 \(e\) 是互逆的对应，从而在这些素理想集合之间是双射。这建立了（3）。
+
+由（1），\(D^{-1}R\) 中任何互不相同的理想上升（分别地，下降）链收缩为 \(R\) 中互不相同的理想上升（分别地，下降）链，这给出（4），证明完毕。
+\end{proof}
+
+由于 \(1 \in D\)，先局部化理想 \(I\)、再如（2）中那样收缩这个局部化，得到的是 \(R\) 中含 \(I\) 的理想：\(I \subseteq c(eI)\).
+
+\begin{definition}
+设 \(R\) 是含 1 的交换环，\(D\) 是含 1 的乘法封闭子集。\(R\) 中理想 \(I\) 关于 \(D\) 的\textbf{饱和}是 \(R\) 中的理想 \(c(eI)\)，其中收缩与扩张是就 \(\pi : R \to D^{-1}R\) 计算的。
+
+若 \(I = c(eI)\)，则称 \(I\) 关于 \(D\) \textbf{饱和}。
+\end{definition}
+
+粗略地说，命题 38（2）表明 \(I\) 的饱和由 \(R\) 中「若允许取 \(D\) 中的分母就会落入 \(I\)」的元素组成。理想 \(I\) 关于 \(D\) 饱和，意即即使允许取 \(D\) 中的分母也不会得到任何额外的元素。
+
+我们可以应用局部化的结果，给出判断系数在域 \(k\) 中的多项式环 \(k[x_1, \ldots, x_n]\) 里的理想 \(P\) 是否为素理想的算法。基本想法是利用 \(k[x_1, \ldots, x_i] = k[x_1, \ldots, x_{i-1}][x_i]\) 归纳地考察理想 \(P_i = P \cap k[x_1, \ldots, x_i]\) 是否素理想。
+
+一般地，设 \(R\) 是交换环。若 \(P\) 是 \(R[x]\) 中的素理想，则 \(P \cap R\) 是 \(R\) 中的素理想，故 \(S = R/(P \cap R)\) 是整环。设 \(F\) 是其分式域。则我们有两个自然的环同态：
+\[
+R[x] \to (R/P \cap R)[x] = S[x] \to F[x],
+\]
+其中第一个是自然投射同态，第二个是由 \(S \subseteq F\) 诱导的自然包含。注意 \(F[x]\) 是 \(S[x]\) 关于乘法封闭集 \(S-\{0\}\) 的局部化。下一个命题表明，\(P\) 在第一个同态下的像是 \(S[x]\) 中关于 \(S-\{0\}\) 饱和、并可扩张为 \(F[x]\) 中素理想的素理想；反之，我们也可以用这些性质判断 \(R[x]\) 中的理想是否素理想。
+
+\begin{proposition}\label{pro:15.39}
+设 \(R\) 是含 1 的交换环，\(I\) 是 \(R[x]\) 中的理想。则 \(I\) 是 \(R[x]\) 中的素理想当且仅当
+
+（i）\(J = I \cap R\) 是 \(R\) 中的素理想，即 \(S = R/J\) 是整环；
+
+（ii）若 \(\bar I\) 是 \(I\) 在 \(S[x]\) 中的像，则 \(\bar IF[x]\) 是 \(F[x]\) 中的素理想，且 \(\bar IF[x] \cap S[x] = \bar I\).
+\end{proposition}
+
+\begin{proof}
+设 \(I\) 是 \(R[x]\) 中的素理想，则 \(J = I \cap R\) 是 \(R\) 中的素理想、\(S = R/J\) 是整环。由第 9 章命题 2，约化同态 \(R[x] \to S[x] = (R/J)[x]\) 的核是 \(J[x]\)，它包含在 \(I[x]\) 中，故有环同构 \(R[x]/I \cong S[x]/\bar I\). 由于 \(R[x]/I\) 是整环，可知 \(\bar I\) 是整环 \(S[x]\) 中的素理想。\(\bar I \cap S\) 的元素是 \(R \cap I\) 中元素的像，故 \(\bar I \cap S = 0\). 由于环 \(F[x]\) 是 \(S[x]\) 关于乘法封闭集 \(S-\{0\}\) 的局部化，条件（ii）由命题 38（3）推出。
+
+反之，若 \(I\) 不是素理想，则或者 \(J\) 在 \(R\) 中不是素理想，或者 \(J\) 在 \(R\) 中是素理想但 \(\bar I\) 在 \(S[x]\) 中不是素理想。在后一情形，或者 \(\bar IF[x]\) 在 \(F[x]\) 中不是素理想，或者（再次由命题 38（3））\(\bar I\) 不饱和。故若 \(I\) 不是素理想，则（i）或（ii）不成立，证明完毕。
+\end{proof}
+
+由于 \(F[x]\) 是欧几里得整环，命题 39 中的理想 \(\bar IF[x] = (h(x))\) 是主理想，且它是素理想当且仅当 \(h(x)\) 为 0 或在 \(F[x]\) 中不可约。设 \(h(x)\) 是 \(I\) 的一个元素，它在 \(S[x]\) 中的像的首项系数为 \(a \in S\). 下一个命题表明 \(a\) 给出了使 \(\bar I\) 饱和所需分母的一个界，并可用于计算这个饱和 \(\bar IF[x] \cap S[x]\).
+
+\begin{proposition}\label{pro:15.40}
+设 \(S\) 是分式域为 \(F\) 的整环，\(A\) 是 \(S[x]\) 中的非零理想。设 \(AF[x] = (h(x))\)，其中 \(h(x)\) 是 \(S[x]\) 中首项系数为 \(a \in S\) 的多项式。设 \(S_a\) 是 \(S\) 关于 \(a\) 的幂的局部化。则
+
+（1）\(AF[x] \cap S[x] = AS_a[x] \cap S[x]\)，且
+
+（2）若 \(\tilde A\) 表示由 \(A\) 与 \(1-at\) 在多项式环 \(S[x,t]\) 中生成的理想，则 \(AS_a[x] \cap S[x] = \tilde A \cap S[x]\).
+\end{proposition}
+
+\begin{proof}
+先证明 \(AF[x] \cap S_a[x] = AS_a[x]\). 由于 \(S_a \subseteq F\)，包含 \(AS_a[x] \subseteq AF[x] \cap S_a[x]\) 是显然的。现在设 \(f(x) \in AF[x] \cap S_a[x]\). 若 \(f(x)\) 的首项是 \(sx^N\)、\(h(x)\) 的首项是 \(ax^m\)，则由于 \(AF[x] = (h(x))\) 有 \(N \geq m\). 于是多项式 \(f(x)-(s/a)x^{N-m}h(x)\) 仍在 \(AF[x] \cap S_a[x]\) 中且次数比 \(f(x)\) 低。迭代可知 \(f(x)\) 可以写成 \(S_a[x]\) 中的多项式与 \(h(x)\) 的乘积，故 \(f(x) \in AS_a[x]\). 把等式 \(AF[x] \cap S_a[x] = AS_a[x]\) 两边与 \(S[x]\) 取交，得到命题的第一个论断。
+
+为证明第二个论断，先设 \(f(x) \in \tilde A \cap S[x]\). 则我们可以写 \(f(x) = f_1(x,t)b(x)+f_2(x,t)(1-at)\)（某些 \(b(x) \in A\)、\(f_1, f_2 \in S[x,t]\)）。代入 \(t = 1/a\) 得 \(f(x) = f_1(x,1/a)b(x)\)，而由于 \(f_1(x,1/a) \in S_a[x]\)，得 \(f(x) \in AS_a[x] \cap S[x]\). 反之，设 \(f(x) = b(x)g(x) \in S[x]\)，其中 \(g(x) \in S_a[x]\)、\(b(x) \in A\). 若 \(a^N\) 是 \(g(x)\) 的各系数分母中出现的 \(a\) 的最高次幂，则 \(a^Ng(x) \in S[x]\). 由
+\[
+f(x) = (at)^Nf(x)+(1-(at)^N)f(x) = b(x)t^N(a^Ng(x))+(1-(at)^N)f(x)
+\]
+可知 \(f(x) \in \tilde A \cap S[x]\)，这给出反向包含，证明完毕。
+\end{proof}
+
+现在设 \(P\) 是 \(k[x_1, \ldots, x_n]\) 中的理想，对 \(i = 1, \ldots, n\) 设 \(P_i\) 是 \(P\) 与 \(k[x_1, \ldots, x_i]\) 的交。我们用命题 39 与 40 归纳地判断 \(P_1, P_2, \ldots, P_n = P\) 是否分别是相应多项式环中的素理想。
+
+理想 \(P_1\) 在欧几里得整环 \(k[x_1]\) 中是素理想当且仅当它为 0 或由不可约多项式生成。现在设 \(i \geq 2\)，并假设已经证明 \(P_{i-1}\) 是 \(k[x_1, \ldots, x_{i-1}]\) 中的素理想，故商环 \(S = k[x_1, \ldots, x_{i-1}]/P_{i-1}\) 是整环。若 \(F\) 表示 \(S\) 的分式域，则由命题 39，\(P_i\) 是 \(k[x_1, \ldots, x_i]\) 中的素理想当且仅当它在 \((k[x_1, \ldots, x_{i-1}]/P_{i-1})[x_i] = S[x_i]\) 中的像是饱和理想，且它到欧几里得整环 \(F[x_i]\) 的扩张是素理想。设 \(h(x_i) \in S[x_i]\) 是这个理想的生成元，\(a\) 是 \(h(x_i)\) 的首项系数。则 \((h(x_i))\) 是 \(F[x_i]\) 中的素理想当且仅当 \(h(x_i) = 0\) 或 \(h(x_i)\) 不可约。由命题 40，\(P_i\) 在 \(S[x_i]\) 中的像饱和当且仅当它等于 \(\tilde A \cap S[x_i]\)，其中 \(\tilde A\) 是由 \(P_i\) 与 \(1-at\) 在 \(S[x_i,t]\) 中生成的理想。后一条件可以在 \(k[x_1, \ldots, x_i, t]\) 中检验：它等价于检验由 \(P_i\) 与 \(1-at\) 在 \(k[x_1, \ldots, x_i, t]\) 中生成的理想与 \(k[x_1, \ldots, x_i]\) 的交恰为 \(P_i\)（参见习题 3）。
+
+把这些观察与第 9 章关于 Gröbner 基的结果结合起来，我们得到下述判断 \(k[x_1, \ldots, x_n]\) 中理想 \(P\) 是否素理想（等价地，判断相应的仿射代数集是否为簇）的算法。
+
+\noindent\textbf{判断 \(k[x_1, \ldots, x_n]\) 中理想是否素理想的算法}
+
+（1）计算 \(P\) 关于字典序 \(x_n > \cdots > x_1\) 的约化 Gröbner 基 \(G = \{g_1, \ldots, g_m\}\). 由第 9.6 节命题 29，\(G\) 中属于 \(k[x_1, \ldots, x_i]\) 的元素给出 \(P_i = P \cap k[x_1, \ldots, x_i]\) 的约化 Gröbner 基 \(\{g_1, \ldots, g_{m_i}\}\).
+
+（2）通过检验 \(P_1 = 0\) 或 \(P_1\) 的非零生成元在 \(k[x_1]\) 中不可约，判断 \(P_1\) 是否是 \(k[x_1]\) 中的素理想。
+
+对每个 \(i \geq 2\)，假设已判定 \(P_{i-1}\) 是 \(k[x_1, \ldots, x_{i-1}]\) 中的素理想（否则 \(P\) 不是 \(k[x_1, \ldots, x_n]\) 中的素理想）。设 \(S = k[x_1, \ldots, x_{i-1}]/P_{i-1}\)，\(F\) 是 \(S\) 的分式域。对 \(P_i\) 应用步骤（3）与（4），判断它是否是 \(k[x_1, \ldots, x_i]\) 中的素理想。
+
+（3）若 \(m_i = m_{i-1}\)，则 \(P_i\) 在 \(S[x_i]\) 中的像是零理想，故是素理想。否则 \(P_i\) 在 \(S[x_i]\) 与 \(F[x_i]\) 中的像是非零理想，且由 \(g_{m_{i-1}+1}, \ldots, g_{m_i}\) 的像生成。在 \(F[x_i]\) 中对这些生成元施行欧几里得算法，求出 \(P_i\) 中的一个元素 \(h(x_i)\)，使它在 \(F[x_i]\) 中的像生成 \(P_i\) 在 \(F[x_i]\) 中的像。判断 \(h(x_i)\) 在 \(F[x_i]\) 中是否不可约——若不可约，则 \(P_i\) 与 \(P\) 都不是素理想。
+
+（注意在 \(P_i\) 在 \(F[x_i]\) 中的像的生成元上施行欧几里得算法后，我们可以乘以 \(S\) 的单个元素来「清除每个等式中的分母」，使所有余式（特别地最后一个非零余式 \(h(x_i)\)）都是 \(P_i\) 的像中的元素。）
+
+（4）设 \(a \in k[x_1, \ldots, x_{i-1}]\) 是 \(h(x_i)\)（作为 \(x_i\) 的多项式）的首项系数。计算由 \(P_i\) 与 \(1-at\) 生成的理想在 \(k[x_1, \ldots, x_i, t]\) 中关于字典序 \(t > x_i > \cdots > x_1\) 的约化 Gröbner 基。判断这个约化基中属于 \(k[x_1, \ldots, x_i]\) 的元素是否是 \(\{g_1, \ldots, g_{m_i}\}\)——若是，则 \(P_i\) 是 \(k[x_1, \ldots, x_i]\) 中的素理想；若不是，则 \(P_i\) 与 \(P\) 都不是素理想。
+
+最后我们指出，类似的想法（连同把 Gröbner 基的结果推广到系数在整环 \(R\) 中的多项式环 \(R[x_1, \ldots, x_n]\) 的一些小修改）可以用来给出判断例如 \(\mathbb{Z}[x_1, \ldots, x_n]\) 中的理想是否素理想的算法。
+
+\noindent\textbf{例}
+
+（1）考虑任意无限域 \(k\) 上 \(k[x,y,z]\) 中的理想 \(P = (xz-y^2,\ yz-x^3,\ z^2-x^2y)\). 由第 1 节习题 26 可知 \(P\) 是素理想，因为存在从 \(k[x,y,z]/P\) 到整环 \(k[\mathbb{A}^1]\) 的单射（参见第 2 节习题 24）。这里我们用本节的想法证明 \(P \subset \mathbb{Q}[x,y,z]\) 是素理想。\(P\) 关于字典序 \(x > y > z\) 的约化 Gröbner 基是 \(\{x^3-yz,\ x^2y-z^2,\ xy^3-z^3,\ xz-y^2,\ y^5-z^4\}\). 于是 \(P_1 = P \cap \mathbb{Q}[z] = (0)\)，\(P_2 = P \cap \mathbb{Q}[y,z] = (y^5-z^4)\). 由于 \(P_1 = 0\)，理想 \(P_1\) 在 \(\mathbb{Q}[z]\) 中是素理想。
+
+下面检验 \(P_2\) 在 \(\mathbb{Q}[y,z]\) 中是素理想，这可以直接完成（参见习题 4 或第 9.1 节习题 14）。此时 \(S = \mathbb{Q}[z]\)、\(F = \mathbb{Q}(z)\). \(P_2\) 在 \(F[y]\) 中的像由 \(h(y) = y^5-z^4\) 生成，而它在 \(\mathbb{Q}(z)[y]\) 中不可约。\(h(y)\) 的首项系数是 1，而 \((y^5-z^4,\ 1-t)\) 在 \(\mathbb{Q}[y,z,t]\) 中关于字典序 \(t > y > z\) 的约化 Gröbner 基是 \(\{y^5-z^4,\ 1-t\}\). \(P_2\) 的约化 Gröbner 基中属于 \(\mathbb{Q}[y,z]\) 的元素是这个基中唯一位于 \(\mathbb{Q}[y,z]\) 的元素，故 \(P_2\) 是 \(\mathbb{Q}[y,z]\) 中的素理想。
+
+现在我们利用 \(P_2\) 是素理想来证明 \(P\) 是素理想。此时 \(S\) 是整环 \(\mathbb{Q}[y,z]/P_2 = \mathbb{Q}[y,z]/(y^5-z^4)\)，其分式域 \(F\) 由
+\[
+S = \mathbb{Q}[z]+\mathbb{Q}[z]\bar y+\mathbb{Q}[z]\bar y^2+\mathbb{Q}[z]\bar y^3+\mathbb{Q}[z]\bar y^4, \qquad F = \mathbb{Q}(z)+\mathbb{Q}(z)\bar y+\cdots+\mathbb{Q}(z)\bar y^4
+\]
+给出，其中 \(\bar y^5 = z^4\). \(P\) 在 \(S[x]\) 中的像是由元素 \(g_1 = x^3-yz\)、\(g_2 = yx^2-z^2\)、\(g_3 = y^3x-z^3\)、\(g_4 = zx-y^2\) 生成的理想 \(\bar P\)（且 \(\bar y^5-z^4 = 0\)）。生成 \(P\) 在 \(F[x]\) 中的像的 \(g_1, g_2, g_3, g_4\) 在 \(F[x]\) 中的最大公因式是不可约多项式 \(x-y^2/z\). \(P\) 中的多项式 \(h(x) = zx-y^2\) 的像生成 \(F[x]\) 中同一个理想，故在算法的（4）中可以取 \(a = z\). \((xz-y^2,\ yz-x^3,\ z^2-x^2y,\ 1-zt)\) 关于字典序 \(t > x > y > z\) 的约化 Gröbner 基由 \(P\) 的约化 Gröbner 基连同涉及 \(t\) 的元素 \(tx-1\) 与 \(tz-x\) 组成，故 \(P\) 是 \(\mathbb{Q}[x,y,z]\) 中的素理想。
+
+（2）考虑 \(\mathbb{Q}[x,y,z]\) 中的理想 \(P = (xz-y^3,\ xy-z^2)\)，它关于字典序 \(x > y > z\) 的约化 Gröbner 基是 \(\{xy-z^2,\ xz-y^3,\ y^4-z^3\}\). 这里 \(P_1 = 0\)、\(P_2 = P \cap \mathbb{Q}[y,z] = (y^4-z^3)\) 都是素理想（如例 1 中那样）。此时 \(S = \mathbb{Q}[y,z]/P_2\) 由
+\[
+S = \mathbb{Q}[z]+\mathbb{Q}[z]\bar y+\mathbb{Q}[z]\bar y^2+\mathbb{Q}[z]\bar y^3
+\]
+给出（\(\bar y^4 = z^3\)），其分式域 \(F\) 与上一例类似，而 \(\bar P = (g_1, g_2)\) 在 \(S[x]\) 中，其中 \(g_1 = yx-z^2\)、\(g_2 = zx-y^3\). \(\bar P\) 到 \(F[x]\) 的扩张由不可约多项式 \(yx-z^2\) 生成，而 \(h(x) = yx-z^2\) 是 \(P\) 中在 \(F[x]\) 中有相同像的元素，其首项系数 \(a = y\). 理想 \((xz-y^3,\ xy-z^2,\ 1-yt)\) 在 \(\mathbb{Q}[x,y,z,t]\) 中使用字典序 \(t > x > y > z\) 的约化 Gröbner 基是
+\[
+\{x^2-y^2z,\ xy-z^2,\ xz-y^3,\ y^4-z^3,\ ty-1,\ tz^2-x\},
+\]
+其中含有不在 \(P\) 的约化 Gröbner 基中的元素 \(x^2-y^2z\)，故 \(P\) 不是 \(\mathbb{Q}[x,y,z]\) 中的素理想。这个计算不仅表明 \(P\) 不是素理想，还通过局部化 \(S_a\) 显式地表明 \(P\) 在 \(S[x]\) 中的像不饱和。计算 \(a = y\) 使我们能够找到一个显式的元素对，它们都不在 \(P\) 中而乘积在 \(P\) 中：\(f = x^2-y^2z \notin P\)、\(y \notin P\)，但 \(y\) 的某个幂与 \(f\) 的乘积在 \(P\) 中。此时简单计算可验证 \(yf \in P\).
+
+\noindent\textbf{模的局部化}
+
+现在设 \(M\) 是 \(R\)-模，\(D\) 是如上含 1 的乘法封闭子集。则构造 \(D^{-1}R\) 时所用的想法可以类似地用来由 \(M\) 构造一个 \(D^{-1}R\)-模 \(D^{-1}M\)，如下。在 \(D \times M\) 上定义关系
+\[
+(d, m) \sim (e, n) \iff x(dn-em) = 0 \text{ 对某个 } x \in D,
+\]
+容易验证这是等价关系。设 \(m/d\) 表示 \((d,m)\) 的等价类，\(D^{-1}M\) 表示等价类之集。则容易验证运算
+\[
+\frac{m}{d}+\frac{n}{e} = \frac{em+dn}{de}, \qquad \frac{r}{d}\cdot\frac{m}{e} = \frac{rm}{de}
+\]
+良定义，并使 \(D^{-1}M\) 具有 \(D^{-1}R\)-模的结构。
+
+\begin{definition}
+\(D^{-1}R\)-模 \(D^{-1}M\) 称为 \(M\) 关于 \(D\) 的\textbf{分式模}，或 \(M\) 在 \(D\) 处的\textbf{局部化}。
+\end{definition}
+
+注意局部化 \(D^{-1}M\) 也是 \(R\)-模（因为每个 \(r \in R\) 通过 \(r/1\) 作用在 \(D^{-1}M\) 上），且有 \(R\)-模同态
+\[
+\pi : M \to D^{-1}M, \qquad \pi(m) = \frac{m}{1}.
+\]
+由等价关系的定义直接推出
+\[
+\ker\pi = \{m \in M \mid dm = 0 \text{ 对某个 } d \in D\}.
+\]
+同态 \(\pi\) 具有与定理 36 中类似的泛性质。假设 \(N\) 是 \(R\)-模，且对每个 \(d \in D\)，\(N\) 上的左乘 \(d\) 是 \(N\) 的双射。若 \(\psi : M \to N\) 是任意 \(R\)-模同态，则存在唯一的 \(R\)-模同态 \(\Psi : D^{-1}M \to N\) 使 \(\Psi \circ \pi = \psi\).
+
+若 \(M\) 与 \(N\) 是 \(R\)-模、\(\varphi : M \to N\) 是 \(R\)-模同态，则对 \(R\) 中任何乘法集 \(D\)，容易验证存在诱导的 \(D^{-1}R\)-模同态从 \(D^{-1}M\) 到 \(D^{-1}N\)，由把 \(m/d\) 映到 \(\varphi(m)/d\) 定义。
+
+下一个结果表明 \(M\) 在 \(D\) 处的局部化与张量积有关。
+
+\begin{proposition}\label{pro:15.41}
+设 \(D\) 是 \(R\) 中含 1 的乘法封闭子集，\(M\) 是 \(R\)-模。则作为 \(D^{-1}R\)-模有 \(D^{-1}M \cong D^{-1}R \otimes_RM\)，即 \(D^{-1}M\) 是由 \(R\)-模 \(M\) 作纯量扩张所得的 \(D^{-1}R\)-模。
+\end{proposition}
+
+\begin{proof}
+由把 \((r/d, m)\) 映到 \(rm/d\) 定义的映射 \(D^{-1}R \times M \to D^{-1}M\) 良定义且 \(R\)-平衡，故诱导出从 \(D^{-1}R \otimes_RM\) 到 \(D^{-1}M\) 的同态。把 \(m/d\) 映到 \((1/d)\otimes m\) 的映射给出良定义的逆同态（若在 \(D^{-1}M\) 中 \(m/d = m'/d'\)，则对某个 \(x \in D\) 有 \(x(d'm-dm') = 0\)，于是 \((1/d)\otimes m\) 可以写成 \((1/xd'd)\otimes(xd'm) = (1/xd'd)\otimes(xdm') = (1/d')\otimes m'\)）。故作为 \(R\)-模 \(D^{-1}M\) 同构于 \(D^{-1}R \otimes_RM\)，因为这些互逆的同构也是 \(D^{-1}R\)-模同态。
+\end{proof}
+
+在 \(D\) 处局部化环 \(R\) 或 \(R\)-模 \(M\) 与环和模的代数运算配合得很好，如下一命题所示：
+
+\begin{proposition}\label{pro:15.42}
+设 \(R\) 是含 1 的交换环，\(D^{-1}R\) 是它关于含 1 的乘法封闭子集 \(D\) 的局部化。
+
+（1）局部化与理想的有限和、有限交可交换：若 \(I\) 与 \(J\) 是 \(R\) 的理想，则
+\[
+D^{-1}(I+J) = D^{-1}(I)+D^{-1}(J), \qquad D^{-1}(I \cap J) = D^{-1}(I) \cap D^{-1}(J).
+\]
+局部化与商可交换：
+\[
+D^{-1}R/D^{-1}I \cong D^{-1}(R/I)
+\]
+（右边的局部化是就 \(D\) 在商环 \(R/I\) 中的像而言）。
+
+（2）局部化与取根可交换：若 \(N\) 是 \(R\) 的幂零根，则 \(D^{-1}N\) 是 \(D^{-1}R\) 的幂零根。若 \(I\) 是 \(R\) 中的理想，则 \(\operatorname{rad}(D^{-1}I) = D^{-1}(\operatorname{rad}I)\).
+
+（3）在命题 38 的对应（3）下，准素理想对应准素理想。更精确地说，设 \(Q\) 是 \(R\) 中的 \(P\)-准素理想。若 \(D \cap P \neq \varnothing\) 则 \(D^{-1}Q = D^{-1}R\). 若 \(D \cap P = \varnothing\)，则 \(D^{-1}P\) 是素理想，\(Q\) 的扩张 \(D^{-1}Q\) 是 \(D^{-1}R\) 中的 \(D^{-1}P\)-准素理想，且 \(D^{-1}Q\) 收缩回 \(R\) 得到 \(Q\).
+
+（4）局部化与模的有限和、有限交、商可交换：若 \(L\) 与 \(N\) 是 \(R\)-模 \(M\) 的子模，则
+（a）\(D^{-1}(L+N) = D^{-1}L+D^{-1}N\)，\(D^{-1}(L \cap N) = D^{-1}L \cap D^{-1}N\)；
+（b）\(D^{-1}N\) 是 \(D^{-1}M\) 的子模，且 \(D^{-1}M/D^{-1}N = D^{-1}(M/N)\).
+
+（5）局部化与模的有限直和可交换：若 \(M\) 与 \(N\) 是 \(R\)-模，则 \(D^{-1}(M \oplus N) \cong D^{-1}M \oplus D^{-1}N\).
+
+（6）局部化是正合的（即 \(D^{-1}R\) 是平坦 \(R\)-模）：若 \(0 \to L \xrightarrow{\psi} M \xrightarrow{\varphi} N \to 0\) 是 \(R\)-模的短正合序列，则诱导序列 \(0 \to D^{-1}L \xrightarrow{\psi'} D^{-1}M \xrightarrow{\varphi'} D^{-1}N \to 0\) 也是 \(D^{-1}R\)-模的正合序列。
+\end{proposition}
+
+\begin{proof}
+我们先证明（6）。设 \(0 \to L \xrightarrow{\psi} M \xrightarrow{\varphi} N \to 0\) 是 \(R\)-模的短正合序列。\(D^{-1}N\) 的每个元素都具有形式 \(n/d\)（某些 \(n \in N\)、\(d \in D\)）。由于 \(\varphi\) 是满射，对某个 \(m \in M\) 有 \(n = \varphi(m)\)，故 \(\varphi'(m/d) = \varphi(m)/d = n/d\)，即 \(\varphi' : D^{-1}M \to D^{-1}N\) 是满射。若 \(m/d\) 在 \(\varphi'\) 的核中，则对某个 \(d_1 \in D\) 有 \(d_1\varphi(m) = 0\). 于是 \(\varphi(d_1m) = 0\)，由原序列在 \(M\) 处的正合性得 \(d_1m = \psi(l)\)（某个 \(l \in L\)），故 \(m/d = d_1m/(d_1d) = \psi(l)/(d_1d) = \psi'(l/(d_1d))\)，即 \(\ker(\varphi') \subseteq \operatorname{image}(\psi')\)。若 \(\psi'(l)/d \in \operatorname{image}(\psi')\)，则 \(\varphi'(\psi(l)/d) = \varphi(\psi(l))/d = 0\)，这给出反向包含 \(\operatorname{image}(\psi') \subseteq \ker(\varphi')\)，于是诱导序列在 \(D^{-1}M\) 处正合。最后设 \(\psi'(l/d) = 0\). 则对某个 \(d_2 \in D\) 有 \(d_2\psi(l) = 0\)，即 \(\psi(d_2l) = 0\)，故由 \(\psi\) 的单射性 \(d_2l = 0\). 于是 \(l/d = d_2l/(d_2d) = 0\)，即 \(\psi'\) 是单射。这证明了序列 \(0 \to D^{-1}L \xrightarrow{\psi'} D^{-1}M \xrightarrow{\varphi'} D^{-1}N \to 0\) 正合。
+
+为证明（1）的第一个论断，注意对 \(i \in I\)、\(j \in J\)、\(d \in D\) 有 \((i+j)/d = i/d+j/d\)，这表明 \(D^{-1}(I+J) \subseteq D^{-1}(I)+D^{-1}(J)\)；而 \(i/d_1+j/d_2 = (d_2i+d_1j)/(d_1d_2)\) 表明 \(D^{-1}(I)+D^{-1}(J) \subseteq D^{-1}(I+J)\). 对第二个论断，包含 \(D^{-1}(I \cap J) \subseteq D^{-1}(I) \cap D^{-1}(J)\) 是显然的。若 \(a/d \in D^{-1}(I) \cap D^{-1}(J)\)，则对某些 \(d_1, d_2 \in D\) 有 \(d_1a \in I\)、\(d_2a \in J\). 于是 \(d_1d_2a \in I \cap J\)，且 \(a/d = (d_1d_2a)/(d_1d_2d)\)，这给出包含 \(D^{-1}(I) \cap D^{-1}(J) \subseteq D^{-1}(I \cap J)\). （1）的最后一个论断可通过把（6）应用于正合序列 \(0 \to I \to R \to R/I \to 0\) 得到。
+
+为证明（2），先设 \(a \in \operatorname{rad}I\)，即对某个 \(n \geq 1\) 有 \(a^n \in I\). 则 \((a/d)^n = a^n/d^n \in D^{-1}I\)，故 \(D^{-1}(\operatorname{rad}I) \subseteq \operatorname{rad}(D^{-1}I)\). 反之，若 \(a/d \in \operatorname{rad}(D^{-1}I)\)，则对某个 \(n \geq 1\) 有 \((a/d)^n \in D^{-1}I\)，即对某个 \(d_1 \in D\) 有 \(d_1a^n \in I\). 于是 \((d_1a)^n = d_1^{n-1}(d_1a^n) \in I\)，故 \(d_1a \in \operatorname{rad}I\)，而 \(a/d = d_1a/(d_1d) \in D^{-1}(\operatorname{rad}I)\)，这表明 \(\operatorname{rad}(D^{-1}I) \subseteq D^{-1}(\operatorname{rad}I)\). 这证明了（2）的第二个论断，第一个论断可由对理想 \(I = (0)\) 应用它得到。
+
+对（3），先注意 \(D \cap P = \varnothing\) 当且仅当 \(D \cap Q = \varnothing\)（一个包含是显然的，另一个由 \(d \in D \cap Q\) 得 \(d^n \in D \cap Q\)）。\(D \cap P \neq \varnothing\) 的情形以及 \(D \cap P = \varnothing\) 时 \(D^{-1}P\) 是素理想这一事实已在命题 38 中证明。为看出 \(D^{-1}Q\) 是 \(D^{-1}R\) 中的准素理想，设 \((a/d_1)(b/d_2) \in D^{-1}Q\) 且 \(a/d_1 \notin D^{-1}Q\). 则存在 \(d \in D\) 使 \(dab \in Q\)，而由于 \(a \notin Q\) 且 \(Q\) 准素，对某个 \(n \geq 1\) 有 \((db)^n \in Q\). 于是 \((b/d_2)^n = d^nb^n/(d^nd_2^n) \in D^{-1}Q\)，故 \(D^{-1}Q\) 准素。由（2），\(D^{-1}Q\) 的根是 \(D^{-1}P\). 最后，由命题 38（2），\(D^{-1}Q\) 的收缩是 \(R\) 中含 \(Q\) 的理想，且恰好由满足对某个 \(d \in D\) 有 \(dr \in Q\) 的元素 \(r \in R\) 组成。由于 \(Q\) 是 \(P\)-准素的，准素的定义表明若 \(dr \in Q\) 且 \(d \notin P\)，则 \(r \in Q\)，故 \(D^{-1}Q\) 的收缩是 \(Q\).
+
+（4）的证明与（1）的证明本质上相同，留作习题。容易看出若 \(R\)-模的正合序列 \(0 \to L \to M \to N \to 0\) 分裂，则 \(D^{-1}R\)-模的正合序列 \(0 \to D^{-1}L \to D^{-1}M \to D^{-1}N \to 0\) 也分裂，这给出（5）。
+\end{proof}
+
+命题 38 表明，在乘法封闭集 \(D\) 处局部化突出了不含 \(D\) 中任何元素的 \(R\) 的理想，因为 \(R\) 的其余理想扩张到 \(D^{-1}R\) 后变为平凡的。下一个命题就局部化对理想准素分解的影响给出更精确的陈述。
+
+\begin{proposition}\label{pro:15.43}
+设 \(R\) 是诺特环，
+\[
+I = Q_1 \cap \cdots \cap Q_m
+\]
+是真理想 \(I\) 的极小准素分解，其中 \(Q_i\) 是 \(P_i\)-准素理想。设 \(D\) 是 \(R\) 中含 1 的乘法封闭集，并把准素理想 \(Q_1, \ldots, Q_m\) 编号使对 \(1 \leq i \leq t\) 有 \(D \cap P_i = \varnothing\)，而对 \(t+1 \leq i \leq m\) 有 \(D \cap P_i \neq \varnothing\). 则
+\[
+D^{-1}I = D^{-1}Q_1 \cap \cdots \cap D^{-1}Q_t
+\]
+是 \(D^{-1}I\) 在 \(D^{-1}R\) 中的极小准素分解，且 \(D^{-1}Q_i\) 是 \(D^{-1}P_i\)-准素的。此外，\(D^{-1}Q_i\) 收缩回 \(R\) 得到 \(Q_i\)（\(1 \leq i \leq t\)），且
+\[
+c(D^{-1}I) = Q_1 \cap \cdots \cap Q_t
+\]
+是 \(D^{-1}I\) 的收缩回 \(R\) 的极小准素分解。
+\end{proposition}
+
+\begin{proof}
+由命题 42（3），对 \(t+1 \leq i \leq m\) 有 \(D^{-1}Q_i = D^{-1}R\)，而对 \(1 \leq i \leq t\)，\(D^{-1}Q_i\) 是 \(D^{-1}P_i\)-准素理想，其原像为 \(Q_i\). 由同一命题的（1），\(D^{-1}I = D^{-1}Q_1 \cap \cdots \cap D^{-1}Q_t\)，而（3）表明这是一个准素分解。收缩回 \(R\) 表明 \(c(D^{-1}I) = Q_1 \cap \cdots \cap Q_t\)，这也蕴涵这些分解都是极小的。
+\end{proof}
+
+特别地，我们可以完成定理 21 的证明：
+
+\begin{corollary}\label{cor:15.44}
+\(I\) 的极小准素分解中属于孤立素理想的准素理想由 \(I\) 唯一确定。
+\end{corollary}
+
+\begin{proof}
+设 \(P\) 是 \(I\) 的相伴素理想集合 \(\{P_1, \ldots, P_m\}\) 的极小元，在命题 43 中取 \(D = R-P\). 则仅当 \(P = P_i\) 时 \(D \cap P_i = \varnothing\)，故 \(I\) 在 \(D\) 处局部化的收缩恰是属于极小素理想 \(P\) 的准素理想 \(Q\). 由于 \(I\) 的相伴素理想集合 \(\{P_1, \ldots, P_m\}\) 由 \(I\) 唯一确定，可知属于 \(I\) 的孤立素理想的准素理想 \(Q\) 也由 \(I\) 唯一确定。
+\end{proof}
+
+在某个素理想 \(P\) 处局部化（即上面推论 37 之后的例 3 中考虑的情形）时，把某些素理想分离出来的效果特别精确。我们先回忆一类重要环的定义（参见第 7.4 节习题 37--39）。
+
+\begin{definition}
+具有唯一极大理想的含 1 交换环称为\textbf{局部环}。
+\end{definition}
+
+\begin{proposition}\label{pro:15.45}
+设 \(R\) 是含 1 的交换环。则下述命题等价：
+
+（1）\(R\) 是以 \(M\) 为唯一极大理想的局部环；
+
+（2）若 \(M\) 是 \(R\) 中非单位元素之集，则 \(M\) 是理想；
+
+（3）存在 \(R\) 的极大理想 \(M\)，使每个形如 \(1+m\)（\(m \in M\)）的元素都是 \(R\) 中的单位。
+\end{proposition}
+
+\begin{proof}
+若 \(a \in R\)，则理想 \((a)\) 或者是 \(R\)（此时 \(a\) 是单位），或者是真理想（此时 \((a)\) 包含在某个极大理想中，第 7.4 节命题 11）。由此可知若 \(R\) 是局部环、\(M\) 是其唯一极大理想，则每个 \(a \notin M\) 都是单位，故 \(M\) 恰由 \(R\) 中的非单位元素组成，这表明（1）蕴涵（2）。也可知若 \(R\) 中非单位元素之集 \(M\) 是理想，则这个理想必是 \(R\) 的唯一极大理想，故（2）蕴涵（1）。
+
+现在设（3）成立。若 \(a\) 是 \(R\) 中不包含在极大理想 \(M\) 中的元素，则 \((a)+M = R\)，故对某些 \(b \in R\)、\(m \in M\) 有 \(ab+m = 1\). 则 \(ab = 1-m\) 由假设是单位，故 \(a\) 也是单位。这表明 \(M\) 是 \(R\) 的唯一极大理想，故（3）蕴涵（1）。反之，若 \(R\) 是局部环，则对任何 \(m \in M\) 有 \(1+m \notin M\)，故 \(1+m\) 是单位，即（1）蕴涵（3）。
+\end{proof}
+
+\begin{proposition}\label{pro:15.46}
+对任何含 1 的交换环 \(R\)，设 \(R_P\) 是 \(R\) 在素理想 \(P\) 处的局部化，\(eP\) 是 \(P\) 到 \(R_P\) 的扩张。
+
+（1）环 \(R_P\) 是以 \(eP\) 为唯一极大理想的局部环。\(eP\) 到 \(R\) 的收缩是 \(P\)，即 \(c(eP) = P\)，且从 \(R\) 到 \(R_P\) 的映射诱导出整环 \(R/P\) 到 \(R_P/eP\) 的单射。商环 \(R_P/eP\) 是域，且同构于整环 \(R/P\) 的分式域。
+
+（2）若 \(R\) 是整环，则 \(R_P\) 是整环。\(R\) 嵌入局部环 \(R_P\) 中，且把 \(R\) 与它在 \(R_P\) 中的像等同后，\(R_P\) 的唯一极大理想是 \(PR_P\).
+
+（3）\(R_P\) 中的素理想与 \(R\) 中包含在 \(P\) 中的素理想一一对应。
+
+（4）若 \(P\) 是 \(R\) 的极小非零素理想，则 \(R_P\) 有唯一的非零素理想。
+
+（5）若 \(P = M\) 是极大理想，\(I\) 是 \(R\) 的任意 \(M\)-准素理想，则 \(R_M/eI \cong R/I\). 特别地 \(R_M/eM \cong R/M\)，且 \((eM)^n/(eM)^{n+1} \cong M^n/M^{n+1}\) 对所有 \(n \geq 1\) 成立。
+\end{proposition}
+
+\begin{proof}
+若 \(P'\) 是 \(R\) 的素理想，则 \(P' \cap (R-P) = \varnothing\) 当且仅当 \(P' \subseteq P\)，故（3）由命题 38（3）立即推出，（4）也随之推出。由命题 38（2）有 \(eP \neq R_P\)，故由（3）可知 \(R_P\) 是以 \(eP\) 为唯一极大理想的局部环，这证明了（1）的第一个论断。
+
+由命题 38（2），收缩 \(c(eP)\) 是集合 \(\{r \in R \mid dr \in P \text{ 对某个 } d \in R-P\}\)，而由于 \(P\) 是素理想，\(dr \in P\) 且 \(d \notin P\) 蕴涵 \(r \in P\). 这表明 \(c(eP) = P\)，即（1）的第二个论断。
+
+从 \(R\) 到 \(R_P/eP\) 的映射的核是 \(c(eP) = P\)，故诱导的从 \(R/P\) 到 \(R_P/eP\) 的映射是单射。由（1）的第一部分，商环 \(R_P/eP\) 是域，故诱导出从整环 \(R/P\) 的分式域到 \(R_P/eP\) 的同态。局部化 \(R_P\) 的泛性质表明存在从 \(R_P/eP\) 到 \(R/P\) 的分式域的逆同态（因为 \(R\) 中不在 \(P\) 中的每个元素在 \(R_P/eP\) 中的像是单位）。由此 \(R_P/eP\) 同构于 \(R/P\) 的分式域。
+
+若 \(R\) 是整环，则 \(R-P\) 没有零因子，故由推论 37，\(R\) 单射入 \(R_P\)；若把 \(R\) 与它在 \(R_P\) 中的像等同，则 \(eP = PR_P\)，这就给出（2）。
+
+为证明（5），由命题 42（1）我们可以过渡到商环 \(R/I\)，从而化归到 \(I = 0\) 的情形。此时 \(R\) 中的极大理想 \(P = M\) 是 \(R\) 的幂零根，从而是 \(R\) 的唯一极大理想。由命题 45，\(R-M\) 的每个元素都是单位，故 \(R_P = R\)，而（5）中各论断立即推出，证明完毕。
+\end{proof}
+
+\noindent\textbf{例}
+
+若 \(P\) 是素理想但不是极大理想，命题（5）的结果一般不成立。例如在 \(R = \mathbb{Z}\) 中取 \(P = (0)\)，则 \(R/P = \mathbb{Z}\) 而 \(R_P/PR_P = \mathbb{Q}\)；此时对一切 \(n \geq 1\) 有 \((PR_P)^n/(PR_P)^{n+1} \cong P^n/P^{n+1} = 0\)（参见习题）。
+
+\begin{definition}
+设 \(M\) 是 \(R\)-模，\(P\) 是 \(R\) 的素理想，令 \(D = R-P\). \(R_P\)-模 \(D^{-1}M\) 称为 \(M\) 在 \(P\) 处的\textbf{局部化}，记作 \(M_P\).
+\end{definition}
+
+由命题 41，\(M_P\) 也可以与张量积 \(R_P \otimes_RM\) 等同。当 \(R\) 是整环、\(P = (0)\) 时，\(M_{(0)}\) 是 \(R\) 的分式域 \(F\) 上的模，即 \(F\) 上的向量空间。
+
+元素 \(m/1\) 在 \(M_P\) 中为零当且仅当对某个 \(r \in R-P\) 有 \(rm = 0\)，故在 \(P\) 处局部化消去 \(M\) 的 \(P'\)-挠元素（\(P'\) 是不包含在 \(P\) 中的素理想）。特别地，在整环上在 \((0)\) 处局部化消去 \(M\) 的挠子群。
+
+\begin{definition}
+若 \(R\) 是整环，则 \(R\)-模 \(M\) 的\textbf{秩}是局部化 \(M_{(0)}\) 作为 \(R\) 的分式域上向量空间的维数。
+\end{definition}
+
+容易看出这个秩的定义与第 12 章引入的秩的概念一致。
+
+\noindent\textbf{例}
+
+设 \(R = \mathbb{Z}\)，\(\mathbb{Z}_{(p)}\) 是 \(\mathbb{Z}\) 在非零素理想 \((p)\) 处的局部化。任何阿贝尔群 \(M\) 都是 \(\mathbb{Z}\)-模，故我们可以通过构造 \(M_{(p)}\) 来在 \((p)\) 处局部化 \(M\). 这个阿贝尔群就是 \(M\) 模去其元素阶有限且不被 \(p\) 整除的子群所得的商。若 \(M\) 是有限（或更一般地，挠）阿贝尔群，则 \(M_{(p)}\) 是 \(p\)-群，且是 \(M\) 的 Sylow \(p\)-子群或 \(p\)-准素分量。\(M\) 在 \((0)\) 处的局部化 \(M_{(0)}\) 是平凡群。具体例子：设 \(M = \mathbb{Z}/6\mathbb{Z}\) 是 6 阶循环群，看作 \(\mathbb{Z}\)-模。则 \(M\) 在 \(p = 2\) 处的局部化是 \(\mathbb{Z}/2\mathbb{Z}\)，在 \(p = 3\) 处是 \(\mathbb{Z}/3\mathbb{Z}\)，而在 \(\mathbb{Z}\) 的其他素理想处都化为 0.
+
+一般地，把模 \(M\) 在素理想 \(P\) 处局部化会产生一个更简单的模 \(M_P\)，其性质更易于确定。于是人们希望把这些 \(M_P\) 的「局部」性质翻译回关于模 \(M\) 本身的「整体」信息。例如最基本的「模 \(M\) 是否为 0」这个问题可以局部地回答：
+
+\begin{proposition}\label{pro:15.47}
+设 \(M\) 是 \(R\)-模。则下述命题等价：
+
+（1）\(M = 0\)；
+
+（2）对 \(R\) 的所有素理想 \(P\) 有 \(M_P = 0\)；
+
+（3）对 \(R\) 的所有极大理想 \(\mathfrak{m}\) 有 \(M_{\mathfrak{m}} = 0\).
+\end{proposition}
+
+\begin{proof}
+（1）\(\Rightarrow\)（2）\(\Rightarrow\)（3）是显然的，故只需证明（3）\(\Rightarrow\)（1）。设 \(m\) 是 \(M\) 中的非零元素，考虑 \(m\) 在 \(R\) 中的零化子 \(I\)，即满足 \(rm = 0\) 的元素 \(r \in R\) 构成的理想。由于 \(m\) 非零，\(I\) 是 \(R\) 的真理想。设 \(\mathfrak{m}\) 是包含 \(I\) 的极大理想，考虑 \(M\) 的相应局部化 \(M_{\mathfrak{m}}\) 中的元素 \(m/1\). 若这个元素为 0，则对某个 \(r \in R-\mathfrak{m}\) 有 \(rm = 0\). 但此时 \(r\) 是不包含在 \(\mathfrak{m}\) 中的元素，矛盾。故 \(M_{\mathfrak{m}} \neq 0\)，这证明了（3）\(\Rightarrow\)（1）。
+\end{proof}
+
+一般地，并非模 \(M\) 的所有局部化共有的性质也为 \(M\) 所共有。例如环 \(R\) 的所有局部化都可以是整环，而 \(R\) 本身不是整环（例如上面的 \(\mathbb{Z}/6\mathbb{Z}\)）。尽管如此，研究各种可能的局部化可以获得大量信息，这正是这一技巧如此有用的原因。例如若 \(R\) 是整环，则每个局部化 \(R_P\) 都可以看作 \(R\) 的分式域 \(F\) 的含 \(R\) 的子环；下一个命题表明 \(R\) 的元素是 \(F\) 中唯一包含在每个局部化中的元素。
+
+\begin{proposition}\label{pro:15.48}
+设 \(R\) 是整环。则 \(R\) 是 \(R\) 的所有局部化的交：\(R = \bigcap_PR_P\). 事实上 \(R = \bigcap_{\mathfrak{m}}R_{\mathfrak{m}}\) 是 \(R\) 在 \(R\) 的极大理想处所有局部化的交。
+\end{proposition}
+
+\begin{proof}
+如前所述，\(R \subseteq \bigcap_{\mathfrak{m}}R_{\mathfrak{m}}\). 现在设 \(a\) 是 \(R\) 的分式域 \(F\) 中属于每个 \(R_{\mathfrak{m}}\)（\(\mathfrak{m}\) 取遍 \(R\) 的极大理想）的元素，考虑
+\[
+I_a = \{d \in R \mid da \in R\}.
+\]
+容易验证 \(I_a\) 是 \(R\) 的理想，且 \(a \in R\) 当且仅当 \(1 \in I_a\)，即 \(I_a = R\). 假设 \(I_a \neq R\). 则存在极大理想 \(\mathfrak{m}\) 包含 \(I_a\)，而由于 \(a \in R_{\mathfrak{m}}\)，有 \(a = r/d\)（某些 \(r \in R\)、\(d \in R-\mathfrak{m}\)）。但此时 \(d \in I_a\) 且 \(d \notin \mathfrak{m}\)，矛盾。故 \(a \in R\)，即 \(\bigcap_{\mathfrak{m}}R_{\mathfrak{m}} \subseteq R\)，这证明了命题的第二个论断。第一个论断随之立即推出。
+\end{proof}
+
+环 \(R\) 的另一个可以局部检测的重要性质是正规性：
+
+\begin{proposition}\label{pro:15.49}
+设 \(R\) 是整环。则下述命题等价：
+
+（1）\(R\) 正规，即 \(R\)（在其分式域中）整闭；
+
+（2）对 \(R\) 的所有素理想 \(P\)，\(R_P\) 正规；
+
+（3）对 \(R\) 的所有极大理想 \(\mathfrak{m}\)，\(R_{\mathfrak{m}}\) 正规。
+\end{proposition}
+
+\begin{proof}
+设 \(F\) 是 \(R\) 的分式域，故 \(R\) 的各种局部化都可以看作 \(F\) 的子环。
+
+先设 \(R\) 整闭，并设 \(y \in F\) 在 \(R_P\) 上整。则 \(y\) 是某个 \(n\) 次首一多项式的根，其系数形如 \(a_i/d_i\)（某些 \(d_i \notin P\)）。则元素 \(y' = y(d_0d_1\cdots d_{n-1})^n\) 是系数在 \(R\) 中的 \(n\) 次首一多项式的根，即 \(y'\) 在 \(R\) 上整。由于假设 \(R\) 正规，这意味着 \(y' \in R\)，故 \(y = y'/(d_0d_1\cdots d_{n-1})^n \in R_P\)，这证明了（1）\(\Rightarrow\)（2）。（2）\(\Rightarrow\)（3）是平凡的。现在设 \(R\) 的所有极大理想的局部化 \(R_{\mathfrak{m}}\) 都正规，\(y\) 是 \(F\) 中在 \(R\) 上整的元素。由于 \(R \subseteq R_{\mathfrak{m}}\)，\(y\) 特别也在 \(R_{\mathfrak{m}}\) 上整，故由假设 \(y \in R_{\mathfrak{m}}\)（对每个极大理想）。于是由上一命题 \(y \in R\)，这证明了（3）\(\Rightarrow\)（1）。
+\end{proof}
+
+现在我们容易证明推论 27 的证明中用到的上升定理的第一部分（参见第 3 节）。
+
+\begin{corollary}\label{cor:15.50}
+设 \(R\) 是交换环 \(S\) 的子环，\(1 \in R\)，并假设 \(S\) 在 \(R\) 上整。若 \(P\) 是 \(R\) 中的素理想，则存在 \(S\) 的素理想 \(Q\) 使 \(P = Q \cap R\).
+\end{corollary}
+
+\begin{proof}
+令 \(D = R-P\)，它是 \(R\) 与 \(S\) 的乘法封闭子集。则有交换图
+\[
+\begin{array}{ccc}
+R & \longrightarrow & D^{-1}R = R_P\\
+\downarrow & & \downarrow\\
+S & \longrightarrow & D^{-1}S
+\end{array}
+\]
+其中竖直映射是包含映射。容易看出 \(D^{-1}S\) 在 \(R_P\) 上整（习题 20）。设 \(\mathfrak{m}\) 是 \(D^{-1}S\) 的任意极大理想。则由定理 26（2）的第二个论断，\(\mathfrak{m} \cap R_P\) 是 \(R_P\) 中的极大理想（注意定理 26（2）的第一个部分在其第二个论断的证明中并未用到）。由命题 38（1），\(\mathfrak{m} \cap R_P\) 是 \(P\) 到局部环 \(R_P\) 的扩张，而这个理想到 \(R\) 的收缩恰是 \(P\). 换一种说法，\(\mathfrak{m}\) 沿上面图中上方与右侧的映射的原像是 \(P\). 若 \(Q \subseteq S\) 表示 \(\mathfrak{m}\) 沿图中下方映射的原像，则由命题 38（3）\(Q\) 是素理想。由于 \(Q \cap R\) 是 \(Q\) 沿图中左侧映射的原像，图的交换性表明 \(Q \cap R = P\).
+\end{proof}
+
+\noindent\textbf{仿射代数簇的局部环}
+
+本节余下部分设 \(k\) 是代数闭域，\(V\) 是 \(k\) 上的仿射簇，坐标环为 \(k[V]\). 则 \(k[V]\) 是整环，故可以构造它的分式域：
+\[
+k(V) = \{f/g \mid f, g \in k[V],\ g \neq 0\}.
+\]
+\(k(V)\) 的元素称为 \(V\) 上的\textbf{有理函数}，\(k(V)\) 称为 \(V\) 上的\textbf{有理函数域}。当 \(k[V]\) 是唯一分解整环时，\(f/g\) 有一个本质上唯一的「既约」代表元，但一般地每个分式 \(f/g \in k(V)\) 都有许多 \(k[V]\) 中两个元素之比的表示。由于 \(k[V]\) 是整环，\(f/g = f_1/g_1\) 当且仅当 \(fg_1 = f_1g\).
+
+\(k[V]\) 的元素可以看作 \(V\) 上的 \(k\)-值函数，而若分母不为零，\(k(V)\) 的元素也是如此（这有助于解释这个域的术语）。由于 \(k(V)\) 的同一个元素可以以多种方式写成 \(f/g\) 的形式，我们作如下定义：
+
+\begin{definition}
+称 \(f/g\) 在点 \(v \in V\) 处\textbf{正则}或有定义，若存在 \(f_1, g_1 \in k[V]\) 使 \(f/g = f_1/g_1\) 且 \(g_1(v) \neq 0\).
+\end{definition}
+
+若 \(f_2, g_2\) 是另一对满足 \(g_2(v) \neq 0\) 的元素，则作为 \(k\) 的元素有 \(f_1(v)/g_1(v) = f_2(v)/g_2(v)\)，故只要 \(f/g\) 在 \(v\) 处正则，就可以良定义地指定它在 \(v\) 处的值。
+
+\noindent\textbf{例}
+
+\(\mathbb{A}^4\) 中的簇 \(V = Z(xz-yw)\) 有坐标环 \(k[V] = k[x,y,z,w]/(xz-yw)\). 考虑 \(k[V]\) 的商域 \(k(V)\) 中的元素 \(f = x/y\). 由于在 \(k[V]\) 中有 \(xz = yw\)，元素 \(f\) 也可以写成 \(z/w\). 由 \(f\) 的第一个表达式可知 \(f\) 在 \(V\) 上所有满足 \(y \neq 0\) 的点处正则，由第二个表达式可知 \(f\) 在 \(V\) 上所有满足 \(w \neq 0\) 的点处正则。不难证明这些就是 \(f\) 正则的全部点。此外，不存在 \(f = a/b\)（\(a, b \in k[V]\)）的单个表达式使 \(b(v) \neq 0\) 对 \(f\) 正则的每个 \(v\) 都成立（参见习题 25）。
+
+若 \(f/g \in k(V)\) 在点 \(v\) 处正则，比如 \(f/g = f_1/g_1\) 且 \(g_1(v) \neq 0\)，则 \(f/g\) 也在 \(V\) 中 \(v\) 的 Zariski 开邻域 \(V_{g_1}\)（即 \(g_1 \neq 0\) 的点集）的所有点处正则。作为 \(V\) 上的 \(k\)-值函数，这意味着若 \(f/g\) 在 \(v\) 处有定义，则它也在 \(v\) 的某个（Zariski 开）邻域中有定义。由于仿射簇的任何非空开集都 Zariski 稠密（参见第 2 节习题 11），我们看到 \(V\) 上每个有理函数都在 \(V\) 的一个稠密点集上有定义（因此在适当的意义下「几乎处处」有定义）。此外，表示 \(f/g\) 的每一对 \(f_1/g_1\) 与 \(f_2/g_2\) 在 \(v\) 的开邻域 \(V_{g_1} \cap V_{g_2}\) 上作为函数一致，但这个邻域的「大小」依赖于 \(g_1\) 与 \(g_2\)——一般不存在 \(v\) 的一个公共开邻域，使 \(f/g\) 在 \(v\) 处分母非零的所有代表元都在其上同时有定义。
+
+若 \(v\) 是 \(V\) 中固定的点，则有理函数 \(f/g\) 在 \(v\) 处正则当且仅当 \(f/g = f_1/g_1\)（某些 \(f_1, g_1 \in k[V]\)）且 \(g_1 \notin I(v)\)（即在 \(v\) 处取零的函数理想）。这意味着在 \(v\) 处有定义的有理函数之集与 \(k[V]\) 在极大理想 \(I(v)\) 处的局部化相同：
+
+\begin{definition}
+对每个点 \(v \in V\)，\(V\) 上在 \(v\) 处有定义的有理函数之集
+\[
+\mathcal{O}_{V,v} = \{f/g \in k(V) \mid f/g \text{ 在 } v \text{ 处正则}\}
+\]
+称为 \(V\) 在 \(v\) 处的\textbf{局部环}。等价地，\(V\) 在 \(v\) 处的局部环是 \(k[V]\) 在极大理想 \(I(v)\) 处的局部化。
+\end{definition}
+
+特别地，\(\mathcal{O}_{V,v}\) 是以 \(\mathfrak{m}_{V,v}\) 为唯一极大理想的局部环，其中 \(\mathfrak{m}_{V,v}\) 是在 \(v\) 处有定义且取值 0 的有理函数之集。由于 \(\mathcal{O}_{V,v}\) 是诺特整环 \(k[V]\) 在素理想处的局部化，\(\mathcal{O}_{V,v}\) 也是诺特整环。还要注意由命题 46（5）有 \(\mathcal{O}_{V,v}/\mathfrak{m}_{V,v} \cong k[V]/I(v) \cong k\).
+
+回忆从 \(V\) 到 \(k\) 的多项式映射也称为 \(V\) 到 \(k\) 的\textbf{正则映射}。这是因为它们恰是 \(V\) 上处处正则的有理函数：
+
+\begin{proposition}\label{pro:15.51}
+若 \(V\) 是代数闭域 \(k\) 上的仿射簇，则 \(V\) 上在 \(V\) 的所有点处都正则的有理函数恰是多项式函数 \(k[V]\).
+\end{proposition}
+
+\begin{proof}
+这由命题 48 推出：它表明 \(k[V]\) 在所有极大理想处局部化在 \(k(V)\) 中的交恰是 \(k[V]\).
+\end{proof}
+
+由于 \(k[V]\) 的极大理想与 \(V\) 的点一一对应，局部环 \(\mathcal{O}_{V,v}\) 与对应于 \(v\) 的极大理想处 \(k[V]\) 的局部化相同这一事实表明，\(\mathcal{O}_{V,v}\) 内蕴地依赖于环 \(k[V]\)，而不依赖于 \(V\) 在特定仿射空间中的嵌入。
+
+设 \(\varphi : V \to W\) 是仿射簇的态射，相应的 \(k\)-代数同态为 \(\bar\varphi : k[W] \to k[V]\). 若 \(v \in V\) 被 \(\varphi\) 映到 \(w \in W\)，则容易证明 \(\bar\varphi\) 诱导出相应局部环之间的同态（也记作 \(\bar\varphi\)）：
+\[
+\bar\varphi : \mathcal{O}_{W,w} \to \mathcal{O}_{V,v}, \qquad \bar\varphi(h/k) = \bar\varphi(h)/\bar\varphi(k),
+\]
+且在这个同态下有 \(\bar\varphi^{-1}(\mathfrak{m}_{V,v}) = \mathfrak{m}_{W,w}\)（具有这个性质的局部环同态称为\textbf{局部同态}）。注意 \(\bar\varphi\) 一般不能延拓为从整个 \(k(W)\) 到 \(k(V)\) 的域同态，因为落在 \(\bar\varphi\) 的核中的 \(k[W]\) 的元素不能映到 \(k(V)\) 中的可逆元素。也容易验证若 \(\psi \circ \varphi\) 是态射的复合，则在局部环上 \(\overline{\psi \circ \varphi} = \bar\varphi \circ \bar\psi\).
+
+局部环 \(\mathcal{O}_{V,v}\) 可以用来给出 \(V\) 在 \(v\) 处「光滑性」（即在切线存在的意义上）的代数定义，如下所述。先设 \(V = Z(f)\) 是由 \(k[x_1, \ldots, x_n]\) 中不可约多项式 \(f\) 的零点定义 \(\mathbb{A}^n\) 中的超曲面簇。对 \(V\) 上任意点 \(v = (v_1, \ldots, v_n)\)，设 \(D_v(f)(x_1, \ldots, x_n)\) 是线性多项式
+\[
+D_v(f)(x_1, \ldots, x_n) = \sum_{i=1}^{n}\frac{\partial f}{\partial x_i}(v)x_i,
+\]
+其中 \(f\) 关于 \(x_i\) 的偏导数由多项式 \(x_i\) 导数的通常形式规则给出（其他变量视为常数）。多项式 \(D_v(f)(x_1-v_1, \ldots, x_n-v_n)\) 是函数 \(f\) 在 \(v\) 处的一阶 Taylor 多项式，故给出 \(f(x_1, \ldots, x_n) \in k[x_1, \ldots, x_n]\) 在 \(v\) 处的最佳线性逼近。由此可知，若 \(T\) 是由 \(D_v(f)\) 取零的点构成的线性簇 \(Z(D_v(f)(x_1, \ldots, x_n))\)，则平移 \(v+T\) 与超曲面 \(Z(f)\) 在 \(v\) 处「相切」。
+
+\noindent\textbf{例}
+
+设 \(f = x^2-y \in k[x,y]\)，故 \(V = Z(f)\) 就是抛物线 \(y = x^2\). 我们有 \(\partial f/\partial x = 2x\)、\(\partial f/\partial y = -1\)，在 \(v = (3,9)\) 处分别等于 6 与 \(-1\). 于是
+\[
+D_{(3,9)}(f)(x,y) = 6x-y,
+\]
+相应的线性簇 \(T\) 是过原点的直线 \(y = 6x\). 平移 \((3,9)+T\) 就是抛物线在 \((3,9)\) 处的通常切线。\(x^2-y\) 在 \((3,9)\) 处的 Taylor 展开是 \(x^2-y = [6(x-3)-(y-9)]+(x-3)^2\). 一阶项是 \(D_{(3,9)}(f)(x-3, y-9)\)，给出 \(x^2-y\) 在 \((3,9)\) 附近的最佳线性逼近。
+
+把这些概念推广到 \(\mathbb{A}^n\) 中的任何仿射簇 \(V\) 是直接的。
+
+\begin{definition}
+定义 \(V\) 在 \(v\) 处的\textbf{切空间}为线性簇
+\[
+\mathcal{T}_{V,v} = Z\left(\{D_v(f)(x_1, \ldots, x_n) \mid f \in I(V)\}\right).
+\]
+\end{definition}
+
+形式偏导数是 \(k\)-线性的且满足导数的通常乘积法则，故切空间可以由 \(I(V)\) 的生成元计算：若 \(I(V) = (f_1, f_2, \ldots, f_m)\)，则 \(\mathcal{T}_{V,v} = \bigcap_{i=1}^{m}Z(D_v(f_i))\). 注意 \(\mathcal{T}_{V,v}\) 是向量空间的交，从而是 \(k^n\) 的向量子空间。
+
+切空间 \(\mathcal{T}_{V,v}\) 的这个定义虽然明显地显示了与簇 \(V\) 的切线的联系，却似乎依赖于 \(V\) 在 \(\mathbb{A}^n\) 中的嵌入。事实上切空间可以完全用局部环 \(\mathcal{O}_{V,v}\) 定义，如下一命题所证。
+
+\begin{proposition}\label{pro:15.52}
+设 \(V\) 是代数闭域 \(k\) 上的仿射簇，\(v\) 是 \(V\) 上的点，局部环为 \(\mathcal{O}_{V,v}\)，相应的极大理想为 \(\mathfrak{m}_{V,v}\). 则存在 \(k\)-向量空间同构
+\[
+(\mathcal{T}_{V,v})^* \cong \mathfrak{m}_{V,v}/\mathfrak{m}_{V,v}^2,
+\]
+其中 \((\mathcal{T}_{V,v})^*\) 表示 \(V\) 在 \(v\) 处切空间 \(\mathcal{T}_{V,v}\) 的向量空间对偶（参见第 11.3 节）。
+\end{proposition}
+
+\begin{proof}
+设 \((k^n)^*\) 表示 \(k^n\) 的 \(n\) 维向量空间对偶。由于每个 \(D_v(f)\) 都是线性函数，\(D_v\) 是从 \(k[x_1, \ldots, x_n]\) 到 \((k^n)^*\) 的线性变换。设 \(M_v\) 是 \(k[x_1, \ldots, x_n]\) 中由集合 \(x_i-v_i\)（\(1 \leq i \leq n\)）生成的极大理想。\(M_v\) 在 \(k[V]\) 中的像 \(M_v/I(V)\) 是在 \(v\) 处取零的函数理想 \(I(v)\)，且 \(I(v) = M_v+I(V)\). 于是 \(\mathcal{O}_{V,v}\) 是 \(k[V]\) 在 \(I(v)\) 处的局部化；把 \(I(v)\) 与它在 \(\mathcal{O}_{V,v}\) 中的像等同，由命题 46（2）有 \(\mathfrak{m}_{V,v} = I(v)\mathcal{O}_{V,v}\).
+
+由 \(D_v\) 的定义有 \(D_v(x_i-v_i) = x_i\)，而由于这些线性函数构成 \((k^n)^*\) 的基，可知 \(D_v\) 把 \(M_v\) 满射到 \((k^n)^*\) 上。\(D_v\) 的核由在 \(v\) 处 Taylor 展开从至少 2 次项开始的元素组成，而这些元素恰是 \(M_v^2\) 中的元素。故 \(D_v\) 定义同构 \(D_v : M_v/M_v^2 \to (k^n)^*\).
+
+切空间 \(\mathcal{T}_{V,v}\) 是 \(k^n\) 的向量子空间，故 \(k^n\) 上每个线性函数都限制为 \(\mathcal{T}_{V,v}\) 上的线性函数。把 \(D_v\) 与这个限制映射复合，得到线性变换 \(D : M_v \to (k^n)^* \to (\mathcal{T}_{V,v})^*\)，它是满射（因为各个映射都是满射）。我们已经看到 \(I(v) = M_v+I(V)\)，故 \(I(v)/I(v)^2 \cong M_v/(M_v^2+I(V))\). 由命题 46（5）可知 \(\mathfrak{m}_{V,v}/\mathfrak{m}_{V,v}^2 \cong I(v)/I(v)^2\). 因此为证明命题，只需证明 \(\ker D = M_v^2+I(V)\)，因为此时
+\[
+\mathfrak{m}_{V,v}/\mathfrak{m}_{V,v}^2 \cong M_v/(M_v^2+I(V)) = M_v/\ker D \cong (\mathcal{T}_{V,v})^*.
+\]
+多项式 \(f\) 在 \(\ker D\) 中当且仅当 \(D_v(f)\) 在 \(\mathcal{T}_{V,v}\) 上为零，即当且仅当 \(f\) 在 \(v\) 处展开的 Taylor 多项式的线性项属于 \(I(\mathcal{T}_{V,v})\). 由于 \(I(V)\) 中函数的线性项生成理想 \(I(\mathcal{T}_{V,v})\)，可知 \(f \in \ker D\) 当且仅当对某个 \(g \in I(V)\)，\(f-g\) 有零线性项。但这等价于 \(f \in I(V)+M_v^2\)，故 \(\ker D = I(V)+M_v^2\)，证明完毕。
+\end{proof}
+
+回忆簇 \(V\) 的维数按定义是域 \(k(V)\) 在 \(k\) 上的超越次数。由于每个局部环 \(\mathcal{O}_{V,v}\) 都以 \(k(V)\) 为分式域，\(V\) 的维数由它的任何局部环的分式域在 \(k\) 上的超越次数决定。
+
+\begin{definition}
+若 \(k\)-向量空间 \(\mathcal{T}_{V,v}\) 的维数等于 \(\dim V\)，则称 \(V\) 在点 \(v \in V\) 处\textbf{非奇异}（或称 \(v\) 是 \(V\) 的非奇异点）。等价地（由命题 52），\(v\) 是 \(V\) 的非奇异点若 \(\dim_k(\mathfrak{m}_{V,v}/\mathfrak{m}_{V,v}^2) = \dim V\). 否则称点 \(v\) 为\textbf{奇异点}。若 \(V\) 在每个点处都非奇异，则称 \(V\) \textbf{非奇异}或\textbf{光滑}。
+\end{definition}
+
+几何图景是：在非奇异点 \(v\) 处，独立切线的数目正如所料：曲线上的切线、曲面上的切平面等等。
+
+簇 \(V\) 在点 \(v\) 处是否非奇异可以由局部环 \(\mathcal{O}_{V,v}\) 的性质确定，即是否有 \(\dim_k(\mathfrak{m}_{V,v}/\mathfrak{m}_{V,v}^2) = \dim\mathcal{O}_{V,v}\). 具有这个性质的局部环称为\textbf{正则局部环}。特别地，奇点的概念不依赖于 \(V\) 在特定仿射空间中的嵌入。这个代数解释可以用来为抽象代数簇定义光滑性，此时切平面（例如曲面）的几何直观并不那么明显。
+
+若 \(f_1, \ldots, f_m\) 是 \(I(V)\) 的生成元（它们把 \(V\) 定义在 \(\mathbb{A}^n\) 中），则 \(V\) 的维数可以由 \(I(V)\) 的 Gröbner 基确定（参见习题 29）。确定切空间 \(\mathcal{T}_{V,v}\) 作为 \(k\) 上向量空间的维数是一个线性代数问题：这个向量空间是 \(m\) 个线性方程 \(D_v(f_i)(x_1, \ldots, x_n) = 0\) 的解集。若 \(r\) 是方程组系数矩阵 \((\partial f_i/\partial x_j(v))\)（\(m \times n\)）的秩，则 \(\mathcal{T}_{V,v}\) 是维数为 \(n-r\) 的向量空间。由此不难建立下述结论：
+
+1. 对 \(V \subseteq \mathbb{A}^n\) 中的每个点 \(v\) 有 \(\dim V \leq \dim_k(\mathcal{T}_{V,v}) \leq n\).
+
+2. \(V\) 的奇异点之集是 \(V\) 的真 Zariski 闭子集。\(V\) 的非奇异点之集是 \(V\) 的非空开子集；特别地 \(V\) 的非奇异点在 \(V\) 中稠密（故 \(V\) 的「大多数」点非奇异）。
+
+我们还不加证明地陈述下述结果，它进一步把 \(V\) 的局部几何与 \(V\) 的局部环的代数性质联系起来：
+
+3. 若 \(v\) 是非奇异点，则局部环 \(\mathcal{O}_{V,v}\) 是唯一分解整环；特别地 \(\mathcal{O}_{V,v}\) 整闭（参见推论 25 之后的例 3）。
+
+若对每个点 \(v \in V\)，\(\mathcal{O}_{V,v}\) 都是唯一分解整环，则称簇 \(V\) \textbf{阶乘}；若对每个 \(v \in V\)，\(\mathcal{O}_{V,v}\) 都整闭，则称 \(V\) 是\textbf{正规簇}（由命题 49，这等价于 \(k[V]\) 整闭）。由上面的（3）有
+\[
+\text{光滑簇} \subset \text{阶乘簇} \subset \text{正规簇}.
+\]
+一般地上述每个包含关系都是严格的。然而当 \(V\) 的维数为 1（即 \(V\) 是仿射曲线）时，这三个性质实际上等价：我们将在后面证明不可约仿射曲线光滑当且仅当它正规或阶乘（参见第 16.2 节推论 13）。由此可知在代数闭域 \(k\) 上，不可约仿射曲线 \(C\) 光滑当且仅当 \(k[C]\) 整闭。
+
+对任何不可约仿射曲线 \(C\)，\(k[V]\) 在 \(k(V)\) 中的整闭包 \(S\) 也是某个不可约仿射曲线 \(\tilde C\) 的坐标环。则 \(S\) 在 \(k[V]\) 上整，由定理 30 与推论 27 可知存在从光滑曲线 \(\tilde C\) 到 \(C\) 的纤维有限的态射。曲线 \(\tilde C\) 称为 \(C\) 的\textbf{正规化}或\textbf{非奇异模型}，可以证明它在同构意义下唯一。请注意「存在一条光滑曲线有限地映到 \(C\)」（一个「几何」问题）是如何由「环扩张中整闭包的存在性」（一个「代数」问题）解决的。
+
+我们将在第 16.2 节末尾给出不可约仿射曲线光滑性的另一个刻画。
+
+\subsection*{习题}
+
+照例 \(R\) 是含 1 的交换环，\(D\) 是 \(R\) 中的乘法封闭集。
+
+\begin{enumerate}
+\item 设 \(M\) 是有限生成 \(R\)-模。证明 \(D^{-1}M = 0\) 当且仅当对某个 \(d \in D\) 有 \(dM = 0\).
+
+\item 设 \(I\) 是 \(R\) 中的理想，\(D\) 是 \(R\) 的乘法封闭子集，分式环为 \(D^{-1}R\)，并设 \(c(eI) = R\) 是 \(I\) 关于 \(D\) 的饱和。
+
+（a）证明 \(c(eI) = R\) 当且仅当 \(eI = D^{-1}R\)，当且仅当 \(I \cap D \neq \varnothing\).
+
+（b）证明 \(I = c(eI)\)（即 \(I\) 饱和）当且仅当对每个 \(d \in D\)，由 \(da \in I\) 可得 \(a \in I\).
+
+（c）证明扩张与收缩给出 \(R\) 中关于 \(D\) 饱和的理想与 \(D^{-1}R\) 的理想之间的互逆双射。
+
+（d）设 \(I = (2x, 3y) \subset \mathbb{Z}[x,y]\). 证明 \(I\) 关于 \(\mathbb{Z}-\{0\}\) 的饱和是 \((x,y)\).
+
+\item 若 \(I\) 是交换环 \(R\) 中的理想，设 \(\varphi : R[x_1, \ldots, x_n] \to (R/I)[x_1, \ldots, x_n]\) 是由系数模 \(I\) 约化给出的、核为 \(I[x_1, \ldots, x_n]\) 的环同态。若 \(A\) 是 \((R/I)[x_1, \ldots, x_n]\) 中的理想，用 \(\tilde A\) 表示 \(A\) 在 \(\varphi\) 下的原像。
+
+（a）证明 \(\tilde A \cap R[x_1, \ldots, x_i]\) 在 \(\varphi\) 下的像是 \((R/I)[x_1, \ldots, x_i]\) 的子环。
+
+（b）证明 \(\varphi(A \cap R[x_1, \ldots, x_i]) = \tilde A \cap (R/I)[x_1, \ldots, x_i]\).
+
+\item 把 \(f = y^5-z^4\) 看作系数在 \(\mathbb{Q}[z]\) 中的 \(y\) 的多项式。
+
+（a）证明 \(f\) 在 \(\mathbb{Q}[z]\) 中没有根。
+
+（b）设 \(f = (y^2+ay+b)(y^3+cy^2+dy+e)\). 证明 \(a, b, c, d, e\) 满足方程组
+\[
+a+c = 0, \quad ac+b+d = 0, \quad ad+bc+e = 0, \quad ae+bd = 0, \quad be-z^4 = 0.
+\]
+由此证明 \(e^5 = z^{12}\)，并得出 \(f\) 在 \(\mathbb{Q}[y,z]\) 中不可约。〔利用消元法。〕
+
+\item 设 \(R\) 是分式域为 \(F\) 的唯一分解整环，\(p \in R[x]\) 是首一多项式。
+
+（a）证明 \(R[x]\) 中由 \(p\) 生成的理想 \(pR[x]\) 是素理想当且仅当 \(F[x]\) 中由 \(p\) 生成的理想 \(pF[x]\) 是素理想。〔利用 Gauss 引理。〕
+
+（b）证明 \(pR[x]\) 饱和，即 \(pF[x] \cap R[x] = pR[x]\).
+
+\item 证明 \(I = (y^3-xz,\ x^4-z^2)\) 不是 \(\mathbb{Q}[x,y,z]\) 中的素理想，并求出显式的元素 \(a, b \in \mathbb{Q}[x,y,z]\) 使 \(ab \in I\) 但 \(a \notin I\)、\(b \notin I\).
+
+\item 证明 \(P = (y^3-xz,\ xy^2-z^2,\ x^2-yz)\) 是 \(\mathbb{Q}[x,y,z]\) 中的素理想。
+
+\item 证明 \(P = (x^2-yz,\ w^2-x^4z)\) 是 \(\mathbb{Q}[x,y,z,w]\) 中的素理想。
+
+\item 证明 \(P = (xz^2-w^3,\ xw^2-y^4,\ y^4z^2-w^5)\) 是 \(\mathbb{Q}[x,y,z,w]\) 中的素理想。
+
+\item 证明 \(I = (xy-w^3,\ y^2-zw)\) 不是 \(\mathbb{Q}[x,y,z,w]\) 中的素理想，并求出满足 \(ab \in I\) 但 \(a, b \notin I\) 的 \(a, b\).
+
+\item 设 \(R_P\) 是 \(R\) 在素理想 \(P\) 处的局部化。证明若 \(Q\) 是 \(R\) 的 \(P\)-准素理想，则关于 \(Q\) 到 \(R_P\) 的扩张与收缩有 \(Q = c(eQ)\). 证明若 \(Q\) 是 \(P'\)-准素的（某个包含在 \(P\) 中的素理想 \(P'\)），同样的结果也成立。
+
+\item 设 \(R = \mathbb{R}[x,y,z]/(xy-z^2)\)，\(P = (x, z)\) 是由 \(x\) 与 \(z\) 的像生成的素理想，\(R_P\) 是 \(R\) 在 \(P\) 处的局部化。证明 \(P^2R_P \cap R = P^2\)（原文此处为「\(P^2R_P \cap R = P^2\)，并证明它严格大于 \(P^2\)」，按扫描件照录，疑为原书笔误），并证明 \(P^2R_P\) 严格大于 \(P^2\).
+
+\item 证明若 \(N\) 与 \(N'\) 是 \(R\)-模 \(M\) 的两个 \(R\)-子模，且对 \(R\) 的每个素理想 \(P\)（或只对每个极大理想）在局部化中有 \(N_P = N'_P\)，则 \(N = N'\).
+
+\item 设 \(\varphi : M \to N\) 是 \(R\)-模同态。证明 \(\varphi\) 是单射（分别地，满射）当且仅当对 \(R\) 的每个素理想 \(P\)（或只对每个极大理想）诱导的 \(R_P\)-模同态 \(\varphi_P : M_P \to N_P\) 是单射（分别地，满射）。
+
+\item 设 \(R = \mathbb{Z}[\sqrt{-5}]\) 是二次域 \(\mathbb{Q}(\sqrt{-5})\) 的整数环，\(I\) 是 \(R\) 中由 2 与 \(1+\sqrt{-5}\) 生成的素理想 \((2, 1+\sqrt{-5})\)（参见第 8.2 节习题 5）。回忆 \(R\) 的每个非零素理想 \(P\) 都含有某个素数 \(p \in \mathbb{Z}\).
+
+（a）若 \(P\) 是不含 2 的素理想，证明 \(I_P = R_P\).
+
+（b）若 \(P\) 是含 2 的素理想，证明 \(P = I\) 且 \(I_P = (1+\sqrt{-5})R_P\).
+
+（c）证明对 \(R\) 的每个素理想 \(P\) 都有 \(I_P \cong R_P\)（作为 \(R_P\)-模），但 \(I\) 与 \(R\) 不是同构的 \(R\)-模。（这个例子表明习题 14 中给定 \(R\)-模同态 \(\varphi\) 很重要。）〔注意作为 \(R\)-模 \(I \cong R\) 当且仅当 \(I\) 是主理想。〕
+
+\item 证明局部化与张量积可交换：对任意 \(R\)-模 \(M, N\) 与 \(R\) 中的乘法封闭集 \(D\)，存在唯一的 \(D^{-1}R\)-模同构 \(\varphi : (D^{-1}M)\otimes_{D^{-1}R}(D^{-1}N) \to D^{-1}(M \otimes_RN)\) 使 \(\varphi((m/d)\otimes(n/d')) = (m \otimes n)/(dd')\).
+
+\item 证明 \(R\)-模 \(A\) 是平坦 \(R\)-模当且仅当对 \(R\) 的每个素理想 \(P\)（或只对每个极大理想）\(A_P\) 是平坦 \(R_P\)-模。〔利用命题 41、习题 14 与 16，以及局部化的正合性质。〕
+
+\item 在推论 37 之后的例 2 的记号下，证明若 \(f\) 在 \(R\) 中不幂零则 \(R_f \cong R[x]/(fx-1)\).〔证明由 \(\varphi(r) = r/1\)、\(\varphi(x) = 1/f\) 定义的映射 \(\varphi : R[x] \to R_f\) 是满环同态，且定理 36 的泛性质给出它的逆。〕
+
+\item 证明若 \(R\) 是整闭整环，\(D\) 是 \(R\) 中含 1 的乘法封闭子集，则 \(D^{-1}R\) 整闭。
+
+\item 设 \(R\) 是环 \(S\) 的子环，\(1 \in R\)，且 \(S\) 在 \(R\) 上整。若 \(D\) 是 \(R\) 的任意乘法封闭子集，证明 \(D^{-1}S\) 在 \(D^{-1}R\) 上整。
+
+\item 设 \(\varphi : R \to S\) 是环同态，\(D'\) 是 \(S\) 的乘法封闭子集。令 \(D = \varphi^{-1}(D')\). 证明 \(D\) 是 \(R\) 的乘法封闭子集，且由 \(\varphi'(r/d) = \varphi(r)/\varphi(d)\) 给出的映射 \(\varphi' : D^{-1}R \to D'^{-1}S\) 是环同态。
+
+\item 设 \(P \subseteq Q\) 是 \(R\) 中的素理想，\(R_Q\) 是 \(R\) 在 \(Q\) 处的局部化。证明局部化 \(R_P\) 同构于 \(R_Q\) 在素理想 \(PR_Q\) 处的局部化（参见上一习题）。
+
+\item 设 \(\varphi : A \to B\) 是交换环的同态，\(\varphi(1_A) = 1_B\)，\(P\) 是 \(A\) 的素理想。用上标 \(c\) 与 \(e\) 分别表示就 \(\varphi\) 而言理想的收缩与扩张。证明 \(P\) 是 \(B\) 中某个素理想的收缩当且仅当 \(P = (P^e)^c\).〔把 \(B\) 在 \(\varphi(A-P)\) 处局部化。〕
+
+\item （\textbf{下降定理}）设 \(S\) 是整环，\(R\) 是 \(S\) 中含 \(1_S\) 的整闭子环，\(k\) 是 \(R\) 的分式域。设 \(P_2 \subseteq P_1\) 是 \(R\) 中的素理想，\(Q_1\) 是 \(S\) 中的素理想且 \(Q_1 \cap R = P_1\). 设 \(S_{Q_1}\) 是 \(S\) 在 \(Q_1\) 处的局部化。
+
+（a）证明 \(P_2 \subseteq P_2S_{Q_1} \cap R\).
+
+（b）设 \(a \in P_2S_{Q_1} \cap R\)，写 \(a = s/d\)（\(s \in P_2S\)、\(d \in S\)、\(d \notin Q_1\)）。若 \(s\) 在 \(k\) 上的极小多项式是 \(x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\)，其中 \(a_0, \ldots, a_{n-1} \in P_2\)（参见第 3 节习题 12），证明 \(d\) 在 \(k\) 上的极小多项式是 \(x^n+b_{n-1}x^{n-1}+\cdots+b_1x+b_0\)，其中 \(b_i = a_i/a_n^{n-i}\)（此处按上下文理解为 \(a_i\) 与 \(a\) 的相应幂之比），并得出 \(b_i \in R\).〔利用第 3 节习题 10。〕
+
+（c）证明 \(a \in P_2\)，并由此 \(P_2S_{Q_1} \cap R = P_2\).〔证明 \(a \notin P_2\) 将蕴涵 \(b_i \in P_2\)（\(i = 0, 1, \ldots, n-1\)），从而 \(d^n \in P_2S \subseteq P_1S \subseteq Q_1\)，于是 \(d \in Q_1\)，矛盾。〕
+
+（d）证明 \(P_2S_{Q_1}\) 包含在 \(S_{Q_1}\) 的某个素理想 \(\mathcal{P}\) 中且 \(\mathcal{P} \cap R = P_2\).〔利用（c）与上一习题，取 \(\varphi : R \to S_{Q_1}\).〕
+
+（e）令 \(Q_2 = \mathcal{P} \cap S\). 证明 \(Q_2 \subseteq Q_1\) 且 \(Q_2 \cap R = P_2\).
+
+（f）结合归纳法与上述结果证明下降定理，即定理 26（4）。
+
+\item 设 \(k\) 是代数闭域，\(V = Z(xz-yw) \subset \mathbb{A}^4\). 证明使 \(f = x/y \in k(V)\) 正则的点 \(v\) 之集恰是满足 \(y \neq 0\) 或 \(w \neq 0\) 的点 \((x,y,z,w)\) 之集。〔若 \(f = a/b\)，证明作为 \(k[x,y,z,w]\) 中的多项式有 \(ay-bx \in (xz-yw)\)，并由此 \(b \in (y,z)\).〕证明不存在 \(k(V)\) 中的函数 \(a/b\) 使在所有使 \(f\) 正则的点 \(v\) 处都有 \(b(v) \neq 0\).
+
+\item （\textbf{态射的微分}）设 \(\varphi : V \to W\) 是代数闭域 \(k\) 上仿射簇的态射，\(\varphi(v) = w\).
+
+（a）证明 \(\varphi\) 诱导出 \(k\)-向量空间 \(M_w/M_w^2\) 到 \(M_v/M_v^2\) 的线性映射，并用它证明 \(\varphi\) 诱导出（称为 \(\varphi\) 的微分）从 \(k\)-向量空间 \(\mathcal{T}_{V,v}\) 到 \(k\)-向量空间 \(\mathcal{T}_{W,w}\) 的线性映射 \(d\varphi\).
+
+（b）证明若 \(V \subseteq \mathbb{A}^n\)、\(W \subseteq \mathbb{A}^m\) 且 \(\varphi = (F_1(x_1, \ldots, x_n), \ldots, F_m(x_1, \ldots, x_n))\)，则 \(d\varphi : \mathcal{T}_{V,v} \to \mathcal{T}_{W,w}\) 由
+\[
+(d\varphi)(a_1, \ldots, a_n) = (D_v(F_1)(a_1, \ldots, a_n), \ldots, D_v(F_m)(a_1, \ldots, a_n))
+\]
+显式给出。〔若 \(g = g(y_1, \ldots, y_m)\)，证明链法则蕴涵
+\[
+\frac{\partial(g\circ\varphi)}{\partial x_i}(v) = \sum_{j=1}^{m}\frac{\partial g}{\partial y_j}(w)\frac{\partial F_j}{\partial x_i}(v),
+\]
+故 \(D_v(g\circ\varphi)(a_1, \ldots, a_n) = D_w(g)(b_1, \ldots, b_m)\)，其中 \(b_j = D_v(F_j)(a_1, \ldots, a_n)\). 然后利用若 \(g \in I(W)\) 则 \(g\circ\varphi \in I(V)\) 这一事实。〕
+
+（c）若 \(\psi : U \to V\) 是另一个满足 \(\psi(u) = v\) 的态射，证明相应的 \(d(\varphi \circ \psi) : \mathcal{T}_{U,u} \to \mathcal{T}_{W,w}\) 等于 \(d\varphi \circ d\psi\).
+
+（d）证明若 \(\varphi\) 是同构，则对每个满足 \(\varphi(v) = w\) 的 \(v\)，\(d\varphi\) 是从 \(\mathcal{T}_{V,v}\) 到 \(\mathcal{T}_{W,w}\) 的向量空间同构。
+
+\item 设 \(V = \mathbb{A}^1\)、\(W = Z(xz-y^2,\ yz-x^3,\ z^2-x^2y) \subset \mathbb{A}^3\)，\(\varphi : V \to W\) 是满态射 \(\varphi(t) = (t^3, t^4, t^5)\)（参见第 1 节习题 26）。对每个 \(t \in \mathbb{A}^1\) 显式描述上一习题中的微分 \(d\varphi\)；特别证明对所有 \(t \neq 0\)，\(d\varphi : \mathcal{T}_{V,t} \to \mathcal{T}_{W,(t^3,t^4,t^5)}\) 是向量空间的同构，而对 \(t = 0\) 是零映射。由此证明 \(V\) 与 \(W\) 不同构。
+
+\item 若 \(k\) 是域，商环 \(k[x]/(x^2)\) 称为 \(k\) 上的\textbf{对偶数环}。若 \(V\) 是 \(k\) 上的仿射代数集，证明从 \(k[V]\) 到 \(k[x]/(x^2)\) 的 \(k\)-代数同态等价于指定 \(V\) 的一个点 \(v\)（使 \(\mathcal{O}_{V,v}/\mathfrak{m}_{V,v} = k\)，称为 \(V\) 的一个 \(k\)-有理点）连同 \(V\) 在 \(v\) 处切空间 \(\mathcal{T}_{V,v}\) 中的一个元素。
+
+\item （\textbf{计算簇的维数}）设 \(P\) 是 \(k[x_1, \ldots, x_n]\) 中的素理想。令 \(P_0 = 0\)，\(P_i = P \cap k[x_1, \ldots, x_i]\). 定义簇 \(V_i = Z(P_i) \subseteq \mathbb{A}^i\)，其中 \(V_0\) 是单点构成的零维簇，坐标环为 \(k\).
+
+（a）证明 \(\dim V_{i-1} \leq \dim V_i \leq \dim V_{i-1}+1\).〔先构造从 \(k(V_{i-1})\) 到 \(k[V_i]\) 的单射，然后证明 \(k[V_i]\) 是由 \(k[V_{i-1}]\) 与一个额外生成元生成的 \(k\)-代数。〕
+
+（b）若 \(P_{i-1}\) 在 \(k[x_1, \ldots, x_i]\) 中生成的理想等于 \(P_i\)，证明 \(V_i \cong V_{i-1} \times \mathbb{A}^1\)，并由此 \(\dim V_i = \dim V_{i-1}+1\).
+
+（c）若 \(P_{i-1}\) 在 \(k[x_1, \ldots, x_i]\) 中生成的理想真包含在 \(P_i\) 中，证明 \(\dim V_i = \dim V_{i-1}\).
+
+（d）证明 \(\dim V\) 等于使 \(P_{i-1}\) 在 \(k[x_1, \ldots, x_i]\) 中生成的理想等于 \(P_i\) 的 \(i \in \{1, 2, \ldots, n\}\) 的个数。由此证明：若 \(G\) 是 \(P\) 关于字典序 \(x_n > \cdots > x_1\) 的约化 Gröbner 基，\(G_i = G \cap k[x_1, \ldots, x_i]\)（取 \(G_0 = 0\)），而 \(N\) 是满足 \(G_i \neq G_{i-1}\) 的 \(i\)（\(1 \leq i \leq n\)）的个数，则 \(\dim V = n-N\).
+
+\noindent 下面十一个习题引入 \(R\)-模 \(M\) 的\textbf{支集}的概念以及它与 \(M\) 的相伴素理想的关系。另见第 1 节习题 29--35 与第 5 节习题 25--30.
+
+\noindent\textbf{定义。} 若 \(M\) 是 \(R\)-模，则使局部化 \(M_P\) 非零的 \(R\) 的素理想 \(P\) 之集称为 \(M\) 的\textbf{支集}，记作 \(\operatorname{Supp}(M)\).
+
+\item 证明 \(M = 0\) 当且仅当 \(\operatorname{Supp}(M) = \varnothing\).〔利用命题 47。〕
+
+\item 若 \(0 \to L \to M \to N \to 0\) 是 \(R\)-模的正合序列，证明局部化 \(M_P\) 非零当且仅当局部化 \(N_P\) 与 \(L_P\) 中有一个非零，并由此 \(\operatorname{Supp}(M) = \operatorname{Supp}(L) \cup \operatorname{Supp}(N)\). 特别地，若 \(M = M_1 \oplus \cdots \oplus M_n\)，证明 \(\operatorname{Supp}(M) = \operatorname{Supp}(M_1) \cup \cdots \cup \operatorname{Supp}(M_n)\).
+
+\item 设 \(P \subseteq Q\) 是 \(R\) 中的素理想，\(M\) 是 \(R\)-模。证明 \(R\)-模 \(M_Q\) 在 \(P\) 处的局部化就是局部化 \(M_P\)，即 \((M_Q)_P = M_P\).〔直接论证，或利用命题 41 与张量积的结合性。〕
+
+\item 设 \(P \subseteq Q\) 是 \(R\) 中的素理想，\(M\) 是 \(R\)-模。证明若 \(P \in \operatorname{Supp}(M)\) 则 \(Q \in \operatorname{Supp}(M)\).〔利用上一习题。〕
+
+\item （a）设 \(M = Rm\) 是循环 \(R\)-模。证明 \(M_P = 0\) 当且仅当存在元素 \(r \in R\)、\(r \notin P\) 使 \(rm = 0\). 由此证明 \(P \in \operatorname{Supp}(M)\) 当且仅当 \(P\) 包含 \(m\) 在 \(R\) 中的零化子（参见第 10.1 节习题 10）。
+
+（b）若 \(M = Rm_1+\cdots+Rm_n\) 是有限生成 \(R\)-模，证明 \(P \in \operatorname{Supp}(M)\) 当且仅当对某个 \(i = 1, \ldots, n\) 有 \(P \in \operatorname{Supp}(Rm_i)\).〔利用命题 42。〕由此证明 \(P \in \operatorname{Supp}(M)\) 当且仅当 \(P\) 包含 \(M\) 在 \(R\) 中的零化子 \(\operatorname{Ann}(M)\).〔注意 \(\operatorname{Ann}(M) = \bigcap_{i=1}^{n}\operatorname{Ann}(Rm_i)\)，然后利用（a）与第 7.4 节习题 11。〕
+
+\item 设 \(P\) 是 \(R\) 的素理想且 \(P \cap D = \varnothing\). 证明若 \(P \in \operatorname{Ass}_R(M)\) 则 \(D^{-1}P \in \operatorname{Ass}_{D^{-1}R}(D^{-1}M)\).〔利用命题 38（3）与命题 42。〕
+
+\item 设 \(D^{-1}P \in \operatorname{Ass}_{D^{-1}R}(D^{-1}M)\)，其中 \(P = (a_1, \ldots, a_n)\) 是 \(R\) 中有限生成的素理想且 \(P \cap D = \varnothing\).
+
+（a）设 \(m/d \in D^{-1}M\) 的零化子是 \(D^{-1}P\). 证明对某些 \(d_1, \ldots, d_n \in D\) 有 \(d_ia_im = 0\)（在 \(R\) 中）。
+
+（b）令 \(d' = d_1d_2\cdots d_n\). 证明 \(P = \operatorname{Ann}(d'm)\)，并由此 \(P \in \operatorname{Ass}_R(M)\).〔包含 \(P \subseteq \operatorname{Ann}(d'm)\) 是显然的。对反向包含，证明若 \(b \in \operatorname{Ann}(d'm)\) 则 \(b/1\) 在 \(D^{-1}M\) 中零化 \(m/d\)，故 \(b/1 \in D^{-1}P\)，从而 \(b \in P\).〕
+
+\item 设 \(M\) 是诺特环 \(R\) 上的模。利用上两习题证明：在命题 38（3）的双射下，\(\operatorname{Ass}_R(M)\) 中满足 \(P \cap D = \varnothing\) 的素理想与 \(\operatorname{Ass}_{D^{-1}R}(D^{-1}M)\) 的素理想一一对应。
+
+\item 设 \(M\) 是诺特环 \(R\) 上的模，\(D\) 是 \(R\) 的乘法封闭子集。设 \(S\) 是 \(\operatorname{Ass}_R(M)\) 中满足 \(P \cap D \neq \varnothing\) 的素理想之集。本习题证明局部化映射 \(M \to D^{-1}M\) 的核 \(N\) 是 \(M\) 中唯一具有 \(\operatorname{Ass}_R(N) = S\) 且 \(\operatorname{Ass}_R(M/N) = \operatorname{Ass}_R(M)-S\) 的子模。
+
+（a）若 \(N'\) 是 \(M\) 的子模，满足如第 1 节习题 35 中的 \(\operatorname{Ass}_R(N') = S\) 且 \(\operatorname{Ass}_R(M/N') = \operatorname{Ass}_R(M)-S\)，证明下图交换，其中 \(\pi\) 与 \(\pi'\) 是自然投射（参见命题 42（6）），\(\varphi\) 与 \(\varphi'\) 是局部化同态：
+\[
+\begin{array}{ccc}
+M & \xrightarrow{\pi} & M/N'\\
+\downarrow\varphi & & \downarrow\varphi'\\
+D^{-1}M & \xrightarrow{\pi'} & D^{-1}(M/N')
+\end{array}
+\]
+
+（b）证明 \(\operatorname{Ass}_{D^{-1}R}(D^{-1}N') = \varnothing\)，并由此 \(D^{-1}N' = 0\) 且 \(\pi'\) 是单射。〔利用上一习题、\(S\) 的定义与第 1 节习题 34。〕
+
+（c）若 \(K\) 是 \(\varphi'\) 的核，证明 \(\operatorname{Ann}(x) \cap D \neq \varnothing\)（\(x \in K\)）且 \(\operatorname{Ass}_R(K) \subseteq S\). 证明 \(\operatorname{Ass}_R(K) \subseteq \operatorname{Ass}_R(M/N')\) 蕴涵 \(\operatorname{Ass}_R(K) = \varnothing\)，并由此 \(K = 0\).
+
+（d）证明 \(\varphi\) 与 \(\pi\) 的核相同，即 \(N = N'\)，且 \(M\) 的这个子模唯一。
+
+\noindent 下面两个习题建立与 \(R\)-模 \(M\) 相关的素理想集合 \(\operatorname{Ass}_R(M)\) 与 \(\operatorname{Supp}(M)\) 之间的基本关系。
+
+\item 证明 \(\operatorname{Ass}_R(M) \subseteq \operatorname{Supp}(M)\).〔若 \(Rm \cong R/P\)，用命题 42（4）与命题 46（1）证明 \(0 \neq (Rm)_P \subseteq M_P\).〕
+
+\item 设 \(R\) 是诺特环，\(M\) 是 \(R\)-模。
+
+（a）若 \(P \in \operatorname{Supp}(M)\)，证明 \(P\) 包含某个 \(Q \in \operatorname{Ass}_R(M)\).
+
+（b）若 \(P\) 是 \(\operatorname{Supp}(M)\) 中的极小素理想，证明 \(P \in \operatorname{Ass}_R(M)\).〔利用第 1 节习题 33 证明 \(\operatorname{Ass}_{R_P}(M_P) \neq \varnothing\)，然后利用习题 37。〕
+
+（c）由此证明 \(\operatorname{Ass}_R(M) \subseteq \operatorname{Supp}(M)\)，且这两个集合有相同的极小元。
+\end{enumerate}
+
+\section{环的素谱}
+
+本节中「环」一律指含 1 的交换环，且所有环同态 \(\varphi : R \to S\) 都假设把 \(1_R\) 映到 \(1_S\).
+
+我们已经看到，\(k\) 上仿射代数集 \(V\) 的大部分几何性质都可以翻译为 \(V\) 上 \(k\)-值函数的坐标环 \(k[V]\) 的代数性质。例如从 \(V\) 到 \(W\) 的态射对应于从 \(k[W]\) 到 \(k[V]\) 的 \(k\)-代数同态。当域 \(k\) 代数闭时这个翻译特别精确：Hilbert 零点定理在 \(V\) 的点 \(v\) 与 \(k[V]\) 的极大理想 \(M = I(v)\) 之间建立双射，而若 \(\varphi : V \to W\) 是态射，则 \(\varphi(v) \in W\) 对应于 \(k[W]\) 中的极大理想 \(\bar\varphi^{-1}(M)\). 在这一展开中，我们一般从仿射代数集的几何性质出发，然后看到坐标环共有的许多代数性质可以对任意交换环定义。现在假设我们试图反过来：从一般的交换环作为代数对象出发，类比 \(k[V]\) 与 \(V\) 来定义一个相应的「几何」对象。
+
+给定交换环 \(R\)，最自然的类比或许会建议把 \(R\) 的极大理想 \(M\) 之集定义为相应几何对象的「点」。在这个定义下，若 \(\bar\varphi : R' \to R\) 是环同态，则 \(\bar\varphi^{-1}(M)\) 应对应于极大理想 \(M\). 遗憾的是，极大理想在环同态下的原像一般不必是极大理想。由于素理想在（把 1 映到 1 的）环同态下的原像仍是素理想，这提示更好的定义应当包含 \(R\) 的素理想。这引出下述定义。
+
+\begin{definition}
+设 \(R\) 是含 1 的交换环。\(R\) 的\textbf{谱}或\textbf{素谱} \(\operatorname{Spec}R\) 是 \(R\) 的所有素理想之集。\(R\) 的所有极大理想之集 \(\operatorname{mSpec}R\) 称为 \(R\) 的\textbf{极大谱}。
+\end{definition}
+
+\noindent\textbf{例}
+
+（1）若 \(R\) 是域，则 \(\operatorname{Spec}R = \operatorname{mSpec}R = \{(0)\}\).
+
+（2）\(\operatorname{Spec}\mathbb{Z}\) 中的点是素理想 \((0)\) 以及素理想 \((p)\)（\(p > 0\) 为素数），而 \(\operatorname{mSpec}\mathbb{Z}\) 由 \(\operatorname{Spec}\mathbb{Z}\) 中除 \((0)\) 之外的所有素理想组成。
+
+（3）\(\operatorname{Spec}\mathbb{Z}[x]\) 的元素如下：
+
+（a）\((0)\)；
+
+（b）\((p)\)，其中 \(p\) 是 \(\mathbb{Z}\) 中的素数；
+
+（c）\((f)\)，其中 \(f \neq \pm1\) 是容度（即各系数的最大公因数）为 1 且在 \(\mathbb{Q}[x]\) 中不可约的多项式；
+
+（d）\((p, g)\)，其中 \(p\) 是 \(\mathbb{Z}\) 中的素数，\(g\) 是模 \(p\) 不可约的首一多项式。
+
+\(\operatorname{mSpec}\mathbb{Z}[x]\) 的元素就是上面（d）中的素理想。
+
+在 \(k\) 代数闭时与 \(k[V]\)、\(V\) 的类比中，元素 \(f \in k[V]\) 是 \(V\) 上取值于 \(k\) 的函数，通过在 \(V\) 中点 \(v\) 处求值得到。注意「在 \(v\) 处求值」定义了从 \(k[V]\) 到 \(k\) 的同态，其核为 \(I(v)\)，而 \(f\) 在 \(v\) 处的值就是商环 \(k[V]/I(v) \cong k\) 中代表 \(f\) 的元素。换一种说法，\(f \in k[V]\) 在 \(v \in V\) 处的值可以看作元素 \(f \in k[V]/I(v) \cong k\). 类似的定义可以一般地给出：
+
+\begin{definition}
+若 \(f \in R\)，则 \(f\) 在点 \(P \in \operatorname{Spec}R\) 处的\textbf{值}是元素 \(f(P) = f \in R/P\).
+\end{definition}
+
+注意一般地 \(f\) 在不同点 \(P\) 处的值落在不同的整环中。还要注意一般地 \(f \in R\) 不由它的值唯一确定，\(f\) 只被确定到相差 \(R\) 的幂零根中的一个元素（参见习题 3）。
+
+映射 \(Z\) 与 \(I\) 以及 Zariski 拓扑也有类似的对应。对 \(R\) 的任何子集 \(A\) 定义
+\[
+Z(A) = \{P \in \operatorname{Spec}R \mid A \subseteq P\},
+\]
+即包含 \(A\) 的素理想之集。显然 \(Z(A) = Z(I)\)，其中 \(I = (A)\) 是由 \(A\) 生成的理想，故只需考虑 \(Z(I)\)（\(I\) 是 \(R\) 的理想）。注意按定义 \(P \in Z(I)\) 当且仅当 \(I \subseteq P\)，这当且仅当对每个 \(f \in I\) 有 \(f \in P\). 把 \(f \in R\) 看作 \(\operatorname{Spec}R\) 上的函数，这表明 \(P \in Z(I)\) 当且仅当对所有 \(f \in I\) 有 \(f(P) = f \bmod P = 0 \in R/P\). 在这个意义上，\(Z(I)\) 由 \(\operatorname{Spec}R\) 中使 \(I\) 中所有函数取值为 0 的点组成。
+
+对 \(\operatorname{Spec}R\) 的任何子集 \(Y\) 定义
+\[
+I(Y) = \bigcap_{P \in Y}P,
+\]
+即 \(Y\) 中素理想的交。
+
+\begin{proposition}\label{pro:15.53}
+设 \(R\) 是含 1 的交换环。上面定义的 \(R\) 与 \(\operatorname{Spec}R\) 之间的映射 \(Z\) 与 \(I\) 满足
+
+（1）对 \(R\) 的任何理想 \(I\) 有 \(Z(I) = Z(\operatorname{rad}(I)) = Z(I(Z(I)))\)，且 \(I(Z(I)) = \operatorname{rad}I\)；
+
+（2）对 \(R\) 的任何理想 \(I, J\) 有 \(Z(I \cap J) = Z(IJ) = Z(I) \cup Z(J)\)；
+
+（3）若 \(\{I_j\}\) 是 \(R\) 的任意理想族，则 \(Z(\bigcup_jI_j) = \bigcap_jZ(I_j)\).
+\end{proposition}
+
+\begin{proof}
+若素理想 \(P\) 包含理想 \(I\)，则 \(P\) 包含 \(\operatorname{rad}I\)（第 2 节习题 8），这蕴涵 \(Z(I) = Z(\operatorname{rad}(I))\). 由于 \(\operatorname{rad}I\) 是所有包含 \(I\) 的素理想的交（命题 12），\(I(Z(I))\) 的定义给出 \(Z(\operatorname{rad}(I)) = Z(I(Z(I)))\). 类似地
+\[
+I(Z(I)) = \bigcap_{P \in Z(I)}P = \bigcap_{I \subseteq P}P = \operatorname{rad}I,
+\]
+这完成了（1）的证明。\(Z(I \cap J) = Z(I) \cup Z(J)\) 是显然的。设素理想 \(P\) 包含 \(IJ\). 若 \(P\) 不包含 \(I\)，则存在 \(i \in I\) 使 \(i \notin P\). 由于 \(iJ \subseteq P\)，得 \(J \subseteq P\). 这证明了 \(Z(IJ) = Z(I) \cup Z(J)\)，完成（2）的证明。（3）的证明是显然的。
+\end{proof}
+
+命题的第一个论断表明 \(\operatorname{Spec}R\) 中每个集合 \(Z(I)\) 都对某个根理想 \(I\) 出现，而由于 \(I(Z(I)) = \operatorname{rad}I\)，这个根理想唯一。命题的第二、三个论断表明集合族
+\[
+\mathcal{T} = \{Z(I) \mid I \text{ 是 } R \text{ 的理想}\}
+\]
+满足第 2 节中拓扑的闭集三条公理。
+
+\begin{definition}
+由理想 \(I\) 的 \(Z(I)\) 作为闭集定义的 \(\operatorname{Spec}R\) 上的拓扑称为 \textbf{Spec} \(R\) \textbf{的 Zariski 拓扑}。
+\end{definition}
+
+按定义，\(\operatorname{Spec}R\) 中单点集 \(\{P\}\) 在 Zariski 拓扑下的闭包由所有包含 \(P\) 的素理想组成。特别地，\(\operatorname{Spec}R\) 中的点 \(P\) 在 Zariski 拓扑下是闭集当且仅当素理想 \(P\) 不包含在 \(R\) 的任何其他素理想中，即 \(P\) 是极大理想（故 \(\operatorname{Spec}R\) 上的 Zariski 拓扑一般不是 Hausdorff 的）。这些点有一个名称：
+
+\begin{definition}
+\(R\) 的极大理想称为 \(\operatorname{Spec}R\) 中的\textbf{闭点}。
+\end{definition}
+
+用上面的术语说，\(\operatorname{Spec}R\) 中在 Zariski 拓扑下是闭集的点恰是 \(\operatorname{mSpec}R\) 中的点。
+
+拓扑空间的闭子集称为\textbf{不可约}的，若它不是两个真闭子集的并，等价地，若每个非空开集都稠密。与证明命题 17 类似的论证表明 \(\operatorname{Spec}R\) 中的闭子集 \(Y = Z(I)\) 不可约当且仅当 \(I(Y) = \operatorname{rad}I\) 是素理想（参见习题 16）。
+
+下述命题总结了其中一些结果：
+
+\begin{proposition}\label{pro:15.54}
+映射 \(Z\) 与 \(I\) 定义互逆的双射
+\[
+\{\operatorname{Spec}R \text{ 的 Zariski 闭子集}\} \underset{Z}{\overset{I}{\longleftrightarrow}} \{R \text{ 的根理想}\}.
+\]
+在这个对应下，\(\operatorname{Spec}R\) 中的闭点对应于 \(R\) 中的极大理想，\(\operatorname{Spec}R\) 中的不可约子集对应于 \(R\) 中的素理想。
+\end{proposition}
+
+\noindent\textbf{例}
+
+（1）设 \(X = \operatorname{Spec}\mathbb{Z}\). 则 \(X\) 不可约，且非零素理想给出 \(X\) 中的闭点。点 \((0)\) 不是闭点，事实上 \((0)\) 的闭包是整个 \(X\)，即 \((0)\) 在 \(\operatorname{Spec}\mathbb{Z}\) 中稠密。因此元素 \((0)\) 称为 \(\operatorname{Spec}\mathbb{Z}\) 中的\textbf{一般点}。由于 \(\mathbb{Z}\) 的每个理想都是主理想，\(\operatorname{Spec}\mathbb{Z}\) 中的 Zariski 闭集是 \(\varnothing\)、\(\operatorname{Spec}\mathbb{Z}\) 以及 \(\mathbb{Z}\) 中任意有限多个非零素理想之集。
+
+（2）设 \(X = \operatorname{Spec}\mathbb{Z}[x]\)，如前面的例 3 中那样。对每个整数素数 \(p\)，元素 \((p) \in X\) 的 Zariski 闭包由类型（d）的极大理想 \((p,g)\) 组成。类似地，对每个类型（c）的 \(\mathbb{Q}\)-不可约多项式 \(f\)，元素 \((f)\) 的 Zariski 闭包由类型（d）的素理想组成，其中 \(g\) 是 \(f\) 在 \(\mathbb{Z}/p\mathbb{Z}[x]\) 中的某个因子。
+
+\noindent\textbf{例（仿射 \(k\)-代数）}
+
+设 \(R = k[V]\) 是代数闭域 \(k\) 上某个仿射代数集 \(V \subseteq \mathbb{A}^n\) 的坐标环。则 \(R = k[x_1, \ldots, x_n]/I(V)\)，其中 \(I(V)\) 是 \(k[x_1, \ldots, x_n]\) 中的根理想。特别地 \(R\) 是有限生成 \(k\)-代数，且由于 \(I(V)\) 是根理想，\(R\) 不含非零幂零元素。
+
+\begin{definition}
+代数闭域 \(k\) 上没有非零幂零元素的有限生成代数称为\textbf{仿射 \(k\)-代数}。
+\end{definition}
+
+若 \(R\) 是仿射 \(k\)-代数，则由推论 5 存在满 \(k\)-代数同态 \(k[x_1, \ldots, x_n] \to R\)，其核 \(I = \ker\) 必须是 \(k[x_1, \ldots, x_n]\) 中的根理想，因为 \(R\) 没有非零幂零元素。于是 \(R \cong k[x_1, \ldots, x_n]/I = k[V]\)（\(V = Z(I)\)）是 \(k\) 上某个仿射代数集的坐标环。因此仿射 \(k\)-代数恰是作为代数闭域上仿射代数集上函数环出现的环。
+
+由零点定理，\(\operatorname{mSpec}R\) 的点与 \(V\) 一一对应，\(\operatorname{Spec}R\) 的点与 \(V\) 的子簇一一对应。由定理 6，两个仿射代数集之间的态射与仿射 \(k\)-代数的（\(k\)-代数）同态一一对应。用范畴的语言，这些结果表明在代数闭域 \(k\) 上有范畴等价
+\[
+\{\text{仿射代数集}\} \longleftrightarrow \{\text{仿射 } k\text{-代数}\},
+\]
+其中的态射分别是代数集的态射与 \(k\)-代数同态。从左到右的映射把仿射代数集 \(V\) 映到它的坐标环 \(k[V]\)。从右到左的映射把仿射 \(k\)-代数 \(R\) 映到 \(\operatorname{mSpec}R\). 序对 \((\operatorname{mSpec}R, R)\) 有时称为仿射 \(k\)-代数 \(R\) 的\textbf{标准模型}。
+
+在代数闭域 \(k\) 上，两个仿射 \(k\)-代数之间的 \(k\)-代数同态 \(\varphi : R \to S\) 由零点定理具有性质：\(S\) 中极大理想的原像是 \(R\) 中的极大理想。如前所述，对更一般的环考虑 \(\operatorname{Spec}R\) 而不只是 \(\operatorname{mSpec}R\) 的一个原因是：极大理想在环同态下的原像一般不是极大理想。当 \(R\) 是对应于仿射代数集 \(V\) 的仿射 \(k\)-代数时，空间 \(\operatorname{Spec}R\) 不仅包含 \(V\) 的「几何点」（以 \(\operatorname{Spec}R\) 中闭点的形式），还包含对应于 \(V\) 的所有子簇的非闭点（以 \(\operatorname{Spec}R\) 中非闭点，即 \(R\) 的非极大素理想的形式）。
+
+一般地，若 \(\varphi : R \to S\) 是把 \(1_R\) 映到 \(1_S\) 的环同态，\(\mathcal{P}\) 是 \(S\) 中的素理想，则 \(\varphi^{-1}(\mathcal{P})\) 是 \(R\) 中的素理想。这定义了映射 \(\varphi^* : \operatorname{Spec}S \to \operatorname{Spec}R\)，\(\varphi^*(\mathcal{P}) = \varphi^{-1}(\mathcal{P})\). 若 \(Z(I) \subseteq \operatorname{Spec}S\) 是 Zariski 闭子集，则 \((\varphi^*)^{-1}(Z(I)) = Z(\varphi(I)S)\)（即由 \(\varphi(I)\) 在 \(S\) 中生成的理想定义的 Zariski 闭子集）。由于 \(\operatorname{Spec}R\) 中闭子集的原像是 \(\operatorname{Spec}S\) 中的闭子集，诱导映射在 Zariski 拓扑下连续。这证明了下述命题。
+
+\begin{proposition}\label{pro:15.55}
+每个把 \(1_R\) 映到 \(1_S\) 的环同态 \(\varphi : R \to S\) 都诱导出映射 \(\varphi^* : \operatorname{Spec}S \to \operatorname{Spec}R\)，它关于 \(\operatorname{Spec}R\) 与 \(\operatorname{Spec}S\) 上的 Zariski 拓扑连续。
+\end{proposition}
+
+虽然从仿射代数集推广到一般环的 \(\operatorname{Spec}R\) 使情形稍微复杂，但这个更一般的框架至少带来两个非常重要的好处。第一，即使交换环 \(R\) 含有幂零元素也可以考虑 \(\operatorname{Spec}R\)；第二，\(\operatorname{Spec}R\) 不必是任何域 \(k\) 上的 \(k\)-代数，即使它是，域 \(k\) 也不必代数闭。仿射 \(k\)-代数情形中的许多性质在更一般的情形下成立，这使得「几何」想法可以应用于这些情形（例如应用于 \(R\) 有限时的 \(\operatorname{Spec}R\)）。
+
+\noindent\textbf{例}
+
+（1）自然包含 \(\varphi : \mathbb{Z} \to \mathbb{Z}[i]\) 诱导出映射 \(\varphi^* : \operatorname{Spec}\mathbb{Z}[i] \to \operatorname{Spec}\mathbb{Z}\). \(\varphi^*\) 在 \(\mathbb{Z}\) 中非零素理想 \(P\) 上的纤维由 \(\mathbb{Z}[i]\) 中包含 \(P\) 的素理想组成。若 \(P = (p)\)（\(p = 2\) 或 \(p \equiv 3 \pmod 4\)），则这个纤维中只有一个元素；若 \(p \equiv 1 \pmod 4\)，则纤维中有两个元素：素理想 \((\pi)\) 与 \((\pi')\)，其中 \(p = \pi\pi'\) 在 \(\mathbb{Z}[i]\) 中（参见第 8.3 节命题 18）。这可以用下图表示：
+
+\[
+\begin{array}{cccccc}
+(1+i) & & (1+i) & & (\pi) & \\
+& (2+i) & & (3) & & (p)\\
+& (2-i) & & & (\pi') &
+\end{array}
+\qquad\longrightarrow\qquad
+\begin{array}{ccccc}
+(0) & (2) & (3) & (5) & (p)\\
+& p\equiv3 (4) & & p\equiv1 (4) &
+\end{array}
+\]
+
+（2）若 \(k\) 是代数闭域，则 \(\operatorname{Spec}k[x]\) 由 \((0)\) 与理想 \((x-a)\)（\(a \in k\)）组成；自然包含 \(\varphi : k[x] \to k[x,y]\) 诱导出 Zariski 连续映射 \(\varphi^* : \operatorname{Spec}k[x,y] \to \operatorname{Spec}k[x]\). \(\operatorname{Spec}k[x,y]\) 的元素是
+
+（a）\((0)\)；
+
+（b）\((f)\)，其中 \(f\) 是 \(k[x,y]\) 中的不可约多项式；
+
+（c）\((x-a, y-b)\)（\(a, b \in k\)）
+
+（参见习题 4）。素理想 \((0)\) 在 \(\operatorname{Spec}k[x,y]\) 中 Zariski 稠密；（b）中素理想的 Zariski 闭包由满足 \(f(a,b) = 0\) 的（c）中素理想 \((x-a,y-b)\) 组成；闭点即 \(\operatorname{mSpec}k[x,y]\) 的元素就是（c）中的素理想。
+
+由零点定理，\(\operatorname{Spec}k[x,y]\) 中每个素理想 \(P\) 由相应的零点集 \(Z(P)\) 唯一确定。素理想 \((0) \in k[x,y]\) 对应于 \(\mathbb{A}^2\)；素理想 \((f)\) 对应于 \(f(x,y) = 0\) 的点，且 \(P = (f)\) 是所有包含 \(P\) 的极大理想的交；极大理想 \((x-a,y-b)\) 对应于点 \((a,b) \in \mathbb{A}^2\). 用映射 \(\varphi^*\) 把它们纤维化在 \(\operatorname{Spec}k[x]\) 上，这些素理想可以几何地描绘出来（图略，参见原书）。
+
+\(\operatorname{Spec}k[x,y]\) 捕捉了 \(\mathbb{A}^2\) 中代数集的全部几何：\(\mathbb{A}^2\) 中每个代数集都是对应于上面描绘的 \(\operatorname{Spec}k[x,y]\) 中元素的不可约代数集的有限并。除处处稠密的点 \((0)\) 之外，\(\operatorname{Spec}k[x,y]\) 的「几何」图像正是仿射平面 \(\mathbb{A}^2\) 的通常几何。当 \(k\) 不是代数闭时情形稍复杂，但图像类似（参见习题 4）。
+
+（3）把 \(\operatorname{Spec}\mathbb{Z}[x]\) 通过自然包含 \(\mathbb{Z} \to \mathbb{Z}[x]\) 看作纤维化在 \(\operatorname{Spec}\mathbb{Z}\) 上，情形与上一例中的 \(\operatorname{Spec}k[x,y]\) 非常类似。\(\operatorname{Spec}\mathbb{Z}[x]\) 的元素已在推论 54 之后的例 2 中讨论过。元素 \((0)\) 在 \(\operatorname{Spec}\mathbb{Z}[x]\) 中 Zariski 稠密；\((p)\) 的闭包由 \((p)\) 以及所有闭点 \((p,g)\) 组成，其中 \(g\) 是 \(\mathbb{Z}[x]\) 中模 \(p\) 不可约的首一多项式；\((f)\) 的闭包由 \((f)\) 以及包含 \((f)\) 的极大理想 \((p,g)\) 组成，这等价于说 \(f\) 在商环 \(\mathbb{Z}[x]/(p,g)\) 中的像是 0，即不可约多项式 \(g\) 是 \(f\) 模 \(p\) 的一个因子。闭点 \(\operatorname{mSpec}\mathbb{Z}[x]\) 就是极大理想 \((p,g)\).
+
+注意包含 \((f)\) 的极大理想 \((p,g)\) 恰是图中那些闭点，使 \(\operatorname{Spec}\mathbb{Z}[x]\) 上的「函数」\(f\)（把素理想 \(P\) 映到 \(f(P) = f \bmod P \in \mathbb{Z}[x]/P\)）取值为零。例如多项式 \(f = x^3-4x^2+x-9 \in \mathbb{Z}[x]\) 符合上面的图：\(f\) 在 \(\mathbb{Z}[x]\) 中不可约，且模各素数分解为不可约因子如下：
+\[
+f \equiv x^3+x+1 \pmod 2, \quad f \equiv x(x-1)^2 \pmod 3, \quad f \equiv (x-1)(x-2)(x-3) \pmod 5.
+\]
+在 \((2)\) 上方的纤维中与 \((f)\) 相交的点有一个，即闭点 \((2, x^3+x+1)\)；在 \((3)\) 上方的纤维中有两个闭点 \((3,x)\) 与 \((3,x-1)\)（后者带「重数」）；在 \((5)\) 上方有三个闭点 \((5,x-1)\)、\((5,x-2)\)、\((5,x-3)\). 图中素数 \(p\) 可以取 \(p = 53\)，因为这是大于 5 的第一个使该多项式模 \(p\) 有三个不可约因子的素数。注意虽然图中把素理想 \((f)\) 画成光滑曲线以强调与上一例中 \(\operatorname{Spec}k[x,y]\) 结构的几何相似性，但 \(\operatorname{Spec}\mathbb{Z}\) 中各素数上方的纤维是离散的，故须小心。例如由于 \(f \equiv (x+2)(x^2+x+6) \pmod 7\)，\((f)\) 与 \((7)\) 上方纤维的交只含两个点 \((7,x+2)\) 与 \((7,x^2+x+6)\)，各带重数 1.
+
+位于 \((p) \in \operatorname{Spec}\mathbb{Z}\) 上方纤维中的 \((f)\) 的闭点数目由多项式 \(f\) 在 \(\mathbb{Q}\) 上的伽罗瓦群控制（参见第 14.8 节）。例如 \(f = x^4+1\) 在 \((2)\) 上方纤维中有一个闭点，而对奇素数 \(p\)，在 \((p)\) 上方纤维中有两个或四个闭点（参见习题 8）。
+
+空间 \(\operatorname{Spec}R\) 连同其 Zariski 拓扑给出了任意交换环上簇 \(V\) 的点的几何推广。下面我们考虑推广 \(V\) 上有理函数环的问题。
+
+当 \(V\) 是代数闭域 \(k\) 上的簇时，坐标环 \(k[V]\) 的商域 \(k(V)\) 中的元素定义 \(V\) 上的有理函数。\(k(V)\) 中每个元素 \(a\) 一般可以以许多不同方式写成 \(a, f \in k[V]\) 的商 \(a/f\). 使 \(a\) 正则的点集 \(U\) 是 \(V\) 的开子集；按定义，它由所有可以用某个商 \(a/f\)（\(f(v) \neq 0\)）表示的 \(v \in V\) 组成，而这个代表元 \(a/f\) 定义了局部环 \(\mathcal{O}_{V,v}\) 中的元素。还要注意同一个代表元 \(a/f\) 不仅在 \(v\) 处有定义，还在 \(f\) 非零的所有其他点处有定义，即在 \(V\) 的开子集 \(V_f = \{w \in V \mid f(w) \neq 0\}\) 上有定义。这些开集 \(V_f\)（称为\textbf{主开集}，参见第 2 节习题 21）对 \(a\) 的各种可能代表元 \(a/f\) 给出 \(U\) 的一个开覆盖。命题 51 之前关于 \(V = Z(xz-yw) \subset \mathbb{A}^4\) 上函数 \(x/y\) 的例子表明，一般地单个代表元不足确定整个 \(U\)——在这个例子中 \(U = V_y \cup V_w\)，而 \(U\) 不能被任何单个 \(V_f\) 覆盖（参见第 4 节习题 25）。
+
+把有理函数解释为在 \(V\) 的开子集上正则的函数，这一做法可以推广到 \(\operatorname{Spec}R\). 我们先定义 \(X = \operatorname{Spec}R\) 中集合 \(V_f\) 的类似物 \(X_f\)，并建立它们的基本性质。
+
+\begin{definition}
+对任意 \(f \in R\)，用 \(X_f\) 表示 \(X = \operatorname{Spec}R\) 中不包含 \(f\) 的素理想之集。等价地，\(X_f\) 是 \(\operatorname{Spec}R\) 中使 \(f \in R\) 的值非零的点之集。集合 \(X_f\) 称为 \(\operatorname{Spec}R\) 中的\textbf{主开集}（或基本开集）。
+\end{definition}
+
+由于 \(X_f\) 是 Zariski 闭集 \(Z(f)\) 的补集，正如其名所示它确实是 \(\operatorname{Spec}R\) 中的开集。主开集的一些基本性质由下一命题给出。回忆拓扑空间之间的映射称为\textbf{同胚}，若它连续、双射且逆映射连续。
+
+\begin{proposition}\label{pro:15.56}
+设 \(f \in R\)，\(X_f\) 是 \(X = \operatorname{Spec}R\) 中相应的主开集。则
+
+（1）\(X_f = X\) 当且仅当 \(f\) 是单位，\(X_f = \varnothing\) 当且仅当 \(f\) 幂零；
+
+（2）\(X_f \cap X_g = X_{fg}\)；
+
+（3）\(X_f \subseteq X_{g_1} \cup \cdots \cup X_{g_n}\) 当且仅当 \(f \in \operatorname{rad}(g_1, \ldots, g_n)\)；特别地 \(X_f = X_g\) 当且仅当 \(\operatorname{rad}(f) = \operatorname{rad}(g)\)；
+
+（4）主开集构成 \(\operatorname{Spec}R\) 上 Zariski 拓扑的一个基，即 \(X\) 中每个 Zariski 开集都是某些主开集 \(X_f\) 的并；
+
+（5）从 \(R\) 到 \(R_f\) 的自然映射诱导出从 \(\operatorname{Spec}R_f\) 到 \(X_f\) 的同胚，其中 \(R_f\) 是 \(R\) 在 \(f\) 处的局部化；
+
+（6）任何环的谱都是拟紧的（即每个开覆盖都有有限子覆盖）；特别地 \(X_f\) 拟紧；
+
+（7）若 \(\varphi : R \to S\) 是任意环同态（\(\varphi(1_R) = 1_S\)），则在诱导映射 \(\varphi^* : Y = \operatorname{Spec}S \to \operatorname{Spec}R\) 下，\(X\) 中主开集 \(X_f\) 的完全原像是 \(Y\) 中的主开集 \(Y_{\varphi(f)}\).
+\end{proposition}
+
+\begin{proof}
+（1）、（2）与（7）留作容易的习题。对（3），注意按定义 \(X_{g_1} \cup \cdots \cup X_{g_n}\) 由不包含 \(g_1, \ldots, g_n\) 中至少一个的素理想 \(P\) 组成。故 \(X_{g_1} \cup \cdots \cup X_{g_n}\) 是闭集 \(Z((g_1, \ldots, g_n))\) 的补集，而 \(Z((g_1,\ldots,g_n))\) 由包含由 \(g_1, \ldots, g_n\) 生成的理想的素理想组成。若 \((g_1, \ldots, g_n) = R\)，则 \(X_{g_1} \cup \cdots \cup X_{g_n} = X\)，无需证明。否则 \(X_f \subseteq X_{g_1} \cup \cdots \cup X_{g_n}\) 当且仅当每个满足 \(f \notin P\) 的素理想 \(P\) 也满足 \(P \notin Z((g_1,\ldots,g_n))\). 后一条件等价于：若素理想 \(P\) 包含理想 \((g_1,\ldots,g_n)\)，则 \(P\) 也包含 \(f\)，即 \(f\) 含在所有包含 \((g_1,\ldots,g_n)\) 的素理想 \(P\) 的交中。由命题 12，这个交是 \(\operatorname{rad}(g_1,\ldots,g_n)\)，这证明了（3）。
+
+若 \(U = X-Z(I)\) 是 \(X\) 的 Zariski 开子集，则 \(U\) 是集合 \(X_f\)（\(f \in I\)）的并，这证明了（4）。
+
+从 \(R\) 到局部化 \(R_f\) 的自然环同态在 \(R_f\) 的素理想与 \(R\) 中不包含 \(f\) 的素理想之间建立双射（命题 38）。相应的从 \(\operatorname{Spec}R_f\) 到 \(\operatorname{Spec}R\) 的 Zariski 连续映射因此连续且双射。由于 \(R_f\) 的每个理想都是 \(R\) 的某个理想的扩张（参见命题 38（1）），可知逆映射也连续，这证明了（5）。
+
+对（6），由（4）每个开集都是主开集的并，故只需证明若 \(X\) 被主开集 \(X_{g_i}\)（\(i\) 属于某个指标集 \(\mathcal{J}\)）覆盖，则 \(X\) 是其中有限多个 \(X_{g_i}\) 的并。若由各 \(g_i\) 生成的理想 \(I\) 是 \(R\) 的真理想，则 \(I\) 包含在某个极大理想 \(P\) 中。但此时 \(X = \operatorname{Spec}R\) 中的元素 \(P\) 不包含在任何主开集 \(X_{g_i}\) 中，与 \(X\) 被各 \(X_{g_i}\) 覆盖矛盾。故 \(I = R\)，于是 \(1 \in R\) 可以写成有限和 \(1 = a_1g_{i_1}+\cdots+a_ng_{i_n}\)（\(i_1, \ldots, i_n \in \mathcal{J}\)）。考虑有限并 \(X_{g_{i_1}} \cup \cdots \cup X_{g_{i_n}}\). 若 \(X\) 中的点 \(P\) 不包含在这个并中，则 \(P\) 是包含 \(g_{i_1}, \ldots, g_{i_n}\) 的素理想，从而包含 1，矛盾。故 \(X = X_{g_{i_1}} \cup \cdots \cup X_{g_{i_n}}\)，正如所需。（6）的第二部分由（5）推出。
+\end{proof}
+
+下面我们为 \(X = \operatorname{Spec}R\) 定义 \(V\) 上有理函数的类似物。如我们所述，对簇 \(V\)，有理函数 \(a \in k(V)\) 是某个开集 \(U\) 上的正则函数。在每个点 \(v \in U\) 处有 \(a\) 的一个代表元 \(a/f\) 使 \(f(v) \neq 0\)，而这个代表元是局部化 \(\mathcal{O}_{V,v} = k[V]_{I(v)}\) 中的元素。这样 \(U\) 上的正则函数 \(a\) 可以看作从 \(U\) 到这些局部化的不交并的映射：点 \(v \in U\) 映到代表元 \(a/f \in k[V]_{I(v)}\). 此外同一个代表元不仅可以用于 \(v\)，还可以同时用于 \(v\) 的整个 Zariski 邻域 \(V_f\)（故 \(a\)「在 \(v\) 附近局部地」由 \(k[V]\) 的元素的单个商给出）。注意 \(a/f\) 是局部化 \(k[V]_f\) 中的元素，而 \(k[V]_f\) 包含在每个局部化 \(k[V]_{I(w)}\)（\(w \in V_f\)）中。
+
+我们把这个推广到 \(\operatorname{Spec}R\)：考虑从 \(\operatorname{Spec}R\) 的 Zariski 开子集 \(U\) 到各局部化 \(R_P\)（\(P \in U\)）的不交并的函数 \(s\)，使 \(s(P) \in R_P\)，且 \(s\) 局部地由 \(R\) 的元素之商给出。更精确地：
+
+\begin{definition}
+设 \(U\) 是 \(\operatorname{Spec}R\) 的 Zariski 开子集。若 \(U = \varnothing\)，定义 \(\mathcal{O}(U) = 0\). 否则定义 \(\mathcal{O}(U)\) 为从 \(U\) 到各局部化 \(R_Q\)（\(Q \in U\)）的不交并的函数 \(s : U \to \coprod_{Q \in U}R_Q\) 之集，满足下述两条性质：
+
+（1）\(s(Q) \in R_Q\) 对每个 \(Q \in U\) 成立；
+
+（2）对每个 \(P \in U\)，存在 \(P\) 在 \(U\) 中的开邻域 \(X_f \subseteq U\) 以及局部化 \(R_f\) 中的元素 \(a/f^l\) 在 \(X_f\) 上定义 \(s\)，即对每个 \(Q \in X_f\) 有 \(s(Q) = a/f^l \in R_Q\).
+\end{definition}
+
+若 \(s, t \in \mathcal{O}(U)\)，则 \(s+t\) 与 \(st\) 也是 \(\mathcal{O}(U)\) 的元素（参见习题 18），故每个 \(\mathcal{O}(U)\) 是环。另外 \(R\) 的每个元素 \(a\) 通过 \(s(Q) = a \in R_Q\) 给出 \(\mathcal{O}(U)\) 的元素，特别地 \(1 \in R\) 给出环 \(\mathcal{O}(U)\) 的单位元。若 \(U'\) 是 \(U\) 的开子集，则有自然的限制映射从 \(\mathcal{O}(U)\) 到 \(\mathcal{O}(U')\)，它是环同态（参见习题 19）。
+
+\begin{definition}
+设 \(R\) 是含 1 的交换环，\(X = \operatorname{Spec}R\).
+
+（1）由 \(X\) 的 Zariski 开集对应的环 \(\mathcal{O}(U)\) 以及限制映射 \(\mathcal{O}(U) \to \mathcal{O}(U')\)（\(U' \subseteq U\)）构成的结构称为 \(X\) 上的\textbf{结构层}，简记作 \(\mathcal{O}\)（或 \(\mathcal{O}_X\)）。
+
+（2）\(\mathcal{O}(U)\) 的元素 \(s\) 称为 \(\mathcal{O}\) 在 \(U\) 上的\textbf{截面}。\(\mathcal{O}(X)\) 的元素称为 \(\mathcal{O}\) 的\textbf{整体截面}。
+\end{definition}
+
+下一个命题推广命题 51 的结果：簇 \(V\) 上处处正则的有理函数只有坐标环 \(k[V]\) 的元素。
+
+\begin{proposition}\label{pro:15.57}
+设 \(X = \operatorname{Spec}R\)，\(\mathcal{O} = \mathcal{O}_X\) 是其结构层。\(\mathcal{O}\) 的整体截面是 \(R\) 的元素，即 \(\mathcal{O}(X) \cong R\). 更一般地，若 \(X_f\) 是 \(X\) 中某个主开集（\(f \in R\)），则 \(\mathcal{O}(X_f)\) 同构于局部化 \(R_f\).
+\end{proposition}
+
+\begin{proof}
+设 \(a/f^l\) 是局部化 \(R_f\) 中的元素。则由 \(s(Q) = a/f^l \in R_Q\)（\(Q \in X_f\)）定义的映射给出 \(\mathcal{O}(X_f)\) 的元素，且容易看出由此得到的从 \(R_f\) 到 \(\mathcal{O}(X_f)\) 的映射 \(\psi\) 是环同态。设 \(a/f^l = b/f^{l'}\) 在每个 \(Q \in X_f\) 处的 \(R_Q\) 中成立，即对某个 \(g \notin Q\) 有 \(g(af^{l'}-bf^l) = 0\)（在 \(R\) 中）。若 \(I\) 是使 \(r(af^{l'}-bf^l) = 0\) 的元素 \(r \in R\) 构成的理想，则由 \(g \in I\) 可知对任何 \(Q \in X_f\)，\(I\) 都不包含在 \(Q\) 中。换一种说法，包含 \(I\) 的每个素理想也都包含 \(f\)，故 \(f\) 含在所有包含 \(I\) 的素理想的交中，即 \(f \in \operatorname{rad}I\). 于是 \(f^N \in I\)（某个 \(N \geq 1\)），即 \(f^N(af^{l'}-bf^l) = 0\)，故在 \(R_f\) 中 \(a/f^l = b/f^{l'}\). 这表明 \(\psi\) 是单射。\(\psi\) 的满射性由结构层的定义（局部地由 \(R\) 的元素之商给出）推出，细节留作习题。
+\end{proof}
+
+\begin{definition}
+若 \(P \in X = \operatorname{Spec}R\)，则环 \(\mathcal{O}(U)\) 在 \(P\) 处沿包含 \(P\) 的开集 \(U\) 的\textbf{正向极限} \(\varinjlim_{P \in U}\mathcal{O}(U)\) 称为结构层 \(\mathcal{O}\) 在 \(P\) 处的\textbf{茎}，记作 \(\mathcal{O}_P\).
+\end{definition}
+
+\begin{proposition}\label{pro:15.58}
+设 \(X = \operatorname{Spec}R\)，\(\mathcal{O} = \mathcal{O}_X\) 是其结构层。则 \(\mathcal{O}\) 在 \(P\) 处的茎同构于局部化 \(R_P\)：\(\mathcal{O}_P \cong R_P\).
+\end{proposition}
+
+命题 58 表明对 \(P \in \operatorname{Spec}R\)，代数上定义的局部化 \(R_P\) 具有纯粹的层论解释。命题 58 还给出 \(\operatorname{Spec}R\) 上结构层的一个漂亮的几何图景：在每个点 \(P\) 处的「纤维」是 \(R_P\)，而在主开集 \(X_f\) 上的截面是 \(R_f\)（命题 57），这些纤维与局部截面由限制映射粘合起来（图略，参见原书）。
+
+\begin{definition}
+设 \(R\) 是含 1 的交换环。由 \(\operatorname{Spec}R\) 与其结构层构成的对 \((\operatorname{Spec}R, \mathcal{O}_{\operatorname{Spec}R})\) 称为 \(R\) 的\textbf{仿射概形}。
+\end{definition}
+
+\noindent\textbf{例}
+
+（1）\(\operatorname{Spec}\mathbb{Z}\) 的仿射概形：其点是 \((0)\) 与各 \((p)\)，结构层在各点处的茎分别是 \(\mathbb{Q}\) 与 \(\mathbb{Z}_{(p)}\).
+
+（2）若 \(k\) 是代数闭域，则 \(\operatorname{Spec}k[x]\) 的仿射概形在每个闭点 \((x-a)\) 处的茎是 \(k[x]\) 在极大理想 \((x-a)\) 处的局部化，即在 \(a\) 处正则的有理函数环；在一般点 \((0)\) 处的茎是 \(k(x)\).
+
+由命题 56（7），每个环同态 \(\varphi : R \to S\) 诱导出连续映射 \(\varphi^* : Y = \operatorname{Spec}S \to X = \operatorname{Spec}R\)，且主开集的原像是主开集。此外，沿 \(\varphi^*\) 可以把 \(X\) 上的截面拉回到 \(Y\) 上，这给出同态 \(\varphi^{\#} : \mathcal{O}_X(U) \to \mathcal{O}_Y((\varphi^*)^{-1}(U))\)（参见习题 20）。
+
+\begin{definition}
+设 \((\operatorname{Spec}R, \mathcal{O}_X)\) 与 \((\operatorname{Spec}S, \mathcal{O}_Y)\) 是仿射概形。一个\textbf{概形态射}（从 \((\operatorname{Spec}S, \mathcal{O}_Y)\) 到 \((\operatorname{Spec}R, \mathcal{O}_X)\)）由连续映射 \(\varphi^* : \operatorname{Spec}S \to \operatorname{Spec}R\) 连同与限制映射相容的层同态 \(\varphi^{\#} : \mathcal{O}_X \to \varphi^*_*\mathcal{O}_Y\) 组成。
+\end{definition}
+
+\begin{theorem}\label{thm:15.59}
+每个环同态 \(\varphi : R \to S\) 都诱导出一个概形态射
+\[
+(\varphi^*, \varphi^{\#}) : (\operatorname{Spec}S, \mathcal{O}_Y) \to (\operatorname{Spec}R, \mathcal{O}_X).
+\]
+反之，每个概形态射 \((\operatorname{Spec}S, \mathcal{O}_Y) \to (\operatorname{Spec}R, \mathcal{O}_X)\) 都由某个环同态 \(\varphi : R \to S\) 诱导。因此在仿射概形与交换环之间存在范畴等价（反变）。
+\end{theorem}
+
+定理 59 是 \(\operatorname{Spec}R\) 情形的定理 6 的类似物，定理 6 把几何态射翻译为环同态。定理 59 表明在概形的层次上，态射的定义必须包含层的部分：\(\operatorname{Spec}R\) 上的连续映射不足以决定环同态（参见例子）。
+
+\noindent\textbf{例}
+
+设 \(k\) 是代数闭域，考虑 \(R = k[x]\) 与 \(S = k[x,y]\). 包含 \(\varphi : k[x] \to k[x,y]\) 诱导出 \(\varphi^* : \operatorname{Spec}k[x,y] \to \operatorname{Spec}k[x]\)，即把素理想 \((x-a,y-b)\) 映到 \((x-a)\)、把 \((0)\) 映到 \((0)\)、把其他素理想映到相应的素理想。这个映射在闭点上的纤维正是 \(\mathbb{A}^2\) 到 \(\mathbb{A}^1\) 的通常投影（参见习题 5、13）。
+
+\subsection*{习题}
+
+所有环都假设是含单位元的交换环，所有环同态都假设把单位元映到单位元。
+
+\begin{enumerate}
+\item 若 \(N\) 是 \(R\) 的幂零根，证明 \(\operatorname{Spec}R\) 与 \(\operatorname{Spec}(R/N)\) 同胚。〔证明从 \(R\) 到 \(R/N\) 的自然同态诱导出从 \(\operatorname{Spec}(R/N)\) 到 \(\operatorname{Spec}R\) 的 Zariski 连续同构。〕
+
+\item 设 \(I\) 是环 \(R\) 中的理想。证明由典范投射同态 \(R \to R/I\) 诱导的从 \(\operatorname{Spec}(R/I)\) 到 \(\operatorname{Spec}R\) 的连续映射把 \(\operatorname{Spec}(R/I)\) 同胚地映到 \(\operatorname{Spec}R\) 中的闭集 \(Z(I)\).
+
+\item 证明两个元素 \(f, g \in R\) 在 \(\operatorname{Spec}R\) 的所有元素 \(P\) 处取值相同当且仅当 \(f-g\) 含在 \(R\) 的幂零根中。特别地，证明仿射 \(k\)-代数中的元素由它的值唯一确定。
+
+\item 设 \(k\) 是任意域（不必代数闭）。证明 \(k[x,y]\) 中的素理想（即 \(\operatorname{Spec}k[x,y]\) 的元素）是
+
+（i）\((0)\)；
+
+（ii）\((f)\)，其中 \(f\) 是 \(k[x,y]\) 中的不可约多项式；
+
+（iii）\((p(x), g(x,y))\)，其中 \(p(x)\) 是 \(k[x]\) 中的不可约多项式，\(g(x,y)\) 是 \(k[x,y]\) 中模 \(p(x)\) 不可约的不可约多项式，即 \(g(x,y)\) 在商环 \(k[x,y]/(p(x))\) 中仍不可约。
+
+证明 \(\operatorname{mSpec}k[x,y]\) 由（iii）中的素理想组成。〔利用第 1 节习题 20。〕
+
+\item 设 \(\mathfrak{m} = (p(x), g(x,y))\) 是上一习题中 \(k[x,y]\) 的极大理想。证明 \(K = k[x,y]/\mathfrak{m}\) 是 \(k\) 的代数域扩张，从而 \(k[x,y]\) 也可以看作 \(K[x,y]\) 的子环。若在典范同态 \(k[x,y] \to k[x,y]/\mathfrak{m}\) 下 \(x, y\) 分别映到 \(\alpha, \beta \in K\)，证明 \(\mathfrak{m} = k[x,y] \cap (x-\alpha, y-\beta) \subseteq K[x,y]\).
+
+\item 描述 \(\operatorname{Spec}\mathbb{R}[x]\) 与 \(\operatorname{Spec}\mathbb{C}[x]\) 的元素。描述 \(\operatorname{Spec}\mathbb{Z}_{(2)}[x]\) 的元素，其中 \(\mathbb{Z}_{(2)} = \{a/b \in \mathbb{Q} \mid b \text{ 为奇数}\}\) 是 \(\mathbb{Z}\) 在素理想 \((2)\) 处的局部化。
+
+\item 设 \((f) = (x^5+x+1)\) 在 \(\operatorname{Spec}\mathbb{Z}[x]\) 中，如推论 55 之后的例 3 中那样纤维化在 \(\operatorname{Spec}\mathbb{Z}\) 上。证明在 \((2)\) 上方的纤维中有两个闭点，在 \((5)\) 上方的纤维中有三个闭点，在 \((19)\) 上方的纤维中有四个闭点，在 \((211)\) 上方的纤维中有五个闭点。
+
+\item 设 \((f) = (x^4+1)\) 在 \(\operatorname{Spec}\mathbb{Z}[x]\) 中，如推论 55 之后的例 3 中那样纤维化在 \(\operatorname{Spec}\mathbb{Z}\) 上。证明在 \((2)\) 上方的纤维中有一个闭点，对满足 \(p \equiv 1 \pmod 8\) 的奇素数 \(p\) 在 \((p)\) 上方的纤维中有四个闭点，而对所有其他奇素数 \(p\) 有两个闭点（参见第 14 章第 3 节推论 16）。
+
+\item 证明从 \(\operatorname{Spec}\mathbb{Z}[x]\) 到 \(\operatorname{Spec}\mathbb{Z}\) 的 Zariski 连续映射在 \((p)\) 上方的纤维中的元素与 \(\operatorname{Spec}(\mathbb{Z}[x]\otimes_{\mathbb{Z}}\mathbb{F}_p)\) 的元素同胚。
+
+\item 设 \(X = \operatorname{Spec}R\)，\(X_f\) 是对应于 \(f \in R\) 的主开集。证明 \(X_f \cap X_g = X_{fg}\). 证明 \(X_f = X\) 当且仅当 \(f\) 是 \(R\) 中的单位，且 \(X_f = \varnothing\) 当且仅当 \(f\) 幂零。
+
+\item 若 \(X_f\) 与 \(X_g\) 是 \(X = \operatorname{Spec}R\) 中的主开集，证明开集 \(X_f \cup X_g\) 是闭集 \(Z(I)\) 的补集，其中 \(I = (f,g)\) 是由 \(f\) 与 \(g\) 生成的理想。
+
+\item 证明 \(X = \operatorname{Spec}R\) 的 Zariski 开子集 \(U\) 拟紧当且仅当 \(U\) 是有限多个主开子集的并。举出一个环 \(R\)、\(\operatorname{Spec}R\) 的一个 Zariski 开子集 \(U\) 以及 \(U\) 的一个 Zariski 开覆盖的例子，使这个覆盖不能约化为有限子覆盖。
+
+\item 设 \(\varphi : R \to S\) 是环同态。证明在诱导映射 \(\varphi^* : Y = \operatorname{Spec}S \to X = \operatorname{Spec}R\) 下，\(X\) 中主开集 \(X_f\) 的完全原像是 \(Y\) 中的主开集 \(Y_{\varphi(f)}\).
+
+\item 设 \(R = R_1 \times R_2\) 是环 \(R_1\) 与 \(R_2\) 的直积。证明 \(X = \operatorname{Spec}R\) 是两个开子空间 \(X_1, X_2\)（从而也是闭子空间）的不交并，其中 \(X_1\) 同胚于 \(\operatorname{Spec}R_1\)，\(X_2\) 同胚于 \(\operatorname{Spec}R_2\).
+
+\item 证明 \(X = \operatorname{Spec}R\) 不连通当且仅当 \(R\) 是两个非零环的直积，当且仅当 \(R\) 含有幂等元 \(e \neq 0, 1\)（参见上一习题）。
+
+\item 证明 \(X = \operatorname{Spec}R\) 不可约（即任何两个非空开子集都有非平凡交）当且仅当对任何两个非空主开集 \(X_f\) 与 \(X_g\) 有 \(X_f \cap X_g \neq \varnothing\). 由此证明 \(X = \operatorname{Spec}R\) 不可约当且仅当 \(R\) 的幂零根是素理想。〔利用习题 10。〕
+
+\item 设 \(G = \langle\sigma\rangle\) 是 2 阶群，\(R = \mathbb{Z}[G] = \{a+b\sigma \mid a, b \in \mathbb{Z}\}\) 是相应的群环，\(X = \operatorname{Spec}R\).
+
+（a）证明 \(R\) 的幂零根是 \((0)\) 但它不是素理想。证明 \(X = X^+ \cup X^-\)，其中 \(X^+ = Z(1-\sigma)\)、\(X^- = Z(1+\sigma)\).〔利用 \((1+\sigma)(1-\sigma) = 0\).〕
+
+（b）证明把 \(\sigma\) 映到 1 的同态 \(\mathbb{Z}[G] \to \mathbb{Z}\) 诱导出 \(X^+\) 与 \(\operatorname{Spec}\mathbb{Z}\) 的同胚，而把 \(\sigma\) 映到 \(-1\) 的同态诱导出 \(X^-\) 与 \(\operatorname{Spec}\mathbb{Z}\) 的同胚。
+
+（c）证明 \(X^+ \cap X^-\) 由单个元素 \(\mathfrak{m} = (1+\sigma, 1-\sigma) = (2, 1-\sigma)\) 组成，且这是 \(X\) 中的闭点。
+
+（d）证明 \((1-\sigma)\) 与 \((1+\sigma)\) 是 \(X\) 中唯一的非闭点，其闭包分别是 \(X^+\) 与 \(X^-\). 描述闭点 \(\operatorname{mSpec}R\)，并证明 \(X = \operatorname{Spec}\mathbb{Z}[\langle\sigma\rangle]\) 可以描绘为原书中的图形（图略）。
+
+\item 设 \(\mathcal{O}\) 是 \(X = \operatorname{Spec}R\) 上的结构层，\(U\) 是 \(X\) 中的开集，\(s, t \in \mathcal{O}(U)\). 若在 \(X_{f_1}\) 上 \(s = a/f_1^n\)、在 \(X_{f_2}\) 上 \(t = b/f_2^m\)，证明在 \(X_{f_1f_2}\) 上
+\[
+st = \frac{abf_1^mf_2^n}{(f_1f_2)^{n+m}}, \qquad s+t = \frac{af_2^n+b f_1^m}{(f_1f_2)^{\max(n,m)}}
+\]
+由此证明 \(\mathcal{O}(U)\) 是含单位元的交换环。
+
+\item 设 \(\mathcal{O}\) 是 \(X = \operatorname{Spec}R\) 上的结构层，\(V \subseteq U\) 是 \(X\) 中的开集，\(s \in \mathcal{O}(U)\). 设 \(P \in V\)，且 \(s = a/f^n\) 在 \(X_f \subseteq U\) 上成立。
+
+（a）证明存在包含 \(P\) 的主开集 \(X_{f'} \subseteq V \cap X_f\).
+
+（b）证明对某个 \(b \in R\) 有 \((f')^m = bf\).
+
+（c）证明在 \(X_{f'}\) 上 \(s = (abf^{m-1})/(f')^{mn}\)，并由此把 \(s\) 限制到 \(V\) 给出良定义的从 \(\mathcal{O}(U)\) 到 \(\mathcal{O}(V)\) 的环同态。
+
+\item 设 \(\varphi : R \to S\) 是环同态，\(X = \operatorname{Spec}R\)，\(Y = \operatorname{Spec}S\)，\(V \subseteq U\) 是 \(X\) 的 Zariski 开子集。令 \(V' = (\varphi^*)^{-1}(V)\)、\(U' = (\varphi^*)^{-1}(U)\)，它们是 \(Y\) 中相对于由 \(\varphi\) 诱导的连续映射 \(\varphi^* : Y \to X\) 的相应 Zariski 开子集。证明诱导的截面映射 \(\varphi^{\#} : \mathcal{O}_X(U) \to \mathcal{O}_Y(U')\) 是环同态。证明 \(V' \subseteq U'\)，且 \(\varphi^{\#}\) 与限制映射相容，即原书中的相应图表交换。
+
+\item 设 \(D\) 是 \(R\) 的乘法封闭子集。证明局部化同态 \(R \to D^{-1}R\) 诱导出从 \(\operatorname{Spec}(D^{-1}R)\) 到满足 \(P \cap D = \varnothing\) 的 \(R\) 的素理想 \(P\) 之集的同胚。
+
+\item 证明 \(\operatorname{Spec}k[x,y]/(xy)\) 连通，但它是两个真闭子集的并，其中每一个都同胚于 \(\operatorname{Spec}k[x]\)，因此它不可约（参见习题 16）。
+
+\item 对下列每个环 \(R\)，写出 \(\operatorname{Spec}R\) 的元素、\(\operatorname{Spec}R\) 中的开集、\(\operatorname{Spec}R\) 的每个开集 \(U\) 上结构层的截面 \(\mathcal{O}(U)\)，以及每个点 \(P \in \operatorname{Spec}R\) 处的茎 \(\mathcal{O}_P\)：
+
+（a）\(\mathbb{Z}/4\mathbb{Z}\)；（b）\(\mathbb{Z}/6\mathbb{Z}\)；（c）\(\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/3\mathbb{Z}\)；（d）\(\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}\).
+
+\item （a）若 \(R\) 的每个理想都是主理想，证明 \(\operatorname{Spec}R\) 中每个开集都是主开集。
+
+（b）证明若 \(R = \mathbb{Z}[x]/(4, x^2)\)，则 \(R\) 含有非主理想，但 \(\operatorname{Spec}R\) 中每个开集都是主开集。
+
+\item （a）若 \(M\) 是 \(R\)-模，证明 \(\operatorname{Supp}(M)\) 是 \(\operatorname{Spec}R\) 的 Zariski 闭子集。〔利用第 4 节习题 33。〕
+
+（b）若 \(M\) 是有限生成 \(R\)-模，证明 \(\operatorname{Supp}(M) = Z(\operatorname{Ann}(M)) \subseteq \operatorname{Spec}R\).〔利用第 4 节习题 34。〕
+
+\item 设 \(M\) 是诺特环 \(R\) 上的有限生成模。
+
+（a）证明只有有限多个包含 \(\operatorname{Ann}(M)\) 的极小素理想 \(P_1, \ldots, P_n\).〔利用推论 22。〕
+
+（b）证明 \(\{P_1, \ldots, P_n\}\) 也是 \(\operatorname{Ass}_R(M)\) 中极小素理想之集，且 \(\operatorname{Supp}(M)\) 是 \(\operatorname{Spec}R\) 中 Zariski 闭集 \(Z(P_1), \ldots, Z(P_n)\) 的并。〔利用上一习题与第 4 节习题 40。〕
+
+\noindent 上一习题给出诺特环 \(R\) 上有限生成模 \(M\) 的几何图景：在 \(\operatorname{Spec}R\) 的每个点 \(P\) 上方是局部化 \(M_P\)（\(P\) 处的茎）。这个茎恰在使 \(P_i\) 为 \(\operatorname{Ass}_R(M)\) 中极小素理想的那两个 Zariski 闭子集 \(Z(P_1), \ldots, Z(P_n)\) 的点处非零。这些想法引出与 \(M\) 相关联的 \(\operatorname{Spec}R\) 上（凝聚）模层的概念（其图景类似于命题 58 之后的结构层），这是现代代数几何中有力的工具。
+
+\item 设 \(R = k[x,y]\)，\(M\) 是 \(R\) 中的理想 \((x,y)\). 证明 \(\operatorname{Supp}(M) = \operatorname{Spec}R\) 且 \(\operatorname{Ass}_R(M) = \{(0)\}\).
+
+\noindent 下面两个习题表明诺特环 \(R\) 中理想 \(I\)（在准素分解意义下）的相伴素理想就是 \(I\)（在 \(\operatorname{Ass}_R(R/I)\) 意义下）的相伴素理想。
+
+\item 本习题证明诺特环 \(R\) 中的理想 \(Q\) 是 \(P\)-准素的当且仅当 \(\operatorname{Ass}_R(R/Q) = \{P\}\).
+
+\item 设 \(I = Q_1 \cap \cdots \cap Q_n\) 是诺特环 \(R\) 中理想 \(I\) 的极小准素分解。
+
+（a）证明 \(\operatorname{Ass}_R(R/I) = \{\operatorname{rad}Q_1, \ldots, \operatorname{rad}Q_n\}\).
+
+（b）由此推出第 1 节习题 35 中的结论在 \(M = R/I\) 的情形成立。
+
+\item 设 \(I\) 是 \(R = k[x,y,z]\) 中的理想 \((x^2, xy, xz, yz)\). 证明 \(\operatorname{Ass}_R(R/I)\) 由 \((x)\) 与 \((x,y,z)\) 组成，并从准素分解的角度解释这一点。
+
+\item （\textbf{二次整数环的 Spec}）设 \(R\) 是二次域 \(K = \mathbb{Q}(\sqrt{D})\)（\(D\) 无平方因子）的整数环，\(X = \operatorname{Spec}R\). 证明 \(X\) 的元素可以描绘为纤维化在 \(\operatorname{Spec}\mathbb{Z}\) 上的图（图略）：每个有理素数 \(p\) 上方的纤维包含一个、两个或三个闭点，取决于 \(p\) 在 \(\mathcal{O}_K\) 中如何分解（分别为惯性、分裂、分歧）。特别地，证明 \(X\) 的一般点 \((0)\) 在 \(X\) 中稠密。
+\end{enumerate}

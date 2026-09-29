@@ -1,0 +1,421 @@
+\setcounter{chapter}{-1}
+
+
+\chapter{预备知识}
+
+本节收集了贯穿全书的一些结果和记号，以方便使用。学生可能希望先快速浏览本章，然后在课程进行过程中再仔细阅读每个部分。
+
+\section{基本概念}
+
+
+集合论的基本概念：集合、$\in$、$\cup$、$\cap$等，读者应该已经熟悉。我们用以下记号表示给定集合$A$的子集：
+\[ B = \{ a \in A \mid \text{...（关于$a$的条件）...} \} \]
+
+集合$A$的\textbf{阶}或\textbf{基数}记为$|A|$。如果$A$是有限集，其阶就是$A$中元素的个数。
+
+理解如何判断某个$x \in A$是否属于$A$的子集$B$很重要（参见习题1-4）。两个集合$A$和$B$的\textbf{笛卡尔积}是
+$ A \times B = \{ (a, b) \mid a \in A, b \in B \} $
+，即由$A$和$B$中元素组成的有序对集合。
+
+我们将使用以下记号表示一些常见的数集：
+\begin{enumerate}[label=(\arabic*)] 
+\item $\mathbb{Z} = \{0, \pm 1, \pm 2, \pm 3, \ldots\}$表示\textbf{整数}（$\mathbb{Z}$来自德语中表示"数"的词：\textit{Zahlen}）。
+\item $\mathbb{Q} = \{ a/b \mid a, b \in \mathbb{Z}, b \neq 0 \}$表示\textbf{有理数}。
+\item $\mathbb{R} = \{ \text{所有小数展开式} \pm d_1d_2\ldots d_n.a_1a_2a_3\ldots \}$表示\textbf{实数}。
+\item $\mathbb{C} = \{ a + bi \mid a, b \in \mathbb{R}, i^2 = -1 \}$表示\textbf{复数}。
+\item $\mathbb{Z}^+$、$\mathbb{Q}^+$和$\mathbb{R}^+$将分别表示$\mathbb{Z}$、$\mathbb{Q}$和$\mathbb{R}$中的正（非零）元素。
+\end{enumerate}
+
+我们将使用$f: A \to B$或$A \xrightarrow{f} B$表示从$A$到$B$的函数$f$，$f$在$a$处的值记为$f(a)$（即我们将所有函数作用在左边）。我们交替使用"函数"和"映射"这两个词。集合$A$称为$f$的定义域，$B$称为$f$的陪域。记号$f: a \mapsto b$或$a \mapsto b$表示$f(a) = b$，即函数在元素上被指定。
+
+如果函数$f$没有在元素上被指定，通常需要检查$f$是否\textbf{良定义}，即是否无歧义地确定。例如，如果集合$A$是两个子集$A_1$和$A_2$的并集，那么可以尝试通过声明$f$将$A_1$中的所有元素映射到$0$，将$A_2$中的所有元素映射到$1$来指定从$A$到集合$\{0, 1\}$的函数。除非$A_1$和$A_2$有公共元素（在这种情况下不清楚这些元素应该映射到$0$还是$1$），否则这无歧义地定义了$f$。因此，检查这个$f$是否良定义就相当于检查$A_1$和$A_2$没有交集。
+
+集合
+\[ f(A) = \{ b \in B \mid b = f(a), \text{对某个} a \in A \} \]
+是$B$的子集，称为$f$的\textbf{值域}或\textbf{像}（或$A$在$f$下的像）。对于$B$的每个子集$C$，集合
+\[ f^{-1}(C) = \{ a \in A \mid f(a) \in C \} \]
+由在$f$下映射到$C$的$A$的元素组成，称为$C$在$f$下的\textbf{原像}或\textbf{逆像}。对于每个$b \in B$，$\{b\}$在$f$下的原像称为$f$在$b$上的\textbf{纤维}。注意$f^{-1}$通常不是函数，并且$f$的纤维通常包含许多元素，因为可能有许多$A$的元素映射到元素$b$。
+
+如果$f: A \to B$且$g: B \to C$，则复合映射$g \circ f: A \to C$定义为
+\[ (g \circ f)(a) = g(f(a)) \]
+
+设$f: A \to B$.
+\begin{enumerate}[label=(\arabic*)] 
+\item $f$是\textbf{单的}或\textbf{单射}，如果当$a_1 \neq a_2$时，有$f(a_1) \neq f(a_2)$.
+\item $f$是\textbf{满的}或\textbf{满射}，如果对所有的$b \in B$，存在某个$a \in A$使得$f(a) = b$，即$f$的像就是$B$。注意，由于函数总是映射到其值域（根据定义），因此为了使满射性问题有意义，必须指定陪域$B$。
+\item $f$是\textbf{双射}，如果它既是单射又是满射。如果存在这样的双射$f$从$A$到$B$，我们说$A$和$B$存在\textbf{双射对应关系}。
+\item $f$有\textbf{左逆}，如果存在函数$g: B \to A$使得$g \circ f: A \to A$是$A$上的恒等映射，即$(g \circ f)(a) = a$，对所有$a \in A$。
+\item $f$有\textbf{右逆}，如果存在函数$h: B \to A$使得$f \circ h: B \to B$是$B$上的恒等映射。
+\end{enumerate}
+
+\begin{proposition}
+\label{pro:0-1}
+设$f: A \to B$.
+\begin{enumerate}[label=(\arabic*)]
+\item 映射$f$是单射当且仅当$f$有左逆。
+\item 映射$f$是满射当且仅当$f$有右逆。
+\item 映射$f$是双射当且仅当存在$g: B \to A$使得$f \circ g$是$B$上的恒等映射且$g \circ f$是$A$上的恒等映射。
+\item 如果$A$和$B$是具有相同元素个数的有限集（即$|A| = |B|$），则$f: A \to B$是双射当且仅当$f$是单射当且仅当$f$是满射。
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+见习题。
+\end{proof}
+
+在上述命题的第(3)部分的情况下，映射$g$必然是唯一的，我们称$g$是$f$的\textbf{两侧逆}（或简称\textbf{逆}）。
+
+集合$A$的\textbf{置换}简单地是从$A$到其自身的双射。
+
+如果$A \subseteq B$且$f: B \to C$，我们用$f|_A$表示$f$在$A$上的\textbf{限制}。当考虑的定义域被理解时，我们偶尔会将$f|_A$再次简单地表示为$f$，尽管这些在形式上是不同的函数（它们的定义域不同）。
+
+如果$A \subseteq B$且$g: A \to C$，并且存在函数$f: B \to C$使得$f|_A = g$，我们说$f$是$g$到$B$的\textbf{延拓}（这样的映射$f$可能不存在或不唯一）。
+\begin{enumerate}[label=(\arabic*)]
+\item 设$A$是非空集合。$A$上的二元关系是$A \times A$的子集$R$，我们写$a \sim b$如果$(a, b) \in R$。
+    
+\item $A$上的关系$\sim$被称为：
+\begin{enumerate}[label=(\alph*)]
+\item 自反的，如果对所有的$a \in A$，有$a \sim a$，
+\item 对称的，如果$a \sim b$蕴含$b \sim a$，对所有$a, b \in A$，
+\item 传递的，如果$a \sim b$且$b \sim c$蕴含$a \sim c$，对所有$a, b, c \in A$。
+        \end{enumerate}
+        关系是等价关系，如果它是自反的、对称的和传递的。
+    
+    \item 如果$\sim$定义了$A$上的等价关系，则$a \in A$的等价类定义为$\{ x \in A \mid x \sim a \}$。等价类$a$的元素被称为与$a$等价。如果$C$是等价类，$C$的任何元素都称为类$C$的代表元。
+    
+    \item $A$的划分是$A$的非空子集的集合$\{ A_i \mid i \in I \}$（$I$是某个索引集），使得
+        \begin{enumerate}[label=(\alph*)]
+            \item $A = \bigcup_{i \in I} A_i$，且
+            \item $A_i \cap A_j = \emptyset$，对所有$i, j \in I$且$i \neq j$
+        \end{enumerate}
+        即$A$是划分中集合的不相交并。
+\end{enumerate}
+
+
+等价关系和划分的概念是相同的：
+
+命题2. 设$A$是非空集合。
+(1) 如果$\sim$定义了$A$上的等价关系，则$\sim$的等价类集合形成$A$的划分。
+(2) 如果$\{ A_i \mid i \in I \}$是$A$的划分，则存在$A$上的等价关系，其等价类恰好是集合$A_i$，$i \in I$。
+
+证明：略。
+
+最后，我们假设读者熟悉数学归纳法的证明。
+
+\section*{练习}
+
+在练习1到4中，设$A$是$2 \times 2$实数矩阵的集合。回忆矩阵乘法定义为：
+\[
+\begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} p & q \\ r & s \end{pmatrix} = \begin{pmatrix} ap + br & aq + bs \\ cp + dr & cq + ds \end{pmatrix}
+\]
+设
+\[
+M = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}
+\]
+并设
+\[
+B = \{ X \in A \mid MX = XM \}
+\]
+\begin{enumerate}
+\item     
+确定$A$中的哪些元素属于$B$：
+\[
+\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}, \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}.
+\]
+
+\item 证明如果$P, Q \in B$，则$P + Q \in B$（其中$+$表示矩阵的通常和）。
+\item 证明如果$P, Q \in B$，则$P \cdot Q \in B$（其中$\cdot$表示矩阵的通常乘积）。
+\item 找出$p, q, r, s$的条件，以确定何时$\begin{pmatrix} p & q \\ r & s \end{pmatrix} \in B$.
+    
+\item 确定以下函数$f$是否良定义：
+    \begin{enumerate}
+        \item $f: \mathbb{Q} \to \mathbb{Z}$定义为$f(a/b) = a$。
+        \item $f: \mathbb{Q} \to \mathbb{Q}$定义为$f(a/b) = a^2/b^2$。
+    \end{enumerate}
+    
+    \item 确定函数$f: \mathbb{R}^+ \to \mathbb{Z}$是否良定义，该函数将实数$r$映射到其十进制展开式中小数点右侧的第一个数字。
+    
+    \item 设$f: A \to B$是集合的满射。证明关系
+    \[
+    a \sim b \text{ 当且仅当 } f(a) = f(b)
+    \]
+    是等价关系，其等价类是$f$的纤维。
+\end{enumerate}
+
+
+
+
+\section{整数的性质}
+整数$\mathbb{Z}$的以下性质（许多来自初等算术）将在第8章的环论中更一般地证明，但在第一部分中需要使用它们（当然，这些性质的环论证明都不会依赖于群论）。
+
+\begin{enumerate}[label=(\arabic*)]
+\item （$\mathbb{Z}$的良序性）如果$A$是$\mathbb{Z}^+$的任何非空子集，则存在某个元素$m \in A$，使得对所有的$a \in A$，有$m \leq a$（$m$称为$A$的\textbf{极小元}）。
+\item 如果$a, b \in \mathbb{Z}$且$a \neq 0$，我们说$a$\textbf{整除}$b$，如果存在元素$c \in \mathbb{Z}$使得$b = ac$。此时我们写$a \mid b$；如果$a$不整除$b$，我们写$a \nmid b$。
+\item 如果$a, b \in \mathbb{Z} - \{0\}$，则存在唯一的正整数$d$，称为$a$和$b$的\textbf{最大公约数}（或$\text{g.c.d.}$），满足：
+\begin{enumerate}
+\item $d \mid a$且$d \mid b$（因此$d$是$a$和$b$的公约数），且
+\item 如果$e \mid a$且$e \mid b$，则$e \mid d$（因此$d$是最大的这样的除数）。
+\end{enumerate}
+$a$和$b$的最大公约数将记为$(a, b)$。如果$(a, b) = 1$，我们说$a$和$b$\textbf{互质}。
+\item 如果$a, b \in \mathbb{Z} - \{0\}$，则存在唯一的正整数$l$，称为$a$和$b$的\textbf{最小公倍数}（或$\text{l.c.m.}$），满足：
+\begin{enumerate}
+\item $a \mid l$且$b \mid l$（因此$l$是$a$和$b$的公倍数），且
+\item 如果$a \mid m$且$b \mid m$，则$l \mid m$（因此$l$是最小的这样的倍数）。
+\end{enumerate}
+两个整数$a$和$b$的最大公约数$d$与最小公倍数$l$之间的关系由$dl = ab$给出。
+\item \textbf{除法算法}：如果$a, b \in \mathbb{Z} - \{0\}$，则存在唯一的$q, r \in \mathbb{Z}$使得
+\[a = qb + r\quad \text{且}\quad  0 \leq r < |b|,\]
+其中$q$是\textbf{商}，$r$是\textbf{余数}。这是初等算术中熟悉的“长除法”。
+\item 欧几里得算法是一个重要的过程，通过迭代除法算法生成两个整数$a$和$b$的最大公约数：如果$a, b \in \mathbb{Z} - \{0\}$，则我们得到一个商和余数的序列
+
+\begin{align}
+a &= q_0 b + r_0 \tag{0} \\
+b &= q_1 r_0 + r_1 \tag{1} \\
+r_0 &= q_2 r_1 + r_2 \tag{2} \\
+r_1 &= q_3 r_2 + r_3 \tag{3} \\
+&\notag\vdots \\
+r_{n-2} &= q_n r_{n-1} + r_n \tag{n} \\
+r_{n-1} &= q_{n+1} r_n \tag{n+1}
+\end{align}
+其中$r_n$是最后一个非零余数。这样的$r_n$存在，因为如果余数非零，则$|b| > |r_0| > |r_1| > \cdots > |r_n|$是一个严格递减的正整数序列，且这样的序列不能无限继续。此时$r_n$是$a$和$b$的$\text{g.c.d.} \ (a, b)$。
+
+\begin{example}
+假设$a = 57970$且$b = 10353$.应用欧几里得算法我们得到：
+\[
+\begin{aligned}
+57970 &= (5)  10353 + 6205, \\
+10353 &= (1)  6205 + 4148, \\
+6205 &= (1)  4148 + 2057, \\
+4148 &= (2)  2057 + 34, \\
+2057 &= (60)  34 + 17, \\
+34 &= (2)  17,
+\end{aligned}
+\]
+这表明$(57970, 10353) = 17$.
+\end{example}
+
+\item 欧几里得算法的一个我们将经常使用的推论是：如果$a, b \in \mathbb{Z} - \{0\}$，则存在$x, y \in \mathbb{Z}$使得
+\[
+(a, b) = ax + by,
+\]
+即$a$和$b$的最大公约数是$a$和$b$的$\mathbb{Z}$-\textbf{线性组合}。这通过递归地将欧几里得算法中的元素$r_n$表示为之前的余数（即用上面的方程$(n)$解出$r_n = r_{n-2} - q_n r_{n-1}$，用余数$r_{n-1}$和$r_{n-2}$表示，然后用方程$(n-1)$将$r_n$表示为余数$r_{n-2}$和$r_{n-3}$，等等，最终将$r_n$表示为$a$和$b$）得到。
+
+
+
+\begin{example}
+假设$a = 57970$且$b = 10353$，我们上面计算出的最大公约数是$17$.从应用于这两个整数的欧几里得算法的第五个方程（倒数第二个方程）中，我们解出它们的最大公约数：$17 = 2057 - (60)34$.第四个方程则表明$34 = 4148 - (2)2057$，因此将前一个余数$34$的这个表达式代入得到方程$17 = 2057 - (60)[4148 - (2)2057]$，即$17 = (121)2057 - (60)4148$.解第三个方程求$2057$并代入得到$17 = (121)[6205 - (1)4148] - (60)4148 = (121)6205 - (181)4148$。用第二个方程解出$4148$，然后用第一个方程解出$6205$，我们最终得到
+\[
+17 = (302)57970 - (1691)10353
+\]
+这可以直接验证。因此，在这个例子中，$a$和$b$的最大公约数的方程$ax + by = (a, b)$的解是$x = 302$和$y = -1691$。注意，这个关系不太可能仅仅通过猜测找到。
+
+上述(7)中的整数$x$和$y$不是唯一的。在$a = 57970$和$b = 10353$的例子中，我们确定了一个解是$x = 302$和$y = -1691$，例如，很容易验证$x = -307$和$y = 1719$也满足$57970x + 10353y = 17$。$x$和$y$的一般解是已知的（参见下面的练习和第8章）。
+\end{example}
+
+\item 
+$\mathbb{Z}^+$中的元素$p$称为\textbf{素数}，如果$p > 1$且$p$的正因数只有$1$和$p$（最初，素数一词仅指正整数）。
+大于$1$且不是素数的整数称为\textbf{合数}。
+例如，$2,3,5,7,11,13,17,19,\dots$是素数，而$4,6,8,9,10,12,14,15,16,18,\dots$是合数。
+素数的一个重要性质（实际上可以用来定义素数（参见练习3））如下：如果$p$是素数且$p \mid ab$（对某些$a, b \in \mathbb{Z}$），则要么$p \mid a$，要么$p \mid b$。
+
+\item \textbf{算术基本定理}指出：如果$n \in \mathbb{Z}$且$n > 1$，则$n$可以唯一地分解为素数的乘积，即存在不同的素数$p_1, p_2, \ldots, p_s$和正整数$\alpha_1, \alpha_2, \ldots, \alpha_s$，使得
+\[
+n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_s^{\alpha_s}.
+\]
+这种分解的唯一性是指，如果$q_1, q_2, \ldots, q_t$是任意不同的素数，且$\beta_1, \beta_2, \ldots, \beta_t$是正整数，使得
+\[
+n = q_1^{\beta_1} q_2^{\beta_2} \cdots q_t^{\beta_t},
+\]
+则$s = t$，并且如果我们按递增顺序排列这两组素数，那么$q_i = p_i$且$\alpha_i = \beta_i$（$1 \leq i \leq s$）。例如，$n = 1852423848 = 2^3 3^2 11^2 19^3 31$，这种分解为素数乘积的形式是唯一的。
+
+假设正整数$a$和$b$表示为素数幂的乘积：
+\[
+a = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_s^{\alpha_s}, \quad b = p_1^{\beta_1} p_2^{\beta_2} \cdots p_s^{\beta_s}
+\]
+其中$p_1, p_2, \ldots, p_s$互异，且指数$\geq 0$（我们允许指数为$0$，以便乘积在相同的素数集合上取值——如果该素数实际上不是除数，则指数为$0$）。那么$a$和$b$的最大公约数是
+\[
+(a, b) = p_1^{\min(\alpha_1, \beta_1)} p_2^{\min(\alpha_2, \beta_2)} \cdots p_s^{\min(\alpha_s, \beta_s)}
+\]
+（而最小公倍数则是通过取$\alpha_i$和$\beta_i$的最大值而不是最小值得到的）。
+
+\begin{example}
+在上述例子中，$a = 57970$和$b = 10353$可以分解为$a = 2 \cdot 5 \cdot 11 \cdot 17 \cdot 31$和$b = 3 \cdot 7 \cdot 17 \cdot 29$，由此我们可以立即得出它们的最大公约数是$17$。然而，需要注意的是，对于大整数，确定它们的素因子分解是极其困难的（事实上，当前使用的几种常见代码就是基于这种困难），因此这不是确定最大公约数的一般有效方法。欧几里得算法将快速产生最大公约数，而无需对$a$和$b$进行素因子分解。
+\end{example}
+
+\item \textbf{欧拉$\varphi$函数}定义如下：对于$n \in \mathbb{Z}^+$，令$\varphi(n)$是小于或等于$n$且与$n$互素（即$(a, n) = 1$）的正整数$a$的个数。例如，$\varphi(12) = 4$，因为$1, 5, 7$和$11$是小于或等于$12$且与$12$没有公因数的仅有的四个正整数。类似地，$\varphi(1) = 1$，$\varphi(2) = 1$，$\varphi(3) = 2$，$\varphi(4) = 2$，$\varphi(5) = 4$，$\varphi(6) = 2$，等等。对于素数$p$，$\varphi(p) = p - 1$，更一般地，对于所有$a \geq 1$，我们有公式
+\[
+\varphi(p^a) = p^a - p^{a-1} = p^{a-1}(p - 1).
+\]
+函数$\varphi$是可乘的，即
+\[
+\varphi(ab) = \varphi(a)\varphi(b) \quad \text{当} \ (a, b) = 1
+\]
+（注意这里重要的是$a$和$b$互素）。结合上面的公式，这给出了$\varphi$值的一般公式：如果$n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_s^{\alpha_s}$，那么
+\[
+\varphi(n) = \varphi(p_1^{\alpha_1})\varphi(p_2^{\alpha_2}) \cdots \varphi(p_s^{\alpha_s}) = p_1^{\alpha_1 - 1}(p_1 - 1)p_2^{\alpha_2 - 1}(p_2 - 1) \cdots p_s^{\alpha_s - 1}(p_s - 1).
+\]
+例如，$\varphi(12) = \varphi(2^2)\varphi(3) = 2^1(2 - 1)3^0(3 - 1) = 4$.读者应注意，我们将在文本中使用字母$\varphi$表示许多不同的函数，因此当我们想要用这个字母表示欧拉函数时，我们将明确指出这一点。
+\end{enumerate}
+
+\section*{练习}
+\begin{enumerate}
+\item 对于以下每对整数$a$和$b$，确定它们的最大公约数、最小公倍数，并将它们的最大公约数表示为$ax + by$的形式（对某些整数$x$和$y$）。
+\begin{enumerate}
+\item $a = 20, \ b = 13$.
+\item $a = 69, \ b = 372$.
+\item $a = 792, \ b = 275$.
+\item $a = 11391, \ b = 5673$.
+\item $a = 1761, \ b = 1567$.
+\item $a = 507885, \ b = 60808$.
+\end{enumerate}
+\item 证明如果整数$k$整除整数$a$和$b$，则$k$整除$as + bt$，对每一对整数$s$和$t$。
+\item 证明如果$n$是合数，则存在整数$a$和$b$使得$n$整除$ab$但$n$不整除$a$或$b$。
+\item 设$a, b$和$N$是固定的整数，$a$和$b$非零，且$d = (a, b)$是$a$和$b$的最大公约数。假设$x_0$和$y_0$是$ax + by = N$的特定解（即$ax_0 + by_0 = N$）。证明对任意整数$t$，整数
+\[
+x = x_0 + \frac{b}{d} t, \quad y = y_0 - \frac{a}{d} t
+\]
+也是$ax + by = N$的解（这实际上是通解）。
+\item 确定$\varphi(n)$的值，对每个整数$n \leq 30$（其中$\varphi$表示欧拉$\varphi$-函数）。
+\item 用归纳法证明$\mathbb{Z}$的良序性，并证明极小元是唯一的。
+\item 如果$p$是素数，证明不存在非零整数$a$和$b$使得$a^2 = pb^2$（即$\sqrt{p}$不是有理数）。
+\item 设$p$是素数，$n \in \mathbb{Z}^+$。求$p$的最大幂的公式，它整除$n! = n(n-1)(n-2) \cdots 2 \cdot 1$（它涉及最大整数函数）。
+\item 编写一个计算机程序，确定两个整数$a$和$b$的最大公约数$(a, b)$，并将$(a, b)$表示为$ax + by$的形式（对某些整数$x$和$y$）。
+\item 证明对任意给定的正整数$N$，存在有限多个整数$n$使得$\varphi(n) = N$（其中$\varphi$表示欧拉$\varphi$-函数）。特别地，当$n$趋于无穷时，$\varphi(n)$趋于无穷。
+\item 证明如果$d$整除$n$，则$\varphi(d)$整除$\varphi(n)$（其中$\varphi$表示欧拉$\varphi$-函数）。
+\end{enumerate}
+
+
+
+\section{$(\mathbb{Z}/n\mathbb{Z} : \text{整数模}n)$}
+设$n$是一个固定的正整数。
+在$\mathbb{Z}$上定义一个关系：\[a \sim b \text{当且仅当} n \mid (b - a).\]
+显然$a \sim a$，且$a \sim b$蕴含$b \sim a$（对任意整数$a, b$），因此该关系显然是自反和对称的。
+如果$a \sim b$且$b \sim c$，则$n$整除$a - b$和$b - c$，故$n$也整除这两个整数的和，即$n$整除$(a - b) + (b - c) = a - c$，因此$a \sim c$且关系是传递的。
+因此这是一个等价关系。
+记$a \equiv b \pmod{n}$（读作“$a$和$b$在模$n$下相等”/“$a$和$b$模$n$\textbf{同余}”）如果$a \sim b$.
+对于任意$k \in \mathbb{Z}$，$a$的等价类记为$\overline{a}$，称为$a$模$n$的\textbf{同余类}或\textbf{剩余类}，由与$a$相差$n$的整数倍的所有整数组成，即
+\[
+\overline{a} = \{a + kn \mid k \in \mathbb{Z}\} = \{a, a \pm n, a \pm 2n, a \pm 3n, \ldots\}.
+\]
+模$n$恰好有$n$个不同的等价类，即$$\overline{0}, \overline{1}, \overline{2}, \ldots, \overline{n-1},$$由除以$n$后的可能余数确定，这些剩余类划分了整数集$\mathbb{Z}$.
+在等价关系下的等价类集合记为$\mathbb{Z}/n\mathbb{Z}$，称为\textbf{模$n$的整数}）。
+当讨论商群和商环时，这种记法的动机会更清楚。
+注意，对于不同的$n$，等价关系和等价类是不同的，因此在使用上划线记号之前，我们总是先固定$n$. 
+找到整数$a$模$n$的等价类的过程通常称为将$a$\textbf{模$n$约化}。
+这种术语也经常指找到与$a$模$n$同余的最小非负整数（$a$模$n$的\textbf{最小剩余}）。
+
+我们可以在$\mathbb{Z}/n\mathbb{Z}$的元素上定义加法和乘法，定义模运算如下：对于$\overline{a}, \overline{b} \in \mathbb{Z}/n\mathbb{Z}$，定义它们的和与积为
+\[
+\overline{a} + \overline{b} = \overline{a + b}, \quad \overline{a} \cdot \overline{b} = \overline{ab}.
+\]
+这意味着：给定$\mathbb{Z}/n\mathbb{Z}$中的任意两个元素$\overline{a}$和$\overline{b}$，计算它们的和（或积）时，取$\overline{a}$类中的任意代表整数$a$和$\overline{b}$类中的任意代表整数$b$，像在$\mathbb{Z}$中一样相加（或相乘）整数$a$和$b$，然后取包含结果的等价类。下面的定理\ref{thm:0.3.1}断言这是良定义的，即不依赖于为$\mathbb{Z}/n\mathbb{Z}$中的元素$\overline{a}$和$\overline{b}$所选择的代表元。
+
+\begin{example}
+假设$n = 12$，考虑$\mathbb{Z}/12\mathbb{Z}$，它由十二个剩余类$$\overline{0}, \overline{1}, \overline{2}, \ldots, \overline{11}$$组成，由除以12后的十二个可能余数确定。
+例如，剩余类$\overline{5}$中的元素是除以12时余数为5的整数（模12\textbf{同余}于5的整数）。
+任何模12同余于5的整数（如$5, 17, 29, \ldots$或$-7, -19, \ldots$）都可以作为剩余类$\overline{5}$的代表元。
+注意$\mathbb{Z}/12\mathbb{Z}$由上述十二个\textbf{元素}组成（且$\mathbb{Z}/12\mathbb{Z}$的每个元素都包含无限多个通常的整数）。
+
+现在假设$\overline{a} = \overline{5}$，$\overline{b} = \overline{8}$。$\overline{a}$最明显的代表元是整数5，同样8是$\overline{b}$最明显的代表元。使用这些剩余类的代表元，我们得到$5 + 8 = 13 = \overline{1}$，因为13和1在模$n = 12$的同一个类中。如果我们取17作为$\overline{a}$的代表元（注意5和17确实在模12的同一个剩余类中），取$-28$作为$\overline{b}$的代表元，我们会得到$5 + 8 = 17 + (-28) = -11 = \overline{1}$，正如我们提到的，结果不依赖于所选择的代表元。这两个类的积是$\overline{a} \cdot \overline{b} = \overline{5 \cdot 8} = \overline{40} = \overline{4}$，同样不依赖于所选择的代表元。
+\end{example}
+
+\begin{theorem}
+\label{thm:0.3.1}
+上面定义的$\mathbb{Z}/n\mathbb{Z}$上的加法和乘法运算都是良定义的，即它们不依赖于所涉及的类的代表元的选择。更精确地说，如果$a_1, a_2 \in \mathbb{Z}$且$b_1, b_2 \in \mathbb{Z}$，使得$\overline{a_1} = \overline{b_1}$且$\overline{a_2} = \overline{b_2}$，那么$\overline{a_1} + \overline{a_2} = \overline{b_1} + \overline{b_2}$且$\overline{a_1}\overline{a_2} = \overline{b_1}\overline{b_2}$，即如果
+\[
+a_1 \equiv b_1 \pmod{n} \quad \text{且} \quad a_2 \equiv b_2 \pmod{n},
+\]
+那么
+\[
+a_1 + a_2 \equiv b_1 + b_2 \pmod{n} \quad \text{且} \quad a_1a_2 \equiv b_1b_2 \pmod{n}.
+\]
+\end{theorem}
+
+\begin{proof}
+假设$a_1 \equiv b_1 \pmod{n}$，即$a_1 - b_1$能被$n$整除。
+那么有$a_1 = b_1 + sn$，其中$s$为整数。
+类似地，$a_2 \equiv b_2 \pmod{n}$意味着$a_2 = b_2 + tn$，其中$t$为整数。
+那么
+$a_1 + a_2 = (b_1 + b_2) + (s + t)n,$
+所以$a_1 + a_2 \equiv b_1 + b_2 \pmod{n}$，这表明剩余类的和与所选择的代表元无关。
+类似地，$a_1a_2 = (b_1 + sn)(b_2 + tn) = b_1b_2 + (tb_1 + b_2s + stn)n,$意味着$a_1a_2 \equiv b_1b_2 \pmod{n}$
+这表明剩余类的积也与所选择的代表元无关，证毕。
+\end{proof}
+
+我们稍后将看到，通过添加代表元来添加等价类的过程是更一般构造（\textbf{商}的构造）的一个特例。
+这种添加等价类的概念在添加有理数的背景下已经是一个熟悉的了：每个有理数$a/b$实际上是一个类的表达式：$a/b = 2a/2b = -3a/-3b$等，我们经常改变代表元（例如，取公分母）来添加两个分数（例如$1/2 + 1/3$是通过取$1/2$的等价代表元$3/6$和$1/3$的$2/6$来计算$1/2 + 1/3 = 3/6 + 2/6 = 5/6$）.
+模运算的概念也是熟悉的：为了找到添加或减去若干小时后的时间，我们模12约化并找到最小剩余。
+
+重要的是要能够将某种等价关系的等价类视为可以进行操作的元素（就像我们对分数所做的那样）而不是集合。
+与此态度一致，我们经常将$\mathbb{Z}/n\mathbb{Z}$的元素简单地表示为$\{0, 1, \ldots, n-1\}$，其中加法和乘法都取模运算的结果。
+但要记住的是，$\mathbb{Z}/n\mathbb{Z}$的元素不是整数，而是通常整数的集合，并且算术是完全不同的。例如，在整数$\mathbb{Z}$中$5 + 8$不是1，但在$\mathbb{Z}/12\mathbb{Z}$的例子中是1。
+
+能够在$\mathbb{Z}/n\mathbb{Z}$中定义算术在初等数论中有很多重要应用。
+作为一个简单的例子，我们计算$2^{1000}$的最后两位数字。
+首先观察到，最后两位数字给出了$2^{1000}$除以100后的余数，所以我们感兴趣的是包含$2^{1000}$的模100的剩余类。
+我们计算$2^{10} = 1024 \equiv 24 \pmod{100}$，所以$2^{20} = (2^{10})^2 = 24^2 = 576 \equiv 76 \pmod{100}$.
+然后$2^{40} = (2^{20})^2 = 76^2 = 5776 \equiv 76 \pmod{100}$.
+类似地，$2^{80} = 2^{160} = 2^{320} = 2^{640} \equiv 76 \pmod{100}$.最后，$2^{1000} = 2^{640}2^{320}2^{40} = 76 \cdot 76 \cdot 76 = 76 \pmod{100}$，所以最后两位数字是76。
+
+$\mathbb{Z}/n\mathbb{Z}$的一个重要子集是由在$\mathbb{Z}/n\mathbb{Z}$中具有乘法逆元的剩余类组成的集合：
+\[
+(\mathbb{Z}/n\mathbb{Z})^\times = \{\overline{a} \in \mathbb{Z}/n\mathbb{Z} \mid \text{存在 } c \in \mathbb{Z}/n\mathbb{Z} \text{ 使得 } \overline{a} \cdot \overline{c} = \overline{1}\}.
+\]
+下面的部分练习概述了证明$(\mathbb{Z}/n\mathbb{Z})^\times$也是其代表元与$n$互素的剩余类的集合的证明，这证明了以下命题。
+
+\begin{proposition}[$\mathbb{Z}/n\mathbb{Z}$的乘法群]
+\label{prop:0.3.2}
+$(\mathbb{Z}/n\mathbb{Z})^\times = \{\overline{a} \in \mathbb{Z}/n\mathbb{Z} \mid (a, n) = 1\}$。
+\end{proposition}
+
+很容易看出，如果$\overline{a}$的任何代表元与$n$互素，那么所有代表元都与$n$互素，因此命题右边的集合是良定义的。
+
+\begin{example}
+对于$n = 9$，我们得到$(\mathbb{Z}/9\mathbb{Z})^\times = \{\overline{1}, \overline{2}, \overline{4}, \overline{5}, \overline{7}, \overline{8}\}$，根据命题。这些元素的乘法逆元分别是$\{1, 5, 7, 2, 4, 8\}$.
+\end{example}
+
+如果$a$是与$n$互素的整数，那么欧几里得算法产生满足$ax + ny = 1$的整数$x$和$y$，因此$ax \equiv 1 \pmod{n}$，所以$x$是$\overline{a}$在$\mathbb{Z}/n\mathbb{Z}$中的乘法逆元。这给出了在$\mathbb{Z}/n\mathbb{Z}$中计算乘法逆元的有效方法。
+
+\begin{example}
+假设$n = 60$且$a = 17$。应用欧几里得算法我们得到
+
+\[
+\begin{aligned}
+60 &= (3)17 + 9\\ 17 &= (1)9 + 8 \\ 9 &= (1)8 + 1
+\end{aligned}
+\]
+所以$a$和$n$互素，且$(-7)17 + (2)60 = 1$. 
+因此$\overline{-7} \equiv \overline{53}$是$\overline{17}$在$\mathbb{Z}/60\mathbb{Z}$中的乘法逆元。
+\end{example}
+
+
+\section*{练习}
+\begin{enumerate}
+\item 明确写出$\mathbb{Z}/18\mathbb{Z}$中所有剩余类的元素。
+\item 证明$\mathbb{Z}/n\mathbb{Z}$中不同的等价类恰好是$0, 1, 2, \ldots, n-1$（使用除法算法）。
+\item 证明如果$a = a_n 10^n + a_{n-1}10^{n-1} + \cdots + a_1 10 + a_0$是任意正整数，那么$a \equiv a_n + a_{n-1} + \cdots + a_1 + a_0 \pmod{9}$（注意这是通常的算术规则：除以9后的余数与十进制数字之和模9相同——特别地，一个整数能被9整除当且仅当其数字之和能被9整除）[注意$10 \equiv 1 \pmod{9}$]。
+\item 计算$37^{100}$除以29的余数。
+\item 计算$9^{1500}$的最后两位数字。
+\item 证明$\mathbb{Z}/4\mathbb{Z}$中元素的平方只有$\overline{0}$和$\overline{1}$。
+\item 证明对任意整数$a$和$b$，$a^2 + b^2$除以4时余数永远不会是3（使用上一题）。
+\item 证明方程$a^2 + b^2 = 3c^2$在非零整数$a, b, c$中没有解。[考虑模4的情况，如前两题所示，证明$a, b, c$都必须能被2整除。然后$a^2, b^2, c^2$都有因子4，通过除以4，说明原方程会有更小的解集。迭代以得出矛盾。]
+\item 证明任何奇数的平方除以8时余数总是1。
+\item 证明$(\mathbb{Z}/n\mathbb{Z})^\times$的元素个数是$\varphi(n)$，其中$\varphi$表示欧拉$\varphi$函数。
+\item 证明如果$a, b \in (\mathbb{Z}/n\mathbb{Z})^\times$，那么$a \cdot b \in (\mathbb{Z}/n\mathbb{Z})^\times$。
+\item 设$n \in \mathbb{Z}$，$n > 1$，且$a \in \mathbb{Z}$，$1 \leq a \leq n$。证明如果$a$和$n$不互素，则存在整数$b$，$1 \leq b < n$，使得$ab \equiv 0 \pmod{n}$，并由此推断不存在整数$c$使得$ac \equiv 1 \pmod{n}$。
+\item 设$n \in \mathbb{Z}$，$n > 1$，且$a \in \mathbb{Z}$，$1 \leq a \leq n$。证明如果$a$和$n$互素，则存在整数$c$使得$ac \equiv 1 \pmod{n}$；[利用两个整数的最大公约数是它们的$\mathbb{Z}$-线性组合这一事实]。
+\item 由前两题得出$(\mathbb{Z}/n\mathbb{Z})^\times$是$\mathbb{Z}/n\mathbb{Z}$中满足$(a, n) = 1$的元素$a$的集合，从而证明命题\ref{prop:0.3.2}。在$n = 12$的情况下直接验证。
+\item 对下列每对整数$a$和$n$，证明$a$与$n$互素，并确定$a$在$\mathbb{Z}/n\mathbb{Z}$中的乘法逆元。
+
+(a) $a = 13$，$n = 20$.
+
+(b) $a = 69$，$n = 89$.
+
+(c) $a = 1891$，$n = 3797$.
+
+(d) $a = 6003722857$，$n = 77695236973$. 
+[欧几里得算法只需3步即可处理这些整数。]
+\item 
+编写一个计算机程序，用于对任意给定的 $n$（作为输入）进行模 $n$ 的加法和乘法运算。这些运算的结果应为两个整数之和与之积的最小余数。
+另外，如果$(a, n) = 1$，则可以根据请求打印出$1$到$n-1$之间的整数$c$，使得$a \cdot c \equiv 1$. 
+当然，您的程序不应简单地引用许多系统中已内置的“mod”函数）。
+\end{enumerate}

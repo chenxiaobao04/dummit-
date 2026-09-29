@@ -1,0 +1,1921 @@
+
+\setcounter{chapter}{16}
+
+\chapter{同调代数与群上同调引论}
+
+设 \(R\) 是含 1 的环。在第 10.5 节我们看到，\(R\)-模的短正合序列
+\[
+0 \longrightarrow L \xrightarrow{\psi} M \xrightarrow{\varphi} N \longrightarrow 0 \tag{17.1}
+\]
+对任何 \(R\)-模 \(D\) 给出阿贝尔群的正合序列
+\[
+0 \longrightarrow \operatorname{Hom}_R(N, D) \xrightarrow{\varphi'} \operatorname{Hom}_R(M, D) \xrightarrow{\psi'} \operatorname{Hom}_R(L, D), \tag{17.2}
+\]
+而同态 \(\psi'\) 一般不是满射，故这个序列不能总是延拓为短正合序列。等价地，从 \(L\) 到 \(D\) 的同态一般不能提升为从 \(M\) 到 \(D\) 的同态。本章我们介绍「同调代数」的一些技巧，它们提供了以自然方式延拓某些正合序列的方法。对上面的情形，人们得到一个包含「上同调群」\(\operatorname{Ext}_R^n(\_, D)\) 的无限正合序列（参见定理 8），而这些群衡量了从 \(L\) 到 \(D\) 的不能延拓到 \(M\) 的同态之集。然后我们考虑第 10.5 节中另外两个函子的类似问题，即取从 \(D\) 到序列（1）各项的同态，以及把序列（1）与 \(D\) 作张量积。
+
+在随后几节我们集中讨论这类一般同调构造的一个重要特殊情形——\textbf{有限群的上同调}。我们把这个情形中的计算写清楚，并指出这些技巧在群论中建立一些新结果的应用。在这个意义上，第 2--4 节可以看作说明第 1 节一般理论用法的一个显式「例子」。
+
+同调群与上同调群出现在数学的许多领域。同调群与上同调群的形式概念以及同调代数这一领域，起源于 20 世纪中叶代数拓扑中对拓扑空间的高阶同伦群与基本群之间关系的研究，尽管对某些具体上同调群的研究（例如 Schur 关于群扩张的工作，见第 4 节）比这早半个世纪。与代数中许多情形一样，若干不同领域共有的想法被抽象为一般理论。同调与上同调中许多术语反映了它的拓扑起源：同调群、链、闭链、边界等等。
+
+\section{同调代数引论——Ext 与 Tor}
+
+本节我们描述同调代数中的一些一般术语与结果，它们引出所谓\textbf{上同调中的长正合序列}。然后我们定义与序列（2）相关联的某些（上同调）群，并应用一般的同调结果得到在右端延拓这个序列的长正合序列。随后我们指出对「取从 \(D\) 到（1）中各项的同态」以及「把（1）中各项与 \(D\) 作张量积」所得序列的相应展开。
+
+我们先给出正合序列概念的一个推广，即相继映射复合为零（即一个映射的像包含在下一个映射的核中）的阿贝尔群同态序列：
+
+\begin{definition}
+设 \(\mathcal{C}\) 是阿贝尔群同态的序列
+\[
+0 \longrightarrow C^0 \xrightarrow{d^1} C^1 \longrightarrow \cdots \longrightarrow C^{n-1} \xrightarrow{d^n} C^n \xrightarrow{d^{n+1}} \cdots. \tag{17.3}
+\]
+（1）若任意两个相继映射的复合为零：对所有 \(n\) 有 \(d^{n+1}d^n = 0\)，则称序列 \(\mathcal{C}\) 是\textbf{上链复形}。
+
+（2）若 \(\mathcal{C}\) 是上链复形，它的\textbf{第 \(n\) 个上同调群}是商群 \(\ker d^{n+1}/\operatorname{image}d^n\)，记作 \(H^n(\mathcal{C})\)。
+\end{definition}
+
+有一个完全类似的「对偶」版本，其中同态在递减的群之间，此时对应于（3）的序列写作 \(\cdots \to C_n \xrightarrow{d_n} C_{n-1} \to \cdots \to C_0 \to 0\). 若任意两个相继同态的复合为零，则称这个复形为\textbf{链复形}，其\textbf{同调群}定义为 \(H_n(\mathcal{C}) = \ker d_n/\operatorname{image}d_{n+1}\). 对链复形，指标常取为下标且递减；对上链复形，指标取为上标且递增。我们在此对两者的映射采用统一的记号，因为从上下文可以清楚看出是在处理链复形还是上链复形。
+
+链复形最早出现在拓扑背景中，上链复形不久也随之出现。考虑到第 2 节的应用，我们集中讨论上链与上同调，尽管本节所有一般结果对链与同调都有类似的陈述。我们也关心每个 \(C^n\) 是 \(R\)-模、同态 \(d^n\) 是 \(R\)-模同态的情形（简称为 \(R\)-模的复形），此时群 \(H^n(\mathcal{C})\) 也是 \(R\)-模。
+
+注意若 \(\mathcal{C}\) 是上链（分别地，链）复形，则 \(\mathcal{C}\) 是正合序列当且仅当它所有上同调（分别地，同调）群为零。因此第 \(n\) 个上同调（分别地，同调）群衡量复形在第 \(n\) 步处正合性的失效。
+
+\begin{definition}
+设 \(\mathcal{A} = \{A^n\}\) 与 \(\mathcal{B} = \{B^n\}\) 是上链复形。\textbf{复形的同态} \(\alpha : \mathcal{A} \to \mathcal{B}\) 是一族同态 \(\alpha^n : A^n \to B^n\)，使对每个 \(n\) 下图交换：
+\[
+\begin{array}{ccc}
+A^n & \xrightarrow{d^n} & A^{n+1}\\
+\downarrow\alpha^n & & \downarrow\alpha^{n+1}\\
+B^n & \xrightarrow{d^n} & B^{n+1}
+\end{array} \tag{17.4}
+\]
+\end{definition}
+
+\begin{proposition}\label{pro:17.1}
+上链复形的同态 \(\alpha : \mathcal{A} \to \mathcal{B}\) 诱导出它们各自上同调群之间的群同态 \(H^n(\mathcal{A}) \to H^n(\mathcal{B})\)（\(n \geq 0\)）。
+\end{proposition}
+
+\begin{proof}
+容易验证（4）的交换性蕴涵：第一行中各映射的像与核被映到第二行中相应映射的像与核，从而在相应的商（上同调）群上给出良定义的映射。
+\end{proof}
+
+\begin{definition}
+设 \(\mathcal{A} = \{A^n\}\)、\(\mathcal{B} = \{B^n\}\)、\(\mathcal{C} = \{C^n\}\) 是上链复形。\textbf{复形的短正合序列} \(0 \to \mathcal{A} \xrightarrow{\alpha} \mathcal{B} \xrightarrow{\beta} \mathcal{C} \to 0\) 是复形的同态序列，使对每个 \(n\)，\(0 \to A^n \xrightarrow{\alpha^n} B^n \xrightarrow{\beta^n} C^n \to 0\) 是短正合的。
+\end{definition}
+
+上链复形的主要特征之一是它们引出上同调中的长正合序列，这是我们的第一个主要结果：
+
+\begin{theorem}\label{thm:17.2}
+（\textbf{上同调中的长正合序列}）设 \(0 \to \mathcal{A} \xrightarrow{\alpha} \mathcal{B} \xrightarrow{\beta} \mathcal{C} \to 0\) 是上链复形的短正合序列。则存在上同调群的长正合序列
+\[
+0 \to H^0(\mathcal{A}) \to H^0(\mathcal{B}) \to H^0(\mathcal{C}) \xrightarrow{\delta^0} H^1(\mathcal{A}) \to H^1(\mathcal{B}) \to H^1(\mathcal{C}) \xrightarrow{\delta^1} H^2(\mathcal{A}) \to \cdots, \tag{17.5}
+\]
+其中各层上同调群之间的映射就是命题 1 中的那些映射。映射 \(\delta^n\) 称为\textbf{连接同态}。
+\end{theorem}
+
+\begin{proof}
+这个证明的细节有些长。对每个 \(n\)，验证序列 \(H^n(\mathcal{A}) \to H^n(\mathcal{B}) \to H^n(\mathcal{C})\) 正合只需按正合性的定义直接检验，类似于第 10.5 节定理 33 的证明。连接同态 \(\delta^n\) 的构造在习题 2 中概述。然后还需一些工作说明 \(\delta^n\) 是同态，且序列在 \(\delta^n\) 处正合。
+\end{proof}
+
+定理 2 中长正合序列存在的一个直接推论是：若上链复形 \(\mathcal{A}, \mathcal{B}, \mathcal{C}\) 中有两个是正合的，则第三个也是（参见习题 6）。
+
+\noindent\textbf{同态与群 \texorpdfstring{\(\operatorname{Ext}_R^n(A,B)\)}{Ext(A,B)}}
+
+为把定理 2 应用于分析序列（2），我们试图构造一个上链复形，使其长正合序列（5）中最前面的几个上同调群与（2）中的各项一致。为此我们引入 \(R\)-模的「分解」的概念：
+
+\begin{definition}
+设 \(A\) 是任意 \(R\)-模。\(A\) 的\textbf{投射分解}是正合序列
+\[
+\cdots \longrightarrow P_n \xrightarrow{d_n} P_{n-1} \longrightarrow \cdots \longrightarrow P_0 \xrightarrow{\varepsilon} A \longrightarrow 0 \tag{17.6}
+\]
+其中每个 \(P_i\) 是投射 \(R\)-模。
+\end{definition}
+
+每个 \(R\)-模都有投射分解：设 \(P_0\) 是以 \(A\) 的一组生成元为基的自由（从而是投射）\(R\)-模，由第 10 章定理 6 定义从 \(P_0\) 满射到 \(A\) 的 \(R\)-模同态 \(\varepsilon\). 这就开始了分解 \(\varepsilon : P_0 \to A \to 0\). \(\varepsilon\) 的满射性保证这个序列正合。其次令 \(K_0 = \ker\varepsilon\)，取 \(P_1\) 是满射到 \(P_0\) 的子模 \(K_0\) 的任意自由模；这给出第二阶段 \(P_1 \to P_0 \to A\)，按构造也是正合的。如此继续，在第 \(n\) 步取满射到 \(P_n\) 的子模 \(\ker d_n\) 的自由 \(R\)-模 \(P_{n+1}\)，事实上就得到 \(A\) 的自由分解。
+
+在 \(A\) 的分解中使用投射模的原因之一是这使得可以提升各种映射（例如参见下面命题 4 的证明）。
+
+一般地投射分解是无限长的，但若 \(A\) 本身投射，则它有一个非常简单的有限长投射分解，即由 \(A\) 到自身的恒等映射给出的 \(0 \to A \xrightarrow{1} A \to 0\).
+
+给定投射分解（6），我们可以通过取每一项到 \(D\) 的同态得到一个相关序列，注意这会反转同态的方向。这给出序列
+\[
+0 \to \operatorname{Hom}_R(A, D) \xrightarrow{\varepsilon} \operatorname{Hom}_R(P_0, D) \xrightarrow{d_1} \operatorname{Hom}_R(P_1, D) \xrightarrow{d_2} \cdots, \tag{17.7}
+\]
+其中为简化记号，对 \(n \geq 1\) 我们仍用 \(d_n\) 表示从 \(\operatorname{Hom}_R(P_{n-1}, D)\) 到 \(\operatorname{Hom}_R(P_n, D)\) 的诱导映射，对 \(\varepsilon\) 诱导的映射也类似（参见第 10.5 节）。这个序列不必正合，但它是一个上链复形（这是第 10.5 节定理 33 证明的一部分）。相应的上同调群有一个专门的名称。
+
+\begin{definition}
+设 \(A\) 与 \(D\) 是 \(R\)-模。对 \(A\) 的任意投射分解如（6），按（7）令 \(d_n : \operatorname{Hom}_R(P_{n-1}, D) \to \operatorname{Hom}_R(P_n, D)\)（\(n \geq 1\)）。定义
+\[
+\operatorname{Ext}_R^n(A, D) = \ker d_{n+1}/\operatorname{image}d_n,
+\]
+其中 \(\operatorname{Ext}_R^0(A, D) = \ker d_1\). 群 \(\operatorname{Ext}_R^n(A, D)\) 称为从函子 \(\operatorname{Hom}_R(\_, D)\) 导出的第 \(n\) 个上同调群。当 \(R = \mathbb{Z}\) 时群 \(\operatorname{Ext}_{\mathbb{Z}}^n(A, D)\) 也简记作 \(\operatorname{Ext}^n(A, D)\).
+\end{definition}
+
+注意群 \(\operatorname{Ext}_R^n(A, D)\) 也是把（7）中的项 \(\operatorname{Hom}_R(A, D)\) 换为 0（这不影响上链性质）所得上链复形的上同调群，即它们是上链复形 \(0 \to \operatorname{Hom}_R(P_0, D) \to \operatorname{Hom}_R(P_1, D) \to \cdots\) 的上同调群。
+
+下面我们将证明这些上同调群不依赖于 \(A\) 的投射分解的选取。在此之前我们先确定第 0 个上同调群并给出一些例子。
+
+\begin{proposition}\label{pro:17.3}
+对任何 \(R\)-模 \(A\) 有 \(\operatorname{Ext}_R^0(A, D) \cong \operatorname{Hom}_R(A, D)\).
+\end{proposition}
+
+\begin{proof}
+由于序列 \(P_1 \xrightarrow{d_1} P_0 \xrightarrow{\varepsilon} A \to 0\) 正合，由第 10.5 节定理 33（注意该证明开头的说明）相应的序列 \(0 \to \operatorname{Hom}_R(A, D) \xrightarrow{\varepsilon} \operatorname{Hom}_R(P_0, D) \xrightarrow{d_1} \operatorname{Hom}_R(P_1, D)\) 也正合。故 \(\operatorname{Ext}_R^0(A, D) = \ker d_1/\operatorname{image}\varepsilon \cong \operatorname{Hom}_R(A, D)\)，正如所断言。
+\end{proof}
+
+\noindent\textbf{例}
+
+（1）设 \(R = \mathbb{Z}\)，\(A = \mathbb{Z}/m\mathbb{Z}\)（某个 \(m \geq 2\)）。由命题有 \(\operatorname{Ext}_{\mathbb{Z}}^0(\mathbb{Z}/m\mathbb{Z}, D) \cong \operatorname{Hom}_{\mathbb{Z}}(\mathbb{Z}/m\mathbb{Z}, D)\)，由此 \(\operatorname{Ext}_{\mathbb{Z}}^0(\mathbb{Z}/m\mathbb{Z}, D) \cong {}_mD\)，其中 \({}_mD = \{d \in D \mid md = 0\}\) 是 \(D\) 中阶整除 \(m\) 的元素之集。对更高阶上同调群，我们使用 \(A\) 的简单投射分解
+\[
+0 \to \mathbb{Z} \xrightarrow{m} \mathbb{Z} \to \mathbb{Z}/m\mathbb{Z} \to 0
+\]
+（其中第一个映射是乘以 \(m\)）。取到固定 \(\mathbb{Z}\)-模 \(D\) 的同态给出上链复形
+\[
+0 \to \operatorname{Hom}_{\mathbb{Z}}(\mathbb{Z}/m\mathbb{Z}, D) \to \operatorname{Hom}_{\mathbb{Z}}(\mathbb{Z}, D) \xrightarrow{m} \operatorname{Hom}_{\mathbb{Z}}(\mathbb{Z}, D) \to 0 \to \cdots.
+\]
+我们有 \(D \cong \operatorname{Hom}_{\mathbb{Z}}(\mathbb{Z}, D)\)（参见第 10.5 节推论 32 之后的例 4），在这个同构下对任何阿贝尔群 \(D\) 有 \(\operatorname{Ext}_{\mathbb{Z}}^1(\mathbb{Z}/m\mathbb{Z}, D) \cong D/mD\). 由定义与上面的上链复形立即得到对所有 \(n \geq 2\) 与任何阿贝尔群 \(D\) 有 \(\operatorname{Ext}_{\mathbb{Z}}^n(\mathbb{Z}/m\mathbb{Z}, D) = 0\)，我们总结为
+\[
+\operatorname{Ext}_{\mathbb{Z}}^0(\mathbb{Z}/m\mathbb{Z}, D) \cong {}_mD, \qquad \operatorname{Ext}_{\mathbb{Z}}^1(\mathbb{Z}/m\mathbb{Z}, D) \cong D/mD, \qquad \operatorname{Ext}_{\mathbb{Z}}^n(\mathbb{Z}/m\mathbb{Z}, D) = 0\ (n \geq 2).
+\]
+
+（2）同样的阿贝尔群可以看作若干不同环 \(R\) 上的模，而 \(\operatorname{Ext}_R\) 上同调群依赖于 \(R\). 例如设 \(R = \mathbb{Z}/m\mathbb{Z}\)（某个整数 \(m \geq 1\)）。\(R\)-模 \(D\) 与指数整除 \(m\) 的阿贝尔群 \(D\)（即 \(mD = 0\)）相同。特别地，对 \(m\) 的任何因子 \(d\)，群 \(\mathbb{Z}/d\mathbb{Z}\) 是 \(R\)-模，而
+\[
+\cdots \xrightarrow{m} \mathbb{Z}/m\mathbb{Z} \xrightarrow{d} \mathbb{Z}/m\mathbb{Z} \xrightarrow{m} \mathbb{Z}/m\mathbb{Z} \xrightarrow{d} \mathbb{Z}/m\mathbb{Z} \to \mathbb{Z}/d\mathbb{Z} \to 0
+\]
+是 \(\mathbb{Z}/d\mathbb{Z}\) 作为 \(\mathbb{Z}/m\mathbb{Z}\)-模的投射（事实上自由）分解，其中最后一个映射是把 \(x \bmod m\) 映到 \(x \bmod d\) 的自然投射。取到 \(\mathbb{Z}/m\mathbb{Z}\)-模 \(D\) 的同态，利用同构 \(\operatorname{Hom}_{\mathbb{Z}/m\mathbb{Z}}(\mathbb{Z}/m\mathbb{Z}, D) \cong D\)，并去掉第一项，得到上链复形
+\[
+0 \to D \xrightarrow{d} D \xrightarrow{m/d} D \xrightarrow{d} D \xrightarrow{m/d} \cdots.
+\]
+于是
+\[
+\operatorname{Ext}_{\mathbb{Z}/m\mathbb{Z}}^0(\mathbb{Z}/d\mathbb{Z}, D) \cong {}_dD, \qquad \operatorname{Ext}_{\mathbb{Z}/m\mathbb{Z}}^n(\mathbb{Z}/d\mathbb{Z}, D) \cong (m/d)D/dD \ (n \text{ 为奇数}, n \geq 1),
+\]
+\[
+\operatorname{Ext}_{\mathbb{Z}/m\mathbb{Z}}^n(\mathbb{Z}/d\mathbb{Z}, D) \cong {}_dD/(m/d)D \ (n \text{ 为偶数}, n \geq 2),
+\]
+其中 \({}_kD = \{d \in D \mid kd = 0\}\) 表示 \(D\) 中被 \(k\) 零化的元素之集。特别地，对所有 \(n \geq 0\) 有 \(\operatorname{Ext}_{\mathbb{Z}/p^2\mathbb{Z}}^n(\mathbb{Z}/p\mathbb{Z}, \mathbb{Z}/p\mathbb{Z}) \cong \mathbb{Z}/p\mathbb{Z}\)，而对所有 \(n \geq 2\) 有 \(\operatorname{Ext}_{\mathbb{Z}}^n(\mathbb{Z}/p\mathbb{Z}, \mathbb{Z}/p\mathbb{Z}) = 0\).
+
+为证明上同调群 \(\operatorname{Ext}_R^n(A, D)\) 不依赖于 \(A\) 的投射分解的选取，我们需要能够「比较」不同的分解。下一命题表明从 \(A\) 到 \(B\) 的 \(R\)-模同态可以提升为从 \(A\) 的投射分解到 \(B\) 的投射分解的同态——这个提升性质正是分解中模的投射性重要的一个实例。
+
+\begin{proposition}\label{pro:17.4}
+设 \(f : A \to A'\) 是 \(R\)-模的任意同态，分别取 \(A\) 与 \(A'\) 的投射分解。则对每个 \(n \geq 0\) 存在 \(f\) 的提升 \(f_n\)，使下图交换：
+\[
+\begin{array}{ccccccc}
+\cdots & \to & P_1 & \to & P_0 & \to & A \to 0\\
+& & \downarrow f_1 & & \downarrow f_0 & & \downarrow f\\
+\cdots & \to & P'_1 & \to & P'_0 & \to & A' \to 0
+\end{array} \tag{17.8}
+\]
+其中两行分别是 \(A\) 与 \(A'\) 的投射分解。
+\end{proposition}
+
+\begin{proof}
+给定（8）中的两行与映射 \(f\)，由于 \(P_0\) 投射，我们可以把映射 \(f\varepsilon : P_0 \to A'\) 提升为映射 \(f_0 : P_0 \to P'_0\)，使 \(\varepsilon' f_0 = f\varepsilon\)（第 10.5 节命题 30（2））。这给出 \(f\) 的第一个提升。如此归纳进行：假设 \(f_n\) 已定义使图表到这一步交换。则 \(\operatorname{image}f_nd_{n+1} \subseteq \ker d'_n\). \(P_{n+1}\) 的投射性蕴涵我们可以把映射 \(f_nd_{n+1} : P_{n+1} \to P'_n\) 提升为映射 \(f_{n+1} : P_{n+1} \to P'_{n+1}\)，使图表在下一步交换。证明完毕。
+\end{proof}
+
+命题 4 中的交换图表蕴涵相应的图表
+\[
+\begin{array}{ccccccc}
+0 & \to & \operatorname{Hom}_R(A, D) & \to & \operatorname{Hom}_R(P_0, D) & \to & \operatorname{Hom}_R(P_1, D) \to \cdots\\
+& & \downarrow & & \downarrow f_0^* & & \downarrow f_1^*\\
+0 & \to & \operatorname{Hom}_R(A', D) & \to & \operatorname{Hom}_R(P'_0, D) & \to & \operatorname{Hom}_R(P'_1, D) \to \cdots
+\end{array} \tag{17.9}
+\]
+也交换。这个图表的两行是上链复形，而这个交换图表描述了这些上链复形的一个同态。由命题 1，我们在它们的上同调群上得到诱导映射：
+
+\begin{proposition}\label{pro:17.5}
+设 \(f : A \to A'\) 是 \(R\)-模同态，如命题 4 中那样取 \(A\) 与 \(A'\) 的投射分解。则对每个 \(n\)，通过这些分解在上同调群上诱导出群同态 \(\phi^n : \operatorname{Ext}_R^n(A', D) \to \operatorname{Ext}_R^n(A, D)\)，且这些映射 \(\phi^n\) 只依赖于 \(f\)，不依赖于命题 4 中提升 \(f_n\) 的选取。
+\end{proposition}
+
+\begin{proof}
+上同调群 \(\operatorname{Ext}_R^n\) 上映射的存在性由命题 1 应用于上链复形的同态（9）推出。较困难的部分是证明这些映射不依赖于命题 4 中提升 \(f_n\) 的选取。容易看出这等价于证明：若 \(f\) 是零映射，则在上同调群上诱导的映射也都为零。于是设 \(f = 0\). 由模 \(P_i\) 的投射性可以归纳地定义 \(R\)-模同态 \(s_n : P_n \to P'_{n+1}\)，使对所有 \(n\) 有
+\[
+f_n = d'_{n+1}s_n+s_{n-1}d_n, \tag{17.10}
+\]
+故映射 \(s_n\) 给出（8）中各方块的反向下对角箭头。（映射族 \(\{s_n\}\) 称为由 \(f_n\) 给出的链同态与零链同态之间的\textbf{链同伦}，参见习题 4。）取到 \(D\) 的同态，得到带由 \(s_n\) 诱导的附加向上对角箭头的图表（9），而这些诱导同态满足（10）中的关系（即为上链复形同态之间的同伦）。此时容易验证（利用（9）中附加的对角映射）\(\operatorname{Hom}_R(P'_n, D)\) 中代表 \(\operatorname{Ext}_R^n(A', D)\) 中陪集的每个元素都映到 \(\operatorname{Ext}_R^n(A, D)\) 中的零陪集（参见习题 4）。这完成了论证。
+\end{proof}
+
+也可以验证命题 5 中的同态 \(\phi^0 : \operatorname{Ext}_R^0(A', D) \to \operatorname{Ext}_R^0(A, D)\) 在通过命题 3 中的同构把相应的群等同之后，就是第 10.5 节中定义的映射 \(f : \operatorname{Hom}_R(A', D) \to \operatorname{Hom}_R(A, D)\).
+
+\begin{theorem}\label{thm:17.6}
+群 \(\operatorname{Ext}_R^n(A, D)\) 只依赖于 \(A\) 与 \(D\)，即它们不依赖于 \(A\) 的投射分解的选取。
+\end{theorem}
+
+\begin{proof}
+在命题 4 的记号下取 \(A' = A\)，\(f : A \to A'\) 为恒等映射，（8）的两行为 \(A\) 的两个投射分解。对恒等映射的任意提升选择，所得上同调群上的同态 \(\phi^n : \operatorname{Ext}_R^n(A', D) \to \operatorname{Ext}_R^n(A, D)\) 都是同构，理由如下。在图表（8）的第二行下方再复制第一行的投射分解，从而加上第三行。设 \(g\) 是从 \(A'\) 到 \(A\) 的恒等映射，由命题 4 把 \(g\) 提升为映射 \(g_n : P'_n \to P_n\). 设 \(\psi^n : \operatorname{Ext}_R^n(A, D) \to \operatorname{Ext}_R^n(A', D)\) 是所得上同调群上的映射。映射 \(g_n \circ f_n : P_n \to P_n\) 是恒等映射 \(g \circ f\) 的一个提升，它们在上同调群上诱导同态 \(\phi^n \circ \psi^n\). 然而由于第一行与第三行相同，对所有 \(n\) 取 \(P_n\) 到自身的恒等映射是 \(g \circ f\) 的一个特殊提升，而这个选择显然在上同调群上诱导恒等映射。命题 5 的最后一个论断于是蕴涵 \(\phi^n \circ \psi^n\) 也是 \(\operatorname{Ext}_R^n(A, D)\) 上的恒等映射。由对称的论证，\(\psi^n \circ \phi^n\) 是 \(\operatorname{Ext}_R^n(A', D)\) 上的恒等映射。这表明 \(\phi^n\) 与 \(\psi^n\) 是同构，这正是完成证明所需的。
+\end{proof}
+
+对固定的 \(R\)-模 \(D\) 与固定的整数 \(n \geq 0\)，命题 5 与定理 6 表明 \(\operatorname{Ext}_R^n(\_, D)\) 定义了从 \(R\)-模范畴到阿贝尔群范畴的（反变）函子。
+
+下一个结果表明，一个 \(R\)-模 \(M\) 的子模与相应商模的投射分解可以拼在一起给出 \(M\) 的投射分解。
+
+\begin{proposition}\label{pro:17.7}
+（\textbf{同时分解}）设 \(0 \to L \xrightarrow{\psi} M \xrightarrow{\varphi} N \to 0\) 是 \(R\)-模的短正合序列，设 \(L\) 有如上（6）的投射分解，\(N\) 有类似的投射分解（其投射模记作 \(P'_n\)）。则存在 \(M\) 的由投射模 \(P_n \oplus P'_n\) 给出的分解，使下图交换：
+\[
+\begin{array}{ccccccc}
+& & 0 & & 0 & & 0\\
+& & \downarrow & & \downarrow & & \downarrow\\
+0 & \to & P_1 & \to & P_1 \oplus P'_1 & \to & P'_1 \to 0\\
+& & \downarrow & & \downarrow & & \downarrow\\
+0 & \to & P_0 & \to & P_0 \oplus P'_0 & \to & P'_0 \to 0\\
+& & \downarrow & & \downarrow & & \downarrow\\
+0 & \to & L & \to & M & \to & N \to 0\\
+& & \downarrow & & \downarrow & & \downarrow\\
+& & 0 & & 0 & & 0
+\end{array} \tag{17.11}
+\]
+此外，这个图表的行与列都正合，且各行分裂。
+\end{proposition}
+
+\begin{proof}
+（11）中左右两个非零列按假设正合。中间列的模是投射模（参见第 10.5 节习题 3），行映射取为使每一行成为分裂正合序列的显然映射。于是还需定义中间列的竖直映射使图表交换。这可以通过从下往上归纳地直接完成——这个过程的第一个步骤在习题 5 中概述。
+\end{proof}
+
+定理 2 与命题 7 现在给出延拓正合序列（2）的 \(\operatorname{Ext}_R\) 的长正合序列。
+
+\begin{theorem}\label{thm:17.8}
+设 \(0 \to L \xrightarrow{\psi} M \xrightarrow{\varphi} N \to 0\) 是 \(R\)-模的短正合序列。则存在阿贝尔群的长正合序列
+\[
+0 \to \operatorname{Hom}_R(N, D) \to \operatorname{Hom}_R(M, D) \to \operatorname{Hom}_R(L, D) \xrightarrow{\delta^0} \operatorname{Ext}_R^1(N, D) \tag{17.12}
+\]
+\[
+\to \operatorname{Ext}_R^1(M, D) \to \operatorname{Ext}_R^1(L, D) \xrightarrow{\delta^1} \operatorname{Ext}_R^2(N, D) \to \cdots,
+\]
+其中同一层 \(n\) 的群之间的映射如命题 5 中那样，连接同态 \(\delta^n\) 由定理 2 给出。
+\end{theorem}
+
+\begin{proof}
+如命题 7 中那样取这个短正合序列的同时投射分解，并取到 \(D\) 的同态。为从所得图表得到上同调群 \(\operatorname{Ext}_R^n\)，如命题 3 之前的讨论所述，我们把变换后的图表中最下面一个非零行换为零行，得到下面的交换图表：
+\[
+\begin{array}{ccccccc}
+& & 0 & & 0 & & 0\\
+& & \downarrow & & \downarrow & & \downarrow\\
+0 & \to & \operatorname{Hom}_R(P_1, D) & \to & \operatorname{Hom}_R(P_1 \oplus P'_1, D) & \to & \operatorname{Hom}_R(P'_1, D) \to 0\\
+& & \downarrow & & \downarrow & & \downarrow\\
+0 & \to & \operatorname{Hom}_R(P_0, D) & \to & \operatorname{Hom}_R(P_0 \oplus P'_0, D) & \to & \operatorname{Hom}_R(P'_0, D) \to 0\\
+& & \downarrow & & \downarrow & & \downarrow\\
+& & 0 & & 0 & & 0
+\end{array} \tag{17.13}
+\]
+（13）的各列是上链复形，各行由第 10.5 节命题 29（2）及其后的讨论分裂。于是（13）是上链复形的短正合序列。定理 2 给出上同调群的长正合序列，其各项按定义就是群 \(\operatorname{Ext}_R^n(\_, D)\)（\(n \geq 0\)）。第 0 项由命题 3 确定，证明完毕。
+\end{proof}
+
+定理 8 表明正合序列（2）可以如何以自然方式延拓，并表明群 \(\operatorname{Ext}^1(N, D)\) 是（2）在右端正合性失效的第一个度量——事实上（2）在右端可以延拓为短正合序列当且仅当（12）中的连接同态 \(\delta^0\) 是零同态。特别地，若对所有 \(R\)-模 \(N\) 有 \(\operatorname{Ext}^1(N, D) = 0\)，则对每个正合序列（1），（2）在右端都正合。我们已经看到（第 10.5 节推论 35）这意味着 \(R\)-模 \(D\) 是内射的。下一个结果的一部分表明其逆也成立，并用 \(\operatorname{Ext}_R\) 群刻画内射模。
+
+\begin{proposition}\label{pro:17.9}
+对 \(R\)-模 \(Q\)，下述命题等价：
+
+（1）\(Q\) 是内射模；
+
+（2）对所有 \(R\)-模 \(A\) 有 \(\operatorname{Ext}_R^1(A, Q) = 0\)；
+
+（3）对所有 \(R\)-模 \(A\) 与所有 \(n \geq 1\) 有 \(\operatorname{Ext}_R^n(A, Q) = 0\).
+\end{proposition}
+
+\begin{proof}
+我们已在上文证明（2）蕴涵（1），而（3）蕴涵（2）是显然的，故只需证明若 \(Q\) 内射，则对所有 \(R\)-模 \(A\) 与所有 \(n \geq 1\) 有 \(\operatorname{Ext}_R^n(A, Q) = 0\). 取 \(A\) 的投射分解
+\[
+\cdots \longrightarrow P_1 \longrightarrow P_0 \longrightarrow A \longrightarrow 0.
+\]
+由于 \(Q\) 内射，序列 \(0 \to \operatorname{Hom}_R(A, Q) \to \operatorname{Hom}_R(P_0, Q) \to \operatorname{Hom}_R(P_1, Q) \to \cdots\) 仍然正合（第 10.5 节推论 35），故这个上链复形的所有上同调群都是 0. 特别地群 \(\operatorname{Ext}_R^n(A, Q)\)（\(n \geq 1\)）都平凡，即（3）。
+\end{proof}
+
+对固定的 \(R\)-模 \(D\)，定理 8 的结果可以看作解释了短正合序列 \(0 \to L \to M \to N \to 0\) 在应用左正合函子 \(\operatorname{Hom}_R(\_, D)\) 后右端会发生什么。这就是（反变）函子 \(\operatorname{Ext}_R^n(\_, D)\) 被称为函子 \(\operatorname{Hom}_R(\_, D)\) 的\textbf{右导出函子}的原因。
+
+也可以考虑应用左正合函子 \(\operatorname{Hom}_R(D, \_)\) 的效果，即取从 \(D\) 出发而不是到 \(D\) 的同态。下一个定理表明事实上同样是 \(\operatorname{Ext}_R\) 群定义了 \(\operatorname{Hom}_R(D, \_)\) 的（协变）右导出函子。
+
+\begin{theorem}\label{thm:17.10}
+设 \(0 \to L \to M \to N \to 0\) 是 \(R\)-模的短正合序列。则存在阿贝尔群的长正合序列
+\[
+0 \to \operatorname{Hom}_R(D, L) \to \operatorname{Hom}_R(D, M) \to \operatorname{Hom}_R(D, N) \xrightarrow{\delta^0} \operatorname{Ext}_R^1(D, L) \tag{17.14}
+\]
+\[
+\to \operatorname{Ext}_R^1(D, M) \to \operatorname{Ext}_R^1(D, N) \xrightarrow{\delta^1} \operatorname{Ext}_R^2(D, L) \to \cdots.
+\]
+\end{theorem}
+
+\begin{proof}
+取 \(D\) 的投射分解，然后把这个分解分别应用于 \(\operatorname{Hom}_R(\_, L)\)、\(\operatorname{Hom}_R(\_, M)\) 与 \(\operatorname{Hom}_R(\_, N)\)，得到类似于（13）的交换图表（各列），只是 \(L, M, N\) 处于第二个位置而不是第一个位置。对这个阵列应用长正合序列定理即得（14）。
+\end{proof}
+
+定理 10 表明群 \(\operatorname{Ext}_R^1(D, L)\) 衡量正合序列能否延拓为短正合序列——它可以延拓当且仅当 \(\delta^0\) 是零同态。特别地，若模 \(D\) 具有性质「对所有 \(R\)-模 \(B\) 有 \(\operatorname{Ext}_R^1(D, B) = 0\)」，则总是如此；此时由第 10.5 节推论 32 可知 \(D\) 是投射 \(R\)-模。与命题 9 中内射 \(R\)-模的情形一样，这些上同调群的消失事实上刻画了投射 \(R\)-模：
+
+\begin{proposition}\label{pro:17.11}
+对 \(R\)-模 \(P\)，下述命题等价：
+
+（1）\(P\) 是投射模；
+
+（2）对所有 \(R\)-模 \(B\) 有 \(\operatorname{Ext}_R^1(P, B) = 0\)；
+
+（3）对所有 \(R\)-模 \(B\) 与所有 \(n \geq 1\) 有 \(\operatorname{Ext}_R^n(P, B) = 0\).
+\end{proposition}
+
+\begin{proof}
+我们已在上文证明（2）蕴涵（1），而（3）蕴涵（2）是显然的，故只需证明（1）蕴涵（3）。若 \(P\) 是投射 \(R\)-模，则由 \(P\) 上的恒等映射给出的简单正合序列 \(0 \to P \xrightarrow{1} P \to 0\) 是 \(P\) 的投射分解。取到 \(B\) 的同态给出简单的上链复形 \(0 \to \operatorname{Hom}_R(P, B) \xrightarrow{1} \operatorname{Hom}_R(P, B) \to 0 \to \cdots\)，由定义可知对所有 \(n \geq 1\) 有 \(\operatorname{Ext}_R^n(P, B) = 0\)，即（3）。
+\end{proof}
+
+\noindent\textbf{例}
+
+（1）由于 \(\mathbb{Z}^m\) 是自由、从而是投射 \(\mathbb{Z}\)-模，由命题 11 可知对所有阿贝尔群 \(B\)、所有 \(n \geq 1\) 有 \(\operatorname{Ext}_{\mathbb{Z}}^n(\mathbb{Z}^m, B) = 0\).
+
+（2）不难证明对所有 \(n \geq 0\) 有 \(\operatorname{Ext}_R^n(A_1 \oplus A_2, B) \cong \operatorname{Ext}_R^n(A_1, B) \oplus \operatorname{Ext}_R^n(A_2, B)\)（参见习题 10），故上一例连同伴随命题 3 的例一起确定了所有有限生成阿贝尔群 \(A\) 的 \(\operatorname{Ext}_{\mathbb{Z}}^n(A, B)\). 特别地，对所有有限生成群 \(A\)、所有阿贝尔群 \(B\) 与所有 \(n \geq 2\) 有 \(\operatorname{Ext}_{\mathbb{Z}}^n(A, B) = 0\).
+
+我们选择用 \(A\) 的投射分解来定义上同调群 \(\operatorname{Ext}_R^n(A, B)\). 有一个使用 \(B\) 的内射分解的平行展开：\(0 \to B \to Q_0 \to Q_1 \to \cdots\)，其中每个 \(Q_i\) 内射。此时把 \(\operatorname{Ext}_R^n(A, B)\) 定义为把 \(\operatorname{Hom}_R(A, \_)\) 应用于 \(B\) 的分解所得上链序列的第 \(n\) 个上同调群。理论的展开与本节类似。最终可以证明两种方法构造的群 \(\operatorname{Ext}_R^n(A, B)\) 之间存在自然同构。
+
+\noindent\textbf{例}
+
+（1）设 \(R = \mathbb{Z}\)，\(A\) 与 \(B\) 是 \(\mathbb{Z}\)-模，即阿贝尔群。回忆 \(\mathbb{Z}\)-模内射当且仅当它是可除的（第 10.5 节命题 36）。群 \(B\) 可以嵌入内射 \(\mathbb{Z}\)-模 \(Q_0\)（第 10.5 节推论 37），而 \(Q_0\) 模 \(B\) 的像所得商 \(Q_1\) 也内射。于是我们得到 \(B\) 的内射分解 \(0 \to B \to Q_0 \to Q_1 \to 0\). 把 \(\operatorname{Hom}_{\mathbb{Z}}(A, \_)\) 应用于这个序列给出上链复形
+\[
+0 \to \operatorname{Hom}_{\mathbb{Z}}(A, B) \to \operatorname{Hom}_{\mathbb{Z}}(A, Q_0) \to \operatorname{Hom}_{\mathbb{Z}}(A, Q_1) \to 0 \to \cdots,
+\]
+由此立即得到对所有阿贝尔群 \(A, B\) 与所有 \(n \geq 2\) 有 \(\operatorname{Ext}_{\mathbb{Z}}^n(A, B) = 0\)，这表明上一例的结果在 \(A\) 不有限生成时也成立。
+
+（2）设 \(A\) 是挠阿贝尔群。则由于 \(\mathbb{Z}\) 无挠有 \(\operatorname{Ext}_{\mathbb{Z}}^0(A, \mathbb{Z}) \cong \operatorname{Hom}(A, \mathbb{Z}) = 0\). 序列 \(0 \to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0\) 给出 \(\mathbb{Z}\) 的内射分解。应用 \(\operatorname{Hom}(A, \_)\) 给出上链复形 \(0 \to \operatorname{Hom}(A, \mathbb{Z}) \to \operatorname{Hom}(A, \mathbb{Q}) \to \operatorname{Hom}(A, \mathbb{Q}/\mathbb{Z}) \to 0 \to \cdots\)，而由于 \(\mathbb{Q}\) 也无挠，这表明
+\[
+\operatorname{Ext}_{\mathbb{Z}}^1(A, \mathbb{Z}) \cong \operatorname{Hom}_{\mathbb{Z}}(A, \mathbb{Q}/\mathbb{Z}).
+\]
+群 \(\operatorname{Hom}(A, \mathbb{Q}/\mathbb{Z})\) 称为 \(A\) 的 \textbf{Pontriagin 对偶群}。若 \(A\) 是有限阿贝尔群，则 \(A\) 的 Pontriagin 对偶同构于 \(A\)（参见第 5.2 节习题 14）。特别地，对所有非零有限阿贝尔群 \(A\) 有 \(\operatorname{Ext}^1(A, \mathbb{Z}) \cong A \neq 0\). 由上一例，对所有 \(n \geq 2\) 有 \(\operatorname{Ext}^n(A, \mathbb{Z}) = 0\).
+
+我们记录 \(\operatorname{Ext}_R^1\) 的一个重要性质，它有助于解释这些上同调群的名称。回忆等价扩张在第 10.5 节开头定义。
+
+\begin{theorem}\label{thm:17.12}
+对任何 \(R\)-模 \(N\) 与 \(L\)，\(\operatorname{Ext}_R^1(N, L)\) 与由 \(L\) 对 \(N\) 的扩张的等价类之集之间存在双射。
+\end{theorem}
+
+我们不会证明这个结果，但在第 4 节我们将建立类似的由 \(A\) 对 \(G\) 的群扩张的等价类与某个上同调群的元素之间的双射，其中 \(G\) 是任意有限群、\(A\) 是任意 \(\mathbb{Z}G\)-模。
+
+\noindent\textbf{例}
+
+设 \(R = \mathbb{Z}\)、\(A = B = \mathbb{Z}/p\mathbb{Z}\). 我们在上文证明了 \(\operatorname{Ext}_{\mathbb{Z}}^1(\mathbb{Z}/p\mathbb{Z}, \mathbb{Z}/p\mathbb{Z}) \cong \mathbb{Z}/p\mathbb{Z}\)，故由定理 12 恰有 \(p\) 个由 \(\mathbb{Z}/p\mathbb{Z}\) 对 \(\mathbb{Z}/p\mathbb{Z}\) 的扩张的等价类。它们由直和 \(\mathbb{Z}/p\mathbb{Z} \oplus \mathbb{Z}/p\mathbb{Z}\)（对应 \(\operatorname{Ext}_{\mathbb{Z}}^1(\mathbb{Z}/p\mathbb{Z}, \mathbb{Z}/p\mathbb{Z})\) 中的平凡类）以及 \(p-1\) 个扩张
+\[
+0 \to \mathbb{Z}/p\mathbb{Z} \xrightarrow{i} \mathbb{Z}/p^2\mathbb{Z} \xrightarrow{\pi} \mathbb{Z}/p\mathbb{Z} \to 0
+\]
+（由映射 \(i(x) = ix \bmod p\) 定义，\(i = 1, 2, \ldots, p-1\)）给出。注意虽然这些扩张不等价，它们都确定同一个群 \(\mathbb{Z}/p^2\mathbb{Z}\).
+
+\noindent\textbf{张量积与群 \(\operatorname{Tor}_R^n(A,B)\)}
+
+上同调群 \(\operatorname{Ext}_R^n(A, B)\) 确定短正合序列在应用左正合函子 \(\operatorname{Hom}_R(D, \_)\) 与 \(\operatorname{Hom}_R(\_, D)\) 后右端的行为。人们可以类似地询问短正合序列在应用右正合函子 \(D \otimes_R \_\) 或右正合函子 \(\_ \otimes_R D\) 后左端的行为。这引出 \textbf{Tor}（同调）群（其名称来自它们与挠子模的关系），下面我们简要概述这些左导出函子的展开。在某些方面这个理论与 \(\operatorname{Ext}_R\) 的理论「对偶」。我们集中讨论 \(D\) 是右 \(R\)-模时 \(D \otimes_R \_\) 的情形。当 \(D\) 是左 \(R\)-模时，对 \(\_ \otimes_R D\) 有完全对称的理论；当 \(R\) 交换且所有 \(R\)-模有相同的左右 \(R\) 作用时，两个展开所得的同调群同构。
+
+于是设 \(D\) 是右 \(R\)-模。则对每个左 \(R\)-模 \(B\)，张量积 \(D \otimes_RB\) 是阿贝尔群，且函子 \(D \otimes \_\) 是协变、右正合的，即对任何左 \(R\)-模的短正合序列（1），
+\[
+D \otimes L \longrightarrow D \otimes M \longrightarrow D \otimes N \longrightarrow 0
+\]
+是阿贝尔群的正合序列。这个序列可以如下在左端延拓为长正合序列。设
+\[
+\cdots \longrightarrow P_n \xrightarrow{d_n} P_{n-1} \longrightarrow \cdots \longrightarrow P_0 \xrightarrow{\varepsilon} B \longrightarrow 0
+\]
+是 \(B\) 的投射分解，与 \(D\) 作张量积得到
+\[
+\cdots \to D \otimes P_n \xrightarrow{1 \otimes d_n} D \otimes P_{n-1} \to \cdots \xrightarrow{1 \otimes d_1} D \otimes P_0 \xrightarrow{1 \otimes \varepsilon} D \otimes B \to 0. \tag{17.15}
+\]
+由第 10.5 节定理 39 的论证可知（15）是链复形——任意两个相继映射的复合为零——故我们可以构造它的同调群。
+
+\begin{definition}
+设 \(D\) 是右 \(R\)-模，\(B\) 是左 \(R\)-模。对 \(B\) 的由左 \(R\)-模给出的任意投射分解如上，按（15）令 \(1 \otimes d_n : D \otimes P_n \to D \otimes P_{n-1}\)（\(n \geq 1\)）。则
+\[
+\operatorname{Tor}_n^R(D, B) = \ker(1 \otimes d_n)/\operatorname{image}(1 \otimes d_{n+1}),
+\]
+其中 \(\operatorname{Tor}_0^R(D, B) = (D \otimes P_0)/\operatorname{image}(1 \otimes d_1)\). 群 \(\operatorname{Tor}_n^R(D, B)\) 称为从函子 \(D \otimes \_\) 导出的第 \(n\) 个同调群。当 \(R = \mathbb{Z}\) 时群 \(\operatorname{Tor}_n^{\mathbb{Z}}(D, B)\) 也简记作 \(\operatorname{Tor}_n(D, B)\).
+\end{definition}
+
+于是 \(\operatorname{Tor}_n^R(D, B)\) 是把（15）中项 \(D \otimes B\) 去掉所得链复形的第 \(n\) 个同调群。
+
+与命题 3 完全类似的证明（但依赖第 10.5 节定理 39）给出：
+
+\begin{proposition}\label{pro:17.13}
+对任何左 \(R\)-模 \(B\) 有 \(\operatorname{Tor}_0^R(D, B) \cong D \otimes_RB\).
+\end{proposition}
+
+\noindent\textbf{例}
+
+设 \(R = \mathbb{Z}\)，\(B = \mathbb{Z}/m\mathbb{Z}\)（某个 \(m \geq 2\)）。由命题，\(\operatorname{Tor}_0^{\mathbb{Z}}(D, \mathbb{Z}/m\mathbb{Z})\) 同构于 \(D \otimes \mathbb{Z}/m\mathbb{Z}\)，故 \(\operatorname{Tor}_0^{\mathbb{Z}}(D, \mathbb{Z}/m\mathbb{Z}) \cong D/mD\)（第 10.4 节推论 12 之后的例 8）。对更高阶的群，我们把 \(D \otimes \_\) 应用于 \(B\) 的投射分解 \(0 \to \mathbb{Z} \xrightarrow{m} \mathbb{Z} \to \mathbb{Z}/m\mathbb{Z} \to 0\)，并利用同构 \(D \otimes \mathbb{Z} \cong D\) 与 \(D \otimes \mathbb{Z}/m\mathbb{Z} \cong D/mD\). 这给出链复形 \(0 \to D \xrightarrow{m} D \to D/mD \to 0\). 由此 \(\operatorname{Tor}_1^{\mathbb{Z}}(D, \mathbb{Z}/m\mathbb{Z}) \cong {}_mD\) 是被 \(m\) 零化的 \(D\) 的子群，且对所有 \(n \geq 2\) 有 \(\operatorname{Tor}_n^{\mathbb{Z}}(D, \mathbb{Z}/m\mathbb{Z}) = 0\)，我们总结为
+\[
+\operatorname{Tor}_0(D, \mathbb{Z}/m\mathbb{Z}) \cong D/mD, \quad \operatorname{Tor}_1(D, \mathbb{Z}/m\mathbb{Z}) \cong {}_mD, \quad \operatorname{Tor}_n(D, \mathbb{Z}/m\mathbb{Z}) = 0\ (n \geq 2).
+\]
+与 \(\operatorname{Ext}\) 一样，Tor 群依赖于环 \(R\)（参见习题 20）。
+
+按照与 \(\operatorname{Ext}_R\) 类似的展开，可以证明：
+
+\begin{proposition}\label{pro:17.14}
+（1）同调群 \(\operatorname{Tor}_n^R(D, B)\) 不依赖于 \(B\) 的投射分解的选取；
+
+（2）对每个 \(R\)-模同态 \(f : B \to B'\) 存在同调群上的诱导映射 \(\psi_n : \operatorname{Tor}_n^R(D, B) \to \operatorname{Tor}_n^R(D, B')\)（只依赖于 \(f\)）。
+\end{proposition}
+
+有一个与定理 2 类似、但所有箭头都反向的\textbf{同调中的长正合序列}，其证明可由上同调的论证稍作修改得到。它与同时分解一起给出：
+
+\begin{theorem}\label{thm:17.15}
+设 \(0 \to L \to M \to N \to 0\) 是左 \(R\)-模的短正合序列。则存在阿贝尔群的长正合序列
+\[
+\cdots \to \operatorname{Tor}_1^R(D, N) \xrightarrow{\delta} \operatorname{Tor}_1^R(D, L) \to \operatorname{Tor}_1^R(D, M) \to \operatorname{Tor}_1^R(D, N) \xrightarrow{\delta^0} D \otimes L \to D \otimes M \to D \otimes N \to 0,
+\]
+其中同一层 \(n\) 的群之间的映射如命题 14 中那样（映射 \(\delta^n\) 称为连接同态）。
+\end{theorem}
+
+有一个对应于命题 9 与 11 的平坦模的刻画，其证明非常类似，留作习题。
+
+\begin{proposition}\label{pro:17.16}
+对右 \(R\)-模 \(D\)，下述命题等价：
+
+（1）\(D\) 是平坦 \(R\)-模；
+
+（2）对所有左 \(R\)-模 \(B\) 有 \(\operatorname{Tor}_1^R(D, B) = 0\)；
+
+（3）对所有左 \(R\)-模 \(B\) 与所有 \(n \geq 1\) 有 \(\operatorname{Tor}_n^R(D, B) = 0\).
+\end{proposition}
+
+我们把 \(\operatorname{Tor}_n^R(A, B)\) 定义为把 \(B\) 的投射分解在左端与 \(A\) 作张量积所得链复形的同调。把 \(A\) 的投射分解在右端与 \(B\) 作张量积所得链复形的同调给出同样的群。换一种说法，群 \(\operatorname{Tor}_n^R(A, B)\) 定义了右正合函子 \(A \otimes_R \_\) 与 \(\_ \otimes_RB\) 两者的（协变）左导出函子：若 \(D\) 是左 \(R\)-模，则右 \(R\)-模的短正合序列 \(0 \to L \to M \to N \to 0\) 引出阿贝尔群的长正合序列
+\[
+\cdots \to \operatorname{Tor}_1^R(N, D) \xrightarrow{\delta} \operatorname{Tor}_1^R(L, D) \to \operatorname{Tor}_1^R(M, D) \to \operatorname{Tor}_1^R(N, D) \xrightarrow{\delta^0} L \otimes_RD \to M \otimes_RD \to N \otimes_RD \to 0.
+\]
+特别地，左 \(R\)-模 \(D\) 平坦当且仅当对所有右 \(R\)-模 \(A\) 有 \(\operatorname{Tor}_1^R(A, D) = 0\).
+
+当 \(R\) 交换时，对具有标准 \(R\)-模结构的任意两个 \(R\)-模 \(A\) 与 \(B\) 有 \(A \otimes_RB \cong B \otimes_RA\)（第 10.4 节命题 20），由此作为 \(R\)-模有 \(\operatorname{Tor}_n^R(A, B) \cong \operatorname{Tor}_n^R(B, A)\). 当 \(R\) 交换时 Tor 的长正合序列是 \(R\)-模的正合序列。
+
+\noindent\textbf{例}
+
+（1）若 \(R = \mathbb{Z}\)，则由于 \(\mathbb{Z}^m\) 自由、从而平坦（第 10.5 节推论 42），对所有 \(n \geq 1\) 与所有阿贝尔群 \(A\) 有 \(\operatorname{Tor}_n(A, \mathbb{Z}^m) = 0\).
+
+（2）由于 \(\operatorname{Tor}_n^R(A, B_1 \oplus B_2) \cong \operatorname{Tor}_n^R(A, B_1) \oplus \operatorname{Tor}_n^R(A, B_2)\)（参见习题 10），上两例一起确定了所有阿贝尔群 \(A\) 与所有有限生成阿贝尔群 \(B\) 的 \(\operatorname{Tor}_n^R(A, B)\).
+
+（3）作为上一例的特殊情形，\(\operatorname{Tor}_0(A, B)\) 是挠群，且对每个阿贝尔群 \(A\)、每个有限生成阿贝尔群 \(B\) 与所有 \(n \geq 2\) 有 \(\operatorname{Tor}_n(A, B) = 0\). 事实上这些结果不需要 \(B\) 有限生成这一条件。
+
+（4）正合序列 \(0 \to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0\) 给出长正合序列
+\[
+\cdots \to \operatorname{Tor}_1(D, \mathbb{Q}) \to \operatorname{Tor}_1(D, \mathbb{Q}/\mathbb{Z}) \to D \otimes \mathbb{Z} \to D \otimes \mathbb{Q} \to D \otimes \mathbb{Q}/\mathbb{Z} \to 0.
+\]
+由于 \(\mathbb{Q}\) 是平坦 \(\mathbb{Z}\)-模（第 10.5 节推论 42 之后的例 2），命题表明有正合序列
+\[
+0 \to \operatorname{Tor}_1(D, \mathbb{Q}/\mathbb{Z}) \to D \to D \otimes \mathbb{Q},
+\]
+从而 \(\operatorname{Tor}_1(D, \mathbb{Q}/\mathbb{Z})\) 同构于自然映射 \(D \to D \otimes \mathbb{Q}\) 的核，即 \(D\) 的挠子群（参见第 10.4 节习题 9）。
+
+下述结果表明对 \(R = \mathbb{Z}\)，Tor 群与挠子群密切相关。Tor 群最初出现在拓扑背景中挠阿贝尔群的应用里，这有助于解释这个术语。
+
+\begin{proposition}\label{pro:17.17}
+设 \(A\) 与 \(B\) 是 \(\mathbb{Z}\)-模，\(t(A)\) 与 \(t(B)\) 分别表示它们的挠子模。则 \(\operatorname{Tor}_1^{\mathbb{Z}}(A, B) \cong \operatorname{Tor}_1^{\mathbb{Z}}(t(A), t(B))\).
+\end{proposition}
+
+\begin{proof}
+在 \(A\) 与 \(B\) 是有限生成阿贝尔群的情形，这由上面的例 3 与例 4 推出。一般情形参见习题 16。
+\end{proof}
+
+\begin{corollary}\label{cor:17.18}
+若 \(A\) 是阿贝尔群，则 \(A\) 无挠当且仅当对每个阿贝尔群 \(B\) 有 \(\operatorname{Tor}_1^{\mathbb{Z}}(A, B) = 0\)（此时作为 \(\mathbb{Z}\)-模 \(A\) 平坦）。
+\end{corollary}
+
+\begin{proof}
+由命题，若 \(A\) 没有有限阶元素则对每个阿贝尔群 \(B\) 有 \(\operatorname{Tor}_1^{\mathbb{Z}}(A, B) = \operatorname{Tor}_1^{\mathbb{Z}}(t(A), B) = \operatorname{Tor}_1^{\mathbb{Z}}(\{0\}, B) = 0\). 反之，若对所有 \(B\) 有 \(\operatorname{Tor}_1^{\mathbb{Z}}(A, B) = 0\)，则特别地 \(\operatorname{Tor}_1^{\mathbb{Z}}(A, \mathbb{Q}/\mathbb{Z}) = 0\)，而由上面的例这个群同构于 \(A\) 的挠子群。
+\end{proof}
+
+命题 17 与推论 18 的结果对任何主理想整环 \(R\) 代替 \(\mathbb{Z}\) 也成立（参见第 10.5 节习题 26 与习题 16）。
+
+最后我们指出，我们所描述的上同调与同调理论可以在远为一般的框架中展开，办法是把 \(R\)-模以及 \(\operatorname{Hom}_R\) 与张量积函子的本质性质公理化。这引出一般的\textbf{阿贝尔范畴}与\textbf{加性函子}的概念。在 \(R\)-模的阿贝尔范畴的情形，任何到阿贝尔群范畴的加性函子 \(\mathcal{F}\) 都给出一族导出函子 \(\mathcal{F}_n\)（也把 \(R\)-模映到阿贝尔群，\(n \geq 0\)）。于是对每个 \(R\)-模的短正合序列 \(0 \to L \to M \to N \to 0\)，都有（上同调或同调）群的长正合序列，其各项是 \(\mathcal{F}_n(L), \mathcal{F}_n(M), \mathcal{F}_n(N)\)，而这些长正合序列反映了函子 \(\mathcal{F}\) 的正合性质。若 \(\mathcal{F}\) 左正合或右正合，则第 0 个导出函子 \(\mathcal{F}_0\) 自然等价于 \(\mathcal{F}\)（故第 0 层群 \(\mathcal{F}_0(X)\) 同构于 \(\mathcal{F}(X)\)）；若 \(\mathcal{F}\) 是正合函子，则对所有 \(n \geq 1\) 与所有 \(R\)-模 \(X\) 有 \(\mathcal{F}_n(X) = 0\).
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 给出命题 1 证明的细节。
+
+\item 本习题定义定理 2 的长正合序列中的连接映射 \(\delta^n\) 并证明它是同态。在定理 2 的记号下，设 \(0 \to \mathcal{A} \xrightarrow{\alpha} \mathcal{B} \xrightarrow{\beta} \mathcal{C} \to 0\) 是上链复形的短正合序列，为简单起见把 \(\mathcal{A}, \mathcal{B}, \mathcal{C}\) 的上链映射都记作 \(d^n\).
+
+（a）若 \(c \in C^n\) 代表类 \(x \in H^n(\mathcal{C})\)，证明存在 \(b \in B^n\) 使 \(\beta^n(b) = c\).
+
+（b）证明 \(d^{n+1}(b) \in \ker\beta^{n+1}\)，并由此存在唯一的 \(a \in A^{n+1}\) 使 \(\alpha^{n+1}(a) = d^{n+1}(b)\).〔利用 \(c \in \ker d^{n+1}\) 与图表的交换性。〕
+
+（c）证明 \(d^{n+2}(a) = 0\)，并由此 \(a\) 定义了商群 \(H^{n+1}(\mathcal{A})\) 中的一个类 \(\bar a\).〔利用 \(\alpha^{n+2}\) 是单射。〕
+
+（d）证明 \(\bar a\) 不依赖于 \(b\) 的选取，即若 \(b'\) 是另一个选择、\(a'\) 是它在 \(A^{n+1}\) 中的唯一原像，则 \(\bar a = \bar a'\)；并证明 \(\bar a\) 也不依赖于代表类 \(x\) 的 \(c\) 的选取。
+
+（e）定义 \(\delta^n(x) = \bar a\)，并证明 \(\delta^n\) 是从 \(H^n(\mathcal{C})\) 到 \(H^{n+1}(\mathcal{A})\) 的群同态。〔利用 \(\delta^n(x)\) 不依赖于 \(c, b\) 的选取来计算 \(\delta^n(x_1+x_2)\).〕
+
+\item 设
+\[
+\begin{array}{cccccc}
+A & \xrightarrow{\alpha} & B & \xrightarrow{\beta} & C & \to 0\\
+\downarrow f & & \downarrow g & & \downarrow h & \\
+A' & \xrightarrow{\alpha'} & B' & \xrightarrow{\beta'} & C' & \to 0
+\end{array}
+\]
+是行正合的 \(R\)-模交换图表。
+
+（a）若 \(c \in \ker h\) 且 \(\beta(b) = c\)，证明 \(g(b) \in \ker\beta'\)，并由此对某个 \(a' \in A'\) 有 \(g(b) = \alpha'(a')\).〔利用图表的交换性。〕
+
+（b）证明 \(\delta(c) = \bar a' \bmod \operatorname{image}f\) 是良定义的从 \(\ker h\) 到商 \(A'/\operatorname{image}f\) 的 \(R\)-模同态。
+
+（c）（\textbf{蛇引理}）证明存在正合序列
+\[
+\ker f \to \ker g \to \ker h \xrightarrow{\delta} \operatorname{coker}f \to \operatorname{coker}g \to \operatorname{coker}h,
+\]
+其中 \(\operatorname{coker}f\)（\(f\) 的余核）是 \(A'/(\operatorname{image}f)\)，\(\operatorname{coker}g\)、\(\operatorname{coker}h\) 类似定义。
+
+（d）证明若 \(\alpha\) 是单射且 \(\beta'\) 是满射（即上面交换图表的两行可以延拓为短正合序列），则（c）中的正合序列可以延拓为
+\[
+0 \to \ker f \to \ker g \to \ker h \xrightarrow{\delta} \operatorname{coker}f \to \operatorname{coker}g \to \operatorname{coker}h \to 0.
+\]
+
+\item 设 \(\mathcal{B} = \{B^n\}\) 与 \(\mathcal{A} = \{A^n\}\) 是上链复形，\(\alpha, \beta : \mathcal{A} \to \mathcal{B}\) 是上链复形的同态。若对所有 \(n\) 都存在模同态 \(s_n : A^{n+1} \to B^n\)，使映射 \(\alpha^n-\beta^n\) 满足相应的关系，则称 \(\alpha\) 与 \(\beta\) \textbf{同伦}。映射族 \(\{s_n\}\) 称为从 \(\alpha\) 到 \(\beta\) 的\textbf{上链同伦}。链复形之间的链同伦可以类似定义。
+
+（a）证明同伦的上链复形映射在上同调上诱导相同的映射，即若 \(\alpha\) 与 \(\beta\) 是同伦的上链复形同态，则对每个 \(n \geq 0\)，它们诱导的群同态 \(H^n(\mathcal{A}) \to H^n(\mathcal{B})\) 相等。（故「同伦」给出复形的两个映射在上同调或同调上诱导相同映射的充分条件；这个条件一般不是必要的。）〔利用同伦的定义证明对每个 \(z \in \ker d^{n+1}\) 有 \((\alpha^n-\beta^n)(z) \in \operatorname{image}d^n\).〕
+
+（b）证明「\(\alpha \sim \beta\) 当且仅当 \(\alpha\) 与 \(\beta\) 同伦」这一关系是任何上链复形同态集合上的等价关系。
+
+\item 如下建立命题 7 的同时分解结果的第一步：假设图表（11）的前两个非零行已给定，只差从 \(P_0 \oplus P'_0\) 到 \(M\) 的映射（沿投射模那一行的映射取为这个分裂正合序列的显然嵌入与投射）。设 \(\mu : P'_0 \to M\) 是把映射 \(P'_0 \to N\) 提升到 \(P'_0 \to M\) 的一个提升（它存在因为 \(P'_0\) 投射）。设 \(\lambda\) 是图表中复合 \(P_0 \to L \to M\). 定义 \(\eta : P_0 \oplus P'_0 \to M\) 为 \(\eta(x,y) = \lambda(x)+\mu(y)\). 证明按此定义（11）的前两个非零行构成交换图表。
+
+\item 设 \(0 \to \mathcal{A} \xrightarrow{\alpha} \mathcal{B} \xrightarrow{\beta} \mathcal{C} \to 0\) 是上链复形的短正合序列。证明若 \(\mathcal{A}, \mathcal{B}, \mathcal{C}\) 中有两个正合，则第三个也正合。〔利用定理 2。〕
+
+\item 证明有限生成阿贝尔群 \(A\) 自由当且仅当 \(\operatorname{Ext}^1(A, \mathbb{Z}) = 0\).
+
+\item 证明若 \(0 \to L \to M \to N \to 0\) 是 \(R\)-模的分裂短正合序列，则对每个 \(n \geq 0\)，序列 \(0 \to \operatorname{Ext}_R^n(N, D) \to \operatorname{Ext}_R^n(M, D) \to \operatorname{Ext}_R^n(L, D) \to 0\) 也是短正合且分裂的。〔利用分裂同态与命题 5。〕
+
+\item 证明
+\[
+0 \to \mathbb{Z}/d\mathbb{Z} \xrightarrow{d} \mathbb{Z}/m\mathbb{Z} \xrightarrow{m/d} \mathbb{Z}/m\mathbb{Z} \xrightarrow{d} \mathbb{Z}/m\mathbb{Z} \xrightarrow{m/d} \cdots
+\]
+是 \(\mathbb{Z}/d\mathbb{Z}\) 作为 \(\mathbb{Z}/m\mathbb{Z}\)-模的内射分解。〔利用第 10.5 节命题 36。〕用它把群 \(\operatorname{Ext}_{\mathbb{Z}/m\mathbb{Z}}^n(A, \mathbb{Z}/d\mathbb{Z})\) 用对偶群 \(\operatorname{Hom}_{\mathbb{Z}/m\mathbb{Z}}(A, \mathbb{Z}/m\mathbb{Z})\) 表示出来。特别地，若 \(m = p^2\)、\(d = p\)，给出 \(\operatorname{Ext}_{\mathbb{Z}/p^2\mathbb{Z}}^n(\mathbb{Z}/p\mathbb{Z}, \mathbb{Z}/p\mathbb{Z}) \cong \mathbb{Z}/p\mathbb{Z}\) 的另一种推导。
+
+\item （a）证明投射模的任意直和 \(\bigoplus_{i \in I}P_i\) 是投射模，内射模的任意直积 \(\prod_{j \in J}Q_j\) 是内射模。
+
+（b）证明投射分解的任意直和仍是投射分解，并用它证明对任何 \(R\)-模族 \(A_i\)（\(i \in I\)）有 \(\operatorname{Ext}_R^n\left(\bigoplus_{i \in I}A_i, B\right) \cong \prod_{i \in I}\operatorname{Ext}_R^n(A_i, B)\).〔参见第 10.5 节习题 12。〕
+
+（c）证明内射分解的任意直积是内射分解，并用它证明对任何 \(R\)-模族 \(B_j\)（\(j \in J\)）有 \(\operatorname{Ext}_R^n\left(A, \prod_{j \in J}B_j\right) \cong \prod_{j \in J}\operatorname{Ext}_R^n(A, B_j)\).〔参见第 10.5 节习题 12。〕
+
+（d）证明对任何 \(R\)-模族 \(B_j\)（\(j \in J\)）有 \(\operatorname{Tor}_n^R\left(A, \bigoplus_{j \in J}B_j\right) \cong \bigoplus_{j \in J}\operatorname{Tor}_n^R(A, B_j)\).
+
+\item （\textbf{Bass 对诺特环的刻画}）设 \(R\) 是交换环。
+
+（a）若 \(R\) 是诺特环、\(I\) 是 \(R\) 中的任意非零理想，证明任何 \(R\)-模同态 \(f : I \to \bigoplus_{j \in \mathcal{J}}Q_j\)（其中各 \(Q_j\) 是内射 \(R\)-模，\(j \in \mathcal{J}\)）的像包含在有限多个 \(Q_j\) 的直和中。
+
+（b）若 \(R\) 是诺特环，证明内射 \(R\)-模的任意直和 \(\bigoplus_{j \in \mathcal{J}}Q_j\) 仍是内射模。〔利用 Baer 判别法（命题 36）与第 10.5 节习题 4 以及（a）。〕
+
+（c）设 \(I_1 \subseteq I_2 \subseteq \cdots\) 是 \(R\) 的理想递增链、并集为 \(I\)，设 \(f_i : I/I_i \to Q_i\)（\(i = 1, 2, \ldots\)）是把商 \(I/I_i\) 嵌入内射 \(R\)-模 \(Q_i\) 的单射（由第 10.5 节定理 38）。证明这些单射与典范投射 \(I \to I/I_i\) 的乘积的复合给出 \(R\)-模同态 \(f : I \to \bigoplus_{i=1,2,\ldots}Q_i\).
+
+（d）证明（b）的逆：若内射 \(R\)-模的任意直和 \(\bigoplus_{j \in \mathcal{J}}Q_j\) 仍内射，则 \(R\) 是诺特环。〔若（c）中的直和是内射的，用 Baer 判别法把 \(f\) 提升为同态 \(F : R \to \bigoplus_{i=1,2,\ldots}Q_i\). 若 \(F(1)\) 在 \(Q_i\) 中的分量对 \(i \geq n\) 为 0，证明 \(I = I_n\)，即理想升链有限。〕
+
+\item 证明命题 13：\(\operatorname{Tor}_0^R(D, A) \cong D \otimes A\).〔仿照命题 3 的证明。〕
+
+\item 证明刻画平坦模的命题 16.
+
+\item 设 \(0 \to A \to B \to C \to 0\) 是 \(R\)-模的短正合序列。证明若 \(C\) 是平坦 \(R\)-模，则 \(A\) 平坦当且仅当 \(B\) 也平坦。〔利用 Tor 的长正合序列。〕举例说明若 \(A\) 与 \(B\) 平坦，\(C\) 不必平坦。
+
+\item （a）若 \(I\) 是 \(R\) 中的理想、\(M\) 是 \(R\)-模，证明 \(\operatorname{Tor}_1^R(M, R/I)\) 同构于映射 \(M \otimes_R I \to M\)（把 \(m \otimes i\) 映到 \(mi\)，\(i \in I\)，\(m \in M\)）的核。〔利用对应于 \(0 \to I \to R \to R/I \to 0\) 的 Tor 长正合序列，注意 \(R\) 平坦。〕
+
+（b）（\textbf{用 Tor 给出的平坦性判别法}）证明 \(R\)-模 \(M\) 平坦当且仅当对 \(R\) 的每个有限生成理想 \(I\) 有 \(\operatorname{Tor}_1^R(M, R/I) = 0\).〔利用第 10.5 节习题 25。〕
+
+\item 设 \(R\) 是主理想整环，\(A\) 与 \(B\) 是 \(R\)-模。若 \(t(B)\) 表示 \(B\) 的挠子模，证明 \(\operatorname{Tor}_1^R(A, t(B)) \cong \operatorname{Tor}_1^R(A, B)\)，并由此 \(\operatorname{Tor}_1^R(A, B) \cong \operatorname{Tor}_1^R(t(A), t(B))\).〔利用第 10.5 节习题 26 证明 \(B/t(B)\) 在 \(R\) 上平坦，然后对短正合序列 \(0 \to t(B) \to B \to B/t(B) \to 0\) 应用 \(D = A\) 的 Tor 长正合序列以及命题 16 之后的说明。〕
+
+\item 设 \(A = \mathbb{Z}/2\mathbb{Z} \oplus \mathbb{Z}/3\mathbb{Z} \oplus \mathbb{Z}/4\mathbb{Z} \oplus \cdots\). 证明对任何阿贝尔群 \(B\) 有 \(\operatorname{Ext}^1(A, B) \cong (B/2B) \times (B/3B) \times (B/4B) \times \cdots\).〔利用习题 10。〕证明 \(\operatorname{Ext}^1(A, B) = 0\) 当且仅当 \(B\) 可除。
+
+\item 证明 \(\mathbb{Z}/2\mathbb{Z}\) 是投射 \(\mathbb{Z}/6\mathbb{Z}\)-模，并由此 \(\operatorname{Tor}_1^{\mathbb{Z}/6\mathbb{Z}}(\mathbb{Z}/2\mathbb{Z}, \mathbb{Z}/2\mathbb{Z}) = 0\).
+
+\item 设 \(r \neq 0\) 不是交换环 \(R\) 中的零因子。
+
+（a）证明乘以 \(r\) 给出商 \(R/rR\) 的自由分解 \(0 \to R \xrightarrow{r} R \to R/rR \to 0\).
+
+（b）证明 \(\operatorname{Ext}_R^0(R/rR, B) = {}_rB\) 是满足 \(rb = 0\) 的 \(b \in B\) 之集，\(\operatorname{Ext}_R^1(R/rR, B) \cong B/rB\)，且对每个 \(R\)-模 \(B\) 与所有 \(n \geq 2\) 有 \(\operatorname{Ext}_R^n(R/rR, B) = 0\).
+
+（c）证明 \(\operatorname{Tor}_0^R(A, R/rR) = A/rA\)，\(\operatorname{Tor}_1^R(A, R/rR) = {}_rA\) 是满足 \(ra = 0\) 的 \(a \in A\) 之集，且对每个 \(R\)-模 \(A\) 与所有 \(n \geq 2\) 有 \(\operatorname{Tor}_n^R(A, R/rR) = 0\).
+
+\item 证明 \(\operatorname{Tor}_0^{\mathbb{Z}/m\mathbb{Z}}(A, \mathbb{Z}/d\mathbb{Z}) \cong A/dA\)，\(\operatorname{Tor}_n^{\mathbb{Z}/m\mathbb{Z}}(A, \mathbb{Z}/d\mathbb{Z}) \cong {}_dA/(m/d)A\)（\(n\) 为奇数，\(n \geq 1\)），以及 \(\operatorname{Tor}_n^{\mathbb{Z}/m\mathbb{Z}}(A, \mathbb{Z}/d\mathbb{Z}) \cong (m/d)A/{}_dA\)（\(n\) 为偶数，\(n \geq 2\)）。〔利用命题 3 之后的例 2 中的投射分解。〕
+
+\item 设 \(R = k[x,y]\)（\(k\) 是域），\(I\) 是 \(R\) 中的理想 \((x,y)\).
+
+（a）设 \(\alpha : R \to R^2\) 为 \(\alpha(r) = (yr, -xr)\)，\(\beta : R^2 \to R\) 为 \(\beta((r_1,r_2)) = r_1x+r_2y\). 证明
+\[
+0 \to R \xrightarrow{\alpha} R^2 \xrightarrow{\beta} R \to R/I = k \to 0
+\]
+（其中映射 \(R \to R/I = k\) 是典范投射）给出 \(k\) 作为 \(R\)-模的自由分解。
+
+（b）用（a）中的分解证明 \(\operatorname{Tor}_2^R(k, k) \cong k\).
+
+（c）证明 \(\operatorname{Tor}_2^R(k, I) \cong k\).〔利用对应于短正合序列 \(0 \to I \to R \to k \to 0\) 的长正合序列与（b）。〕
+
+（d）由（c）推出无挠 \(R\)-模 \(I\) 不平坦（与第 10.5 节习题 26 比较）。
+
+\item （\textbf{Tor 的平坦基变换}）设 \(R\) 与 \(S\) 是交换环，\(f : R \to S\) 是使 \(S\) 成为 \(R\)-模的环同态（如第 10.4 节推论 12 之后的例 6）。证明若 \(S\) 作为 \(R\)-模平坦，则对所有 \(R\)-模 \(A\) 与所有 \(S\)-模 \(B\) 有 \(\operatorname{Tor}_n^R(A, B) \cong \operatorname{Tor}_n^S(S \otimes_RA, B)\).〔证明由于 \(S\) 平坦，把 \(A\) 的 \(R\)-模投射分解与 \(S\) 作张量积给出 \(S \otimes_RA\) 的 \(S\)-模投射分解。〕
+
+\item （\textbf{局部化与 Tor}）设 \(D^{-1}R\) 是交换环 \(R\) 关于 \(R\) 的乘法子集 \(D\) 的局部化。证明局部化与 Tor 可交换，即对所有 \(R\)-模 \(A, B\) 与所有 \(n \geq 0\) 有 \(D^{-1}\operatorname{Tor}_n^R(A, B) \cong \operatorname{Tor}_n^{D^{-1}R}(D^{-1}A, D^{-1}B)\).〔利用上一习题以及 \(D^{-1}R\) 在 \(R\) 上平坦这一事实，参见第 15.4 节命题 42（6）。〕
+
+\item （\textbf{平坦性是局部的}）设 \(R\) 是交换环。证明 \(R\)-模 \(M\) 平坦当且仅当对 \(R\) 的每个极大理想（从而也对每个素理想）\(M_P\) 是平坦 \(R_P\)-模。〔利用上一习题以及用 Tor 给出的平坦性刻画。〕
+
+\item 若 \(R\) 是分式域为 \(F\) 的整环，证明对任何 \(R\)-模 \(B\) 有 \(\operatorname{Tor}_1^R(F/R, B) \cong t(B)\)，其中 \(t(B)\) 表示 \(B\) 的 \(R\)-挠子模。
+
+\noindent \(R\)-模 \(M\) 称为\textbf{有限表现}的，若存在 \(R\)-模的正合序列 \(R^s \to R^t \to M \to 0\)（某些整数 \(s, t\)）。等价地，\(M\) 由 \(t\) 个元素有限生成，且相应的 \(R\)-模同态 \(R^t \to M\) 的核可以由 \(s\) 个元素生成。
+
+\item （a）证明诺特环 \(R\) 上的每个有限生成模都是有限表现的。〔利用第 15.1 节习题 8。〕
+
+（b）证明 \(R\)-模 \(M\) 有限表现且投射当且仅当对某个整数 \(n \geq 1\)，\(M\) 是 \(R^n\) 的直和项。
+
+\item 设 \(M\) 是有限表现 \(R\)-模，\(0 \to A \to B \to M \to 0\) 是 \(R\)-模的正合序列。本习题证明若 \(B\) 是有限生成 \(R\)-模，则 \(A\) 也是有限生成 \(R\)-模。
+
+（a）设 \(R^s \xrightarrow{\psi} R^t \xrightarrow{\varphi} M \to 0\)，\(e_1, \ldots, e_t\) 是 \(R^t\) 的一组 \(R\)-模基。证明存在 \(b_1, \ldots, b_t \in B\) 使 \(\vartheta(b_i) = \varphi(e_i)\)（\(i = 1, \ldots, t\)）。
+
+（b）若 \(f\) 是由 \(f(e_i) = b_i\)（\(i = 1, \ldots, t\)）定义的从 \(R^t\) 到 \(B\) 的 \(R\)-模同态，证明 \(f(\psi(R^s)) \subseteq \ker\vartheta\).〔利用 \(\varphi \circ \psi = 0\).〕由此存在行正合的 \(R\)-模交换图表：
+\[
+\begin{array}{ccccccc}
+R^s & \xrightarrow{\psi} & R^t & \xrightarrow{\varphi} & M & \to & 0\\
+\downarrow g & & \downarrow f & & \parallel & & \\
+0 & \to & A & \xrightarrow{\alpha} & B & \xrightarrow{\vartheta} & M \to 0
+\end{array}
+\]
+
+（c）证明 \(A/\operatorname{image}g \cong B/\operatorname{image}f\) 并用它证明 \(A\) 有限生成。〔同构可由习题 3 中的蛇引理得到。然后证明 \(\operatorname{image}g\) 与 \(A/\operatorname{image}g\) 都有限生成，并应用第 10.3 节习题 7。〕
+
+（d）若 \(I\) 是 \(R\) 的理想，证明 \(R/I\) 是有限表现 \(R\)-模当且仅当 \(I\) 是有限生成理想。
+
+\item 设 \(R\) 是以 \(\mathfrak{m}\) 为唯一极大理想的局部环，\(M\) 是有限表现 \(R\)-模。设 \(m_1, \ldots, m_s \in M\)，它们在 \(M/\mathfrak{m}M\) 中的像构成 \(M/\mathfrak{m}M\) 作为域 \(R/\mathfrak{m}\) 上向量空间的基。
+
+（a）证明 \(m_1, \ldots, m_s\) 作为 \(R\)-模生成 \(M\).〔利用 Nakayama 引理。〕
+
+（b）由（a）推出存在正合序列 \(0 \to \ker\varphi \to R^s \xrightarrow{\varphi} M \to 0\)，它把 \(R^s\) 的一组自由生成元映到元素 \(m_1, \ldots, m_s\). 由此证明存在正合序列
+\[
+\operatorname{Tor}_1^R(M, R/\mathfrak{m}) \to (\ker\varphi)/\mathfrak{m}(\ker\varphi) \to 0.
+\]
+〔利用把与 \(R/\mathfrak{m}\) 作张量积的 Tor 长正合序列，利用对任何 \(R\)-模 \(N\) 有 \(N \otimes R/\mathfrak{m} \cong N/\mathfrak{m}N\)（第 10.4 节推论 12 之后的例 8），以及由 \(m_1, \ldots, m_s\) 的选取 \(\varphi : (R/\mathfrak{m})^s \to M/\mathfrak{m}M\) 是同构。〕
+
+（c）证明若 \(\operatorname{Tor}_1^R(M, R/\mathfrak{m}) = 0\)，则 \(m_1, \ldots, m_s\) 是 \(M\) 的一组自由 \(R\)-模生成元。〔利用上一习题与 Nakayama 引理证明 \(\ker\varphi = 0\).〕
+
+\item 设 \(R\) 是以 \(\mathfrak{m}\) 为唯一极大理想的局部环。本习题证明有限生成 \(R\)-模平坦当且仅当它自由。
+
+（a）证明 \(M = F/K\) 是有限生成自由模 \(F\) 对子模 \(K\)（满足 \(K \subseteq \mathfrak{m}F\)）的商。〔取自由模 \(F\) 使 \(F/\mathfrak{m}F \cong M/\mathfrak{m}M\).〕
+
+（b）设 \(x \in K\)，写 \(x = a_1e_1+\cdots+a_ne_n\)（其中 \(e_1, \ldots, e_n\) 是 \(R\)-基），证明若 \(x \neq 0\) 则 \(K\) 与 \(M\) 的平坦性矛盾，并由此 \(K = 0\)，即 \(M\) 自由。
+\end{enumerate}
+\section{群的上同调}
+
+本节我们考虑上一节一般技巧在一个重要特殊情形中的应用。设 \(G\) 是群。
+
+\begin{definition}
+一个 \(G\) 作为自同构（左）作用的阿贝尔群 \(A\) 称为 \textbf{\(G\)-模}。
+\end{definition}
+
+注意 \(G\)-模等同于一个阿贝尔群 \(A\) 连同同态 \(\varphi : G \to \operatorname{Aut}(A)\). 由于阿贝尔群等同于 \(\mathbb{Z}\) 上的模，也容易看出 \(G\)-模 \(A\) 等同于以 \(\mathbb{Z}\) 为系数的 \(G\) 的整群环 \(\mathbb{Z}G\) 上的模。当 \(G\) 是无限群时，环 \(\mathbb{Z}G\) 由 \(G\) 的元素的以 \(\mathbb{Z}\) 为系数的所有有限形式和组成。
+
+照例我们常用乘法记号，把 \(g \in G\) 对 \(a \in A\) 的作用写成 \(ga\) 而不是 \(g \cdot a\).
+
+\begin{definition}
+若 \(A\) 是 \(G\)-模，令 \(A^G = \{a \in A \mid ga = a \text{ 对所有 } g \in G\}\)，即 \(A\) 中被 \(G\) 的所有元素固定的元素之集。
+\end{definition}
+
+\noindent\textbf{例}
+
+（1）若对所有 \(a \in A\) 与 \(g \in G\) 有 \(ga = a\)，则称 \(G\) 平凡地作用在 \(A\) 上，此时 \(A^G = A\). 除非另有说明，任何群 \(G\) 都假设平凡地作用在 \(\mathbb{Z}\) 上。
+
+（2）对任何 \(G\)-模 \(A\)，\(A\) 在 \(G\) 作用下的不动点 \(A^G\) 显然是 \(A\) 的 \(\mathbb{Z}G\)-子模，且 \(G\) 平凡地作用在其上。
+
+（3）若 \(V\) 是域 \(F\) 上 \(n\) 维向量空间，\(G \subseteq GL_n(F)\)，则 \(V\) 自然地是 \(G\)-模。此时 \(V^G = \{0\}\)，因为 \(V\) 中任何非零元素都可以被某个线性变换映到任意其他非零元素。
+
+（4）如第 5.5 节中的半直积 \(E = A \rtimes G\)（\(A\) 是阿贝尔正规子群）给出一个 \(G\)-模 \(A\)，其中 \(G\) 的作用由同态 \(\varphi : G \to \operatorname{Aut}(A)\) 给出。子群 \(A^G\) 由 \(A\) 中落在 \(E\) 的中心里的元素组成。更一般地，若 \(A\) 是群 \(E\) 的任意阿贝尔正规子群，则 \(E\) 通过共轭作用在 \(A\) 上，这使 \(A\) 成为 \(E\)-模与 \(E/A\)-模。此时 \(A^E = A^{E/A}\) 也由 \(A\) 中落在 \(E\) 的中心里的元素组成。
+
+（5）若 \(K/F\) 是伽罗瓦群为 \(G\) 的伽罗瓦扩张，则加法群 \(K\) 自然地是 \(G\)-模，且 \(K^G = F\). 类似地，\(K\) 中非零元素的乘法群 \(K^\times\) 是 \(G\)-模，其不动点是 \((K^\times)^G = F^\times\).
+
+最后一个例子中的不动点子群在第 14 章的伽罗瓦理论中起核心作用。一般地容易看出，\(G\)-模的短正合序列
+\[
+0 \to A \to B \to C \to 0
+\]
+诱导出正合序列
+\[
+0 \to A^G \to B^G \to C^G \tag{17.15}
+\]
+而后者一般不能延拓为短正合序列（一般地，商 \(C^G\) 中被 \(G\) 固定的陪集不必能由 \(B\) 中被 \(G\) 固定的元素代表）。看出（15）正合的一种方法是注意到 \(A^G\) 与某个 \(\operatorname{Hom}\) 群有关：
+
+\begin{lemma}\label{lem:17.19}
+设 \(A\) 是 \(G\)-模，\(\operatorname{Hom}_{\mathbb{Z}G}(\mathbb{Z}, A)\) 是从 \(\mathbb{Z}\)（带平凡 \(G\)-作用）到 \(A\) 的所有 \(\mathbb{Z}G\)-模同态之群。则 \(A^G \cong \operatorname{Hom}_{\mathbb{Z}G}(\mathbb{Z}, A)\).
+\end{lemma}
+
+\begin{proof}
+从 \(\mathbb{Z}\) 到 \(A\) 的任何 \(G\)-模同态 \(\alpha\) 由它在 1 处的值唯一确定。用 \(\alpha_a\) 表示满足 \(\alpha(1) = a\) 的 \(G\)-模同态。由于 \(\alpha_a\) 是 \(G\)-模同态，对任何 \(g \in G\) 有 \(\alpha_a(1) = \alpha_a(g \cdot 1) = g \cdot \alpha_a(1) = ga\)，故 \(a\) 落在 \(A^G\) 中；类似地容易验证对任何 \(a \in A^G\)，映射 \(\alpha_a\) 是 \(G\)-模同态。于是 \(\alpha_a \mapsto a\) 给出从 \(\operatorname{Hom}_{\mathbb{Z}G}(\mathbb{Z}, A)\) 到 \(A^G\) 的同构。
+\end{proof}
+
+结合上一节的结果，这个引理不仅表明序列（15）正合，还表明把 \(\mathbb{Z}\) 看作 \(\mathbb{Z}G\)-模的任何投射分解都将给出延拓（15）的长正合序列。一个这样的投射分解是 \(\mathbb{Z}\) 的\textbf{标准分解}（或棒分解）：
+\[
+\cdots \to F_n \xrightarrow{d_n} F_{n-1} \to \cdots \xrightarrow{d_1} F_0 \xrightarrow{\text{aug}} \mathbb{Z} \to 0. \tag{17.16}
+\]
+这里 \(F_n = \mathbb{Z}G \otimes_{\mathbb{Z}}\mathbb{Z}G \otimes_{\mathbb{Z}}\cdots \otimes_{\mathbb{Z}}\mathbb{Z}G\)（\(n+1\) 个因子，\(n \geq 0\)），在简单张量上由 \(g \cdot (g_0 \otimes g_1 \otimes \cdots \otimes g_n) = (gg_0) \otimes g_1 \otimes \cdots \otimes g_n\) 定义 \(G\)-作用。不难看出 \(F_n\) 是秩为 \(|G|^n\) 的自由 \(\mathbb{Z}G\)-模，其 \(\mathbb{Z}G\)-基由元素 \(1 \otimes g_1 \otimes g_2 \otimes \cdots \otimes g_n\)（\(g_i \in G\)）给出。映射 \(\operatorname{aug} : F_0 \to \mathbb{Z}\) 是增广映射 \(\operatorname{aug}(\sum_{g \in G}a_gg) = \sum_{g \in G}a_g\)，而 \(d_1\) 由 \(d_1(1 \otimes g) = g-1\) 给出。\(n \geq 2\) 时的映射 \(d_n\) 更复杂，它们的定义以及（16）是投射（事实上自由）分解的证明可见习题 1--3.
+
+如上一节那样，取从（16）中各项到 \(G\)-模 \(A\) 的（\(\mathbb{Z}G\)-模）同态（把第一项换成 0），得到上链复形
+\[
+0 \to \operatorname{Hom}_{\mathbb{Z}G}(F_0, A) \xrightarrow{d_1} \operatorname{Hom}_{\mathbb{Z}G}(F_1, A) \xrightarrow{d_2} \operatorname{Hom}_{\mathbb{Z}G}(F_2, A) \xrightarrow{d_3} \cdots, \tag{17.17}
+\]
+按定义它的上同调群就是群 \(\operatorname{Ext}_{\mathbb{Z}G}^n(\mathbb{Z}, A)\). 于是如定理 8 中那样，\(G\)-模的短正合序列 \(0 \to A \to B \to C \to 0\) 引出长正合序列，其前几项由（15）给出，更高项是上同调群 \(\operatorname{Ext}_{\mathbb{Z}G}^n(\mathbb{Z}, A)\).
+
+为使之更明确，我们可以不显式引用 \(\mathbb{Z}\) 的标准分解而重新解释这个上链复形中的各项，如下。\(\operatorname{Hom}_{\mathbb{Z}G}(F_n, A)\) 的元素由它们在 \(F_n\) 的 \(\mathbb{Z}G\)-基元素上的值唯一确定，而这些基元素可以与 \(G\) 的元素构成的 \(n\) 元组 \((g_1, g_2, \ldots, g_n)\) 等同。由此对 \(n \geq 1\)，群 \(\operatorname{Hom}_{\mathbb{Z}G}(F_n, A)\) 可以与从 \(G \times \cdots \times G\)（\(n\) 个）到 \(A\) 的全体函数之集等同。对 \(n = 0\) 我们把 \(\operatorname{Hom}_{\mathbb{Z}G}(\mathbb{Z}G, A)\) 与 \(A\) 等同。
+
+\begin{definition}
+设 \(G\) 是有限群，\(A\) 是 \(G\)-模。定义 \(C^0(G, A) = A\)，并对 \(n \geq 1\) 定义 \(C^n(G, A)\) 为从 \(G \times \cdots \times G\)（\(n\) 个 \(G\)，\(n \geq 1\) 时）到 \(A\) 的全体映射（称为 \(n\)-\textbf{上链}）之集。
+\end{definition}
+
+每个 \(C^n(G, A)\) 是加法阿贝尔群：\(C^0(G, A) = A\) 由 \(A\) 的群结构给出；对 \(n \geq 1\) 由函数的通常逐点加法给出：\((f_1+f_2)(g_1, \ldots, g_n) = f_1(g_1, \ldots, g_n)+f_2(g_1, \ldots, g_n)\). 在把 \(\operatorname{Hom}_{\mathbb{Z}G}(F_n, A)\) 与 \(C^n(G, A)\) 等同之后，（17）中的上链映射 \(d_n\) 可以非常明确地给出：
+
+\begin{definition}
+对 \(n \geq 0\)，定义第 \(n\) 个\textbf{上边界同态} \(d_n : C^n(G, A) \to C^{n+1}(G, A)\) 为
+\[
+d_n(f)(g_1, \ldots, g_{n+1}) = g_1 \cdot f(g_2, \ldots, g_{n+1})+\sum_{i=1}^{n}(-1)^if(g_1, \ldots, g_{i-1}, g_ig_{i+1}, \ldots, g_{n+1})+(-1)^{n+1}f(g_1, \ldots, g_n), \tag{17.18}
+\]
+其中占据第 \(i\) 个位置的乘积 \(g_ig_{i+1}\) 是在群 \(G\) 中取的。
+\end{definition}
+
+由定义立即可知映射 \(d_n\) 是群同态。由（17）是投射分解这一事实推出对所有 \(n \geq 1\) 有 \(d_nd_{n-1} = 0\)（也可以仅由上面 \(d_n\) 的定义给出自包含的直接证明，但那很繁琐）。
+
+\begin{definition}
+（1）令 \(Z^n(G, A) = \ker d_n\)（\(n \geq 0\)）。\(Z^n(G, A)\) 的元素称为 \textbf{\(n\)-上闭链}。
+
+（2）令 \(B^n(G, A) = \operatorname{image}d_{n-1}\)（\(n \geq 1\)），并令 \(B^0(G, A) = 0\). \(B^n(G, A)\) 的元素称为 \textbf{\(n\)-上边界}。
+\end{definition}
+
+由于对所有 \(n \geq 1\) 有 \(d_nd_{n-1} = 0\)，我们有 \(\operatorname{image}d_{n-1} \subseteq \ker d_n\)，故 \(B^n(G, A)\) 总是 \(Z^n(G, A)\) 的子群。
+
+\begin{definition}
+对任何 \(G\)-模 \(A\)，商群 \(Z^n(G, A)/B^n(G, A)\) 称为 \(G\) 的以 \(A\) 为系数的\textbf{第 \(n\) 个上同调群}，记作 \(H^n(G, A)\)（\(n \geq 0\)）。
+\end{definition}
+
+用上链给出的上同调群 \(H^n(G, A)\) 的定义，在随后两节考察低维群 \(H^1(G, A)\) 与 \(H^2(G, A)\) 及其在各种情形中的应用时特别有用。然而应当记住，对所有 \(n \geq 0\) 有 \(H^n(G, A) \cong \operatorname{Ext}_{\mathbb{Z}G}^n(\mathbb{Z}, A)\). 特别地，这些群可以用 \(\mathbb{Z}\) 的任何投射分解来计算。
+
+\noindent\textbf{例}
+
+（1）若 \(f = a \in C^0(G, A)\)，则 \(d_0(f)(g) = g \cdot a-a\)，故 \(\ker d_0\) 是集合 \(\{a \in A \mid g \cdot a = a \text{ 对所有 } g \in G\}\)，即 \(Z^0(G, A) = A^G\)，从而对任何群 \(G\) 与 \(G\)-模 \(A\) 有
+\[
+H^0(G, A) = A^G.
+\]
+
+（2）设 \(G = 1\) 是平凡群。则 \(G^n = \{(1, 1, \ldots, 1)\}\) 也是平凡群，故 \(f \in C^n(G, A)\) 完全由 \(f(1, 1, \ldots, 1) = a \in A\) 确定。把 \(f\) 与 \(a\) 等同得对所有 \(n \geq 0\) 有 \(C^n(G, A) = A\). 则若 \(f = a \in A\)，由（18）有
+\[
+d_n(f)(1, 1, \ldots, 1) = a+\sum_{i=1}^{n}(-1)^ia+(-1)^{n+1}a = \begin{cases}0, & n \text{ 为奇数},\\ a, & n \text{ 为偶数},\end{cases}
+\]
+故 \(n\) 为偶数时 \(d_n = 0\)，\(n\) 为奇数时 \(d_n = 1\) 是恒等映射。于是
+\[
+H^0(1, A) = A = A^G, \qquad H^n(1, A) = 0 \text{ 对所有 } n \geq 1.
+\]
+
+\noindent\textbf{例（有限循环群的上同调）}
+
+设 \(G\) 是 \(m\) 阶循环群，生成元为 \(\sigma\). 令 \(N = 1+\sigma+\sigma^2+\cdots+\sigma^{m-1} \in \mathbb{Z}G\). 则 \(N(\sigma-1) = (\sigma-1)N = \sigma^m-1 = 0\)，故我们有一个特别简单的自由分解
+\[
+\cdots \to \mathbb{Z}G \xrightarrow{\sigma-1} \mathbb{Z}G \xrightarrow{N} \mathbb{Z}G \xrightarrow{\sigma-1} \cdots \xrightarrow{\sigma-1} \mathbb{Z}G \xrightarrow{N} \mathbb{Z}G \xrightarrow{\operatorname{aug}} \mathbb{Z} \to 0,
+\]
+其中 \(\operatorname{aug}\) 表示增广映射（参见习题 8）。取从这个分解的各项到 \(A\) 的 \(\mathbb{Z}G\)-模同态（把第一项换成 0），并利用等同 \(\operatorname{Hom}_{\mathbb{Z}G}(\mathbb{Z}G, A) = A\)，得到链复形
+\[
+0 \to A \xrightarrow{\sigma-1} A \xrightarrow{N} A \xrightarrow{\sigma-1} A \xrightarrow{N} \cdots,
+\]
+其上同调计算群 \(H^n(G, A)\)：
+\[
+H^0(G, A) = A^G, \qquad H^n(G, A) = \begin{cases}A^G/NA, & n \text{ 为偶数}, n \geq 2,\\ {}_NA/(\sigma-1)A, & n \text{ 为奇数}, n \geq 1,\end{cases}
+\]
+其中 \({}_NA = \{a \in A \mid Na = 0\}\) 是被 \(N\) 零化的 \(A\) 的子群，因为乘以 \(\sigma-1\) 的核是 \(A^G\).
+
+特别地，若 \(G = \langle\sigma\rangle\) 平凡地作用在 \(A\) 上，则 \(N \cdot a = ma\)，故此时 \(H^0(G, A) = A\)，且对偶数 \(n \geq 2\) 有 \(H^n(G, A) = A/mA\)，对奇数 \(n \geq 1\) 有 \(H^n(G, A) = {}_mA\)，即 \(A\) 中阶整除 \(m\) 的元素。再取 \(m = 1\) 就得到前面的例 2。
+
+\begin{proposition}\label{pro:17.20}
+设对某个整数 \(m \geq 1\) 有 \(mA = 0\)（即阿贝尔群 \(A\) 的指数整除 \(m\)）。则对所有 \(n \geq 0\) 有
+\[
+mZ^n(G, A) = mB^n(G, A) = mH^n(G, A) = 0.
+\]
+特别地，若 \(A\) 的指数为某个素数 \(p\)，则阿贝尔群 \(Z^n(G, A)\)、\(B^n(G, A)\)、\(H^n(G, A)\) 的指数都整除 \(p\)，故这些群都是有限域 \(\mathbb{F}_p = \mathbb{Z}/p\mathbb{Z}\) 上的向量空间。
+\end{proposition}
+
+\begin{proof}
+若 \(f \in C^n(G, A)\) 是 \(n\)-上链，则或者 \(f \in A\)（当 \(n = 0\)，此时 \(mf = 0\)），或者 \(f\) 是从 \(G^n\) 到 \(A\) 的函数（当 \(n \geq 1\)，此时 \(mf\) 是从 \(G^n\) 到 \(mA = 0\) 的函数，故同样 \(mf = 0\)）。因此 \(mZ^n(G, A) = mB^n(G, A) = 0\)（因为它们是 \(C^n(G, A)\) 的子群）。于是由 \(mZ^n(G, A) = 0\) 得 \(mH^n(G, A) = 0\)，命题中其余论断立即推出。
+\end{proof}
+
+由例 1，定理 10 中的长正合序列用上同调群 \(H^n(G, A)\) 写出即为：
+
+\begin{theorem}\label{thm:17.21}
+（\textbf{群上同调中的长正合序列}）设
+\[
+0 \to A \to B \to C \to 0
+\]
+是 \(G\)-模的短正合序列。则存在阿贝尔群的长正合序列
+\[
+0 \to A^G \to B^G \to C^G \xrightarrow{\delta} H^1(G, A) \to H^1(G, B) \to H^1(G, C) \xrightarrow{\delta} \cdots
+\]
+\[
+\cdots \to H^n(G, A) \to H^n(G, B) \to H^n(G, C) \xrightarrow{\delta} H^{n+1}(G, A) \to \cdots.
+\]
+\end{theorem}
+
+定理 21 中长正合序列的许多用途之一是所谓\textbf{维数移动}的技巧，它使我们可以通过考虑另一个 \(G\)-模的 \(n\) 维上同调群来分析 \(A\) 的 \(n+1\) 维上同调群 \(H^{n+1}(G, A)\). 这个技巧基于找到一个几乎所有上同调群都为零的 \(G\)-模。这类模有一个名称：
+
+\begin{definition}
+若对所有 \(n \geq 1\) 有 \(H^n(G, M) = 0\)，则称 \(G\)-模 \(M\) 对 \(G\) \textbf{上同调平凡}。
+\end{definition}
+
+\begin{corollary}\label{cor:17.22}
+（\textbf{维数移动}）设 \(0 \to A \to M \to C \to 0\) 是 \(G\)-模的短正合序列，且 \(M\) 对 \(G\) 上同调平凡。则存在正合序列
+\[
+0 \to A^G \to M^G \to C^G \to H^1(G, A) \to 0
+\]
+且对所有 \(n \geq 1\) 有 \(H^n(G, C) \cong H^{n+1}(G, A)\).
+\end{corollary}
+
+\begin{proof}
+由于 \(M\) 对 \(G\) 上同调平凡，定理 21 中长正合序列中 \(H^n(G, M) = 0\)（\(n \geq 1\)）的部分化为
+\[
+0 \to H^n(G, C) \to H^{n+1}(G, A) \to 0,
+\]
+这表明对所有 \(n \geq 1\) 有 \(H^n(G, C) \cong H^{n+1}(G, A)\). 类似地，定理 21 中长正合序列的第一部分给出推论中的第一个论断。
+\end{proof}
+
+下面我们指出一个自然的构造，它由 \(G\) 的子群 \(H\) 上的模产生一个 \(G\)-模。当 \(H = 1\) 是平凡群时，这个构造对任何 \(G\)-模 \(A\) 产生一个上同调平凡的模 \(M\) 以及如推论 22 中的正合序列。
+
+\begin{definition}
+若 \(H\) 是 \(G\) 的子群、\(A\) 是 \(H\)-模，定义\textbf{诱导} \(G\)-模 \(M_H^G(A)\) 为 \(\operatorname{Hom}_{\mathbb{Z}H}(\mathbb{Z}G, A)\). 换句话说，\(M_H^G(A)\) 是满足 \(f(hx) = hf(x)\)（对所有 \(x \in G\) 与 \(h \in H\)）的从 \(G\) 到 \(A\) 的映射 \(f\) 之集。元素 \(g \in G\) 对 \(f \in M_H^G(A)\) 的作用由 \((g \cdot f)(x) = f(xg)\)（\(x \in G\)）给出（参见第 10.5 节习题 10）。
+\end{definition}
+
+回忆若 \(H\) 是 \(G\) 的子群、\(A\) 是 \(H\)-模，则由纯量扩张从 \(\mathbb{Z}H\) 到 \(\mathbb{Z}G\) 所得的模 \(\mathbb{Z}G \otimes_{\mathbb{Z}H}A\) 是 \(G\)-模。对有限群 \(G\)，或者更一般地若 \(H\) 在 \(G\) 中指数有限，我们有 \(M_H^G(A) \cong \mathbb{Z}G \otimes_{\mathbb{Z}H}A\)（参见习题 10）。当 \(G\) 无限时这不再成立（参见习题 11）。模 \(\mathbb{Z}G \otimes_{\mathbb{Z}H}A\) 有时称为\textbf{诱导} \(G\)-模，而模 \(M_H^G(A)\) 有时称为\textbf{余诱导} \(G\)-模。对有限群，张量积的结合性表明对子群 \(K \leq H \leq G\) 有 \(M_H^G(M_K^H(A)) = M_K^G(A)\)，一般情形也一样（由定义利用习题 7 可得）。
+
+\noindent\textbf{例}
+
+（1）若 \(H\) 是 \(G\) 的子群，\(0 \to A \to B \to C \to 0\) 是 \(H\)-模的短正合序列，则 \(0 \to M_H^G(A) \to M_H^G(B) \to M_H^G(C) \to 0\) 是 \(G\)-模的短正合序列，因为 \(M_H^G(A) \cong \mathbb{Z}G \otimes_{\mathbb{Z}H}A\) 而 \(\mathbb{Z}G\) 在 \(\mathbb{Z}H\) 上自由、从而平坦。
+
+（2）当 \(G\) 有限、\(A\) 是平凡 \(H\)-模 \(\mathbb{Z}\) 时，模 \(M_H^G(\mathbb{Z})\) 是秩为 \(m = [G:H]\) 的自由 \(\mathbb{Z}\)-模。存在基 \(b_1, \ldots, b_m\) 使 \(G\) 置换这些基元素的方式与它通过左乘置换 \(H\) 在 \(G\) 中的左陪集的方式相同，即若令 \(b_i \leftrightarrow g_iH\)，则 \(gb_i = b_j\) 当且仅当 \(gg_iH = g_jH\). 模 \(M_H^G(\mathbb{Z})\) 是 \(G\) 的以 \(H\) 为稳定化子的 \(\mathbb{Z}\) 上的置换模。一个有兴趣的特殊情形是 \(G = S_m\)、\(H = S_{m-1}\)（\(S_m\) 照常置换 \(\{1, 2, \ldots, m\}\)）。域上的置换模与诱导模将在第 VI 部分研究。
+
+（3）任何阿贝尔群 \(A\) 当 \(H = 1\) 是平凡群时是 \(H\)-模。相应的诱导 \(G\)-模 \(M_1^G(A)\) 就是所有从 \(G\) 到 \(A\) 的映射 \(f\) 之集。对 \(g \in G\)，映射 \(g \cdot f \in M_1^G(A)\) 满足 \((g \cdot f)(x) = f(xg)\)（\(x \in G\)）。
+
+（4）设 \(A\) 是 \(G\)-模。则由把 \(a \in A\) 映到函数 \(f_a\)（\(f_a(x) = xa\)，对所有 \(x \in G\)）定义的从 \(A\) 到上一例中诱导 \(G\)-模 \(M_1^G(A)\) 的自然映射 \(\varphi : A \to M_1^G(A)\) 是群同态，而 \(f_{ga}(x) = x(ga) = (xg)a = f_a(xg) = (g \cdot f_a)(x)\) 表明 \(\varphi\) 也是 \(G\)-模同态。由于 \(f_a(1) = a\)，函数 \(f_a\) 在 \(G\) 上恒为零当且仅当在 \(A\) 中 \(a = 0\)，故 \(\varphi\) 是单射。因此我们可以把 \(A\) 与诱导模 \(M_1^G(A)\) 的 \(G\)-子模等同。
+
+（5）更一般地，若 \(A\) 是 \(G\)-模、\(H\) 是 \(G\) 的任意子群，则上一例中的函数 \(f_a(x)\) 是子群 \(M_H^G(A)\) 的元素，因为对所有 \(h \in H\) 有 \(f_a(hx) = (hx)a = h(xa) = hf_a(x)\). 相应的从 \(A\) 到 \(M_H^G(A)\) 的映射是单的 \(G\)-模同态。
+
+（6）不动点 \((M_H^G(A))^G\) 是满足 \(gf = f\)（对所有 \(g \in G\)）的从 \(G\) 到 \(A\) 的映射 \(f\)，即满足 \((gf)(x) = f(x)\)（对所有 \(g, x \in G\)）。由 \(M_H^G(A)\) 上 \(G\)-作用的定义，这就是方程 \(f(xg) = f(x)\)（对所有 \(g, x \in G\)）。取 \(x = 1\) 表明 \(f\) 在整个 \(G\) 上是常数：\(f(g) = f(1) = a \in A\). 常函数 \(f = a\) 是 \(M_H^G(A)\) 的元素当且仅当对所有 \(h \in H\) 有 \(a = f(hx) = hf(x) = ha\)，故 \((M_H^G(A))^G \cong A^H\).
+
+上一例中的元素 \(f_a(x)\) 包含在子群 \((M_1^G(A))^G\) 中当且仅当 \(xa\) 对 \(x \in G\) 是常数，即当且仅当 \(a \in A^G\).
+
+由 \(H\)-模 \(A\) 诱导的 \(G\)-模 \(M_H^G(A)\) 的重要性质之一是它关于 \(G\) 的上同调与 \(A\) 关于 \(H\) 的上同调相同：
+
+\begin{proposition}\label{pro:17.23}
+（\textbf{Shapiro 引理}）对 \(G\) 的任何子群 \(H\) 与任何 \(H\)-模 \(A\)，对所有 \(n \geq 0\) 有 \(H^n(G, M_H^G(A)) \cong H^n(H, A)\).
+\end{proposition}
+
+\begin{proof}
+设 \(\cdots \to P_n \to \cdots \to P_0 \to \mathbb{Z} \to 0\) 是由投射 \(G\)-模给出的 \(\mathbb{Z}\) 的分解（例如标准分解）。上同调群 \(H^n(G, M_H^G(A))\) 通过取从这个分解到 \(M_H^G(A) = \operatorname{Hom}_{\mathbb{Z}H}(\mathbb{Z}G, A)\) 的同态来计算。由于 \(\mathbb{Z}G\) 是自由 \(\mathbb{Z}H\)-模，可知这个 \(G\)-模分解也是由投射 \(H\)-模给出的 \(\mathbb{Z}\) 的分解，故取到 \(A\) 的同态时同一个分解可以用来计算上同调群 \(H^n(H, A)\). 为看出这两族上同调群同构，我们使用自然同构
+\[
+\Phi : \operatorname{Hom}_{\mathbb{Z}G}(P_n, \operatorname{Hom}_{\mathbb{Z}H}(\mathbb{Z}G, A)) \cong \operatorname{Hom}_{\mathbb{Z}H}(P_n, A),
+\]
+它由 \(\Phi(f)(p) = f(p)(1)\) 给出（\(f \in \operatorname{Hom}_{\mathbb{Z}G}(P_n, \operatorname{Hom}_{\mathbb{Z}H}(\mathbb{Z}G, A))\)、\(p \in P_n\)）；其逆由把 \(f' \in \operatorname{Hom}_{\mathbb{Z}H}(P_n, A)\) 映到由 \(\Psi(f')(p)(g) = f'(gp)\) 定义的 \(\Psi(f') \in \operatorname{Hom}_{\mathbb{Z}G}(P_n, \operatorname{Hom}_{\mathbb{Z}H}(\mathbb{Z}G, A))\) 给出，即 \(\Psi(f')\) 把 \(g \in G\) 映到元素 \(f'(gp) \in A\). 注意这是良定义的，因为 \(P_n\) 是 \(G\)-模。（这些映射是\textbf{伴随结合性}定理的一个特殊情形，参见习题 7。）由于这些同构与上链映射可交换，它们在相应的上同调群上诱导同构，即 \(H^n(G, M_H^G(A)) \cong H^n(H, A)\)，正如所需。
+\end{proof}
+
+\begin{corollary}\label{cor:17.24}
+对任何 \(G\)-模 \(A\)，模 \(M_1^G(A)\) 对 \(G\) 上同调平凡，即对所有 \(n \geq 1\) 有 \(H^n(G, M_1^G(A)) = 0\).
+\end{corollary}
+
+\begin{proof}
+这由取 \(H = 1\) 应用命题，以及命题 20 之前例 2 中平凡群上同调的计算立即推出。
+\end{proof}
+
+由这个推论，上面的例 4 给出 \(G\)-模的短正合序列 \(0 \to A \to M \to C \to 0\)，其中 \(M = M_1^G(A)\) 对 \(G\) 上同调平凡，而 \(C\) 是 \(M_1^G(A)\) 模 \(A\) 的像所得的商。推论 22 中的维数移动结果于是成为：
+
+\begin{corollary}\label{cor:17.25}
+对任何 \(G\)-模 \(A\)，对所有 \(n \geq 1\) 有 \(H^{n+1}(G, A) \cong H^n(G, M_1^G(A)/A)\).
+\end{corollary}
+
+下面我们考虑联系各个上同调群的几个重要映射。这些同态的应用将出现在随后两节中。
+
+一般地，设有两个群 \(G\) 与 \(G'\)，\(A\) 是 \(G\)-模、\(A'\) 是 \(G'\)-模。若 \(\varphi : G' \to G\) 是群同态，则通过定义 \(g' \cdot a = \varphi(g')a\)（\(g' \in G'\)、\(a \in A\)）使 \(A\) 成为 \(G'\)-模。若 \(\psi : A \to A'\) 是阿贝尔群同态，则我们考虑 \(\psi\) 是否是 \(G'\)-模同态：
+
+\begin{definition}
+设 \(A\) 是 \(G\)-模、\(A'\) 是 \(G'\)-模。若在通过 \(\varphi\) 使 \(A\) 成为 \(G'\)-模时 \(\psi\) 是 \(G'\)-模同态，即对所有 \(g' \in G'\) 与 \(a \in A\) 有 \(\psi(\varphi(g')a) = g'\psi(a)\)，则称群同态 \(\varphi : G' \to G\) 与 \(\psi : A \to A'\) \textbf{相容}。
+\end{definition}
+
+相容同态的要点在于它们在相应的上同调群上诱导群同态，如下。若 \(\varphi : G' \to G\) 与 \(\psi : A \to A'\) 是同态，则 \(\varphi\) 诱导同态 \(\varphi^n : (G')^n \to G^n\)，从而诱导出把 \(f\) 映到 \(f \circ \varphi^n\) 的同态从 \(C^n(G, A)\) 到 \(C^n(G', A)\). 映射 \(\psi\) 诱导出把 \(f\) 映到 \(\psi \circ f\) 的同态从 \(C^n(G', A)\) 到 \(C^n(G', A')\). 合起来我们得到诱导同态
+\[
+\Lambda^n : C^n(G, A) \to C^n(G', A'), \qquad f \mapsto \psi \circ f \circ \varphi^n.
+\]
+若此外 \(\varphi\) 与 \(\psi\) 是相容同态，则容易验证诱导映射 \(\Lambda^n\) 与上边界算子可交换：对所有 \(n \geq 0\) 有 \(\Lambda^{n+1} \circ d_n = d_n \circ \Lambda^n\). 由此 \(\Lambda^n\) 把上闭链映到上闭链、把上边界映到上边界，从而在上同调上诱导群同态
+\[
+\Lambda^n : H^n(G, A) \to H^n(G', A') \qquad (n \geq 0).
+\]
+
+我们考虑这类映射的几个实例：
+
+\noindent\textbf{例}
+
+（1）设 \(G = G'\) 且 \(\varphi\) 是恒等映射。则说群同态 \(\psi : A \to A'\) 与 \(\varphi\) 相容只是说 \(\psi\) 是 \(G\)-模同态。故从 \(A\) 到 \(A'\) 的任何 \(G\)-模同态都诱导群同态 \(H^n(G, A) \to H^n(G, A')\)（\(n \geq 0\)）。特别地，若 \(0 \to A \to B \to C \to 0\) 是 \(G\)-模的短正合序列，我们得到从 \(H^n(G, A)\) 到 \(H^n(G, B)\) 与从 \(H^n(G, B)\) 到 \(H^n(G, C)\) 的诱导同态（\(n \geq 0\)）。这些正是定理 21 的长正合序列中的同态。
+
+（2）（\textbf{限制同态}）若 \(A\) 是 \(G\)-模，则对 \(G\) 的任何子群 \(H\)，\(A\) 也是 \(H\)-模。包含映射 \(\varphi : H \to G\) 与恒等映射 \(\psi : A \to A\) 是相容同态。相应的上同调上的诱导群同态称为\textbf{限制同态}：
+\[
+\operatorname{Res} : H^n(G, A) \to H^n(H, A) \qquad (n \geq 0).
+\]
+这个术语来自这样的事实：上链上的映射从 \(C^n(G, A)\) 到 \(C^n(H, A)\) 只是把一个从 \(G^n\) 到 \(A\) 的映射 \(f\) 限制到 \(G^n\) 的子群 \(H^n\).
+
+（3）（\textbf{膨胀同态}）设 \(H\) 是 \(G\) 的正规子群，\(A\) 是 \(G\)-模。\(A\) 中被 \(H\) 固定的元素 \(A^H\) 在由 \((gH) \cdot a = g \cdot a\) 定义的作用下自然是商群 \(G/H\) 的模。则投射 \(\varphi : G \to G/H\) 与包含 \(\psi : A^H \to A\) 显然是相容同态。相应的上同调上的诱导群同态称为\textbf{膨胀同态}：
+\[
+\operatorname{Inf} : H^n(G/H, A^H) \to H^n(G, A) \qquad (n \geq 0).
+\]
+
+（4）（\textbf{余限制同态}）设 \(H\) 是 \(G\) 的指数为 \(m\) 的子群，\(A\) 是 \(G\)-模。设 \(g_1, \ldots, g_m\) 是 \(H\) 在 \(G\) 中的左陪集的代表元。定义映射
+\[
+\psi : M_H^G(A) \to A, \qquad f \mapsto \sum_{i=1}^{m}g_i \cdot f(g_i^{-1}).
+\]
+注意若把某个陪集代表元 \(g_i\) 换为 \(g_ih\)，则
+\[
+(g_ih)f((g_ih)^{-1}) = g_ihf(h^{-1}g_i^{-1}) = g_ihh^{-1}f(g_i^{-1}) = g_if(g_i^{-1}),
+\]
+故映射 \(\psi\) 不依赖于陪集代表元的选取。容易看出 \(\psi\) 是 \(G\)-模同态（甚至可看出它是满射），故对所有 \(n \geq 0\) 我们得到从 \(H^n(G, M_H^G(A))\) 到 \(H^n(G, A)\) 的群同态。由于 \(A\) 也是 \(H\)-模，由 Shapiro 引理有同构 \(H^n(G, M_H^G(A)) \cong H^n(H, A)\). 这两个同态的复合称为\textbf{余限制同态}：
+\[
+\operatorname{Cor} : H^n(H, A) \to H^n(G, A) \qquad (n \geq 0).
+\]
+这个同态可以通过把 Shapiro 引理证明中的同构（对 \(\mathbb{Z}\) 的任何 \(\mathbb{Z}G\)-投射分解 \(P_n\)；注意这些是 \(G\)-模而不只是 \(H\)-模）与映射 \(\psi\) 复合而显式计算，如下。对代表上同调类 \(c \in H^n(H, A)\) 的上闭链 \(f \in \operatorname{Hom}_{\mathbb{Z}H}(P_n, A)\)，代表 \(\operatorname{Cor}(c) \in H^n(G, A)\) 的上闭链 \(\operatorname{Cor}(f) \in \operatorname{Hom}_{\mathbb{Z}G}(P_n, A)\) 由
+\[
+\operatorname{Cor}(f)(p) = \sum_{i=1}^{m}g_i \cdot f(g_i^{-1}p)
+\]
+给出（\(p \in P_n\)）。当 \(n = 0\) 时这特别简单，因为可以取 \(P_0 = \mathbb{Z}G\). 此时 \(f \in \operatorname{Hom}_{\mathbb{Z}H}(\mathbb{Z}G, A) = M_H^G(A)\) 是上闭链当且仅当 \(f = a\) 对某个 \(a \in A^H\) 是常数，此时 \(\operatorname{Cor}(f)\) 是取值为 \(\sum_{i=1}^{m}g_i \cdot a \in A^G\) 的常函数：
+\[
+\operatorname{Cor} : H^0(H, A) = A^H \to A^G = H^0(G, A).
+\]
+
+下一个结果建立限制同态与余限制同态之间的一个基本关系。
+
+\begin{proposition}\label{pro:17.26}
+设 \(H\) 是 \(G\) 的指数为 \(m\) 的子群。则 \(\operatorname{Cor} \circ \operatorname{Res} = m\)，即若 \(c\) 是 \(H^n(G, A)\) 中的上同调类（某个 \(G\)-模 \(A\)），则对所有 \(n \geq 0\) 有 \(\operatorname{Cor}(\operatorname{Res}(c)) = mc \in H^n(G, A)\).
+\end{proposition}
+
+\begin{proof}
+这由上面例 4 中余限制的显式公式推出，如下。若 \(f \in \operatorname{Hom}_{\mathbb{Z}G}(P_n, A)\) 是 \(G\)-模同态，则对 \(1 \leq i \leq m\) 有 \(g_i \cdot f(g_i^{-1}p) = g_ig_i^{-1}f(p) = f(p)\). 由于限制是自然包含 \(\operatorname{Hom}_{\mathbb{Z}G}(P_n, A) \to \operatorname{Hom}_{\mathbb{Z}H}(P_n, A)\) 在上同调上的诱导映射，对这样的 \(f\) 我们得到复合
+\[
+\operatorname{Hom}_{\mathbb{Z}G}(P_n, A) \xrightarrow{\operatorname{Res}} \operatorname{Hom}_{\mathbb{Z}H}(P_n, A) \xrightarrow{\operatorname{Cor}} \operatorname{Hom}_{\mathbb{Z}G}(P_n, A), \qquad f \mapsto mf.
+\]
+由此 \(\operatorname{Cor} \circ \operatorname{Res}\) 在上同调群上也是乘以 \(m\).
+\end{proof}
+
+\begin{corollary}\label{cor:17.27}
+设有限群 \(G\) 的阶为 \(m\)。则对任何 \(G\)-模 \(A\) 与所有 \(n \geq 1\) 有 \(mH^n(G, A) = 0\).
+\end{corollary}
+
+\begin{proof}
+在命题 26 中取 \(H = 1\)，则 \([G:H] = m\). 于是对任何类 \(c \in H^n(G, A)\) 有 \(mc = \operatorname{Cor}(\operatorname{Res}(c))\). 由于 \(\operatorname{Res}(c) \in H^n(H, A) = H^n(1, A)\)，由命题 20 之前的例 2 可知对所有 \(n \geq 1\) 有 \(\operatorname{Res}(c) = 0\). 故对所有 \(n \geq 1\) 有 \(mc = 0\)，这就是推论。
+\end{proof}
+
+\begin{corollary}\label{cor:17.28}
+若 \(G\) 是有限群，则对所有 \(n \geq 1\) 与所有 \(G\)-模 \(A\)，\(H^n(G, A)\) 是挠阿贝尔群。
+\end{corollary}
+
+\begin{proof}
+这由上一推论立即推出。
+\end{proof}
+
+\begin{corollary}\label{cor:17.29}
+设 \(G\) 是有限群，其阶与 \(G\)-模 \(A\) 的指数互素。则对所有 \(n \geq 1\) 有 \(H^n(G, A) = 0\). 特别地，若 \(A\) 是满足 \((|G|, |A|) = 1\) 的有限阿贝尔群，则对所有 \(n \geq 1\) 有 \(H^n(G, A) = 0\).
+\end{corollary}
+
+\begin{proof}
+这由以下事实推出：由上一推论，阿贝尔群 \(H^n(G, A)\) 被 \(|G|\) 零化；由命题 20，它被 \(A\) 的指数零化。
+\end{proof}
+
+注意上述几个推论中的论断对 \(n = 0\) 一般不成立，因为此时 \(H^0(G, A) = A^G\)，它甚至不必是挠群。
+
+我们不加证明地提到下述结果。设 \(H\) 是 \(G\) 的正规子群、\(A\) 是 \(G\)-模。上同调群 \(H^n(H, A)\) 可以被赋予 \(G/H\)-模的结构（参见习题 17）。可以证明存在正合序列
+\[
+0 \to H^1(G/H, A^H) \xrightarrow{\operatorname{Inf}} H^1(G, A) \xrightarrow{\operatorname{Res}} H^1(H, A)^{G/H} \xrightarrow{\operatorname{Tra}} H^2(G/H, A^H) \xrightarrow{\operatorname{Inf}} H^2(G, A),
+\]
+其中 \(H^1(H, A)^{G/H}\) 表示 \(H^1(H, A)\) 在 \(G/H\) 作用下的不动点，\(\operatorname{Tra}\) 是所谓\textbf{超限同态}。这个正合序列把 \(G\) 的上同调群与正规子群 \(H\) 及商群 \(G/H\) 的上同调群联系起来。换一种说法，\(G\) 的上同调与 \(G\) 的过滤 \(1 \trianglelefteq H \trianglelefteq G\) 中各因子的上同调有关。更一般地，人们可以试图把 \(G\) 的上同调与 \(G\) 的更长过滤中各因子的上同调联系起来。这就是\textbf{谱序列}理论，是同调代数中的重要工具。
+
+\noindent\textbf{伽罗瓦上同调与 profinite 群}
+
+群上同调的一个重要应用出现在 \(G\) 是域扩张 \(K/F\) 的伽罗瓦群的情形。此时有许多有兴趣的群被 \(G\) 作用，例如 \(K\) 的加法群、乘法群 \(K^\times\) 等等。伽罗瓦群 \(G = \operatorname{Gal}(K/F)\) 是 \(F\) 的包含在 \(K\) 中的有限扩张 \(L\) 的伽罗瓦群的逆向极限 \(\varprojlim\operatorname{Gal}(L/F)\)，关于其 Krull 拓扑是紧拓扑群（即群运算关于由 \(G\) 的有限指数子群 \(\operatorname{Gal}(K/L)\) 定义的拓扑连续），参见第 14.9 节。在这种情形，利用 \(G\) 的附加拓扑结构是有用（且常常是必要的）。例如 \(K\) 中含 \(F\) 的子域与 \(G = \operatorname{Gal}(K/F)\) 的闭子群一一对应，而第 14.9 节讨论的 \(\mathbb{Q}\) 的二次扩张的合成的例子表明一般地 \(G\) 有许多不闭的子群。幸运的是，在这种背景下定义上同调群所需的修改相对较小，并适用于有限群的任意逆向极限（即 \textbf{profinite 群}）。若 \(G\) 是 profinite 群，则 \(G = \varprojlim G/N\)，其中逆向极限取遍 \(G\) 的开正规子群 \(N\)（参见习题 23）。
+
+\begin{definition}
+若 \(G\) 是 profinite 群，则\textbf{离散} \(G\)-模 \(A\) 是带离散拓扑的 \(G\)-模 \(A\)，使 \(G\) 在 \(A\) 上的作用连续，即映射 \(G \times A \to A\)（把 \((g,a)\) 映到 \(g \cdot a\)）连续。
+\end{definition}
+
+由于 \(A\) 取离散拓扑，\(A\) 的每个子集都是开集，特别地每个元素 \(a \in A\) 都是开集。于是 \(G\) 在 \(A\) 上作用的连续性等价于：\(a\) 在 \(G\) 中的稳定化子 \(G_a\) 是 \(G\) 的开子群，从而由于 \(G\) 紧它有有限指数（参见习题 22）。这又等价于 \(A = \bigcup_HA^H\)，其中并取遍 \(G\) 的开子群 \(H\).
+
+在定义 profinite 群 \(G\) 作用在离散 \(G\)-模 \(A\) 上的上同调群 \(H^n(G, A)\) 时必须小心，因为这个范畴中没有足够多的投射对象。例如当 \(G\) 无限时，自由 \(G\)-模 \(\mathbb{Z}G\) 不是离散 \(G\)-模（\(G\) 的作用不连续，参见习题 25）。然而本节给出的 \(H^n(G, A)\) 的显式描述（有时称为\textbf{离散}上同调群）可以容易地修改——只需要求上链 \(C^n(G, A)\) 是从 \(G^n\) 到 \(A\) 的连续映射。上边界映射 \(d_n\) 在等式（18）中的定义完全相同，上闭链群、上边界群与相应上同调群的定义也完全相同。习惯上不为这些上同调群引入单独的记号，而在术语中指明所指的上同调。
+
+\begin{definition}
+若 \(G\) 是 profinite 群、\(A\) 是离散 \(G\)-模，则用连续上链计算所得的上同调群 \(H^n(G, A)\) 称为 \textbf{profinite} 上同调群或\textbf{连续}上同调群。当 \(G = \operatorname{Gal}(K/F)\) 是域扩张 \(K/F\) 的伽罗瓦群时，伽罗瓦上同调群 \(H^n(G, A)\) 总是指用连续上链计算所得的上同调群。
+\end{definition}
+
+当 \(G\) 是有限群时，每个 \(G\)-模都是离散 \(G\)-模，故 \(G\) 的离散与连续上同调群相同。当 \(G\) 无限时这不必成立，正如前面提到的 \(G\) 为无限 profinite 群时自由 \(G\)-模 \(\mathbb{Z}G\) 的例子所示。本节所有主要结果对连续上同调群仍然成立，只需把「\(G\)-模」换成「离散 \(G\)-模」、「子群」换成「闭子群」。例如群上同调中的长正合序列保持成立，限制同态要求 \(G\) 的子群 \(H\) 是闭子群（使 \(G^n\) 上连续映射在 \(H^n\) 上的限制仍连续），命题 26 要求 \(H\) 闭，等等。
+
+我们可以写 \(G = \varprojlim(G/N)\)、\(A = \bigcup A^N\)，其中 \(N\) 取遍 \(G\) 的开正规子群（由于 \(G\) 紧，它们必然在 \(G\) 中有限指数）。则 \(A^N\) 是离散 \(G/N\)-模，且不难证明
+\[
+H^n(G, A) = \varinjlim H^n(G/N, A^N), \tag{17.19}
+\]
+其中上同调群是连续上同调，正向极限取遍 \(G\) 的所有开正规子群 \(N\)（参见习题 24）。由于 \(G/N\) 是有限群，这个正向极限中的连续上同调群 \(H^n(G/N, A^N)\) 就是本节前面考虑的（离散）上同调群。因此 profinite 群 \(G\) 的连续上同调的计算总可以化归为有限群上同调，而在那里连续理论与离散理论没有区别。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(F_n = \mathbb{Z}G \otimes_{\mathbb{Z}}\mathbb{Z}G \otimes_{\mathbb{Z}}\cdots \otimes_{\mathbb{Z}}\mathbb{Z}G\)（\(n+1\) 个因子，\(n \geq 0\)），\(G\)-作用在简单张量上由 \(g \cdot (g_0 \otimes g_1 \otimes \cdots \otimes g_n) = (gg_0) \otimes g_1 \otimes \cdots \otimes g_n\) 定义。
+
+（a）证明 \(F_n\) 是秩为 \(|G|^n\) 的自由 \(\mathbb{Z}G\)-模，其 \(\mathbb{Z}G\)-基为 \(1 \otimes g_1 \otimes g_2 \otimes \cdots \otimes g_n\)（\(g_i \in G\)）。把（a）中的基元素简记作 \((g_1, g_2, \ldots, g_n)\)，并对 \(n \geq 1\) 在这些基元素上定义 \(G\)-模同态 \(d_n\)：\(d_1(g_1) = g_1-1\)，以及对 \(n \geq 2\)
+\[
+d_n(g_1, \ldots, g_n) = g_1 \cdot (g_2, \ldots, g_n)+\sum_{i=1}^{n-1}(-1)^i(g_1, \ldots, g_{i-1}, g_ig_{i+1}, \ldots, g_n)+(-1)^n(g_1, \ldots, g_{n-1}).
+\]
+并用 \(s_{-1}(1) = 1\)、\(s_n(g_0 \otimes \cdots \otimes g_n) = 1 \otimes g_0 \otimes \cdots \otimes g_n\) 在 \(\mathbb{Z}\)-基上定义收缩同态 \(s_{-1}, s_0, s_1, s_2, \ldots\).
+
+（b）证明 \(\varepsilon s_{-1} = 1\)，\(d_1s_0+s_{-1}\varepsilon = 1\)，以及对所有 \(n \geq 1\) 有 \(d_{n+1}s_n+s_{n-1}d_n = 1\).
+
+（c）证明映射 \(s_n\) 给出复合 \(\cdots \to F_n \to F_{n-1} \to \cdots \to F_0 \to \mathbb{Z} \to 0\)（\(\mathbb{Z}\)-模链复形）的恒等（链）映射与零（链）映射之间的同伦，其中增广映射 \(\operatorname{aug}(\sum_{g \in G}c_gg) = \sum_{g \in G}c_g\)（参见习题 4 与第 8 节）。
+
+（d）由（c）推出链复形（\*) 的所有 \(\mathbb{Z}\)-模同调群为零，即（\*）是 \(\mathbb{Z}\)-模的正合序列。由此（\*）是 \(\mathbb{Z}\) 的投射 \(G\)-模分解。
+
+\item 设 \(P_n\) 是以 \((g_0, g_1, g_2, \ldots, g_n)\)（\(g_i \in G\)）为基的自由 \(\mathbb{Z}\)-模，并定义 \(G\) 在 \(P_n\) 上的作用为 \(g \cdot (g_0, g_1, \ldots, g_n) = (gg_0, gg_1, \ldots, gg_n)\). 对 \(n \geq 1\) 定义 \(d_n(g_0, g_1, \ldots, g_n) = \sum_{i=0}^{n}(-1)^i(g_0, \ldots, \hat g_i, \ldots, g_n)\)（符号 \(\hat{\ }\) 表示删去该项）。
+
+（a）证明 \(P_n\) 是以 \((1, g_1, g_2, \ldots, g_n)\)（\(g_i \in G\)）为基的自由 \(\mathbb{Z}G\)-模。
+
+（b）证明对 \(n \geq 1\) 有 \(d_{n-1}d_n = 0\).〔证明同时删去 \(g_j\) 与 \(g_k\) 的项在 \(d_{n-1}d_n(g_0, \ldots, g_n)\) 中出现两次且符号相反。〕
+
+（c）证明由 \(\varphi((g_0, g_1, \ldots, g_n)) = g_0 \otimes (g_0^{-1}g_1) \otimes (g_1^{-1}g_2) \otimes \cdots \otimes (g_{n-1}^{-1}g_n)\) 定义的 \(\varphi : P_n \to F_n\) 是 \(G\)-模同构，其逆 \(\psi : F_n \to P_n\) 由 \(\psi(g_0 \otimes g_1 \otimes \cdots \otimes g_n) = (g_0, g_0g_1, g_0g_1g_2, \ldots, g_0g_1\cdots g_n)\) 给出。
+
+（d）证明若对所有 \(g_0 \in G\) 有 \(\varepsilon(g_0) = 1\)，则所得的复形是 \(\mathbb{Z}\) 的自由 \(G\)-模分解。〔证明（c）中的同构把上一习题的 \(G\)-模分解（\*\*）与（\*）互相映为对方。〕
+
+\item 设 \(F_n\) 与 \(P_n\) 如上两习题，\(A\) 是 \(G\)-模。
+
+（a）证明 \(\operatorname{Hom}_{\mathbb{Z}G}(F_n, A)\) 可以与从 \(G \times G \times \cdots \times G\)（\(n\) 个）到 \(A\) 的映射之集 \(C^n(G, A)\) 等同，并证明在这个等同下相应的从 \(C^n(G, A)\) 到 \(C^{n+1}(G, A)\) 的上边界映射由等式（18）给出。
+
+（b）证明 \(\operatorname{Hom}_{\mathbb{Z}G}(P_n, A)\) 可以与满足 \(f(gg_0, gg_1, \ldots, gg_n) = gf(g_0, g_1, \ldots, g_n)\) 的从 \(G \times \cdots \times G\)（\(n+1\) 个）到 \(A\) 的映射 \(f\) 之集等同。
+
+\noindent 群 \(C^n(G, A)\) 有时称为 \(G\) 的以 \(A\) 为系数的\textbf{非齐次 \(n\)-上链}群，而（b）中的群称为\textbf{齐次 \(n\)-上链}群。非齐次上链更易描述，因为对从 \(G^n\) 到 \(A\) 的映射没有限制，但齐次上链上的上边界映射 \(d_n\) 比非齐次上链上的上边界映射更简单（在拓扑背景中也更自然地出现）。上面习题的结果表明用齐次或非齐次上链定义的 \(H^n(G, A)\) 相同，并指出了正文中所用上边界映射的来源。历史上 \(H^n(G, A)\) 最初是用齐次上链定义的。
+
+\item 设 \(H\) 是群 \(G\) 的正规子群，\(A\) 是 \(G\)-模。对每个 \(g \in G\) 证明由 \(f(a) = ga\)（\(a \in A\)）定义的映射是子群 \(A^H\) 的自同构。
+
+\item 设 \(G\)-模 \(A\) 分解为 \(G\)-子模的直和 \(A = A_1 \oplus A_2\). 证明对所有 \(n \geq 0\) 有 \(H^n(G, A) \cong H^n(G, A_1) \oplus H^n(G, A_2)\).
+
+\item 设 \(0 \to A \to M_1 \to M_2 \to \cdots \to M_k \to C \to 0\) 是 \(G\)-模的正合序列，其中每个 \(M_i\) 上同调平凡。证明 \(H^{n+k}(G, A) \cong H^n(G, C)\)（\(n \geq 0\)）。〔把正合序列拆成短正合序列并利用推论 22。例如若 \(0 \to A \to M_1 \to M_2 \to C \to 0\) 正合，证明 \(0 \to A \to M_1 \to B \to 0\) 与 \(0 \to B \to M_2 \to C \to 0\) 都正合，其中 \(B = M_1/\operatorname{image}\alpha\).〕
+
+\item （\textbf{伴随结合性}）设 \(R, S, T\) 是含 1 的环，\(P\) 是左 \(S\)-模、\(N\) 是 \((T,S)\)-双模、\(A\) 是左 \(T\)-模。证明由 \(\Phi(f)(n \otimes p) = f(p)(n)\) 定义的 \(\Phi : \operatorname{Hom}_S(P, \operatorname{Hom}_T(N, A)) \cong \operatorname{Hom}_T(N \otimes_SP, A)\) 是阿贝尔群的同构。（另见第 10.5 节定理 43。）
+
+\item 设 \(G\) 是 \(m\) 阶循环群，生成元为 \(\sigma\)，\(N = 1+\sigma+\sigma^2+\cdots+\sigma^{m-1} \in \mathbb{Z}G\).
+
+（a）证明增广映射 \(\operatorname{aug}(\sum_{i=0}^{m-1}a_i\sigma^i) = \sum_{i=0}^{m-1}a_i\) 是从 \(\mathbb{Z}G\) 到 \(\mathbb{Z}\) 的 \(G\)-模同态。
+
+（b）证明在 \(\mathbb{Z}G\) 中乘以 \(N\) 与乘以 \(\sigma-1\) 给出 \(\mathbb{Z}\) 的自由 \(G\)-模分解：\(\cdots \to \mathbb{Z}G \xrightarrow{\sigma-1} \mathbb{Z}G \xrightarrow{N} \mathbb{Z}G \to \mathbb{Z} \to 0\).
+
+\item 设 \(G\) 是以 \(\sigma\) 为生成元的无限循环群。
+
+（a）证明在 \(\mathbb{Z}G\) 中乘以 \(\sigma-1\) 给出 \(\mathbb{Z}\) 的自由 \(G\)-模分解：\(0 \to \mathbb{Z}G \xrightarrow{\sigma-1} \mathbb{Z}G \to \mathbb{Z} \to 0\).
+
+（b）证明 \(H^0(G, A) \cong A^G\)，\(H^1(G, A) \cong A/(\sigma-1)A\)，且对所有 \(n \geq 2\) 有 \(H^n(G, A) = 0\). 由此 \(H^1(G, \mathbb{Z}G) \cong \mathbb{Z}\)（故自由模不必上同调平凡）。
+
+\item 设 \(H\) 是群 \(G\) 的指数为 \(m\) 的子群，\(A\) 是 \(H\)-模。设 \(x_1, \ldots, x_m\) 是 \(H\) 在 \(G\) 中的一组左陪集代表元：\(G = x_1H \cup \cdots \cup x_mH\).
+
+（a）证明作为阿贝尔群有 \(\mathbb{Z}G = \bigoplus_{i=1}^{m}x_i\mathbb{Z}H = \bigoplus_{i=1}^{m}\mathbb{Z}Hx_i^{-1}\)，以及 \(\mathbb{Z}G \otimes_{\mathbb{Z}H}A = \bigoplus_{i=1}^{m}(x_i \otimes A)\).
+
+（b）设 \(f_{i,a}\) 是由
+\[
+f_{i,a}(x) = \begin{cases}ha, & x = hx_i^{-1}\ (h \in H),\\ 0, & \text{否则}\end{cases}
+\]
+定义的从 \(\mathbb{Z}G\) 到 \(A\) 的函数。证明 \(f_{i,a} \in M_H^G(A) = \operatorname{Hom}_{\mathbb{Z}H}(\mathbb{Z}G, A)\)，即对 \(h' \in H\) 有 \(f_{i,a}(h'x) = h'f_{i,a}(x)\).
+
+（c）证明由 \(\varphi(f) = \sum_{i=1}^{m}x_i \otimes f(x_i^{-1})\) 定义的映射 \(\varphi : M_H^G(A) \to \mathbb{Z}G \otimes_{\mathbb{Z}H}A\) 是 \(G\)-模同态。〔写 \(x_i^{-1}g = h_ix_j^{-1}\)（\(i = 1, \ldots, m\)），并注意 \(x_i \otimes f(x_i^{-1}g) = x_i \otimes h_if(x_j^{-1}) = x_ih_i \otimes f(x_j^{-1}) = gx_j \otimes f(x_j^{-1})\).〕
+
+（d）证明 \(\varphi\) 给出 \(G\)-模同构 \(\varphi : M_H^G(A) \cong \mathbb{Z}G \otimes_{\mathbb{Z}H}A\).〔对单射性注意 \(H\)-模同态为零当且仅当 \(f(x_i^{-1}) = 0\)（\(i = 1, \ldots, m\)）。对满射性证明 \(\varphi(f_{i,a}) = x_i \otimes a\).〕
+
+\item 证明上一习题（d）中的同构 \(M_H^G(A) \cong \mathbb{Z}G \otimes_{\mathbb{Z}H}A\) 在 \(H\) 于 \(G\) 中指数无限时不必成立。〔若 \(G\) 是无限循环群，证明由 Shapiro 引理 \(H^1(G, M_1^G(\mathbb{Z})) = 0\)，而由习题 9 有 \(H^1(G, \mathbb{Z}G) \cong \mathbb{Z}\).〕
+
+\item 若 \(H\) 是 \(G\) 的子群、\(A\) 是阿贝尔群，用 \(M_{G;H}(A)\) 表示从 \(H\) 在 \(G\) 中的左陪集 \(gH\) 到 \(A\) 的所有映射构成的阿贝尔群。
+
+（a）证明作为 \(H\)-模有 \(M_1^G(A) \cong M_1^H(M_{G;H}(A))\).〔若 \(\{g_i\}_{i \in I}\) 是 \(H\) 在 \(G\) 中左陪集代表元的一个选择，用 \(F(h)(g_iH) = f(g_ih)\) 定义 \(f \in M_1^G(A)\) 与 \(F : H \to M_{G;H}(A)\) 之间的对应，并验证这是 \(H\)-模的同构。〕
+
+（b）若 \(G\)-模 \(A\) 满足对所有 \(n \geq 1\) 与 \(G\) 的所有子群 \(H\) 有 \(H^n(H, A) = 0\)，则称 \(A\) \textbf{上同调平凡}。证明对任何阿贝尔群 \(A\)，\(M_1^G(A)\) 上同调平凡。
+
+（c）若 \(G\) 有限，证明对所有阿贝尔群 \(A\)，\(\mathbb{Z}G \otimes_{\mathbb{Z}}A\) 上同调平凡。
+
+\item 设 \(A\) 是 \(G\)-模、\(H\) 是 \(G\) 的子群。证明由推论 22 之后例 3 中从 \(A\) 到 \(M_H^G(A)\) 的 \(G\)-模同态诱导的从 \(H^n(G, A)\) 到 \(H^n(G, M_H^G(A))\) 的群同态（\(n \geq 0\)）与 Shapiro 引理的同构 \(H^n(G, M_H^G(A)) \cong H^n(H, A)\) 的复合，就是从 \(H^n(G, A)\) 到 \(H^n(H, A)\) 的限制同态。
+
+\item 设 \(\varphi : H \to G\) 是子群 \(H\) 到 \(G\) 的包含映射。若 \(A\) 是 \(H\)-模、\(M_H^G(A)\) 是相应的诱导 \(G\)-模，定义群同态 \(\psi : M_H^G(A) \to A\) 为把 \(f\) 映到它在 1 处的值：\(\psi(f) = f(1)\).
+
+（a）证明 \(\varphi\) 与 \(\psi\) 是相容同态。
+
+（b）证明（\(n \geq 0\) 时）从 \(H^n(G, M_H^G(A))\) 到 \(H^n(H, A)\) 的诱导群同态就是 Shapiro 引理中的同构。
+
+\item 设 \(H\) 是 \(G\) 的正规子群，\(A\) 是 \(G\)-模。对固定的 \(g \in G\)，令 \(\psi_1(a) = ga\)、\(\varphi(h) = g^{-1}hg\)（\(h \in H\)）。
+
+（a）证明 \(\varphi\) 与 \(\psi_1\) 是相容同态。
+
+（b）对每个 \(n \geq 0\) 证明由相容同态 \(\varphi\) 与 \(\psi_1\) 诱导的从 \(H^n(H, A)\) 到 \(H^n(H, A)\) 的同态 \(\theta_g\) 是 \(H^n(H, A)\) 的自同构。〔注意 \(\varphi\) 与 \(\psi_1\) 都有逆。〕
+
+（c）证明 \(\theta_g\) 在 \(H^0(H, A)\) 上的作用就是习题 4 中的自同构。
+
+\item 设 \(A\) 是 \(G\)-模，对 \(g \in G\) 用 \(\theta_g\) 表示上一习题中定义的 \(H^n(G, A)\) 的自同构。
+
+（a）证明 \(\theta_g\) 在 \(H^0(G, A) = A^G\) 上的作用是恒等映射。
+
+（b）证明对 \(n \geq 1\)，\(\theta_g\) 在 \(H^n(G, A)\) 上的作用是恒等映射。〔对 \(n\) 归纳并用维数移动。对 \(n = 1\) 利用推论 22 中的正合序列以及（a）中应用于 \(C^G\) 上的 \(\theta_g\). 对 \(n \geq 2\) 利用推论 22 中的同构 \(H^{n+1}(G, A) \cong H^n(G, C)\).〕
+
+\item 设 \(H\) 是 \(G\) 的正规子群、\(A\) 是 \(G\)-模。对 \(n \geq 0\) 证明 \(H^n(H, A)\) 是 \(G/H\)-模，其中 \(gH\) 通过由 \(g\) 对 \(H\) 的共轭以及 \(g\) 对 \(A\) 的自然作用（如习题 15）诱导的自同构 \(\theta_g\) 作用。〔利用上一习题证明陪集的这个作用是良定义的。〕
+
+\item 设 \(G\) 是 \(m\) 阶循环群，\(H\) 是 \(G\) 的指数为 \(d\) 的子群，\(\mathbb{Z}\) 是平凡 \(G\)-模。利用习题 8 中的投射 \(G\)-模分解证明
+
+（a）\(\operatorname{Cor} : H^n(H, \mathbb{Z}) \to H^n(G, \mathbb{Z})\) 在 \(n = 0\) 时是从 \(\mathbb{Z}\) 到 \(\mathbb{Z}\) 乘以 \(d\)，在 \(n\) 为奇数时是从 \(\mathbb{Z}/(m/d)\mathbb{Z}\) 到 \(\mathbb{Z}/m\mathbb{Z}\) 乘以 \(d\)，而在 \(n\) 为偶数（\(n \geq 2\)）时是从 0 到 0；
+
+（b）\(\operatorname{Res} : H^n(G, \mathbb{Z}) \to H^n(H, \mathbb{Z})\) 在 \(n = 0\) 时是从 \(\mathbb{Z}\) 到 \(\mathbb{Z}\) 的恒等映射，而在 \(n \geq 1\) 时是从 \(\mathbb{Z}/m\mathbb{Z}\) 到 \(\mathbb{Z}/(m/d)\mathbb{Z}\) 的自然投射或从 0 到 0，取决于 \(n\) 的奇偶性。
+
+\item 设 \(p\) 是素数，\(P\) 是有限群 \(G\) 的 Sylow \(p\)-子群。证明对任何 \(G\)-模 \(A\) 与所有 \(n \geq 0\)，映射 \(\operatorname{Res} : H^n(G, A) \to H^n(P, A)\) 在 \(H^n(G, A)\) 的 \(p\)-准素分量上是单射。由此证明若 \(|A| = p^a\) 则限制映射在 \(H^n(G, A)\) 上是单射。〔利用命题 26。〕
+
+\item 设 \(p\) 是素数，\(G = \langle\sigma\rangle\) 是 \(p^m\) 阶循环群，\(W\) 是 \(\mathbb{F}_p\) 上维数 \(d > 0\) 的向量空间，\(\sigma\) 在其上作为线性变换作用。假设 \(W\) 有一组基使 \(\sigma\) 的矩阵是特征值为 1 的 \(d \times d\) 初等 Jordan 块。
+
+（a）证明 \(d \leq p^m\).〔利用初等 Jordan 块的极小多项式的相关事实。〕
+
+（b）证明 \(\dim_{\mathbb{F}_p}W^G = 1\).
+
+（c）证明 \(\dim_{\mathbb{F}_p}(\sigma-1)W = d-1\).
+
+（d）若 \(N = 1+\sigma+\cdots+\sigma^{p^m-1}\) 是通常的范元素，证明 \(NW\) 的维数为 1（当 \(d = p^m\) 时）、为 0（当 \(d < p^m\) 时），而 \({}_NW\) 的维数为 \(d-1\)（分别为 \(d\)）。〔设 \(R = \mathbb{F}_pG\)，证明 \(R\) 的每个非零 \(R\)-子模都含有 \(N\). 注意 \(W\) 是循环 \(R\)-模，设 \(\varphi : R \to W\) 是满同态，并由此若 \(\varphi\) 不是同构则 \(N \in \ker\varphi\).〕
+
+（e）由此证明若 \(d = p^m\) 则对所有 \(n \geq 1\) 有 \(H^n(G, W) = 0\)，若 \(d < p^m\) 则对所有 \(n \geq 1\)，\(H^n(G, W)\) 的阶为 \(p\)（即这些上同调群为零当且仅当 \(W\) 是自由 \(\mathbb{F}_pG\)-模）。
+
+\item 设 \(p\) 是素数，\(G = \langle\sigma\rangle\) 是 \(p^m\) 阶循环群，\(V\) 是指数为 \(p\) 的 \(G\)-模。设 \(V = V_1 \oplus V_2 \oplus \cdots \oplus V_k\) 是给出 \(\sigma\) 的 Jordan 标准形的分解，其中每个 \(V_j\) 是 \(\sigma\)-不变的，\(\sigma\) 在 \(V_j\) 上的矩阵是特征值为 1 的 \(d_j \times d_j\) 初等 Jordan 块（\(d_j \geq 1\)，参见第 12.3 节）。证明 \(|V^G| = p^k\)，且对所有 \(n \geq 1\)，\(|H^n(G, V)| = p^s\)，其中 \(s\) 是维数小于 \(p^m\)（在 \(\mathbb{F}_p\) 上）的 \(V_j\) 的个数。〔利用上一习题与习题 5。〕
+
+\item 设 \(G\) 是拓扑群，即 \(G\) 上有拓扑使映射 \(G \times G \to G\)（\((g_1,g_2) \mapsto g_1g_2\)）与 \(G \to G\)（\(g \mapsto g^{-1}\)）连续。
+
+（a）若 \(H\) 是 \(G\) 的开子群、\(g \in G\)，证明陪集 \(gH\)、\(Hg\) 与子群 \(g^{-1}Hg\) 也是开集。
+
+（b）证明任何开子群也是闭子群。〔补集是如（a）中那样的一些陪集之并。〕
+
+（c）证明有限指数的闭子群是开子群。
+
+（d）若 \(G\) 紧，证明每个开子群 \(H\) 都有有限指数。
+
+\item 设 \(G\) 是紧拓扑群。证明下述命题等价：（i）\(G\) 是 profinite 的，即 \(G = \varprojlim G_i\) 是有限群 \(G_i\) 的逆向极限；（ii）存在 \(G\) 的开正规子群族 \(\{N_i\}\)（\(i \in I\)）使 \(\bigcap_iN_i = 1\)，此时 \(G \cong \varprojlim(G/N_i)\)；（iii）存在 \(G\) 的开子群族 \(\{H_j\}\)（\(j \in \mathcal{J}\)）使 \(\bigcap_jH_j = 1\).〔为证明（iii）蕴涵（ii），设 \(H\) 在 \(G\) 中开，用上一习题（d）证明 \(N = \bigcap_{g \in G}g^{-1}Hg\) 是有限交，并由此 \(N \subseteq H \subseteq G\) 且 \(N\) 在 \(G\) 中开且正规。〕
+
+\item 设 \(N\) 与 \(N'\) 是 profinite 群 \(G\) 的开正规子群且 \(N' \subseteq N\). 证明投射同态 \(\varphi : G/N' \to G/N\) 与单射 \(\psi : A^N \to A^{N'}\) 是相容同态，并由此存在从 \(H^n(G/N, A^N)\) 到 \(H^n(G/N', A^{N'})\) 的诱导同态。
+
+\item 若 \(G\) 是无限 profinite 群，证明 \(G\) 不连续地作用在 \(A = \mathbb{Z}G\) 上。〔证明 \(a \in A\) 的稳定化子不总是有限指数的。〕
+\end{enumerate}
+\section{交叉同态与 \(H^1(G,A)\)}
+
+本节我们更详细地考察上同调群 \(H^1(G, A)\)，其中 \(G\) 是群、\(A\) 是 \(G\)-模。由等式（18）中上边界映射 \(d_1\) 的定义，若 \(f \in C^1(G, A)\) 则
+\[
+d_1(f)(g_1, g_2) = g_1 \cdot f(g_2)-f(g_1g_2)+f(g_1).
+\]
+于是任何函数 \(f : G \to A\) 是 1-上闭链当且仅当它满足恒等式
+\[
+f(gh) = f(g)+gf(h) \qquad \text{对所有 } g, h \in G. \tag{17.20}
+\]
+等价地，1-上闭链由 \(A\) 中一族元素 \(\{a_g\}_{g \in G}\) 满足 \(a_{gh} = a_g+ga_h\)（\(g, h \in G\)）确定（此时 1-上闭链就是把 \(g\) 映到 \(a_g\) 的函数）。注意若 \(1\) 表示 \(G\) 的单位元，则 \(f(1) = f(1^2) = f(1)+1 \cdot f(1) = 2f(1)\)，故 \(f(1) = 0\)（\(A\) 中的单位元）。因此 1-上闭链在单位元处必然「正规化」。由上闭链条件还可推出对所有 \(g \in G\) 有 \(f(g^{-1}) = -g^{-1}f(g)\).
+
+若 \(A\) 是 \(G\) 平凡作用的 \(G\)-模，则上闭链条件（20）只是 \(f(gh) = f(g)+f(h)\)，即 \(f\) 只是从乘法群 \(G\) 到加法群 \(A\) 的同态。因此满足（20）的从 \(G\) 到 \(A\) 的函数称为\textbf{交叉同态}。
+
+1-上链 \(f\) 是 1-上边界，若存在某个 \(a \in A\) 使
+\[
+f(g) = g \cdot a-a \qquad \text{对所有 } g \in G, \tag{17.21}
+\]
+（等价地，上面的记号中 \(a_g = ga-a\)）。注意由于 \(-a \in A\)，上边界条件（21）也可以写成：对某个固定的 \(a \in A\) 与所有 \(g \in G\) 有 \(f(g) = a-g \cdot a\). 1-上边界称为\textbf{主交叉同态}。按这个术语，上同调群 \(H^1(G, A)\) 就是交叉同态群模去主交叉同态子群所得的商群。
+
+\noindent\textbf{例（Hilbert 定理 90）}
+
+设 \(G = \operatorname{Gal}(K/F)\) 是域 \(K/F\) 的有限伽罗瓦扩张的伽罗瓦群。则乘法群 \(K^\times\) 是 \(G\)-模且 \(H^1(G, K^\times) = 0\). 为看出这一点，设 \(\{a_\sigma\}\) 是 1-上闭链 \(f\) 的取值 \(f(\sigma)\)，故 \(a_\sigma \in K^\times\) 且 \(a_{\sigma\tau} = a_\sigma\sigma(a_\tau)\)（把 \(K^\times\) 群的上闭链条件写为乘法形式）。由自同构的线性无关性（第 14.2 节推论 8），存在元素 \(y \in K\) 使
+\[
+\beta = \sum_{\tau \in G}a_\tau\tau(y)
+\]
+非零，即 \(\beta \in K^\times\). 则对任何 \(\sigma \in G\) 有
+\[
+\sigma(\beta) = \sum_{\tau \in G}\sigma(a_\tau)\sigma\tau(y) = \sum_{\tau \in G}\frac{a_{\sigma\tau}}{a_\sigma}\sigma\tau(y) = \frac{1}{a_\sigma}\beta,
+\]
+其中第二个等式来自上闭链条件。于是 \(a_\sigma = \beta/\sigma(\beta)\)，这是上边界条件（21）的乘法形式（对应元素 \(a = \beta^{-1}\)）。由于每个 1-上闭链都是 1-上边界，我们有 \(H^1(G, K^\times) = 0\). 由上一节的等式（19），同样的结果对无限伽罗瓦扩张也成立，因为 \(H^1(G, K^\times)\) 是平凡群的正向极限。
+
+作为一个特殊情形，设 \(K/F\) 是伽罗瓦群为循环群 \(G\) 的伽罗瓦扩张，生成元为 \(\sigma\). 上一节中已显式计算了 \(G\) 的上同调群，特别地（把 \(A\) 写成加法）对任何 \(G\)-模 \(A\) 有 \(H^1(G, A) = {}_NA/(\sigma-1)A\). 由于在当前情形这个群平凡，我们看到 \(K\) 中的元素 \(a\) 落在范映射的核中，即 \(N_{K/F}(a) = 1\)，当且仅当对某个 \(\beta \in K\) 有 \(a = \sigma(\beta)/\beta\).（循环情形的直接证明参见第 14.2 节习题 23。）
+
+这个循环扩张的著名结果由 Hilbert 首先证明，并作为「定理 90」出现在他 1897 年关于数论的著作（称为「Zahlbericht」）中。作为结果，文献中把更一般的结论 \(H^1(G, K^\times) = 0\) 称为「Hilbert 定理 90」。一般地，更高维的上同调群 \(H^n(G, K^\times)\)（\(n \geq 2\)）可以非平凡（参见习题 13）。
+
+\noindent\textbf{例}
+
+设 \(G = \operatorname{Gal}(K/F)\) 如上例中是域 \(K/F\) 的有限伽罗瓦扩张的伽罗瓦群。则加法群 \(K\) 也是 \(G\)-模，且对所有 \(n \geq 0\) 有 \(H^n(G, K) = 0\). 一般情形的证明用到 \(K\) 在 \(F\) 上存在正规基这一事实，即存在元素 \(\alpha \in K\) 使其伽罗瓦共轭构成 \(K\) 作为 \(F\) 上向量空间的基，等价地作为 \(G\)-模有 \(K \cong \mathbb{Z}G \otimes_{\mathbb{Z}}F\). 后一个同构表明 \(K\) 作为 \(G\)-模是诱导模，于是 \(H^n(G, K) = 0\) 由第 2 节推论 24 推出。\(G\) 循环情形的直接证明参见第 14.2 节习题 26。
+
+另一方面，若 \(G\) 平凡地作用在 \(A\) 上，则 \(B^1(G, A) = 0\). 这是因为 \(a-g \cdot a = 0\)，故 \(0\) 是唯一的主交叉同态。这证明了下面的结果：
+
+\begin{proposition}\label{pro:17.30}
+若 \(A\) 是 \(G\) 平凡作用的 \(G\)-模，则 \(H^1(G, A) = \operatorname{Hom}(G, A)\)，即从 \(G\) 到 \(A\) 的所有群同态之群。
+\end{proposition}
+
+若 \(G\) 是 profinite 群，则只要取从 \(G\) 到 \(A\) 的连续同态之群，同样的结果对连续上同调群 \(H^1(G, A)\) 成立。
+
+\noindent\textbf{例}
+
+（1）若 \(G\) 平凡地作用在 \(A\) 上，则 \(H^1(G, A) = H^1(G/[G,G], A)\)，因为从 \(G\) 到阿贝尔群 \(A\) 的任何群同态都通过换位子群 \([G,G]\) 分解（参见第 5.4 节命题 7（5）），故计算平凡 \(G\)-作用的 \(H^1\) 归结为计算某个阿贝尔群的 \(H^1\).
+
+（2）若 \(G\) 是平凡地作用在 \(\mathbb{Z}\) 上的有限群，则 \(H^1(G, \mathbb{Z}) = 0\)，因为 \(\mathbb{Z}\) 没有非零的有限阶元素，故不存在从 \(G\) 到 \(\mathbb{Z}\) 的非零群同态。
+
+（3）若 \(A\) 是素数阶 \(p\) 的循环群、\(G\) 是 \(p\)-群，则 \(G\) 必然平凡地作用在 \(A\) 上（因为 \(A\) 的自同构群的阶为 \(p-1\)），故此时总有 \(H^1(G, A) = \operatorname{Hom}(G, A)\).
+
+（4）若 \(G\) 是平凡地作用在 \(\mathbb{Q}/\mathbb{Z}\) 上的有限群，则 \(H^1(G, \mathbb{Q}/\mathbb{Z}) = \operatorname{Hom}(G, \mathbb{Q}/\mathbb{Z}) = \widehat G\) 是 \(G\) 的对偶群（参见第 5.2 节习题 14）。由于 \(\mathbb{Q}/\mathbb{Z}\) 是阿贝尔群，从 \(G\) 到 \(\mathbb{Q}/\mathbb{Z}\) 的任何同态都通过 \(G\) 的换位商 \(G^{ab} = G/[G,G]\) 分解，故 \(\operatorname{Hom}(G, \mathbb{Q}/\mathbb{Z}) = \operatorname{Hom}(G^{ab}, \mathbb{Q}/\mathbb{Z})\). 由此 \(\operatorname{Hom}(G, \mathbb{Q}/\mathbb{Z}) \cong \widehat{G^{ab}}\)（再次参见习题 14，它给出与 \(G^{ab}\) 的非典范同构）。
+
+若 \(0 \to A \to B \to C \to 0\) 是 \(G\)-模的短正合序列，则上一节定理 21 中群上同调的长正合序列以如下各项开始：
+\[
+0 \to A^G \to B^G \to C^G \xrightarrow{\delta^0} H^1(G, A) \to H^1(G, B) \to \cdots.
+\]
+连接同态 \(\delta^0\) 如下显式给出：若 \(c \in C^G\)，则存在映到 \(c\) 的元素 \(b \in B\)，此时 \(\delta^0(c)\) 是 1-上闭链
+\[
+\delta^0(c) : G \to A, \qquad g \mapsto g \cdot b-b
+\]
+在 \(H^1(G, A)\) 中的类。注意由于 \(c \in C^G\)，对所有 \(g \in G\)，\(g \cdot b-b\) 是 \(A\) 的元素（在 \(B\) 中的像）。为直接验证 \(f = \delta^0(c)\) 满足（20）中的上闭链条件，我们计算
+\[
+f(gh) = gh \cdot b-b = (g \cdot b-b)+g \cdot (h \cdot b-b) = f(g)+gf(h).
+\]
+由 \(f = g \cdot b-b\) 的显式表达式也清楚看到 \(\delta^0(c) \in H^1(G, A)\) 映到上面长正合序列的下一项 \(H^1(G, B)\) 中的 0，因为 \(f\) 是元素 \(b \in B\) 的上边界。
+
+\noindent\textbf{例（Kummer 理论）}
+
+设 \(F\) 是特征为 0 且含有某个 \(n \geq 1\) 的所有 \(n\) 次单位根群 \(\mu_n\) 的域。设 \(K\) 是 \(F\) 的代数闭包，\(G = \operatorname{Gal}(K/F)\). 由于由假设 \(\mu_n \subseteq F\)，群 \(G\) 平凡地作用在 \(\mu_n\) 上，即作为 \(G\)-模 \(\mu_n \cong \mathbb{Z}/n\mathbb{Z}\). 故伽罗瓦上同调群 \(H^1(G, \mu_n)\) 就是从 \(G\) 到 \(\mathbb{Z}/n\mathbb{Z}\) 的连续同态之群 \(\operatorname{Hom}_c(G, \mathbb{Z}/n\mathbb{Z})\). 若 \(\chi\) 是这样的连续同态，则 \(\ker\chi\) 是 \(G\) 的闭正规子群，从而由伽罗瓦理论对应于伽罗瓦扩张 \(L_\chi/F\). 于是 \(\operatorname{Gal}(L_\chi/F) \cong \operatorname{image}\chi\) 是 \(F\) 的次数整除 \(n\) 的循环扩张。反之，\(F\) 的每个这样的循环扩张都定义 \(\operatorname{Hom}_c(G, \mathbb{Z}/n\mathbb{Z})\) 中的一个元素，故伽罗瓦上同调群 \(H^1(G, \mu_n)\) 的元素与 \(F\) 的次数整除 \(n\) 的循环扩张之间存在双射。
+
+取 \(n\) 次幂的同态在 \(K^\times\) 上是满射（因为我们总可以在 \(K\) 中开 \(n\) 次方），其核为 \(\mu_n\). 故序列
+\[
+1 \to \mu_n \to K^\times \xrightarrow{n} K^\times \to 1
+\]
+是离散 \(G\)-模的正合序列。相应的伽罗瓦上同调长正合序列给出
+\[
+1 \to \mu_n^G \to (K^\times)^G \xrightarrow{n} (K^\times)^G \to H^1(G, \mu_n) \to H^1(G, K^\times) \to \cdots.
+\]
+由伽罗瓦理论有 \(\mu_n^G = \mu_n\) 与 \((K^\times)^G = F^\times\)，而由 Hilbert 定理 90 有 \(H^1(G, K^\times) = 0\)，故这个正合序列成为
+\[
+1 \to \mu_n \to F^\times \xrightarrow{n} F^\times \to H^1(G, \mu_n) \to 0,
+\]
+这又等价于同构
+\[
+H^1(G, \mu_n) \cong F^\times/(F^\times)^n,
+\]
+其中 \((F^\times)^n\) 表示 \(F^\times\) 中元素的 \(n\) 次幂之群。这个同构可以用上面给出的连接同态的显式形式写清楚：对每个 \(a \in F^\times\) 与 \(\sigma \in G\)，\(K^\times\) 中的元素 \(\sqrt[n]{a}\) 在正合序列中映到 \(a\)，而
+\[
+\chi(\sigma) = \frac{\sigma(\sqrt[n]{a})}{\sqrt[n]{a}}
+\]
+定义了 \(H^1(G, \mu_n)\) 中的一个元素（参见习题 11）。这个同态的核是域 \(F(\sqrt[n]{a})\). 由上一段的结果，当 \(F\) 含有 \(n\) 次单位根时，扩张 \(L/F\) 是伽罗瓦群为次数整除 \(n\) 的循环群的伽罗瓦扩张，当且仅当对某个 \(a \in F^\times\) 有 \(L = F(\sqrt[n]{a})\). 此外 \(a\) 在 \(F^\times/(F^\times)^n\) 中的类唯一，即 \(a\) 在相差 \(F\) 中元素的 \(n\) 次幂的意义下唯一。这样的扩张称为 \textbf{Kummer 扩张}，参见第 14.7 节与习题 12。
+
+若 \(F\) 的特征是素数 \(p\)，则当 \(n\) 不被 \(p\) 整除时同样的论证适用，只需把 \(F\) 的代数闭包换成 \(F\) 的可分闭包（即 \(F\) 的最大可分代数扩张）。
+
+\noindent\textbf{例（转移同态）}
+
+设 \(G\) 是有限群，\(H\) 是子群。余限制定义了从 \(H^1(H, \mathbb{Q}/\mathbb{Z})\) 到 \(H^1(G, \mathbb{Q}/\mathbb{Z})\) 的同态，而由上面的例 4 这给出从 \(H^{ab}\) 到 \(G^{ab}\) 的同态。这给出同态
+\[
+\operatorname{Ver} : G^{ab} \to H^{ab},
+\]
+称为\textbf{转移}（或 Verlagerungen）同态（参见习题 14）。为使这个同态显式，考虑由上一节命题 23 之前例 4 中把 \(a \in \mathbb{Q}/\mathbb{Z}\) 映到 \(f_a \in M_1^G(\mathbb{Q}/\mathbb{Z})\) 的同态定义的短正合序列
+\[
+0 \to \mathbb{Q}/\mathbb{Z} \to M_1^G(\mathbb{Q}/\mathbb{Z}) \to M_1^G(\mathbb{Q}/\mathbb{Z})/(\mathbb{Q}/\mathbb{Z}) \to 0, \tag{17.22}
+\]
+（故对 \(g \in G\) 有 \(f_a(g) = g \cdot a\)）。这是 \(G\)-模从而也是 \(H\)-模的短正合序列。相应长正合序列（先对 \(H\) 再对 \(G\) 的上同调）的前几段给出交换图的两行
+\[
+\begin{array}{ccccccc}
+\cdots & \to & C^H & \xrightarrow{\delta^0} & H^1(H, \mathbb{Q}/\mathbb{Z}) & \to & 0\\
+& & \downarrow\operatorname{Cor} & & \downarrow\operatorname{Cor} & & \\
+\cdots & \to & C^G & \xrightarrow{\delta^0} & H^1(G, \mathbb{Q}/\mathbb{Z}) & \to & 0
+\end{array}
+\]
+（因为 \(H^1(H, M_1^G(\mathbb{Q}/\mathbb{Z})) = H^1(G, M_1^G(\mathbb{Q}/\mathbb{Z})) = 0\)，参见第 2 节习题 12）。设 \(\chi \in H^1(H, \mathbb{Q}/\mathbb{Z})\)，设 \(c \in C^H\) 是上面图中第一行满连接同态 \(\delta^0\) 映到 \(\chi\) 的元素。由交换性，\(\chi' = \operatorname{Cor}(\chi)\) 是第二行中元素 \(c' = \operatorname{Cor}(c) \in C^G\) 在连接同态 \(\delta^0\) 下的像。由上边界映射 \(\delta^0\) 的显式公式，若 \(f \in M_1^G(\mathbb{Q}/\mathbb{Z})\) 是（22）中映到 \(c'\) 的任意元素，则对唯一的 \(a' \in \mathbb{Q}/\mathbb{Z}\) 有 \(g \cdot f-f = f_{a'}\)，且对 \(g \in G\) 有 \(\chi'(g) = \delta^0(c')(g) = a'\). 由于 \(G\) 平凡地作用在 \(\mathbb{Q}/\mathbb{Z}\) 上，对任何 \(x \in G\) 有 \(f_{a'}(x) = x \cdot a' = a'\)，故函数 \(g \cdot f-f\) 事实上取常值 \(a'\)，从而可以在任何 \(x \in G\) 处求值以确定 \(\chi'(g)\) 的值。
+
+由于 \(c' = \sum_{i=1}^{m}g_i \cdot c \in C^G\)，其中 \(g_1, \ldots, g_m\) 是 \(H\) 在 \(G\) 中左陪集的代表元（参见命题 26 之前的例 4），这样的元素 \(f\) 由
+\[
+f = \sum_{i=1}^{m}g_i \cdot l
+\]
+给出，其中 \(l \in M_1^G(\mathbb{Q}/\mathbb{Z})\) 是（22）中映到 \(c\) 的任意元素。这个 \(l\) 可以用来如前面那样计算 \(c\) 的显式上边界：对唯一的 \(a \in \mathbb{Q}/\mathbb{Z}\) 有 \(h \cdot l-l = f_a\)，且对所有 \(h \in H\) 有 \(\chi(h) = a\). 如上所述，函数 \(g \cdot f-f\) 取常值 \(a\)，故在任何 \(x \in G\) 处求值即可确定 \(\chi'(g)\) 的值。在元素 \(1 \in G\) 上计算 \(g \cdot f-f\) 可知
+\[
+\chi'(g) = \sum_{i=1}^{m}l(gg_i)-\sum_{i=1}^{m}l(g_i).
+\]
+对 \(i = 1, \ldots, m\) 写
+\[
+gg_i = g_{\sigma(i)}h(g, g_i), \qquad h(g, g_i) \in H, \tag{17.23}
+\]
+注意所得的 \(g_{\sigma(i)}\) 之集是 \(\{g_1, \ldots, g_m\}\) 的某个置换。则
+\[
+\sum_{i=1}^{m}l(gg_i)-\sum_{i=1}^{m}l(g_i) = \sum_{i=1}^{m}\left[l(g_{\sigma(i)}h(g,g_i))-l(g_{\sigma(i)})\right] = \sum_{i=1}^{m}\chi(h(g, g_i))
+\]
+（因为如上所述，对任何 \(x \in G\) 有 \(\chi(h) = l(xh)-l(x)\)）。于是
+\[
+\chi'(g) = \prod_{i=1}^{m}h(g, g_i),
+\]
+故转移同态由公式
+\[
+\operatorname{Ver}(g) = \prod_{i=1}^{m}h(g, g_i) \tag{17.24}
+\]
+给出，其中元素 \(h(g, g_i) \in H\) 由等式（23）定义。注意这特别证明（24）中定义的映射是从 \(G^{ab}\) 到 \(H^{ab}\) 的同态，且不依赖于（23）中 \(H\) 在 \(G\) 中的代表元 \(g_i\) 的选取。直接证明这个映射是同态并不完全平凡。当 \(G\) 无限而 \(H\) 是 \(G\) 的有限指数子群时，同样的公式也定义转移同态。
+
+作为转移的一个例子，设 \(H = n\mathbb{Z}\)、\(G = \mathbb{Z}\)，并取 \(0, 1, 2, \ldots, n-1\) 作为 \(H\) 在 \(G\) 中的陪集代表元。若 \(g = 1\)，则对 \(i = 1, 2, \ldots, n-1\) 所有元素 \(h(g, g_i)\) 都是 0，而 \(h(1, n-1) = n\). 故从 \(\mathbb{Z}\) 到 \(n\mathbb{Z}\) 的转移映射把 1 映到 \(n\)，即就是乘以指数。类似地，从任何循环群 \(G\) 到指数为 \(n\) 的子群 \(H\) 的转移映射是 \(n\) 次幂映射。另见习题 8。
+
+对奇素数 \(p\) 的循环群 \(\mathbb{F}_p^\times\) 与子群 \(\{\pm1\}\)，可知转移映射是由
+\[
+\operatorname{Ver}(a) = a^{(p-1)/2} = \left(\frac{a}{p}\right) = \begin{cases}+1, & a \text{ 是平方},\\ -1, & a \text{ 不是平方}\end{cases}
+\]
+给出的同态 \(\operatorname{Ver} : \mathbb{F}_p^\times \to \{\pm1\}\)（符号 \(\left(\frac{a}{p}\right)\) 称为 \textbf{Legendre 符号}或二次剩余符号）。若改取元素 \(1, 2, \ldots, (p-1)/2\) 作为 \(\{\pm1\}\) 在 \(\mathbb{F}_p^\times\) 中的陪集代表元，我们看到
+\[
+\left(\frac{a}{p}\right) = (-1)^{m(a)},
+\]
+其中 \(m(a)\) 是 \(a, 2a, \ldots, (p-1)a/2\) 中其模 \(p\) 的最小正余数大于 \((p-1)/2\) 的元素个数（此时该元素与我们选取的某个陪集代表元相差 \(-1\)，从而在（24）的乘积中贡献一个因子 \(-1\)）。这个结果在初等数论中称为 \textbf{Gauss 引理}，可用来证明 Gauss 著名的二次互反律（另见习题 15）。
+
+下面我们用半直积给出 \(H^1(G, A)\) 的两个重要解释。若 \(A\) 是 \(G\)-模，设 \(E = A \rtimes G\) 是半直积，其中 \(A\) 在 \(E\) 中正规，且 \(G\)（看作 \(E\) 的子群）通过共轭对 \(A\) 的作用与它的 \(G\)-模作用相同：\(gag^{-1} = g \cdot a\). 用第 5.5 节的记号，\(E = A \rtimes_\varphi G\)，其中 \(\varphi\) 是由 \(G\)-模作用给出的从 \(G\) 到 \(\operatorname{Aut}(A)\) 的同态。特别地，\(E\) 是 \(A\) 与 \(G\) 的直积当且仅当 \(G\) 平凡地作用在 \(A\) 上。如第 5.5 节那样，我们把 \(E\) 的元素写成 \((a, g)\)（\(a \in A\)、\(g \in G\)），群运算为
+\[
+(a_1, g_1)(a_2, g_2) = (a_1+g_1a_2, g_1g_2).
+\]
+注意 \(A\) 用加法记号，而 \(G\) 与 \(E\) 用乘法记号。
+
+\begin{definition}
+设 \(X\) 是任意群，\(Y\) 是 \(X\) 的正规子群。列 \(1 \trianglelefteq Y \trianglelefteq X\) 的\textbf{稳定性群}是把 \(Y\) 映到自身且在两个因子 \(Y\) 与 \(X/Y\) 上都作为恒等映射作用的所有 \(X\) 的自同构之群，即
+\[
+\operatorname{Stab}(1 \trianglelefteq Y \trianglelefteq X) = \{\alpha \in \operatorname{Aut}(X) \mid \alpha(y) = y \text{ 对所有 } y \in Y，且 \alpha(x) \equiv x \bmod Y \text{ 对所有 } x \in X\}.
+\]
+\end{definition}
+
+在 \(Y\) 是 \(X\) 的阿贝尔正规子群这一特殊情形，由 \(Y\) 的元素共轭诱导出稳定列 \(1 \trianglelefteq Y \trianglelefteq X\) 的（内）自同构，此时 \(Y/C_Y(X)\) 同构于 \(\operatorname{Stab}(1 \trianglelefteq Y \trianglelefteq X)\) 的一个子群（其中 \(C_Y(X)\) 是 \(Y\) 中落在 \(X\) 的中心里的元素）。
+
+\begin{proposition}\label{pro:17.31}
+设 \(A\) 是 \(G\)-模，\(E = A \rtimes G\) 是相应的半直积。对每个上闭链 \(f \in Z^1(G, A)\)，定义
+\[
+\sigma_f : E \to E, \qquad \sigma_f((a, g)) = (a+f(g), g).
+\]
+则映射 \(f \mapsto \sigma_f\) 是从 \(Z^1(G, A)\) 到 \(\operatorname{Stab}(1 \trianglelefteq A \trianglelefteq E)\) 的群同构。在这个同构下，上边界子群 \(B^1(G, A)\) 映到稳定性群的子群 \(A/C_E(A)\).
+\end{proposition}
+
+\begin{proof}
+一个习题是验证上闭链条件蕴涵 \(\sigma_f\) 是稳定链 \(1 \trianglelefteq A \trianglelefteq E\) 的 \(E\) 的自同构。同样可以直接验证 \(\sigma_{f_1+f_2} = \sigma_{f_1} \circ \sigma_{f_2}\)，故映射 \(f \mapsto \sigma_f\) 是群同态。按 \(\sigma_f\) 的定义这个映射是单射。反之，设 \(\sigma \in \operatorname{Stab}(1 \trianglelefteq A \trianglelefteq E)\). 由于 \(\sigma\) 平凡地作用在 \(E/A\) 上，这个半直积中的每个元素 \((0, g)\) 在 \(\sigma\) 下映到同一 \(A\)-陪集中的另一个元素 \((a, g)\)；定义 \(f_\sigma : G \to A\) 为 \(f_\sigma(g) = a\). 若我们把 \(A\) 与 \(E\) 中形如 \((a, 1)\) 的元素等同，则 \(E\) 中的群运算表明 \(f_\sigma(g) = \sigma((0,g))(0,g)^{-1}\). 由于 \(\sigma\) 是 \(E\) 的稳定性自同构，容易验证 \(f_\sigma\) 满足上闭链条件。由定义立即有 \(\sigma_{f_\sigma} = \sigma\)，故映射 \(f \mapsto \sigma_f\) 是同构。
+
+现在 \(f\) 是上边界当且仅当存在某个 \(x \in A\) 使对所有 \(g \in G\) 有 \(f(g) = x-g \cdot x\). 于是 \(f\) 是上边界当且仅当 \(\sigma_f((a,g)) = (a+x-g \cdot x, g)\). 但用元素 \((x,1)\) 在 \(E\) 中共轭把 \((a,g)\) 映到同一个元素 \((a+x-g \cdot x, g)\)，故自同构 \(\sigma_f\) 就是用 \((x,1)\) 作共轭。这证明了命题中余下的论断。
+\end{proof}
+
+\begin{corollary}\label{cor:17.32}
+在命题 31 的记号下，用 \(\sigma_a\) 表示 \(E\) 中由 \(a \in A\) 作共轭给出的自同构。则上闭链 \(f_1\) 与 \(f_2\) 在 \(H^1(G, A)\) 中的上同类相同当且仅当对某个 \(a \in A\) 有 \(\sigma_{f_1} = \sigma_{f_2} \circ \sigma_a\)（即 \(\sigma_{f_1}\) 与 \(\sigma_{f_2}\) 相差一个内自同构）。
+\end{corollary}
+
+命题与推论表明 1-上闭链可以通过求稳定列 \(1 \trianglelefteq A \trianglelefteq E\) 的 \(E\) 的自同构来计算，反之亦然。第一上同调群于是由这些自同构模去内自同构给出，即这个列的「外稳定性自同构」群。
+
+\noindent\textbf{例}
+
+设 \(G = \mathbb{Z}_2\) 通过取逆作用在 \(A = \mathbb{Z}/4\mathbb{Z}\) 上。相应的半直积 \(E = A \rtimes G\) 是 8 阶二面体群，其自同构群同构于 \(D_8\)；把 \(E\) 看作 \(D_{16}\) 的正规（指数 2）子群，后者中的共轭限制到 \(E\) 上给出 \(E\) 的 8 个不同自同构（参见第 4.4 节命题 17）。\(E\) 的子群 \(A\) 在 \(E\) 中特征，故 \(E\) 的每个自同构都把 \(A\) 映到自身，从而也作用在 \(E/A\) 上（由于 \(|E/A| = 2\)，这个作用必然是平凡的）。一半自同构把 \(A\) 取逆，一半中心化 \(A\)；事实上 \(D_{16}\) 中的 8 阶循环子群（它包含 \(A\)）映到中心化 \(A\) 的 4 阶循环自同构群。于是 \(\operatorname{Stab}(1 \trianglelefteq A \trianglelefteq E) \cong \mathbb{Z}_4 \cong Z^1(G, A)\). 由于 \(E\) 的中心是 \(A\) 的 2 阶子群，有 \(|A/Z(E)| = 2 = |B^1(G, A)|\). 这证明 \(|H^1(G, A)| = 2\).
+
+在半直积 \(E\) 中，子群 \(G\) 是 \(A\) 的一个补，即 \(E = AG\) 且 \(A \cap G = 1\)；此外 \(G\) 的每个 \(E\)-共轭也是 \(A\) 的补。但 \(A\) 在 \(E\) 中可能有与 \(G\) 不共轭的补。我们对 \(H^1(G, A)\) 的第二个解释表明这个上同调群刻画了 \(E\) 中 \(A\) 的补的 \(E\)-共轭类。
+
+\begin{proposition}\label{pro:17.33}
+设 \(A\) 是 \(G\)-模，\(E = A \rtimes G\) 是半直积。对每个 1-上闭链 \(f\)，令
+\[
+G_f = \{(f(g), g) \mid g \in G\}.
+\]
+则 \(G_f\) 是 \(E\) 中 \(A\) 的补子群。映射 \(f \mapsto G_f\) 是从 \(Z^1(G, A)\) 到 \(E\) 中 \(A\) 的补之集的双射。两个补在 \(E\) 中共轭当且仅当它们对应的 1-上闭链在 \(H^1(G, A)\) 中属于同一个上同类，故 \(H^1(G, A)\) 与 \(A\) 的补的 \(E\)-共轭类之集之间存在双射。
+\end{proposition}
+
+\begin{proof}
+由上闭链条件，
+\[
+(f(g), g)(f(h), h) = (f(g)+g f(h), gh) = (f(g)+g \cdot f(h), gh) = (f(gh), gh),
+\]
+由此 \(G_f\) 对 \(E\) 中的群运算封闭。如前所述，每个上闭链必有 \(f(1) = 0\)，故 \(G_f\) 含 \(E\) 的单位元 \((0,1)\). \(E\) 中 \((f(g), g)\) 的逆是 \((f(g^{-1}), g^{-1})\)，故 \(G_f\) 对取逆封闭。这证明 \(G_f\) 是 \(E\) 的子群。由于 \(G\) 的不同元素代表 \(A\) 在 \(E\) 中的不同陪集，\(G_f\) 是 \(E\) 中 \(A\) 的补。不同的上闭链给出不同的陪集代表元，故它们确定不同的补。
+
+反之，若 \(C\) 是 \(A\) 在 \(E\) 中的任意补，则对每个 \(g \in G\)，\(C\) 含 \(Ag\) 的唯一陪集代表元 \(a_gg\). 由于 \(C\) 对群运算封闭，元素 \((a_gg)(a_hh) = (a_g+ga_h)gh\) 代表陪集 \(Agh\)，故 \(a_{gh} = a_g+ga_h\). 这表明由 \(f(g) = a_g\) 给出的映射 \(f : G \to A\) 是上闭链，从而 \(C = G_f\). 因此 1-上闭链与 \(E\) 中 \(A\) 的补之间存在双射。
+
+由于 \(\operatorname{Stab}(1 \trianglelefteq A \trianglelefteq E)\) 正规化 \(A\)，它置换 \(E\) 中 \(A\) 的补。在命题 31 的记号下，对 1-上闭链 \(f_1\) 与 \(f_2\)，由定义立即有 \(\sigma_{f_1}(G_{f_2}) = G_{f_1+f_2}\). 这表明 \(\operatorname{Stab}(1 \trianglelefteq A \trianglelefteq E)\) 在 \(A\) 的补之集上的置换作用是它的（左）正则表示。此外，若 \(a \in A\)、\(\sigma_a\) 是用 \(a\) 作共轭的稳定性自同构，则
+\[
+\sigma_a(G_f) = G_{f+\beta_a}, \tag{17.25}
+\]
+其中 \(\beta_a\) 是 1-上边界 \(\beta_a(g) = a-g \cdot a\). 由于 \(G_f\) 是 \(A\) 的补，任何 \(e \in E\) 都可以写成 \(e = ag\)（\(a \in A\)、\(g \in G_f\)）。则 \(eG_fe^{-1} = aG_fa^{-1}\)，即 \(G_f\) 的 \(E\)-共轭就是 \(G_f\) 的 \(A\)-共轭。由（25），补 \(G_{f_1}\) 与 \(G_{f_2}\) 在 \(E\) 中共轭当且仅当对某个 \(a \in A\) 有 \(G_{f_2} = G_{f_1+\beta_a}\)，即 \(f_2 = f_1+\beta_a\). 这表明两个补在 \(E\) 中共轭当且仅当它们对应的上闭链相差一个上边界，即代表 \(H^1(G, A)\) 中的同一个上同类，证明完毕。
+\end{proof}
+
+\begin{corollary}\label{cor:17.34}
+在命题 33 的记号下，\(A\) 的所有补在 \(E\) 中共轭当且仅当 \(H^1(G, A) = 0\).
+\end{corollary}
+
+\begin{corollary}\label{cor:17.35}
+若 \(A\) 是阶与 \(|G|\) 互素的有限阿贝尔群，则任何半直积 \(E = A \rtimes G\) 中 \(A\) 的所有补都在 \(E\) 中共轭。
+\end{corollary}
+
+\noindent\textbf{例}
+
+（1）设 \(A = \langle a\rangle\) 与 \(G = \langle g\rangle\) 都是 2 阶循环群。\(G\) 必然平凡地作用在 \(A\) 上，故 \(A \rtimes G = A \times G\) 是 Klein 四元群。这里 \(A \rtimes G\) 阿贝尔，故每个子群只与自身共轭；而由于 \(H^1(G, A) = \operatorname{Hom}(\mathbb{Z}_2, \mathbb{Z}/2\mathbb{Z})\) 的阶为 2，\(E\) 中 \(A\) 的补恰有两个，即 \(\langle g\rangle\) 与 \(\langle ag\rangle\).
+
+（2）若 \(A = \langle a\rangle\) 是 2 阶循环群、\(G = \langle x\rangle \times \langle y\rangle\) 是 Klein 四元群，则如前 \(G\) 必然平凡地作用在 \(A\) 上，故 \(H^1(G, A) = \operatorname{Hom}(\mathbb{Z}_2 \times \mathbb{Z}_2, \mathbb{Z}/2\mathbb{Z})\) 的阶为 4，故 \(A\) 在 \(A \times G\) 中有 4 个补。
+
+（3）对命题 33 的一个简单应用如下：设 \(A = \langle r\rangle\) 是 4 阶循环群，\(G = \langle s\rangle\) 是 2 阶循环群，通过取逆作用在 \(A\) 上：\(srs^{-1} = r^{-1}\)，如推论 32 之后的例子中那样。则 \(A \rtimes G\) 是 8 阶二面体群 \(D_8\). 子群 \(A\) 在 \(D_8\) 中有四个补，即由 \(A\) 外四个 2 阶元素 \(\langle s\rangle\)、\(\langle r^2s\rangle\)、\(\langle rs\rangle\)、\(\langle r^3s\rangle\) 分别生成的群。前两个与后两个在 \(D_8\) 中共轭（两者都通过 \(r\) 共轭），但 \(\langle s\rangle\) 不与 \(\langle rs\rangle\) 共轭。故 \(A\) 在 \(A \rtimes G\) 中有 2 个补的共轭类，从而 \(H^1(\mathbb{Z}_2, \mathbb{Z}/4\mathbb{Z})\) 的阶为 2，这也由第 2 节中循环群上同调的计算推出。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(G\) 是 2 阶循环群，\(A\) 是 \(G\)-模。对下列每种情形计算 \(Z^1(G, A)\)、\(B^1(G, A)\)、\(H^1(G, A)\) 的同构型：
+
+（a）\(A = \mathbb{Z}/4\mathbb{Z}\)（平凡作用）；（b）\(A = \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}\)（平凡作用）；（c）\(A = \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}\)（任意非平凡作用）。
+
+\item 设 \(p\) 是素数，\(P\) 是 \(p\)-群。
+
+（a）证明 \(H^1(P, \mathbb{F}_p) \cong P/\Phi(P)\)，其中 \(\Phi(P)\) 是 \(P\) 的 Frattini 子群（参见第 6.1 节习题）。
+
+（b）由此证明 \(H^1(P, \mathbb{F}_p)\) 作为 \(\mathbb{F}_p\) 上向量空间的维数等于 \(P\) 的最小生成元个数。〔利用第 6.1 节习题 26（c）。〕
+
+\item 若 \(G\) 是 2 阶循环群，通过取逆作用在 \(\mathbb{Z}\) 上，证明 \(|H^1(G, \mathbb{Z})| = 2\).〔证明在 \(E = \mathbb{Z} \rtimes G\) 中 \(E-\mathbb{Z}\) 的每个元素都是 2 阶的，且这个陪集中有两个共轭类。〕
+
+\item 设 \(A\) 是 Klein 四元群，\(G = \operatorname{Aut}(A) \cong S_3\) 以自然方式作用在 \(A\) 上。证明 \(H^1(G, A) = 0\).〔证明在半直积 \(E = A \rtimes G\) 中，\(G\) 是 \(E\) 的某个 Sylow 3-子群的正规化子。用 Sylow 定理证明 \(E\) 中 \(A\) 的所有补都共轭。〕
+
+\item 设 \(G\) 是 2 阶循环群，作用在阶为 \(2^n\) 的初等阿贝尔 2-群 \(A\) 上。证明 \(H^1(G, A) = 0\) 当且仅当 \(n = 2k\) 且 \(|A^G| = 2^k\).〔在 \(E = A \rtimes G\) 中证明 \((a, x)\) 是 2 阶元素当且仅当 \(a \in A^G\)，其中 \(G = \langle x\rangle\). 然后比较 \(A\) 的补的个数与 \(x\) 的 \(E\)-共轭的个数。〕
+
+\item （\textbf{Thompson 转移引理}）设 \(G\) 是偶数阶有限群，\(T\) 是 \(G\) 的 Sylow 2-子群，\(M \leq T\) 且 \([T:M] = 2\)，\(x\) 是 \(G\) 中 2 阶元素。证明若 \(G\) 没有指数为 2 的子群，则 \(M\) 含有 \(x\) 的某个 \(G\)-共轭，步骤如下：
+
+（a）设 \(\operatorname{Ver} : G/[G,G] \to T/[T,T]\) 是转移同态。证明
+\[
+\operatorname{Ver}(x) \equiv \prod_g g^{-1}xg \bmod [T,T],
+\]
+其中乘积取遍在 \(x\) 的左乘下固定的陪集 \(gT\) 的代表元。
+
+（b）证明在左乘下 \(x\) 固定 \(T\) 在 \(G\) 中的奇数个左陪集。
+
+（c）证明若 \(G\) 没有指数为 2 的子群，则 \(\operatorname{Ver}(x) \in M/[T,T]\). 由此证明对某个 \(g \in G\) 有 \(g^{-1}xg \in M\).〔在 2 阶群 \(T/M\) 中考虑乘积 \(\operatorname{Ver}(x)\).〕
+
+\item 设 \(H\) 是 \(G\) 的子群，\(x \in G\). 转移 \(\operatorname{Ver} : G/[G,G] \to H/[H,H]\) 可以如下计算：设 \(O_1, O_2, \ldots, O_k\) 是 \(x\) 通过左乘作用在 \(H\) 于 \(G\) 中的左陪集上的不同轨道，\(O_i\) 的长度为 \(n_i\)，\(g_iH\) 是 \(O_i\) 的任意代表元。
+
+（a）证明 \(O_i = \{g_iH, xg_iH, x^2g_iH, \ldots, x^{n_i-1}g_iH\}\) 且 \(g_i^{-1}x^{n_i}g_i \in H\).
+
+（b）证明 \(\operatorname{Ver}(x) = \prod_{i=1}^{k}g_i^{-1}x^{n_i}g_i \bmod [H,H]\).
+
+\item 假设 \(G\) 的中心 \(Z(G)\) 的指数为 \(m\)。证明对所有 \(x \in G\) 有 \(\operatorname{Ver}(x) = x^m\)，其中 \(\operatorname{Ver}\) 是从 \(G/[G,G]\) 到 \(Z(G)\) 的转移同态。〔利用上一习题。〕
+
+\item 设 \(p\) 是素数，\(n \geq 3\)，\(V\) 是 \(\mathbb{F}_p\) 上以 \(v_1, v_2, \ldots, v_n\) 为基的 \(n\) 维向量空间。设 \(V\) 是对称群 \(S_n\) 的模，其中每个 \(\sigma \in S_n\) 以自然方式置换基：\(\sigma(v_i) = v_{\sigma(i)}\).
+
+（a）证明 \(|H^1(S_n, V)| = \begin{cases}2, & p \neq 2,\\ 1, & p = 2.\end{cases}\)〔利用 Shapiro 引理。〕
+
+（b）证明对所有素数 \(p\) 有 \(H^1(A_n, V) = 0\).
+
+\item 设 \(V\) 是上一习题中描述的 \(S_n\)（\(n \geq 3\)）在 \(\mathbb{F}_2\) 上的自然置换模，\(W = \{a_1v_1+\cdots+a_nv_n \mid a_1+\cdots+a_n = 0\}\)（\(V\) 的「迹零」子模）。证明若 \(n\) 为偶数则 \(H^1(A_n, W) \neq 0\).〔证明在半直积 \(V \rtimes A_n\) 中元素 \(v_1\) 诱导出 \(E = W \rtimes A_n\) 的一个非平凡外自同构且稳定列 \(1 \trianglelefteq W \trianglelefteq E\).〕
+
+\item 设 \(F\) 是特征不整除 \(n\) 的域，\(a\) 是 \(F\) 中任意非零元素。设 \(K\) 是含 \(x^n-a\) 的分裂域的 \(F\) 的伽罗瓦扩张，\(\sqrt[n]{a}\) 是 \(a\) 在 \(K\) 中固定的一个 \(n\) 次根。
+
+（a）证明 \(\sigma(\sqrt[n]{a})/\sqrt[n]{a}\) 是 \(n\) 次单位根。
+
+（b）证明函数 \(f(\sigma) = \sigma(\sqrt[n]{a})/\sqrt[n]{a}\) 是 \(G\) 的、取值在 \(K\) 中 \(n\) 次单位根群 \(\mu_n\) 中的 1-上闭链（注意并不假设 \(\mu_n\) 含于 \(F\)）。
+
+（c）证明在 \(K\) 中选取不同的 \(n\) 次根 \(a\) 所得的 1-上闭链与（b）中的 1-上闭链相差一个 1-上边界。
+
+\item 设 \(F\) 是特征不整除 \(n\) 且含有 \(n\) 次单位根的域，假设 \(L/F\) 是伽罗瓦群为指数整除 \(n\) 的阿贝尔群的伽罗瓦扩张。证明 \(L\) 是次数为 \(n\) 的因子的 \(F\) 的循环扩张的合成，并由此证明 \(F^\times/(F^\times)^n\) 的子群与这样的扩张 \(L\) 之间存在双射。
+
+\item 扩张 \(\mathbb{C}/\mathbb{R}\) 的伽罗瓦群是由复共轭 \(\tau\) 生成的 2 阶循环群 \(G = \langle\tau\rangle\). 证明 \(H^2(G, \mathbb{C}^\times) \cong \mathbb{R}^\times/\mathbb{R}_{>0} \cong \mathbb{Z}/2\mathbb{Z}\)，其中 \(\mathbb{R}_{>0}\) 表示正实数之群。
+
+\item 对任何群 \(G\) 用 \(\widehat G = \operatorname{Hom}(G, \mathbb{Q}/\mathbb{Z})\) 表示它的对偶群。
+
+（a）若 \(\varphi : G_1 \to G_2\) 是群同态，证明与 \(\varphi\) 复合诱导出对偶群上的同态 \(\widehat\varphi : \widehat{G_2} \to \widehat{G_1}\).
+
+（b）对 \(G\) 中任意固定的 \(g\)，证明在 \(g\) 处求值给出从 \(\widehat G\) 到 \(\mathbb{Q}/\mathbb{Z}\) 的同态 \(\varphi_g\).
+
+（c）证明把 \(g \in G\) 映到（b）中的 \(\widehat\varphi_g\) 的映射定义了从 \(G\) 到其双对偶 \(\widehat{\widehat G}\) 的同态。
+
+（d）证明若 \(G\) 是有限阿贝尔群，则（c）中的同态是 \(G\) 与其双对偶的同构。（由第 5.2 节习题 14，\(G\) 与其对偶 \(\widehat G\)（非典范地）同构。这表明 \(G\) 与其双对偶典范同构——这个同构不依赖于 \(G\) 的生成元的任何选取。）
+
+（e）若 \(\psi : G_2 \to G_1\) 是同态，其中 \(G_1\) 与 \(G_2\) 是有限阿贝尔群，则由（a）与（d）诱导出同态 \(\varphi : G_1 \to G_2\). 证明 \(\varphi(g_1) = g_2\) 当且仅当对 \(\chi' = \psi(\chi)\) 有 \(\chi(g_2) = \chi'(g_1)\).
+
+\item 用 Gauss 引理计算从 \(\mathbb{F}_p^\times\) 到 \(\{\pm1\}\) 的转移映射，证明 2 是奇素数 \(p\) 的模平方当且仅当 \(p \equiv \pm1 \pmod 8\).〔数一数 \(2, 4, \ldots, p-1\) 中有多少个大于 \((p-1)/2\) 的元素。〕
+\end{enumerate}
+\section{群扩张、因子集与 \(H^2(G,A)\)}
+
+若 \(A\) 是 \(G\)-模，则由等式（18）中上边界映射 \(d_2\) 的定义，从 \(G \times G\) 到 \(A\) 的函数 \(f\) 是 2-上闭链当且仅当它满足恒等式
+\[
+f(g, h)+f(gh, k) = g \cdot f(h, k)+f(g, hk) \qquad \text{对所有 } g, h, k \in G. \tag{17.26}
+\]
+等价地，2-上闭链由 \(A\) 中一族元素 \(\{a_{g,h}\}_{g,h \in G}\) 满足 \(a_{g,h}+a_{gh,k} = g \cdot a_{h,k}+a_{g,hk}\)（\(g, h, k \in G\)）确定（此时 2-上闭链就是把 \((g,h)\) 映到 \(a_{g,h}\) 的函数）。
+
+2-上链 \(f\) 是上边界，若存在函数 \(f_1 : G \to A\) 使
+\[
+f(g, h) = g f_1(h)-f_1(gh)+f_1(g) \qquad \text{对所有 } g, h \in G, \tag{17.27}
+\]
+即 \(f\) 是 1-上链 \(f_1\) 在 \(d_1\) 下的像。
+
+本节的主要结果之一是在 2-上闭链 \(Z^2(G, A)\) 与由 \(A\) 对 \(G\) 的群扩张相关联的因子集之间建立联系，后者在考察定义扩张中乘法时选取不同陪集代表元的效果时出现。特别地，我们将证明由 \(A\) 对 \(G\) 的群扩张（\(G\) 在 \(A\) 上的作用固定）的等价类与 \(H^2(G, A)\) 的元素之间存在双射。
+
+我们先观察关于扩张的一些基本事实。设 \(E\) 是 \(G\) 由 \(A\) 的任意群扩张，
+\[
+1 \to A \xrightarrow{\iota} E \xrightarrow{\pi} G \to 1. \tag{17.28}
+\]
+扩张（28）如下确定 \(G\) 在 \(A\) 上的一个作用。对每个 \(g \in G\)，设 \(e_g\) 是 \(E\) 中在 \(\pi\) 下映到 \(g\) 的元素（这样一组 \(G\) 在 \(E\) 中的代表元的选取称为 \(\pi\) 的一个集合论截面）。元素 \(e_g\) 通过共轭作用在 \(E\) 的正规子群 \(\iota(A)\) 上，把 \(\iota(a)\) 映到 \(e_g\iota(a)e_g^{-1}\). \(E\) 中任何其他映到 \(g\) 的元素都具有形式 \(e_g\iota(a_1)\)（某个 \(a_1 \in A\)），而由于 \(\iota(A)\) 阿贝尔，用这个元素在 \(\iota(A)\) 上作共轭与用 \(e_g\) 作共轭相同，故不依赖于 \(g\) 的代表元的选取。因此 \(G\) 作用在 \(\iota(A)\) 上，从而（由于 \(\iota\) 是单射）也作用在 \(A\) 上。由于共轭是自同构，扩张（28）把 \(A\) 定义为一个 \(G\)-模。
+
+回忆第 10.5 节：两个扩张 \(1 \to A \xrightarrow{\iota_1} E_1 \xrightarrow{\pi_1} G \to 1\) 与 \(1 \to A \xrightarrow{\iota_2} E_2 \xrightarrow{\pi_2} G \to 1\) 称为\textbf{等价}，若存在群同构 \(\beta : E_1 \to E_2\) 使下图交换：
+\[
+\begin{array}{ccccccc}
+1 & \to & A & \xrightarrow{\iota_1} & E_1 & \xrightarrow{\pi_1} & G \to 1\\
+& & \downarrow 1 & & \downarrow\beta & & \downarrow 1\\
+1 & \to & A & \xrightarrow{\iota_2} & E_2 & \xrightarrow{\pi_2} & G \to 1
+\end{array} \tag{17.29}
+\]
+此时我们简称 \(\beta\) 是两个扩张之间的等价。如第 10.5 节所述，扩张的等价性自反、对称、传递。我们还观察到：
+
+\noindent\textbf{等价的扩张在 \(A\) 上定义相同的 \(G\)-模结构。}
+
+为看出这一点，设（29）是等价，\(g\) 是 \(G\) 中任意元素，\(e_g\) 是 \(E_1\) 中在 \(\pi_1\) 下映到 \(g\) 的任意元素。由 \(E_1\) 中共轭给出的 \(g\) 在 \(A\) 上的作用把每个 \(a\) 映到 \(\iota_1^{-1}(e_g\iota_1(a)e_g^{-1})\). 令 \(e'_g = \beta(e_g)\). 由于图表交换，\(\pi_2(e'_g) = g\)，故第二个扩张中 \(g\) 在 \(A\) 上的作用由用 \(e'_g\) 作共轭给出。这个共轭把 \(a\) 映到 \(\iota_2^{-1}(e'_g\iota_2(a)e_g'^{-1})\). 由于 \(\iota_1, \iota_2, \beta\) 都是单射，\(g\) 对 \(a\) 的这两个作用相等当且仅当它们在 \(E_2\) 中有相同的像，即 \(\beta(\iota_1(\iota_1^{-1}(e_g\iota_1(a)e_g^{-1}))) = e'_g\iota_2(a)e_g'^{-1}\). 这个等式由 \(e'_g\) 的定义与图表的交换性立即推出。
+
+下面我们看（28）中的扩张如何定义一个 \(Z^2(G, A)\) 中的 2-上闭链。为简单起见，我们用 \(\iota\) 把 \(A\) 与 \(E\) 的子群等同，并用 \(\pi\) 把 \(G\) 与 \(E/A\) 等同。
+
+\begin{definition}
+满足 \(\pi \circ \mu(g) = g\) 且 \(\mu(1) = 0\) 的映射 \(\mu : G \to E\)（即对每个 \(g \in G\)，\(\mu(g)\) 是 \(E\) 的陪集 \(Ag\) 的唯一代表元，且 \(E\) 的单位元（即 \(A\) 的零元）代表单位陪集）称为 \(\pi\) 的\textbf{正规化截面}。
+\end{definition}
+
+固定（28）中 \(\pi\) 的一个截面 \(\mu\). \(E\) 的每个元素都可以唯一地写成 \(a\mu(g)\)（\(a \in A\)、\(g \in G\)）的形式。对 \(g, h \in G\)，\(E\) 中的乘积 \(\mu(g)\mu(h)\) 落在陪集 \(Agh\) 中，故存在唯一的元素 \(f(g,h) \in A\) 使
+\[
+\mu(g)\mu(h) = f(g,h)\mu(gh) \qquad \text{对所有 } g, h \in G. \tag{17.30}
+\]
+若此外 \(\mu\) 在单位元处正规化，我们还有
+\[
+f(g, 1) = 0 = f(1, g) \qquad \text{对所有 } g \in G. \tag{17.31}
+\]
+
+\begin{definition}
+由等式（30）定义的函数 \(f\) 称为扩张 \(E\) 的、与截面 \(\mu\) 相关联的\textbf{因子集}。若 \(f\) 还满足（31），则称 \(f\) 是\textbf{正规化因子集}。
+\end{definition}
+
+我们将在随后的例子中看到，不同的截面 \(\mu\) 可能给出相同的因子集 \(f\).
+
+现在验证因子集 \(f\) 事实上是 2-上闭链。先注意 \(E\) 中的群运算可以写成
+\[
+(a_1\mu(g))(a_2\mu(h)) = (a_1+\mu(g)a_2\mu(g)^{-1})\mu(g)\mu(h) = (a_1+g \cdot a_2)\mu(g)\mu(h) = (a_1+g \cdot a_2+f(g,h))\mu(gh), \tag{17.32}
+\]
+其中 \(g \cdot a_2\) 表示由 \(E\) 中共轭给出的 \(g\) 在 \(a_2\) 上的 \(G\)-模作用。现在利用（32）与 \(E\) 中的结合律，用两种不同方式计算乘积 \(\mu(g)\mu(h)\mu(k)\)：
+\[
+(\mu(g)\mu(h))\mu(k) = (f(g,h)+f(gh,k))\mu(ghk), \tag{17.33}
+\]
+\[
+\mu(g)(\mu(h)\mu(k)) = (gf(h,k)+f(g,hk))\mu(ghk).
+\]
+由此（33）中两个右端的 \(A\)-因子对所有 \(g, h, k \in G\) 相等，而这正是 \(f\) 的 2-上闭链条件（26）。这表明与扩张 \(E\) 及任意截面选取相关联的因子集是 \(Z^2(G, A)\) 中的元素。下面我们看因子集 \(f\) 如何依赖于截面 \(\mu\) 的选取。设 \(\mu_1\) 是同一扩张 \(E\) 的另一个截面，\(f'\) 是与之关联的因子集。则对所有 \(g \in G\)，\(\mu(g)\) 与 \(\mu_1(g)\) 都在同一陪集 \(Ag\) 中，故存在函数 \(f_1 : G \to A\) 使 \(\mu_1(g) = f_1(g)\mu(g)\) 对所有 \(g\) 成立。则
+\[
+\mu_1(g)\mu_1(h) = f'(g,h)\mu_1(gh) = (f'(g,h)+f_1(gh))\mu(gh),
+\]
+另一方面
+\[
+\mu_1(g)\mu_1(h) = (f_1(g)\mu(g))(f_1(h)\mu(h)) = (f_1(g)+g \cdot f_1(h))(\mu(g)\mu(h)) = (f_1(g)+g \cdot f_1(h)+f(g,h))\mu(gh).
+\]
+比较这两个表达式中 \(\mu_1(g)\mu_1(h)\) 的 \(A\)-因子可知
+\[
+f'(g,h) = f(g,h)+(gf_1(h)-f_1(gh)+f_1(g)) \qquad \text{对所有 } g, h \in G,
+\]
+换句话说 \(f\) 与 \(f'\) 相差 \(f_1\) 的 2-上边界（如（27）中那样）。
+
+我们已经证明：与 \(E\) 的扩张相对应的、由不同截面选取所得的因子集给出 \(Z^2(G, A)\) 中彼此相差 \(B^2(G, A)\) 中上边界的 2-上闭链。故与扩张 \(E\) 相关联的是 \(H^2(G, A)\) 中一个良定义的上同类，它由（30）中对任意截面 \(\mu\) 的因子集确定。
+
+若由 \(A\) 对 \(G\) 的扩张 \(E\) 是\textbf{分裂}扩张（即 \(E = A \rtimes G\) 是 \(G\) 由 \(A\) 的半直积，其中共轭作用就是给定的 \(G\) 在 \(A\) 上的作用），则存在 \(G\) 的截面 \(\mu\) 是群同态 \(G \to E\). 此时（30）中的因子集 \(f\) 恒为 0：对所有 \(g, h \in G\) 有 \(f(g,h) = 0\). 故由分裂扩张定义的 \(H^2(G, A)\) 中的上同类是平凡类。
+
+现在设 \(\beta\) 是（28）中扩张与扩张 \(E'\) 之间的等价：
+\[
+\begin{array}{ccccccc}
+1 & \to & A & \xrightarrow{\iota} & E & \xrightarrow{\pi} & G \to 1\\
+& & \downarrow 1 & & \downarrow\beta & & \downarrow 1\\
+1 & \to & A & \xrightarrow{\iota'} & E' & \xrightarrow{\pi'} & G \to 1.
+\end{array}
+\]
+若 \(\mu\) 是 \(\pi\) 的截面，则 \(\mu_1 = \beta \circ \mu\) 是 \(\pi'\) 的截面，故刚才证明的结果可以用来确定与 \(E'\) 对应的 \(H^2(G, A)\) 中的上同类。把同态 \(\beta\) 应用于等式（30）给出
+\[
+\beta(\mu(g))\beta(\mu(h)) = \beta(f(g,h))\beta(\mu(gh)) \qquad \text{对所有 } g, h \in G.
+\]
+由于 \(\beta\) 限制到 \(A\) 上是恒等映射，这就是
+\[
+\mu_1(g)\mu_1(h) = f(g,h)\mu_1(gh) \qquad \text{对所有 } g, h \in G,
+\]
+这表明与 \(\mu_1\) 关联的 \(E'\) 的因子集与与 \(\mu\) 关联的 \(E\) 的因子集相同。这证明等价的扩张定义 \(H^2(G, A)\) 中相同的上同类。
+
+下面我们说明这个过程可以反过来：给定 \(H^2(G, A)\) 中的一个类，我们构造一个扩张 \(E_f\)，其相应的因子集落在给定的类中。这个过程推广了第 5.5 节的半直积构造（后者是 \(f\) 为零上闭链、即平凡类这一特殊情形）。
+
+先注意，任何由如上扩张的因子集（其中截面 \(\mu\) 正规化）产生的 2-上闭链都满足（31）中的条件。
+
+\begin{definition}
+满足对所有 \(g \in G\) 有 \(f(g,1) = 0 = f(1,g)\) 的 2-上闭链 \(f\) 称为\textbf{正规化 2-上闭链}。
+\end{definition}
+
+当 \(f\) 是正规化上闭链时 \(E_f\) 的构造稍简单，为简单起见我们只指出这种情形下的构造（\(f\) 不正规化时所需的小修改在习题 4 中指出）。
+
+我们先说明任何 2-上闭链都与某个正规化 2-上闭链属于同一个上同类。设 \(d_1f_1\) 是 \(G\) 上取值为 \(f(1,1)\) 的常函数 \(f_1\) 的 2-上边界。则 \(f(1,1) = d_1f_1(1,1)\)，且由 2-上闭链条件容易验证 \(f-d_1f_1\) 是正规化的。
+
+因此我们可以假设 \(H^2(G, A)\) 中的上同类由正规化 2-上闭链 \(f\) 代表。设 \(E_f\) 是集合 \(A \times G\)，在 \(E_f\) 上定义二元运算
+\[
+(a_1, g)(a_2, h) = (a_1+g \cdot a_2+f(g,h),\ gh), \tag{17.34}
+\]
+其中照例 \(g \cdot a_2\) 表示 \(G\) 在 \(A\) 上的模作用。容易验证群公理成立：由于 \(f\) 正规化，单位元是 \((0,1)\)，逆元由
+\[
+(a, g)^{-1} = (-g^{-1} \cdot a-g^{-1} \cdot f(g, g^{-1}),\ g^{-1}) \tag{17.35}
+\]
+给出（原文此处公式从略，按（34）与正规化条件重建）。上闭链条件通过与（32）、（33）类似的计算蕴涵结合律——细节留作习题。
+
+由于 \(f\) 是正规化 2-上闭链，\(A^* = \{(a,1) \mid a \in A\}\) 是 \(E_f\) 的子群，且映射 \(\iota^* : a \mapsto (a,1)\) 是从 \(A\) 到 \(A^*\) 的同构。此外由（34）与（35）推出
+\[
+(0, g)(a, 1)(0, g)^{-1} = (g \cdot a,\ 1) \qquad \text{对所有 } g \in G \text{ 与 } a \in A. \tag{17.36}
+\]
+由于 \(E_f\) 由 \(A^*\) 连同元素 \((0,g)\)（\(g \in G\)）生成，（36）蕴涵 \(A^*\) 是 \(E_f\) 的正规子群。进一步，由（34）立即看出映射 \(\pi^* : (a,g) \mapsto g\) 是从 \(E_f\) 到 \(G\) 的满同态，其核为 \(A^*\)，即 \(E_f/A^* \cong G\). 于是
+\[
+1 \to A \xrightarrow{\iota^*} E_f \xrightarrow{\pi^*} G \to 1 \tag{17.37}
+\]
+是 \(G\) 由 \(A\) 的一个具体的扩张，其中（36）还保证由这个扩张中共轭给出的 \(G\) 在 \(A\) 上的作用，就是确定 \(H^2(G, A)\) 中 2-上闭链 \(f\) 时指定的模作用。扩张序列（37）表明这个扩张有正规化截面 \(\mu(g) = (0,g)\)，其相应的正规化因子集是 \(f\).
+
+注意这不仅证明 \(H^2(G, A)\) 中每个上同类都来自某个扩张 \(E\)，还证明每个正规化 2-上闭链都作为某个扩张的正规化因子集出现。
+
+最后，设 \(f'\) 是与 \(f\) 同属 \(H^2(G, A)\) 中同一上同类的另一个正规化 2-上闭链，\(E_{f'}\) 是相应的扩张。若 \(f\) 与 \(f'\) 相差 \(f_1 : G \to A\) 的上边界，即对所有 \(g, h \in G\) 有 \(f(g,h)-f'(g,h) = gf_1(h)-f_1(gh)+f_1(g)\). 取 \(g = h = 1\) 可知 \(f_1(1) = 0\). 定义
+\[
+\beta : E_f \to E_{f'}, \qquad \beta((a,g)) = (a+f_1(g), g).
+\]
+显然 \(\beta\) 是双射，且
+\[
+\beta((a_1,g)(a_2,h)) = \beta((a_1+g \cdot a_2+f(g,h), gh)) = (a_1+g \cdot a_2+f(g,h)+f_1(gh), gh)
+\]
+\[
+= (a_1+f_1(g)+g \cdot (a_2+f_1(h))+f'(g,h), gh) = (a_1+f_1(g), g)(a_2+f_1(h), h) = \beta((a_1,g))\beta((a_2,h)),
+\]
+这表明 \(\beta\) 是从 \(E_f\) 到 \(E_{f'}\) 的同构。\(\beta\) 在 \(A\) 上的限制由 \(\beta((a,1)) = (a+f_1(1), 1) = (a,1)\) 给出，故 \(\beta\) 是 \(A\) 上的恒等映射。类似地 \(\beta\) 是 \((a,g)\) 第二个分量上的恒等映射，故 \(\beta\) 诱导商 \(G\) 上的恒等映射。由此 \(\beta\) 定义扩张 \(E_f\) 与 \(E_{f'}\) 之间的等价。这表明扩张 \(E_f\) 的等价类只依赖于 \(f\) 在 \(H^2(G, A)\) 中的上同类。
+
+我们把这段讨论总结为下述定理。
+
+\begin{theorem}\label{thm:17.36}
+设 \(A\) 是 \(G\)-模。则
+
+（1）函数 \(f : G \times G \to A\) 是 \(G\) 由 \(A\) 的某个扩张 \(E\)（共轭由 \(A\) 上的 \(G\)-模作用给出）的正规化因子集，当且仅当 \(f\) 是 \(Z^2(G, A)\) 中的正规化 2-上闭链。
+
+（2）如（1）中的扩张 \(E\) 的等价类与 \(H^2(G, A)\) 中的上同类之间存在双射。这个双射把扩张 \(E\) 映到 \(E\) 的、与 \(G\) 到 \(E\) 的任意正规化截面 \(\mu\) 相关联的正规化因子集 \(f\) 的类，并把 \(H^2(G, A)\) 中的上同类 \(c\) 映到由该类的任意正规化上闭链 \(f\) 通过扩张（37）定义的扩张 \(E_f\).
+
+（3）在（2）的双射下，分裂扩张对应平凡上同类。
+\end{theorem}
+
+\begin{corollary}\label{cor:17.37}
+\(G\) 由阿贝尔群 \(A\) 的每个扩张都分裂，当且仅当 \(H^2(G, A) = 0\).
+\end{corollary}
+
+\begin{corollary}\label{cor:17.38}
+若 \(A\) 是有限阿贝尔群且 \((|A|, |G|) = 1\)，则 \(G\) 由 \(A\) 的每个扩张都分裂。
+\end{corollary}
+
+\begin{proof}
+这由第 2 节推论 29 立即推出。
+\end{proof}
+
+我们可以用推论 38 在不要求 \(A\) 阿贝尔的情形证明同样的结果。
+
+\begin{theorem}\label{thm:17.39}
+（\textbf{Schur 定理}）若有限群 \(E\) 含有阶与指数互素的正规子群 \(N\)，则 \(N\) 在 \(E\) 中有补。
+\end{theorem}
+
+\noindent\textbf{注：} 回忆阶与指数互素的子群称为 \textbf{Hall 子群}，故 Schur 定理说每个正规 Hall 子群都有补，从而把群分解为半直积。
+
+\begin{proof}
+我们对 \(E\) 的阶归纳。由于可以假设 \(N \neq 1\)，设 \(p\) 是整除 \(|N|\) 的素数，\(P\) 是 \(N\) 的 Sylow \(p\)-子群。设 \(E_0\) 是 \(P\) 在 \(E\) 中的正规化子，\(N_0 = N \cap E_0\). 由 Frattini 论断（第 6.1 节命题 6）有 \(E = E_0N\). 由第二同构定理，\(N_0\) 是 \(E_0\) 的（正规）Hall 子群且 \([E_0:N_0] = [E:N]\)（参见第 3.3 节习题 10）。
+
+若 \(E_0 < E\)，则由对 \(E_0\) 中的 \(N_0\) 应用归纳假设，得到 \(N_0\) 在 \(E_0\) 中的补 \(K\). 由于 \(|K| = [E_0:N_0]\)，\(K\) 也是 \(N\) 在 \(E\) 中的补，正如所需。故可以假设 \(E_0 = E\)，即 \(P\) 在 \(E\) 中正规。
+
+由于 \(P\) 的中心 \(Z(P)\) 在 \(P\) 中特征，它在 \(E\) 中正规（参见第 4.4 节）。若 \(Z(P) = N\)，则 \(N\) 阿贝尔，定理由推论 38 推出。故可以假设 \(Z(P) \neq N\). 用横线表示过渡到商群 \(E/Z(P)\). 则 \(\bar N\) 是 \(\bar E\) 的正规 Hall 子群。由归纳假设它在 \(\bar E\) 中有补 \(\bar K\). 设 \(E_1\) 是 \(\bar K\) 在 \(E\) 中的完全原像。则 \(|E_1| = |K||Z(P)| = [E/N]|Z(P)|\)，故 \(Z(P)\) 是 \(E_1\) 的正规 Hall 子群。由归纳假设 \(Z(P)\) 在 \(E_1\) 中有补，而由阶的考虑可知这个补也是 \(N\) 在 \(E\) 中的补。证明完毕。
+\end{proof}
+
+\noindent\textbf{例}
+
+（1）若 \(G = \mathbb{Z}_2\)、\(A = \mathbb{Z}/2\mathbb{Z}\)，则 \(G\) 平凡地作用在 \(A\) 上，故由第 2 节中循环群上同调的计算有 \(H^2(G, A) = A^G/NA = \mathbb{Z}/2\mathbb{Z}\)，于是由定理 36 恰有两个不等价的由 \(A\) 对 \(G\) 的扩张：4 阶循环群与 Klein 四元群，后者分裂，从而对应 \(H^2\) 中的平凡类。
+
+（2）若 \(G = \langle g\rangle \cong \mathbb{Z}_2\)、\(A = \langle a\rangle \cong \mathbb{Z}/4\mathbb{Z}\) 是 4 阶群且 \(G\) 平凡地作用在 \(A\) 上，则由循环群上同调的计算 \(H^2(G, A) = A/2A \cong \mathbb{Z}/2\mathbb{Z}\). 如上一例有两个不等价的由 \(A\) 对 \(G\) 的扩张，显然它们是 \(\mathbb{Z}_8\) 与 \(\mathbb{Z}_4 \times \mathbb{Z}_2\)，后者分裂且对应平凡上同类。
+
+若 \(E = \langle r\rangle \times \langle s\rangle\) 表示 \(G\) 由 \(A\) 的分裂扩张（\(|r| = 4\)、\(|s| = 2\)），则 \(\mu_i(g) = r^is\)（\(i = 0, \ldots, 3\)）给出 \(G\) 在 \(E\) 中的四个正规化截面。截面 \(\mu_0, \mu_2\) 都给出零因子集 \(f\). 截面 \(\mu_1, \mu_3\) 都给出因子集 \(f'\)，其中 \(f'(g,g) = a^2 \in A\). \(f\) 与 \(f'\) 都给出落在 \(H^2(G, A)\) 的平凡上同类中的正规化 2-上闭链。对应于零 2-上闭链 \(f\) 的扩张 \(E_f\) 是以 \((a,1)\) 与 \((1,g)\) 为通常生成元（阶分别为 4 与 2）的群 \(\mathbb{Z}_4 \times \mathbb{Z}_2\). 然而在 \(E_{f'}\) 中，\((a,1)\) 的阶为 4，\((1,g)\) 的阶也是 4，因为 \((1,g)^2 = (f'(g,g), g^2) = (a^2, 1)\). 2-上闭链 \(f\) 与 \(f'\) 相差上边界 \(f_1\)，其中 \(f_1(1) = 1\)、\(f_1(g) = r\). 从 \(E_f\) 到 \(E_{f'}\) 的同构 \(\beta(a,g) = (a+f_1(g), g)\) 把 \(E_f\) 的生成元 \((a,1)\) 与 \((1,g)\) 映到 \(E_{f'}\) 的生成元 \((a,1)\) 与 \((a,g)\)，并给出这两个扩张的显式等价。
+
+\(G\) 通过取逆作用在 \(A\) 上的情形在习题 3 中处理。
+
+（3）设 \(G = \mathbb{Z}_2\)、\(A\) 是 Klein 四元群。若 \(G\) 非平凡地作用在 \(A\) 上，则 \(G\) 交换 \(A\) 的两个非单位元（比如 \(a\) 与 \(b\)）并固定第三个非单位元 \(c\). 则 \(A^G = NA = \{1, c\}\)，故 \(H^2(G, A) = 0\)，于是 \(G\) 由 \(A\) 的每个扩张都分裂。这可以直接看出，如下。由于作用非平凡，这样的群必非阿贝尔，从而必是 \(D_8\). 由第 2.5 节中 \(D_8\) 的子群格可知对每个 Klein 四元群，\(D_8\) 中有一个不包含在该四元群中的 2 阶子群，而那个子群分裂这个扩张。若 \(G\) 平凡地作用在 \(A\) 上则 \(H^2(G, A) = A/2A \cong A\)，故此时 \(G\) 由 \(A\) 有 4 个不等价的扩张。这些在习题 1 中考虑。
+
+\noindent\textbf{例（8 阶群与 \(H^2(\mathbb{Z}_2 \times \mathbb{Z}_2, \mathbb{Z}/2\mathbb{Z})\)）}
+
+设 \(G = \{1, a, b, c\}\) 是 Klein 四元群，\(A = \mathbb{Z}/2\mathbb{Z}\). 2-群 \(G\) 必然平凡地作用在 \(A\) 上。\(H^2(G, A)\) 的元素分类了那些含有一个商群同构于 Klein 四元群的 \(\mathbb{Z}_2\) 子群的 8 阶扩张 \(E\). 虽然在同构意义下这样的群只有四个，我们将看到有八个不等价的扩张。
+
+由于 \(G \times G\) 有 16 个元素，\(|C^2(G, A)| = 2^{16}\). 此时上闭链条件（26）化为
+\[
+f(g,h)+f(gh,k) = f(h,k)+f(g,hk) \qquad \text{对所有 } g, h, k \in G. \tag{17.38}
+\]
+对 2-上闭链子群 \(Z^2(G, A)\) 成立下述关系：
+
+（1）对所有 \(g \in G\) 有 \(f(g,1) = f(1,g) = f(1,1)\)；
+
+（2）对所有 \(g \in G\) 有 \(f(g,1)+f(g,a)+f(g,b)+f(g,c) = 0\)；
+
+（3）对所有 \(h \in G\) 有 \(f(1,h)+f(a,h)+f(b,h)+f(c,h) = 0\).
+
+第一条由（38）取 \(h = k = 1\) 与 \(g = h = 1\) 得到。另两条分别由（38）取 \(g = h\) 与 \(h = k\) 并结合关系（1）、（2）得到。由此每个 2-上闭链 \(f\) 都可以由 \(\mathbb{F}_2^5\) 中的向量 \((\alpha, \beta, \gamma, \delta, \varepsilon)\) 表示，其中
+\[
+\alpha = f(1,g) = f(g,1) \text{ 对所有 } g \in G，\quad \beta = f(a,a),\quad \gamma = f(a,b),\quad \delta = f(b,a),\quad \varepsilon = f(b,b),
+\]
+因为上面的关系随后确定了 \(f\) 的其余取值。由此 \(|Z^2(G, A)| \leq 2^5\). 虽然最终可以证明每个满足这些关系的函数都是 2-上闭链（从而阶恰为 32），这一点也将由下面的其他考虑推出。
+
+上闭链 \(f\) 是上边界，若存在函数 \(f_1 : G \to A\) 使对所有 \(g, h \in G\) 有 \(f(g,h) = f_1(h)-f_1(gh)+f_1(g)\). 容易看出这个上边界条件等价于：（i）对所有 \(g \in G\) 有 \(f(g,1) = f(1,g) = f(g,g)\)；（ii）只要 \(g, h\) 是互不相同的非单位元、\(g', h'\) 也是如此，就有 \(f(g,h) = f(g',h')\). 这些关系等价于 \(\beta = \gamma = \varepsilon\) 与 \(\alpha = \delta\). 于是 \(B^2(G, A)\) 由向量 \((\alpha, \alpha, \gamma, \gamma, \alpha)\) 组成，故 \(H^2(G, A)\) 的维数至多为 3（即阶至多为 \(2^3 = 8\)）。容易看出取 \(\beta, \gamma, \varepsilon \in \mathbb{F}_2\) 的 \(\{(0, \beta, \gamma, 0, \varepsilon)\}\) 给出 \(Z^2(G, A)/B^2(G, A)\) 的一组代表元，且这些代表上闭链都是正规化的。
+
+现在我们通过显式给出八个不等价的群扩张来证明 \(|H^2(G, A)| = 8\)（从而也证明 \(|Z^2(G, A)| = 2^5\)）。设 \(E\) 是 \(G\) 由 \(A\) 的扩张，为简单起见设 \(A \subseteq E\). 若 \(\mu : G \to E\) 是截面，则与 \(\mu\) 关联的 \(E\) 的因子集满足 \(\mu(g)\mu(h) = f(g,h)\mu(gh)\). 群 \(E\) 由 \(\mu(a), \mu(b)\) 与 \(A\) 生成，而由于 \(G\) 平凡地作用在 \(A\) 上，\(A\) 含于 \(E\) 的中心。故 \(E\) 阿贝尔当且仅当 \(\mu(a)\mu(b) = \mu(b)\mu(a)\)，由上面的关系这当且仅当 \(f(a,b) = f(b,a)\). 若 \(g\) 是 \(G\) 中的非单位元，由上面的关系还看出 \(\mu(g)\) 是 \(E\) 中的 2 阶元素当且仅当 \(f(g,g) = 0\). 由于 \(A\) 含于 \(E\) 的中心，任何非单位陪集 \(A\mu(g)\) 中的两个元素都有相同的阶（2 或 4）。
+
+含有 2 阶正规子群且商群同构于 Klein 四元群的 8 阶群有四个：\(\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2\)、\(\mathbb{Z}_4 \times \mathbb{Z}_2\)、\(D_8\) 与 \(Q_8\).
+
+群 \(E \cong \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2\) 是 \(G\) 由 \(A\) 的分裂扩张，因子集为 \(f = 0\).
+
+当 \(E \cong Q_8\) 时，按四元数群的通常记号 \(A = \langle-1\rangle\). 在这个（非阿贝尔）群中每个非单位陪集都由 4 阶元素组成，而这个性质是 \(Q_8\) 特有的，故所得的因子集 \(f\) 满足对 \(G\) 中所有非单位元 \(g\) 有 \(f(g,g) \neq 0\).
+
+当 \(E \cong \mathbb{Z}_4 \times \mathbb{Z}_2 = \langle x\rangle \times \langle y\rangle\) 时必须 \(A = \langle x^2\rangle\). 陪集 \(Ax\) 与 \(Axy\) 都由 4 阶元素组成，而陪集 \(Ay\) 由 2 阶元素组成，故 \(\mu(a), \mu(b), \mu(c)\) 中恰有一个是 2 阶元素、另外两个必是 4 阶元素。这提示三个从 \(E\) 到 \(G\) 的同态，它们在生成元上分别由
+\[
+\pi_1(y) = a,\ \pi_1(x) = b; \qquad \pi_2(y) = b,\ \pi_2(x) = a; \qquad \pi_3(y) = c,\ \pi_3(x) = a
+\]
+定义。这些同态中的每一个都满射到 \(G\)，核为 \(A\)，且使 \(\mu(a)\)（分别地 \(\mu(b)\)、\(\mu(c)\)）是 \(E\) 中的 2 阶元素。\(E\) 到自身的、在 \(A\) 上为恒等的任何同构必须把 \(A\) 的唯一的由 2 阶元素组成的非单位陪集 \(Ay\) 映到自身。故任何等价于 \(\pi_1\) 所定义的扩张 \(E_1\) 的扩张也把 \(y\) 映到 \(a\)（因为等价在 \(G\) 上是恒等的）。由此由 \(\pi_1, \pi_2, \pi_3\) 定义的三个扩张互不等价。
+
+当 \(E \cong D_8 = \langle r, s\rangle\) 时情形类似。此时 \(A = \langle r^2\rangle\)，陪集 \(As\) 与 \(Asr\) 由 2 阶元素组成，陪集 \(Ar\) 由 4 阶元素组成。此时 \(\mu(a), \mu(b), \mu(c)\) 中恰有一个是 4 阶元素、另外两个是 2 阶元素，这提示在生成元上由
+\[
+\pi_1(r) = a,\ \pi_1(s) = b; \qquad \pi_2(r) = b,\ \pi_2(s) = a; \qquad \pi_3(r) = c,\ \pi_3(s) = a
+\]
+定义的三个同态。与前面一样，相应的扩张互不等价。
+
+\(G\) 由 \(A\) 存在 8 个不等价扩张这一事实证明 \(|H^2(G, A)| = 8\)，从而这些是全部不等价的扩张的完整列表。特别地，由同态 \(\pi\)（把 \(y\) 映到 \(a\)、把 \(x\) 映到 \(c\)）定义的扩张 \(E \cong \mathbb{Z}_4 \times \mathbb{Z}_2\) 必等价于上面的扩张 \(E_1\)（另外两个同构于 \(\mathbb{Z}_4 \times \mathbb{Z}_2\) 的扩张以及三个 \(D_8\) 的扩张也类似）。这证明这些群存在某些外自同构，参见习题 9。
+
+\noindent\textbf{注：} 对任何素数 \(p\)，初等阿贝尔群 \(E_{p^m}\) 的以有限域 \(\mathbb{F}_p\) 为系数的上同调群可以通过把它们与直积中各因子的上同调群联系起来而确定（如第 2 节末所述）。一般地，\(H^2(E_{p^m}, \mathbb{F}_p)\) 是 \(\mathbb{F}_p\) 上维数为 \(\frac{1}{2}m(m+1)\) 的向量空间。当 \(p = 2\)、\(m = 2\) 时这就是上面的结果 \(H^2(\mathbb{Z}_2 \times \mathbb{Z}_2, \mathbb{Z}/2\mathbb{Z}) \cong (\mathbb{Z}/2\mathbb{Z})^3\).
+\noindent\textbf{交叉积代数与 Brauer 群}
+
+设 \(F\) 是域。回忆 \(F\)-代数 \(B\) 是其中心含有域 \(F\)、且 \(B\) 的单位元就是 \(F\) 的单位元的环（参见第 10.1 节）。
+
+\begin{definition}
+若 \(F\)-代数 \(A\) 不含非平凡真（双边）理想，则称 \(A\) 是\textbf{单}的。中心为 \(F\) 的单 \(F\)-代数称为\textbf{中心单} \(F\)-代数。
+\end{definition}
+
+最简单的中心单 \(F\)-代数之一是 \(F\) 上 \(n \times n\) 矩阵构成的矩阵代数 \(M_n(F)\).
+
+若 \(K/F\) 是伽罗瓦群为 \(G = \operatorname{Gal}(K/F)\) 的有限伽罗瓦扩张，则我们可以用 \(Z^2(G, K^\times)\) 中的正规化 2-上闭链构造某些中心单 \(K\)-代数。由 2-上闭链构造这些代数并用 \(H^2(G, K^\times)\) 对它们分类（参见下面定理 42），是同调方法在数论中的重要应用。当 \(G\) 循环时它们的构造是引出抽象上同调的先驱之一。
+
+设 \(f = \{a_{\sigma,\tau}\}_{\sigma,\tau \in G}\) 是 \(Z^2(G, K^\times)\) 中的正规化 2-上闭链。设 \(B_f\) 是以 \(u_\sigma\)（\(\sigma \in G\)）为基的 \(K\) 上向量空间：
+\[
+B_f = \left\{\sum_{\sigma \in G}a_\sigma u_\sigma \;\middle|\; a_\sigma \in K\right\}. \tag{17.39}
+\]
+在 \(B_f\) 上定义乘法为
+\[
+u_\sigma u_\tau = a_{\sigma,\tau}u_{\sigma\tau}, \qquad u_\sigma a = \sigma(a)u_\sigma \tag{17.40}
+\]
+（\(a \in K\)，\(\sigma, \tau \in G\)）。第二个等式表明 \(a_{\sigma,\tau}\) 给出 \(B_f\) 中元素 \(u_\sigma\) 的「因子集」，这也是使用这个术语的原因之一。用这个乘法我们计算
+\[
+(u_\sigma u_\tau)u_\rho = a_{\sigma,\tau}u_{\sigma\tau}u_\rho = a_{\sigma,\tau}a_{\sigma\tau,\rho}u_{\sigma\tau\rho}, \qquad u_\sigma(u_\tau u_\rho) = u_\sigma a_{\tau,\rho}u_{\tau\rho} = \sigma(a_{\tau,\rho})a_{\sigma,\tau\rho}u_{\sigma\tau\rho}.
+\]
+由于 \(a_{\sigma,\tau}a_{\sigma\tau,\rho} = \sigma(a_{\tau,\rho})a_{\sigma,\tau\rho}\) 是上闭链条件（26）的乘法形式，可知（40）中定义的乘法是结合的。
+
+由于上闭链正规化，对所有 \(\sigma \in G\) 有 \(u_1a = a = a_{\sigma,1}u_\sigma\)（当 \(\sigma = 1\) 时），并由（40）可知元素 \(u_1\) 是 \(B_f\) 中的单位元。把 \(K\) 与 \(B_f\) 中形如 \(au_1\) 的元素等同，我们看到 \(B_f\) 是含域 \(K\) 的 \(F\)-代数，且当 \(n = [K:F] = |G|\) 时它在 \(F\) 上的维数为 \(n^2\).
+
+\begin{proposition}\label{pro:17.40}
+以（39）中的 \(u_\sigma\) 为 \(K\)-向量空间基、乘法由（40）定义的 \(F\)-代数 \(B_f\) 是中心单 \(F\)-代数。
+\end{proposition}
+
+\begin{proof}
+还需证明 \(B_f\) 的中心是 \(F\)，且 \(B_f\) 不含非零真理想。设 \(x = \sum_{\sigma \in G}a_\sigma u_\sigma\) 是 \(B_f\) 中心的元素。则由对 \(\beta \in K\) 有 \(x\beta = \beta x\) 可知当 \(a_\sigma \neq 0\) 时有 \(\sigma(\beta) = \beta\). 由于对任何 \(\sigma \neq 1\) 都存在不被 \(\sigma\) 固定的元素 \(\beta \in K\)，这表明对所有 \(\sigma \neq 1\) 有 \(a_\sigma = 0\)，即 \(x = a_1u_1\). 此时 \(xu_\tau = u_\tau x\) 当且仅当 \(\tau(a_1) = a_1\)，故若这对所有 \(\tau\) 成立，则必有 \(a_1 \in K^G = F\). 因此 \(B_f\) 的中心是 \(F\).
+
+为证明 \(B_f\) 单，设 \(I\) 是 \(B_f\) 中的非零理想，\(x\) 是 \(I\) 中非零项个数 \(m\) 最少的非零元素。若 \(m > 1\)，则存在元素 \(\beta \in K^\times\) 使 \(\sigma_m(\beta) \neq \beta\). 此时元素 \(x-\sigma_m(\beta)x\beta^{-1}\) 是理想 \(I\) 的元素，其 \(u_{\sigma_m}\) 的系数为 0、而 \(u_{\sigma_{m-1}}\) 的系数为 \((1-\sigma_m(\beta)\sigma_{m-1}(\beta)^{-1})a_{\sigma_{m-1}} \neq 0\)，故其非零项个数比 \(x\) 少，矛盾。由此 \(m = 1\)，即 \(x = au_\sigma\)（某个 \(a \in K\)、某个 \(\sigma\)）。这个元素是单位，其逆为 \(a^{-1}u_{\sigma^{-1}}\) 乘以相应因子，故 \(I = B_f\)，证明完毕。
+\end{proof}
+
+\begin{definition}
+由（39）与（40）定义的中心单 \(F\)-代数 \(B_f\) 称为因子集 \(\{a_{\sigma,\tau}\}\) 的\textbf{交叉积代数}。
+\end{definition}
+
+若 \(f' = a'_{\sigma,\tau}\) 是与 \(a_{\sigma,\tau}\) 同属 \(H^2(G, K^\times)\) 中同一上同类的正规化上闭链，则存在元素 \(b_\sigma \in K^\times\) 使
+\[
+a'_{\sigma,\tau} = a_{\sigma,\tau}(b_{\sigma\tau}^{-1}b_\sigma\sigma(b_\tau))
+\]
+（上边界条件（27）的乘法形式）。若 \(B_{f'}\) 是由这个上闭链按（39）、（40）定义的以 \(v_\sigma\) 为 \(K\)-基的 \(F\)-代数，则由把 \(v_\sigma\) 映到 \(b_\sigma u_\sigma\) 定义的 \(K\)-向量空间同态 \(\varphi\) 满足
+\[
+\varphi(v_\sigma v_\tau) = \varphi(a'_{\sigma,\tau}v_{\sigma\tau}) = a'_{\sigma,\tau}b_{\sigma\tau}u_{\sigma\tau} = a_{\sigma,\tau}b_\sigma\sigma(b_\tau)u_{\sigma\tau} = (b_\sigma u_\sigma)(b_\tau u_\tau) = \varphi(v_\sigma)\varphi(v_\tau).
+\]
+由此 \(\varphi\) 是从 \(B_{f'}\) 到 \(B_f\) 的 \(F\)-代数同构。
+
+我们已经证明 \(H^2(G, K^\times)\) 中每个上同类 \(c\) 都定义一个中心单 \(F\)-代数的同构类，即代表类 \(c\) 的任意正规化上闭链 \(\{a_{\sigma,\tau}\}\) 的交叉积代数的同构类。下一个结果表明平凡上同类对应包含 \(M_n(F)\) 的同构类。
+
+\begin{proposition}\label{pro:17.41}
+\(H^2(G, K^\times)\) 中平凡上同类的交叉积代数同构于矩阵代数 \(M_n(F)\)，其中 \(n = [K:F]\).
+\end{proposition}
+
+\begin{proof}
+若 \(a \in K\)，则乘以 \(a\) 定义了把 \(K\)（看作 \(F\) 上 \(n\) 维向量空间）映到自身的线性变换 \(T_a\). 类似地，每个自同构 \(\sigma \in G\) 定义 \(K\) 的 \(F\)-线性变换 \(T_\sigma\)，而通过在 \(F\) 上选取 \(K\) 的一组基，我们可以把 \(T_a\) 与 \(T_\sigma\) 都看作 \(M_n(F)\) 的元素。若 \(B_0\) 表示平凡因子集（对所有 \(\sigma, \tau \in G\) 有 \(a_{\sigma,\tau} = 1\)）的交叉积代数，考虑由 \(\varphi(\sum a_\sigma u_\sigma) = \sum T_aT_\sigma\) 定义的加法映射 \(\varphi : B_0 \to M_n(F)\). 由于对 \(a \in F\) 有 \(T_{\sigma a} = aT_\sigma\)，映射 \(\varphi\) 是 \(F\)-向量空间同态。若 \(x \in K\)，我们有
+\[
+T_\sigma T_a(x) = T_\sigma(ax) = \sigma(ax) = \sigma(a)\sigma(x) = T_{\sigma(a)}T_\sigma(x),
+\]
+故作为 \(K\) 上的线性变换有 \(T_\sigma T_a = T_{\sigma(a)}T_\sigma\). 由 \(u_\sigma u_\tau = u_{\sigma\tau}\) 推出
+\[
+\varphi((au_\sigma)(\beta u_\tau)) = \varphi(a\sigma(\beta)u_{\sigma\tau}) = T_{a\sigma(\beta)}T_{\sigma\tau} = T_aT_\sigma(\beta)T_\sigma T_\tau = T_aT_\sigma T_\beta T_\tau = \varphi(au_\sigma)\varphi(\beta u_\tau),
+\]
+这表明 \(\varphi\) 是从 \(B_0\) 到 \(M_n(F)\) 的 \(F\)-代数同态。由于 \(\ker\varphi\) 是 \(B_0\) 中的理想且 \(\varphi \neq 0\)，由命题 40 得 \(\ker\varphi = 0\)，即 \(\varphi\) 是单射。由于 \(B_0\) 与 \(M_n(F)\) 作为 \(F\) 上向量空间的维数都是 \(n^2\)，可知 \(\varphi\) 是 \(F\)-代数同构，命题得证。
+\end{proof}
+
+\noindent\textbf{例}
+
+若 \(K = \mathbb{C}\)、\(F = \mathbb{R}\)，则 \(G = \operatorname{Gal}(\mathbb{C}/\mathbb{R})\) 是 2 阶群，由复共轭 \(\tau\) 生成。我们有 \(H^2(G, \mathbb{C}^\times) \cong \mathbb{Z}/2\mathbb{Z}\). 平凡类对应的中心单 \(\mathbb{R}\)-代数 \(B_0\) 是 \(\mathbb{C}u_1 \oplus \mathbb{C}u_\tau\)，其中 \(u_\tau(a+bi) = (a-bi)u_\tau\) 且 \(u_\tau^2 = u_1\). 它通过映射
+\[
+\varphi((a+bi)u_1+(c+di)u_\tau) = aI+b\tilde i+cT_\tau+d\tilde iT_\tau = \begin{pmatrix}a+c & -b+d\\ b+d & a-c\end{pmatrix}
+\]
+同构于矩阵代数 \(M_2(\mathbb{R})\). 代表非平凡上同类的正规化上闭链 \(f\) 由取值 \(a_{1,1} = a_{1,\tau} = a_{\tau,1} = 1\)、\(a_{\tau,\tau} = -1\) 定义。相应的中心单 \(\mathbb{R}\)-代数 \(B_f\) 由 \(\mathbb{C}v_1 \oplus \mathbb{C}v_\tau\) 给出。元素 \(v_1\) 是 \(B_f\) 的单位元，且有 \(v_\tau(a+bi) = (a-bi)v_\tau\) 与 \(v_\tau^2 = -v_1\). 令 \(v_1 = 1\)、\(v_\tau = i\)，我们看到 \(B_f\) 作为 \(\mathbb{R}\)-代数同构于实 Hamilton 四元数代数 \(\mathbb{R}+\mathbb{R}i+\mathbb{R}j+\mathbb{R}k\).
+
+单代数有一个丰富的理论，我们不加证明地提到下述结果。设 \(A\) 是 \(F\) 上有限维的中心单 \(F\)-代数。
+
+\noindent\textbf{I.} 若 \(F \subseteq B \subseteq A\)（\(B\) 是单 \(F\)-代数），定义 \(B\) 在 \(A\) 中的\textbf{中心化子} \(B^c\) 为 \(A\) 中与 \(B\) 的所有元素交换的元素之集。定义\textbf{反代数} \(B^{opp}\) 为集合 \(B\) 带相反的乘法，即 \(B^{opp}\) 中乘积 \(b_1b_2\) 由 \(B\) 中乘积 \(b_2b_1\) 给出。\(B^c\) 与 \(B^{opp}\) 都是单 \(F\)-代数，且
+
+（a）\((\dim_FB)(\dim_FB^c) = \dim_FA\)；
+
+（b）\(A \otimes_FB^{opp} \cong M_r(B^c)\) 作为 \(F\)-代数，其中 \(r = \dim_FB\)；
+
+（c）若 \(B\) 是中心单 \(F\)-代数，则 \(B \otimes_FB^c \cong A\).
+
+\noindent\textbf{II.} 若 \(A'\) 是 Artin（满足左理想的 D.C.C.）单 \(F\)-代数，则 \(A \otimes_FA'\) 是中心为 \((A')^c\) 的 Artin 单 \(F\)-代数。
+
+\noindent\textbf{III.} 我们有 \(A \cong M_r(\Delta)\)（某个中心为 \(F\) 的除环 \(\Delta\)、某个整数 \(r\)）。除环 \(\Delta\) 与 \(r\) 由 \(A\) 唯一确定。同样的结论对任何 Artin 单 \(F\)-代数成立。
+
+最后一个结果是 Wedderburn 定理的一部分，将在下一章更详细地描述。
+
+\begin{definition}
+若 \(A\) 是中心单 \(F\)-代数，则称含 \(F\) 的域 \(L\) \textbf{分裂} \(A\)，若对某个 \(m \geq 1\) 有 \(A \otimes_FL \cong M_m(L)\).
+\end{definition}
+
+由（II）可知 \(\Delta\) 的每个极大交换子代数都是满足 \(E = E^c = E^{opp}\) 的域 \(E\)；若 \([E:F] = m\) 则 \(\dim_F\Delta = m^2\). 把（II）应用于 \(A = \Delta\)、\(B = E\)，我们还看到 \(\Delta \otimes_FE \cong M_m(E)\). 也可以证明中心单 \(F\)-代数 \(A\) 的极大子域 \(E\) 也满足 \(E = E^c = E^{opp}\)，于是再次由（II）推出 \(A \otimes_FE \cong M_r(E)\)（\(r^2 = \dim_FA\)）。
+
+若 \(A = M_r(\Delta)\)，则域 \(L\) 分裂 \(A\) 当且仅当 \(L\) 分裂 \(\Delta\)，理由如下。若 \(\Delta \otimes_FL \cong M_n(L)\)，则
+\[
+A \otimes_FL \cong M_r(\Delta)\otimes_FL \cong M_r(\Delta \otimes_FL) \cong M_r(M_n(L)) \cong M_{rn}(L).
+\]
+反之，若 \(A \otimes_FL \cong M_n(L)\)，则 \(M_n(L) \cong M_r(\Delta)\otimes_FL \cong M_r(\Delta \otimes_FL)\). 由（II）与（III），\(\Delta \otimes_FL \cong M_s(\Delta')\)（某个除环 \(\Delta'\)）。结合上一个同构与（III）中的唯一性论断可知 \(\Delta' \cong L\)，于是同构 \(\Delta \otimes_FL \cong M_s(L)\) 表明 \(L\) 分裂 \(\Delta\).
+
+由上面的讨论我们看到 \(\Delta\) 的极大交换子域同时分裂 \(\Delta\) 与 \(A \cong M_r(\Delta)\)（对任意 \(r \geq 1\)）。由此不难证明 \(F\) 上每个有限维中心单 \(F\)-代数都可以被 \(F\) 的某个有限伽罗瓦扩张分裂。
+
+取 \(A\) 为交叉积代数 \(B_f\)、\(B = K\) 应用（I），可知 \(K = K^c = K^{opp}\) 且 \(B_f \otimes_FK \cong M_n(K)\). 特别地，交叉积代数 \(B_f\) 总被 \(K\) 分裂。
+
+\noindent\textbf{例}
+
+在上面 Hamilton 四元数的例子中我们有 \(B_f \otimes_{\mathbb{R}}\mathbb{C} \cong M_2(\mathbb{C})\). 我们有 \(B_f \otimes_{\mathbb{R}}\mathbb{C} = \mathbb{C}+\mathbb{C}i+\mathbb{C}j+\mathbb{C}k\)，且到 \(M_2(\mathbb{C})\) 的一个显式同构 \(\varphi\) 由
+\[
+\varphi(i) = \begin{pmatrix}i & 0\\ 0 & -i\end{pmatrix}, \qquad \varphi(j) = \begin{pmatrix}0 & 1\\ -1 & 0\end{pmatrix}
+\]
+并 \(\mathbb{C}\)-线性地延拓给出。
+
+由（III），每个中心单 \(F\)-代数 \(A\) 都作为 \(F\)-代数同构于 \(M_r(\Delta)\)（某个在 \(F\)-同构意义下唯一确定的除环 \(\Delta\)，称为 \(A\) 的\textbf{除环部分}）。
+
+\begin{definition}
+两个中心单 \(F\)-代数 \(A\) 与 \(B\) 称为\textbf{相似}，若对同一个除环 \(\Delta\) 有 \(A \cong M_r(\Delta)\)、\(B \cong M_s(\Delta)\)，即 \(A\) 与 \(B\) 有相同的除环部分。
+\end{definition}
+
+用 \([A]\) 表示 \(A\) 的相似类。由（II），若 \(A\) 与 \(B\) 是中心单 \(F\)-代数，则 \(A \otimes_FB\) 仍是中心单 \(F\)-代数，故我们可以在相似类上定义乘法 \([A][B] = [A \otimes_FB]\). 类 \([F]\) 是这个乘法的单位元，而张量积的结合性表明这个乘法结合。把（I）（b）应用于 \(B = A\)（此时 \(B^c = F\)，因为 \(A\) 中心），我们有 \([A][A^{opp}] = [F]\)，故在这个乘法下存在逆元。
+
+\begin{definition}
+中心单 \(F\)-代数的相似类在乘法 \([A][B] = [A \otimes_FB]\) 下构成的群称为 \(F\) 的 \textbf{Brauer 群}，记作 \(\operatorname{Br}(F)\).
+\end{definition}
+
+若 \(L\) 是 \(F\) 的任意扩张域，则由（II）代数 \(A \otimes_FL\) 是中心单 \(L\)-代数。容易验证映射 \([A] \mapsto [A \otimes_FL]\) 是良定义的从 \(\operatorname{Br}(F)\) 到 \(\operatorname{Br}(L)\) 的同态。这个同态的核由那些满足对某个 \(m \geq 1\) 有 \(A \otimes_FL \cong M_m(L)\) 的代数 \(A\) 的类组成，即被 \(L\) 分裂的代数 \(A\).
+
+\begin{definition}
+若 \(L/F\) 是域扩张，则\textbf{相对 Brauer 群} \(\operatorname{Br}(L/F)\) 是被 \(L\) 分裂的中心单 \(F\)-代数的相似类之群。等价地，\(\operatorname{Br}(L/F)\) 是同态 \([A] \mapsto [A \otimes_FL]\) 从 \(\operatorname{Br}(F)\) 到 \(\operatorname{Br}(L)\) 的核。
+\end{definition}
+
+下述定理总结了这一领域的一些主要结果，并表明 Brauer 群与上面构造的交叉积代数之间的基本联系。
+
+\begin{theorem}\label{thm:17.42}
+设 \(K/F\) 是次数为 \(n\) 的伽罗瓦扩张，\(G = \operatorname{Gal}(K/F)\).
+
+（1）满足 \(\dim_FA = n^2\) 的中心单 \(F\)-代数 \(A\) 被 \(K\) 分裂，当且仅当 \(A \otimes_FK \cong M_n(K)\)，当且仅当 \(A\) 同构于（39）、（40）中的某个交叉积代数 \(B_f\).
+
+（2）满足 \(A \otimes_FK \cong M_n(K)\) 的中心单 \(F\)-代数 \(A\) 的 \(F\)-同构类与 \(H^2(G, K^\times)\) 的元素之间存在双射。在这个双射下，含有正规化上闭链 \(f\) 的上同类 \(c \in H^2(G, K^\times)\) 对应（39）、（40）中定义的交叉积代数 \(B_f\) 的同构类，而平凡上同类对应 \(M_n(F)\).
+
+（3）每个 \(F\) 上有限维且被 \(K\) 分裂的中心单 \(F\)-代数都相似于一个维数为 \(n^2\) 且被 \(K\) 分裂的代数。（2）中的双射还建立了 \(\operatorname{Br}(K/F)\) 与 \(H^2(G, K^\times)\) 之间的双射，它也是群同构。
+
+（4）被 \(K\) 分裂的 \(F\) 上中心单除代数的 \(F\)-同构类之集与 \(H^2(G, K^\times)\) 之间存在双射。
+\end{theorem}
+
+如前所述，\(F\) 上每个有限维中心单 \(F\)-代数都可以被 \(F\) 的某个有限伽罗瓦扩张分裂，由此
+\[
+\operatorname{Br}(F) = \bigcup_K\operatorname{Br}(K/F),
+\]
+其中并取遍 \(F\) 的所有有限伽罗瓦扩张。由此 \(\operatorname{Br}(F)\) 与 \(H^2(\operatorname{Gal}(F'/F), (F')^\times)\) 之间存在双射，其中 \(F'\) 表示 \(F\) 的可分代数闭包。这里 \(\operatorname{Gal}(F'/F)\) 看作 profinite 群，而上同调群指连续伽罗瓦上同调。
+
+这个结果与定理 42 的一个推论是：\(F\) 上中心单除代数的 \(F\)-同构类的一组完整代表元可以由 \(F\) 的有限伽罗瓦扩张的交叉积代数的除环部分得到。在 \(K\) 上分裂的除代数出现在 \(K/F\) 的交叉积代数中。
+
+\noindent\textbf{例}
+
+由于 \(H^2(\operatorname{Gal}(\mathbb{F}_{q^d}/\mathbb{F}_q), \mathbb{F}_{q^d}^\times) = 0\)（参见习题 10），我们有 \(\operatorname{Br}(\mathbb{F}_{q^d}/\mathbb{F}_q) = 0\)，从而也有 \(\operatorname{Br}(\mathbb{F}_q) = 0\). 作为推论，每个有限除代数都是域（直接证明参见第 13.6 节习题 13），且每个有限中心单 \(\mathbb{F}_q\)-代数都同构于全矩阵环 \(M_r(\mathbb{F}_q)\).
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(A = \{1, a, b, c\}\) 是 Klein 四元群，\(G = \langle g\rangle\) 是平凡地作用在 \(A\) 上的 2 阶循环群。
+
+（a）证明 \(|C^2(G, A)| = 2^8\).
+
+（b）证明上边界都是常函数，并由此 \(|B^2(G, A)| = 4\).
+
+（c）用上闭链条件证明 \(|Z^2(G, A)| \leq 2^4\).
+
+（d）若 \(E = \mathbb{Z}_4 \times \mathbb{Z}_2 = \langle x\rangle \times \langle y\rangle\)，证明由 \(\pi(a) = x^2y\)、\(\pi(b) = y\)、\(\pi(c) = x^2\)（其中 \(\pi\) 相应取）给出的扩张 \(1 \to A \to E \to G \to 1\)，连同分别由 \(\pi(x) = a\)、\(\pi(y) = b\)（即 (a) \(\pi = x^2\)、(b) \(\pi(b) = x^2y\)、(c) \(\pi(c) = y\)、\(E = \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2\)、\(\mathbb{Z}_4 \times \mathbb{Z}_2\)、\(D_8\)、\(Q_8\)）给出由 Klein 四元群对 \(\mathbb{Z}_2\) 的 4 个不等价扩张。由此通过显式给出相应的上闭链证明 \(H^2(G, A)\) 的阶为 4.
+
+\item 设 \(A = \mathbb{Z}/4\mathbb{Z}\)，\(G\) 是平凡地作用在 \(A\) 上的 2 阶循环群。
+
+（a）证明 \(|C^2(G, A)| = 2^8\).
+
+（b）用上边界条件证明 \(|B^2(G, A)| = 2^3\).
+
+（c）用上闭链条件证明 \(|Z^2(G, A)| \leq 2^4\).
+
+（d）通过给出由 \(A\) 对 \(G\) 的两个不等价扩张及相应的上闭链，证明 \(|H^2(G, A)| = 2\).
+
+\item 设 \(A = \mathbb{Z}/4\mathbb{Z}\)，\(G\) 是 2 阶循环群，通过取逆作用在 \(A\) 上。
+
+（a）证明有四个上边界，且只有零上边界是正规化的。
+
+（b）通过直接计算上闭链群与上边界群证明 \(|H^2(G, A)| = 2\).
+
+（c）给出两个不同的上同类及其相应的扩张群。
+
+（d）证明对扩张群同构于 \(D_8\) 的给定扩张，有四个正规化截面，它们的因子集都是零 2-上闭链。
+
+（e）证明对扩张群同构于 \(Q_8\) 的给定扩张，有十六个截面，其中四个是正规化的，且这四个正规化截面都有相同的因子集。
+
+\item 对非正规化 2-上闭链 \(f\)，用（34）中同样的二元运算在集合 \(A \times G\) 上定义扩张群 \(E_f\). 验证此时的两条群公理，证明单位元现在是 \((-f(1,1), 1)\)，而逆元由
+\[
+(a, x)^{-1} = (-x^{-1} \cdot a-f(x^{-1}, x)-f(1,1),\ x^{-1})
+\]
+给出。（结合律的验证与正规化 2-上闭链的情形本质上相同。）还证明集合 \(A^{**} = \{(a-f(1,1), 1) \mid a \in A\}\) 是 \(E_f\) 的子群，映射 \(\iota^{**} : a \mapsto (a-f(1,1),1)\) 是从 \(A\) 到 \(A^{**}\) 的同构。证明这个扩张 \(E_f\)（连同单射 \(\iota^{**}\) 与到 \(G\) 的通常投射 \(\pi^*\)）等价于由与 \(f\) 同类的正规化上闭链得到的扩张。
+
+\item 证明给定扩张 \(1 \to A \to E \to G \to 1\) 与自身的等价之集在复合下构成群，且这个群同构于稳定性群 \(\operatorname{Stab}(1 \trianglelefteq \iota(A) \trianglelefteq E)\).（故命题 31 蕴涵 \(Z^1(G, A)\) 是这个扩张与自身的等价之群。）
+
+\item （\textbf{Gaschütz 定理}）设 \(p\) 是素数，\(A\) 是有限群 \(G\) 的阿贝尔正规 \(p\)-子群，\(P\) 是 \(G\) 的 Sylow \(p\)-子群。证明 \(G\) 是 \(G/A\) 由 \(A\) 的分裂扩张当且仅当 \(P\) 是 \(P/A\) 由 \(A\) 的分裂扩张。（注意由第 4.5 节习题 37 有 \(A \trianglelefteq P\)。）〔用 Sylow 定理证明若 \(G\) 在 \(A\) 上分裂则 \(P\) 也分裂。反之，证明由定理 36 与 \(P/A\) 由 \(A\) 的扩张相关联的正规化 2-上闭链是 \(H^2(G/A, A)\) 中某个正规化 2-上闭链在限制同态 \(\operatorname{Res} : H^2(G/A, A) \to H^2(P/A, A)\) 下的像。然后利用命题 26 以及「乘以 \([G:P]\)」是 \(A\) 的自同构。〕
+
+\item （a）通过给出 \(A_4\) 由一个 2 阶循环群的非分裂扩张，证明 \(H^2(A_4, \mathbb{Z}/2\mathbb{Z}) \neq 0\).〔参见第 4.5 节习题 11。〕
+
+（b）通过证明 \(SL_2(\mathbb{F}_5)\) 是 \(A_5\) 由一个 2 阶循环群的非分裂扩张，证明 \(H^2(A_5, \mathbb{Z}/2\mathbb{Z}) \neq 0\).〔利用第 4.5 节命题 21 与 23。〕
+
+\item 有限群 \(G\) 的 \textbf{Schur 乘子}定义为群 \(H^2(G, \mathbb{C}^\times)\)，其中复数乘法群 \(\mathbb{C}^\times\) 是平凡 \(G\)-模。证明 Schur 乘子是有限群。〔证明每个上同类都含有取值在 \(n\) 次单位根群中的上闭链，其中 \(n = |G|\)，如下：若 \(f\) 是任意上闭链，则由推论 27 有 \(f^n \in B^2(G, \mathbb{C}^\times)\). 用 \(k(g_1,g_2) = f(g_1,g_2)^{1/n}\) 定义 \(k \in C^2(G, \mathbb{C}^\times)\)（任取 \(n\) 次根）。证明 \(k \in B^2(G, \mathbb{C}^\times)\) 且 \(fk^{-1}\) 取值在 \(n\) 次单位根群中。〕
+
+\item 利用定理 39 之后例子中对 Klein 四元群由 \(\mathbb{Z}_2\) 的扩张的分类，证明（在该例的记号下）：
+
+（a）存在 \(\mathbb{Z}_4 \times \mathbb{Z}_2\) 的（外）自同构，它交换陪集 \(Ax\) 与 \(Axy\) 并固定陪集 \(Ay\)；
+
+（b）存在 \(D_8\) 的外自同构，它交换陪集 \(As\) 与 \(Asr\) 并固定陪集 \(Ar\).
+
+\item 设 \(\mathbb{F}_q\) 是有限域，\(G = \operatorname{Gal}(\mathbb{F}_{q^d}/\mathbb{F}_q) = \langle\sigma_q\rangle\)，其中 \(\sigma_q\) 是 Frobenius 自同构，\(N\) 是循环群 \(G\) 的通常范元素。
+
+（a）用 Hilbert 定理 90 证明 \(|N(\mathbb{F}_{q^d}^\times)| = (q^d-1)/(q-1)\)，并由此证明从 \(\mathbb{F}_{q^d}^\times\) 到 \(\mathbb{F}_q^\times\) 的范映射是满射。
+
+（b）证明对所有 \(n \geq 1\) 有 \(H^n(G, \mathbb{F}_{q^d}^\times) = 0\).
+\end{enumerate}

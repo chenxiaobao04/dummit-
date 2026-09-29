@@ -1,0 +1,114 @@
+
+
+\documentclass[UTF8, zihao=-4]{ctexbook} % 替换 book，完美支持中文
+
+%%% -------------------- 宏包区 --------------------
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=3cm, right=3cm}
+
+\usepackage{caption, graphicx, subcaption} % 删去 subfig，避免与 subcaption 冲突
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm, mathrsfs} % 粗体和花体
+\usepackage{array, makecell, multirow} % 表格相关
+\usepackage{enumerate, enumitem} % 列表
+\usepackage{fancyhdr} % 页眉页脚
+\usepackage{titlesec} % 标题样式
+\usepackage{xcolor} % 删去 color，xcolor 包含它
+\usepackage{listings} % 代码排版
+\usepackage{comment} % 批量注释
+\usepackage{ulem} % 下划线删除线
+\usepackage{setspace}
+
+\usepackage{tikz}
+
+\setstretch{1.697} 
+
+
+% 超链接（通常放在导言区最后）
+\usepackage{hyperref} 
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+%%% -------------------- 定理环境定制 --------------------
+% 使用 amsthm 的样式功能，让排版更符合数学规范
+\theoremstyle{plain} % 默认样式：标题粗体，正文斜体
+\newtheorem{theorem}{定理}[chapter] % 按章编号，如 第1章的第1个定理为 定理 1.1
+\newtheorem{lemma}[theorem]{引理} % 共享 theorem 的计数器
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{property}[theorem]{性质}
+
+\theoremstyle{definition} % 定义样式：标题粗体，正文正体
+\newtheorem{definition}{定义}[chapter]
+\newtheorem{example}{例}[chapter]
+
+\theoremstyle{remark} % 注记样式：标题斜体，正文正体
+\newtheorem*{remark}{注} % 加 * 表示不编号
+
+%%% -------------------- 文档开始 --------------------
+\includeonly{includes/chap00,includes/chap01,includes/chap02,includes/chap03,includes/chap04,includes/chap05,includes/chap06,includes/chap07,includes/chap08,includes/chap09,includes/chap10,includes/chap11,includes/chap12,includes/chap13,includes/chap14,includes/chap15,includes/chap16,includes/chap17,includes/chap18,includes/chap19,includes/appendix}
+
+\begin{document}
+
+%%% ======== 封面页 ======== %}
+% 使用 titlepage 环境创建一个居中、不影响页眉页脚的独立封面
+\begin{titlepage}
+    \centering
+    \vspace*{2cm} % 顶部留白
+    
+    {\Huge\bfseries 抽象代数 \par}
+    \vspace{1cm}
+    {\LARGE (原书第三版) \par}
+    
+    \vspace{3cm}
+    
+    {\Large 原著：David S. Dummit \quad Richard M. Foote \par}
+    \vspace{1cm}
+    {\Large 译者：codex \par}
+    
+    \vfill % 底部填充
+    
+    {\large \today \par} % 日期
+\end{titlepage}
+
+%%% ======== 前置部分 (目录等) ======== %}
+\frontmatter % 关键命令：开启前置部分，页码自动变为罗马数字(i, ii...)，章节不编号
+
+% 重置页码，让目录从 i 开始
+\pagenumbering{roman} 
+\setcounter{page}{1}
+
+\tableofcontents % 自动生成目录
+\newpage
+
+%%% ======== 主体部分 (正文) ======== %}
+\mainmatter % 关键命令：开启主体部分，页码自动变回阿拉伯数字(1, 2...)，章节开始编号
+
+% 因为你有第0章，所以把章节计数器设为 -1
+
+
+% 引入各章节
+\include{includes/chap00}
+\include{includes/chap01} % 建议按顺序列出，编译时可用 \includeonly 控制只编译某一个
+\include{includes/chap02}
+\include{includes/chap03}
+\include{includes/chap04}
+\include{includes/chap05}
+\include{includes/chap06}
+\include{includes/chap07}
+\include{includes/chap08}
+\include{includes/chap09}
+\include{includes/chap10}
+\include{includes/chap11}
+\include{includes/chap12}
+\include{includes/chap13}
+\include{includes/chap14}
+\include{includes/chap15}
+\include{includes/chap16}
+\include{includes/chap17}
+\include{includes/chap18}
+\include{includes/chap19}
+
+%%% ======== 附录 ======== %}
+\include{includes/appendix}
+
+\end{document}

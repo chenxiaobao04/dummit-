@@ -1,0 +1,1457 @@
+
+\setcounter{chapter}{12}
+
+\chapter{域论}
+
+\section{域扩张的基本理论}
+
+回忆域 \(F\) 是每个非零元素都有逆的带单位元交换环。等价地，\(F\) 的非零元素集合 \(F^\times = F-\{0\}\) 在乘法下是阿贝尔群。
+
+与任何域相关的最初的不变量之一是它的特征，定义如下：若 \(1_F\) 表示 \(F\) 的单位元，则 \(F\) 含有由 \(1_F\) 生成的加法子群中的元素 \(1_F, 1_F+1_F, 1_F+1_F+1_F, \ldots\)，这些元素不必互异。对正整数 \(n\)，令 \(n \cdot 1_F = 1_F+\cdots+1_F\)（\(n\) 个）。则出现两种可能：或者所有元素 \(n \cdot 1_F\) 互异，或者对某个正整数 \(n\) 有 \(n \cdot 1_F = 0\).
+
+\begin{definition}
+域 \(F\) 的\textbf{特征}，记作 \(\operatorname{ch}(F)\)，定义为使 \(p \cdot 1_F = 0\) 的最小正整数 \(p\)（若这样的 \(p\) 存在），否则定义为 0.
+\end{definition}
+
+容易看出对正整数 \(m\) 与 \(n\) 有
+\begin{equation}
+n \cdot 1_F+m \cdot 1_F = (m+n) \cdot 1_F \quad \text{与} \quad (n \cdot 1_F)(m \cdot 1_F) = mn \cdot 1_F. \tag{13.1}
+\end{equation}
+由此可知域的特征或者为 0，或者为素数 \(p\)（这就是上面定义中选 \(p\) 的原因），因为若 \(n = ab\) 是合数且 \(n \cdot 1_F = 0\)，则 \(ab \cdot 1_F = (a \cdot 1_F)(b \cdot 1_F) = 0\)，而由于 \(F\) 是域，\(a \cdot 1_F\) 或 \(b \cdot 1_F\) 之一为 0，故最小的这样的整数必是素数。还可推出若 \(n \cdot 1_F = 0\)，则 \(p\) 整除 \(n\).
+
+\begin{proposition}\label{pro:13.1}
+域 \(F\) 的特征 \(\operatorname{ch}(F)\) 或为 0，或为素数 \(p\). 若 \(\operatorname{ch}(F) = p\)，则对任意 \(a \in F\) 有
+\[
+p \cdot a = \underbrace{a+a+\cdots+a}_{p \text{ 个}} = 0.
+\]
+\end{proposition}
+
+\begin{proof}
+只有第二个断言尚未证明，它由 \(F\) 中显然的等式 \(p \cdot a = p \cdot (1_Fa) = (p \cdot 1_F)(a)\) 立即推出。
+\end{proof}
+
+\noindent\textbf{注：}这个特征的概念对任何整环也有意义，且其特征与其分式域的特征相同。
+
+\begin{example}
+（1）域 \(\mathbb{Q}\) 与 \(\mathbb{R}\) 的特征都是 0：\(\operatorname{ch}(\mathbb{Q}) = \operatorname{ch}(\mathbb{R}) = 0\). 整环 \(\mathbb{Z}\) 的特征也是 0.
+
+（2）（有限）域 \(\mathbb{F}_p = \mathbb{Z}/p\mathbb{Z}\) 对任何素数 \(p\) 有特征 \(p\).
+
+（3）系数在域 \(\mathbb{F}_p\) 中的变量 \(x\) 的多项式整环 \(\mathbb{F}_p[x]\) 的特征为 \(p\)，它的分式域 \(\mathbb{F}_p(x)\)（系数在 \(\mathbb{F}_p\) 中的 \(x\) 的有理函数域）也一样。
+\end{example}
+
+若对正整数 \(n\) 定义 \((-n) \cdot 1_F = -(n \cdot 1_F)\)、\(0 \cdot 1_F = 0\)，则由（13.1）式我们有一个自然的环同态
+\[
+\varphi : \mathbb{Z} \to F, \qquad n \mapsto n \cdot 1_F,
+\]
+并且可以由 \(\ker(\varphi) = \operatorname{ch}(F)\mathbb{Z}\) 来解释 \(F\) 的特征。关于这个核作商，就得到 \(\mathbb{Z}\) 或 \(\mathbb{Z}/p\mathbb{Z}\) 到 \(F\) 中的单射（取决于 \(\operatorname{ch}(F) = 0\) 还是 \(\operatorname{ch}(F) = p\)）。由于 \(F\) 是域，我们看到 \(F\) 含有一个同构于 \(\mathbb{Q}\)（\(\mathbb{Z}\) 的分式域）或 \(\mathbb{F}_p = \mathbb{Z}/p\mathbb{Z}\)（\(\mathbb{Z}/p\mathbb{Z}\) 的分式域）的子域，取决于 \(F\) 的特征；而无论哪种情形，它都是 \(F\) 中含 \(1_F\) 的最小子域（\(F\) 中由 \(1_F\) 生成的域）。
+
+\begin{definition}
+域 \(F\) 的\textbf{素子域}是 \(F\) 中由 \(F\) 的乘法单位元 \(1_F\) 生成的子域。它（同构于）\(\mathbb{Q}\)（若 \(\operatorname{ch}(F) = 0\)）或 \(\mathbb{F}_p\)（若 \(\operatorname{ch}(F) = p\)）。
+\end{definition}
+
+\noindent\textbf{注：}我们通常把域 \(F\) 的单位元 \(1_F\) 简记作 1. 则在特征为 \(p\) 的域中有 \(p \cdot 1 = 0\)，常简写作 \(p = 0\)（例如特征为 2 的域中 \(2 = 0\)）。然而应当记住这是简写——元素“\(p\)”实际上是 \(p \cdot 1_F\)，并不是 \(F\) 中另一个不同的元素。鉴于命题 \ref{pro:13.1} 的第二个断言，这个记号很有用。
+
+\begin{example}
+（1）\(\mathbb{Q}\) 与 \(\mathbb{R}\) 的素子域都是 \(\mathbb{Q}\).
+
+（2）域 \(\mathbb{F}_p(x)\) 的素子域同构于 \(\mathbb{F}_p\)，它由常数多项式给出。
+\end{example}
+
+\begin{definition}
+若域 \(K\) 含有子域 \(F\)，则称 \(K\) 是 \(F\) 的\textbf{扩域}（或简称\textbf{扩张}），记作 \(K/F\) 或用一个图表示。特别地，每个域 \(F\) 都是其素子域的扩张。域 \(F\) 有时称为这个扩张的\textbf{基域}。
+\end{definition}
+
+域扩张的记号 \(K/F\) 是“\(K\) 在 \(F\) 之上”的简写，并不是 \(K\) 关于 \(F\) 的商。
+
+若 \(K/F\) 是任意域扩张，则 \(K\) 中定义的乘法使 \(K\) 成为 \(F\) 上的向量空间。特别地，每个域 \(F\) 都可以看作其素域上的向量空间。
+
+\begin{definition}
+域扩张 \(K/F\) 的\textbf{次数}（或\textbf{相对次数}、\textbf{指数}），记作 \([K:F]\)，是 \(K\) 作为 \(F\) 上向量空间的维数（即 \([K:F] = \dim_F K\)）。若 \([K:F]\) 有限，则称这个扩张是\textbf{有限}的，否则称它是\textbf{无限}的。
+\end{definition}
+
+一类重要的域扩张是通过求解给定域 \(F\) 上的方程得到的。例如若 \(F = \mathbb{R}\) 是实数域，则简单的方程 \(x^2+1 = 0\) 在 \(F\) 中没有解。于是产生这样的问题：是否存在某个包含 \(\mathbb{R}\) 的更大域，使这个方程在其中确实有解？正是这个问题促使 Gauss 引入复数 \(\mathbb{C} = \mathbb{R}+\mathbb{R}i\)，其中 \(i\) 被定义为满足 \(i^2+1 = 0\). 随后按初等代数中熟悉的通常法则定义 \(\mathbb{C}\) 中的加法与乘法，并验证这样定义的 \(\mathbb{C}\) 确实是域，即 \(\mathbb{C}\) 的每个非零元素都能找到逆。
+
+给定任意域 \(F\) 与任意多项式 \(p(x) \in F[x]\)，可以问类似的问题：是否存在 \(F\) 的扩张 \(K\) 含有方程 \(p(x) = 0\) 的解（即含有 \(p(x)\) 的根）？注意这里我们可以假设 \(p(x)\) 在 \(F[x]\) 中不可约，因为 \(p(x)\) 的任何因子的根当然也是 \(p(x)\) 的根。答案是肯定的，且几乎立即由我们关于多项式环 \(F[x]\) 的工作推出。我们先回忆下面这个关于域同态的有用结果（第 7 章推论 10），它由域 \(F\) 的理想只有 0 与 \(F\) 这一事实推出。
+
+\begin{proposition}\label{pro:13.2}
+设 \(\varphi : F \to F'\) 是域的同态。则 \(\varphi\) 或恒为 0，或是单射；因此 \(\varphi\) 的像或为 0，或同构于 \(F\).
+\end{proposition}
+
+\begin{theorem}\label{thm:13.3}
+设 \(F\) 是域，\(p(x) \in F[x]\) 是不可约多项式。则存在含有 \(F\) 的同构拷贝的域 \(K\)，在其中 \(p(x)\) 有根。把 \(F\) 与这个同构拷贝等同起来，就表明存在 \(F\) 的扩张，在其中 \(p(x)\) 有根。
+\end{theorem}
+
+\begin{proof}
+考虑多项式环 \(F[x]\) 关于由 \(p(x)\) 生成的理想的商
+\[
+K = F[x]/(p(x)).
+\]
+由于按假设 \(p(x)\) 是主理想整环 \(F[x]\) 中的不可约多项式，理想 \((p(x))\) 是极大理想。故 \(K\) 实际上是域（这是第 7 章命题 12）。把 \(F[x]\) 到商 \(F[x]/(p(x))\) 的典范投影 \(\pi\) 限制在 \(F \subset F[x]\) 上，得到同态 \(\varphi = \pi|_F : F \to K\)，它不恒为 0，因为它把 \(F\) 的单位元 1 映到 \(K\) 的单位元 1. 故由上一命题，\(\varphi(F) \cong F\) 是 \(K\) 中含有的 \(F\) 的同构拷贝。我们把 \(F\) 与它在 \(K\) 中的同构像等同，并把 \(F\) 看作 \(K\) 的子域。若用 \(\overline{x} = \pi(x)\) 表示 \(x\) 在商 \(K\) 中的像，则
+\[
+p(\overline{x}) = \overline{p(x)} \ (\text{因为 } \pi \text{ 是环同态}) = p(x) \bmod (p(x)) = 0 \in F[x]/(p(x)),
+\]
+故 \(K\) 确实含有多项式 \(p(x)\) 的一个根。于是 \(K\) 是 \(F\) 的扩张，在其中多项式 \(p(x)\) 有根。
+\end{proof}
+
+我们以后将用这个结果构造 \(F\) 的扩张，使它含有 \(p(x)\) 的所有根（这就是分裂域的概念，也是伽罗瓦理论中核心的关注对象之一）。
+
+为更充分地理解上面构造的域 \(K = F[x]/(p(x))\)，对它的元素有一个简单的表示是有用的。由于 \(F\) 是 \(K\) 的子域，我们特别可以问 \(K\) 作为 \(F\) 上向量空间的基是什么。
+
+\begin{theorem}\label{thm:13.4}
+设 \(p(x) \in F[x]\) 是域 \(F\) 上次数为 \(n\) 的不可约多项式，\(K\) 是域 \(F[x]/(p(x))\)，\(\theta = x \bmod (p(x)) \in K\). 则元素
+\[
+1, \theta, \theta^2, \ldots, \theta^{n-1}
+\]
+是 \(K\) 作为 \(F\) 上向量空间的一组基，故这个扩张的次数为 \(n\)，即 \([K:F] = n\). 因此
+\[
+K = \{a_0+a_1\theta+a_2\theta^2+\cdots+a_{n-1}\theta^{n-1} \mid a_0, a_1, \ldots, a_{n-1} \in F\}
+\]
+由所有次数 \(< n\) 的 \(\theta\) 的多项式组成。
+\end{theorem}
+
+\begin{proof}
+设 \(a(x) \in F[x]\) 是系数在 \(F\) 中的任意多项式。由于 \(F[x]\) 是欧几里得整环（这是第 9 章定理 3），我们可以用 \(p(x)\) 除 \(a(x)\)：
+\[
+a(x) = q(x)p(x)+r(x), \qquad q(x), r(x) \in F[x], \quad \deg r(x) < n.
+\]
+由于 \(q(x)p(x)\) 在理想 \((p(x))\) 中，可知 \(a(x) \equiv r(x) \bmod (p(x))\)，这表明 \(F[x]/(p(x))\) 中每个剩余类都由一个次数小于 \(n\) 的多项式代表。故 \(1, x, x^2, \ldots, x^{n-1}\) 在商中的像 \(\overline{1}, \overline{x}, \overline{x^2}, \ldots, \overline{x^{n-1}}\) 作为 \(F\) 上的向量空间张成商。剩下要看出这些元素线性无关，从而是商在 \(F\) 上的基。
+
+若元素 \(1, \theta, \theta^2, \ldots, \theta^{n-1}\) 在 \(K\) 中不线性无关，则在 \(K\) 中有线性组合
+\[
+b_0+b_1\theta+b_2\theta^2+\cdots+b_{n-1}\theta^{n-1} = 0,
+\]
+其中 \(b_0, b_1, \ldots, b_{n-1} \in F\) 不全为 0. 这等价于
+\[
+b_0+b_1x+b_2x^2+\cdots+b_{n-1}x^{n-1} \equiv 0 \bmod (p(x)),
+\]
+即 \(p(x)\) 在 \(F[x]\) 中整除 \(b_0+b_1x+b_2x^2+\cdots+b_{n-1}x^{n-1}\). 但这是不可能的，因为 \(p(x)\) 的次数为 \(n\)，而右端非零多项式的次数小于 \(n\). 这证明 \(1, \theta, \theta^2, \ldots, \theta^{n-1}\) 是 \(K\) 在 \(F\) 上的基，故按定义 \([K:F] = n\). 定理的最后一个断言是显然的。
+\end{proof}
+
+这个定理给出域 \(F[x]/(p(x))\) 的元素的简单描述：它们是 \(\theta\) 的次数 \(< n\) 的多项式，其中 \(\theta\) 是（\(K\) 中）满足 \(p(\theta) = 0\) 的元素。剩下只需看出如何对这种形式写出的元素作加法与乘法。商 \(F[x]/(p(x))\) 中的加法就是多项式的通常加法。商 \(F[x]/(p(x))\) 中多项式 \(a(x)\) 与 \(b(x)\) 的乘法这样进行：先在 \(F[x]\) 中求乘积 \(a(x)b(x)\)，然后用 \(p(x)\) 除 \(a(x)b(x)\) 取余式，得到陪集 \(a(x)b(x)+(p(x))\) 的次数 \(< n\) 的代表元（如上面的证明中那样）。
+
+这也可以容易地用 \(\theta\) 表示如下：我们可以假设 \(p(x)\) 是首一的（因为乘以常数不改变它的根及它生成的理想），比如 \(p(x) = x^n+p_{n-1}x^{n-1}+\cdots+p_1x+p_0\). 则在 \(K\) 中，由于 \(p(\theta) = 0\)，我们有
+\[
+\theta^n = -(p_{n-1}\theta^{n-1}+\cdots+p_1\theta+p_0),
+\]
+即 \(\theta^n\) 是 \(\theta\) 的较低次幂的线性组合。两边乘以 \(\theta\) 并把右端的 \(\theta^n\) 再次换成这些较低次幂，我们看到 \(\theta^{n+1}\) 也是 \(\theta\) 的次数 \(< n\) 的多项式。类似地，\(\theta\) 的任何正幂都可以写成 \(\theta\) 的次数 \(< n\) 的多项式，从而 \(\theta\) 的任何多项式都可以写成 \(\theta\) 的次数 \(< n\) 的多项式。现在 \(K\) 中的乘法就容易进行了：只需把两个 \(\theta\) 的次数 \(< n\) 的多项式之积写成 \(\theta\) 的另一个次数 \(< n\) 的多项式。
+
+我们把它总结为：
+
+\begin{corollary}\label{cor:13.5}
+设 \(K\) 如定理 \ref{thm:13.4} 中那样，\(a(\theta), b(\theta) \in K\) 是两个 \(\theta\) 的次数 \(< n\) 的多项式。则 \(K\) 中的加法就按通常的多项式加法定义，而 \(K\) 中的乘法由
+\[
+a(\theta)b(\theta) = r(\theta)
+\]
+定义，其中 \(r(x)\) 是在 \(F[x]\) 中用 \(p(x)\) 除多项式 \(a(x)b(x)\) 后所得的（次数 \(< n\) 的）余式。
+\end{corollary}
+
+由上面证明的结果，\(\theta\) 的次数 \(< n\) 的多项式上这个加法与乘法的定义使 \(K\) 成为域，从而也可以除以非零元素，而从运算的定义来看这一点并不那么显然。
+
+定理 \ref{thm:13.4} 中 \(p(x)\) 在 \(F\) 上不可约也很重要。一般地，推论 \ref{cor:13.5} 中的加法与乘法（对任意多项式 \(p(x)\) 都可以同样定义）在 \(p(x)\) 不可约时使 \(\theta\) 的次数 \(< n\) 的多项式构成域；若 \(p(x)\) 不可约，则一般甚至不构成整环（其结构由第 9 章命题 16 给出）。为描述含有 \(F\) 上一般多项式 \(f(x)\) 的根 \(\theta\) 的域，应把 \(f(x)\) 在 \(F[x]\) 中分解为不可约因子，并对以 \(\theta\) 为根的 \(f(x)\) 的不可约因子 \(p(x)\) 应用上面的结果。我们将在随后几节更充分地考虑这一点。
+
+\begin{example}
+（1）若把这个构造应用于 \(F = \mathbb{R}\)、\(p(x) = x^2+1\) 的特殊情形，我们就得到域 \(\mathbb{R}[x]/(x^2+1)\)，它是 \(\mathbb{R}\) 的次数为 2 的扩张，其中 \(x^2+1\) 有根。这个域的元素具有 \(a+b\theta\)（\(a, b \in \mathbb{R}\)）的形式。加法由
+\begin{equation}
+(a+b\theta)+(c+d\theta) = (a+c)+(b+d)\theta \tag{13.2a}
+\end{equation}
+定义。为作乘法，我们利用 \(K\) 中 \(\theta^2+1 = 0\)，即 \(\theta^2 = -1\).（或者注意 \(-1\) 也是在 \(\mathbb{R}[x]\) 中用 \(x^2+1\) 除 \(x^2\) 所得的余式。）则
+\begin{equation}
+(a+b\theta)(c+d\theta) = ac+(ad+bc)\theta+bd\theta^2 = ac+(ad+bc)\theta+bd(-1) = (ac-bd)+(ad+bc)\theta. \tag{13.2b}
+\end{equation}
+把 \(\theta\) 换成 \(i\)，这些就是 \(\mathbb{C}\) 中加法与乘法的公式。换句话说，映射
+\[
+\varphi : \mathbb{R}[x]/(x^2+1) \to \mathbb{C}, \qquad a+bx \mapsto a+bi
+\]
+是同态。由于它是双射（例如作为实数上的向量空间之间的映射），它是同构。注意我们不必把 \(\mathbb{C}\) 的存在性（连同验证它确实是域这一相当繁琐的工作）当作已知，我们可以用这个同构来定义 \(\mathbb{C}\). 此时它是域这一事实就是定理 \ref{thm:13.4} 的推论。
+
+（2）现在取 \(F = \mathbb{Q}\) 为有理数域，并再次取 \(p(x) = x^2+1\)（当然仍在 \(\mathbb{Q}\) 上不可约）。则同样的构造（加法与乘法公式与上面的（13.2a）、（13.2b）相同，只是现在 \(a\) 与 \(b\) 是有理数）定义了 \(\mathbb{Q}\) 的次数为 2 的域扩张 \(\mathbb{Q}(i)\)，它含有 \(x^2+1\) 的根 \(i\).
+
+（3）取 \(F = \mathbb{Q}\)、\(p(x) = x^2-2\)（例如由艾森斯坦判别法它在 \(\mathbb{Q}\) 上不可约）。则我们得到 \(\mathbb{Q}\) 的次数为 2 的域扩张，它含有 2 的平方根 \(\theta\)，记作 \(\mathbb{Q}(\theta)\). 若把 \(\theta\) 记作 \(\sqrt{2}\)，这个域的元素具有 \(a+b\sqrt{2}\)（\(a, b \in \mathbb{Q}\)）的形式，加法由 \((a+b\sqrt{2})+(c+d\sqrt{2}) = (a+c)+(b+d)\sqrt{2}\) 定义，乘法由 \((a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd)+(ad+bc)\sqrt{2}\) 定义。
+
+（4）设 \(F = \mathbb{Q}\)、\(p(x) = x^3-2\)（同样由艾森斯坦判别法不可约）。用 \(\theta\) 表示 \(p(x)\) 的一个根，我们得到域
+\[
+\mathbb{Q}[x]/(x^3-2) \cong \{a+b\theta+c\theta^2 \mid a, b, c \in \mathbb{Q}\},
+\]
+其中 \(\theta^3 = 2\)，这是次数为 3 的扩张。为求例如 \(1+\theta\) 在这个域中的逆，可以如下进行：由 \(\mathbb{Q}[x]\) 中的欧几里得算法，存在多项式 \(a(x)\) 与 \(b(x)\) 使
+\[
+a(x)(1+x)+b(x)(x^3-2) = 1
+\]
+（因为 \(p(x) = x^3-2\) 不可约，它与任何次数更小的多项式互素）。在商域中这个等式蕴涵 \(a(\theta)\) 是 \(1+\theta\) 的逆。此时简单计算表明可以取 \(a(x) = \frac{1}{3}(x^2-x+1)\)（以及 \(b(x) = -\frac{1}{3}\)），故
+\[
+(1+\theta)^{-1} = \frac{1}{3}\theta^2-\frac{1}{3}\theta+\frac{1}{3}.
+\]
+
+（5）一般地，若 \(\theta \in K\) 是不可约多项式
+\[
+p(x) = p_nx^n+p_{n-1}x^{n-1}+\cdots+p_1x+p_0
+\]
+的根，我们可以由
+\[
+\theta(p_n\theta^{n-1}+p_{n-1}\theta^{n-2}+\cdots+p_1) = -p_0
+\]
+计算 \(\theta^{-1} \in K\)，即
+\[
+\theta^{-1} = -\frac{1}{p_0}(p_n\theta^{n-1}+p_{n-1}\theta^{n-2}+\cdots+p_1) \in K
+\]
+（注意由于 \(p(x)\) 不可约，\(p_0 \neq 0\)）。
+
+\noindent\textbf{注：}在这类扩张中求逆，可能以“有理化分母”之名从初等代数中关于 \(\mathbb{C}\) 或上面例 3 的内容而熟悉。最后两个例子指出一个远比初等代数中的特殊方法更一般的步骤。
+
+（6）取 \(F = \mathbb{F}_2\)（只有两个元素的有限域），\(p(x) = x^2+x+1\)（我们前面验证过它在 \(\mathbb{F}_2\) 上不可约）。这里我们得到 \(\mathbb{F}_2\) 的次数为 2 的扩张
+\[
+\mathbb{F}_2[x]/(x^2+x+1) \cong \{a+b\theta \mid a, b \in \mathbb{F}_2\},
+\]
+其中 \(\theta^2 = -\theta-1 = \theta+1\). 这个域 \(\mathbb{F}_2(\theta)\)（含有 4 个元素）中的乘法由
+\[
+(a+b\theta)(c+d\theta) = ac+(ad+bc)\theta+bd\theta^2 = ac+(ad+bc)\theta+bd(\theta+1) = (ac+bd)+(ad+bc+bd)\theta
+\]
+定义。
+
+（7）设 \(F = k(t)\) 是域 \(k\) 上变量 \(t\) 的有理函数域（例如 \(k = \mathbb{Q}\) 或 \(k = \mathbb{F}_p\)）。设 \(p(x) = x^2-t \in F[x]\). 则 \(p(x)\) 不可约（它在 \(k[t]\) 中的素理想 \((t)\) 处是艾森斯坦的）。若用 \(\theta\) 表示一个根，相应的次数为 2 的域扩张 \(F(\theta)\) 由元素 \(\{a(t)+b(t)\theta \mid a(t), b(t) \in F\}\) 组成，其中系数 \(a(t)\) 与 \(b(t)\) 是系数在 \(k\) 中的 \(t\) 的有理函数，且 \(\theta^2 = t\).
+\end{example}
+
+假设 \(F\) 是域 \(K\) 的子域，\(\alpha \in K\) 是 \(K\) 的元素。则同时包含 \(F\) 与 \(\alpha\) 的 \(K\) 的子域的集合非空（例如 \(K\) 就是这样的域）。由于子域的交仍是子域，可知存在同时包含 \(F\) 与 \(\alpha\) 的 \(K\) 的唯一最小子域（所有具有这个性质的子域之交）。若把 \(\alpha\) 换成 \(K\) 的一族元素 \(\alpha, \beta, \ldots\)，类似的论述也适用。
+
+\begin{definition}
+设 \(K\) 是域 \(F\) 的扩张，\(\alpha, \beta, \ldots \in K\) 是 \(K\) 的一族元素。则同时包含 \(F\) 与元素 \(\alpha, \beta, \ldots\) 的 \(K\) 的最小子域记作 \(F(\alpha, \beta, \ldots)\)，称为由 \(\alpha, \beta, \ldots\) 在 \(F\) 上\textbf{生成的域}。
+\end{definition}
+
+\begin{definition}
+若域 \(K\) 由单个元素 \(\alpha\) 在 \(F\) 上生成，即 \(K = F(\alpha)\)，则称 \(K\) 是 \(F\) 的\textbf{单扩张}，并称元素 \(\alpha\) 是这个扩张的\textbf{本原元}。
+\end{definition}
+
+我们以后将刻画域 \(F\) 的哪些扩张是单扩张。特别地我们将证明特征为 0 的域的每个有限扩张都是单扩张。
+
+由 \(F\) 上元素 \(\alpha\) 生成的单扩张 \(F(\alpha)\)（其中 \(\alpha\) 是某个不可约多项式 \(p(x)\) 的根）与定理 \ref{thm:13.3} 中构造的域之间的联系由下面结果给出：
+
+\begin{theorem}\label{thm:13.6}
+设 \(F\) 是域，\(p(x) \in F[x]\) 是不可约多项式。假设 \(K\) 是 \(F\) 的扩域，含有 \(p(x)\) 的根 \(\alpha\)：\(p(\alpha) = 0\). 设 \(F(\alpha)\) 表示 \(K\) 中由 \(\alpha\) 在 \(F\) 上生成的子域。则
+\[
+F(\alpha) \cong F[x]/(p(x)).
+\]
+\end{theorem}
+
+\noindent\textbf{注：}这个定理说，任何在 \(F\) 上含有 \(p(x)\) 的根的域都含有一个同构于定理 \ref{thm:13.3} 中构造的 \(F\) 的扩张的子域，且这个域（在同构意义下）是含有这样一个根的 \(F\) 的最小的扩张。这个结果与定理 \ref{thm:13.3} 的区别在于：定理 \ref{thm:13.6} 假设 \(p(x)\) 的根 \(\alpha\) 在某个域 \(K\) 中存在，而定理 \ref{thm:13.3} 的要点正是证明这样的扩域 \(K\) 存在。
+
+\begin{proof}
+存在自然的同态
+\[
+\varphi : F[x] \to F(\alpha) \subseteq K, \qquad a(x) \mapsto a(\alpha),
+\]
+它由把 \(F\) 恒等地映入 \(F\)、把 \(x\) 映到 \(\alpha\)，然后延拓为环同态得到（即把 \(x\) 的多项式 \(a(x)\) 映到 \(\alpha\) 的多项式 \(a(\alpha)\)）。由于按假设 \(p(\alpha) = 0\)，元素 \(p(x)\) 在 \(\varphi\) 的核中，故我们得到诱导同态（也记作 \(\varphi\)）\(\varphi : F[x]/(p(x)) \to F(\alpha)\). 但由于 \(p(x)\) 不可约，左端的商是域，且 \(\varphi\) 不是 0 映射（例如它在 \(F\) 上是恒等映射），故 \(\varphi\) 是左端域与它的像的域同构。由于这个像是 \(F(\alpha)\) 的含有 \(F\) 且含有 \(\alpha\) 的子域，由 \(F(\alpha)\) 的定义这个映射必是满射，这证明了定理。
+\end{proof}
+
+结合推论 \ref{cor:13.5}，当 \(\alpha\) 是不可约多项式 \(p(x)\) 的根时这就确定了域 \(F(\alpha)\)：
+
+\begin{corollary}\label{cor:13.7}
+假设定理 \ref{thm:13.6} 中 \(p(x)\) 的次数为 \(n\). 则
+\[
+F(\alpha) = \{a_0+a_1\alpha+a_2\alpha^2+\cdots+a_{n-1}\alpha^{n-1} \mid a_0, a_1, \ldots, a_{n-1} \in F\} \subseteq K.
+\]
+\end{corollary}
+
+描述由多于一个元素生成的域更为复杂，我们将在下一节回到这个问题。
+
+\begin{example}
+（1）在上面例 3 中，我们确定了由元素 \(\sqrt{2} \in \mathbb{R}\) 在 \(\mathbb{Q}\) 上生成的域 \(\mathbb{Q}(\sqrt{2})\)，我们已经暗示性地把方程 \(x^2-2 = 0\) 的抽象解 \(\theta\) 记作符号 \(\sqrt{2}\)，它在域 \(\mathbb{R}\) 中有独立的意义（即 \(\mathbb{R}\) 中 2 的正平方根）。
+
+（2）方程 \(x^2-2 = 0\) 在 \(\mathbb{R}\) 中还有另一个解，即 \(-\sqrt{2}\)（\(\mathbb{R}\) 中 2 的负平方根）。由这个解在 \(\mathbb{Q}\) 上生成的域由元素 \(\{a+b(-\sqrt{2}) \mid a, b \in \mathbb{Q}\}\) 组成，它同样同构于上面例 3 中的域（从而也同构于刚刚考虑的域，同构由 \(a+b\sqrt{2} \mapsto a-b\sqrt{2}\) 显式给出）。作为 \(\mathbb{R}\) 的子集，这与例 1 中的元素集合相同。
+
+（3）类似地，若我们用符号 \(\sqrt[3]{2}\) 表示 \(\mathbb{R}\) 中 2 的（正）立方根，则由 \(\sqrt[3]{2}\) 在 \(\mathbb{Q}\) 上生成的域（在 \(\mathbb{R}\) 中）由元素 \(\{a+b\sqrt[3]{2}+c(\sqrt[3]{2})^2 \mid a, b, c \in \mathbb{Q}\}\) 组成，它同构于上面例 4 中构造的域。
+
+（4）方程 \(x^3-2 = 0\) 在 \(\mathbb{R}\) 中没有进一步的解，但在 \(\mathbb{C}\) 中还有两个解：\(\sqrt[3]{2}\left(-\frac{1}{2}+\frac{\sqrt{3}}{2}i\right)\) 与 \(\sqrt[3]{2}\left(-\frac{1}{2}-\frac{\sqrt{3}}{2}i\right)\)（其中 \(\sqrt{3}\) 表示 3 的正实平方根），容易验证。由这两个元素之一在 \(\mathbb{Q}\) 上生成的域是 \(\mathbb{C}\)（但不是 \(\mathbb{R}\)）的子域，且都同构于上一例中构造的域（以及前面的例 4）。
+\end{example}
+
+如定理 \ref{thm:13.6} 所表明的，不可约多项式 \(p(x)\) 的根在代数上不可区分，其意义是：把不可约多项式的任何根添加到域中所得到的域都同构。在上面最后两个例子中，把 \(x^3-2 = 0\) 的三个可能（复）根之一添加到 \(\mathbb{Q}\) 所得的域都代数同构。这些域的区分不在于它们的代数性质，而在于它们的元素是否实（这涉及连续运算）。
+
+同一个不可约多项式的不同根具有相同的代数性质，这一事实可以稍作推广，如下：
+
+设 \(\varphi : F \to F'\) 是域的同构。这个映射诱导出环同构（也记作 \(\varphi\)）
+\[
+\varphi : F[x] \to F'[x],
+\]
+它由把 \(\varphi\) 作用于 \(F[x]\) 中多项式的系数定义。设 \(p(x) \in F[x]\) 是不可约多项式，\(p'(x) \in F'[x]\) 是把 \(\varphi\) 作用于 \(p(x)\) 的系数所得的多项式，即 \(p(x)\) 在 \(\varphi\) 下的像。同构 \(\varphi\) 把极大理想 \((p(x))\) 映到理想 \((p'(x))\)，故这个理想也是极大的，这表明 \(p'(x)\) 在 \(F'[x]\) 中也不可约。下面这个定理表明，把 \(p(x)\) 的一个根添加到 \(F\)、把 \(p'(x)\) 的一个根添加到 \(F'\) 所得的域有相同的代数结构（即同构）：
+
+\begin{theorem}\label{thm:13.8}
+设 \(\varphi : F \to F'\) 是域的同构。设 \(p(x) \in F[x]\) 是不可约多项式，\(p'(x) \in F'[x]\) 是把 \(\varphi\) 作用于 \(p(x)\) 的系数所得的多项式（它不可约）。设 \(\alpha\) 是 \(p(x)\) 的根（在 \(F\) 的某个扩张中），\(\beta\) 是 \(p'(x)\) 的根（在 \(F'\) 的某个扩张中）。则存在同构
+\[
+\sigma : F(\alpha) \to F'(\beta), \qquad \alpha \mapsto \beta,
+\]
+它把 \(\alpha\) 映到 \(\beta\) 并延拓 \(\varphi\)，即 \(\sigma\) 在 \(F\) 上的限制就是同构 \(\varphi\).
+\end{theorem}
+
+\begin{proof}
+如上所述，同构 \(\varphi\) 诱导出从 \(F[x]\) 到 \(F'[x]\) 的自然同构，它把极大理想 \((p(x))\) 映到极大理想 \((p'(x))\). 关于这两个理想作商，我们得到域的**同构**\(F[x]/(p(x)) \cong F'[x]/(p'(x))\). 由定理 \ref{thm:13.6}，左端的域同构于 \(F(\alpha)\)，由同一定理右端的域同构于 \(F'(\beta)\). 复合这些同构，我们得到同构 \(\sigma\). 显然这个同构在 \(F\) 上的限制是 \(\varphi\)，完成证明。
+\end{proof}
+
+这个延拓定理在我们以后考虑伽罗瓦理论时将非常有用。它可以用图形表示为
+\[
+\begin{array}{ccc}
+F(\alpha) & \xrightarrow{\ \sigma\ } & F'(\beta)\\
+\big\downarrow & & \big\downarrow\\
+F & \xrightarrow{\ \varphi\ } & F'
+\end{array}
+\]
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 证明 \(p(x) = x^3+9x+6\) 在 \(\mathbb{Q}[x]\) 中不可约。设 \(\theta\) 是 \(p(x)\) 的根，求 \(1+\theta\) 在 \(\mathbb{Q}(\theta)\) 中的逆。
+
+\item 证明 \(x^3-2x-2\) 在 \(\mathbb{Q}\) 上不可约，并设 \(\theta\) 是一个根。计算 \((1+\theta)(1+\theta+\theta^2)\) 以及 \(\frac{1+\theta}{1+\theta+\theta^2}\) 在 \(\mathbb{Q}(\theta)\) 中的值。
+
+\item 证明 \(x^3+x+1\) 在 \(\mathbb{F}_2\) 上不可约，并设 \(\theta\) 是一个根。计算 \(\mathbb{F}_2(\theta)\) 中 \(\theta\) 的各次幂。
+
+\item 直接证明映射 \(a+b\sqrt{2} \mapsto a-b\sqrt{2}\) 是 \(\mathbb{Q}(\sqrt{2})\) 到自身的同构。
+
+\item 假设 \(\alpha\) 是 \(\mathbb{Z}[x]\) 中首一多项式的有理根。证明 \(\alpha\) 是整数。
+
+\item 证明若 \(\alpha\) 是 \(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\) 的根，则 \(a_n\alpha\) 是首一多项式 \(x^n+a_{n-1}x^{n-1}+a_na_{n-2}x^{n-2}+\cdots+a_n^{n-1}a_1x+a_n^{n-1}a_0\) 的根。
+
+\item 证明 \(x^3-nx+2\) 对 \(n \neq -1, 3, 5\) 不可约。
+
+\item 证明 \(x^5-ax-1 \in \mathbb{Z}[x]\) 不可约，除非 \(a = 0, 2\) 或 \(-1\). 前两个对应于线性因子，第三个对应于分解 \((x^2-x+1)(x^3+x^2-1)\).
+\end{enumerate}
+
+\section{代数扩张}
+
+设 \(F\) 是域，\(K\) 是 \(F\) 的扩张。
+
+\begin{definition}
+元素 \(\alpha \in K\) 称为在 \(F\) 上\textbf{代数的}，若 \(\alpha\) 是某个非零多项式 \(f(x) \in F[x]\) 的根。若 \(\alpha\) 在 \(F\) 上不是代数的（即它不是任何系数在 \(F\) 中的非零多项式的根），则称 \(\alpha\) 在 \(F\) 上\textbf{超越}。若 \(K\) 的每个元素都在 \(F\) 上代数，则称扩张 \(K/F\) 是\textbf{代数扩张}。
+\end{definition}
+
+注意若 \(\alpha\) 在域 \(F\) 上代数，则它在 \(F\) 的任何扩域 \(L\) 上也代数（若以 \(\alpha\) 为根的多项式 \(f(x)\) 的系数在 \(F\) 中，则它们也在 \(L\) 中）。
+
+\begin{proposition}\label{pro:13.9}
+设 \(\alpha\) 在 \(F\) 上代数。则存在唯一的首一不可约多项式 \(m_{\alpha,F}(x) \in F[x]\) 以 \(\alpha\) 为根。多项式 \(f(x) \in F[x]\) 以 \(\alpha\) 为根当且仅当在 \(F[x]\) 中 \(m_{\alpha,F}(x)\) 整除 \(f(x)\).
+\end{proposition}
+
+\begin{proof}
+设 \(g(x) \in F[x]\) 是以 \(\alpha\) 为根的次数最小的多项式。把 \(g(x)\) 乘以常数，我们可以假设 \(g(x)\) 首一。假设 \(g(x)\) 在 \(F[x]\) 中可约，比如 \(g(x) = a(x)b(x)\)，其中 \(a(x), b(x) \in F[x]\) 的次数都小于 \(g(x)\) 的次数。则在 \(K\) 中 \(g(\alpha) = a(\alpha)b(\alpha)\)，而由于 \(K\) 是域，\(a(\alpha) = 0\) 或 \(b(\alpha) = 0\)，与 \(g(x)\) 次数的最小性矛盾。由此 \(g(x)\) 是以 \(\alpha\) 为根的首一不可约多项式。现在假设 \(f(x) \in F[x]\) 是任意以 \(\alpha\) 为根的多项式。由 \(F[x]\) 中的欧几里得算法，存在 \(q(x), r(x) \in F[x]\) 使
+\[
+f(x) = q(x)g(x)+r(x), \quad \text{其中 } \deg r(x) < \deg g(x).
+\]
+则在 \(K\) 中 \(f(\alpha) = q(\alpha)g(\alpha)+r(\alpha)\)，而由于 \(\alpha\) 是 \(f(x)\) 与 \(g(x)\) 的根，我们得到 \(r(\alpha) = 0\)，这与 \(g(x)\) 次数的最小性矛盾，除非 \(r(x) = 0\). 故 \(g(x)\) 整除 \(F[x]\) 中任何以 \(\alpha\) 为根的多项式 \(f(x)\)，特别地它整除 \(F[x]\) 中任何其他以 \(\alpha\) 为根的首一不可约多项式。这证明 \(m_{\alpha,F}(x) = g(x)\) 唯一，完成命题的证明。
+\end{proof}
+
+\begin{corollary}\label{cor:13.10}
+若 \(L/F\) 是域扩张且 \(\alpha\) 在 \(F\) 与 \(L\) 上都代数，则在 \(L[x]\) 中 \(m_{\alpha,L}(x)\) 整除 \(m_{\alpha,F}(x)\).
+\end{corollary}
+
+\begin{proof}
+这由命题 \ref{pro:13.9} 的第二个断言应用于 \(L\) 立即推出，因为 \(m_{\alpha,F}(x)\) 是 \(L[x]\) 中以 \(\alpha\) 为根的多项式。
+\end{proof}
+
+\begin{definition}
+命题 \ref{pro:13.9} 中的多项式 \(m_{\alpha,F}(x)\)（若域 \(F\) 明确则简记 \(m_\alpha(x)\)）称为 \(\alpha\) 在 \(F\) 上的\textbf{极小多项式}。\(m_\alpha(x)\) 的次数称为 \(\alpha\) 的\textbf{次数}。
+\end{definition}
+
+注意由命题，\(F\) 上以 \(\alpha\) 为根的首一多项式是 \(\alpha\) 在 \(F\) 上的极小多项式当且仅当它在 \(F\) 上不可约。习题 20 给出计算 \(\alpha\) 在 \(F\) 上极小多项式的一种方法，而 Gröbner 基的理论可以用来计算 \(F(\alpha)\) 中其他元素的极小多项式（参见第 15.1 节命题 10 与习题 48）。
+
+\begin{proposition}\label{pro:13.11}
+设 \(\alpha\) 在域 \(F\) 上代数，\(F(\alpha)\) 是由 \(\alpha\) 在 \(F\) 上生成的域。则
+\[
+F(\alpha) \cong F[x]/(m_\alpha(x)),
+\]
+从而特别地
+\[
+[F(\alpha):F] = \deg m_\alpha(x) = \deg \alpha,
+\]
+即 \(\alpha\) 在 \(F\) 上的次数等于它生成的扩张在 \(F\) 上的次数。
+\end{proposition}
+
+\begin{proof}
+这由定理 \ref{thm:13.6} 立即推出。
+\end{proof}
+
+\begin{example}
+（1）\(\sqrt{2}\) 在 \(\mathbb{Q}\) 上的极小多项式是 \(x^2-2\)，\(\sqrt{2}\) 在 \(\mathbb{Q}\) 上的次数为 2：\([\mathbb{Q}(\sqrt{2}):\mathbb{Q}] = 2\).
+
+（2）\(\sqrt[3]{2}\) 在 \(\mathbb{Q}\) 上的极小多项式是 \(x^3-2\)，\(\sqrt[3]{2}\) 在 \(\mathbb{Q}\) 上的次数为 3：\([\mathbb{Q}(\sqrt[3]{2}):\mathbb{Q}] = 3\).
+
+（3）类似地，对任意 \(n > 1\)，由于是艾森斯坦多项式，\(x^n-2\) 在 \(\mathbb{Q}\) 上不可约。用 \(\sqrt[n]{2}\) 表示这个多项式的一个根（照常，若要把这个根看作 \(\mathbb{R}\) 的元素，我们用这个符号表示 2 的正 \(n\) 次根；一般地这个符号表示代数上不可区分的抽象解中的任意一个），我们有 \([\mathbb{Q}(\sqrt[n]{2}):\mathbb{Q}] = n\).
+
+（4）元素的极小多项式与次数依赖于基域。例如在 \(\mathbb{R}\) 上，元素 \(\sqrt[3]{2}\) 的次数为 1，其极小多项式为 \(m_{\sqrt[3]{2},\mathbb{R}}(x) = x-\sqrt[3]{2}\).
+
+（5）考虑 \(\mathbb{Q}\) 上的多项式 \(p(x) = x^3-3x-1\)，它在 \(\mathbb{Q}\) 上不可约，因为它是一个没有有理根的三次多项式（参见第 9 章命题 11）。故对 \(p(x)\) 的任何根 \(\alpha\) 有 \([\mathbb{Q}(\alpha):\mathbb{Q}] = 3\). 供以后参考我们指出，快速画出这个函数在实数上的图像可以看出，它的图像恰好在区间 \([0,2]\) 内穿过 \(x\) 轴一次，即恰有一个实数 \(\alpha\)（\(0 < \alpha < 2\)）满足 \(\alpha^3-3\alpha-1 = 0\).
+\end{example}
+
+\begin{proposition}\label{pro:13.12}
+元素 \(\alpha\) 在 \(F\) 上代数当且仅当单扩张 \(F(\alpha)/F\) 有限。更精确地说，若 \(\alpha\) 是 \(F\) 上 \(n\) 次扩张的元素，则 \(\alpha\) 满足 \(F\) 上一个次数至多为 \(n\) 的多项式；而若 \(\alpha\) 满足 \(F\) 上一个 \(n\) 次多项式，则 \(F(\alpha)\) 在 \(F\) 上的次数至多为 \(n\).
+\end{proposition}
+
+\begin{proof}
+若 \(\alpha\) 在 \(F\) 上代数，则扩张 \(F(\alpha)/F\) 的次数等于 \(\alpha\) 在 \(F\) 上极小多项式的次数。故扩张有限，且若 \(\alpha\) 满足一个 \(n\) 次多项式则其次数为 \(\leq n\). 反之，假设 \(\alpha\) 是 \(F\) 上 \(n\) 次扩张的元素（例如 \([F(\alpha):F] = n\)）。则 \(F(\alpha)\) 的 \(n+1\) 个元素 \(1, \alpha, \alpha^2, \ldots, \alpha^n\) 在 \(F\) 上线性相关，即
+\[
+b_0+b_1\alpha+b_2\alpha^2+\cdots+b_n\alpha^n = 0,
+\]
+其中 \(b_0, b_1, b_2, \ldots, b_n \in F\) 不全为 0. 故 \(\alpha\) 是系数在 \(F\) 中的非零多项式（次数 \(\leq n\)）的根，这证明 \(\alpha\) 在 \(F\) 上代数，也证明了命题的第二个断言。
+\end{proof}
+
+\begin{corollary}\label{cor:13.13}
+若扩张 \(K/F\) 有限，则它是代数扩张。
+\end{corollary}
+
+\begin{proof}
+若 \(\alpha \in K\)，则子域 \(F(\alpha)\) 特别是 \(K\) 作为 \(F\) 上向量空间的子空间。故 \([F(\alpha):F] \leq [K:F]\)，从而由上一命题 \(\alpha\) 在 \(F\) 上代数。
+\end{proof}
+
+\noindent\textbf{注：}我们将在下面证明这个结果某种意义下的逆（定理 \ref{thm:13.17}），但注意存在无限代数扩张（我们以后会有一个例子），故这个推论的逐字逆命题不成立。
+
+\noindent\textbf{例：（特征 \(\neq 2\) 的域上的二次扩张）}
+
+设 \(F\) 是特征 \(\neq 2\) 的域（例如任何特征为 0 的域，如 \(\mathbb{Q}\)），\(K\) 是 \(F\) 的次数为 2 的扩张，\([K:F] = 2\). 设 \(\alpha\) 是 \(K\) 中不属于 \(F\) 的任意元素。由上一命题，\(\alpha\) 满足 \(F\) 上一个次数至多为 2 的方程。由假设 \(\alpha\) 不是 \(F\) 的元素，这个方程不可能是 1 次的。由此 \(\alpha\) 的极小多项式是首一二次多项式
+\[
+m_\alpha(x) = x^2+bx+c, \qquad b, c \in F.
+\]
+由于 \(F \subsetneq F(\alpha) \subseteq K\) 而 \(F(\alpha)\) 已经是 \(F\) 上 2 维向量空间，我们有 \(K = F(\alpha)\).
+
+这个二次方程的根可以用求根公式确定，该公式在任何特征 \(\neq 2\) 的域上都成立（公式由配方如初等代数中那样得到）：
+\[
+\alpha = \frac{-b \pm \sqrt{b^2-4c}}{2}
+\]
+（要求 \(F\) 的特征不是 2 的原因在于我们必须除以 2）。这里 \(b^2-4c\) 在 \(F\) 中不是平方，因为 \(\alpha\) 不是 \(F\) 的元素，而符号 \(\sqrt{b^2-4c}\) 表示方程 \(x^2-(b^2-4c) = 0\) 在 \(K\) 中的一个根（见下一段末尾）。注意这里没有像在 \(\mathbb{R}\) 中选择 2 的正平方根那样对两个根作自然选择——这两个根代数上不可区分。
+
+现在 \(F(\alpha) = F(\sqrt{b^2-4c})\)，如下：由上面的公式，\(\alpha\) 是右端域的元素，故 \(F(\alpha) \subseteq F(\sqrt{b^2-4c})\)。反之，\(\sqrt{b^2-4c} = \pm(b+2\alpha)\) 表明 \(\sqrt{b^2-4c}\) 是 \(F(\alpha)\) 的元素，这给出反向包含 \(F(\sqrt{b^2-4c}) \subseteq F(\alpha)\)（并且顺便表明方程 \(x^2-(b^2-4c) = 0\) 在 \(K\) 中确实有解）。
+
+由此 \(F\) 的任何 2 次扩张 \(K\) 都有形式 \(F(\sqrt{D})\)，其中 \(D\) 是 \(F\) 中不是平方的元素；反之每个这样的扩张都是 \(F\) 的 2 次扩张。因此域 \(F\) 的 2 次扩张称为 \(F\) 的\textbf{二次扩张}。
+
+假设 \(F\) 是域 \(K\) 的子域，而 \(K\) 又是域 \(L\) 的子域。则有三个相关的扩张次数——\(K\) 与 \(L\) 作为 \(F\) 上向量空间的维数，以及 \(L\) 作为 \(K\) 上向量空间的维数。
+
+\begin{theorem}\label{thm:13.14}
+设 \(F \subseteq K \subseteq L\) 是域。则
+\[
+[L:F] = [L:K][K:F],
+\]
+即扩张次数是可乘的，其中若等式一边无限则另一边也无限。
+\end{theorem}
+
+\begin{proof}
+首先假设 \([L:K] = m\) 与 \([K:F] = n\) 有限。设 \(\alpha_1, \alpha_2, \ldots, \alpha_m\) 是 \(L\) 在 \(K\) 上的基，\(\beta_1, \beta_2, \ldots, \beta_n\) 是 \(K\) 在 \(F\) 上的基。则 \(L\) 的每个元素都可以写成线性组合 \(\alpha_1\alpha_1+\alpha_2\alpha_2+\cdots+\alpha_m\alpha_m\)，其中 \(\alpha_1, \ldots, \alpha_m\) 是 \(K\) 的元素，从而是 \(\beta_1, \ldots, \beta_n\) 的 \(F\)-线性组合：
+\begin{equation}
+\alpha_i = \sum_{j=1}^n b_{ij}\beta_j, \quad i = 1, 2, \ldots, m, \tag{13.3}
+\end{equation}
+其中 \(b_{ij} \in F\). 把这些表达式代入上面的系数 \(\alpha_i\)，我们看到 \(L\) 的每个元素都可以写成 \(mn\) 个元素 \(\alpha_i\beta_j\)（\(i = 1, \ldots, m\)，\(j = 1, \ldots, n\)）的、系数在 \(F\) 中的线性组合。故这些元素作为 \(F\) 上向量空间张成 \(L\).
+
+现在假设在 \(L\) 中有线性关系 \(\sum_{i,j}b_{ij}\alpha_i\beta_j = 0\)，其中系数 \(b_{ij} \in F\). 则用上面的（13.3）式定义元素 \(\alpha_i \in K\)，这个线性关系可以写成
+\[
+\alpha_1\alpha_1+\alpha_2\alpha_2+\cdots+\alpha_m\alpha_m = 0.
+\]
+由于 \(\alpha_i\) 是 \(L\) 在 \(K\) 上的基，可知所有系数 \(\alpha_i\)（\(i = 1, 2, \ldots, m\)）必为 0，即在 \(K\) 中 \(\sum_j b_{ij}\beta_j = 0\)（\(i = 1, 2, \ldots, m\)）。由于 \(\beta_j\)（\(j = 1, 2, \ldots, n\)）构成 \(K\) 在 \(F\) 上的基，这蕴涵对所有 \(i, j\) 有 \(b_{ij} = 0\). 故元素 \(\alpha_i\beta_j\) 在 \(F\) 上线性无关，从而构成 \(L\) 在 \(F\) 上的基，且 \([L:F] = mn = [L:K][K:F]\)，正如所断言。
+\end{proof}
+
+（关于无限情形的说明：若 \([K:F]\) 无限，则 \(K\) 从而 \(L\) 中有无限多个在 \(F\) 上线性无关的元素，故 \([L:F]\) 也无限；类似地若 \([L:K]\) 无限，则 \(L\) 中有无限多个在 \(K\) 上线性无关的元素，从而也在 \(F\) 上线性无关，故 \([L:F]\) 仍无限。最后，若 \([L:K]\) 与 \([K:F]\) 都有限，则上面的证明表明 \([L:F]\) 有限，故 \([L:F]\) 无限蕴涵 \([L:K]\) 与 \([K:F]\) 中至少有一个无限，完成证明。）
+
+\noindent\textbf{注：}注意这个结果与第 I 部分中关于群阶的结果的相似性。与涉及群的图形一样，我们常常在域图中标出扩张的相对次数。
+
+扩张次数的可乘性在计算中极其有用。一个特别的应用如下：
+
+\begin{corollary}\label{cor:13.15}
+假设 \(L/F\) 是有限扩张，\(K\) 是 \(L\) 的任意包含 \(F\) 的子域，\(F \subseteq K \subseteq L\). 则 \([K:F]\) 整除 \([L:F]\).
+\end{corollary}
+
+\begin{proof}
+这立即推出。
+\end{proof}
+
+\begin{example}
+（1）元素 \(\sqrt{2}\) 不包含在域 \(\mathbb{Q}(\alpha)\) 中，其中 \(\alpha\) 是 \(x^3-3x-1\) 在 0 与 2 之间的实根，因为我们已经确定 \([\mathbb{Q}(\sqrt{2}):\mathbb{Q}] = 2\) 与 \([\mathbb{Q}(\alpha):\mathbb{Q}] = 3\)，而 2 不整除 3. 注意要直接证明 \(\sqrt{2}\) 不能写成 \(1, \alpha, \alpha^2\) 的有理线性组合并不那么容易。
+
+（2）照常用 \(\sqrt[6]{2}\) 表示 2 的正实 6 次根。则 \([\mathbb{Q}(\sqrt[6]{2}):\mathbb{Q}] = 6\). 由于 \((\sqrt[6]{2})^3 = \sqrt{2}\)，我们有 \(\mathbb{Q}(\sqrt{2}) \subset \mathbb{Q}(\sqrt[6]{2})\)，而由扩张次数的可乘性，\([\mathbb{Q}(\sqrt[6]{2}):\mathbb{Q}(\sqrt{2})] = 3\). 这给出域图，并特别表明 \(\sqrt[6]{2}\) 在 \(\mathbb{Q}(\sqrt{2})\) 上的极小多项式次数为 3，因此该多项式是 \(x^3-\sqrt{2}\). 注意直接证明这个多项式在 \(\mathbb{Q}(\sqrt{2})\) 上不可约并不完全平凡。
+\end{example}
+
+由定理 \ref{thm:13.14}，有限扩张的有限扩张是有限的。下面几个结果用这一点证明由有限多个代数元素生成的扩张是有限的（推广命题 \ref{pro:13.12}）。
+
+\begin{definition}
+若存在 \(K\) 中的元素 \(\alpha_1, \alpha_2, \ldots, \alpha_k\) 使 \(K = F(\alpha_1, \alpha_2, \ldots, \alpha_k)\)，则称扩张 \(K/F\) \textbf{有限生成}。
+\end{definition}
+
+回忆由域 \(K\) 中一族元素在 \(F\) 上生成的域是 \(K\) 的含有这些元素与 \(F\) 的最小子域。下一个引理将表明对有限生成扩张，这个域可以通过一系列单扩张递归地得到。
+
+\begin{lemma}\label{lem:13.16}
+\(F(\alpha, \beta) = (F(\alpha))(\beta)\)，即由 \(\alpha\) 与 \(\beta\) 在 \(F\) 上生成的域是由 \(\beta\) 在由 \(\alpha\) 生成的域 \(F(\alpha)\) 上生成的域。
+\end{lemma}
+
+\begin{proof}
+这由所涉域的最小性推出。域 \(F(\alpha, \beta)\) 含有 \(F\) 与 \(\alpha\)，从而含有域 \(F(\alpha)\)，而由于它还含有 \(\beta\)，由域 \((F(\alpha))(\beta)\) 的最小性有包含 \((F(\alpha))(\beta) \subseteq F(\alpha, \beta)\). 由于域 \((F(\alpha))(\beta)\) 含有 \(F\)、\(\alpha\) 与 \(\beta\)，由 \(F(\alpha, \beta)\) 的最小性有反向包含 \(F(\alpha, \beta) \subseteq (F(\alpha))(\beta)\)，这证明了引理。
+\end{proof}
+
+由引理我们有 \(K = F(\alpha_1, \alpha_2, \ldots, \alpha_k) = (F(\alpha_1, \alpha_2, \ldots, \alpha_{k-1}))(\alpha_k)\)，故继续迭代，我们看到 \(K\) 是这样得到的：先取由 \(\alpha_1\) 在 \(F\) 上生成的域 \(F_1\)，再取由 \(\alpha_2\) 在 \(F_1\) 上（这一点很重要）生成的域 \(F_2\)，依此类推，直到 \(F_k = K\). 这给出域的序列
+\[
+F = F_0 \subseteq F_1 \subseteq F_2 \subseteq \cdots \subseteq F_k = K,
+\]
+其中 \(F_{i+1} = F_i(\alpha_{i+1})\)（\(i = 0, 1, \ldots, k-1\)）。
+
+现在假设元素 \(\alpha_1, \alpha_2, \ldots, \alpha_k\) 在 \(F\) 上代数，次数分别为 \(n_1, n_2, \ldots, n_k\)（故它们先验地在 \(F\) 的任何扩张上代数）。则这个序列中的扩张是命题 \ref{pro:13.11} 中考虑的那类单扩张。相对扩张次数 \([F_{i+1}:F_i]\) 等于 \(\alpha_{i+1}\) 在 \(F_i\) 上极小多项式的次数，它至多为 \(n_{i+1}\)（且等于 \(n_{i+1}\) 当且仅当 \(\alpha_{i+1}\) 在 \(F\) 上的极小多项式在 \(F_i\) 上仍不可约）。由扩张次数的可乘性，我们看到
+\[
+[K:F] = [F_k:F_{k-1}][F_{k-1}:F_{k-2}]\cdots[F_1:F_0]
+\]
+也是有限的，且 \(\leq n_1n_2\cdots n_k\).
+
+这还给出 \(F(\alpha_1, \alpha_2, \ldots, \alpha_k)\) 的元素的描述。为简单起见，考虑 \(\alpha\) 与 \(\beta\) 在 \(F\) 上代数时域 \(F(\alpha, \beta)\) 的情形。则这个域的元素具有
+\[
+b_0+b_1\beta+b_2\beta^2+\cdots+b_{d-1}\beta^{d-1}
+\]
+的形式，其中 \(d = [F(\alpha)(\beta):F(\alpha)]\) 是 \(\beta\) 在 \(F(\alpha)\) 上的次数（它可能严格小于 \(\beta\) 在 \(F\) 上的次数），而系数 \(b_0, b_1, \ldots, b_{d-1}\) 是 \(F(\alpha)\) 的元素。系数 \(b_i \in F(\alpha)\)（\(i = 0, \ldots, d-1\)）具有
+\[
+a_{0i}+a_{1i}\alpha+a_{2i}\alpha^2+\cdots+a_{n-1,i}\alpha^{n-1}
+\]
+的形式，其中 \(n = [F(\alpha):F]\) 是 \(\alpha\) 在 \(F\) 上的次数，\(a_{ij} \in F\). 故 \(F(\alpha, \beta)\) 的元素具有
+\[
+\sum_{\substack{i=0,1,\ldots,n-1 \\ j=0,1,\ldots,d-1}} a_{ij}\alpha^i\beta^j, \quad a_{ij} \in F
+\]
+的形式。由于 \([F(\alpha, \beta):F] = [F(\alpha, \beta):F(\alpha)][F(\alpha):F] = dn\)，元素 \(\alpha^i\beta^j\) 事实上是 \(F(\alpha, \beta)\) 的一组 \(F\)-基。
+
+在实践中，由代数元素 \(\alpha\) 生成的域 \(F(\alpha)\) 是把元素 \(\alpha\) 添加到 \(F\) 后，把所得的集合对加法与乘法“封闭”而得到的，这相当于把 \(\alpha\) 的各次幂 \(\alpha^2, \alpha^3, \ldots\) 添加进来并取这些元素的（系数在 \(F\) 中的）线性组合。当 \(\alpha\) 的某个幂是 \(\alpha\) 的较低次幂的线性组合时这个过程终止，而这相当于知道 \(\alpha\) 的极小多项式。上面的讨论表明类似的过程给出由两个元素生成的域 \(F(\alpha, \beta)\)，并由递归给出由任何有限多个代数元素生成的域。这特别表明对代数元素，“对加法与乘法封闭”也蕴涵对除法封闭（参见上面推论 \ref{cor:13.5} 之后的例 5）。若元素不是代数的，还必须对取逆“封闭”。这个过程（的困难）在于确定相对扩张的次数——例如上面 \(F(\alpha, \beta)\) 在 \(F(\alpha)\) 上的次数 \(d\)，对此我们只有一个先验的上界（\(\beta\) 在 \(F\) 上的次数）。
+
+这是把群 \(G\) 中一族元素“封闭”以确定它们生成的子群的类似做法。
+
+\begin{example}
+（1）扩张 \(\mathbb{Q}(\sqrt[4]{2}, \sqrt{2})\) 就是扩张 \(\mathbb{Q}(\sqrt[4]{2})\)，因为 \(\sqrt{2}\) 已经是这个域的元素。换一种说法，\(\sqrt{2}\) 在 \(\mathbb{Q}(\sqrt[4]{2})\) 上的次数 \(d\) 为 1，它严格小于 \(\sqrt{2}\) 在 \(\mathbb{Q}\) 上的次数。我们以后将有出现这种情况的不那么明显的例子。
+
+（2）考虑由 \(\sqrt{2}\) 与 \(\sqrt{3}\) 在 \(\mathbb{Q}\) 上生成的域 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\). 由于 \(\sqrt{3}\) 在 \(\mathbb{Q}\) 上的次数为 2，扩张 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})/\mathbb{Q}(\sqrt{2})\) 的次数至多为 2，且恰为 2 当且仅当 \(x^2-3\) 在 \(\mathbb{Q}(\sqrt{2})\) 上不可约。由于这个多项式是 2 次的，它可约当且仅当它有根，即当且仅当 \(\sqrt{3} \in \mathbb{Q}(\sqrt{2})\). 假设 \(\sqrt{3} = a+b\sqrt{2}\)（\(a, b \in \mathbb{Q}\)）。两边平方得 \(3 = (a^2+2b^2)+2ab\sqrt{2}\). 若 \(ab \neq 0\)，则我们可以由这个方程把 \(\sqrt{2}\) 用 \(a\) 与 \(b\) 表示出来，这意味着 \(\sqrt{2}\) 是有理数，而它不是。若 \(b = 0\)，则 \(\sqrt{3} = a\) 将是有理数，矛盾。最后，若 \(a = 0\)，我们有 \(\sqrt{3} = b\sqrt{2}\)，两边乘以 \(\sqrt{2}\) 就看到 \(\sqrt{6}\) 将是有理数，仍是矛盾。这表明 \(\sqrt{3} \notin \mathbb{Q}(\sqrt{2})\)，从而 \([\mathbb{Q}(\sqrt{2}, \sqrt{3}):\mathbb{Q}] = 4\).
+
+这个域的元素（通过对 \(1, \sqrt{2}, \sqrt{3}\) 作“封闭”）包括 \(1, \sqrt{2}, \sqrt{3}, \sqrt{6}\)，而由上面的计算，它们构成这个域的基：
+\[
+\mathbb{Q}(\sqrt{2}, \sqrt{3}) = \{a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6} \mid a, b, c, d \in \mathbb{Q}\}.
+\]
+\end{example}
+
+现在我们可以刻画域 \(F\) 的有限扩张：
+
+\begin{theorem}\label{thm:13.17}
+扩张 \(K/F\) 有限当且仅当 \(K\) 由有限多个在 \(F\) 上代数的元素生成。更精确地说，由 \(F\) 上有限多个次数为 \(n_1, n_2, \ldots, n_k\) 的代数元素生成的域是代数的，且次数 \(\leq n_1n_2\cdots n_k\).
+\end{theorem}
+
+\begin{proof}
+若 \(K/F\) 是次数为 \(n\) 的有限扩张，设 \(\alpha_1, \alpha_2, \ldots, \alpha_n\) 是 \(K\) 作为 \(F\) 上向量空间的一组基。由推论 \ref{cor:13.15}，\([F(\alpha_i):F]\) 整除 \([K:F] = n\)（\(i = 1, 2, \ldots, n\)），故命题 \ref{pro:13.12} 蕴涵每个 \(\alpha_i\) 在 \(F\) 上代数。由于 \(K\) 显然由 \(\alpha_1, \alpha_2, \ldots, \alpha_n\) 在 \(F\) 上生成，我们看到 \(K\) 由有限多个在 \(F\) 上代数的元素生成。反之已在上面的讨论中证明。定理的第二个断言由推论 \ref{cor:13.13} 与上面的计算立即推出。
+\end{proof}
+
+上面第一个例子表明定理中给出的扩张次数的不等式可能是严格的。我们指出，关于这个次数的有用信息常常可以通过确定子域再应用推论 \ref{cor:13.15} 得到。
+
+\begin{corollary}\label{cor:13.18}
+假设 \(\alpha\) 与 \(\beta\) 在 \(F\) 上代数。则 \(\alpha \pm \beta\)、\(\alpha\beta\)、\(\alpha/\beta\)（\(\beta \neq 0\)）（特别是 \(\alpha^{-1}\)（\(\alpha \neq 0\)））都代数。
+\end{corollary}
+
+\begin{proof}
+所有这些元素都在扩张 \(F(\alpha, \beta)\) 中，而由定理它在 \(F\) 上有限，故由推论 \ref{cor:13.13} 它们都代数。
+\end{proof}
+
+\begin{corollary}\label{cor:13.19}
+设 \(L/F\) 是任意扩张。则 \(L\) 中在 \(F\) 上代数的元素构成 \(L\) 的一个子域 \(K\).
+\end{corollary}
+
+\begin{proof}
+这由上一推论立即推出。
+\end{proof}
+
+\begin{example}
+（1）考虑扩张 \(\mathbb{C}/\mathbb{Q}\)，用 \(\overline{\mathbb{Q}}\) 表示 \(\mathbb{C}\) 中所有在 \(\mathbb{Q}\) 上代数的元素组成的子域。特别地，元素 \(\sqrt[n]{2}\)（\(\mathbb{R}\) 中 2 的正 \(n\) 次根）都在 \(\overline{\mathbb{Q}}\) 中，故对所有整数 \(n \geq 1\) 有 \([\overline{\mathbb{Q}}:\mathbb{Q}] \geq n\). 因此 \(\overline{\mathbb{Q}}\) 是 \(\mathbb{Q}\) 的无限代数扩张，称为\textbf{代数数域}。
+
+（2）考虑域 \(\overline{\mathbb{Q}} \cap \mathbb{R}\)，即 \(\mathbb{R}\) 中由在 \(\mathbb{Q}\) 上代数的元素组成的子域。域 \(\mathbb{Q}\) 可数。故 \(\mathbb{Q}[x]\) 中任意给定次数 \(n\) 的多项式的数目也可数（因为这样的多项式由从 \(\mathbb{Q}\) 中选取 \(n+1\) 个系数确定）。由于这些多项式在 \(\mathbb{R}\) 中至多有 \(n\) 个根，\(\mathbb{R}\) 中次数为 \(n\) 的代数元素的数目可数。最后，\(\mathbb{R}\) 中所有代数元素的集合是可数个可数集合的可数并（以 \(n\) 为指标），故可数。由于 \(\mathbb{R}\) 不可数，可知存在（事实上有很多）\(\mathbb{R}\) 的元素在 \(\mathbb{Q}\) 上不是代数的，即超越的。特别地，\(\mathbb{R}\) 的代数元素子域 \(\overline{\mathbb{Q}} \cap \mathbb{R}\) 是 \(\mathbb{R}\) 的真子域，故 \(\mathbb{Q}\) 也是 \(\mathbb{C}\) 的真子域。
+\end{example}
+
+一般证明给定实数不是代数的极其困难。例如已知（这些是定理）\(\pi = 3.14159\ldots\) 与 \(e = 2.71828\ldots\) 是 \(\mathbb{R}\) 的超越元素。甚至证明这些元素不是有理数的证明也不太容易。
+
+\begin{theorem}\label{thm:13.20}
+若 \(K\) 在 \(F\) 上代数、\(L\) 在 \(K\) 上代数，则 \(L\) 在 \(F\) 上代数。
+\end{theorem}
+
+\begin{proof}
+设 \(\alpha\) 是 \(L\) 的任意元素。则 \(\alpha\) 在 \(K\) 上代数，故 \(\alpha\) 满足某个多项式方程，其系数 \(a_0, a_1, \ldots, a_n\) 在 \(K\) 中。考虑由 \(\alpha\) 与这个多项式的系数在 \(F\) 上生成的域 \(F(\alpha, a_0, a_1, \ldots, a_n)\). 由于 \(K/F\) 代数，元素 \(a_0, a_1, \ldots, a_n\) 在 \(F\) 上代数，故由定理 \ref{thm:13.17} 扩张 \(F(a_0, a_1, \ldots, a_n)/F\) 有限。由上面的方程，我们看到 \(\alpha\) 生成这个域的一个次数至多为 \(n\) 的扩张，因为它在 \(F(a_0, \ldots, a_n)\) 上的极小多项式整除上面的多项式。因此
+\[
+[F(\alpha, a_0, a_1, \ldots, a_n):F] = [F(\alpha, a_0, \ldots, a_n):F(a_0, \ldots, a_n)][F(a_0, \ldots, a_n):F]
+\]
+也有限，且 \(F(\alpha, a_0, a_1, \ldots, a_n)/F\) 是代数扩张。特别地元素 \(\alpha\) 在 \(F\) 上代数，这证明 \(L\) 在 \(F\) 上代数。
+\end{proof}
+
+由域 \(K\) 中有限多个元素 \(\alpha_1, \alpha_2, \ldots, \alpha_k\) 生成的子域 \(F(\alpha_1, \alpha_2, \ldots, \alpha_k)\) 含有每个域 \(F(\alpha_i)\)（\(i = 1, 2, \ldots, k\)）。按定义，它也是 \(K\) 的含有这些域的最小子域。
+
+\begin{definition}
+设 \(K_1\) 与 \(K_2\) 是域 \(K\) 的两个子域。则 \(K_1\) 与 \(K_2\) 的\textbf{合成域}，记作 \(K_1K_2\)，是 \(K\) 的同时含有 \(K_1\) 与 \(K_2\) 的最小子域。类似地，\(K\) 的任意一族子域的合成是含有所有这些子域的最小子域。
+\end{definition}
+
+注意合成 \(K_1K_2\) 也可以描述为 \(K\) 的所有同时含有 \(K_1\) 与 \(K_2\) 的子域之交，对多于两个域的合成类似，这与群中由子集生成的子群类似（参见第 2.4 节）。
+
+\begin{example}
+域 \(\mathbb{Q}(\sqrt{2})\) 与 \(\mathbb{Q}(\sqrt[3]{2})\) 的合成是域 \(\mathbb{Q}(\sqrt[6]{2})\). 因为这个域同时含有这两个子域（\((\sqrt[6]{2})^3 = \sqrt{2}\) 且 \((\sqrt[6]{2})^2 = \sqrt[3]{2}\)）；反之，任何同时含有 \(\sqrt{2}\) 与 \(\sqrt[3]{2}\) 的域含有它们的商，即 \(\sqrt[6]{2}\).
+\end{example}
+
+现在假设 \(K_1\) 与 \(K_2\) 是 \(F\) 在 \(K\) 中的有限扩张。设 \(\alpha_1, \alpha_2, \ldots, \alpha_n\) 是 \(K_1\) 的 \(F\)-基，\(\beta_1, \beta_2, \ldots, \beta_m\) 是 \(K_2\) 的 \(F\)-基（故 \([K_1:F] = n\)、\([K_2:F] = m\)）。则显然它们给出合成 \(K_1K_2\) 在 \(F\) 上的生成元：
+\[
+K_1K_2 = F(\alpha_1, \alpha_2, \ldots, \alpha_n, \beta_1, \beta_2, \ldots, \beta_m).
+\]
+由于 \(\alpha_1, \alpha_2, \ldots, \alpha_n\) 是 \(K_1\) 的 \(F\)-基，\(\alpha\) 中任何一个的幂 \(\alpha^k\) 都是 \(\alpha_i\) 的、系数在 \(F\) 中的线性组合，对 \(\beta\) 也有类似结论。由此形如 \(\sum_{i,j}a_{ij}\alpha_i\beta_j\)（系数在 \(F\) 中）的线性组合的集合对乘法与加法封闭，因为在两个这样的元素之积中，\(\alpha\) 与 \(\beta\) 的较高次幂都可以换成线性表达式。故元素 \(\alpha_i\beta_j\)（\(i = 1, 2, \ldots, n\)，\(j = 1, 2, \ldots, m\)）作为 \(F\) 上向量空间张成合成扩张 \(K_1K_2\). 特别地 \([K_1K_2:F] \leq mn\). 我们把它总结为：
+
+\begin{proposition}\label{pro:13.21}
+设 \(K_1\) 与 \(K_2\) 是域 \(F\) 的两个包含在 \(K\) 中的有限扩张。则
+\[
+[K_1K_2:F] \leq [K_1:F][K_2:F],
+\]
+其中等号成立当且仅当其中一个域的一组 \(F\)-基在另一个域上仍线性无关。若 \(\alpha_1, \alpha_2, \ldots, \alpha_n\) 与 \(\beta_1, \beta_2, \ldots, \beta_m\) 分别是 \(K_1\) 与 \(K_2\) 在 \(F\) 上的基，则元素 \(\alpha_i\beta_j\)（\(i = 1, 2, \ldots, n\)，\(j = 1, 2, \ldots, m\)）在 \(F\) 上张成 \(K_1K_2\).
+\end{proposition}
+
+\begin{proof}
+由 \(K_1K_2 = F(\alpha_1, \ldots, \alpha_n, \beta_1, \ldots, \beta_m) = K_1(\beta_1, \beta_2, \ldots, \beta_m)\)，如上所述我们看到 \(\beta_1, \beta_2, \ldots, \beta_m\) 在 \(K_1\) 上张成 \(K_1K_2\). 故 \([K_1K_2:K_1] \leq m = [K_2:F]\)，其中等号成立当且仅当这些元素在 \(K_1\) 上线性无关。由于 \([K_1K_2:F] = [K_1K_2:K_1][K_1:F]\)，这证明了命题。
+\end{proof}
+
+由命题（及其证明）我们有以下图形：
+\[
+\begin{array}{ccc}
+& K_1K_2 & \\
+& \swarrow\hspace{2em}\searrow & \\
+K_1 & & K_2\\
+& \nwarrow\hspace{2em}\nearrow & \\
+& F &
+\end{array}
+\]
+
+我们很快就会看到命题中不等式严格成立的例子。一个可以确信等号成立的有用情形如下：
+
+\begin{corollary}\label{cor:13.22}
+假设命题 \ref{pro:13.21} 中 \([K_1:F] = n\)、\([K_2:F] = m\)，其中 \(n\) 与 \(m\) 互素：\((n, m) = 1\). 则 \([K_1K_2:F] = [K_1:F][K_2:F] = nm\).
+\end{corollary}
+
+\begin{proof}
+一般地扩张次数 \([K_1K_2:F]\) 被 \(n\) 与 \(m\) 同时整除，因为 \(K_1\) 与 \(K_2\) 都是 \(K_1K_2\) 的子域，从而它被它们的最小公倍整除。此时由于 \((n, m) = 1\)，这意味着 \(nm\) 整除 \([K_1K_2:F]\)，连同命题中的不等式 \([K_1K_2:F] \leq nm\) 就证明了推论。
+\end{proof}
+
+\begin{example}
+域 \(\mathbb{Q}(\sqrt{2})\) 与 \(\mathbb{Q}(\sqrt[3]{2})\) 的合成在 \(\mathbb{Q}\) 上的次数为 6，这是我们前面通过实际计算合成域 \(\mathbb{Q}(\sqrt[6]{2})\) 确定的。
+\end{example}
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(\mathbb{F}\) 是特征为 \(p\) 的有限域。证明存在正整数 \(n\) 使 \(|\mathbb{F}| = p^n\).
+
+\item 设 \(g(x) = x^2+x-1\)、\(h(x) = x^3-x+1\). 通过把 \(f(x)\) 的根添加到域 \(F\) 上得到 4、8、9 与 27 个元素的域，其中 \(f(x) = g(x)\) 或 \(h(x)\)，\(F = \mathbb{F}_2\) 或 \(\mathbb{F}_3\). 写出 4 个与 9 个元素的域的乘法表，并证明非零元素构成循环群。
+
+\item 确定元素 \(1+i\) 在 \(\mathbb{Q}\) 上的极小多项式。
+
+\item 确定 \(2+\sqrt{3}\) 与 \(1+\sqrt{1+\sqrt[3]{2}}\) 在 \(\mathbb{Q}\) 上的次数。
+
+\item 设 \(F = \mathbb{Q}(i)\). 证明 \(x^3-2\) 与 \(x^3-3\) 在 \(F\) 上不可约。
+
+\item 由定义直接证明域 \(F(\alpha_1, \alpha_2, \ldots, \alpha_n)\) 是域 \(F(\alpha_1), F(\alpha_2), \ldots, F(\alpha_n)\) 的合成。
+
+\item 证明 \(\mathbb{Q}(\sqrt{2}+\sqrt{3}) = \mathbb{Q}(\sqrt{2}, \sqrt{3})\)〔一个包含是显然的，对另一个考虑 \((\sqrt{2}+\sqrt{3})^2\) 等〕。由此断定 \([\mathbb{Q}(\sqrt{2}+\sqrt{3}):\mathbb{Q}] = 4\). 求一个以 \(\sqrt{2}+\sqrt{3}\) 为根的不可约多项式。
+
+\item 设 \(F\) 是特征 \(\neq 2\) 的域，\(D_1\) 与 \(D_2\) 是 \(F\) 中都不是平方的元素。证明若 \(D_1D_2\) 在 \(F\) 中不是平方，则 \(F(\sqrt{D_1}, \sqrt{D_2})\) 在 \(F\) 上的次数为 4；否则为 2. 当 \(F(\sqrt{D_1}, \sqrt{D_2})\) 在 \(F\) 上的次数为 4 时，这个域称为 \(F\) 的\textbf{双二次扩张}。
+
+\item 设 \(F\) 是特征 \(\neq 2\) 的域，\(a, b\) 是域 \(F\) 的元素且 \(b\) 在 \(F\) 中不是平方。证明存在 \(m, n \in F\) 使 \(\sqrt{a+\sqrt{b}} = \sqrt{m}+\sqrt{n}\) 的充分必要条件是 \(a^2-b\) 是 \(F\) 中的平方。用它确定域 \(\mathbb{Q}(\sqrt{a+\sqrt{b}})\)（\(a, b \in \mathbb{Q}\)）何时是 \(\mathbb{Q}\) 上的双二次扩张。
+
+\item 确定扩张 \(\mathbb{Q}(\sqrt{3+2\sqrt{2}})\) 在 \(\mathbb{Q}\) 上的次数。
+
+\item （a）用 \(\sqrt{3+4i}\) 表示复数 \(3+4i\) 位于第一象限的平方根，用 \(\sqrt{3-4i}\) 表示 \(3-4i\) 位于第四象限的平方根。证明 \([\mathbb{Q}(\sqrt{3+4i}+\sqrt{3-4i}):\mathbb{Q}] = 1\).
+
+（b）确定扩张 \(\mathbb{Q}(\sqrt{1+\sqrt{-3}}+\sqrt{1-\sqrt{-3}})\) 在 \(\mathbb{Q}\) 上的次数。
+
+\item 假设扩张 \(K/F\) 的次数是素数 \(p\). 证明 \(K\) 的任何包含 \(F\) 的子域 \(E\) 或为 \(K\) 或为 \(F\).
+
+\item 假设 \(F = \mathbb{Q}(\alpha_1, \alpha_2, \ldots, \alpha_n)\)，其中 \(\alpha_i^3 \in \mathbb{Q}\)（\(i = 1, 2, \ldots, n\)）。证明 \(\sqrt[3]{2} \notin F\).
+
+\item 证明若 \([F(\alpha):F]\) 为奇数，则 \(F(\alpha) = F(\alpha^2)\).
+
+\item 若 \(-1\) 在 \(F\) 中不能表示为平方和，则称域 \(F\) 是\textbf{形式实的}。设 \(F\) 是形式实域，\(f(x) \in F[x]\) 是奇次不可约多项式，\(\alpha\) 是 \(f(x)\) 的根。证明 \(F(\alpha)\) 也是形式实的。〔取 \(\alpha\) 为最小次数的反例。证明对某些 \(p_i(x), g(x) \in F[x]\)（其中 \(g(x)\) 的次数为奇且小于 \(\deg f\)）有 \(-1+f(x)g(x) = (p_1(x))^2+\cdots+(p_m(x))^2\). 证明 \(g\) 的某个根 \(\beta\) 在 \(F\) 上有奇次数，且 \(F(\beta)\) 不是形式实的，这与 \(\alpha\) 的最小性矛盾。〕
+
+\item 设 \(K/F\) 是代数扩张，\(R\) 是 \(K\) 中含 \(F\) 的环。证明 \(R\) 是 \(K\) 的含 \(F\) 的子域。
+
+\item 设 \(f(x)\) 是域 \(F\) 上次数为 \(n\) 的不可约多项式，\(g(x)\) 是 \(F[x]\) 中的任意多项式。证明复合多项式 \(f(g(x))\) 的每个不可约因子的次数都被 \(n\) 整除。
+
+\item 设 \(k\) 是域，\(k(x)\) 是系数在 \(k\) 中的 \(x\) 的有理函数域。设 \(t = \frac{P(x)}{Q(x)} \in k(x)\) 是有理函数，其中 \(P(x), Q(x) \in k[x]\) 互素且 \(Q(x) \neq 0\). 则 \(k(x)\) 是 \(k(t)\) 的扩张，为计算它的次数需要计算 \(x\) 满足的、系数在 \(k(t)\) 中的极小多项式。
+
+（a）证明变量 \(X\) 的多项式 \(P(X)-tQ(X)\)（系数在 \(k(t)\) 中）在 \(k(t)\) 上不可约，并以 \(x\) 为根。〔由高斯引理，这个多项式在 \((k(t))[X]\) 中不可约当且仅当它在 \((k[t])[X]\) 中不可约。然后注意 \((k[t])[X] = (k[X])[t]\).〕
+
+（b）证明 \(P(X)-tQ(X)\) 作为系数在 \(k(t)\) 中的 \(X\) 的多项式的次数是 \(P(x)\) 与 \(Q(x)\) 的次数的最大值。
+
+（c）证明 \([k(x):k(t)] = [k(x):k(\frac{P(x)}{Q(x)})] = \max(\deg P(x), \deg Q(x))\).
+
+\item 设 \(K\) 是 \(F\) 的次数为 \(n\) 的扩张。
+
+（a）对任意 \(\alpha \in K\)，证明用左乘作用在 \(K\) 上的映射 \(x \mapsto \alpha x\) 是 \(K\) 的 \(F\)-线性变换。
+
+（b）证明 \(K\) 同构于 \(F\) 上 \(n \times n\) 矩阵环的一个子域，故 \(F\) 上 \(n \times n\) 矩阵环含有 \(F\) 的每个次数 \(\leq n\) 的扩张的同构拷贝。
+
+\item 证明若上一习题中考虑的“乘以 \(\alpha\)”的线性变换的矩阵为 \(A\)，则 \(\alpha\) 是 \(A\) 的特征多项式的根。这给出确定 \(F\) 的次数为 \(n\) 的扩张中元素 \(\alpha\) 所满足的 \(n\) 次方程的有效方法。用这个方法求 \(\sqrt[3]{2}\) 与 \(1+\sqrt[3]{2}+\sqrt[3]{4}\) 所满足的 3 次首一多项式。
+
+\item 设 \(K = \mathbb{Q}(\sqrt{D})\)（\(D\) 是无平方因子整数），\(\alpha = a+b\sqrt{D}\) 是 \(K\) 的元素。用 \(K\) 作为 \(\mathbb{Q}\) 上向量空间的基 \(1, \sqrt{D}\)，证明上一习题中考虑的 \(K\) 上“乘以 \(\alpha\)”的线性变换的矩阵是 \(\begin{pmatrix} a & bD \\ b & a \end{pmatrix}\). 直接证明映射 \(a+b\sqrt{D} \mapsto \begin{pmatrix} a & bD \\ b & a \end{pmatrix}\) 是域 \(K\) 与系数在 \(\mathbb{Q}\) 中的 \(2 \times 2\) 矩阵环的一个子域的同构。
+
+\item 设 \(K_1\) 与 \(K_2\) 是域 \(F\) 的两个包含在域 \(K\) 中的有限扩张。证明 \(F\)-代数 \(K_1 \otimes_F K_2\) 是域当且仅当 \([K_1K_2:F] = [K_1:F][K_2:F]\).
+\end{enumerate}
+
+\section{古典尺规作图}
+
+作为我们已得到的关于代数扩张、特别是扩张次数可乘性的结果的一个简单应用，我们可以（以否定的方式）回答希腊人提出的下列几何问题：
+
+I.（\textbf{倍立方}）只用直尺与圆规，能否作出一个体积恰为给定立方体两倍的立方体？
+
+II.（\textbf{三等分角}）只用直尺与圆规，能否三等分任何给定的角？
+
+III.（\textbf{化圆为方}）只用直尺与圆规，能否作出一个面积恰为给定圆面积的方形？
+
+为回答这些问题，我们必须把用圆规与直尺的作图翻译成代数语言。设 \(l\) 表示一个固定的给定单位长度。则任何距离都由它的长度 \(a \in \mathbb{R}\) 确定，这使我们能把几何距离看作实数。利用给定的单位距离 1 在坐标轴上定义尺度，我们于是可以构造通常的笛卡尔平面 \(\mathbb{R}^2\)，并把我们所有的作图看作发生在 \(\mathbb{R}^2\) 中。于是点 \((x, y) \in \mathbb{R}^2\) 是从给定距离 1 出发可作的，当且仅当它的坐标 \(x\) 与 \(y\) 是 \(\mathbb{R}\) 中可作的元素。上面这些问题于是归结为确定 \(\mathbb{R}\) 中哪些长度可以从固定的单位距离出发通过尺规作图得到。这种实数的集合连同它们的相反数称为 \(\mathbb{R}\) 的\textbf{可作元素}，我们不再区分可作的长度与可作的实数。
+
+每次尺规作图都由下列四类操作的一系列施行组成：（1）用直线连接两个给定点；（2）求两条直线的交点；（3）以给定半径与圆心作圆；（4）求直线与圆或两个圆的交点。
+
+几何中的一个初等事实是：若给定两个长度 \(a\) 与 \(b\)，则可以用直尺与圆规作出长度 \(a \pm b\)、\(ab\) 与 \(a/b\)（前两个是显然的，后两个由平行线的构造给出（图 1））。
+
+\begin{center}（图 1：作乘积与商的平行线构造。）\end{center}
+
+若给定 \(a\)，作 \(\sqrt{a}\) 也是一个初等几何构造：作出直径为 \(1+a\) 的圆，并如图 2 所示作直径的垂线，则这条垂线的长度就是 \(\sqrt{a}\).
+
+\begin{center}（图 2：作平方根。）\end{center}
+
+由此尺规作图给出实数中加法、减法、乘法与除法（除以非零元素）的全部代数运算，故可作元素的集合是 \(\mathbb{R}\) 的子域。此外还可以对可作元素取平方根。我们马上将看到，本质上这些就是仅有的可能操作。
+
+从给定的长度 1 出发，可以用这些操作作出全部有理数 \(\mathbb{Q}\). 因此我们可以作出 \(\mathbb{R}^2\) 中坐标是有理数的所有点 \((x, y)\). 取平方根还可以作出 \(\mathbb{R}\) 的更多元素，故由 1 出发在 \(\mathbb{R}\) 中可作元素的集合构成一个严格大于 \(\mathbb{Q}\) 的域。
+
+连接坐标在某个域 \(F\) 中的两点的直线，由通常的公式（两点式）给出形如 \(ax+by-c = 0\) 的方程，其中 \(a, b, c \in F\). 联立两个这样的方程以确定两条这种直线的交点，所得的解也在 \(F\) 中。由此，若两个点的坐标在域 \(F\) 中，则仅用直尺的作图不会产生坐标不在 \(F\) 中的新点。
+
+圆规作图（上面第（3）或（4）类）定义由圆与直线或圆与圆的交点得到的点。以 \((h, k)\) 为圆心、\(r\) 为半径的圆的方程是 \((x-h)^2+(y-k)^2 = r^2\)，故当我们考虑圆规作图对域 \(F\) 的元素的影响时，我们考虑的是这样的方程与线性方程 \(ax+by-c = 0\)（其中 \(a, b, c, h, k, r \in F\)）的联立解，或两个二次方程的联立解。
+
+在一条线性方程与圆的方程的情形，把线性方程解出（比如解出 \(y\)）再代入，得到关于 \(x\) 的二次方程（而 \(y\) 由 \(x\) 线性地给出）。故交点的坐标至多落在 \(F\) 的一个二次扩张中。
+
+在两个圆相交的情形，比如 \((x-h)^2+(y-k)^2 = r^2\) 与 \((x-h')^2+(y-k')^2 = r'^2\)，从第一个方程减去第二个表明，我们考虑方程
+\[
+(x-h)^2+(y-k)^2 = r^2
+\]
+与 \(2(h'-h)x+2(k'-k)y = r^2-h^2-k^2-r'^2+h'^2+k'^2\) 的交，这是圆与直线的交（事实上这条直线就是连接两个交点的直线），即刚考虑过的那类情形。
+
+由此，若给定一族可作元素，则可以作出由这些元素在 \(\mathbb{R}\) 中生成的子域 \(F\) 的全部元素，且对 \(F\) 的元素作任何尺规操作至多产生 \(F\) 的二次扩张中的元素。由于二次扩张的次数为 2 而扩张次数可乘，可知若 \(\alpha \in \mathbb{R}\) 是由域 \(F\) 中的元素经过（有限）一系列尺规操作得到的，则 \(\alpha\) 是 \(F\) 的某个扩张 \(K\) 的元素，其次数为 2 的幂：\([K:F] = 2^m\)（某个 \(m\)）。由于 \([F(\alpha):F]\) 整除这个扩张次数，它也必是 2 的幂。
+
+\begin{proposition}\label{pro:13.23}
+若元素 \(\alpha \in \mathbb{R}\) 是由域 \(F \subset \mathbb{R}\) 经过一系列尺规作图得到的，则 \([F(\alpha):F] = 2^k\)（某个整数 \(k \geq 0\)）。
+\end{proposition}
+
+\begin{theorem}\label{thm:13.24}
+古典希腊问题（I）倍立方、（II）三等分角、（III）化圆为方都不可能实现。
+\end{theorem}
+
+\begin{proof}
+（I）倍立方归结为从单位 1 出发在实数中作出 \(\sqrt[3]{2}\). 由于 \([\mathbb{Q}(\sqrt[3]{2}):\mathbb{Q}] = 3\) 不是 2 的幂，这是不可能的。
+
+（II）若角 \(\theta\) 可以作出，则确定 \(\mathbb{R}^2\) 中到原点距离为 1、与正 \(x\) 轴成角 \(\theta\) 的点就表明 \(\cos\theta\)（这个点的 \(x\) 坐标）可以作出（从而 \(\sin\theta\) 也可以作出）。反之若 \(\cos\theta\) 可以作出，则 \(\sin\theta\) 也可以作出，以它们为坐标的点就给出角 \(\theta\). 三等分角 \(\theta\) 的问题于是等价于：给定 \(\cos\theta\)，作出 \(\cos(\theta/3)\).
+
+为看出这并非总是可能（它当然偶尔可能，例如 \(\theta = 180^\circ\)），考虑 \(\theta = 60^\circ\). 则 \(\cos\theta = \frac{1}{2}\). 由余弦的三倍角公式
+\[
+\cos\theta = 4\cos^3(\theta/3)-3\cos(\theta/3),
+\]
+代入 \(\theta = 60^\circ\)，我们看到 \(\beta = \cos 20^\circ\) 满足方程
+\[
+4\beta^3-3\beta-\frac{1}{2} = 0, \quad \text{即 } 8\beta^3-6\beta-1 = 0.
+\]
+这可以写成 \((2\beta)^3-3(2\beta)-1 = 0\). 令 \(\alpha = 2\beta\). 则 \(\alpha\) 是 0 与 2 之间满足方程
+\[
+\alpha^3-3\alpha-1 = 0
+\]
+的实数。但我们在上一节考虑过这个方程并确定 \([\mathbb{Q}(\alpha):\mathbb{Q}] = 3\)，和以前一样我们看到 \(\alpha\) 不可作。
+
+（III）化圆为方等价于确定实数 \(\pi = 3.14159\ldots\) 是否可作。如前所述，甚至证明这个数不是有理数都是一个困难问题。事实上它是超越的（我们不加证明地假定这一点），故 \([\mathbb{Q}(\pi):\mathbb{Q}]\) 甚至不是有限的，更不必说是 2 的幂，这表明确实不能用尺规化圆为方。
+\end{proof}
+
+\noindent\textbf{注：}上面的证明表明 \(\cos 20^\circ\) 与 \(\sin 20^\circ\) 不可作。于是产生这样的问题：哪些整数度角可以作出？\(1^\circ\) 与 \(2^\circ\) 都不可作，因为否则正弦与余弦的加法公式将给出 \(20^\circ\) 的可作性。另一方面，初等几何构造（\(72^\circ\) 的正五边形与 \(60^\circ\) 的正三角形）连同加法公式与半角公式表明 \(\cos 3^\circ\) 与 \(\sin 3^\circ\) 可以作出。由此可知整数度角的三角函数可作当且仅当这个角是 \(3^\circ\) 的倍数。显式地，
+\[
+\cos 3^\circ = \frac{1}{16}\left((\sqrt{3}+1)\sqrt{5+\sqrt{5}}+\sqrt{5+\sqrt{5}}+\sqrt{2}(\sqrt{6}-\sqrt{2})(\sqrt{5}-1)\right),
+\]
+\[
+\sin 3^\circ = \frac{1}{16}\left((\sqrt{6}+\sqrt{2})(\sqrt{5}-1)-\frac{1}{2}(\sqrt{3}-1)\sqrt{10+2\sqrt{5}}\right),
+\]
+这表明它们是由 \(\mathbb{Q}\) 经过逐次开平方与域运算得到的。
+
+在讨论了第 14.5 节的分圆域之后，我们将考虑另一个古典几何问题：“哪些正 \(n\) 边形可以用直尺与圆规作出？”（参见命题 14.29。）
+
+这里我们一直小心地考虑用\textbf{直尺}（straightedge，即没有刻度的尺）作图；与之相对的是带有刻度的\textbf{刻度尺}（ruler）。若使用带刻度的尺，就可以作出许多额外的代数元素。例如，假设角 \(\theta\) 与单位距离都标记在刻度尺上。如图 3 所示作半径为 1、圆心角为 \(\theta\) 的圆，然后滑动刻度尺，使圆上的点 \(A\) 与 \(B\) 之间的距离为 1. 则一些初等几何表明（参见习题）图中标出的角 \(\alpha\) 满足 \(\theta = 3\alpha\)，即这个构造（属于阿基米德）三等分 \(\theta\). 特别地，定理 \ref{thm:13.24} 中的第二个古典问题（三等分角）用刻度尺与圆规可以解决。
+
+\begin{center}（图 3：阿基米德用带刻度尺三等分角的构造。）\end{center}
+
+定理 \ref{thm:13.24} 中的第一个古典问题（倍立方）——它归结为作出 \(\sqrt[3]{2}\)——也可以用刻度尺与圆规解决。下面给出对任意给定小于 1 的正实数 \(k\) 作出 \(k^{1/3}\) 的构造。这个构造由 J. H. Conway 向我们展示。
+
+以半径 1 作圆，并以点 \(A = (k, 0)\) 为圆心构造点 \(B = (0, \sqrt{1-k^2})\). 把这个距离除以 3，构造点 \((0, \frac{1}{3}\sqrt{1-k^2})\)，并作连接这个点与 \(A\) 的直线。滑动标记了单位长度 1 的刻度尺，使它经过点 \(B\)，且使交点 \(C\) 到它与 \(x\) 轴的交点 \(D\) 的距离为长度 1，如图 4 所示。
+
+\begin{center}（图 4：Conway 用带刻度尺作出 \(k^{1/3}\) 的构造。）\end{center}
+
+则 \(A\) 与 \(D\) 之间的距离为 \(2k^{1/3}\)，而 \(B\) 与 \(C\) 之间的距离为 \(2k^{2/3}\)（参见习题）。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 证明不可能作出正九边形。
+
+\item 证明阿基米德的构造确实三等分角 \(\theta\).〔注意图 5 中的等腰三角形，证明 \(\beta = 2\alpha\)。〕
+\begin{center}（图 5：阿基米德三等分角构造中的辅助等腰三角形。）\end{center}
+
+\item 证明正文中给出的 Conway 构造确实作出 \(2k^{1/3}\) 与 \(2k^{2/3}\).〔一种方法：设 \((x, y)\) 是点 \(C\) 的坐标，\(a\) 是 \(B\) 到 \(C\) 的距离，\(b\) 是 \(A\) 到 \(D\) 的距离；用相似三角形证明（a）\(\frac{y}{x-k} = \frac{1+a}{3}\)、（b）\(\frac{\sqrt{1-k^2}}{1+a} = \frac{1}{a}\)、（c）\(\frac{\sqrt{1-k^2}+y}{b+k} = \frac{1}{3}\)，并证明（d）\((1-k^2)+(b+k)^2 = (1+a)^2\)；解这些方程求 \(a\) 与 \(b\)。〕
+
+\item 正七边形的作法归结为 \(\cos(2\pi/7)\) 的可作性。我们以后将看到（第 14.5 节与第 14.7 节习题 2）\(\alpha = 2\cos(2\pi/7)\) 满足方程 \(x^3+x^2-2x-1 = 0\). 用它证明正七边形不能用直尺与圆规作出。
+
+\item 利用 \(2\cos(2\pi/5)\) 满足方程 \(x^2+x-1 = 0\) 这一事实断定正五边形可以用直尺与圆规作出。
+\end{enumerate}
+
+\section{分裂域与代数闭包}
+
+设 \(F\) 是域。
+
+若 \(f(x)\) 是 \(F[x]\) 中的任意多项式，则我们在第 13.1 节看到存在域 \(K\)（把 \(F\) 与 \(F\) 的同构拷贝等同后）可以看作 \(F\) 的扩张，在其中 \(f(x)\) 有根 \(\alpha\). 这等价于说 \(f(x)\) 在 \(K[x]\) 中有线性因子 \(x-\alpha\)（这是第 9 章命题 9）。
+
+\begin{definition}
+\(F\) 的扩域 \(K\) 称为多项式 \(f(x) \in F[x]\) 的\textbf{分裂域}，若 \(f(x)\) 在 \(K[x]\) 中完全分解为线性因子（或完全分裂），而 \(f(x)\) 在 \(K\) 的、含 \(F\) 的任何真子域上都不完全分解为线性因子。
+\end{definition}
+
+若 \(f(x)\) 的次数为 \(n\)，则 \(f(x)\) 在 \(F\) 中至多有 \(n\) 个根（第 9 章命题 17），而它在 \(F\) 中恰有 \(n\) 个根（按重数计）当且仅当 \(f(x)\) 在 \(F[x]\) 中完全分裂。
+
+\begin{theorem}\label{thm:13.25}
+对任意域 \(F\)，若 \(f(x) \in F[x]\)，则存在 \(F\) 的扩张 \(K\)，它是 \(f(x)\) 的分裂域。
+\end{theorem}
+
+\begin{proof}
+我们首先通过对 \(f(x)\) 的次数 \(n\) 归纳证明存在 \(F\) 的扩张 \(E\)，在其中 \(f(x)\) 完全分解为线性因子。若 \(n = 1\)，取 \(E = F\). 现在假设 \(n > 1\). 若 \(f(x)\) 在 \(F\) 上的不可约因子次数都为 1，则 \(F\) 就是 \(f(x)\) 的分裂域，我们可以取 \(E = F\). 否则，\(F[x]\) 中 \(f(x)\) 的至少一个不可约因子（比如 \(p(x)\)）的次数至少为 2. 由定理 \ref{thm:13.3} 存在 \(F\) 的扩张 \(E_1\) 含有 \(p(x)\) 的一个根 \(\alpha\). 在 \(E_1\) 上多项式 \(f(x)\) 有线性因子 \(x-\alpha\). \(f(x)\) 的剩余因子 \(f_1(x)\) 的次数为 \(n-1\)，故由归纳假设存在 \(E_1\) 的扩张 \(E\) 含有 \(f_1(x)\) 的所有根。由于 \(E \supseteq E_1\)，\(E\) 是 \(F\) 的扩张，含有 \(f(x)\) 的所有根。现在设 \(K\) 是 \(E\) 的所有含 \(F\) 且含有 \(f(x)\) 的所有根的（原子域）之交。则 \(K\) 是域，且是 \(f(x)\) 的分裂域。
+\end{proof}
+
+我们很快将看到 \(f(x)\) 的任何两个分裂域都同构（这推广定理 \ref{thm:13.8}），故（滥用术语地）我们常称多项式 \(f(x)\) 的分裂域。
+
+\begin{definition}
+若 \(K\) 是 \(F\) 的代数扩张，且它是一族多项式 \(f(x) \in F[x]\) 在 \(F\) 上的分裂域，则称 \(K\) 是 \(F\) 的\textbf{正规扩张}。
+\end{definition}
+
+我们一般使用“分裂域”这个术语而不用“正规扩张”（另见第 14.9 节）。
+
+\begin{example}
+（1）\(x^2-2\) 在 \(\mathbb{Q}\) 上的分裂域就是 \(\mathbb{Q}(\sqrt{2})\)，因为两个根是 \(\pm\sqrt{2}\)，而 \(-\sqrt{2} \in \mathbb{Q}(\sqrt{2})\).
+
+（2）\((x^2-2)(x^2-3)\) 的分裂域是 \(\mathbb{Q}(\sqrt{2}, \sqrt{3})\)，即由 \(\sqrt{2}\) 与 \(\sqrt{3}\) 在 \(\mathbb{Q}\) 上生成的域，因为这个多项式的根是 \(\pm\sqrt{2}, \pm\sqrt{3}\). 我们已经看到这是 \(\mathbb{Q}\) 上次数为 4 的扩张，并有以下已知子域的图：
+\[
+\begin{array}{ccc}
+& \mathbb{Q}(\sqrt{2}, \sqrt{3}) & \\
+& \swarrow\ \downarrow\ \searrow & \\
+\mathbb{Q}(\sqrt{2}) & \mathbb{Q}(\sqrt{6}) & \mathbb{Q}(\sqrt{3})\\
+& \searrow\ \downarrow\ \swarrow & \\
+& \mathbb{Q} &
+\end{array}
+\]
+
+（3）\(x^3-2\) 在 \(\mathbb{Q}\) 上的分裂域不只是 \(\mathbb{Q}(\sqrt[3]{2})\)，因为如前所述这个多项式在 \(\mathbb{C}\) 中的三个根是
+\[
+\sqrt[3]{2}, \qquad \sqrt[3]{2}\left(\frac{-1+\sqrt{-3}}{2}\right), \qquad \sqrt[3]{2}\left(\frac{-1-\sqrt{-3}}{2}\right),
+\]
+而后两个根不在 \(\mathbb{Q}(\sqrt[3]{2})\) 中，因为这个域的元素具有 \(a+b\sqrt[3]{2}+c(\sqrt[3]{2})^2\)（\(a, b, c\) 有理）的形式，而所有这样的数都是实数。这个多项式的分裂域 \(K\) 是通过把上面三个根都添加到 \(\mathbb{Q}\) 上得到的。注意由于 \(K\) 含有上面前两个根，它便含有它们的商 \(\frac{-1+\sqrt{-3}}{2}\)，故 \(K\) 含有元素 \(\sqrt{-3}\). 另一方面，任何含有 \(\sqrt[3]{2}\) 与 \(\sqrt{-3}\) 的域都含有上面三个根。由此 \(K = \mathbb{Q}(\sqrt[3]{2}, \sqrt{-3})\) 是 \(x^3-2\) 在 \(\mathbb{Q}\) 上的分裂域。由于 \(\sqrt{-3}\) 满足方程 \(x^2+3 = 0\)，这个扩张在 \(\mathbb{Q}(\sqrt[3]{2})\) 上的次数至多为 2，从而必为 2（因为我们上面观察到 \(\mathbb{Q}(\sqrt[3]{2})\) 不是分裂域）。由此
+\[
+[\mathbb{Q}(\sqrt[3]{2}, \sqrt{-3}):\mathbb{Q}] = 6.
+\]
+注意最后我们也可以稍作改变：注意 \(\mathbb{Q}(\sqrt{-3})\) 是 \(K\) 的子域，故指数 \([\mathbb{Q}(\sqrt{-3}):\mathbb{Q}] = 2\) 整除 \([K:\mathbb{Q}]\)；由于这个扩张次数也被 3 整除（因为 \(\mathbb{Q}(\sqrt[3]{2}) \subseteq K\)），它被 6 整除，从而必为 6.
+
+（4）计算分裂域时必须小心。多项式 \(x^4+4\) 在 \(\mathbb{Q}\) 上的分裂域比人们起初可能猜想的要小。事实上这个多项式在 \(\mathbb{Q}\) 上分解：
+\[
+x^4+4 = x^4+4x^2+4-4x^2 = (x^2+2)^2-4x^2 = (x^2+2x+2)(x^2-2x+2),
+\]
+其中这两个因子不可约（仍由艾森斯坦判别法）。用求根公式解这两个因子的根，我们得到四个根 \(\pm1\pm i\)，故这个多项式的分裂域就是域 \(\mathbb{Q}(i)\)，它是 \(\mathbb{Q}\) 的次数为 2 的扩张。
+\end{example}
+
+一般地，若 \(f(x) \in F[x]\) 是 \(n\) 次多项式，则把 \(f(x)\) 的一个根添加到 \(F\) 上生成 \(F\) 的次数至多为 \(n\)（且等于 \(n\) 当且仅当 \(f(x)\) 不可约）的扩张 \(F_1\). 在 \(F_1\) 上多项式 \(f(x)\) 现在至少有一个线性因子，故 \(f(x)\) 的任何其他根在 \(F_1\) 上满足一个次数至多为 \(n-1\) 的方程。把这样一个根添加到 \(F_1\) 上，我们于是得到 \(F_1\) 的次数至多为 \(n-1\) 的扩张，依此类推。利用扩张次数的可乘性，这证明
+
+\begin{proposition}\label{pro:13.26}
+\(F\) 上 \(n\) 次多项式的分裂域在 \(F\) 上的次数至多为 \(n!\).
+\end{proposition}
+
+如上面的例子所示，分裂域的次数可能小于 \(n!\). 以后将用伽罗瓦理论证明，\(\mathbb{Q}\) 上“一般的”\(n\) 次多项式（在某种明确的意义下）的分裂域次数为 \(n!\)，故这可以看作“一般”情形（尽管我们将考虑的大多数有趣的例子的分裂域次数更小）。
+
+\noindent\textbf{例：（\(x^n-1\) 的分裂域：分圆域）}
+
+考虑多项式 \(x^n-1\) 在 \(\mathbb{Q}\) 上的分裂域。这个多项式的根称为 \textbf{\(n\) 次单位根}。
+
+回忆每个非零复数 \(a+bi \in \mathbb{C}\) 都可以唯一地写成
+\[
+re^{i\theta} = r(\cos\theta+i\sin\theta), \quad r > 0,\ 0 \leq \theta < 2\pi
+\]
+的形式；这不过是把复平面中的点 \(a+bi\) 用极坐标表示：\(r\) 是 \((a, b)\) 到原点的距离，\(\theta\) 是与实正半轴所成的角。
+
+在 \(\mathbb{C}\) 上方程 \(x^n = 1\) 有 \(n\) 个不同的解，即元素
+\[
+e^{2\pi ki/n} = \cos\left(\frac{2\pi k}{n}\right)+i\sin\left(\frac{2\pi k}{n}\right), \quad k = 0, \ldots, n-1.
+\]
+几何上这些点由复平面中半径为 1 的圆上从点 \((1, 0)\)（对应于 \(k = 0\)）开始的 \(n\) 个等距点给出（见图 6）。这些都是 \(n\) 次单位根这一事实是直接的，因为 \((e^{2\pi ki/n})^n = e^{(2\pi ki/n)n} = e^{2\pi ki} = 1\).
+
+由此 \(\mathbb{C}\) 含有 \(x^n-1\) 的一个分裂域，我们将常把 \(x^n-1\) 在 \(\mathbb{Q}\) 上的分裂域看作由上述数在 \(\mathbb{C}\) 中生成的域。
+
+在 \(x^n-1\) 的任何抽象分裂域 \(K/\mathbb{Q}\) 中，\(n\) 次单位根的集合在乘法下构成群，因为若 \(\alpha^n = 1\) 且 \(\beta^n = 1\) 则 \((\alpha\beta)^n = 1\)，故这个 \(K^\times\) 的子集对乘法封闭。由此它是循环群（第 9 章命题 18）；我们将看到 \(K\) 中有 \(n\) 个不同的根，故它的阶为 \(n\).
+
+\begin{definition}
+所有 \(n\) 次单位根构成的循环群的生成元称为\textbf{本原 \(n\) 次单位根}。
+\end{definition}
+
+用 \(\zeta_n\) 表示一个本原 \(n\) 次单位根。则其他本原 \(n\) 次单位根是元素 \(\zeta_n^a\)（\(1 \leq a < n\) 是与 \(n\) 互素的整数），因为这些是 \(n\) 阶循环群的其他生成元。特别地恰有 \(\varphi(n)\) 个本原 \(n\) 次单位根，其中 \(\varphi(n)\) 表示欧拉 \(\varphi\)-函数。
+
+在 \(\mathbb{C}\) 上我们可以直接看到这一切：令 \(\zeta_n = e^{2\pi i/n}\)（从 1 出发逆时针方向的第一个 \(n\) 次单位根）。则其他单位根都是 \(\zeta_n\) 的幂，故 \(\zeta_n\) 是 \(n\) 次单位根乘法群的一个可能的生成元。当我们在 \(\mathbb{C}\) 中看单位根时，我们通常用 \(\zeta_n\) 表示这样选定的本原 \(n\) 次单位根。对某些小值 \(n\)，\(\mathbb{C}\) 中的本原单位根为
+\[
+\zeta_1 = 1, \quad \zeta_2 = -1, \quad \zeta_3 = \frac{-1+i\sqrt{3}}{2}, \quad \zeta_4 = i, \quad \zeta_5 = \frac{\sqrt{5}-1}{4}+i\frac{\sqrt{10+2\sqrt{5}}}{4},
+\]
+\[
+\zeta_6 = \frac{1+i\sqrt{3}}{2}, \quad \zeta_8 = \frac{\sqrt{2}}{2}+i\frac{\sqrt{2}}{2}
+\]
+（这些公式由 \(n\) 边形的初等几何得到，且在每种情形都可以直接通过取适当的幂验证）。
+
+\(x^n-1\) 在 \(\mathbb{Q}\) 上的分裂域是域 \(\mathbb{Q}(\zeta_n)\)，这个域有一个名称：
+
+\begin{definition}
+域 \(\mathbb{Q}(\zeta_n)\) 称为 \textbf{\(n\) 次单位根的分圆域}。
+\end{definition}
+
+确定这个扩张的次数需要对 \(\zeta_n\) 在 \(\mathbb{Q}\) 上的极小多项式作一些分析，这将推迟到后面（第 13.6 节）。一个我们已经考虑过的重要特殊情形是 \(n = p\) 为素数。此时我们有分解
+\[
+x^p-1 = (x-1)(x^{p-1}+x^{p-2}+\cdots+x+1),
+\]
+而由于 \(\zeta_p \neq 1\)，可知 \(\zeta_p\) 是多项式
+\[
+\Phi_p(x) = \frac{x^p-1}{x-1} = x^{p-1}+x^{p-2}+\cdots+x+1
+\]
+的根，我们在第 9.4 节证明过它不可约。由此 \(\Phi_p(x)\) 是 \(\zeta_p\) 在 \(\mathbb{Q}\) 上的极小多项式，故
+\[
+[\mathbb{Q}(\zeta_p):\mathbb{Q}] = p-1.
+\]
+我们以后将看到一般地 \([\mathbb{Q}(\zeta_n):\mathbb{Q}] = \varphi(n)\)，其中 \(\varphi(n)\) 是 \(n\) 的欧拉 phi-函数（故 \(\varphi(p) = p-1\)）。
+
+\noindent\textbf{例：（\(x^p-2\) 的分裂域，\(p\) 为素数）}
+
+设 \(p\) 是素数，考虑 \(x^p-2\) 的分裂域。若 \(\alpha\) 是这个方程的根，即 \(\alpha^p = 2\)，则 \((\zeta\alpha)^p = 2\)，其中 \(\zeta\) 是任意 \(p\) 次单位根。故这个方程的解是
+\[
+\zeta\sqrt[p]{2}, \quad \zeta \text{ 是 } p \text{ 次单位根},
+\]
+其中照常若要把这些元素看作复数则符号 \(\sqrt[p]{2}\) 表示 2 的正实 \(p\) 次根，而若抽象地看这些根则表示 \(x^p = 2\) 的任意一个解。由于两个解 \(\zeta_p\sqrt[p]{2}\) 与 \(\sqrt[p]{2}\)（\(\zeta_p\) 是本原 \(p\) 次单位根）之比恰为 \(\zeta_p\)，\(x^p-2\) 在 \(\mathbb{Q}\) 上的分裂域含有 \(\mathbb{Q}(\sqrt[p]{2}, \zeta_p)\). 另一方面，上面所有根都在这个域中，故分裂域恰为 \(\mathbb{Q}(\sqrt[p]{2}, \zeta_p)\).
+
+这个域含有 \(p\) 次单位根的分圆域，并且由 \(\sqrt[p]{2}\) 在它上面生成，故是它上面次数至多为 \(p\) 的扩张。由此这个扩张在 \(\mathbb{Q}\) 上的次数 \(\leq p(p-1)\). 由于 \(\mathbb{Q}(\sqrt[p]{2})\) 与 \(\mathbb{Q}(\zeta_p)\) 都是子域，扩张在 \(\mathbb{Q}\) 上的次数被 \(p\) 与被 \(p-1\) 整除。由于这两个数互素，可知扩张次数被 \(p(p-1)\) 整除，故必有
+\[
+[\mathbb{Q}(\sqrt[p]{2}, \zeta_p):\mathbb{Q}] = p(p-1)
+\]
+（这是推论 \ref{cor:13.22}）。特别地注意我们已证明 \(x^p-2\) 在 \(\mathbb{Q}(\zeta_p)\) 上仍不可约，这一点完全不显然。我们有下列已知子域图，并且 \(p = 3\) 的特殊情形就是上面例 3，那里我们只是显式写出了 3 次单位根。
+
+现在我们回到“多项式 \(f(x)\) 在域 \(F\) 上的分裂域如何构造无关紧要”这一问题的证明。与定理 \ref{thm:13.8} 一样，方便的做法是对两个域之间的任意同构 \(\varphi : F \to F'\) 陈述结果。
+
+\begin{theorem}\label{thm:13.27}
+设 \(\varphi : F \to F'\) 是域的同构。设 \(f(x) \in F[x]\) 是多项式，\(f'(x) \in F'[x]\) 是把 \(\varphi\) 作用于 \(f(x)\) 的系数所得的多项式。设 \(E\) 是 \(f(x)\) 在 \(F\) 上的分裂域，\(E'\) 是 \(f'(x)\) 在 \(F'\) 上的分裂域。则同构 \(\varphi\) 可以延拓为同构 \(\sigma : E \to E'\)，即 \(\sigma\) 在 \(F\) 上的限制是同构 \(\varphi\).
+\end{theorem}
+
+\begin{proof}
+我们通过对 \(f(x)\) 的次数 \(n\) 归纳。如定理 \ref{thm:13.8} 之前的讨论所回忆的，从域 \(F\) 到另一域 \(F'\) 的同构 \(\varphi\) 诱导出多项式环 \(F[x]\) 与 \(F'[x]\) 之间的自然同构。特别地，若 \(f(x)\) 与 \(f'(x)\) 在这个同构下相互对应，则 \(f(x)\) 在 \(F[x]\) 中的不可约因子对应 \(f'(x)\) 在 \(F'[x]\) 中的不可约因子。
+
+若 \(f(x)\) 的所有根都在 \(F\) 中，则 \(f(x)\) 在 \(F[x]\) 中完全分裂，而 \(f'(x)\) 在 \(F'[x]\) 中完全分裂（其线性因子是 \(f(x)\) 的线性因子的像）。故 \(E = F\)、\(E' = F'\)，此时我们可以取 \(\sigma = \varphi\). 这表明结果对 \(n = 1\) 以及 \(f(x)\) 的所有不可约因子次数都为 1 的情形成立。
+
+现在由归纳假设定理对任何域 \(F\)、同构 \(\varphi\) 与次数 \(< n\) 的多项式 \(f(x) \in F[x]\) 已证明。设 \(p(x)\) 是 \(f(x)\) 在 \(F[x]\) 中次数至少为 2 的一个不可约因子，\(p'(x)\) 是 \(f'(x)\) 在 \(F'[x]\) 中相应的不可约因子。若 \(\alpha \in E\) 是 \(p(x)\) 的根、\(\beta \in E'\) 是 \(p'(x)\) 的根，则由定理 \ref{thm:13.8} 我们可以把 \(\varphi\) 延拓为同构 \(\sigma' : F(\alpha) \to F'(\beta)\)，\(\sigma'|_F = \varphi\).
+
+设 \(f_1(x) \in F(\alpha)[x]\) 与 \(f_1'(x) \in F'(\beta)[x]\) 使得 \(f(x) = (x-\alpha)f_1(x)\)、\(f'(x) = (x-\beta)f_1'(x)\)，则 \(f_1(x)\) 的次数为 \(n-1\). 域 \(E\) 是 \(f_1(x)\) 在 \(F_1 = F(\alpha)\) 上的分裂域：\(f_1(x)\) 的所有根都在 \(E\) 中，而若它们含于某个更小的含 \(F_1\) 的扩张 \(L\) 中，则由于 \(F_1\) 含 \(\alpha\)，\(L\) 也会含有 \(f(x)\) 的所有根，这与 \(E\) 作为 \(f(x)\) 在 \(F\) 上的分裂域的最小性矛盾。类似地 \(E'\) 是 \(f_1'(x)\) 在 \(F_1' = F'(\beta)\) 上的分裂域。由于 \(f_1(x)\) 与 \(f_1'(x)\) 的次数都小于 \(n\)，由归纳假设存在映射 \(\sigma : E \to E'\) 延拓同构 \(\sigma' : F_1 \to F_1'\). 由于如图所示 \(\sigma\) 在 \(F_1\) 上的限制是同构 \(\sigma'\)，特别地 \(\sigma\) 在 \(F\) 上的限制是 \(\varphi\)，这表明 \(\sigma\) 是 \(\varphi\) 的延拓，完成证明。
+\end{proof}
+
+\begin{corollary}\label{cor:13.28}
+（\textbf{分裂域的唯一性}）域 \(F\) 上多项式 \(f(x) \in F[x]\) 的任何两个分裂域都同构。
+\end{corollary}
+
+\begin{proof}
+取 \(\varphi\) 为从 \(F\) 到自身的恒等映射，\(E\) 与 \(E'\) 为 \(f(x)\)（\(= f'(x)\)）的两个分裂域。
+\end{proof}
+
+如我们前面提到的，这个结果使“\(f(x)\) 在 \(F\) 上的分裂域”这一术语成为合理，因为任何两个都同构。分裂域在代数元素的研究中起自然的作用（如果你正在添加多项式的一个根，为什么不添加所有根？），故在伽罗瓦理论中起特别重要的作用。
+
+我们以讨论 \(F\) 的含 \(F\) 上所有多项式的所有根的扩张来结束本节。
+
+\begin{definition}
+域 \(\overline{F}\) 称为 \(F\) 的\textbf{代数闭包}，若 \(\overline{F}\) 在 \(F\) 上代数，且每个多项式 \(f(x) \in F[x]\) 在 \(\overline{F}\) 上完全分裂（故可以说 \(\overline{F}\) 含有在 \(F\) 上代数的所有元素）。
+\end{definition}
+
+\begin{definition}
+若每个系数在 \(K\) 中的多项式在 \(K\) 中都有根，则称域 \(K\) 是\textbf{代数闭的}。
+\end{definition}
+
+代数闭域存在以及给定域 \(F\) 的代数闭包存在并不是显然的（我们很快将证明这一点）。
+
+注意若 \(K\) 是代数闭的，则事实上每个 \(f(x) \in K[x]\) 的所有根都在 \(K\) 中，因为按定义 \(f(x)\) 在 \(K\) 中有根 \(\alpha\)，从而在 \(K[x]\) 中有因子 \(x-\alpha\). \(f(x)\) 的剩余因子是 \(K[x]\) 中的多项式，故它有根，从而有线性因子，等等，故 \(f(x)\) 必完全分裂。因此若 \(K\) 是代数闭的，则 \(K\) 本身是 \(K\) 的代数闭包，反之显然，故 \(K = \overline{K}\) 当且仅当 \(K\) 代数闭。
+
+下一个结果表明确实“取代数闭包”的过程一步就停止——取代数闭包的代数闭包不会给出更大的域：这个域已经是代数闭的（记号上：\(\overline{\overline{F}} = \overline{F}\)）。
+
+\begin{proposition}\label{pro:13.29}
+设 \(\overline{F}\) 是 \(F\) 的代数闭包。则 \(\overline{F}\) 是代数闭的。
+\end{proposition}
+
+\begin{proof}
+设 \(f(x)\) 是 \(\overline{F}[x]\) 中的多项式，\(\alpha\) 是 \(f(x)\) 的根。则 \(\alpha\) 生成 \(\overline{F}\) 的代数扩张 \(\overline{F}(\alpha)\)，而 \(\overline{F}\) 在 \(F\) 上代数。由定理 \ref{thm:13.20}，\(\overline{F}(\alpha)\) 在 \(F\) 上代数，故特别地它的元素 \(\alpha\) 在 \(F\) 上代数。但此时 \(\alpha \in \overline{F}\)，这表明 \(\overline{F}\) 是代数闭的。
+\end{proof}
+
+给定域 \(F\)，我们已经看到如何构造 \(F\) 的（有限）扩张，使它含有任意给定多项式 \(f(x) \in F[x]\) 的所有根。直观上，\(F\) 的代数闭包由所有这些域“生成”的域给出。困难在于“生成”于何处？因为它们并不都是某个给定域的子域。对有限多个多项式 \(f_1(x), \ldots, f_k(x)\)，我们可以把它们的分裂域看作乘积多项式 \(f_1(x)\cdots f_k(x)\) 的分裂域的子域，但对无限多个多项式使用同样的想法需要大量“登记”识别以及佐恩引理的应用。
+
+我们将改为通过先构造一个含 \(F\) 的代数闭域来构造 \(F\) 的代数闭包。这个证明使用 Artin 的一个巧妙想法：通过为每个多项式引入一个单独变量，非常干净地解决了构造含有适当多项式根的域的“登记”问题（这最终也依赖于佐恩引理）。
+
+\begin{proposition}\label{pro:13.30}
+对任何域 \(F\)，存在含 \(F\) 的代数闭域 \(K\).
+\end{proposition}
+
+\begin{proof}
+对每个系数在 \(F\) 中的非常数首一多项式 \(f = f(x)\)，设 \(x_f\) 是一个未定元，并考虑由变量 \(x_f\) 在 \(F\) 上生成的多项式环 \(F[\ldots, x_f, \ldots]\). 在这个多项式环中考虑由多项式 \(f(x_f)\) 生成的理想 \(I\). 若这个理想不是真理想，则 1 是这个理想的元素，故我们有关系
+\[
+g_1f_1(x_{f_1})+g_2f_2(x_{f_2})+\cdots+g_nf_n(x_{f_n}) = 1,
+\]
+其中 \(g_i\)（\(i = 1, 2, \ldots, n\)）是 \(x_f\) 的多项式。对 \(i = 1, 2, \ldots, n\) 令 \(x_{f_i} = x_i\)，并设 \(x_{n+1}, \ldots, x_m\) 是多项式 \(g_j\)（\(j = 1, 2, \ldots, n\)）中出现的其余变量。则上面的关系读作
+\[
+g_1(x_1, x_2, \ldots, x_m)f_1(x_1)+\cdots+g_n(x_1, x_2, \ldots, x_m)f_n(x_n) = 1.
+\]
+设 \(F'\) 是 \(F\) 的有限扩张，含有 \(f_i(x)\)（\(i = 1, 2, \ldots, n\)）的根。令 \(x_i = \alpha_i\)（\(i = 1, 2, \ldots, n\)），并在上面的多项式等式中取 \(x_{n+1} = \cdots = x_m = 0\)，则这将蕴涵 \(F'\) 中 \(0 = 1\)，显然不可能。
+
+由于理想 \(I\) 是真理想，它含于某个极大理想 \(M\) 中（这是佐恩引理被用到的地方）。则商
+\[
+K_1 = F[\ldots, x_f, \ldots]/M
+\]
+是含有（\(F\) 的同构拷贝）的域。每个多项式 \(f\) 在 \(K_1\) 中都有根，即 \(x_f\) 的像，因为 \(f(x_f) \in I \subseteq M\). 我们构造出了域 \(K_1\)，其中系数来自 \(F\) 的每个多项式都有根。
+
+把同样的构造对 \(K_1\) 代替 \(F\) 施行，得到含 \(K_1\) 的域 \(K_2\)，其中系数来自 \(K_1\) 的所有多项式都有根。如此继续，我们得到域的序列
+\[
+F = K_0 \subseteq K_1 \subseteq K_2 \subseteq \cdots \subseteq K_j \subseteq K_{j+1} \subseteq \cdots,
+\]
+其中系数在 \(K_j\) 中的每个多项式在 \(K_{j+1}\) 中都有根（\(j = 0, 1, \ldots\)）。令 \(K = \bigcup_{j\geq0}K_j\) 是这些域的并。则 \(K\) 显然是含 \(F\) 的域。由于 \(K\) 是各域 \(K_j\) 的并，\(K[x]\) 中任何多项式 \(h(x)\) 的系数（有限多个）都落在某个充分大的 \(K_N\) 中。但此时 \(h(x)\) 在 \(K_{N+1}\) 中有根，从而在 \(K\) 中有根。由此 \(K\) 是代数闭的，完成证明。
+\end{proof}
+
+现在我们用含 \(F\) 的代数闭域来构造 \(F\) 的代数闭包：
+
+\begin{proposition}\label{pro:13.31}
+设 \(K\) 是代数闭域，\(F\) 是 \(K\) 的子域。则 \(K\) 中在 \(F\) 上代数的元素集合 \(\overline{F}\) 是 \(F\) 的代数闭包。\(F\) 的代数闭包在同构意义下唯一。
+\end{proposition}
+
+\begin{proof}
+按定义，\(\overline{F}\) 是 \(F\) 的代数扩张。每个多项式 \(f(x) \in \overline{F}[x]\) 在 \(K\) 中完全分裂为线性因子 \(x-\alpha\)（对 \(K[x]\) 中的每个多项式也如此）。但每个 \(\alpha\) 都是 \(f(x)\) 的根，故在 \(F\) 上代数，从而是 \(\overline{F}\) 的元素。由此所有线性因子 \(x-\alpha\) 的系数都在 \(\overline{F}\) 中，即 \(f(x)\) 在 \(\overline{F}[x]\) 中完全分裂，且 \(\overline{F}\) 是 \(F\) 的代数闭包。
+
+代数闭包的唯一性（在同构意义下）与分裂域的唯一性（在同构意义下）同样自然，其证明也沿着同样的思路并应用佐恩引理，从略。
+\end{proof}
+
+我们以后将用伽罗瓦理论证明下面这个结果（也存在纯用复分析的证明）。
+
+\noindent\textbf{定理（代数基本定理）}\quad 域 \(\mathbb{C}\) 是代数闭的。
+
+由命题 \ref{pro:13.31}，我们立即得到：
+
+\begin{corollary}\label{cor:13.32}
+域 \(\mathbb{C}\) 含有它任何子域的代数闭包。特别地，\(\overline{\mathbb{Q}}\)（在 \(\mathbb{Q}\) 上代数的复数集合）是 \(\mathbb{Q}\) 的代数闭包。
+\end{corollary}
+
+这些考虑的意义在于：涉及在域 \(F\) 上代数的元素的所有计算都可以看作在一个（大的）域 \(\overline{F}\) 中进行。类似地，我们可以合理地谈论任何一族代数扩张的合成，把它们都看作某个代数闭包的子域。对 \(\mathbb{Q}\) 或 \(\mathbb{Q}\) 的有限扩张，我们可以把所有的计算看作在 \(\mathbb{C}\) 中进行。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 确定 \(x^4-2\) 在 \(\mathbb{Q}\) 上的分裂域及其次数。
+
+\item 确定 \(x^4+2\) 在 \(\mathbb{Q}\) 上的分裂域及其次数。
+
+\item 确定 \(x^4+x^2+1\) 在 \(\mathbb{Q}\) 上的分裂域及其次数。
+
+\item 确定 \(x^6-4\) 在 \(\mathbb{Q}\) 上的分裂域及其次数。
+
+\item 设 \(K\) 是 \(F\) 的有限扩张。证明 \(K\) 是 \(F\) 上的分裂域当且仅当 \(F[x]\) 中任何在 \(K\) 中有根的不可约多项式在 \(K[x]\) 中完全分裂。〔利用定理 \ref{thm:13.8} 与定理 \ref{thm:13.27}。〕
+
+\item 设 \(K_1\) 与 \(K_2\) 是 \(F\) 的两个含于域 \(K\) 中的有限扩张，并假设它们都是 \(F\) 上的分裂域。
+
+（a）证明它们的合成 \(K_1K_2\) 是 \(F\) 上的分裂域。
+
+（b）证明 \(K_1 \cap K_2\) 是 \(F\) 上的分裂域。〔利用上一习题。〕
+\end{enumerate}
+
+\section{可分扩张与不可分扩张}
+
+设 \(F\) 是域，\(f(x) \in F[x]\) 是多项式。在 \(f(x)\) 的分裂域上有分解
+\[
+f(x) = (x-\alpha_1)^{n_1}(x-\alpha_2)^{n_2}\cdots(x-\alpha_k)^{n_k},
+\]
+其中 \(\alpha_1, \alpha_2, \ldots, \alpha_k\) 是分裂域中互不相同的元素，对所有 \(i\) 有 \(n_i \geq 1\). 回忆若 \(n_i > 1\) 则称 \(\alpha_i\) 是\textbf{重根}，若 \(n_i = 1\) 则称它是\textbf{单根}。整数 \(n_i\) 称为根 \(\alpha_i\) 的\textbf{重数}。
+
+\begin{definition}
+\(F\) 上的多项式称为\textbf{可分的}，若它没有重根（即它的所有根都互异）。不可分的多项式称为\textbf{不可分的}。
+\end{definition}
+
+注意若多项式 \(f(x)\) 在某个分裂域中有互异的根，则 \(f(x)\) 在任何分裂域中都有互异的根（因为这等价于 \(f(x)\) 分解为互异线性因子，而 \(f(x)\) 的任何两个分裂域之间存在在 \(F\) 上为恒等、且在根上为双射的同构），故我们不必指定含有 \(f(x)\) 所有根的域。
+
+\begin{example}
+（1）多项式 \(x^2-2\) 在 \(\mathbb{Q}\) 上可分，因为它的两个根 \(\pm\sqrt{2}\) 互异。对任意 \(n \geq 2\)，多项式 \((x^2-2)^n\) 不可分，因为它有重根 \(\pm\sqrt{2}\)，各自的重数为 \(n\).
+
+（2）多项式 \(x^2-t\)（\(= x^2+t\)）在域 \(F = \mathbb{F}_2(t)\)（系数在 \(\mathbb{F}_2\) 中的 \(t\) 的有理函数域）上不可约（如我们以前看到的），但不可分。若用 \(\sqrt{t}\) 表示它在某个扩域中的根（注意 \(\sqrt{t} \notin F\)），则
+\[
+(x-\sqrt{t})^2 = x^2-2x\sqrt{t}+t = x^2+t = x^2-t,
+\]
+因为 \(F\) 是特征为 2 的域。故这个不可约多项式只有一个根（重数为 2），从而在 \(F\) 上不可分。
+\end{example}
+
+有一个判断多项式是否有重根的简单判别法。
+
+\begin{definition}
+多项式 \(f(x) = a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0 \in F[x]\) 的\textbf{导数}定义为多项式
+\[
+D_xf(x) = na_nx^{n-1}+(n-1)a_{n-1}x^{n-2}+\cdots+2a_2x+a_1 \in F[x].
+\]
+\end{definition}
+
+这个公式不过是微积分中熟悉的多项式导数的通常公式。它纯粹是代数的，故可以应用于任意域 \(F\) 上的多项式，而那里导数的分析概念（涉及极限这一连续操作）可能并不存在。
+
+通常（微积分中）的导数公式在这种情况下也成立，例如和与积的导数公式：
+\[
+D_x(f(x)+g(x)) = D_xf(x)+D_xg(x), \qquad D_x(f(x)g(x)) = f(x)D_xg(x)+(D_xf(x))g(x).
+\]
+这些公式可以直接由多项式的定义证明，不需要任何极限操作，留作习题。
+
+下一个命题表明 \(f(x)\) 的可分性可以由 \(f(x)\) 的系数所在域中的欧几里得算法判定，而不必过渡到分裂域并对 \(f(x)\) 作分解。
+
+\begin{proposition}\label{pro:13.33}
+多项式 \(f(x)\) 有重根 \(\alpha\) 当且仅当 \(\alpha\) 也是 \(D_xf(x)\) 的根，即 \(f(x)\) 与 \(D_xf(x)\) 都被 \(\alpha\) 的极小多项式整除。特别地，\(f(x)\) 可分当且仅当它与它的导数互素：\((f(x), D_xf(x)) = 1\).
+\end{proposition}
+
+\begin{proof}
+首先假设 \(\alpha\) 是 \(f(x)\) 的重根。则在分裂域上有
+\[
+f(x) = (x-\alpha)^ng(x)
+\]
+（某个整数 \(n \geq 2\) 与某个多项式 \(g(x)\)）。求导得
+\[
+D_xf(x) = n(x-\alpha)^{n-1}g(x)+(x-\alpha)^nD_xg(x),
+\]
+这表明（\(n \geq 2\)）\(D_xf(x)\) 以 \(\alpha\) 为根。
+
+反之，假设 \(\alpha\) 是 \(f(x)\) 与 \(D_xf(x)\) 的根。则把 \(f(x)\) 写成
+\[
+f(x) = (x-\alpha)h(x)
+\]
+（某个多项式 \(h(x)\)）并求导：
+\[
+D_xf(x) = h(x)+(x-\alpha)D_xh(x).
+\]
+由于按假设 \(D_xf(\alpha) = 0\)，把 \(\alpha\) 代入最后一个等式表明 \(h(\alpha) = 0\). 故对某个多项式 \(h_1(x)\) 有 \(h(x) = (x-\alpha)h_1(x)\)，从而
+\[
+f(x) = (x-\alpha)^2h_1(x),
+\]
+这表明 \(\alpha\) 是 \(f(x)\) 的重根。
+
+与「被 \(\alpha\) 的极小多项式整除」的等价性由命题 \ref{pro:13.9} 推出。最后一个断言于是显然（设 \(\alpha\) 表示 \(f(x)\) 与 \(D_xf(x)\) 的公因子的任意根）。
+\end{proof}
+
+\begin{example}
+（1）\(\mathbb{F}_p\) 上的多项式 \(x^{p^n}-x\) 的导数是 \(p^nx^{p^n-1}-1 = -1\)，因为域的特征为 \(p\). 由于此时导数根本没有根，可知这个多项式没有重根，从而是可分的。
+
+（2）多项式 \(x^n-1\) 的导数是 \(nx^{n-1}\). 在任何特征不整除 \(n\) 的域上（包括特征为 0 的情形），这个多项式只有根 0（重数为 \(n-1\)），而它不是 \(x^n-1\) 的根。故 \(x^n-1\) 可分，且存在 \(n\) 个互异的 \(n\) 次单位根。我们在 \(\mathbb{Q}\) 上通过在 \(\mathbb{C}\) 中给出 \(n\) 个互异解直接看到了这一点。
+
+（3）若 \(F\) 的特征为 \(p\) 且 \(p\) 整除 \(n\)，则 \(F\) 中互异的 \(n\) 次单位根少于 \(n\) 个：此时由于 \(F\) 中 \(n = 0\)，导数恒为 0. 事实上此时 \(x^n-1\) 的每个根都是重根。
+\end{example}
+
+\begin{corollary}\label{cor:13.34}
+特征为 0 的域（例如 \(\mathbb{Q}\)）上每个不可约多项式都可分。这样的域上的多项式可分当且仅当它是互异不可约多项式之积。
+\end{corollary}
+
+\begin{proof}
+假设 \(F\) 是特征为 0 的域，\(p(x) \in F[x]\) 是 \(n\) 次不可约多项式。则导数 \(D_xp(x)\) 是 \(n-1\) 次多项式。在相差常数因子的意义下，\(F[x]\) 中 \(p(x)\) 的因子只有 1 与 \(p(x)\)，故 \(D_xp(x)\) 必与 \(p(x)\) 互素。这表明特征为 0 的域上任何不可约多项式都可分。推论的第二个断言于是显然，因为互异的不可约多项式绝不会有公共零点（由命题 \ref{pro:13.9}）。
+\end{proof}
+
+推论证明中在特征 \(p\) 下可能失效的一点是「导数 \(D_xp(x)\) 的次数为 \(n-1\)」这一说法。在特征 \(p\) 下，\(x\) 的任何 \(p\) 次幂 \(x^{p^m}\) 的导数恒为 0：
+\[
+D_x(x^{p^m}) = p^mx^{p^m-1} = 0,
+\]
+故导数的次数可能下降不止一次。然而若不可约多项式 \(p(x)\) 的导数 \(D_xp(x)\) 非零，则和以前一样我们断定 \(p(x)\) 必可分。
+
+由导数的定义显然，若 \(p(x)\) 是导数恒为 0 的多项式，则 \(p(x)\) 中 \(x\) 的每个指数都必是 \(p\) 的倍数，其中 \(p = \operatorname{ch}(F)\)：
+\[
+p(x) = a_mx^{mp}+a_{m-1}x^{(m-1)p}+\cdots+a_1x^p+a_0.
+\]
+令 \(p_1(x) = a_mx^m+a_{m-1}x^{m-1}+\cdots+a_1x+a_0\)，我们看到 \(p(x)\) 是 \(x^p\) 的多项式，即 \(p(x) = p_1(x^p)\).
+
+现在我们证明特征 \(p\) 的域中取 \(p\) 次幂的一个简单但重要的结果。
+
+\begin{proposition}\label{pro:13.35}
+设 \(F\) 是特征为 \(p\) 的域。则对任意 \(a, b \in F\) 有 \((a+b)^p = a^p+b^p\) 与 \((ab)^p = a^pb^p\).
+
+换句话说，由 \(\varphi(a) = a^p\) 定义的 \textbf{\(p\) 次幂映射}是从 \(F\) 到 \(F\) 的单射域同态。
+\end{proposition}
+
+\begin{proof}
+二项式定理对任何正整数 \(n\) 展开 \((a+b)^n\) 在任何交换环上都成立（由标准的归纳证明）：
+\[
+(a+b)^n = a^n+\binom{n}{1}a^{n-1}b+\cdots+\binom{n}{i}a^{n-i}b^i+\cdots+b^n.
+\]
+应当注意二项式系数 \(\binom{n}{i} = \frac{n!}{i!(n-i)!}\) 都是整数（回忆对任何环中的元素 \(a\) 与 \(m \in \mathbb{Z}\) 定义 \(ma\)）），而这里它们是素域中的元素。
+
+若 \(p\) 是素数，则对 \(i = 1, 2, \ldots, p-1\)，二项式系数 \(\binom{p}{i}\) 都被 \(p\) 整除，因为对这些 \(i\)，数 \(i!\) 与 \((p-i)!\) 只涉及小于 \(p\) 的因子，从而与 \(p\) 互素，故不能消去 \(\frac{p!}{i!(p-i)!}\) 分子中的因子 \(p\). 由此在特征为 \(p\) 的域上，\((a+b)^p\) 展开式中所有中间项都为 0，这给出命题的第一个等式。第二个等式是平凡的，\(\varphi\) 是单射这一点也是平凡的。
+\end{proof}
+
+\begin{definition}
+命题 \ref{pro:13.35} 中的映射称为 \(F\) 的\textbf{Frobenius 自同态}。
+\end{definition}
+
+\begin{corollary}\label{cor:13.36}
+假设 \(\mathbb{F}\) 是特征为 \(p\) 的有限域。则 \(\mathbb{F}\) 的每个元素都是 \(\mathbb{F}\) 中的 \(p\) 次幂（记号上，\(\mathbb{F} = \mathbb{F}^p\)）。
+\end{corollary}
+
+\begin{proof}
+\(\mathbb{F}\) 的 Frobenius 自同态的单射性蕴涵当 \(\mathbb{F}\) 有限时它也是满射，这就是推论的内容。
+\end{proof}
+
+现在我们证明推论 \ref{cor:13.34} 在有限域情形下的类似结果。
+
+设 \(\mathbb{F}\) 是有限域，\(p(x) \in \mathbb{F}[x]\) 是系数在 \(\mathbb{F}\) 中的不可约多项式。若 \(p(x)\) 不可分，则我们已经看到对某个多项式 \(q(x) \in \mathbb{F}[x]\) 有 \(p(x) = q(x^p)\). 设 \(q(x) = a_mx^m+a_{m-1}x^{m-1}+\cdots+a_1x+a_0\). 由推论 \ref{cor:13.36}，每个 \(a_i\)（\(i = 1, 2, \ldots, m\)）都是 \(\mathbb{F}\) 中的 \(p\) 次幂，比如 \(a_i = b_i^p\). 则
+\[
+p(x) = q(x^p) = a_m(x^p)^m+a_{m-1}(x^p)^{m-1}+\cdots+a_1x^p+a_0 = (b_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0)^p,
+\]
+这表明 \(p(x)\) 是 \(\mathbb{F}[x]\) 中某个多项式的 \(p\) 次幂，与 \(p(x)\) 的不可约性矛盾。这证明了：
+
+\begin{proposition}\label{pro:13.37}
+有限域 \(\mathbb{F}\) 上每个不可约多项式都可分。\(\mathbb{F}[x]\) 中的多项式可分当且仅当它是 \(\mathbb{F}[x]\) 中互异不可约多项式之积。
+\end{proposition}
+
+这个结果证明中的重要部分是特征 \(p\) 的域 \(\mathbb{F}\) 中每个元素都是 \(\mathbb{F}\) 中的 \(p\) 次幂这一事实。这引出如下定义：
+
+\begin{definition}
+特征为 \(p\) 的域 \(K\) 称为\textbf{完全的}，若 \(K\) 的每个元素都是 \(K\) 中的 \(p\) 次幂，即 \(K = K^p\). 特征为 0 的域也称为完全的。
+\end{definition}
+
+用这个定义，我们看到我们已证明完全域上每个不可约多项式都可分。不难看出若 \(K\) 不完全，则存在不可分的不可约多项式。
+
+\noindent\textbf{例：（有限域的存在性与唯一性）}
+
+设 \(n > 0\) 是任意正整数，考虑多项式 \(x^{p^n}-x\) 在 \(\mathbb{F}_p\) 上的分裂域。我们已经看到这个多项式可分，故恰有 \(p^n\) 个根。设 \(\alpha\) 与 \(\beta\) 是这个多项式的任意两个根，即 \(\alpha^{p^n} = \alpha\)、\(\beta^{p^n} = \beta\). 则 \((\alpha\beta)^{p^n} = \alpha\beta\)、\((\alpha^{-1})^{p^n} = \alpha^{-1}\)，而由命题 \ref{pro:13.35} 也有
+\[
+(\alpha+\beta)^{p^n} = \alpha^{p^n}+\beta^{p^n} = \alpha+\beta.
+\]
+故 \(\mathbb{F}_p\) 上 \(x^{p^n}-x\) 的 \(p^n\) 个互异根组成的集合在它的分裂域中对加法、乘法与取逆封闭。由此 \(\mathbb{F}\) 是子域，从而事实上必是分裂域本身。由于元素个数为 \(p^n\)，我们有 \([\mathbb{F}:\mathbb{F}_p] = n\)，这表明对任意 \(n > 0\) 存在 \(\mathbb{F}_p\) 上次数为 \(n\) 的有限域。
+
+现在设 \(\mathbb{F}\) 是特征为 \(p\) 的任意有限域。若 \(\mathbb{F}\) 在其素子域 \(\mathbb{F}_p\) 上的维数为 \(n\)，则 \(\mathbb{F}\) 恰有 \(p^n\) 个元素。由于乘法群 \(\mathbb{F}^\times\) 是（事实上循环的）\(p^n-1\) 阶群，对每个 \(a \neq 0\) 有 \(a^{p^n-1} = 1\)，故对每个 \(a \in \mathbb{F}\) 有 \(a^{p^n} = a\). 但这意味着 \(a\) 是 \(x^{p^n}-x\) 的根，故 \(\mathbb{F}\) 含于这个多项式的某个分裂域中。由于我们已经看到分裂域的阶为 \(p^n\)，这表明 \(\mathbb{F}\) 是 \(x^{p^n}-x\) 的分裂域。由于分裂域在同构意义下唯一，这证明任何阶 \(p^n\) 的有限域都存在，且在同构意义下唯一。我们用 \(\mathbb{F}_{p^n}\) 表示阶为 \(p^n\) 的有限域。
+
+我们以后将更充分地考虑有限域。
+
+现在我们进一步研究特征 \(p\) 的域上不可分不可约多项式的结构。上面我们已经看到若 \(p(x)\) 是不可分不可约多项式，则它的导数 \(D_xp(x)\) 恒为 0，从而对某个多项式 \(p_1(x)\) 有 \(p(x) = p_1(x^p)\). 多项式 \(p_1(x)\) 本身可能可分也可能不可分。若不可分，则它也是 \(x^p\) 的多项式，\(p_1(x) = p_2(x^p)\)，故 \(p(x)\) 是 \(x^{p^2}\) 的多项式：\(p(x) = p_2(x^{p^2})\). 如此继续，我们看到存在唯一确定的 \(p\) 的幂 \(p^k\) 使 \(p(x) = p_k(x^{p^k})\)，其中 \(p_k(x)\) 的导数非零。显然 \(p_k(x)\) 不可约，因为 \(p_k(x)\) 的任何分解在把 \(x\) 换成 \(x^{p^k}\) 之后都会立即给出不可约多项式 \(p(x)\) 的分解。由此 \(p_k(x)\) 可分。我们把它总结为：
+
+\begin{proposition}\label{pro:13.38}
+设 \(p(x)\) 是特征为 \(p\) 的域 \(F\) 上的不可约多项式。则存在唯一的整数 \(k \geq 0\) 与唯一的不可约可分多项式 \(p_{\mathrm{sep}}(x) \in F[x]\) 使得
+\[
+p(x) = p_{\mathrm{sep}}(x^{p^k}).
+\]
+\end{proposition}
+
+\begin{definition}
+设 \(p(x)\) 是特征为 \(p\) 的域上的不可约多项式。上一定理中 \(p_{\mathrm{sep}}(x)\) 的次数称为 \(p(x)\) 的\textbf{可分次数}，记作 \(\deg_s p(x)\). 定理中的整数 \(p^k\) 称为 \(p(x)\) 的\textbf{不可分次数}，记作 \(\deg_i p(x)\).
+\end{definition}
+
+由定义与命题我们看到，\(p(x)\) 可分当且仅当它的不可分次数为 1，当且仅当它的次数等于它的可分次数。此外，在关系式 \(p(x) = p_{\mathrm{sep}}(x^{p^k})\) 中数次数，我们看到
+\[
+\deg p(x) = \deg_s p(x) \cdot \deg_i p(x).
+\]
+
+\begin{example}
+（1）上面考虑过的 \(F = \mathbb{F}_2(t)\) 上的多项式 \(p(x) = x^2-t\) 的导数为 0，故不可分（如我们以前确定的）。这里 \(p_{\mathrm{sep}}(x) = x-t\)，不可分次数为 2.
+
+（2）\(F = \mathbb{F}_2(t)\) 上的多项式 \(p(x) = x^2-t^{2^m}\) 不可约，它的可分部分相同，但不可分次数为 \(2^m\).
+
+（3）\(F = \mathbb{F}_p(t)\) 上的多项式 \((x^{p^2}-t)(x^p-t)\) 有（两个）不可分不可约因子，故不可分。这个多项式不能写成 \(f_{\mathrm{sep}}(x^{p^k})\)（\(f_{\mathrm{sep}}(x)\) 可分）的形式，这就是我们上面把自己限制在不可约多项式的原因。这个例子还表明不存在类似的方法来定义一般多项式的可分次数与不可分次数。
+\end{example}
+
+可分性的概念可以推广到由这些多项式的根生成的域。
+
+\begin{definition}
+若 \(K\) 的每个元素都是 \(F\) 上可分多项式的根（等价地：\(K\) 中每个元素在 \(F\) 上的极小多项式都可分），则称域 \(K\) 在 \(F\) 上\textbf{可分}（或\textbf{可分代数}）。不可分的域称为\textbf{不可分的}。
+\end{definition}
+
+我们已经看到，对完全域的有限扩张可分性问题是简单的，因为对这些域，代数元素的极小多项式不可约从而可分。
+
+\begin{corollary}\label{cor:13.39}
+完全域的每个有限扩张都可分。特别地，\(\mathbb{Q}\) 或有限域的每个有限扩张都可分。
+\end{corollary}
+
+在发展了伽罗瓦理论之后，我们将更多地考虑可分扩张与不可分扩张，特别是定义扩张 \(K/F\) 的可分次数与不可分次数。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 证明多项式的导数 \(D_x\) 满足 \(D_x(f(x)+g(x)) = D_x(f(x))+D_x(g(x))\) 与 \(D_x(f(x)g(x)) = D_x(f(x))g(x)+D_x(g(x))f(x)\)（对任意两个多项式 \(f(x)\) 与 \(g(x)\)）。
+
+\item 求 \(\mathbb{F}_2\) 上次数为 1、2、4 的全部不可约多项式，并证明它们之积为 \(x^{16}-x\).
+
+\item 证明 \(d\) 整除 \(n\) 当且仅当 \(x^d-1\) 整除 \(x^n-1\).〔注意若 \(n = qd+r\) 则 \(x^n-1 = (x^{qd+r}-x^r)+(x^r-1)\).〕
+
+\item 设 \(a > 1\) 是整数。证明对任意正整数 \(n, d\)，\(d\) 整除 \(n\) 当且仅当 \(a^d-1\) 整除 \(a^n-1\)（参见上一习题）。特别地断定 \(\mathbb{F}_{p^d} \subseteq \mathbb{F}_{p^n}\) 当且仅当 \(d\) 整除 \(n\).
+
+\item 对任意素数 \(p\) 与任意非零 \(a \in \mathbb{F}_p\)，证明 \(x^p-x+a\) 在 \(\mathbb{F}_p\) 上不可约且可分。〔关于不可约性：一种途径是先证明若 \(\alpha\) 是根则 \(\alpha+1\) 也是根；另一种途径是反设它可约并计算导数。〕
+
+\item 证明 \(x^{p^n-1}-1 = \prod_{a \in \mathbb{F}_p^{\times}}(x-a)\). 由此断定 \(\prod_{a \in \mathbb{F}_{p^n}^\times}a = (-1)^{p^n}\)，故有限域的非零元素之积当 \(p = 2\) 时为 \(+1\)，当 \(p\) 为奇数时为 \(-1\). 对 \(p\) 为奇数且 \(n = 1\) 导出 Wilson 定理：\((p-1)! \equiv -1 \pmod p\).
+
+\item 假设 \(K\) 是特征为 \(p\)、不是完全域（\(K \neq K^p\)）的域。证明 \(K\) 上存在不可分的不可约多项式。由此断定 \(K\) 存在不可分的有限扩张。
+
+\item 证明对任意多项式 \(f(x) \in \mathbb{F}_p[x]\) 有 \(f(x)^p = f(x^p)\).
+
+\item 证明二项式系数 \(\binom{p^n}{p^i}\) 是 \((1+x)^{p^n}\) 展开式中 \(x^{p^i}\) 的系数。在 \(\mathbb{F}_p\) 上运算，证明它也是 \((1+x^p)^n\) 中 \((x^p)^i\) 的系数，从而证明 \(\binom{p^n}{p^i} \equiv \binom{n}{i} \pmod p\).
+
+\item 设 \(f(x_1, x_2, \ldots, x_n) \in \mathbb{Z}[x_1, x_2, \ldots, x_n]\) 是整系数多项式。证明对任意素数 \(p\)，多项式
+\[
+f(x_1, x_2, \ldots, x_n)^p-f(x_1^p, x_2^p, \ldots, x_n^p) \in \mathbb{Z}[x_1, x_2, \ldots, x_n]
+\]
+的所有系数都被 \(p\) 整除。
+
+\item 假设 \(K[x]\) 是域 \(K\) 上的多项式环，\(F\) 是 \(K\) 的子域。若 \(F\) 是完全域且 \(f(x) \in F[x]\) 在 \(F[x]\) 中没有重复的不可约因子，证明 \(f(x)\) 在 \(K[x]\) 中也没有重复的不可约因子。
+\end{enumerate}
+
+\section{分圆多项式与分圆扩张}
+
+本节的目的是证明第 13.4 节引入的、由 \(\mathbb{Q}\) 上 \(n\) 次单位根生成的分圆扩张 \(\mathbb{Q}(\zeta_n)/\mathbb{Q}\) 的次数为 \(\varphi(n)\)，其中 \(\varphi\) 表示欧拉 phi-函数（\(=\) 满足 \(1 \leq a < n\) 且与 \(n\) 互素的整数 \(a\) 的个数 \(=\) 群 \((\mathbb{Z}/n\mathbb{Z})^\times\) 的阶）。
+
+\begin{definition}
+用 \(\mu_n\) 表示 \(\mathbb{Q}\) 上 \(n\) 次单位根构成的群。
+\end{definition}
+
+则如我们已经观察到的，作为群有 \(\mathbb{Z}/n\mathbb{Z} \cong \mu_n\)（左端为加法、右端为乘法），显式地由映射 \(a \mapsto \zeta_n^a\)（对固定的本原 \(n\) 次单位根）给出。本原 \(n\) 次单位根由与 \(n\) 互素的剩余类给出，故恰有 \(\varphi(n)\) 个本原 \(n\) 次单位根。
+
+若 \(d\) 是 \(n\) 的因子、\(\zeta\) 是 \(d\) 次单位根，则 \(\zeta\) 也是 \(n\) 次单位根，因为 \(\zeta^n = (\zeta^d)^{n/d} = 1\). 故对 \(n\) 的所有因子 \(d\) 有 \(\mu_d \subseteq \mu_n\). 反之，\(\mu_n\) 中任何元素的阶都整除 \(n\)，故若 \(\zeta\) 是 \(n\) 次单位根且也是某个更小 \(d\) 的 \(d\) 次单位根，则 \(d \mid n\).
+
+\begin{definition}
+定义 \textbf{\(n\) 次分圆多项式} \(\Phi_n(x)\) 为以本原 \(n\) 次单位根为根的多项式：
+\[
+\Phi_n(x) = \prod_{\substack{1 \leq a < n \\ (a, n) = 1}}(x-\zeta_n^a),
+\]
+它的次数为 \(\varphi(n)\).
+\end{definition}
+
+多项式 \(x^n-1\) 的根正是 \(n\) 次单位根，故我们有分解 \(x^n-1 = \prod_{\zeta \in \mu_n}(x-\zeta)\)，即把阶为 \(d\)（\(d \mid n\)）的（即本原 \(d\) 次单位根的）元素 \(\zeta\) 的因子 \((x-\zeta)\) 归在一起，就得到
+\[
+x^n-1 = \prod_{d \mid n}\prod_{\substack{\zeta \in \mu_d \\ \zeta \text{ 本原}}}(x-\zeta).
+\]
+内层的乘积按定义就是 \(\Phi_d(x)\)，故我们有分解
+\begin{equation}
+x^n-1 = \prod_{d \mid n}\Phi_d(x). \tag{13.4}
+\end{equation}
+顺便注意比较次数给出恒等式 \(n = \sum_{d \mid n}\varphi(d)\).
+
+这个分解使我们能对任意 \(n\) 递归地计算 \(\Phi_n(x)\)：显然 \(\Phi_1(x) = x-1\)、\(\Phi_2(x) = x+1\). 则 \(x^3-1 = \Phi_1(x)\Phi_3(x) = (x-1)\Phi_3(x)\) 给出 \(\Phi_3(x) = x^2+x+1\)；类似地 \(x^4-1 = \Phi_1(x)\Phi_2(x)\Phi_4(x)\) 给出 \(\Phi_4(x) = x^2+1\)（这两种情形也可以直接由显式的单位根得到）。如此继续，我们可以计算任意 \(n\) 的 \(\Phi_n(x)\). 还要注意对素数 \(p\)，我们重新得到多项式
+\[
+\Phi_p(x) = x^{p-1}+x^{p-2}+\cdots+x+1.
+\]
+对某些小值 \(n\)，这些多项式是
+\[
+\Phi_5(x) = x^4+x^3+x^2+x+1, \quad \Phi_6(x) = x^2-x+1, \quad \Phi_7(x) = x^6+x^5+x^4+x^3+x^2+x+1,
+\]
+\[
+\Phi_8(x) = x^4+1, \quad \Phi_9(x) = x^6+x^3+1, \quad \Phi_{10}(x) = x^4-x^3+x^2-x+1,
+\]
+\[
+\Phi_{11}(x) = x^{10}+x^9+\cdots+x+1, \quad \Phi_{12}(x) = x^4-x^2+1.
+\]
+
+在上面计算的所有情形中，\(\Phi_n(x)\) 都是整系数（首一）多项式。这总是成立的：
+
+\begin{lemma}\label{lem:13.40}
+分圆多项式 \(\Phi_n(x)\) 是 \(\mathbb{Z}[x]\) 中次数为 \(\varphi(n)\) 的首一多项式。
+\end{lemma}
+
+\begin{proof}
+显然 \(\Phi_n(x)\) 首一且次数为 \(\varphi(n)\). 我们必须证明它的系数在 \(\mathbb{Z}\) 中。我们对 \(n\) 归纳。结果对 \(n = 1\)（以及 \(n \leq 2\)）成立。由归纳假设 \(\Phi_d(x) \in \mathbb{Z}[x]\) 对所有 \(1 \leq d < n\) 成立。则 \(x^n-1 = f(x)\Phi_n(x)\)，其中 \(f(x) = \prod_{d \mid n, d < n}\Phi_d(x)\) 首一且系数在 \(\mathbb{Z}\) 中。显然 \(f(x)\) 在 \(F[x]\) 中整除 \(x^n-1\)，其中 \(F = \mathbb{Q}(\zeta_n)\) 是 \(n\) 次单位根域，而 \(f(x)\) 与 \(x^n-1\) 的系数都在 \(\mathbb{Q}\) 中，故由除法算法（参见第 9.2 节末尾的注记）\(f(x)\) 在 \(\mathbb{Q}[x]\) 中整除 \(x^n-1\). 由高斯引理，\(f(x)\) 在 \(\mathbb{Z}[x]\) 中整除 \(x^n-1\)，故 \(\Phi_n(x) \in \mathbb{Z}[x]\).
+\end{proof}
+
+我们顺便指出，虽然上面计算的所有例子中 \(\Phi_n(x)\) 的系数都是 \(0, \pm1\)，但已知存在系数任意大的分圆多项式。
+
+\begin{theorem}\label{thm:13.41}
+分圆多项式 \(\Phi_n(x)\) 是 \(\mathbb{Z}[x]\) 中次数为 \(\varphi(n)\) 的不可约首一多项式。
+\end{theorem}
+
+\begin{proof}
+我们必须证明 \(\Phi_n(x)\) 不可约。若不然，则我们有分解 \(\Phi_n(x) = f(x)g(x)\)，其中 \(f(x), g(x)\) 是 \(\mathbb{Z}[x]\) 中的首一多项式，我们取 \(f(x)\) 为 \(\Phi_n(x)\) 的一个不可约因子。设 \(\zeta\) 是 \(f(x)\) 的本原 \(n\) 次单位根（故 \(f(x)\) 是 \(\zeta\) 在 \(\mathbb{Q}\) 上的极小多项式），\(p\) 表示任何不整除 \(n\) 的素数。则 \(\zeta^p\) 也是本原 \(n\) 次单位根，从而是 \(f(x)\) 或 \(g(x)\) 的根。
+
+假设 \(g(\zeta^p) = 0\). 则 \(\zeta\) 是 \(g(x^p)\) 的根，而由于 \(f(x)\) 是 \(\zeta\) 的极小多项式，\(f(x)\) 必在 \(\mathbb{Z}[x]\) 中整除 \(g(x^p)\)，比如
+\[
+g(x^p) = f(x)h(x), \quad h(x) \in \mathbb{Z}[x].
+\]
+把这个等式模 \(p\) 约化，我们得到 \(\mathbb{F}_p[x]\) 中 \(g(x^p) = \overline{f}(x)\overline{h}(x)\). 由上一节的注记，我们有 \(g(x)^p = \overline{f}(x)\overline{h}(x)\). 在唯一分解整环 \(\mathbb{F}_p[x]\) 中，由此 \(\overline{f}(x)\) 与 \(\overline{g}(x)\) 有公因子。
+
+现在由 \(\Phi_n(x) = f(x)g(x)\) 模 \(p\) 约化得到 \(\overline{\Phi_n}(x) = \overline{f}(x)\overline{g}(x)\)，故由上述可知 \(\overline{\Phi_n}(x) \in \mathbb{F}_p[x]\) 有重根。但那样 \(x^n-1\) 在 \(\mathbb{F}_p\) 上也会有重根，因为它以 \(\Phi_n(x)\) 为因子。这与我们在上一节看到的「在任何特征不整除 \(n\) 的域上 \(x^n-1\) 有 \(n\) 个互异根」矛盾。
+
+故 \(\zeta^p\) 必是 \(f(x)\) 的根。由于这对 \(f(x)\) 的每个根 \(\zeta\) 都适用，可知对每个与 \(n\) 互素的整数 \(a\)，\(\zeta^a\) 都是 \(f(x)\) 的根：把 \(a = p_1p_2\cdots p_k\) 写成（不必互异的）不整除 \(n\) 的素数之积，于是 \(\zeta^{p_1}\) 是 \(f(x)\) 的根，故 \((\zeta^{p_1})^{p_2}\) 也是 \(f(x)\) 的根，等等。但这意味着每个本原 \(n\) 次单位根都是 \(f(x)\) 的根，即 \(f(x) = \Phi_n(x)\)，这表明 \(\Phi_n(x)\) 不可约。
+\end{proof}
+
+\begin{corollary}\label{cor:13.42}
+\(n\) 次单位根的分圆域在 \(\mathbb{Q}\) 上的次数为 \(\varphi(n)\)：
+\[
+[\mathbb{Q}(\zeta_n):\mathbb{Q}] = \varphi(n).
+\]
+\end{corollary}
+
+\begin{proof}
+由定理，\(\Phi_n(x)\) 是任何本原 \(n\) 次单位根 \(\zeta_n\) 的极小多项式。
+\end{proof}
+
+\begin{example}
+8 次单位根的分圆域 \(\mathbb{Q}(\zeta_8)\) 在 \(\mathbb{Q}\) 上的次数为 \(\varphi(8) = 4\). 这个域含有 4 次单位根，即 \(\mathbb{Q}(i) \subseteq \mathbb{Q}(\zeta_8)\)，也含有元素 \(\zeta_8+\zeta_8^{-1} = \sqrt{2}\)（回忆第 13.4 节中的显式单位根）。由此
+\[
+\mathbb{Q}(\zeta_8) = \mathbb{Q}(i, \sqrt{2}).
+\]
+\end{example}
+
+习题中概述了分圆多项式的一个有趣的数论应用：证明对任何 \(n\) 都存在无穷多个同余于 1 模 \(n\) 的素数。\(\Phi_\ell(x)\)（它在 \(\mathbb{Z}[x]\) 中不可约）在 \(\mathbb{F}_p[x]\) 中的完全分解由下面习题 8 描述。
+
+在我们发展了一些伽罗瓦理论之后，我们将回到分圆域的例子。
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 假设 \(m\) 与 \(n\) 是互素的正整数，\(\zeta_m\) 是本原 \(m\) 次单位根、\(\zeta_n\) 是本原 \(n\) 次单位根。证明 \(\zeta_m\zeta_n\) 是本原 \(mn\) 次单位根。
+
+\item 设 \(\zeta_n\) 是本原 \(n\) 次单位根，\(d\) 是 \(n\) 的因子。证明 \(\zeta_n^d\) 是本原 \((n/d)\) 次单位根。
+
+\item 证明若一个域含有 \(n\) 次单位根（\(n\) 为奇数），则它也含有 \(2n\) 次单位根。
+
+\item 证明若 \(n = p^km\)，其中 \(p\) 是素数、\(m\) 与 \(p\) 互素，则在特征为 \(p\) 的域上恰有 \(m\) 个互异的 \(n\) 次单位根。
+
+\item 证明 \(\mathbb{Q}\) 的任何有限扩张 \(K\) 中只有有限多个单位根。
+
+\item 证明对奇数 \(n > 1\) 有 \(\Phi_{2n}(x) = \Phi_n(-x)\).
+
+\item 用第 14.3 节中所指的 Möbius 反演公式证明
+\[
+\Phi_m(x) = \prod_{d \mid m}(x^d-1)^{\mu(m/d)}.
+\]
+
+\item 设 \(\ell\) 是素数，\(\Phi_\ell(x) = \frac{x^\ell-1}{x-1} = x^{\ell-1}+x^{\ell-2}+\cdots+x+1 \in \mathbb{Z}[x]\) 是 \(\ell\) 次分圆多项式，由定理 \ref{thm:13.41} 它在 \(\mathbb{Z}\) 上不可约。本习题确定 \(\Phi_\ell(x)\) 模任意素数 \(p\) 的分解。用 \(\zeta_\ell\) 表示任意固定的本原 \(\ell\) 次单位根。
+
+（a）证明若 \(p = \ell\)，则 \(\Phi_\ell(x) = (x-1)^{\ell-1}\) 于 \(\mathbb{F}_\ell[x]\) 中。
+
+（b）假设 \(p \neq \ell\)，用 \(f\) 表示 \(p\) 模 \(\ell\) 的阶，即 \(f\) 是使 \(p^f \equiv 1 \bmod \ell\) 的最小 \(p\) 的幂。利用 \(\mathbb{F}_\ell^\times\) 是循环群这一事实，证明 \(n = f\) 是使 \(\zeta_\ell \in \mathbb{F}_{p^n}\) 成立的最小 \(p\) 的幂 \(p^n\). 由此断定 \(\zeta_\ell\) 在 \(\mathbb{F}_p\) 上的极小多项式次数为 \(f\).
+
+（c）证明对任何不被 \(\ell\) 整除的整数 \(a\) 有 \(\mathbb{F}_p(\zeta_\ell) = \mathbb{F}_p(\zeta_\ell^a)\).〔一个包含是显然的；对另一个注意 \(\zeta_\ell = (\zeta_\ell^a)^b\)，其中 \(b\) 是 \(a\) 模 \(\ell\) 的乘法逆。〕用（b）断定在 \(\mathbb{F}_p[x]\) 中 \(\Phi_\ell(x)\) 是 \(\frac{\ell-1}{f}\) 个互异 \(f\) 次不可约多项式之积。
+
+（d）特别地，证明在 \(\mathbb{F}_p[x]\) 中：\(p = 7\) 时 \(\Phi_7(x) = x^6+x^5+\cdots+x+1\) 是 \((x-1)^6\)；\(p \equiv 1 \bmod 7\) 时它是互异线性因子之积；\(p \equiv 6 \bmod 7\) 时它是 3 个不可约二次式之积；\(p \equiv 2, 4 \bmod 7\) 时它是 2 个不可约三次式之积；\(p \equiv 3, 5 \bmod 7\) 时它不可约。
+
+\item 假设 \(A\) 是 \(\mathbb{C}\) 上 \(n \times n\) 矩阵，且对某个整数 \(k \geq 1\) 有 \(A^k = I\). 证明 \(A\) 可以对角化。证明矩阵 \(A = \begin{pmatrix} a & 1 \\ 0 & a \end{pmatrix}\)（\(a\) 是特征为 \(p\) 的域的元素）满足 \(A^p = I\)，且当 \(a \neq 0\) 时不能对角化。
+
+\item 设 \(\varphi\) 表示有限域 \(\mathbb{F}_{p^n}\) 上的 Frobenius 映射 \(x \mapsto x^p\). 证明 \(\varphi\) 给出 \(\mathbb{F}_{p^n}\) 到自身的同构（这样的同构称为\textbf{自同构}）。证明 \(\varphi^n\) 是恒等映射，而 \(\varphi\) 的任何更低次幂都不是恒等映射。
+
+\item 设 \(\varphi\) 是上一习题中有限域 \(\mathbb{F}_{p^n}\) 上的 Frobenius 映射 \(x \mapsto x^p\). 确定把 \(\varphi\) 看作 \(n\) 维 \(\mathbb{F}_p\)-向量空间 \(\mathbb{F}_{p^n}\) 的 \(\mathbb{F}_p\)-线性变换时它在 \(\mathbb{F}_p\) 上的有理标准形。
+
+\item 设 \(\varphi\) 是上一习题中有限域 \(\mathbb{F}_{p^n}\) 上的 Frobenius 映射 \(x \mapsto x^p\). 确定把 \(\varphi\) 看作 \(n\) 维 \(\mathbb{F}_p\)-向量空间 \(\mathbb{F}_{p^n}\) 的 \(\mathbb{F}_p\)-线性变换时它的若尔当标准形（在包含所有特征值的域上）。
+
+\item （\textbf{关于有限除环的 Wedderburn 定理}）本习题概述（遵循 Witt 的）Wedderburn 定理的证明：有限除环 \(D\) 是域（即交换）。
+
+（a）用 \(Z\) 表示 \(D\) 的中心（即 \(D\) 中与 \(D\) 的每个元素交换的元素）。证明 \(Z\) 是含某个素数 \(p\) 的 \(\mathbb{F}_p\) 的域。若 \(Z = \mathbb{F}_q\)，证明 \(D\) 的阶为 \(q^n\)（某个整数 \(n\)）〔\(D\) 是 \(Z\) 上的向量空间〕。
+
+（b）\(D\) 的非零元素 \(D^\times\) 构成乘法群。对任意 \(x \in D^\times\)，证明 \(D\) 中与 \(x\) 交换的元素构成含 \(Z\) 的除环。证明这个除环的阶为 \(q^m\)（某个整数 \(m\)），且当 \(x\) 不是 \(Z\) 的元素时 \(m < n\)。
+
+（c）证明群 \(D^\times\) 的类方程（定理 4.7）是
+\[
+|D^\times| = q^n-1 = (q-1)+\sum_{i=1}^{r}\frac{q^n-1}{q^{m_i}-1},
+\]
+其中 \(x_1, x_2, \ldots, x_r\) 是 \(D^\times\) 的共轭类 \(C_{D^\times}(x_i)\) 的代表元，它们不包含在 \(D^\times\) 的中心中。由此断定对每个 \(i\)，某个 \(m_i < n\) 使 \(q^{m_i}-1\) 整除 \(q^n-1\).
+
+（d）证明由于 \(\frac{q^n-1}{q^{m_i}-1}\) 是整数（即指数 \(|D^\times : C_{D^\times}(x_i)|\)），\(m_i\) 整除 \(n\)（参见第 5 章习题 4）。断定 \(\Phi_n(x)\) 整除 \((x^n-1)/(x^{m_i}-1)\)，从而整数 \(\Phi_n(q)\) 整除 \((q^n-1)/(q^{m_i}-1)\)（\(i = 1, 2, \ldots, r\)）。
+
+（e）证明（c）与（d）蕴涵 \(\Phi_n(q) = \prod_{\zeta \text{ 本原}}(q-\zeta)\) 整除 \(q-1\). 证明对任何单位根 \(\zeta \neq 1\) 有 \(|q-\zeta| > q-1\)（复绝对值）〔注意 \(\zeta\) 是单位圆上离实轴上的点 \(q\) 最近的点〕。断定 \(n = 1\)，即 \(D = Z\) 是域。
+\end{enumerate}
+
+\noindent 下面各习题给出「对任何正整数 \(m\) 都存在无穷多个满足 \(p \equiv 1 \pmod m\) 的素数 \(p\)」的一个证明。这是 Dirichlet 关于算术级数中素数的定理的一个特殊情形，后者更一般地断言对任何与 \(m\) 互素的 \(a\)，存在无穷多个满足 \(p \equiv a \pmod m\) 的素数 \(p\).
+
+\begin{enumerate}
+\setcounter{enumi}{13}
+\item 给定任意次数至少为 1 的首一多项式 \(P(x) \in \mathbb{Z}[x]\)，证明整数
+\[
+P(1),\ P(2),\ P(3),\ \ldots,\ P(n),\ \ldots
+\]
+有无穷多个不同的素因子。〔反设 \(p_1, p_2, \ldots, p_k\) 是整除这些值 \(P(n)\)（\(n = 1, 2, \ldots\)）的仅有的素数。设 \(N\) 是使 \(P(N) = a \neq 0\) 的整数。证明 \(Q(x) = a^{-1}P(N+ap_1p_2\cdots p_kx)\) 是 \(\mathbb{Z}[x]\) 的元素，且对 \(n = 1, 2, \ldots\) 有 \(Q(n) \equiv 1 \pmod{p_1p_2\cdots p_k}\). 断定存在某个整数 \(M\) 使 \(Q(M)\) 有不同于 \(p_1, p_2, \ldots, p_k\) 的素因子，从而 \(P(N+ap_1p_2\cdots p_kM)\) 有不同于 \(p_1, p_2, \ldots, p_k\) 的素因子。〕
+
+\item 设 \(p\) 是不整除 \(m\) 的奇素数，\(\Phi_m(x)\) 是 \(m\) 次分圆多项式。假设 \(a \in \mathbb{Z}\) 满足 \(\Phi_m(a) \equiv 0 \pmod p\). 证明 \(a\) 与 \(p\) 互素，且 \(a\) 在 \((\mathbb{Z}/p\mathbb{Z})^\times\) 中的阶恰为 \(m\).〔由于 \(x^m-1 = \prod_{d \mid m}\Phi_d(x) = \Phi_m(x)\prod_{d \mid m, d < m}\Phi_d(x)\)，我们首先看到 \(a^m-1 \equiv 0 \pmod p\)，即 \(a^m \equiv 1 \pmod p\). 若 \(a\) 模 \(p\) 的阶小于 \(m\)，则对某个整除 \(m\) 的 \(d < m\) 有 \(a^d \equiv 1 \pmod p\)，于是对某个 \(d < m\) 有 \(\Phi_d(a) \equiv 0 \pmod p\). 但那样 \(x^m-1\) 模 \(p\) 就会以 \(a\) 为重根，矛盾。〕
+
+\item 设 \(a \in \mathbb{Z}\). 证明若奇素数 \(p\) 整除 \(\Phi_m(a)\)，则或 \(p\) 整除 \(m\)，或 \(p \equiv 1 \pmod m\).
+
+\item 证明存在无穷多个满足 \(p \equiv 1 \pmod m\) 的素数 \(p\).
+\end{enumerate}

@@ -1,0 +1,1441 @@
+
+\setcounter{chapter}{10}
+
+\chapter{向量空间}
+
+本章我们复习任意域 \(F\) 上有限维向量空间的基本理论（习题中涉及一些无限维向量空间的理论）。由于这些证明与实向量空间的相应论证完全相同，我们的处理非常简略。我们大体上只收入本书其他部分用到的结果，因此像高斯--若尔当消元法、行阶梯形、求子空间基的方法、矩阵的初等性质等基本话题都不再讲述，或放在习题中讨论。因此读者应把本章看作线性代数的复习，以及域论与伽罗瓦理论的预备。特征多项式与特征值将在下一章在更大的范围内复习和处理。
+
+\section{定义与基本理论}
+
+向量空间的术语与模的术语略有不同，即当环 \(R\) 是域时，上一章中定义的 \(R\)-模的许多性质有不同的名称。下面是这些新术语的对照表（其中许多可能已经熟悉）。每个对应的向量空间性质的定义与模论的定义逐字相同，唯一的附加假设是环 \(R\) 是域（故这里不再重复这些定义）。
+
+\begin{center}
+\begin{tabular}{ll}
+\textbf{\(R\) 为任意环时的术语} & \textbf{\(R\) 为域时的术语} \\
+\hline
+\(M\) 是 \(R\)-模 & \(M\) 是 \(R\) 上的向量空间 \\
+\(m\) 是 \(M\) 的元素 & \(m\) 是 \(M\) 中的向量 \\
+\(a\) 是环元素 & \(a\) 是纯量 \\
+\(N\) 是 \(M\) 的子模 & \(N\) 是 \(M\) 的子空间 \\
+\(M/N\) 是商模 & \(M/N\) 是商空间 \\
+\(M\) 是秩 \(n\) 的自由模 & \(M\) 是 \(n\) 维向量空间 \\
+\(M\) 是有限生成模 & \(M\) 是有限维向量空间 \\
+\(M\) 是非零循环模 & \(M\) 是 1 维向量空间 \\
+\(\varphi : M \to N\) 是 \(R\)-模同态 & \(\varphi : M \to N\) 是线性变换 \\
+\(M\) 与 \(N\) 作为 \(R\)-模同构 & \(M\) 与 \(N\) 是同构的向量空间 \\
+\(M\) 的子集 \(A\) 生成 \(M\) & \(M\) 的子集 \(A\) 张成 \(M\) \\
+\(M = RA\) & \(M\) 的每个元素都是 \(A\) 中元素的线性组合，即 \(M = \operatorname{Span}(A)\)
+\end{tabular}
+\end{center}
+
+本章余下部分中 \(F\) 是域，\(V\) 是 \(F\) 上的向量空间。
+
+我们将要证明的关于向量空间的最初结果之一是它们是自由 \(F\)-模，即它们有基。虽然我们的论证只处理有限维的情形，任意向量空间的相应结果作为佐恩引理的一个应用在习题中证明。读者不妨先复习上一章关于自由模的一节，特别是其中与同态有关的性质。
+
+\begin{definition}
+（1）\(V\) 的子集 \(S\) 称为一组\textbf{线性无关向量}，若等式 \(a_1v_1+a_2v_2+\cdots+a_nv_n = 0\)（其中 \(a_1, a_2, \ldots, a_n \in F\)，\(v_1, v_2, \ldots, v_n \in S\)）蕴涵 \(a_1 = a_2 = \cdots = a_n = 0\).
+
+（2）向量空间 \(V\) 的\textbf{基}是张成 \(V\) 的有序线性无关向量组。特别地，若一个基只是另一个基的重排，仍视为不同的基。这有时称为\textbf{有序基}。
+\end{definition}
+
+\begin{example}
+（1）系数在域 \(F\) 中的变量 \(x\) 的多项式空间 \(V = F[x]\) 特别是 \(F\) 上的向量空间。由定义元素 \(1, x, x^2, \ldots\) 线性无关（即一个多项式为 0 当且仅当它的所有系数都为 0）。由于按定义这些元素也张成 \(V\)，它们是 \(V\) 的一组基。
+
+（2）\(\mathbb{C}\) 上一个线性、齐次、常系数微分方程（例如 \(y''-3y'+2y = 0\)）的解的集合构成 \(\mathbb{C}\) 上的向量空间，因为求导是线性算子。这个向量空间的元素作为函数线性无关时就线性无关。例如容易看出 \(e^t\) 与 \(e^{2t}\) 是方程 \(y''-3y'+2y = 0\) 的解（对 \(t\) 求导）。它们是线性无关的函数，因为 \(ae^t+be^{2t} = 0\) 蕴涵 \(a+b = 0\)（令 \(t = 0\)）与 \(ae+be^2 = 0\)（令 \(t = 1\)），而这两个方程的唯一解是 \(a = b = 0\). 微分方程中的一个定理表明这些元素张成这个方程的解集，从而是这个空间的一组基。
+\end{example}
+
+\begin{proposition}\label{pro:11.1}
+假设集合 \(A = \{v_1, v_2, \ldots, v_n\}\) 张成向量空间 \(V\)，但 \(A\) 的任何真子集都不张成 \(V\). 则 \(A\) 是 \(V\) 的一组基。特别地，\(F\) 上任何有限生成（即有限张成）的向量空间是自由 \(F\)-模。
+\end{proposition}
+
+\begin{proof}
+只需证明 \(v_1, v_2, \ldots, v_n\) 线性无关。假设 \(a_1v_1+a_2v_2+\cdots+a_nv_n = 0\)，其中并非所有 \(a_i\) 都为 0. 必要时重新排列，我们可以假设 \(a_1 \neq 0\)，于是
+\[
+v_1 = \frac{1}{a_1}(a_2v_2+\cdots+a_nv_n).
+\]
+由此 \(\{v_2, v_3, \ldots, v_n\}\) 也张成 \(V\)，因为 \(v_1, v_2, \ldots, v_n\) 的任何线性组合都可以用上式写成 \(v_2, v_3, \ldots, v_n\) 的线性组合。这与题设矛盾。
+\end{proof}
+
+\begin{example}
+设 \(F\) 是域，考虑 \(F[x]/(f(x))\)，其中 \(f(x) = x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\). 理想 \((f(x))\) 是向量空间 \(F[x]\) 的子空间，而商 \(F[x]/(f(x))\) 也是 \(F\) 上的向量空间。由欧几里得算法，每个多项式 \(a(x) \in F[x]\) 都可以唯一地写成 \(a(x) = q(x)f(x)+r(x)\) 的形式，其中 \(r(x) \in F[x]\) 且 \(0 \leq \deg r(x) \leq n-1\). 由于 \(q(x)f(x) \in (f(x))\)，可知商中每个元素都由一个次数 \(\leq n-1\) 的多项式 \(r(x)\) 代表。两个不同的这样的多项式在商中不可能相同，因为那将说明它们之差（一个次数至多为 \(n-1\) 的非零多项式）被 \(f(x)\)（次数为 \(n\)）整除。由此元素 \(\overline{1}, \overline{x}, \overline{x^2}, \ldots, \overline{x^{n-1}}\)（如上，横线表示这些元素在商中的像）作为 \(F\) 上的向量空间张成 \(F[x]/(f(x))\)，且这些元素的任何真子集都不张成它，故这些元素给出 \(F[x]/(f(x))\) 的一组基。
+\end{example}
+
+\begin{corollary}\label{cor:11.2}
+假设有限集 \(A\) 张成向量空间 \(V\). 则 \(A\) 含有 \(V\) 的一组基。
+\end{corollary}
+
+\begin{proof}
+由命题 \ref{pro:11.1}，\(A\) 的任何张成 \(V\) 且其任何真子集都不张成 \(V\) 的子集 \(B\)（这样的子集显然存在）是 \(V\) 的一组基。
+\end{proof}
+
+\begin{theorem}\label{thm:11.3}
+（\textbf{替换定理}）假设 \(A = \{a_1, a_2, \ldots, a_n\}\) 是 \(V\) 的含 \(n\) 个元素的基，\(\{b_1, b_2, \ldots, b_m\}\) 是 \(V\) 中一组线性无关向量。则存在 \(a_1, a_2, \ldots, a_n\) 的一个排列，使得对每个 \(k \in \{1, 2, \ldots, m\}\)，集合 \(\{b_1, b_2, \ldots, b_k, a_{k+1}, a_{k+2}, \ldots, a_n\}\) 都是 \(V\) 的基。换句话说，元素 \(b_1, b_2, \ldots, b_m\) 可以用来逐个替换基 \(A\) 的元素而仍保持一组基。特别地 \(n \geq m\).
+\end{theorem}
+
+\begin{proof}
+对 \(k\) 归纳。若 \(k = 0\) 则无需证明，因为 \(A\) 已给定为 \(V\) 的基。现在假设 \(\{b_1, b_2, \ldots, b_k, a_{k+1}, a_{k+2}, \ldots, a_n\}\) 是 \(V\) 的基。则特别地它是张成集，故 \(b_{k+1}\) 是线性组合：
+\begin{equation}
+b_{k+1} = \alpha_1b_1+\alpha_2b_2+\cdots+\alpha_kb_k+\alpha_{k+1}a_{k+1}+\cdots+\alpha_na_n. \tag{11.1}
+\end{equation}
+并非所有 \(\alpha_i\) 都为 0，因为那将蕴涵 \(b_{k+1}\) 是 \(b_1, b_2, \ldots, b_k\) 的线性组合，与这些元素的线性无关性矛盾。必要时重新排列后，我们可以假设 \(\alpha_{k+1} \neq 0\). 于是把这个最后的等式解出 \(a_{k+1}\) 为 \(b_{k+1}\) 与 \(b_1, b_2, \ldots, b_k, a_{k+2}, \ldots, a_n\) 的线性组合，可知
+\[
+\operatorname{Span}\{b_1, b_2, \ldots, b_k, b_{k+1}, a_{k+2}, \ldots, a_n\} = \operatorname{Span}\{b_1, b_2, \ldots, b_k, a_{k+1}, a_{k+2}, \ldots, a_n\},
+\]
+故这是 \(V\) 的张成集。剩下要证明 \(b_1, \ldots, b_k, b_{k+1}, a_{k+2}, \ldots, a_n\) 线性无关。若
+\begin{equation}
+\beta_1b_1+\cdots+\beta_kb_k+\beta_{k+1}b_{k+1}+\alpha_{k+2}a_{k+2}+\cdots+\alpha_na_n = 0, \tag{11.2}
+\end{equation}
+则把（11.1）中 \(b_{k+1}\) 的表达式代入，得到 \(\{b_1, b_2, \ldots, b_k, a_{k+1}, a_{k+2}, \ldots, a_n\}\) 的一个等于 0 的线性组合，其中 \(a_{k+1}\) 的系数是 \(\beta_{k+1}\). 由于这个集合由归纳假设是基，这个线性组合中的所有系数，特别是 \(\beta_{k+1}\)，都必须为 0. 但此时等式（11.2）就是
+\[
+\beta_1b_1+\cdots+\beta_kb_k+\alpha_{k+2}a_{k+2}+\cdots+\alpha_na_n = 0.
+\]
+再次由归纳假设，其余所有系数也必须为 0. 于是 \(\{b_1, b_2, \ldots, b_k, b_{k+1}, a_{k+2}, \ldots, a_n\}\) 是 \(V\) 的基，归纳完成。
+\end{proof}
+
+\begin{corollary}\label{cor:11.4}
+（1）假设 \(V\) 有一组含 \(n\) 个元素的有限基。则任何线性无关向量组至多有 \(n\) 个元素。任何张成集至少有 \(n\) 个元素。
+
+（2）若 \(V\) 有某组有限基，则 \(V\) 的任何两组基都有相同的基数。
+\end{corollary}
+
+\begin{proof}
+（1）这是定理 \ref{thm:11.3} 最后一个结果与推论 \ref{cor:11.2} 的重述。
+
+（2）这由（1）立即推出，因为一组基既是张成集又是线性无关组。
+\end{proof}
+
+\begin{definition}
+若 \(V\) 是有限生成的 \(F\)-模（即有有限基），则任何基的基数称为 \(V\) 的\textbf{维数}，记作 \(\dim_F V\)，或当 \(F\) 由上下文清楚时简记 \(\dim V\)，并称 \(V\) 在 \(F\) 上是\textbf{有限维}的。若 \(V\) 不是有限生成的，则称 \(V\) 是\textbf{无限维}的（记作 \(\dim V = \infty\)）。
+\end{definition}
+
+\begin{example}
+（1）\(\mathbb{C}\) 上微分方程 \(y''-3y'+2y = 0\) 的解空间的维数是 2（例如以 \(e^t\)、\(e^{2t}\) 为基）。一般地，微分方程中的一个定理表明 \(\mathbb{C}\) 上 \(n\) 阶线性、齐次、常系数微分方程的解空间是 \(\mathbb{C}\) 上 \(n\) 维向量空间。
+
+（2）上面考虑的非零多项式 \(f(x)\) 的商 \(F[x]/(f(x))\) 在 \(F\) 上的维数是 \(n = \deg f(x)\). 空间 \(F[x]\) 及其子空间 \((f(x))\) 是 \(F\) 上的无限维向量空间。
+\end{example}
+
+\begin{corollary}\label{cor:11.5}
+（\textbf{扩充引理}）若 \(A\) 是有限维空间 \(V\) 中的一组线性无关向量，则存在包含 \(A\) 的 \(V\) 的基。
+\end{corollary}
+
+\begin{proof}
+这同样由定理 \ref{thm:11.3} 立即推出，因为我们可以用 \(A\) 的元素逐个替换 \(V\) 的任何给定基（由 \(V\) 有限维这一假设，这样的基存在）的元素。
+\end{proof}
+
+\begin{theorem}\label{thm:11.6}
+若 \(V\) 是 \(F\) 上 \(n\) 维向量空间，则 \(V \cong F^n\). 特别地，\(F\) 上任何两个维数相同的有限维向量空间都同构。
+\end{theorem}
+
+\begin{proof}
+设 \(v_1, v_2, \ldots, v_n\) 是 \(V\) 的一组基。由
+\[
+\varphi(a_1v_1+a_2v_2+\cdots+a_nv_n) = (a_1, a_2, \ldots, a_n)
+\]
+定义映射 \(\varphi : V \to F^n\). 这个映射显然是 \(F\)-线性的，由于 \(v_i\) 张成 \(V\) 它是满射，而由于 \(v_i\) 线性无关它是单射，从而是同构。
+\end{proof}
+
+\begin{example}
+（1）设 \(\mathbb{F}\) 是有 \(q\) 个元素的有限域，\(W\) 是 \(\mathbb{F}\) 上 \(k\) 维向量空间。我们证明 \(W\) 的不同基的个数是
+\[
+(q^k-1)(q^k-q)(q^k-q^2)\cdots(q^k-q^{k-1}).
+\]
+\(W\) 的每組基都可以如下逐个构造。任何非零向量 \(w_1\) 都可以作为基的第一个元素。由于 \(W \cong \mathbb{F}^k\)，有 \(|W| = q^k\)，故 \(w_1\) 有 \(q^k-1\) 种选择。任何不在 \(w_1\) 张成的 1 维空间中的向量都与 \(w_1\) 线性无关，故可以选作第二个基元素 \(w_2\). 1 维空间同构于 \(\mathbb{F}\)，故有 \(q\) 个元素。于是 \(w_2\) 有 \(q^k-q\) 种选择。如此继续，可以看出在第 \(i\) 步，任何不在 \(w_1, w_2, \ldots, w_{i-1}\) 张成的 \((i-1)\) 维空间中的向量都与 \(w_1, w_2, \ldots, w_{i-1}\) 线性无关，故可以选作第 \(i\) 个基向量 \(w_i\). \((i-1)\) 维空间同构于 \(\mathbb{F}^{i-1}\)，故有 \(q^{i-1}\) 个元素。于是 \(w_i\) 有 \(q^k-q^{i-1}\) 种选择。这个过程在选定 \(w_k\) 时终止，因为此时我们在 \(k\) 维空间中有了 \(k\) 个线性无关向量，从而是基。
+
+（2）设 \(\mathbb{F}\) 是有 \(q\) 个元素的有限域，\(V\) 是 \(\mathbb{F}\) 上 \(n\) 维向量空间。对每个 \(k \in \{1, 2, \ldots, n\}\)，我们证明 \(V\) 的 \(k\) 维子空间的个数是
+\[
+\frac{(q^n-1)(q^n-q)\cdots(q^n-q^{k-1})}{(q^k-1)(q^k-q)\cdots(q^k-q^{k-1})}.
+\]
+任何 \(k\) 维空间都由 \(k\) 个无关向量张成。与上一例类似的论证表明，上述表达式的分子是从 \(n\) 维空间中选取 \(k\) 个无关向量的方式的个数。两组 \(k\) 个无关向量张成同一个空间 \(W\) 当且仅当它们都是 \(k\) 维空间 \(W\) 的基。为得到不同 \(k\) 维子空间个数的公式，我们必须除以重复次数，即固定 \(k\) 维空间的基的个数。分母中出现的这个因子正是例 1 中计算出的数。
+\end{example}
+
+接下来我们证明一个有关子空间的维数、其商空间的维数与整个空间维数的重要关系：
+
+\begin{theorem}\label{thm:11.7}
+设 \(V\) 是 \(F\) 上的向量空间，\(W\) 是 \(V\) 的子空间。则 \(V/W\) 是向量空间，且 \(\dim V = \dim W+\dim V/W\)（其中若一边是无限的，则两边都是无限的）。
+\end{theorem}
+
+\begin{proof}
+假设 \(W\) 在 \(F\) 上的维数是 \(m\)、\(V\) 的维数是 \(n\)，并设 \(w_1, w_2, \ldots, w_m\) 是 \(W\) 的一组基。由推论 \ref{cor:11.5}，这些 \(V\) 中的线性无关元素可以扩充为 \(V\) 的基 \(w_1, w_2, \ldots, w_m, v_{m+1}, \ldots, v_n\). 从 \(V\) 到 \(V/W\) 的自然满投影把每个 \(w_i\) 映到 0. 没有任何 \(v_i\) 的线性组合被映到 0，因为那将蕴涵这个线性组合是 \(W\) 的元素，与 \(v_i\) 的选取矛盾。因此这个投影的像 \(V/W\) 同构于 \(v_i\) 张成的 \(V\) 的子空间，于是 \(\dim V/W = n-m\)，这就是维数有限时的定理。若有一边是无限的，则容易作出无限多个线性无关向量表明另一边也是无限的。
+\end{proof}
+
+\begin{corollary}\label{cor:11.8}
+设 \(\varphi : V \to U\) 是 \(F\) 上向量空间的线性变换。则 \(\ker\varphi\) 是 \(V\) 的子空间，\(\varphi(V)\) 是 \(U\) 的子空间，且 \(\dim V = \dim\ker\varphi+\dim\varphi(V)\).
+\end{corollary}
+
+\begin{proof}
+这由定理 \ref{thm:11.7} 立即推出。注意定理 \ref{thm:11.7} 的证明事实上就是推论 \ref{cor:11.8} 中 \(U\) 为商 \(V/W\)、\(\varphi\) 为自然投影同态的特殊情形。
+\end{proof}
+
+\begin{corollary}\label{cor:11.9}
+设 \(\varphi : V \to W\) 是同维有限维向量空间之间的线性变换。则下列命题等价：
+
+（1）\(\varphi\) 是同构；
+
+（2）\(\varphi\) 是单射，即 \(\ker\varphi = 0\)；
+
+（3）\(\varphi\) 是满射，即 \(\varphi(V) = W\)；
+
+（4）\(\varphi\) 把 \(V\) 的一组基映到 \(W\) 的一组基。
+\end{corollary}
+
+\begin{proof}
+这些条件的等价性由推论 \ref{cor:11.8} 通过数维数得到。
+\end{proof}
+
+\begin{definition}
+若 \(\varphi : V \to U\) 是 \(F\) 上向量空间的线性变换，则 \(\ker\varphi\) 有时称为 \(\varphi\) 的\textbf{零空间}，\(\dim\ker\varphi\) 称为 \(\varphi\) 的\textbf{零化度}。\(\dim\varphi(V)\) 称为 \(\varphi\) 的\textbf{秩}。若 \(\ker\varphi = 0\)，则称这个变换是\textbf{非奇异的}。
+\end{definition}
+
+\begin{example}
+设 \(F\) 是有 \(q\) 个元素的有限域，\(V\) 是 \(F\) 上 \(n\) 维向量空间。回忆\textbf{一般线性群} \(GL(V)\) 是从 \(V\) 到 \(V\) 的所有非奇异线性变换构成的群（群运算是复合）。我们证明这个群的阶是
+\[
+|GL(V)| = (q^n-1)(q^n-q)(q^n-q^2)\cdots(q^n-q^{n-1}).
+\]
+为看出这一点，固定 \(V\) 的一组基 \(v_1, \ldots, v_n\). 线性变换非奇异当且仅当它把这组基映到 \(V\) 的另一组基。此外，若 \(w_1, \ldots, w_n\) 是 \(V\) 的任意一组基，则由第 10.3 节定理 \ref{thm:10.6} 存在唯一的线性变换把 \(v_i\) 映到 \(w_i\)（\(1 \leq i \leq n\)）。因此从 \(V\) 到自身的非奇异线性变换的个数等于 \(V\) 的不同基的个数。这个数（在例 1 中取 \(k = n\) 计算过）就是 \(GL(V)\) 的阶。
+\end{example}
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(V = \mathbb{R}^n\)，\((a_1, a_2, \ldots, a_n)\) 是 \(V\) 中的固定向量。证明 \(V\) 中满足 \(a_1x_1+a_2x_2+\cdots+a_nx_n = 0\) 的元素 \((x_1, x_2, \ldots, x_n)\) 的集合是 \(V\) 的子空间。确定这个子空间的维数并求出一组基。
+
+\item 设 \(V\) 是系数在 \(\mathbb{Q}\) 中的变量 \(x\) 的次数至多为 5 的多项式集合。证明 \(V\) 是 \(\mathbb{Q}\) 上 6 维向量空间，以 \(1, x, x^2, \ldots, x^5\) 为基。证明 \(1,\ 1+x,\ 1+x+x^2,\ \ldots,\ 1+x+x^2+x^3+x^4+x^5\) 也是 \(V\) 的一组基。
+
+\item 设 \(\varphi\) 是线性变换 \(\varphi : \mathbb{R}^4 \to \mathbb{R}^1\) 且
+\[
+\varphi((1,0,0,0)) = 1, \qquad \varphi((1,-1,0,0)) = 0,
+\]
+\[
+\varphi((1,-1,1,0)) = 1, \qquad \varphi((1,-1,1,-1)) = 0.
+\]
+求 \(\varphi((a, b, c, d))\).
+
+\item 证明闭区间 \([a, b]\)（\(a < b\)）上实值函数的空间是 \(\mathbb{R}\) 上的无限维向量空间。
+
+\item 证明闭区间 \([a, b]\)（\(a < b\)）上连续实值函数的空间是 \(\mathbb{R}\) 上的无限维向量空间。
+
+\item 设 \(V\) 是有限维向量空间，\(\varphi\) 是从 \(V\) 到 \(V\) 的任意线性变换。证明存在整数 \(m\) 使得 \(\varphi^m\) 的像与 \(\varphi^m\) 的核的交为 \(\{0\}\).
+
+\item 设 \(\varphi\) 是 \(n\) 维向量空间 \(V\) 到自身的满足 \(\varphi^2 = 0\) 的线性变换。证明 \(\varphi\) 的像包含在 \(\varphi\) 的核中，从而 \(\varphi\) 的秩至多为 \(n/2\).
+
+\item 设 \(V\) 是 \(F\) 上的向量空间，\(\varphi\) 是 \(V\) 到自身的线性变换。满足对某个 \(\lambda \in F\) 有 \(\varphi(v) = \lambda v\) 的非零元素 \(v \in V\) 称为 \(\varphi\) 的、特征值为 \(\lambda\) 的\textbf{特征向量}。证明对任意固定的 \(\lambda \in F\)，\(\varphi\) 的、特征值为 \(\lambda\) 的特征向量连同 0 构成 \(V\) 的子空间。
+
+\item 设 \(V\) 是 \(F\) 上的向量空间，\(\varphi\) 是 \(V\) 到自身的线性变换。假设对 \(i = 1, 2, \ldots, k\)，\(v_i \in V\) 是 \(\varphi\) 的、特征值为 \(\lambda_i \in F\) 的特征向量（参见上一习题），且所有特征值 \(\lambda_i\) 互不相同。证明 \(v_1, v_2, \ldots, v_k\) 线性无关。〔对 \(k\) 归纳：写出这些 \(v_i\) 之间的一个线性关系，对它作用 \(\varphi\) 得到另一个含特征值的线性关系——再用第一个线性关系的适当倍数相减，得到涉及更少元素的线性关系。〕由此断定 \(n\) 维向量空间上的任何线性变换至多有 \(n\) 个不同的特征值。
+\end{enumerate}
+
+\noindent 下面各习题中 \(V\) 是域 \(F\) 上任意维数的向量空间。
+
+\begin{enumerate}
+\setcounter{enumi}{9}
+\item 证明任何向量空间 \(V\) 都有基（按约定空集是零空间的基）。〔设 \(S\) 是 \(V\) 的由线性无关向量组成的子集的集合，按包含关系半序化；对 \(S\) 应用佐恩引理，并证明 \(S\) 的极大元是基。〕
+
+\item 改进上一习题中的论证，证明 \(V\) 的任何线性无关向量组都包含在 \(V\) 的某组基中。
+
+\item 若 \(F\) 是有有限个或可数个元素的域，\(V\) 是 \(F\) 上带基 \(B\) 的无限维向量空间，证明 \(V\) 的基数等于 \(B\) 的基数。由此断定此时 \(V\) 的任何两组基都有相同的基数。
+
+\item 证明作为 \(\mathbb{Q}\) 上的向量空间，对所有 \(n \in \mathbb{Z}^+\) 有 \(\mathbb{R}^n \cong \mathbb{R}\)（注意特别地这意味着 \(\mathbb{R}^n\) 与 \(\mathbb{R}\) 作为加法阿贝尔群同构）。
+
+\item 设 \(A\) 是无限维空间 \(V\) 的一组基。证明 \(V\) 同构于由集合 \(A\) 索引的若干份域 \(F\) 的直和。证明由 \(A\) 索引的若干份 \(F\) 的直积是 \(F\) 上的向量空间，且其维数严格大于 \(V\) 的维数（无穷多个模的直和与直积的定义参见第 10.3 节的习题）。
+\end{enumerate}
+
+\section{线性变换的矩阵}
+
+本节自始至终设 \(V, W\) 是同一个域 \(F\) 上的向量空间，\(\mathcal{B} = \{v_1, v_2, \ldots, v_n\}\) 是 \(V\) 的（有序）基，\(\mathcal{E} = \{w_1, w_2, \ldots, w_m\}\) 是 \(W\) 的（有序）基，\(\varphi \in \operatorname{Hom}(V, W)\) 是从 \(V\) 到 \(W\) 的线性变换。对每个 \(j \in \{1, 2, \ldots, n\}\)，用基 \(\mathcal{E}\) 写出 \(v_j\) 在 \(\varphi\) 下的像：
+\begin{equation}
+\varphi(v_j) = \sum_{i=1}^m a_{ij}w_i. \tag{11.3}
+\end{equation}
+设 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi) = (a_{ij})\) 是第 \(i\) 行第 \(j\) 列元素为 \(a_{ij}\) 的 \(m \times n\) 矩阵（即把上面计算 \(\varphi(v_j)\) 时 \(w_i\) 的系数用作这个矩阵的第 \(j\) 列）。矩阵 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 称为 \(\varphi\) 关于基 \(\mathcal{B}, \mathcal{E}\) 的\textbf{矩阵}。定义域基是写在“\(M\)”后面的下方字母，陪域基是上方字母。给定这个矩阵，我们可以如下恢复线性变换 \(\varphi\)：为计算 \(v \in V\) 的 \(\varphi(v)\)，用基 \(\mathcal{B}\) 写出 \(v = \sum_{i=1}^n a_iv_i\)（\(a_i \in F\)），然后计算 \(m \times n\) 矩阵与 \(n \times 1\) 矩阵的乘积
+\[
+M_{\mathcal{E}}^{\mathcal{B}}(\varphi) \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} = \begin{pmatrix} b_1 \\ \vdots \\ b_m \end{pmatrix}.
+\]
+\(v\) 在 \(\varphi\) 下的像是 \(\varphi(v) = \sum_{i=1}^m b_iw_i\)，即 \(\varphi(v)\) 关于基 \(\mathcal{E}\) 的坐标列向量由矩阵 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 乘以 \(v\) 关于基 \(\mathcal{B}\) 的坐标列向量得到（有时记作 \([\varphi(v)]_{\mathcal{E}} = M_{\mathcal{E}}^{\mathcal{B}}(\varphi)[v]_{\mathcal{B}}\)）。
+
+\begin{definition}
+上面与线性变换 \(\varphi\) 关联的 \(m \times n\) 矩阵 \(A = (a_{ij})\) 称为关于基 \(\mathcal{B}, \mathcal{E}\) \textbf{表示}线性变换 \(\varphi\)。类似地，\(\varphi\) 称为关于基 \(\mathcal{B}, \mathcal{E}\) 由 \(A\) 表示的线性变换。
+\end{definition}
+
+\begin{example}
+（1）设 \(V = \mathbb{R}^3\)，带标准基 \(\mathcal{B} = \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}\)，\(W = \mathbb{R}^2\)，带标准基 \(\mathcal{E} = \{(1, 0), (0, 1)\}\). 设 \(\varphi\) 是线性变换 \(\varphi(x, y, z) = (x+2y,\ x+y+z)\). 由于 \(\varphi(1, 0, 0) = (1, 1)\)、\(\varphi(0, 1, 0) = (2, 1)\)、\(\varphi(0, 0, 1) = (0, 1)\)，矩阵 \(A = M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 是
+\[
+A = \begin{pmatrix} 1 & 2 & 0 \\ 1 & 1 & 1 \end{pmatrix}.
+\]
+
+（2）设 \(V = W\) 是 \(\mathbb{C}\) 上微分方程 \(y''-3y'+2y = 0\) 的 2 维解空间，\(\mathcal{B} = \mathcal{E}\) 是基 \(v_1 = e^t\)、\(v_2 = e^{2t}\). 由于这个方程的系数是常数，容易验证若 \(y\) 是解则其导数 \(y'\) 也是解。由此映射 \(\varphi = d/dt\)（对 \(t\) 求导）是从 \(V\) 到自身的线性变换。由于 \(\varphi(v_1) = d(e^t)/dt = e^t = v_1\)、\(\varphi(v_2) = d(e^{2t})/dt = 2e^{2t} = 2v_2\)，我们看到关于这些基相应的矩阵是对角矩阵
+\[
+\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}.
+\]
+
+（3）设 \(V = W = \mathbb{Q}^3 = \{(x, y, z) \mid x, y, z \in \mathbb{Q}\}\) 是通常的 3 维有序三元组空间（元素取自有理数域 \(F = \mathbb{Q}\)），并假设 \(\varphi\) 是从 \(V\) 到自身的线性变换
+\[
+\varphi(x, y, z) = (9x+4y+5z,\ -4x-3z,\ -6x-4y-2z), \quad x, y, z \in \mathbb{Q}.
+\]
+取 \(V\) 与 \(W = V\) 的标准基 \(e_1 = (1, 0, 0)\)、\(e_2 = (0, 1, 0)\)、\(e_3 = (0, 0, 1)\). 由于 \(\varphi(1, 0, 0) = (9, -4, -6)\)、\(\varphi(0, 1, 0) = (4, 0, -4)\)、\(\varphi(0, 0, 1) = (5, -3, -2)\)，关于这些基表示这个线性变换的矩阵 \(A\) 是
+\[
+A = \begin{pmatrix} 9 & 4 & 5 \\ -4 & 0 & -3 \\ -6 & -4 & -2 \end{pmatrix}.
+\]
+\end{example}
+
+\begin{theorem}\label{thm:11.10}
+设 \(V\) 是 \(F\) 上 \(n\) 维向量空间，\(W\) 是 \(F\) 上 \(m\) 维向量空间，基分别为 \(\mathcal{B}, \mathcal{E}\). 则由 \(\varphi \mapsto M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 定义的从 \(V\) 到 \(W\) 的线性变换空间到系数在 \(F\) 中的 \(m \times n\) 矩阵空间的映射 \(\operatorname{Hom}_F(V, W) \to M_{m \times n}(F)\) 是向量空间的同构。特别地，在固定选取基之后，线性变换与它们的关联矩阵之间有一一对应。
+\end{theorem}
+
+\begin{proof}
+矩阵 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 的各列由 \(\varphi\) 在基 \(\mathcal{B}\) 上的作用如（11.3）式确定。这特别表明映射 \(\varphi \mapsto M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 是 \(F\)-线性映射，因为 \(\varphi\) 是 \(F\)-线性的。这个映射是满射，因为给定矩阵 \(M\)，由（11.3）在基上定义 \(\varphi\) 再线性延拓所得的线性变换的矩阵就是 \(M\). 这个映射是单射，因为在基上一致的两个线性变换相同。
+\end{proof}
+
+注意不同的基的选取给出不同的同构，故正如向量空间没有自然的基的选择，\(\operatorname{Hom}_F(V, W)\) 与 \(M_{m \times n}(F)\) 之间也没有自然的同构。
+
+\begin{corollary}\label{cor:11.11}
+\(\operatorname{Hom}_F(V, W)\) 的维数是 \((\dim V)(\dim W)\).
+\end{corollary}
+
+\begin{proof}
+\(M_{m \times n}(F)\) 的维数是 \(mn\).
+\end{proof}
+
+\begin{definition}
+\(m \times n\) 矩阵 \(A\) 称为\textbf{非奇异的}，若 \(x \in F^n\) 且 \(Ax = 0\) 蕴涵 \(x = 0\).
+\end{definition}
+
+矩阵的非奇异性与线性变换的非奇异性之间的联系如下：设 \(A = M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 是与线性变换 \(\varphi\)（在基 \(\mathcal{B}, \mathcal{E}\) 的某个选取下）关联的矩阵。则与基的选取无关，\(m \times n\) 矩阵 \(A\) 非奇异当且仅当线性变换 \(\varphi\) 是从 \(n\) 维空间 \(V\) 到 \(m\) 维空间 \(W\) 的非奇异线性变换（参见习题）。
+
+现在假设 \(U, V, W\) 都是 \(F\) 上的有限维向量空间，有序基分别为 \(\mathcal{A}, \mathcal{B}, \mathcal{E}\)，其中 \(\mathcal{B}\) 与 \(\mathcal{E}\) 如前，并假设 \(\mathcal{A} = \{u_1, u_2, \ldots, u_k\}\). 设 \(\psi : U \to V\) 与 \(\varphi : V \to W\) 是线性变换。它们的复合 \(\varphi \circ \psi\) 是从 \(U\) 到 \(W\) 的线性变换，故我们可以关于相应的基计算它的矩阵；即 \(M_{\mathcal{E}}^{\mathcal{A}}(\varphi \circ \psi)\) 可以通过计算
+\[
+\varphi \circ \psi(u_j) = \sum_{i=1}^m \gamma_{ij}w_i
+\]
+并把系数 \(\gamma_{ij}\) 写在第 \(j\) 列得到。其次分别计算 \(\psi\) 与 \(\varphi\) 的矩阵：
+\[
+\psi(u_j) = \sum_{p=1}^n a_{pj}v_p \quad \text{与} \quad \varphi(v_p) = \sum_{i=1}^m b_{ip}w_i,
+\]
+故 \(M_{\mathcal{B}}^{\mathcal{A}}(\psi) = (a_{pj})\)、\(M_{\mathcal{E}}^{\mathcal{B}}(\varphi) = (b_{ip})\). 用这些系数可以把 \(\gamma\) 用 \(b\) 与 \(a\) 表示出来，如下：
+\[
+\varphi \circ \psi(u_j) = \sum_{p=1}^n a_{pj}\varphi(v_p) = \sum_{p=1}^n a_{pj}\sum_{i=1}^m b_{ip}w_i = \sum_{i=1}^m\left(\sum_{p=1}^n a_{pj}b_{ip}\right)w_i.
+\]
+交换上面二重和中求和的次序，我们看到 \(\gamma_{ij}\)（即上述表达式中 \(w_i\) 的系数）是
+\[
+\gamma_{ij} = \sum_{p=1}^n a_{pj}b_{ip}.
+\]
+计算 \(\varphi\) 与 \(\psi\) 的矩阵的乘积（按这个次序），我们得到 \((b_{ip})(a_{pj}) = (\delta_{ij})\)，其中 \(\delta_{ij} = \sum_{p=1}^n b_{ip}a_{pj}\). 比较上面两个和并利用域乘法的交换性，我们看到对所有 \(i\) 和 \(j\) 有 \(\gamma_{ij} = \delta_{ij}\). 这个计算证明了下面结果：
+
+\begin{theorem}\label{thm:11.12}
+记号如上，\(M_{\mathcal{E}}^{\mathcal{A}}(\varphi \circ \psi) = M_{\mathcal{E}}^{\mathcal{B}}(\varphi)M_{\mathcal{B}}^{\mathcal{A}}(\psi)\)，即关于一组相容选取的基，表示线性变换 \(\varphi\) 与 \(\psi\) 的矩阵之积表示复合线性变换 \(\varphi \circ \psi\).
+\end{theorem}
+
+\begin{corollary}\label{cor:11.13}
+矩阵乘法满足结合律与分配律（只要维数使得乘积有定义）。\(n \times n\) 矩阵 \(A\) 非奇异当且仅当它可逆。
+\end{corollary}
+
+\begin{proof}
+设 \(A, B, C\) 是使得乘积 \((AB)C\) 与 \(A(BC)\) 有定义的矩阵，\(S, T, R\) 表示相应的线性变换。由定理 \ref{thm:11.12}，对应于 \(AB\) 的线性变换是复合 \(S \circ T\)，故对应于 \((AB)C\) 的线性变换是复合 \((S \circ T) \circ R\). 类似地，对应于 \(A(BC)\) 的线性变换是复合 \(S \circ (T \circ R)\). 由于函数复合满足结合律，这两个线性变换相同，故由定理 \ref{thm:11.10} 有 \((AB)C = A(BC)\). 分配律类似证明。注意这些结果也可以用直接（虽然繁琐）的矩阵计算证明。
+
+若 \(A\) 可逆，则 \(Ax = 0\) 蕴涵 \(x = A^{-1}Ax = A^{-1}0 = 0\)，故 \(A\) 非奇异。反之，若 \(A\) 非奇异，固定 \(V\) 的基 \(\mathcal{B}, \mathcal{E}\)，并设 \(\varphi\) 是关于这些基由 \(A\) 表示的 \(V\) 到自身的线性变换。由推论 \ref{cor:11.9}，\(\varphi\) 是 \(V\) 到自身的同构，故有逆 \(\varphi^{-1}\). 设 \(B\) 是关于基 \(\mathcal{E}, \mathcal{B}\)（注意次序）表示 \(\varphi^{-1}\) 的矩阵。则
+\[
+AB = M_{\mathcal{E}}^{\mathcal{B}}(\varphi)M_{\mathcal{B}}^{\mathcal{E}}(\varphi^{-1}) = M_{\mathcal{B}}^{\mathcal{B}}(\varphi \circ \varphi^{-1}) = M_{\mathcal{B}}^{\mathcal{B}}(I) = I.
+\]
+类似地 \(BA = I\)，故 \(B\) 是 \(A\) 的逆。
+\end{proof}
+
+\begin{corollary}\label{cor:11.14}
+（1）若 \(\mathcal{B}\) 是 \(n\) 维空间 \(V\) 的一组基，则映射 \(\varphi \mapsto M_{\mathcal{B}}^{\mathcal{B}}(\varphi)\) 是从 \(\operatorname{Hom}_F(V, V)\) 到系数在 \(F\) 中的 \(n \times n\) 矩阵空间 \(M_n(F)\) 的环同构也是向量空间同构。
+
+（2）\(GL(V) \cong GL_n(F)\)，其中 \(\dim V = n\). 特别地，若 \(F\) 是有限域，则有限群 \(GL_n(F)\)（它等于 \(|GL(V)|\)）的阶由第 11.1 节末尾的公式给出。
+\end{corollary}
+
+\begin{proof}
+（1）我们已在定理 \ref{thm:11.10} 中看到这个映射是 \(F\) 上向量空间的同构。推论 \ref{cor:11.13} 表明 \(M_n(F)\) 在矩阵乘法下是环，而定理 \ref{thm:11.12} 表明乘法在这个映射下保持，故它也是环同构。
+
+（2）这由（1）立即推出，因为环同构把单位映到单位。
+\end{proof}
+
+\begin{definition}
+若 \(A\) 是元素取自 \(F\) 的任意 \(m \times n\) 矩阵，则 \(A\) 的\textbf{行秩}（相应地\textbf{列秩}）是 \(A\) 的线性无关行的最大数目（相应地线性无关列的最大数目）（其中 \(A\) 的行与列分别看作仿射 \(n\) 维空间、\(m\) 维空间中的向量）。
+\end{definition}
+
+矩阵的秩与关联线性变换的秩之间的关系如下：\(\varphi\) 作为线性变换的秩等于矩阵 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 的列秩（参见习题）。我们还将看到任何矩阵的行秩与列秩相等。
+
+现在考虑同一个向量空间到自身的线性变换在两组不同基下关联的两个矩阵之间的关系（关于从向量空间 \(V\) 到另一向量空间 \(W\) 的线性变换的一般陈述参见习题）。
+
+\begin{definition}
+若存在可逆（即非奇异）\(n \times n\) 矩阵 \(P\) 使 \(P^{-1}AP = B\)，则称两个 \(n \times n\) 矩阵 \(A\) 与 \(B\) \textbf{相似}。若存在从向量空间 \(V\) 到 \(V\) 的非奇异线性变换 \(\Phi\) 使 \(\Phi^{-1}\varphi\Phi = \psi\)，则称从向量空间 \(V\) 到自身的两个线性变换 \(\varphi\) 与 \(\psi\) \textbf{相似}。
+\end{definition}
+
+设 \(\mathcal{B}\) 与 \(\mathcal{E}\) 是同一个向量空间 \(V\) 的两组基，\(\varphi \in \operatorname{Hom}_F(V, V)\). 设 \(I\) 是从 \(V\) 到 \(V\) 的恒等映射，\(P = M_{\mathcal{E}}^{\mathcal{B}}(I)\) 是它关联的矩阵（换句话说，用基 \(\mathcal{B}\) 写出基 \(\mathcal{E}\) 的元素——注意次序——并把所得的坐标用作矩阵 \(P\) 的各列）。注意若 \(\mathcal{B} \neq \mathcal{E}\) 则 \(P\) 不是恒等矩阵。则 \(P^{-1}M_{\mathcal{B}}^{\mathcal{B}}(\varphi)P = M_{\mathcal{E}}^{\mathcal{E}}(\varphi)\). 若 \([v]_{\mathcal{B}}\) 是 \(v \in V\) 关于基 \(\mathcal{B}\) 的 \(n \times 1\) 坐标矩阵，同样 \([v]_{\mathcal{E}}\) 是 \(v \in V\) 关于基 \(\mathcal{E}\) 的 \(n \times 1\) 坐标矩阵，则 \([v]_{\mathcal{B}} = P[v]_{\mathcal{E}}\). 矩阵 \(P\) 称为从 \(\mathcal{B}\) 到 \(\mathcal{E}\) 的\textbf{过渡矩阵}或\textbf{基变换矩阵}，而它在 \(M_{\mathcal{B}}^{\mathcal{B}}(\varphi)\) 上的这个相似作用称为\textbf{基变换}。这表明同一个线性变换关于两组不同基关联的矩阵是相似的。
+
+反之，假设 \(A\) 与 \(B\) 是由非奇异矩阵 \(P\) 相似的 \(n \times n\) 矩阵。设 \(\mathcal{B}\) 是 \(n\) 维向量空间 \(V\) 的一组基。用给定的矩阵 \(A\) 按（11.3）式定义从 \(V\)（以 \(\mathcal{B}\) 为基）到 \(V\)（同样以 \(\mathcal{B}\) 为基）的线性变换 \(\varphi\)，即 \(\varphi(v_j) = \sum_{i=1}^n a_{ij}v_i\). 则按 \(\varphi\) 的定义有 \(A = M_{\mathcal{B}}^{\mathcal{B}}(\varphi)\). 用 \(P\) 的第 \(j\) 列作为 \(w_j\) 关于基 \(\mathcal{B}\) 的坐标来定义 \(V\) 的新基 \(\mathcal{E}\)（故按定义 \(P = M_{\mathcal{E}}^{\mathcal{B}}(I)\)）。则 \(B = P^{-1}AP = P^{-1}M_{\mathcal{B}}^{\mathcal{B}}(\varphi)P = M_{\mathcal{E}}^{\mathcal{E}}(\varphi)\) 是 \(\varphi\) 关于基 \(\mathcal{E}\) 关联的矩阵。这表明任何两个相似的 \(n \times n\) 矩阵都以这种方式出现为同一个线性变换在两组不同基下表示的矩阵。
+
+注意从 \(V\) 到自身的线性变换的基变换就是被非奇异线性变换群 \(GL(V)\) 中某个元素的共轭作用。特别地，“相似”关系是等价关系，其等价类是非奇异线性变换群 \(GL(V)\) 通过共轭作用在 \(\operatorname{Hom}_F(V, V)\) 上的轨道。若 \(\varphi \in GL(V)\)（即 \(\varphi\) 是可逆线性变换），则 \(\varphi\) 的相似类不是别的，正是 \(\varphi\) 在群 \(GL(V)\) 中的共轭类。
+
+\begin{example}
+设 \(V = \mathbb{Q}^3\)，\(\varphi\) 是我们前面例子中考虑过的从 \(V\) 到自身的线性变换
+\[
+\varphi(x, y, z) = (9x+4y+5z,\ -4x-3z,\ -6x-4y-2z), \quad x, y, z \in \mathbb{Q}.
+\]
+关于标准基 \(\mathcal{B}\)（\(b_1 = (1, 0, 0)\)、\(b_2 = (0, 1, 0)\)、\(b_3 = (0, 0, 1)\)），我们看到表示这个线性变换的矩阵是
+\[
+A = M_{\mathcal{B}}^{\mathcal{B}}(\varphi) = \begin{pmatrix} 9 & 4 & 5 \\ -4 & 0 & -3 \\ -6 & -4 & -2 \end{pmatrix}.
+\]
+现在取 \(V\) 的基 \(\mathcal{E}\)：\(e_1 = (2, -1, -2)\)、\(e_2 = (1, 0, -1)\)、\(e_3 = (3, -2, -2)\)（我们马上会看到它事实上是一组基）。由于
+\[
+\varphi(e_1) = \varphi(2, -1, -2) = (4, -2, -4) = 2 \cdot e_1+0 \cdot e_2+0 \cdot e_3,
+\]
+\[
+\varphi(e_2) = \varphi(1, 0, -1) = (4, -1, -4) = 1 \cdot e_1+2 \cdot e_2+0 \cdot e_3,
+\]
+\[
+\varphi(e_3) = \varphi(3, -2, -2) = (9, -6, -6) = 0 \cdot e_1+0 \cdot e_2+3 \cdot e_3,
+\]
+关于这组基表示 \(\varphi\) 的矩阵是
+\[
+B = M_{\mathcal{E}}^{\mathcal{E}}(\varphi) = \begin{pmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{pmatrix}.
+\]
+把基 \(\mathcal{E}\) 的元素用基 \(\mathcal{B}\) 写出，我们有
+\[
+e_1 = 2b_1-b_2-2b_3, \qquad e_2 = b_1-b_3, \qquad e_3 = 3b_1-2b_2-2b_3,
+\]
+故矩阵
+\[
+P = M_{\mathcal{E}}^{\mathcal{B}}(I) = \begin{pmatrix} 2 & 1 & 3 \\ -1 & 0 & -2 \\ -2 & -1 & -2 \end{pmatrix} \quad \text{的逆为} \quad P^{-1} = \begin{pmatrix} 2 & 1 & 2 \\ -2 & -2 & -1 \\ -1 & 0 & -1 \end{pmatrix},
+\]
+它把 \(A\) 共轭为 \(B\)，即 \(P^{-1}AP = B\)，容易验证。（顺便注意由于 \(P\) 可逆，这证明了 \(\mathcal{E}\) 确实是 \(V\) 的一组基。）
+
+我们顺便观察到，表示这个线性变换 \(\varphi\) 的矩阵 \(B\) 比矩阵 \(A\) 简单得多。研究表示给定线性变换的最简单的可能矩阵（以及应选择哪组基来实现它），就是下一章考虑的标准形的研究。
+\end{example}
+
+\noindent\textbf{向量空间张量积上的线性变换}
+
+为方便起见，我们把第 10.4 节的推论 18 和 19 在向量空间这一特殊情形下重述一遍。
+
+\begin{proposition}\label{pro:11.15}
+设 \(F\) 是域 \(K\) 的子域。若 \(W\) 是 \(F\) 上以 \(w_1, \ldots, w_m\) 为基的 \(m\) 维向量空间，则 \(K \otimes_F W\) 是 \(K\) 上以 \(1 \otimes w_1, \ldots, 1 \otimes w_m\) 为基的 \(m\) 维向量空间。
+\end{proposition}
+
+\begin{proposition}\label{pro:11.16}
+设 \(V\) 与 \(W\) 是域 \(F\) 上的有限维向量空间，基分别为 \(v_1, \ldots, v_n\) 与 \(w_1, \ldots, w_m\). 则 \(V \otimes_F W\) 是 \(F\) 上以 \(v_i \otimes w_j\)（\(1 \leq i \leq n\)，\(1 \leq j \leq m\)）为基的 \(nm\) 维向量空间。
+\end{proposition}
+
+\noindent\textbf{注：}若 \(v\) 与 \(w\) 分别是 \(V\) 与 \(W\) 的非零元素，则由命题可知 \(v \otimes w\) 是 \(V \otimes_F W\) 的非零元素，因为我们总可以作出 \(V\) 与 \(W\) 的基使其第一个基向量分别为 \(v\) 与 \(w\). 在两个 \(R\)-模的张量积 \(M \otimes_R N\) 中（其中 \(R\) 不是域），一般要判断两个非零元素的张量积 \(m \otimes n\) 何时为零要困难得多。
+
+现在设 \(V, W, X, Y\) 是 \(F\) 上的有限维向量空间，\(\varphi : V \to X\) 与 \(\psi : W \to Y\) 是线性变换。我们计算线性变换 \(\varphi \otimes \psi : V \otimes W \to X \otimes Y\) 的矩阵。
+
+设 \(\mathcal{B}_1 = \{v_1, \ldots, v_n\}\) 与 \(\mathcal{B}_2 = \{w_1, \ldots, w_m\}\) 分别是 \(V\) 与 \(W\) 的（有序）基，\(\mathcal{E}_1 = \{x_1, \ldots, x_r\}\) 与 \(\mathcal{E}_2 = \{y_1, \ldots, y_s\}\) 分别是 \(X\) 与 \(Y\) 的（有序）基。设 \(\mathcal{B} = \{v_i \otimes w_j\}\) 与 \(\mathcal{E} = \{x_i \otimes y_j\}\) 是由命题 \ref{pro:11.16} 给出的 \(V \otimes W\) 与 \(X \otimes Y\) 的基；我们不久将给它们排序。假设
+\[
+\varphi(v_i) = \sum_{p=1}^r a_{pi}x_p \quad \text{与} \quad \psi(w_j) = \sum_{q=1}^s b_{qj}y_q.
+\]
+则
+\begin{equation}
+(\varphi \otimes \psi)(v_i \otimes w_j) = \varphi(v_i) \otimes \psi(w_j) = \sum_{p=1}^r\sum_{q=1}^s a_{pi}b_{qj}(x_p \otimes y_q). \tag{11.8}
+\end{equation}
+鉴于（11.8）中求和的次序，我们把基 \(\mathcal{E}\) 排成有序集，第 \(p\) 组为 \(x_p \otimes y_1, x_p \otimes y_2, \ldots, x_p \otimes y_s\)，并类似地对基 \(\mathcal{B}\) 排序。则（11.8）式确定了 \(\varphi \otimes \psi\) 的相应矩阵的列元素。所得的矩阵 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi \otimes \psi)\) 是 \(r \times n\) 分块矩阵，其第 \(p, q\) 块是 \(s \times m\) 矩阵 \(a_{p,q}M_{\mathcal{E}_2}^{\mathcal{B}_2}(\psi)\). 换句话说，\(\varphi \otimes \psi\) 的矩阵是把 \(\varphi\) 的矩阵中每个元素乘以 \(\psi\) 的矩阵而得到的。这样的矩阵有一个名称：
+
+\begin{definition}
+设 \(A = (a_{ij})\) 与 \(B\) 分别是系数取自任意交换环的 \(r \times n\) 与 \(s \times m\) 矩阵。\(A\) 与 \(B\) 的\textbf{Kronecker 积}或\textbf{张量积}，记作 \(A \otimes B\)，是由 \(r \times n\) 分块矩阵组成的 \(rs \times nm\) 矩阵，其第 \(i, j\) 块是 \(s \times m\) 矩阵 \(a_{ij}B\).
+\end{definition}
+
+用这个术语我们有
+
+\begin{proposition}\label{pro:11.17}
+设 \(\varphi : V \to X\) 与 \(\psi : W \to Y\) 是有限维向量空间之间的线性变换。则表示 \(\varphi\) 与 \(\psi\) 的矩阵的 Kronecker 积是 \(\varphi \otimes \psi\) 的一个矩阵表示。
+\end{proposition}
+
+\begin{example}
+设 \(V = X = \mathbb{R}^3\)，都以 \(v_1, v_2, v_3\) 为基，\(W = Y = \mathbb{R}^2\)，都以 \(w_1, w_2\) 为基。假设 \(\varphi : V \to X\) 与 \(\psi : W \to Y\) 是关于这些基分别由矩阵
+\[
+\begin{pmatrix} 0 & 0 & 1 \\ 2 & 0 & 0 \\ 0 & -3 & 0 \end{pmatrix} \quad \text{与} \quad \begin{pmatrix} 1 & 3 \\ -2 & 4 \end{pmatrix}
+\]
+表示的线性变换。则关于有序基
+\[
+\mathcal{B} = \{v_1 \otimes w_1,\ v_1 \otimes w_2,\ v_2 \otimes w_1,\ v_2 \otimes w_2,\ v_3 \otimes w_1,\ v_3 \otimes w_2\}
+\]
+我们有
+\[
+\left(\begin{array}{cc|cc|cc}
+0 & 0 & 0 & 0 & 1 & 3\\
+0 & 0 & 0 & 0 & -2 & 4\\ \hline
+2 & 6 & 0 & 0 & 0 & 0\\
+-4 & 8 & 0 & 0 & 0 & 0\\ \hline
+0 & 0 & -3 & -9 & 0 & 0\\
+0 & 0 & 6 & -12 & 0 & 0
+\end{array}\right),
+\]
+它是（如虚线所示的分块）把 \(\psi\) 的 \(2 \times 2\) 矩阵依次乘以 \(\varphi\) 的矩阵中各元素得到的。
+\end{example}
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(V\) 是系数在 \(\mathbb{Q}\) 中的变量 \(x\) 的次数至多为 5 的多项式集合。求从 \(V\) 的基 \(1, x, x^2, \ldots, x^5\) 到 \(V\) 的基 \(1,\ 1+x,\ 1+x+x^2,\ \ldots,\ 1+x+x^2+x^3+x^4+x^5\) 的过渡矩阵。
+
+\item 设 \(V\) 是上一习题的向量空间。设 \(\varphi = d/dx\) 是由多项式通常对 \(x\) 求导给出的 \(V\) 到自身的线性变换。求 \(\varphi\) 关于上一习题中 \(V\) 的两组基的矩阵。
+
+\item 设 \(V\) 是系数在 \(F\) 中的变量 \(x\) 的次数至多为 \(n\) 的多项式集合。求从 \(V\) 的基 \(1, x, x^2, \ldots, x^n\) 到元素 \(1,\ x-\lambda,\ \ldots,\ (x-\lambda)^{n-1},\ (x-\lambda)^n\)（其中 \(\lambda\) 是 \(F\) 的固定元素）的过渡矩阵。由此断定这些元素是 \(V\) 的一组基。
+
+\item 设 \(\varphi\) 是由绕原点逆时针旋转角 \(\theta\) 给出的 \(\mathbb{R}^2\) 到自身的线性变换。证明 \(\varphi\) 关于 \(\mathbb{R}^2\) 的标准基的矩阵是 \(\begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}\).
+
+\item 证明 \(m \times n\) 矩阵 \(A\) 非奇异当且仅当线性变换 \(\varphi\) 是从 \(n\) 维空间 \(V\) 到 \(m\) 维空间 \(W\) 的非奇异线性变换，其中 \(A = M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\)，与基 \(\mathcal{B}\) 和 \(\mathcal{E}\) 的选取无关。
+
+\item 证明若 \(\varphi \in \operatorname{Hom}_F(F^n, F^m)\)，\(\mathcal{B}, \mathcal{E}\) 分别是 \(F^n, F^m\) 的自然基，则 \(\varphi\) 的像等于 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 的各列张成的空间。由此断定 \(\varphi\)（作为线性变换）的秩等于 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 的列秩。
+
+\item 证明任意两个相似矩阵有相同的行秩和相同的列秩。
+
+\item 设 \(V\) 是 \(F\) 上 \(n\) 维向量空间，\(\varphi\) 是 \(V\) 到自身的线性变换。
+
+（a）证明若 \(V\) 有一组由 \(\varphi\) 的特征向量组成的基（参见第 11.1 节习题 8），则关于这组基（定义域与陪域都用它）表示 \(\varphi\) 的矩阵是对角矩阵，对角元为特征值。
+
+（b）若 \(A\) 是关于 \(V\) 的给定基（定义域与陪域都用它）表示 \(\varphi\) 的 \(n \times n\) 矩阵，证明 \(A\) 相似于对角矩阵当且仅当 \(V\) 有一组由 \(\varphi\) 的特征向量组成的基。
+
+\item 若 \(W\) 是向量空间 \(V\) 的、在线性变换 \(\varphi\) 下稳定（即 \(\varphi(W) \subseteq W\)）的子空间，证明 \(\varphi\) 诱导出 \(W\) 上的线性变换 \(\varphi|_W\) 与商向量空间 \(V/W\) 上的线性变换 \(\bar{\varphi}\). 若 \(\varphi|_W\) 与 \(\bar{\varphi}\) 都非奇异，证明 \(\varphi\) 非奇异。证明当 \(V\) 有限维时逆命题成立，并给出一个 \(V\) 无限维的反例。
+
+\item 设 \(V\) 是 \(n\) 维向量空间，\(\varphi\) 是 \(V\) 到自身的线性变换。假设 \(W\) 是 \(V\) 的 \(m\) 维子空间，在 \(\varphi\) 下稳定。
+
+（a）证明存在 \(V\) 的一组基使得 \(\varphi\) 关于它的矩阵形如 \(\begin{pmatrix} A & B \\ 0 & C \end{pmatrix}\)，其中 \(A\) 是 \(m \times m\) 矩阵、\(B\) 是 \(m \times (n-m)\) 矩阵、\(C\) 是 \((n-m) \times (n-m)\) 矩阵（这样的矩阵称为\textbf{分块上三角}矩阵）。
+
+（b）证明若存在在 \(\varphi\) 下不变、使 \(V = W \oplus W'\) 分解为直和的子空间 \(W'\)，则由 \(W\) 与 \(W'\) 的基给出 \(V\) 的一组基，使得 \(\varphi\) 关于它的矩阵是分块对角的：\(\begin{pmatrix} A & 0 \\ 0 & C \end{pmatrix}\)，其中 \(A\) 是 \(m \times m\) 矩阵、\(C\) 是 \((n-m) \times (n-m)\) 矩阵。
+
+（c）反过来证明若存在 \(V\) 的一组基使 \(\varphi\) 如（b）中那样分块对角，则存在维数分别为 \(m\) 与 \(n-m\) 的 \(\varphi\)-不变子空间 \(W\) 与 \(W'\)，且 \(V = W \oplus W'\).
+
+\item 设 \(\varphi\) 是有限维向量空间 \(V\) 到自身的满足 \(\varphi^2 = \varphi\) 的线性变换。
+
+（a）证明 \(\mathrm{image}\,\varphi \cap \ker\varphi = 0\).
+
+（b）证明 \(V = \mathrm{image}\,\varphi \oplus \ker\varphi\).
+
+（c）证明存在 \(V\) 的一组基，使得 \(\varphi\) 关于这组基的矩阵是对角矩阵，其元素全为 0 或 1.
+
+满足 \(\varphi^2 = \varphi\) 的线性变换 \(\varphi\) 称为\textbf{幂等线性变换}。本习题证明幂等线性变换就是到某个子空间上的投影。
+
+\item 设 \(V = \mathbb{R}^2\)，\(v_1 = (1, 0)\)、\(v_2 = (0, 1)\)，故 \(v_1, v_2\) 是 \(V\) 的一组基。设 \(\varphi\) 是 \(V\) 到自身的、关于这组基的矩阵为 \(\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}\) 的线性变换。证明若 \(W\) 是 \(v_1\) 生成的子空间，则 \(W\) 在 \(\varphi\) 的作用下稳定。证明不存在在 \(\varphi\) 下不变、使 \(V = W \oplus W'\) 的子空间 \(W'\).
+
+\item 设 \(V\) 是 \(n\) 维向量空间，\(W\) 是域 \(F\) 上 \(m\) 维向量空间。假设 \(A\) 是关于 \(V\) 的基 \(\mathcal{B}_1\) 与 \(W\) 的基 \(\mathcal{E}_1\) 表示从 \(V\) 到 \(W\) 的线性变换 \(\varphi\) 的 \(m \times n\) 矩阵。同样假设 \(B\) 是关于 \(V\) 的基 \(\mathcal{B}_2\) 与 \(W\) 的基 \(\mathcal{E}_2\) 表示 \(\varphi\) 的 \(m \times n\) 矩阵。设 \(P = M_{\mathcal{B}_2}^{\mathcal{B}_1}(I)\)（其中 \(I\) 表示从 \(V\) 到 \(V\) 的恒等映射），\(Q = M_{\mathcal{E}_2}^{\mathcal{E}_1}(I)\)（其中 \(I\) 表示从 \(W\) 到 \(W\) 的恒等映射）。证明 \(Q^{-1} = M_{\mathcal{E}_1}^{\mathcal{E}_2}(I)\) 且 \(Q^{-1}AP = B\)，这给出关于不同基的选取表示同一个线性变换的矩阵之间的一般关系。
+\end{enumerate}
+
+\noindent 下面各习题回顾高斯--若尔当消元法。这是求解许多涉及向量空间的问题（解线性方程组、求矩阵的逆、计算行列式、确定一组向量的张成、确定一组向量的线性无关性等）最快的计算方法之一。
+
+考虑 \(n\) 个未知量 \(x_1, x_2, \ldots, x_n\) 的 \(m\) 个线性方程组
+\begin{equation}
+\begin{aligned}
+a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n &= c_1\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n &= c_2\\
+&\vdots\\
+a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n &= c_m
+\end{aligned}\tag{11.4}
+\end{equation}
+其中 \(a_{ij}, c_j\)（\(i = 1, 2, \ldots, m\)，\(j = 1, 2, \ldots, n\)）是域 \(F\) 的元素。与这个方程组关联的\textbf{系数矩阵}是
+\[
+A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{pmatrix},
+\]
+而\textbf{增广矩阵}是
+\[
+(A \mid C) = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} & c_1 \\ a_{21} & a_{22} & \cdots & a_{2n} & c_2 \\ \vdots & \vdots & & \vdots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} & c_m \end{pmatrix}
+\]
+（“增广”一词指的是在系数矩阵 \(A = (a_{ij})\) 之外还出现了列矩阵 \(C = (c_i)\)）。这个方程组在 \(F\) 中的解集在施行下列三种操作中任何一种时都不改变：（1）交换任意两个方程；（2）把一个方程的倍数加到另一个方程上；（3）把任意方程乘以 \(F\) 中非零元素；它们对应于增广矩阵上的下列三种\textbf{初等行变换}：（1）交换任意两行；（2）把一行的倍数加到另一行上；（3）把任意行乘以 \(F\) 中的单位，即乘以 \(F\) 中任意非零元素。
+
+若矩阵 \(A\) 可以通过一系列初等行变换变为矩阵 \(C\)，则称 \(A\) \textbf{行约化}为 \(C\).
+
+\begin{enumerate}
+\setcounter{enumi}{13}
+\item 证明若 \(A\) 可以行约化为 \(C\)，则 \(C\) 可以行约化为 \(A\). 证明关系“\(A \sim C\) 当且仅当 \(A\) 可以行约化为 \(C\)”是等价关系。〔注意初等行变换是可逆的。〕
+\end{enumerate}
+
+\noindent 在这个等价关系下属于同一等价类的矩阵称为\textbf{行等价}。
+
+\begin{enumerate}
+\setcounter{enumi}{14}
+\item 证明行等价的两个矩阵的行秩相同。〔只需对由一次初等行变换所得的两个矩阵证明这一点。〕
+\end{enumerate}
+
+\noindent \(m \times n\) 矩阵称为处于\textbf{约化行阶梯形}，若（a）第 \(i\) 行的第一个非零元素 \(a_{ij_i}\) 是 1，且对应第 \(j_i\) 列的所有其他元素都是 0，并且（b）\(j_1 < j_2 < \cdots < j_r\)，其中 \(r\) 是非零行的个数，即每行初始零元素的个数严格递增（因此称为阶梯形）。
+
+增广矩阵 \((A \mid C)\) 称为处于约化行阶梯形，若它的系数矩阵 \(A\) 处于约化行阶梯形。例如下面两个矩阵处于约化行阶梯形：
+\[
+\begin{pmatrix} 1 & 0 & 5 & 7 & 0 & 3 \\ 0 & 1 & -1 & 1 & 0 & -4 \\ 0 & 0 & 0 & 0 & 1 & 6 \end{pmatrix}, \qquad \begin{pmatrix} 0 & 1 & -1 & 0 & 0 \\ 0 & 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 0 & 0 \end{pmatrix}
+\]
+（对第一个矩阵 \(j_1 = 1\)、\(j_2 = 2\)、\(j_3 = 5\)，对第二个矩阵 \(j_1 = 2\)、\(j_2 = 4\)）。
+
+约化行阶梯形增广矩阵的系数矩阵中任一行（按定义位于位置 \((i, j_i)\)）的第一个非零元素有时称为\textbf{主元}（故第一个矩阵中主元位于位置 \((1,1)\)、\((2,2)\) 与 \((3,5)\)，第二个矩阵中主元位于位置 \((1,2)\) 与 \((2,4)\)）。含主元的列称为\textbf{主元列}，系数矩阵中不含主元的列称为\textbf{非主元列}。
+
+\begin{enumerate}
+\setcounter{enumi}{15}
+\item 用归纳法证明任何增广矩阵都可以通过一系列初等行变换化为约化行阶梯形。
+
+\item 设 \(A\) 与 \(C\) 是处于约化行阶梯形的两个矩阵。证明若 \(A\) 与 \(C\) 行等价则 \(A = C\).
+
+\item 证明处于约化行阶梯形的矩阵的行秩等于其非零行的个数。
+
+\item 证明矩阵
+\[
+\begin{pmatrix} 1 & 4 & 8 & 0 & -1 \\ 2 & 3 & 9 & 0 & -5 \\ -2 & 2 & -2 & 1 & 14 \end{pmatrix}
+\quad \text{与} \quad
+\begin{pmatrix} -3 & 3 & 1 \\ 1 & -1 & 0 \\ 11 & 0 & -13 \end{pmatrix}
+\]
+的约化行阶梯形分别是习题 16 之前的两个矩阵。
+\end{enumerate}
+
+\noindent 约化行阶梯形的要点在于对应的线性方程组处于特别简单的形式，由此可以立即确定方程组 \(AX = C\)（（11.4）式）的解：
+
+\begin{enumerate}
+\setcounter{enumi}{19}
+\item （\textbf{解线性方程组}）设 \((A' \mid C')\) 是增广矩阵 \((A \mid C)\) 的约化行阶梯形。\(A'\) 的零行个数显然至少等于 \((A' \mid C')\) 的零行个数。
+
+（a）证明若 \(A'\) 的零行个数严格大于 \((A' \mid C')\) 的零行个数，则 \(AX = C\) 无解。
+
+由（a），我们可以假设 \(A'\) 与 \((A' \mid C')\) 有相同个数的非零行，个数记为 \(r\)（故 \(n \geq r\)）。
+
+（b）证明若 \(r = n\)，则方程组 \(AX = C\) 恰有一个解。
+
+（c）证明若 \(r < n\)，则方程组 \(AX = C\) 有无穷多个解。事实上证明对应于 \((A' \mid C')\) 的非主元列的 \(n-r\) 个变量的值可以任意选取，而对应于 \((A' \mid C')\) 的主元列的其余 \(r\) 个变量随后被唯一确定。
+
+\item 求下列方程组的解：
+
+（a）\(-3x+3y+z = 5\)，\(x-y = 0\)，\(2x-2y-z = 3\)；
+
+（b）\(x-2y+5z = 2\)，\(x-4y+6z = 10\)，\(4x-11y+11z = 12\)；
+
+（c）\(x-2y+z = 5\)，\(y-2z = 17\)，\(2x-3y = 27\)；
+
+（d）\(x+y-3z+2u = 2\)，\(3x-2y+5z+u = 1\)，\(6x+y-4z+3u = 7\)，\(2x+2y-6z+4u = 4\)；
+
+（e）\(x+y+4z+8u-w = -1\)，\(x+2y+3z+9u-5w = -2\)，\(-2y+2z-2u+v+14w = 3\)，\(x+4y+z+11u-13w = -4\).
+
+\item 假设 \(A\) 与 \(B\) 是行等价的两个 \(m \times n\) 矩阵。
+
+（a）证明方程组 \(AX = 0\)（如上面（11.4）式）的解集与方程组 \(BX = 0\) 的解集相同。〔只需对由一次初等行变换所得的两个矩阵证明这一点。〕
+
+（b）证明把 \(A\) 的各列看作 \(F^m\) 中的向量时满足的任何线性关系也被 \(B\) 的各列满足。
+
+（c）由（b）断定 \(A\) 的线性无关列的个数等于 \(B\) 的线性无关列的个数。
+
+\item 设 \(A'\) 是处于约化行阶梯形的矩阵。
+
+（a）证明 \(A'\) 的非零行线性无关。证明 \(A'\) 的主元列线性无关，且 \(A'\) 的非主元列线性相关于主元列。（注意主元所起的作用。）
+
+（b）证明处于约化行阶梯形的矩阵的线性无关列个数等于线性无关行个数，即这样的矩阵的行秩与列秩相等。
+
+\item 用前两个习题与上面的习题 15 证明一般地矩阵的行秩与列秩相等。
+
+\item （\textbf{求矩阵的逆}）设 \(A\) 是 \(n \times n\) 矩阵。
+
+（a）证明 \(A\) 有逆矩阵 \(B\)（列分别为 \(B_1, B_2, \ldots, B_n\)）当且仅当方程组 \(AB_i = E_i\)（\(i = 1, \ldots, n\)，其中 \(E_i\) 是第 \(i\) 个标准基向量）有解。
+
+（b）证明 \(A\) 可逆当且仅当 \(A\) 行等价于 \(n \times n\) 恒等矩阵。
+
+（c）证明 \(A\) 有逆 \(B\) 当且仅当增广矩阵 \((A \mid I)\) 可以行约化为增广矩阵 \((I \mid B)\)，其中 \(I\) 是 \(n \times n\) 恒等矩阵。
+
+\item 用行约化求下列矩阵的逆：
+\[
+A = \begin{pmatrix} 1 & 1 & 0 & 2 \\ 0 & 2 & 1 & -1 \\ 0 & 2 & 0 & 0 \\ -7 & -1 & 1 & 1 \end{pmatrix}, \qquad B = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{pmatrix}.
+\]
+
+\item （\textbf{计算向量空间的张成、线性无关性与线性相关性}）设 \(V\) 是带基 \(e_1, e_2, \ldots, e_m\) 的 \(m\) 维向量空间，\(v_1, v_2, \ldots, v_n\) 是 \(V\) 中的向量。设 \(A\) 是以向量 \(v_i\) 的坐标（关于基 \(e_1, e_2, \ldots, e_m\)）为列的 \(m \times n\) 矩阵，\(A'\) 是 \(A\) 的约化行阶梯形。
+
+（a）设 \(B\) 是行等价于 \(A\) 的任意矩阵。设 \(w_1, w_2, \ldots, w_n\) 是以 \(B\) 的各列作为坐标（关于基 \(e_1, e_2, \ldots, e_m\)）的向量。证明 \(v_1, v_2, \ldots, v_n\) 满足的任何线性关系 \(x_1v_1+x_2v_2+\cdots+x_nv_n = 0\)（（11.5）式）把 \(v_i\) 换成 \(w_i\)（\(i = 1, 2, \ldots, n\)）后仍被满足。
+
+（b）证明坐标由 \(A'\) 的主元列给出的向量线性无关，而坐标由 \(A'\) 的非主元列给出的向量线性相关于这些向量。
+
+（c）（\textbf{判断向量的线性无关性}）证明向量 \(v_1, v_2, \ldots, v_n\) 线性无关当且仅当 \(A'\) 有 \(n\) 个非零行（即秩为 \(n\)）。
+
+（d）（\textbf{判断向量的线性相关性}）由（c），向量 \(v_1, v_2, \ldots, v_n\) 线性相关当且仅当 \(A'\) 有非主元列。定义 \(v_1, v_2, \ldots, v_n\) 之间线性相关关系的（11.5）式的解由 \(A'\) 定义的线性方程组给出。证明（11.5）中对应于 \(A'\) 的非主元列的每个变量 \(x_1, x_2, \ldots, x_n\) 都可以任意指定，其余变量的值随后被唯一确定，从而给出如（11.5）中那样的 \(v_1, v_2, \ldots, v_n\) 之间的线性相关关系。
+\end{enumerate}
+
+\section{对偶向量空间}
+
+\begin{definition}
+（1）对 \(F\) 上的任意向量空间 \(V\)，令 \(V^* = \operatorname{Hom}_F(V, F)\) 为从 \(V\) 到 \(F\) 的线性变换空间，称为 \(V\) 的\textbf{对偶空间}。\(V^*\) 的元素称为\textbf{线性泛函}。
+
+（2）若 \(\mathcal{B} = \{v_1, v_2, \ldots, v_n\}\) 是有限维空间 \(V\) 的一组基，对每个 \(i \in \{1, 2, \ldots, n\}\) 通过它在基 \(\mathcal{B}\) 上的作用定义 \(v_i^* \in V^*\)：
+\begin{equation}
+v_i^*(v_j) = \begin{cases} 1, & \text{若 } i = j \\ 0, & \text{若 } i \neq j \end{cases} \qquad 1 \leq j \leq n. \tag{11.6}
+\end{equation}
+\end{definition}
+
+\begin{proposition}\label{pro:11.18}
+记号如上，\(\{v_1^*, v_2^*, \ldots, v_n^*\}\) 是 \(V^*\) 的一组基。特别地，若 \(V\) 是有限维的，则 \(V^*\) 与 \(V\) 有相同的维数。
+\end{proposition}
+
+\begin{proof}
+注意由于 \(V\) 是有限维的，\(\dim V^* = \dim\operatorname{Hom}_F(V, F) = \dim V = n\)（推论 \ref{cor:11.11}），故由于共有 \(n\) 个 \(v_i^*\)，只需证明它们线性无关。若在 \(\operatorname{Hom}_F(V, F)\) 中 \(a_1v_1^*+a_2v_2^*+\cdots+a_nv_n^* = 0\)，则把这个元素作用于 \(v_i\) 并利用上面的（11.6）式得到 \(a_i = 0\). 由于 \(i\) 任意，这些元素线性无关。
+\end{proof}
+
+\begin{definition}
+\(V^*\) 的基 \(\{v_1^*, v_2^*, \ldots, v_n^*\}\) 称为 \(\{v_1, v_2, \ldots, v_n\}\) 的\textbf{对偶基}。
+\end{definition}
+
+习题中将证明若 \(V\) 是无限维的，则总有 \(\dim V < \dim V^*\). 对任意维数的空间，\(V^*\) 是 \(V\) 的“代数”对偶空间。若 \(V\) 有额外的结构，例如连续结构（即拓扑），则可以定义其他类型的对偶空间（例如 \(V\) 的连续对偶，它要求线性泛函是连续映射）。阅读其他著作（特别是分析书）时必须小心，弄清“对偶空间”与“线性泛函”这些术语中隐含了哪些限定词。
+
+\begin{example}
+设 \([a, b]\) 是 \(\mathbb{R}\) 中的闭区间，\(V\) 是 \([a, b]\) 上所有连续函数 \(f : [a, b] \to \mathbb{R}\) 的实向量空间。若 \(a < b\)，则 \(V\) 是无限维的。对每个 \(g \in V\)，由 \(\varphi_g(f) = \int_a^b f(t)g(t)\,dt\) 定义的函数 \(\varphi_g : V \to \mathbb{R}\) 是 \(V\) 上的线性泛函。
+\end{example}
+
+\begin{definition}
+\(V^*\) 的对偶，即 \(V^{**}\)，称为 \(V\) 的\textbf{双对偶}或\textbf{第二对偶}。
+\end{definition}
+
+注意对有限维空间 \(V\) 有 \(\dim V = \dim V^*\)，从而（由 \(\dim V^* = \dim V^{**}\)）\(V\) 与 \(V^{**}\) 是同构的向量空间。对无限维空间有 \(\dim V < \dim V^{**}\)（参见习题），故 \(V\) 与 \(V^{**}\) 不可能同构。在有限维的情形，存在一种自然的（即与基无关、无坐标的）方式给出向量空间与其第二对偶之间的同构。
+
+其基本想法（在更一般的背景下）如下：若 \(X\) 是任意集合、\(S\) 是任意由 \(X\) 到域 \(F\) 的函数组成的集合，我们通常想的是选取或固定一个 \(f \in S\)，并让 \(x\) 取遍整个 \(X\) 来计算 \(f(x)\). 另一种做法是固定 \(X\) 中的一点 \(x\)，并让 \(f\) 取遍整个 \(S\) 来计算 \(f(x)\). 后一过程称为\textbf{在 \(x\) 处求值}，它表明对每个 \(x \in X\) 存在由 \(E_x(f) = f(x)\) 定义的函数 \(E_x : S \to F\)（即在 \(x\) 处对 \(f\) 求值）。这给出从 \(X\) 到 \(S\) 上 \(F\)-值函数集合的映射 \(x \mapsto E_x\). 若 \(S\) “分离点”，即对 \(X\) 的互异点 \(x\) 与 \(y\) 存在 \(f \in S\) 使 \(f(x) \neq f(y)\)，则映射 \(x \mapsto E_x\) 是单射。下一条引理的证明把这种“角色互换”过程应用于 \(X = V\)、\(S = V^*\) 的情形，证明 \(E_x\) 是 \(S\) 上的线性 \(F\)-值函数，即 \(E_x\) 属于 \(V^*\) 的对偶空间，并证明映射 \(x \mapsto E_x\) 是从 \(V\) 到 \(V^{**}\) 的线性变换。注意整个过程中没有提到“基”这个词（尽管知道 \(V^{**}\) 的维数是有用的——这是我们通过选取基建立的事实）。特别地，这个证明不是以熟悉的说法“取 \(V\) 的一组基……”开头的。
+
+\begin{theorem}\label{thm:11.19}
+存在从 \(V\) 到 \(V^{**}\) 的自然单线性变换。若 \(V\) 是有限维的，则这个线性变换是同构。
+\end{theorem}
+
+\begin{proof}
+设 \(v \in V\). 定义映射（在 \(v\) 处求值）
+\[
+E_v : V^* \to F, \qquad E_v(f) = f(v).
+\]
+则 \(E_v(f+ag) = (f+ag)(v) = f(v)+ag(v) = E_v(f)+aE_g(v)\)，故 \(E_v\) 是从 \(V^*\) 到 \(F\) 的线性变换。于是 \(E_v\) 是 \(\operatorname{Hom}_F(V^*, F) = V^{**}\) 的元素。这定义了自然映射
+\[
+\varphi : V \to V^{**}, \qquad \varphi(v) = E_v.
+\]
+映射 \(\varphi\) 是线性映射，如下：对 \(v, w \in V\) 与 \(a \in F\)，
+\[
+E_{v+aw}(f) = f(v+aw) = f(v)+af(w) = E_v(f)+aE_w(f)
+\]
+对每个 \(f \in V^*\) 成立，故 \(\varphi(v+aw) = E_{v+aw} = E_v+aE_w = \varphi(v)+a\varphi(w)\).
+
+为看出 \(\varphi\) 是单射，设 \(v\) 是 \(V\) 的任意非零向量。由扩充引理存在包含 \(v\) 的基 \(\mathcal{B}\). 设 \(f\) 是由把 \(v\) 映到 1、把 \(\mathcal{B}-\{v\}\) 的每个元素映到 0 定义的从 \(V\) 到 \(F\) 的线性变换。则 \(f \in V^*\) 且 \(E_v(f) = f(v) = 1\). 于是 \(\varphi(v) = E_v\) 在 \(V^{**}\) 中非零。这证明 \(\ker\varphi = 0\)，即 \(\varphi\) 是单射。
+
+若 \(V\) 的维数为 \(n\)，则由命题 \ref{pro:11.18}，\(V^*\) 从而 \(V^{**}\) 的维数也是 \(n\). 此时 \(\varphi\) 是从 \(V\) 到同维数有限维向量空间的单线性变换，从而是同构。
+\end{proof}
+
+设 \(V, W\) 是 \(F\) 上的有限维向量空间，基分别为 \(\mathcal{B}, \mathcal{E}\)，\(\mathcal{B}^*, \mathcal{E}^*\) 是对应的对偶基。固定某个 \(\varphi \in \operatorname{Hom}_F(V, W)\). 则对每个 \(f \in W^*\)，复合 \(f \circ \varphi\) 是从 \(V\) 到 \(F\) 的线性变换，即 \(f \circ \varphi \in V^*\). 于是映射 \(f \mapsto f \circ \varphi\) 定义了从 \(W^*\) 到 \(V^*\) 的函数。我们把对偶空间上这个诱导出的函数记作 \(\varphi^*\).
+
+\begin{theorem}\label{thm:11.20}
+记号如上，\(\varphi^*\) 是从 \(W^*\) 到 \(V^*\) 的线性变换，且 \(M_{\mathcal{B}^*}^{\mathcal{E}^*}(\varphi^*)\) 是矩阵 \(M_{\mathcal{E}}^{\mathcal{B}}(\varphi)\) 的转置（回忆矩阵 \((a_{ij})\) 的转置是矩阵 \((a_{ji})\)）。
+\end{theorem}
+
+\begin{proof}
+映射 \(\varphi^*\) 是线性的，因为 \((f+ag) \circ \varphi = (f \circ \varphi)+a(g \circ \varphi)\). 定义 \(\varphi\) 的方程是（由其矩阵）
+\[
+\varphi(v_j) = \sum_{i=1}^m a_{ij}w_i, \qquad 1 \leq j \leq n.
+\]
+为计算 \(\varphi^*\) 的矩阵，注意由 \(\varphi^*\) 与 \(w_i^*\) 的定义，
+\[
+\varphi^*(w_i^*)(v_j) = (w_i^* \circ \varphi)(v_j) = w_i^*\left(\sum_{l=1}^m a_{lj}w_l\right) = a_{ij}.
+\]
+又对所有的 \(j\) 有 \(\left(\sum_{k=1}^n a_{ik}v_k^*\right)(v_j) = a_{ij}\). 这表明下面两个线性泛函在 \(V\) 的一组基上取值相同，故它们是 \(V^*\) 中同一个元素：
+\[
+\varphi^*(w_i^*) = \sum_{k=1}^n a_{ik}v_k^*.
+\]
+这就确定了 \(\varphi^*\) 关于基 \(\mathcal{E}^*, \mathcal{B}^*\) 的矩阵是 \(\varphi\) 的矩阵的转置。
+\end{proof}
+
+\begin{corollary}\label{cor:11.21}
+对任意矩阵 \(A\)，\(A^t\) 的行秩等于 \(A\) 的列秩的转置，即 \(A^t\) 的行秩等于 \(A^t\) 的列秩。
+\end{corollary}
+
+\begin{proof}
+设 \(\varphi : V \to W\) 是关于 \(V\) 与 \(W\) 的某组固定基的矩阵为 \(A\) 的线性变换。由定理 \ref{thm:11.20}，\(\varphi^* : W^* \to V^*\) 关于对偶基的矩阵是 \(A\) 的转置。\(A\) 的列秩是 \(\varphi\) 的秩，而 \(A\) 的行秩（\(=\) 转置的列秩）是 \(\varphi^*\) 的秩（参见第 11.2 节习题 6）。因此只需证明 \(\varphi\) 与 \(\varphi^*\) 有相同的秩。
+
+现在
+\[
+f \in \ker\varphi^* \iff \varphi^*(f) = 0 \iff f \circ \varphi(v) = 0,\ \text{对所有 } v \in V \iff \varphi(V) \subseteq \ker f \iff f \in \operatorname{Ann}(\varphi(V)),
+\]
+其中 \(\operatorname{Ann}(S)\) 是下面习题 3 中描述的 \(S\) 的零化子。于是 \(\operatorname{Ann}(\varphi(V)) = \ker\varphi^*\). 由习题 3，\(\dim\operatorname{Ann}(\varphi(V)) = \dim W-\dim\varphi(V)\). 由推论 \ref{cor:11.8}，\(\dim\ker\varphi^* = \dim W^*-\dim\varphi^*(W^*)\). 由于 \(W\) 与 \(W^*\) 维数相同，故 \(\dim\varphi(V) = \dim\varphi^*(W^*)\)，这正是所要的。
+\end{proof}
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 设 \(V\) 是有限维向量空间。证明定理 \ref{thm:11.20} 中的映射 \(\varphi \mapsto \varphi^*\) 给出 \(\operatorname{End}(V)\) 与 \(\operatorname{End}(V^*)\) 之间的环同构。
+
+\item 设 \(V\) 是系数在 \(\mathbb{Q}\) 中的变量 \(x\) 的次数至多为 5 的多项式集合，以 \(1, x, x^2, \ldots, x^5\) 为基。证明下列元素是 \(V\) 的对偶空间的元素，并把它们表示为对偶基的线性组合：
+
+（a）由 \(E(p(x)) = p(3)\) 定义的 \(E : V \to \mathbb{Q}\)（即在 \(x = 3\) 处求值）；
+
+（b）由 \(\varphi(p(x)) = \int_0^1 p(t)\,dt\) 定义的 \(\varphi : V \to \mathbb{Q}\)；
+
+（c）由 \(\varphi(p(x)) = \int_0^1 t^2p(t)\,dt\) 定义的 \(\varphi : V \to \mathbb{Q}\)；
+
+（d）由 \(\varphi(p(x)) = p'(5)\) 定义的 \(\varphi : V \to \mathbb{Q}\)，其中 \(p'(x)\) 表示多项式 \(p(x)\) 对 \(x\) 的通常导数。
+
+\item 设 \(S\) 是某个有限维空间 \(V\) 的 \(V^*\) 的任意子集。定义 \(\operatorname{Ann}(S) = \{v \in V \mid f(v) = 0 \text{ 对所有 } f \in S\}\)（\(\operatorname{Ann}(S)\) 称为 \(S\) 在 \(V\) 中的\textbf{零化子}）。
+
+（a）证明 \(\operatorname{Ann}(S)\) 是 \(V\) 的子空间。
+
+（b）设 \(W_1\) 与 \(W_2\) 是 \(V^*\) 的子空间。证明 \(\operatorname{Ann}(W_1+W_2) = \operatorname{Ann}(W_1) \cap \operatorname{Ann}(W_2)\) 且 \(\operatorname{Ann}(W_1 \cap W_2) = \operatorname{Ann}(W_1)+\operatorname{Ann}(W_2)\).
+
+（c）设 \(W_1\) 与 \(W_2\) 是 \(V^*\) 的子空间。证明 \(W_1 = W_2\) 当且仅当 \(\operatorname{Ann}(W_1) = \operatorname{Ann}(W_2)\).
+
+（d）证明 \(S\) 的零化子与 \(S\) 张成的 \(V^*\) 的子空间的零化子相同。
+
+（e）假设 \(V\) 是有限维的，基为 \(v_1, \ldots, v_n\). 证明若对某个 \(k \leq n\) 有 \(S = \{v_1^*, \ldots, v_k^*\}\)，则 \(\operatorname{Ann}(S)\) 是 \(\{v_{k+1}, \ldots, v_n\}\) 张成的子空间。
+
+（f）假设 \(V\) 是有限维的。证明若 \(W^*\) 是 \(V^*\) 的任意子空间，则 \(\dim\operatorname{Ann}(W^*) = \dim V-\dim W^*\).
+
+\item 若 \(V\) 是带基 \(A\) 的无限维空间，证明 \(A^* = \{v^* \mid v \in A\}\) 不张成 \(V^*\).
+
+\item 若 \(V\) 是带基 \(A\) 的无限维空间，证明 \(V^*\) 同构于由 \(A\) 索引的若干份 \(F\) 的直积。由此断定 \(\dim V^* > \dim V\).〔利用第 11.1 节习题 14。〕
+\end{enumerate}
+
+\section{行列式}
+
+虽然我们主要对域上的向量空间使用这个理论，行列式的理论可以在任意带 1 的交换环上毫无额外困难地展开。因此本节中 \(R\) 是任意带 1 的交换环，\(V_1, V_2, \ldots, V_n, V, W\) 是 \(R\)-模。为方便起见，我们重述第 10.4 节中多重线性函数的定义。
+
+\begin{definition}
+（1）映射 \(\varphi : V_1 \times V_2 \times \cdots \times V_n \to W\) 称为\textbf{多重线性}的，若对每个固定的 \(i\) 与固定的元素 \(v_j \in V_j\)（\(j \neq i\)），由
+\[
+v_i \longmapsto \varphi(v_1, \ldots, v_{i-1}, v_i, v_{i+1}, \ldots, v_n)
+\]
+定义的映射是 \(R\)-模同态。若 \(V_i = V\)（\(i = 1, 2, \ldots, n\)），则称 \(\varphi\) 是 \(V\) 上的 \textbf{\(n\)-重线性函数}；若此外还有 \(W = R\)，则称 \(\varphi\) 是 \(V\) 上的 \textbf{\(n\)-重线性形式}。
+
+（2）\(V\) 上的 \(n\)-重线性函数 \(\varphi\) 称为\textbf{交错的}，若当对某个 \(i \in \{1, 2, \ldots, n-1\}\) 有 \(v_i = v_{i+1}\) 时 \(\varphi(v_1, v_2, \ldots, v_n) = 0\)（即只要有两个相邻的变量相等，\(\varphi\) 就为 0）。函数 \(\varphi\) 称为\textbf{对称的}，若在 \((v_1, v_2, \ldots, v_n)\) 中把任意 \(v_i\) 与 \(v_j\) 互换不改变 \(\varphi\) 在这个 \(n\) 元组上的值。
+
+当 \(n = 2\)（相应地 3）时，不说 \(\varphi\) 是 2-重线性（或 3-重线性），而说它是\textbf{双线性}（相应地\textbf{三线性}）的。当 \(n\) 由上下文清楚时，我们简称 \(\varphi\) 是多重线性的。
+\end{definition}
+
+\begin{example}
+对任意固定的 \(m \geq 0\)，\(V = \mathbb{R}^m\) 上通常的点积是双线性形式（这里环 \(R\) 是实数域）。
+\end{example}
+
+\begin{proposition}\label{pro:11.22}
+设 \(\varphi\) 是 \(V\) 上的 \(n\)-重线性交错函数。则
+
+（1）对任意 \(i \in \{1, 2, \ldots, n-1\}\)，\(\varphi(v_1, \ldots, v_{i-1}, v_{i+1}, v_i, v_{i+2}, \ldots, v_n) = -\varphi(v_1, v_2, \ldots, v_n)\)，即交换两个相邻分量时 \(\varphi\) 在 \(n\) 元组上的值变号。
+
+（2）对每个 \(\sigma \in S_n\)，\(\varphi(v_{\sigma(1)}, v_{\sigma(2)}, \ldots, v_{\sigma(n)}) = \varepsilon(\sigma)\varphi(v_1, v_2, \ldots, v_n)\)，其中 \(\varepsilon(\sigma)\) 是置换 \(\sigma\) 的符号（参见第 3.5 节）。
+
+（3）若对任意两个互不相同的 \(i, j \in \{1, 2, \ldots, n\}\) 有 \(v_i = v_j\)，则 \(\varphi(v_1, v_2, \ldots, v_n) = 0\).
+
+（4）若对任意 \(j \neq i\) 与任意 \(a \in R\)，把 \((v_1, \ldots, v_n)\) 中的 \(v_i\) 换成 \(v_i+av_j\)，则 \(\varphi\) 在这个 \(n\) 元组上的值不变。
+\end{proposition}
+
+\begin{proof}
+（1）设 \(\psi(x, y)\) 是 \(\varphi\) 在第 \(i\) 与第 \(i+1\) 个位置分别取变量 \(x\) 与 \(y\)、而其余位置 \(j\) 取固定元素 \(v_j\) 所得的函数。于是（1）等价于证明 \(\psi(y, x) = -\psi(x, y)\). 由于 \(\varphi\) 是交错的，\(\psi(x+y, x+y) = 0\). 依次在每个变量中展开 \(x+y\) 得到 \(\psi(x+y, x+y) = \psi(x, x)+\psi(x, y)+\psi(y, x)+\psi(y, y)\). 再次由 \(\varphi\) 的交错性，后一等式右端的第一项与最后一项为 0. 于是 \(0 = \psi(x, y)+\psi(y, x)\)，这给出（1）。
+
+（2）每个置换都可以写成对换之积（参见第 3.5 节）。此外，每个对换都可以写成交换两个相邻整数的对换之积（参见第 3.5 节习题 3）。于是每个置换 \(\sigma\) 都可以写成 \(\tau_1\cdots\tau_m\)，其中每个 \(\tau_k\) 都是交换两个相邻整数的对换。由（1）应用 \(m\) 次可得
+\[
+\varphi(v_{\sigma(1)}, v_{\sigma(2)}, \ldots, v_{\sigma(n)}) = \varepsilon(\tau_m)\cdots\varepsilon(\tau_1)\varphi(v_1, v_2, \ldots, v_n).
+\]
+最后，由于 \(\varepsilon\) 是到阿贝尔群 \(\{\pm 1\}\) 的同态（故因子 \(\pm 1\) 的次序无关紧要），\(\varepsilon(\tau_1)\cdots\varepsilon(\tau_m) = \varepsilon(\tau_1\cdots\tau_m) = \varepsilon(\sigma)\). 这证明了（2）。
+
+（3）取 \(\sigma\) 是任意固定 \(i\) 且把 \(j\) 移到 \(i+1\) 的置换。于是 \((v_{\sigma(1)}, v_{\sigma(2)}, \ldots, v_{\sigma(n)})\) 有两个相等的相邻分量，故 \(\varphi\) 在这个 \(n\) 元组上为 0. 由（2），\(\varphi(v_{\sigma(1)}, v_{\sigma(2)}, \ldots, v_{\sigma(n)}) = \pm\varphi(v_1, v_2, \ldots, v_n)\). 这蕴涵（3）。
+
+（4）这由（3）在第 \(i\) 个位置上按线性展开立即推出。
+\end{proof}
+
+\begin{proposition}\label{pro:11.23}
+假设 \(\varphi\) 是 \(V\) 上的 \(n\)-重线性交错函数，且对某些 \(v_1, v_2, \ldots, v_n\) 与 \(w_1, w_2, \ldots, w_n \in V\) 及某些 \(a_{ij} \in R\) 有
+\[
+w_1 = a_{11}v_1+a_{21}v_2+\cdots+a_{n1}v_n
+\]
+\[
+w_2 = a_{12}v_1+a_{22}v_2+\cdots+a_{n2}v_n
+\]
+（我们有意把 \(a_{ij}\) 的下标写成“列的形式”）。则
+\[
+\varphi(w_1, w_2, \ldots, w_n) = \sum_{\sigma \in S_n} \varepsilon(\sigma)a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}\,\varphi(v_1, v_2, \ldots, v_n).
+\]
+\end{proposition}
+
+\begin{proof}
+若按多重线性展开 \(\varphi(w_1, w_2, \ldots, w_n)\)，我们得到 \(n^n\) 个形如 \(a_{i_11}a_{i_22}\cdots a_{i_nn}\varphi(v_{i_1}, v_{i_2}, \ldots, v_{i_n})\) 的项之和，其中指标 \(i_1, i_2, \ldots, i_n\) 各自取遍 \(1, 2, \ldots, n\). 由命题 \ref{pro:11.22}（3），若有两个或更多个 \(i_j\) 相等，则 \(\varphi\) 在这些项上为 0. 故在这个展开中我们只需考虑 \(i_1, \ldots, i_n\) 互不相同的项。这样的序列与 \(S_n\) 中的置换一一对应，故每个非零项都可以对某个 \(\sigma \in S_n\) 写成 \(a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}\varphi(v_{\sigma(1)}, v_{\sigma(2)}, \ldots, v_{\sigma(n)})\). 对 \(\varphi(w_1, w_2, \ldots, w_n)\) 展开中这些项中的每一个应用上一命题的（2），即得命题中的表达式。
+\end{proof}
+
+\begin{definition}
+\(R\) 上的 \textbf{\(n \times n\) 行列式函数}是满足下列两条公理的任意函数
+\[
+\det : M_{n \times n}(R) \to R
+\]
+
+（1）\(\det\) 是 \(R^n\) 上的 \(n\)-重线性交错形式（这里 \(n\) 元组是 \(M_{n \times n}(R)\) 中矩阵的 \(n\) 个列）；
+
+（2）\(\det(I) = 1\)，其中 \(I\) 是 \(n \times n\) 恒等矩阵。
+\end{definition}
+
+有时我们把 \(\det A\) 写成 \(\det(A_1, A_2, \ldots, A_n)\)，其中 \(A_1, A_2, \ldots, A_n\) 是 \(A\) 的各列。
+
+\begin{theorem}\label{thm:11.24}
+\(R\) 上存在唯一的 \(n \times n\) 行列式函数，并且对任意 \(n \times n\) 矩阵 \((a_{ij})\) 它可以由公式
+\[
+\det(a_{ij}) = \sum_{\sigma \in S_n} \varepsilon(\sigma)a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}
+\]
+计算。
+\end{theorem}
+
+\begin{proof}
+设 \(A_1, A_2, \ldots, A_n\) 是一般 \(n \times n\) 矩阵 \((a_{ij})\) 的列向量。留给读者验证定理陈述中给出的公式确实满足行列式函数的公理——这给出行列式函数的存在性。
+\end{proof}
+
+为证明唯一性，设 \(e_i\) 是第 \(i\) 个位置为 1、其余位置为 0 的列 \(n\) 元组。则
+\[
+A_1 = a_{11}e_1+a_{21}e_2+\cdots+a_{n1}e_n,
+\]
+\[
+A_2 = a_{12}e_1+a_{22}e_2+\cdots+a_{n2}e_n,
+\]
+……
+
+由命题 \ref{pro:11.23}，\(\det A = \sum_{\sigma \in S_n}\varepsilon(\sigma)a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}\det(e_1, e_2, \ldots, e_n)\). 由于由行列式函数的公理（2）有 \(\det(e_1, e_2, \ldots, e_n) = 1\)，\(\det A\) 的值正如所断言。
+
+\begin{corollary}\label{cor:11.25}
+行列式是 \(M_{n \times n}(R)\) 的各行的 \(n\)-重线性函数，且对任意 \(n \times n\) 矩阵 \(A\) 有 \(\det A = \det(A^t)\)，其中 \(A^t\) 是 \(A\) 的转置。
+\end{corollary}
+
+\begin{proof}
+第一个断言是第二个的直接推论，故只需证明矩阵与其转置有相同的行列式。对 \(A = (a_{ij})\) 计算得
+\[
+\det(A^t) = \sum_{\sigma \in S_n}\varepsilon(\sigma)a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.
+\]
+1 到 \(n\) 的每个数在 \(\sigma(1), \ldots, \sigma(n)\) 中都恰好出现一次，故我们可以把乘积 \(a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}\) 重排为 \(a_{\sigma^{-1}(1)1}a_{\sigma^{-1}(2)2}\cdots a_{\sigma^{-1}(n)n}\). 另外，同态 \(\varepsilon\) 取值于 \(\{\pm 1\}\)，故 \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\). 于是 \(\det(A^t)\) 的和可以改写为
+\[
+\sum_{\sigma \in S_n}\varepsilon(\sigma^{-1})a_{\sigma^{-1}(1)1}a_{\sigma^{-1}(2)2}\cdots a_{\sigma^{-1}(n)n}.
+\]
+后一个和遍历所有置换，故指标 \(\sigma^{-1}\) 可以换成 \(\sigma\). 所得表达式正是 \(\det A\) 的和。这完成了证明。
+\end{proof}
+
+\begin{theorem}\label{thm:11.26}
+（\textbf{克拉默法则}）若 \(A_1, A_2, \ldots, A_n\) 是 \(n \times n\) 矩阵 \(A\) 的各列，且对某些 \(\beta_1, \ldots, \beta_n \in R\) 有 \(B = \beta_1A_1+\beta_2A_2+\cdots+\beta_nA_n\)，则
+\[
+\beta_i\det A = \det(A_1, \ldots, A_{i-1}, B, A_{i+1}, \ldots, A_n).
+\]
+\end{theorem}
+
+\begin{proof}
+这由命题 \ref{pro:11.22}（3）把 \(B\) 的给定表达式代入第 \(i\) 个位置并按该位置的多重线性展开立即推出。
+\end{proof}
+
+\begin{corollary}\label{cor:11.27}
+若 \(R\) 是整环，则对 \(A \in M_n(R)\)，\(\det A = 0\) 当且仅当 \(A\) 的各列作为秩 \(n\) 的自由 \(R\)-模的元素是 \(R\)-线性相关的。同样，\(\det A = 0\) 当且仅当 \(A\) 的各行是 \(R\)-线性相关的。
+\end{corollary}
+
+\begin{proof}
+由于 \(\det A = \det(A^t)\)，第一句话蕴涵第二句。
+
+先假设 \(A\) 的各列线性相关，且
+\[
+0 = \beta_1A_1+\beta_2A_2+\cdots+\beta_nA_n
+\]
+是 \(A\) 的各列之间的一个相关关系，其中比如 \(\beta_i \neq 0\). 由克拉默法则，\(\beta_i\det A = 0\). 由于 \(R\) 是整环且 \(\beta_i \neq 0\)，故 \(\det A = 0\).
+
+反之，假设 \(A\) 的各列线性无关。把整环 \(R\) 看作嵌入其商域 \(F\) 中，从而 \(M_{n \times n}(R)\) 可以看作 \(M_{n \times n}(F)\) 的子环（并注意子环上的行列式函数是 \(M_{n \times n}(F)\) 上行列式函数的限制）。这样 \(A\) 的各列成为 \(F^n\) 的元素。任何使 \(F^n\) 中的线性组合为 0 的非零 \(F\)-线性组合，都可以通过把系数乘以一个公共分母给出一个非零的 \(R\)-线性相关关系。因此 \(A\) 的各列必是 \(F^n\) 中的无关向量。由于 \(A\) 有 \(n\) 列，它们构成 \(F^n\) 的一组基。于是存在 \(F\) 的元素 \(\beta_{ij}\)，使得对每个 \(i\)，\(F^n\) 中第 \(i\) 个基向量 \(e_i\) 可以表示为
+\[
+e_i = \beta_{1i}A_1+\beta_{2i}A_2+\cdots+\beta_{ni}A_n.
+\]
+则 \(n \times n\) 恒等矩阵就是列向量为 \(e_1, e_2, \ldots, e_n\) 的那个矩阵。由命题 \ref{pro:11.23}（取 \(\varphi = \det\)），恒等矩阵的行列式是 \(\det A\) 的某个 \(F\)-倍数。由于恒等矩阵的行列式为 1，\(\det A\) 不可能为零。这完成了证明。
+\end{proof}
+
+\begin{theorem}\label{thm:11.28}
+对矩阵 \(A, B \in M_{n \times n}(R)\) 有 \(\det AB = (\det A)(\det B)\).
+\end{theorem}
+
+\begin{proof}
+设 \(B = (\beta_{ij})\)，\(A_1, A_2, \ldots, A_n\) 是 \(A\) 的各列。则 \(C = AB\) 的第 \(j\) 列是 \(C_j = \beta_{1j}A_1+\beta_{2j}A_2+\cdots+\beta_{nj}A_n\). 由命题 \ref{pro:11.23} 把它作为 \(C\) 各列的 \(n\)-重线性函数展开，我们得到
+\[
+\det C = \det(C_1, \ldots, C_n) = \left[\sum_{\sigma \in S_n}\varepsilon(\sigma)\beta_{\sigma(1)1}\beta_{\sigma(2)2}\cdots\beta_{\sigma(n)n}\right]\det(A_1, \ldots, A_n).
+\]
+括号中的和正是 \(\det B\) 的公式，故 \(\det C = (\det B)(\det A)\)，这正是所要的（\(R\) 交换）。
+\end{proof}
+
+\begin{definition}
+设 \(A = (a_{ij})\) 是 \(n \times n\) 矩阵。对每个 \(i, j\)，设 \(A_{ij}\) 是删去 \(A\) 的第 \(i\) 行与第 \(j\) 列所得的 \(n-1 \times n-1\) 矩阵（\(A\) 的一个 \(n-1 \times n-1\) 子式）。则 \((-1)^{i+j}\det(A_{ij})\) 称为 \(A\) 的 \(ij\)-余子式。
+\end{definition}
+
+\begin{theorem}\label{thm:11.29}
+（\textbf{沿第 \(i\) 行的余子式展开公式}）若 \(A = (a_{ij})\) 是 \(n \times n\) 矩阵，则对每个固定的 \(i \in \{1, 2, \ldots, n\}\)，\(A\) 的行列式可以由公式
+\[
+\det A = (-1)^{i+1}a_{i1}\det A_{i1}+(-1)^{i+2}a_{i2}\det A_{i2}+\cdots+(-1)^{i+n}a_{in}\det A_{in}
+\]
+计算。
+\end{theorem}
+
+\begin{proof}
+对每个 \(A\)，设 \(D(A)\) 是由上面的余子式展开公式得到的 \(R\) 的元素。我们证明 \(D\) 满足行列式函数的公理，从而是行列式函数。对 \(n\) 归纳。若 \(n = 1\)，则对所有 \(1 \times 1\) 矩阵 \((a)\) 有 \(D((a)) = a\)，结论成立。因此假设 \(n \geq 2\). 为证明 \(D\) 是各列的交错多重线性函数，固定指标 \(k\)，把第 \(k\) 列看作变化的而其余各列固定。若 \(j \neq k\)，则 \(a_{ij}\) 不依赖于第 \(k\) 列，而由归纳假设 \(D(A_{ij})\) 对第 \(k\) 列是线性的。另外，当第 \(k\) 列线性变化时 \(a_{ik}\) 也线性变化，而 \(D(A_{ik})\) 保持不变（\(A_{ik}\) 中已删去第 \(k\) 列）。于是 \(D\) 的公式中每一项对第 \(k\) 列都线性变化。这证明 \(D\) 对各列是多重线性的。
+\end{proof}
+
+为证明 \(D\) 是交错的，假设 \(A\) 的第 \(k\) 列与第 \(k+1\) 列相等。若 \(j \neq k, k+1\)，则 \(A\) 的这两个相等的列在矩阵 \(A_{ij}\) 中变成两个相等的列。由归纳假设 \(D(A_{ij}) = 0\). 因此 \(D\) 的公式至多有两个非零项：当 \(j = k\) 与当 \(j = k+1\) 时。子式矩阵 \(A_{ik}\) 与 \(A_{i,k+1}\) 相同，且 \(a_{ik} = a_{i,k+1}\). 于是 \(D\) 的展开式中剩下的两项 \((-1)^{i+k}a_{ik}D(A_{ik})\) 与 \((-1)^{i+k+1}a_{i,k+1}D(A_{i,k+1})\) 相等而符号相反，故相消。于是若 \(A\) 有两个相等的相邻列则 \(D(A) = 0\)，即 \(D\) 是交错的。
+
+最后，由公式与归纳容易得出 \(D(I) = 1\)，其中 \(I\) 是恒等矩阵。这完成了归纳。
+
+\begin{theorem}\label{thm:11.30}
+（\textbf{矩阵的逆的余子式公式}）设 \(A = (a_{ij})\) 是 \(n \times n\) 矩阵，\(B\) 是其余子式矩阵的转置，即 \(B = (\beta_{ij})\)，其中 \(\beta_{ij} = (-1)^{i+j}\det A_{ji}\)（\(1 \leq i, j \leq n\)）。则 \(AB = BA = (\det A)I\). 进一步，\(\det A\) 是 \(R\) 中的单位当且仅当 \(A\) 是 \(M_{n \times n}(R)\) 中的单位；此时矩阵 \(\frac{1}{\det A}B\) 是 \(A\) 的逆。
+\end{theorem}
+
+\begin{proof}
+\(AB\) 的第 \(i, j\) 个元素是 \(a_{i1}\beta_{1j}+a_{i2}\beta_{2j}+\cdots+a_{in}\beta_{nj}\). 由 \(B\) 中各元素的定义，这等于
+\begin{equation}
+a_{i1}(-1)^{1+j}\det(A_{j1})+a_{i2}(-1)^{2+j}\det(A_{j2})+\cdots+a_{in}(-1)^{n+j}\det(A_{jn}). \tag{11.7}
+\end{equation}
+若 \(i = j\)，这就是 \(\det A\) 沿第 \(i\) 行的余子式展开。于是 \(AB\) 的对角元素全都等于 \(\det A\). 若 \(i \neq j\)，设 \(A^{(j)}\) 是把 \(A\) 的第 \(j\) 行换成第 \(i\) 行所得的矩阵，故 \(\det A^{(j)} = 0\). 由观察可知对每个 \(k \in \{1, 2, \ldots, n\}\) 有 \(A^{(j)}_{jk} = A_{jk}\) 且 \(a^{(j)}_{ik} = a_{jk}\). 把这些代入（11.7）式对每个 \(k = 1, 2, \ldots, n\)，可以看出 \(AB\) 的第 \(i, j\) 个元素等于 \(a_{i1}(-1)^{1+j}\det(A_{j1})+\cdots+a_{in}(-1)^{n+j}\det(A_{jn})\). 这个表达式是 \(\det A^{(j)}\) 沿第 \(j\) 行的余子式展开。由于如上所述 \(\det A^{(j)} = 0\)，这证明 \(AB\) 的所有非对角元素为零，即 \(AB = (\det A)I\).
+
+直接由 \(B\) 的定义可知数对 \((A^t, B^t)\) 满足与数对 \((A, B)\) 相同的假设。由已证的结果可知 \((BA)^t = A^tB^t = (\det A^t)I\). 由于 \(\det(A^t) = \det A\) 且对角矩阵的转置是它自身，我们也得到 \(BA = (\det A)I\).
+
+若 \(d = \det A\) 是 \(R\) 中的单位，则 \(d^{-1}B\) 是元素在 \(R\) 中的矩阵，且它与 \(A\) 的乘积（从任一侧）都是恒等矩阵，即 \(A\) 是 \(M_{n \times n}(R)\) 中的单位。反之，假设 \(A\) 是 \(R\) 中的单位，有（双边）逆矩阵 \(C\). 由于 \(\det C \in R\) 且
+\[
+1 = \det I = \det AC = (\det A)(\det C) = (\det C)(\det A),
+\]
+可知 \(\det A\) 在 \(R\) 中有双边逆，这正是所要的。这完成了证明的所有部分。
+\end{proof}
+
+\subsection*{习题}
+
+\begin{enumerate}
+\item 陈述并证明方阵 \(A\) 沿第 \(j\) 列的余子式展开公式。
+
+2. 设 \(F\) 是域，\(A_1, A_2, \ldots, A_n\) 是 \(F^n\) 中的（列）向量。作以 \(A_i\) 为第 \(i\) 列的矩阵 \(A\). 证明这些向量构成 \(F^n\) 的一组基当且仅当 \(\det A \neq 0\).
+
+\item 设 \(R\) 是任意带 1 的交换环，\(V\) 是 \(R\)-模，\(x_1, x_2, \ldots, x_n \in V\). 假设对某个 \(A \in M_{n \times n}(R)\) 有
+\[
+A\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} = 0.
+\]
+证明对每个 \(i \in \{1, 2, \ldots, n\}\) 有 \((\det A)x_i = 0\).
+\end{enumerate}
+
+\noindent（下面习题中的矩阵按通常方式记作数组。）
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item （\textbf{计算矩阵的行列式}）本习题概述用高斯--若尔当消元法（参见第 11.2 节的习题）计算行列式。这是计算大型行列式的最有效的通用方法。设 \(A\) 是 \(n \times n\) 矩阵。
+
+（a）证明初等行变换对行列式有下列影响：（i）交换两行改变行列式的符号；（ii）把一行的倍数加到另一行上不改变行列式；（iii）把任意行乘以 \(F\) 中的非零元素 \(u\) 使行列式乘以 \(u\).
+
+（b）证明 \(\det A\) 非零当且仅当 \(A\) 行等价于 \(n \times n\) 恒等矩阵。假设 \(A\) 可以用如（i）中那样的总共 \(s\) 次行交换、如（iii）中那样把行乘以非零元素 \(u_1, u_2, \ldots, u_r\) 以及（ii）中的操作行约化为恒等矩阵。证明 \(\det A = (-1)^s(u_1u_2\cdots u_r)^{-1}\).
+
+\item 用行约化计算下列矩阵的行列式：
+\[
+A = \begin{pmatrix} 5 & 4 & -6 \\ 2 & -1 & 4 \\ 0 & 1 & -2 \end{pmatrix}, \qquad B = \begin{pmatrix} 1 & 2 & -4 & 4 \\ -2 & 0 & 2 & -8 \\ 3 & 4 & -2 & 1 \\ 0 & 1 & -2 & 3 \end{pmatrix}.
+\]
+
+\item （\textbf{闵可夫斯基判别法}）假设 \(A\) 是实元素的 \(n \times n\) 矩阵，其对角元素全为正、非对角元素全为负、且每行的行和全为正。证明 \(\det A \neq 0\).〔考虑相应的方程组 \(AX = 0\)，并假设有非平凡解 \((x_1, \ldots, x_n)\). 若 \(x_i\) 有最大的绝对值，证明第 \(i\) 个方程导出矛盾。〕
+\end{enumerate}
+
+\section{张量代数、对称代数与外代数}
+
+本节中 \(R\) 是任意带 1 的交换环，我们假设 \(R\) 在每个 \(R\)-模上的左作用与右作用相同。我们主要关心 \(R = F\) 是域这一特殊情形，但这些基本构造在一般情况下也成立。
+
+设 \(M\) 是 \(R\)-模。第 10.4 节首次引入张量积时，我们启发式地谈到了作出 \(M\) 的元素的“乘积” \(m_1m_2\)，并构造了由这样的“乘积” \(m_1 \otimes m_2\) 生成的新模 \(M \otimes M\). 这个乘积的“值”不在 \(M\) 中，故这本身并没有给出 \(M\) 上的环结构。然而若我们通过取“乘积” \(m_1m_2m_3\)、\(m_1m_2m_3m_4\) 以及所有这样的乘积的有限和来迭代这一过程，我们就可以构造一个包含 \(M\) 的环，它关于包含 \(M\) 的环（更一般地，关于 \(M\) 的同态像）是“泛”的，如下面所示。
+
+对每个整数 \(k \geq 1\)，定义
+\[
+T^k(M) = \underbrace{M \otimes_R M \otimes_R \cdots \otimes_R M}_{k \text{ 个因子}},
+\]
+并令 \(T^0(M) = R\). \(T^k(M)\) 的元素称为 \textbf{\(k\)-张量}。定义
+\[
+T(M) = R \oplus T^1(M) \oplus T^2(M) \oplus \cdots \oplus T^k(M) \oplus \cdots = \bigoplus_{k=0}^{\infty} T^k(M).
+\]
+\(T(M)\) 的每个元素都是各种 \(k \geq 0\) 的 \(k\)-张量的有限线性组合。我们把 \(M\) 与 \(T^1(M)\) 等同，于是 \(M\) 是 \(T(M)\) 的 \(R\)-子模。
+
+\begin{theorem}\label{thm:11.31}
+若 \(M\) 是交换环 \(R\) 上的任意 \(R\)-模，则
+
+（1）\(T(M)\) 是包含 \(M\) 的 \(R\)-代数，其乘法由
+\[
+(m_1 \otimes \cdots \otimes m_i)(m_1' \otimes \cdots \otimes m_j') = m_1 \otimes \cdots \otimes m_i \otimes m_1' \otimes \cdots \otimes m_j'
+\]
+给出，并通过分配律延拓到和。关于这个乘法有 \(T^i(M)T^j(M) \subseteq T^{i+j}(M)\).
+
+（2）（泛性质）若 \(A\) 是任意 \(R\)-代数且 \(\varphi : M \to A\) 是 \(R\)-模同态，则存在唯一的 \(R\)-代数同态 \(\Phi : T(M) \to A\) 使 \(\Phi|_M = \varphi\).
+\end{theorem}
+
+\begin{proof}
+由
+\[
+(m_1, \ldots, m_i, m_1', \ldots, m_j') \longmapsto m_1 \otimes \cdots \otimes m_i \otimes m_1' \otimes \cdots \otimes m_j'
+\]
+定义的映射（定义域为 \(M \times \cdots \times M\)，\(i+j\) 个因子）到 \(T^{i+j}(M)\) 的映射是 \(R\)-多重线性的，故诱导出从 \(T^i(M) \times T^j(M)\) 到 \(T^{i+j}(M)\) 的双线性映射，容易验证它给出满足（1）的有定义的乘法（参见第 10.4 节命题 \ref{pro:10.21} 的证明）。为证明（2），假设 \(\varphi : M \to A\) 是 \(R\)-代数同态。则
+\[
+(m_1, \ldots, m_k) \longmapsto \varphi(m_1)\cdots\varphi(m_k)
+\]
+定义了从 \(M \times \cdots \times M\)（\(k\) 次）到 \(A\) 的 \(R\)-多重线性映射。这又诱导出唯一的 \(R\)-模同态 \(\Phi : T(M) \to A\)（第 10.4 节推论 \ref{cor:10.16}），把 \(m_1 \otimes \cdots \otimes m_k\) 映到上面右端的元素。由（1）中乘法的定义容易验证所得的、唯一确定的映射 \(\Phi : T(M) \to A\) 是 \(R\)-代数同态。
+\end{proof}
+
+\begin{definition}
+环 \(T(M)\) 称为 \(M\) 的\textbf{张量代数}。
+\end{definition}
+
+\begin{proposition}\label{pro:11.32}
+设 \(V\) 是域 \(F\) 上以 \(\mathcal{B} = \{v_1, \ldots, v_n\}\) 为基的有限维向量空间。则 \(k\)-张量
+\[
+v_{i_1} \otimes v_{i_2} \otimes \cdots \otimes v_{i_k}, \quad \text{其中 } v_{i_j} \in \mathcal{B}
+\]
+是 \(T^k(V)\) 在 \(F\) 上的向量空间基（按约定 \(k = 0\) 时基向量是元素 \(1 \in F\)）。特别地，\(\dim_F(T^k(V)) = n^k\).
+\end{proposition}
+
+\begin{proof}
+这由第 11.2 节命题 \ref{pro:11.16} 立即推出。
+\end{proof}
+
+定理 \ref{thm:11.31} 与命题 \ref{pro:11.32} 表明空间 \(T(V)\) 可以看作 \(F\) 上以（不交换的）变量 \(v_1, \ldots, v_n\) 的\textbf{非交换多项式代数}。类似的结果对任意交换环上有限生成的自由模也成立（利用第 10.4 节推论 \ref{cor:10.19}）。
+
+\begin{example}
+（1）设 \(R = \mathbb{Z}\)，\(M = \mathbb{Q}/\mathbb{Z}\). 则 \((\mathbb{Q}/\mathbb{Z}) \otimes_{\mathbb{Z}} (\mathbb{Q}/\mathbb{Z}) = 0\)（第 10.4 节推论 \ref{cor:10.12} 之后的例 4）。于是 \(T(\mathbb{Q}/\mathbb{Z}) = \mathbb{Z} \oplus (\mathbb{Q}/\mathbb{Z})\)，其中加法是逐分量的，而乘法由 \((r, \rho)(s, \sigma) = (rs, r\sigma+s\rho)\) 给出。第 9.3 节习题 4（d）中的环 \(R/(x)\) 同构于 \(T(\mathbb{Q}/\mathbb{Z})\).
+
+（2）设 \(R = \mathbb{Z}\)，\(M = \mathbb{Z}/n\mathbb{Z}\). 则 \((\mathbb{Z}/n\mathbb{Z}) \otimes_{\mathbb{Z}} (\mathbb{Z}/n\mathbb{Z}) \cong \mathbb{Z}/n\mathbb{Z}\)（第 10.4 节推论 \ref{cor:10.12} 之后的例 3）。于是对所有 \(i > 0\) 有 \(T^i(M) \cong M\)，故 \(T(\mathbb{Z}/n\mathbb{Z}) \cong \mathbb{Z} \oplus (\mathbb{Z}/n\mathbb{Z}) \oplus (\mathbb{Z}/n\mathbb{Z}) \oplus \cdots\). 由此容易推出 \(T(\mathbb{Z}/n\mathbb{Z}) \cong \mathbb{Z}[x]/(nx)\). 由于 \(T^i(M)T^j(M) \subseteq T^{i+j}(M)\)，张量代数 \(T(M)\) 具有令人联想到多项式环的自然的“分次”或“次数”结构。
+\end{example}
+
+\begin{definition}
+（1）环 \(S\) 称为\textbf{分次环}，若它是加法子群的直和：\(S = S_0 \oplus S_1 \oplus S_2 \oplus \cdots\)，且对所有 \(i, j \geq 0\) 有 \(S_iS_j \subseteq S_{i+j}\). \(S_k\) 的元素称为\textbf{\(k\) 次齐次}的，\(S_k\) 称为 \(S\) 的 \textbf{\(k\) 次齐次分量}。
+
+（2）分次环 \(S\) 的理想 \(I\) 称为\textbf{分次理想}，若 \(I = \bigoplus_{k \geq 0}(I \cap S_k)\).
+
+（3）两个分次环之间的环同态 \(\varphi : S \to T\) 称为\textbf{分次环同态}，若它保持 \(S\) 与 \(T\) 上的分次结构，即对 \(k = 0, 1, 2, \ldots\) 有 \(\varphi(S_k) \subseteq T_k\).
+\end{definition}
+
+注意 \(S_0S_0 \subseteq S_0\)，这蕴涵 \(S_0\) 是分次环 \(S\) 的子环，从而 \(S\) 是 \(S_0\)-模。若 \(S_0\) 在 \(S\) 的中心中且包含 \(S\) 的单位元，则 \(S\) 是 \(S_0\)-代数。还要注意理想 \(I\) 是分次理想当且仅当：只要度数互异的齐次元素之和 \(i_{k_1}+\cdots+i_{k_n} \in I\)，则每个单项 \(i_{k_1}, \ldots, i_{k_n}\) 本身都在 \(I\) 中。
+
+\begin{example}
+交换环 \(R\) 上 \(n\) 个变量 \(x_1, x_2, \ldots, x_n\) 的多项式环 \(S = R[x_1, x_2, \ldots, x_n]\) 是分次环的一个例子。这里 \(S_0 = R\)，而 \(k\) 次齐次分量是 \(k\) 次单项式的所有 \(R\)-线性组合构成的子群。
+
+由 \(x_1, \ldots, x_n\) 生成的理想 \(I\) 是分次理想：每个常数项为零的多项式都可以唯一地写成 \(k > 1\) 的 \(k\) 次齐次多项式之和，而其中每一个都有零常数项，从而属于 \(I\). 更一般地，一个理想是分次理想当且仅当它可以由齐次多项式生成（参见第 9.1 节习题 17）。
+
+并非分次环的每个理想都必须是分次理想。例如在分次环 \(\mathbb{Z}[x]\) 中，由 \(1+x\) 生成的主理想 \(J\) 不是分次的：\(1+x \in J\) 而 \(1 \notin J\)，故 \(1+x\) 不能写成每个都在 \(J\) 中的齐次多项式之和。
+\end{example}
+
+下一个结果表明分次环关于分次理想的商环仍是分次环。
+
+\begin{proposition}\label{pro:11.33}
+设 \(S\) 是分次环，\(I\) 是 \(S\) 中的分次理想，对所有 \(k \geq 0\) 令 \(I_k = I \cap S_k\). 则 \(S/I\) 自然地是分次环，其 \(k\) 次齐次分量同构于 \(S_k/I_k\).
+\end{proposition}
+
+\begin{proof}
+映射
+\[
+S = \bigoplus_{k \geq 0} S_k \longrightarrow \bigoplus_{k \geq 0}(S_k/I_k), \qquad (\ldots, s_k, \ldots) \longmapsto (\ldots, s_k \bmod I_k, \ldots)
+\]
+是满射且其核为 \(I = \bigoplus_{k \geq 0} I_k\)，它定义了分次环的同构。细节留作习题。
+\end{proof}
+
+\noindent\textbf{对称代数}
+
+命题 \ref{pro:11.33} 的第一个应用是构造 \(T(M)\) 的一个交换商环，使得从 \(M\) 到任何交换 \(R\)-代数的 \(R\)-模同态都必须通过它分解。这给出定理 \ref{thm:11.31} 的一个“交换化”版本。这个构造类似于作群的交换子商群 \(G/G'\)（参见第 5.4 节）。
+
+\begin{definition}
+\(R\)-模 \(M\) 的\textbf{对称代数}是把张量代数 \(T(M)\) 关于由所有形如 \(m_1 \otimes m_2-m_2 \otimes m_1\)（\(m_1, m_2 \in M\)）的元素生成的理想 \(\mathcal{C}(M)\) 作商所得的 \(R\)-代数。对称代数 \(T(M)/\mathcal{C}(M)\) 记作 \(\mathcal{S}(M)\).
+\end{definition}
+
+张量代数 \(T(M)\) 作为环由 \(R = T^0(M)\) 与 \(M = T^1(M)\) 生成，而按定义这些元素在商环 \(\mathcal{S}(M)\) 中交换。由此对称代数 \(\mathcal{S}(M)\) 是交换环。理想 \(\mathcal{C}(M)\) 由 2 次齐次张量生成，容易看出 \(\mathcal{C}(M)\) 是分次理想。于是由命题 \ref{pro:11.33}，对称代数是分次环，其 \(k\) 次齐次分量是 \(\mathcal{S}^k(M) = T^k(M)/\mathcal{C}^k(M)\). 由于 \(\mathcal{C}(M)\) 由 \(k \geq 2\) 的 \(k\)-张量组成，我们有 \(\mathcal{C}(M) \cap M = 0\)，故 \(M = T^1(M)\) 在 \(\mathcal{S}(M)\) 中的像同构于 \(M\). 把 \(M\) 与它的像等同，我们看到 \(\mathcal{S}^1(M) = M\)，且对称代数包含 \(M\). 类似地 \(\mathcal{S}^0(M) = R\)，故对称代数也是 \(R\)-代数。\(R\)-模 \(\mathcal{S}^k(M)\) 称为 \(M\) 的 \textbf{\(k\) 次对称幂}。
+
+下一个定理的第一部分表明 \(M\) 的 \(k\) 次对称幂的元素可以看作简单张量 \(m_1 \otimes \cdots \otimes m_k\) 的有限和，其中因子的次序被置换后所得的张量被等同起来。还要回忆第 10.4 节中，\(k\)-重线性映射 \(\varphi : M \times \cdots \times M \to N\) 称为\textbf{对称的}，若对所有 \(1, 2, \ldots, k\) 的置换 \(\sigma\) 有 \(\varphi(m_1, \ldots, m_k) = \varphi(m_{\sigma(1)}, \ldots, m_{\sigma(k)})\).（对任意交换环 \(R\) 上的模的定义与向量空间相同。）
+
+\begin{theorem}\label{thm:11.34}
+设 \(M\) 是交换环 \(R\) 上的 \(R\)-模，\(\mathcal{S}(M)\) 是它的对称代数。
+
+（1）\(M\) 的 \(k\) 次对称幂 \(\mathcal{S}^k(M)\) 等于 \(M \otimes \cdots \otimes M\)（\(k\) 个因子）关于由所有形如
+\[
+m_1 \otimes \cdots \otimes m_k - m_{\sigma(1)} \otimes \cdots \otimes m_{\sigma(k)}
+\]
+的元素（\(m_i \in M\)，\(\sigma\) 是 \(k\) 次对称群 \(S_k\) 中的置换）生成的子模的商。
+
+（2）（对称多重线性映射的泛性质）若 \(\varphi : M \times \cdots \times M \to N\) 是 \(R\) 上的对称 \(k\)-重线性映射，则存在唯一的 \(R\)-模同态 \(\Phi : \mathcal{S}^k(M) \to N\) 使 \(\varphi = \Phi \circ \iota\)，其中
+\[
+\iota : M \times \cdots \times M \to \mathcal{S}^k(M)
+\]
+是由 \(\iota(m_1, \ldots, m_k) = m_1 \otimes \cdots \otimes m_k \bmod \mathcal{C}(M)\) 定义的映射。
+
+（3）（映入交换 \(R\)-代数的映射的泛性质）若 \(A\) 是任意交换 \(R\)-代数且 \(\varphi : M \to A\) 是 \(R\)-模同态，则存在唯一的 \(R\)-代数同态 \(\Phi : \mathcal{S}(M) \to A\) 使 \(\Phi|_M = \varphi\).
+\end{theorem}
+
+\begin{proof}
+理想 \(\mathcal{C}(M)\) 中的 \(k\)-张量 \(\mathcal{C}^k(M)\) 是形如
+\[
+m_1 \otimes \cdots \otimes m_{i-1} \otimes (m \otimes m' - m' \otimes m) \otimes m_{i+2} \otimes \cdots \otimes m_k
+\]
+的元素（\(m_1, \ldots, m_k, m, m' \in M\)，\(k \geq 2\)，\(1 \leq i < k\)）的有限和。这个乘积给出两个除第 \(i\) 与第 \(i+1\) 个位置的两个入口被互换外都相等的 \(k\)-张量之差，即给出定理（1）中对应于对称群 \(S_k\) 中对换 \((i\ i+1)\) 的元素。反之，由于 \(S_k\) 中的任何置换都可以写成这样的对换之积，容易看出（1）中每个元素都可以写成上述形式的元素之和。这给出（1）。
+
+（2）与（3）的证明与相应的“非对称”结果（第 10.4 节推论 \ref{cor:10.16} 与定理 \ref{thm:11.31}）的证明非常类似，注意由（1），\(\mathcal{C}^k(M)\) 包含在任何从 \(T^k(M)\) 到 \(N\) 的对称映射的核中。
+\end{proof}
+
+\begin{corollary}\label{cor:11.35}
+设 \(V\) 是域 \(F\) 上 \(n\) 维向量空间。则 \(\mathcal{S}(V)\) 作为分次 \(F\)-代数同构于 \(F\) 上 \(n\) 个变量的多项式环（即这个同构也是从 \(\mathcal{S}^k(V)\) 到所有 \(k\) 次齐次多项式空间上的向量空间同构）。特别地，\(\dim_F(\mathcal{S}^k(V)) = \binom{n+k-1}{k}\).
+\end{corollary}
+
+\begin{proof}
+设 \(\mathcal{B} = \{v_1, \ldots, v_n\}\) 是 \(V\) 的一组基。由命题 \ref{pro:11.32}，\(T^k(V)\) 的一组基与由 \(\mathcal{B}\) 中元素组成的有序 \(k\) 元组的集合 \(\mathcal{B}^k\) 之间存在一一对应。若把其中一个 \(k\) 元组的入口作置换后得到另一个，就称 \(\mathcal{B}^k\) 中的两个 \(k\) 元组等价——容易看出这是 \(\mathcal{B}^k\) 上的等价关系。设 \(S(\mathcal{B}^k)\) 表示相应的等价类集合。从 \(V^k\) 到 \(F\) 上向量空间的任何对称 \(k\)-重线性函数在这些基张量上、只要对应的 \(k\) 元组属于同一个等价类就取相同值；反之，\(S(\mathcal{B}^k)\) 上的任何函数都可以唯一地延拓为 \(V^k\) 上的对称 \(k\)-重线性函数。由此以 \(S(\mathcal{B}^k)\) 为基的 \(F\) 上向量空间满足定理 \ref{thm:11.34}（2）中 \(\mathcal{S}^k(V)\) 的泛性质，从而同构于 \(\mathcal{S}^k(V)\). 每个等价类都有形如 \((v_1^{a_1}, v_2^{a_2}, \ldots, v_n^{a_n})\) 的唯一代表元，其中 \(v_i^{a_i}\) 表示 \(v_i, v_i, \ldots, v_i\)（取 \(a_i\) 次），每个 \(a_i \geq 0\) 且 \(a_1+\cdots+a_n = k\). 于是基 \(\mathcal{S}^k(\mathcal{B})\) 与多项式环 \(F[x_1, \ldots, x_n]\) 中 \(k\) 次首一单项式集合 \(x_1^{a_1}\cdots x_n^{a_n}\) 之间存在一一对应。这个一一对应延拓为分次 \(F\)-代数的同构，证明了推论的第一部分。\(\mathcal{S}^k(V)\) 的维数（即 \(k\) 次首一单项式的个数）的计算留作习题。
+\end{proof}
+
+\noindent\textbf{外代数}
+
+回忆第 10.4 节中，多重线性映射 \(\varphi : M \times \cdots \times M \to N\) 称为\textbf{交错的}，若只要对某个 \(i\) 有 \(m_i = m_{i+1}\) 就有 \(\varphi(m_1, \ldots, m_k) = 0\).（对任意 \(R\)-模的定义与向量空间相同。）我们看到行列式映射是交错的，并由一些附加约束唯一确定。我们可以应用命题 \ref{pro:11.33} 构造一个代数，交错多重线性映射必须以类似于对称代数（对称多重线性映射通过它分解）的方式通过它分解。
+
+\begin{definition}
+\(R\)-模 \(M\) 的\textbf{外代数}是把张量代数 \(T(M)\) 关于由所有形如 \(m \otimes m\)（\(m \in M\)）的元素生成的理想 \(\mathcal{A}(M)\) 作商所得的 \(R\)-代数。外代数 \(T(M)/\mathcal{A}(M)\) 记作 \(\bigwedge(M)\)，而 \(m_1 \otimes m_2 \otimes \cdots \otimes m_k\) 在 \(\bigwedge(M)\) 中的像记作 \(m_1 \wedge m_2 \wedge \cdots \wedge m_k\).
+\end{definition}
+
+与对称代数一样，理想 \(\mathcal{A}(M)\) 由齐次元素生成，从而是分次理想。由命题 \ref{pro:11.33}，外代数是分次的，\(k\) 次齐次分量为 \(\bigwedge^k(M) = T^k(M)/\mathcal{A}^k(M)\). 我们同样可以把 \(R\) 与 \(\bigwedge^0(M)\) 等同、把 \(M\) 与 \(\bigwedge^1(M)\) 等同，从而把 \(M\) 看作 \(R\)-代数 \(\bigwedge(M)\) 的 \(R\)-子模。\(R\)-模 \(\bigwedge^k(M)\) 称为 \(M\) 的 \textbf{\(k\) 次外幂}。
+
+外代数中的乘法
+\[
+(m_1 \wedge \cdots \wedge m_i) \wedge (m_1' \wedge \cdots \wedge m_j') = m_1 \wedge \cdots \wedge m_i \wedge m_1' \wedge \cdots \wedge m_j'
+\]
+称为\textbf{楔积}（或外积）。由商的定义，这个乘法是交错的，即只要对某个 \(1 \leq i < k\) 有 \(m_i = m_{i+1}\)，乘积 \(m_1 \wedge \cdots \wedge m_k\) 在 \(\bigwedge(M)\) 中就是 0. 于是
+\[
+0 = (m+m') \wedge (m+m') = (m \wedge m)+(m \wedge m')+(m' \wedge m)+(m' \wedge m') = (m \wedge m')+(m' \wedge m)
+\]
+表明这个乘法在简单张量上也是反交换的：对所有 \(m, m' \in M\) 有 \(m \wedge m' = -m' \wedge m\). 然而这种反交换性并不延拓到任意的乘积，即我们不必有对所有 \(a, b \in \bigwedge(M)\) 成立 \(ab = -ba\)（参见习题 4）。
+
+\begin{theorem}\label{thm:11.36}
+设 \(M\) 是交换环 \(R\) 上的 \(R\)-模，\(\bigwedge(M)\) 是它的外代数。
+
+（1）\(M\) 的 \(k\) 次外幂 \(\bigwedge^k(M)\) 等于 \(M \otimes \cdots \otimes M\)（\(k\) 个因子）关于由所有形如 \(m_1 \otimes m_2 \otimes \cdots \otimes m_k\)（其中对某对 \(i \neq j\) 有 \(m_i = m_j\)）的元素生成的子模的商。特别地，若对某对 \(i \neq j\) 有 \(m_i = m_j\)，则 \(m_1 \wedge m_2 \wedge \cdots \wedge m_k = 0\).
+
+（2）（交错多重线性映射的泛性质）若 \(\varphi : M \times \cdots \times M \to N\) 是交错的 \(k\)-重线性映射，则存在唯一的 \(R\)-模同态 \(\Phi : \bigwedge^k(M) \to N\) 使 \(\varphi = \Phi \circ \iota\)，其中
+\[
+\iota : M \times \cdots \times M \to \bigwedge\nolimits^k(M)
+\]
+是由 \(\iota(m_1, \ldots, m_k) = m_1 \wedge \cdots \wedge m_k\) 定义的映射。
+\end{theorem}
+
+\noindent\textbf{注：}外代数也满足与定理 \ref{thm:11.34}（3）类似的泛性质，即关于从 \(M\) 到满足对所有 \(a \in A\) 有 \(a^2 = 0\) 的 \(R\)-代数 \(A\) 的 \(R\)-模同态（参见习题 6）。
+
+\begin{proof}
+理想 \(\mathcal{A}(M)\) 中的 \(k\)-张量 \(\mathcal{A}^k(M)\) 是形如
+\[
+m_1 \otimes \cdots \otimes m_{i-1} \otimes (m \otimes m) \otimes m_{i+2} \otimes \cdots \otimes m_k
+\]
+的元素（\(m_1, \ldots, m_k, m \in M\)，\(k \geq 2\)，\(1 \leq i < k\)）的有限和，这是有两个相等入口（在第 \(i\) 与第 \(i+1\) 个位置）的 \(k\)-张量，故具有（1）中的形式。为证明反向包含，注意由于
+\[
+m' \otimes m = -m \otimes m'+[(m+m') \otimes (m+m')-m \otimes m-m' \otimes m'] \equiv -m \otimes m' \bmod \mathcal{A}(M),
+\]
+在简单 \(k\)-张量中交换任意两个相邻入口并乘以 \(-1\)，得到模 \(\mathcal{A}^k(M)\) 等价的张量。用这样一系列交换与变号，我们可以把（1）中简单张量的相等入口 \(m_i\) 与 \(m_j\) 调到相邻位置，这给出 \(\mathcal{A}^k(M)\) 的元素。由此（1）中的生成元包含在 \(\mathcal{A}^k(M)\) 中，这证明了定理的第一部分。
+
+与定理 \ref{thm:11.34} 一样，（2）的证明容易由定理 \ref{thm:11.31} 中张量代数的相应结果得出，因为 \(\mathcal{A}^k(M)\) 包含在任何从 \(T^k(M)\) 到 \(N\) 的交错映射的核中。
+\end{proof}
+
+\begin{example}
+（1）假设 \(V\) 是 \(F\) 上以 \(v\) 为基元素的一维向量空间。则 \(\bigwedge^k(V)\) 由形如 \(a_1v \wedge a_2v \wedge \cdots \wedge a_kv\)（即 \(a_1a_2\cdots a_k(v \wedge v \wedge \cdots \wedge v)\)，\(a_1, \ldots, a_k \in F\)）的元素的有限和组成。由于 \(v \wedge v = 0\)，可知 \(\bigwedge^0(V) = F\)、\(\bigwedge^1(V) = V\)，而对 \(i \geq 2\) 有 \(\bigwedge^i(V) = 0\)，故作为分次 \(F\)-代数有
+\[
+\bigwedge(V) = F \oplus V \oplus 0 \oplus 0 \oplus \cdots.
+\]
+
+（2）现在假设 \(V\) 是 \(F\) 上以 \(v, v'\) 为基的二维向量空间。这里 \(\bigwedge^k(V)\) 由形如 \((a_1v+a_1'v') \wedge \cdots \wedge (a_kv+a_k'v')\) 的元素的有限和组成。这样的元素是只涉及 \(v\) 与 \(v'\) 的简单楔积之和。例如 \(\bigwedge^2(V)\) 的元素是形如
+\[
+(av+bv') \wedge (cv+dv') = ac(v \wedge v)+ad(v \wedge v')+bc(v' \wedge v)+bd(v' \wedge v') = (ad-bc)v \wedge v'
+\]
+的元素之和。由此对 \(i \geq 3\) 有 \(\bigwedge^i(V) = 0\)，因为此时 \(v, v'\) 中至少有一个在这样的简单乘积中出现两次。
+
+我们可以直接从 \(\bigwedge^2(V) = T^2(V)/\mathcal{A}^2(V)\) 看出 \(v \wedge v' \neq 0\)，如下。向量空间 \(T^2(V)\) 是 4 维的，以 \(v \otimes v, v \otimes v', v' \otimes v, v' \otimes v'\) 为基（命题 \ref{pro:11.16}）。因此元素 \(v \otimes v\)、\(v \otimes v'+v' \otimes v\)、\(v' \otimes v'\) 与 \(v \otimes v'\) 也构成 \(T^2(V)\) 的一组基。子空间 \(\mathcal{A}^2(V)\) 由理想中所有 2-张量组成，该理想由张量
+\[
+(av+bv') \otimes (av+bv') = a^2(v \otimes v)+ab(v \otimes v'+v' \otimes v)+b^2(v' \otimes v')
+\]
+生成，由此显然 \(\mathcal{A}^2(V)\) 包含在以 \(v \otimes v\)、\(v \otimes v'+v' \otimes v\)、\(v' \otimes v'\) 为基的 3 维子空间中。特别地，\(T^2(V)\) 的基元素 \(v \otimes v'\) 不包含在 \(\mathcal{A}^2(V)\) 中，即在 \(\bigwedge^2(V)\) 中 \(v \wedge v' \neq 0\).
+
+由此 \(\bigwedge^0(V) = F\)、\(\bigwedge^1(V) = V\)、\(\bigwedge^2(V) = F(v \wedge v')\)，而对 \(i \geq 3\) 有 \(\bigwedge^i(V) = 0\)，故作为分次 \(F\)-代数有
+\[
+\bigwedge(V) = F \oplus V \oplus F(v \wedge v') \oplus 0 \oplus \cdots.
+\]
+\end{example}
+
+如前面的例子所示，与张量代数、对称代数不同，对有限维向量空间外代数是有限维的：
+
+\begin{corollary}\label{cor:11.37}
+设 \(V\) 是域 \(F\) 上以 \(\mathcal{B} = \{v_1, \ldots, v_n\}\) 为基的有限维向量空间。则向量
+\[
+v_{i_1} \wedge v_{i_2} \wedge \cdots \wedge v_{i_k}, \quad \text{其中 } 1 \leq i_1 < i_2 < \cdots < i_k \leq n
+\]
+是 \(\bigwedge^k(V)\) 的一组基，而当 \(k > n\) 时 \(\bigwedge^k(V) = 0\)（当 \(k = 0\) 时基向量是元素 \(1 \in F\)）。特别地，\(\dim_F(\bigwedge^k(V)) = \binom{n}{k}\).
+\end{corollary}
+
+\begin{proof}
+如定理 \ref{thm:11.36} 的证明所示，模 \(\mathcal{A}^k(M)\)，任何简单 \(k\)-张量中各项的次序都可以在引入一个符号变化的意义下重新排列。由此推论中的那些 \(k\)-张量（已按 \(v_i\) 的下标递增排列且没有重复入口）是 \(\bigwedge^k(V)\) 的生成元。为证明这些向量线性无关，只需构造一个从 \(V^k\) 到 \(F\) 的交错 \(k\)-重线性函数，它在给定的 \(v_{i_1} \wedge v_{i_2} \wedge \cdots \wedge v_{i_k}\) 上取 1，而在所有其他生成元上取 0. 这样的函数 \(f\) 由命题 \ref{pro:11.32} 中 \(T^k(V)\) 的基上的如下取值定义：若 \(\sigma\) 是把 \((j_1, j_2, \ldots, j_k)\) 变为 \((i_1, i_2, \ldots, i_k)\) 的唯一置换，则 \(f(v_{j_1} \otimes v_{j_2} \otimes \cdots \otimes v_{j_k}) = \varepsilon(\sigma)\)；而对任何其 \(k\) 元组指标不能置换为 \((i_1, i_2, \ldots, i_k)\) 的基张量，\(f\) 取 0（其中 \(\varepsilon(\sigma)\) 是 \(\sigma\) 的符号）。注意 \(f\) 在任何有重复入口的基张量上为 0. 值 \(\varepsilon(\sigma)\) 保证当 \(f\) 延拓到 \(T^k(V)\) 的所有元素上时给出交错映射，即 \(f\) 通过 \(\mathcal{A}^k(V)\) 分解。于是 \(f\) 就是所要的函数。\(\bigwedge^k(V)\) 的维数（即 \(k\) 元指标递增序列的个数）的计算留作习题。
+\end{proof}
+
+推论 \ref{cor:11.37} 中的结果对任何秩 \(n\) 的自由 \(R\)-模也成立。特别地，若 \(M \cong R^n\) 有 \(R\)-模基 \(m_1, \ldots, m_n\)，则
+\[
+\bigwedge\nolimits^n(M) = R(m_1 \wedge \cdots \wedge m_n)
+\]
+是以 \(m_1 \wedge \cdots \wedge m_n\) 为生成元的自由（秩 1）\(R\)-模，且 \(\bigwedge^{n+1}(M) = \bigwedge^{n+2}(M) = \cdots = 0\).
+
+\begin{example}
+设 \(R\) 是变量 \(x\) 与 \(y\) 的多项式环 \(\mathbb{Z}[x, y]\). 若 \(M = R\)，则 \(\bigwedge^2(M) = 0\)，故例如由 \(\bigwedge^2(R)\) 关于这类映射的泛性质（定理 \ref{thm:11.36}），\(R \times R\) 上没有非平凡的交错双线性映射。
+
+现在假设 \(M = I\) 是 \(R\) 中由 \(x\) 与 \(y\) 生成的理想 \((x, y)\). 则 \(\bigwedge^2 I \neq 0\). 看出这一点或许最容易的方法是构造一个 \(I \times I\) 上的非平凡交错双线性映射。映射
+\[
+\varphi(ax+by,\ cx+dy) = (ad-bc) \bmod (x, y)
+\]
+是有定义的、从 \(I \times I\) 到 \(\mathbb{Z} = R/I\) 的交错 \(R\)-双线性映射（参见习题 7）。由于 \(\varphi(x, y) = 1\)，可知 \(x \wedge y \in \bigwedge^2(I)\) 非零。与自由模的情形（定理 \ref{thm:11.36} 之后的例子中可以用到关于基的论证）不同，此时直接验证在 \(\bigwedge^2(I)\) 中 \(x \wedge y \neq 0\) 绝非平凡之事。
+
+\noindent\textbf{注：}理想 \(I\) 是秩 1（但不是自由）的 \(R\)-模的一个例子（整环上模的秩在第 12.1 节中定义），而这个例子表明：若 \(R\)-模 \(M\) 不是 \(R\) 上的自由模，则推论 \ref{cor:11.37} 的结果一般不再成立。
+\end{example}
+
+\noindent\textbf{张量代数的同态}
+
+若 \(\varphi : M \to N\) 是任意 \(R\)-模同态，则它在第 \(k\) 个张量幂上诱导出映射：
+\[
+T^k(\varphi) : T^k(M) \to T^k(N), \qquad m_1 \otimes \cdots \otimes m_k \longmapsto \varphi(m_1) \otimes \cdots \otimes \varphi(m_k).
+\]
+由此直接可知这个映射把理想 \(\mathcal{C}(M)\) 与 \(\mathcal{A}(M)\) 的每个齐次分量的生成元仍映到相应的生成元。于是 \(\varphi\) 在商上诱导出 \(R\)-模同态：
+\[
+\mathcal{S}^k(\varphi) : \mathcal{S}^k(M) \to \mathcal{S}^k(N), \qquad \bigwedge\nolimits^k(\varphi) : \bigwedge\nolimits^k(M) \to \bigwedge\nolimits^k(N),
+\]
+以及 \(T(\varphi)\)、\(\mathcal{S}(\varphi)\)、\(\bigwedge(\varphi)\). 此外，这三个映射中每一个都是环同态（因而是分次 \(R\)-代数同态）。
+
+特别有意义的情形是 \(M = V\) 是域 \(F\) 上 \(n\) 维向量空间、\(\varphi : V \to V\) 是自同态。此时由推论 \ref{cor:11.37}，\(\bigwedge^n(\varphi)\) 把 1 维空间 \(\bigwedge^n(V)\) 映到自身。设 \(v_1, \ldots, v_n\) 是 \(V\) 的一组基，故 \(v_1 \wedge \cdots \wedge v_n\) 是 \(\bigwedge^n(V)\) 的基。则
+\[
+\bigwedge\nolimits^n(\varphi)(v_1 \wedge \cdots \wedge v_n) = \varphi(v_1) \wedge \cdots \wedge \varphi(v_n) = D(\varphi)v_1 \wedge \cdots \wedge v_n
+\]
+对某个纯量 \(D(\varphi) \in F\) 成立。
+
+对 \(F\) 上任何 \(n \times n\) 矩阵 \(A\)，我们可以定义（关于给定基 \(v_1, \ldots, v_n\)）关联的自同态 \(\varphi\)，这给出映射 \(D : M_{n \times n}(F) \to F\)，其中 \(D(A) = D(\varphi)\). 容易验证这个映射 \(D\) 满足第 11.4 节中行列式函数的三条公理。于是定理 \ref{thm:11.24} 的唯一性断言给出：
+
+\begin{proposition}\label{pro:11.38}
+若 \(\varphi\) 是 \(n\) 维向量空间 \(V\) 上的自同态，则对所有 \(w \in \bigwedge^n(V)\) 有
+\[
+\bigwedge\nolimits^n(\varphi)(w) = \det(\varphi)\,w.
+\]
+\end{proposition}
+
+注意命题 \ref{pro:11.38} 把自同态 \(\varphi\) 的行列式刻画为 \(\bigwedge^n(V)\) 上某个自然诱导出的线性映射。行列式在考虑交错多重线性映射时自然出现这一事实，也解释了上面例子中映射 \(\varphi\) 的来源。
+
+与张量积一样，由单射 \(M \to N\) 诱导的映射 \(\mathcal{S}^k(\varphi)\) 与 \(\bigwedge^k(\varphi)\) 不必仍是单射（故例如当 \(M\) 是 \(N\) 的子模时，\(\bigwedge^2(M)\) 不必是 \(\bigwedge^2(N)\) 的子模）。
+
+\begin{example}
+把理想 \((x, y)\) 含入环 \(R = \mathbb{Z}[x, y]\) 的单射 \(\varphi : I \hookrightarrow R\)（二者都看作 \(R\)-模）诱导出映射 \(\bigwedge^2(\varphi) : \bigwedge^2(I) \to \bigwedge^2(R)\). 由于 \(\bigwedge^2(R) = 0\) 而 \(\bigwedge^2(I) \neq 0\)，这个映射不可能是单射。
+\end{example}
+
+可以证明若 \(M\) 是 \(R\)-模 \(N\) 的直和项，则 \(T(M)\)（相应地 \(\mathcal{S}(M)\) 与 \(\bigwedge(M)\)）是 \(T(N)\)（相应地 \(\mathcal{S}(N)\) 与 \(\bigwedge(N)\)）的 \(R\)-子代数（参见习题）。当 \(R = F\) 是域时，\(N\) 的每个子空间 \(M\) 都是 \(N\) 的直和项，故 \(M\) 相应的代数是 \(N\) 相应的代数的子代数。
+
+\noindent\textbf{对称张量与交错张量}
+
+在某些情形下，对称代数与外代数也可以用对称张量与交错张量（定义如下）来定义，这将把这些代数看作张量代数的子代数而不是商代数。
+
+对任意 \(R\)-模 \(M\)，对称群 \(S_k\) 在 \(M \times M \times \cdots \times M\)（\(k\) 个因子）上有自然的左群作用，由置换各因子给出：
+\[
+\sigma(v_1, \ldots, v_k) = (v_{\sigma^{-1}(1)}, \ldots, v_{\sigma^{-1}(k)}) \quad \text{对每个 } \sigma \in S_k
+\]
+（\(\sigma^{-1}\) 的出现是为了使它成为左群作用，参见第 5.1 节习题 8）。这个映射显然是 \(R\)-多重线性的，故存在定义良好的 \(S_k\) 在 \(T^k(M)\) 上的 \(R\)-线性左群作用，它在简单张量上由
+\[
+\sigma(m_1 \otimes \cdots \otimes m_k) = m_{\sigma^{-1}(1)} \otimes \cdots \otimes m_{\sigma^{-1}(k)} \quad \text{对每个 } \sigma \in S_k
+\]
+给出。
+
+\begin{definition}
+（1）元素 \(z \in T^k(M)\) 称为\textbf{对称 \(k\)-张量}，若对对称群 \(S_k\) 中的所有 \(\sigma\) 有 \(\sigma z = z\).
+
+（2）元素 \(z \in T^k(M)\) 称为\textbf{交错 \(k\)-张量}，若对对称群 \(S_k\) 中的所有 \(\sigma\) 有 \(\sigma z = \varepsilon(\sigma)z\)，其中 \(\varepsilon(\sigma)\) 是置换 \(\sigma\) 的符号 \(\pm 1\).
+\end{definition}
+
+由定义立即得知对称（相应地交错）\(k\)-张量的集合是所有 \(k\)-张量模的 \(R\)-子模。
+
+\begin{example}
+元素 \(m \otimes m\) 与 \(m_1 \otimes m_2+m_2 \otimes m_1\) 是对称 2-张量。元素 \(m_1 \otimes m_2-m_2 \otimes m_1\) 是交错 2-张量。
+\end{example}
+
+由定义还可清楚看出 \(\mathcal{C}^k(M)\) 与 \(\mathcal{A}^k(M)\) 在 \(S_k\) 的作用下都稳定，故在商 \(\mathcal{S}^k(M)\) 与 \(\bigwedge^k(M)\) 上有诱导的作用。
+
+\begin{proposition}\label{pro:11.39}
+设 \(\sigma\) 是对称群 \(S_k\) 中的元素，\(\varepsilon(\sigma)\) 是置换 \(\sigma\) 的符号。则
+
+（1）对每个 \(w \in \mathcal{S}^k(M)\) 有 \(\sigma w = w\)，且
+
+（2）对每个 \(w \in \bigwedge^k(M)\) 有 \(\sigma w = \varepsilon(\sigma)w\).
+\end{proposition}
+
+\begin{proof}
+第一个断言由定理 \ref{thm:11.34}（1）立即推出。我们在定理 \ref{thm:11.36} 的证明过程中已经证明
+\[
+m_1 \wedge \cdots \wedge m_i \wedge m_{i+1} \wedge \cdots \wedge m_k = -m_1 \wedge \cdots \wedge m_{i+1} \wedge m_i \wedge \cdots \wedge m_k,
+\]
+这表明（2）中的公式对简单乘积、对换 \(\sigma = (i\ i+1)\) 成立。由于这些对换生成 \(S_k\) 且 \(\varepsilon\) 是群同态，可知（2）对任意 \(\sigma \in S_k\)、对简单乘积 \(w\) 成立。由于两边对 \(w\) 都是 \(R\)-线性的，可知（2）对所有 \(w \in \bigwedge^k(M)\) 成立。
+\end{proof}
+
+由命题 \ref{pro:11.39}，对称群 \(S_k\) 在对称 \(k\)-张量的子模与商模 \(\mathcal{S}^k(M)\)（\(M\) 的 \(k\) 次对称幂）上都平凡作用。类似地，\(S_k\) 在交错 \(k\)-张量的子模上的作用与在 \(\bigwedge^k(M)\)（\(M\) 的 \(k\) 次外幂）上的作用相同。下面我们证明当 \(k!\) 是 \(R\) 中的单位时，这两组子模与商模分别同构（其中 \(k!\) 是 \(R\) 的 1 与自身相加 \(k!\) 次）。
+
+对任意 \(k\)-张量 \(z \in T^k(M)\) 定义
+\[
+\operatorname{Sym}(z) = \sum_{\sigma \in S_k} \sigma z, \qquad \operatorname{Alt}(z) = \sum_{\sigma \in S_k} \varepsilon(\sigma)\sigma z.
+\]
+对任意 \(k\)-张量 \(z\)，\(k\)-张量 \(\operatorname{Sym}(z)\) 是对称的，而 \(k\)-张量 \(\operatorname{Alt}(z)\) 是交错的。例如对任意 \(\tau \in S_k\)，
+\[
+\tau\operatorname{Alt}(z) = \sum_{\sigma \in S_k}\varepsilon(\sigma)\tau\sigma z = \sum_{\sigma' \in S_k}\varepsilon(\tau^{-1}\sigma')\sigma' z = \varepsilon(\tau^{-1})\sum_{\sigma' \in S_k}\varepsilon(\sigma')\sigma' z = \varepsilon(\tau)\operatorname{Alt}(z),
+\]
+其中令 \(\sigma' = \tau\sigma\). 张量 \(\operatorname{Sym}(z)\) 有时称为 \(z\) 的\textbf{对称化}，\(\operatorname{Alt}(z)\) 称为\textbf{反对称化}。
+
+若 \(z\) 已经是对称（相应地交错）张量，则 \(\operatorname{Sym}(z)\)（相应地 \(\operatorname{Alt}(z)\)）就是 \(k!z\). 由此 \(\operatorname{Sym}\)（相应地 \(\operatorname{Alt}\)）是 \(T^k(M)\) 的 \(R\)-模自同态，其像落在对称（相应地交错）张量的子模中。一般地这些映射不是满射，但若 \(k!\) 是 \(R\) 中的单位，则
+\[
+\frac{1}{k!}\operatorname{Sym}(z) = z \ \text{对任意对称张量 } z, \qquad \frac{1}{k!}\operatorname{Alt}(z) = z \ \text{对任意交错张量 } z,
+\]
+故此时映射 \((1/k!)\operatorname{Sym}\) 与 \((1/k!)\operatorname{Alt}\) 给出从 \(T^k(M)\) 到对称（相应地交错）张量子模上的满 \(R\)-模同态。
+
+\begin{proposition}\label{pro:11.40}
+假设 \(k!\) 是环 \(R\) 中的单位，\(M\) 是 \(R\)-模。则
+
+（1）映射 \((1/k!)\operatorname{Sym}\) 诱导出 \(M\) 的 \(k\) 次对称幂与对称 \(k\)-张量的 \(R\)-子模之间的 \(R\)-模同构：
+\[
+\frac{1}{k!}\operatorname{Sym} : \mathcal{S}^k(M) \xrightarrow{\ \sim\ } \{\text{对称 } k\text{-张量}\}.
+\]
+
+（2）映射 \((1/k!)\operatorname{Alt}\) 诱导出 \(M\) 的 \(k\) 次外幂与交错 \(k\)-张量的 \(R\)-子模之间的 \(R\)-模同构：
+\[
+\frac{1}{k!}\operatorname{Alt} : \bigwedge\nolimits^k(M) \xrightarrow{\ \sim\ } \{\text{交错 } k\text{-张量}\}.
+\]
+\end{proposition}
+
+\begin{proof}
+我们已经看到相应的映射是从 \(T^k(M)\) 出发的满 \(R\)-同态，故为证明命题只需验证它们的核分别是 \(\mathcal{C}^k(M)\) 与 \(\mathcal{A}^k(M)\). 我们证明第一个，把第二个留作习题。显然 \(\operatorname{Sym}\) 在任何两个只在因子次序上不同的 \(k\)-张量之差上为 0，故由定理 \ref{thm:11.34}（1），\(\mathcal{C}^k(M)\) 包含在 \((1/k!)\operatorname{Sym}\) 的核中。为证明反向包含，注意对任意 \(k\)-张量 \(z\) 有
+\[
+z-\frac{1}{k!}\operatorname{Sym}(z) = \frac{1}{k!}\sum_{\sigma \in S_k}(z-\sigma z).
+\]
+若 \(z\) 在 \(\operatorname{Sym}\) 的核中，则这个等式左端就是 \(z\)；而由于（再次由定理 \ref{thm:11.34}（1））对每个 \(\sigma \in S_k\) 有 \(z-\sigma z \in \mathcal{C}^k(M)\)，可知 \(z \in \mathcal{C}^k(M)\)，完成证明。
+\end{proof}
+
+映射 \((1/k!)\operatorname{Sym}\) 与 \((1/k!)\operatorname{Alt}\) 是到对称与反对称张量子模上的投影（参见第 10.2 节习题 11）。等价地，若 \(k!\) 是 \(R\) 中的单位，则作为 \(R\)-模有直和分解 \(T^k(M) = \ker(\pi) \oplus \mathrm{image}(\pi)\)，其中 \(\pi = (1/k!)\operatorname{Sym}\) 或 \((1/k!)\operatorname{Alt}\). 在第一种情形核由 \(\mathcal{C}^k(M)\) 组成，而像是所有对称张量的集合（此时说 \(\mathcal{C}^k(M)\) 构成对称张量的一个 \(R\)-模补）。在第二种情形核是 \(\mathcal{A}^k(M)\)，像由所有交错张量组成。
+
+\(S_k\) 在 \(T^k(M)\) 上的 \(R\)-线性左群作用使 \(T^k(M)\) 成为群环 \(RS_k\) 上的模（类似于第 10.1 节中描述的 \(F[x]\)-模的构造）。用这个模结构来说，这些投影给出 \(RS_k\)-子模 \(\mathcal{C}^k(M)\) 与 \(\mathcal{A}^k(M)\) 的 \(RS_k\)-子模补。用来构造这些映射的“平均化”技巧可以用来证明一个非常一般的结果（第 18.1 节的 Maschke 定理），它与有限群在向量空间上的作用有关（这是第 VI 部分中有限群“表示论”的论题）。
+
+若 \(k!\) 在 \(R\) 中不可逆，则一般不存在这样的 \(S_k\)-不变直和分解，故一般不可能例如把 \(M\) 的 \(k\) 次外幂与 \(M\) 的 \(k\) 次交错张量等同起来。
+
+还要注意当 \(k!\) 可逆时，可以把 \(M\) 的 \(k\) 次外幂定义为交错 \(k\)-张量的集合（在文献中，当理论在诸如 \(\mathbb{R}\) 与 \(\mathbb{C}\) 这样的域上展开时，有时会遇到这种等价的做法）。此时两个交错张量 \(z\) 与 \(w\) 的乘法定义为：先在 \(T(M)\) 中取乘积 \(zw = z \otimes w\)，然后把所得张量投影到交错张量的子模中。注意两个交错张量的简单乘积不必是交错的（例如交错张量的平方是对称张量）。
+
+\begin{example}
+设 \(V\) 是域 \(F\) 上的向量空间，其中 \(k! \neq 0\). \(T^k(V)\) 中 \(\mathcal{A}^k(V)\) 的向量空间补有很多（例如把 \(\mathcal{A}^k(V)\) 的一组基扩充为 \(T^k(V)\) 的基即可）。这些补依赖于 \(T^k(V)\) 的基的选取，故仅从向量空间的角度看它们无法彼此区分。由 \(S_k\) 的作用给出的 \(T^k(V)\) 上的附加结构挑出 \(\mathcal{A}^k(V)\) 的一个唯一的补，即命题 \ref{pro:11.40} 中的交错张量子空间。
+
+假设对所有 \(k \geq 2\) 有 \(k! \neq 0\) 于 \(F\) 中（即域 \(F\) 的“特征为 0”，参见第 7.3 节习题），例如 \(F = \mathbb{Q}\). 则整个外代数 \(\bigwedge(V) = \bigoplus_{k \geq 0}\bigwedge^k(V)\) 可以等同于其齐次分量都是交错张量的张量集合（关于相应的对称群 \(S_k\)）。然而用交错张量表示 \(\bigwedge(V)\) 中的乘法相当繁琐。例如设 \(v_1, v_2, v_3\) 是 \(V\) 中互不相同的基向量。两个交错张量 \(z = v_1\) 与 \(w = v_2 \otimes v_3-v_3 \otimes v_2\) 的乘积是先在完整个张量代数中计算
+\[
+z \otimes w = v_1 \otimes v_2 \otimes v_3 - v_1 \otimes v_3 \otimes v_2.
+\]
+这个 3-张量不是交错的——例如 \((1\ 2)(z \otimes w) = v_2 \otimes v_1 \otimes v_3-v_3 \otimes v_1 \otimes v_2 \neq -z \otimes w\)，而 \((1\ 2\ 3)(z \otimes w) = v_3 \otimes v_1 \otimes v_2-v_2 \otimes v_1 \otimes v_3 \neq z \otimes w\). 乘法要求我们把这个张量投影到交错张量的子空间中。这个投影由 \((1/3!)\operatorname{Alt}(z \otimes w)\) 给出，而容易的计算表明
+\[
+\frac{1}{6}\operatorname{Alt}(z \otimes w) = \frac{1}{6}[v_1 \otimes v_2 \otimes v_3+v_2 \otimes v_3 \otimes v_1+v_3 \otimes v_1 \otimes v_2-v_1 \otimes v_3 \otimes v_2-v_2 \otimes v_1 \otimes v_3-v_3 \otimes v_2 \otimes v_1],
+\]
+故右端就是用交错张量表示的 \(z\) 与 \(w\) 的乘积。同样的乘积用商代数 \(\bigwedge(V)\) 表示就简单地是
+\[
+v_1 \wedge (2v_2 \wedge v_3) = 2v_1 \wedge v_2 \wedge v_3.
+\]
+\end{example}
+
+\subsection*{习题}
+
+\noindent 这些习题中 \(R\) 是带 1 的交换环，\(M\) 是 \(R\)-模；\(F\) 是域，\(V\) 是 \(F\) 上的有限维向量空间。
+
+\begin{enumerate}
+\item 证明若 \(M\) 是循环 \(R\)-模，则 \(T(M) = \mathcal{S}(M)\)，即张量代数 \(T(M)\) 是交换的。
+
+\item 为命题 \ref{pro:11.33} 中 \(S/I = \bigoplus_{k \geq 0}S_k/I_k\) 的证明补充细节。〔首先证明 \(S_jJ_j \subseteq I_{i+j}\). 用它证明乘法 \((S_i/I_i)(S_j/I_j) \subseteq S_{i+j}/I_{i+j}\) 有定义，然后验证环公理并核对命题 \ref{pro:11.33} 的证明中所作的断言。〕
+
+\item 证明对 \(\mathbb{Z}\)-模 \(\mathbb{Z}\) 而言，映射 \(\operatorname{Sym}^2\) 的像由 2-张量 \(a(1 \otimes 1)\) 组成，其中 \(a\) 是偶数。特别地断定 \(\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}\) 中的对称张量 \(1 \otimes 1\) 不包含在映射 \(\operatorname{Sym}\) 的像中。
+
+\item 证明 \(m \wedge n_1 \wedge n_2 \wedge \cdots \wedge n_k = (-1)^k(n_1 \wedge n_2 \wedge \cdots \wedge n_k \wedge m)\). 特别地，对所有 \(x, y, z \in M\) 有 \(x \wedge (y \wedge z) = (y \wedge z) \wedge x\).
+
+\item 证明若 \(M\) 是秩 \(n\) 的自由 \(R\)-模，则对 \(i = 0, 1, 2, \ldots\) 有 \(\bigwedge^i(M)\) 是秩 \(\binom{n}{i}\) 的自由 \(R\)-模。
+
+\item 若 \(A\) 是任意满足对所有 \(a \in A\) 有 \(a^2 = 0\) 的 \(R\)-代数，\(\varphi : M \to A\) 是 \(R\)-模同态，证明存在唯一的 \(R\)-代数同态 \(\Phi : \bigwedge(M) \to A\) 使 \(\Phi|_M = \varphi\).
+
+\item 设 \(R = \mathbb{Z}[x, y]\)，\(I = (x, y)\).
+
+（a）证明若在 \(R\) 中 \(ax+by = a'x+b'y\)，则对某个多项式 \(f(x, y) \in R\) 有 \(a' = a+yf\) 且 \(b' = b-xf\).
+
+（b）证明推论 \ref{cor:11.37} 之后的例子中映射 \(\varphi(ax+by, cx+dy) = ad-bc \bmod (x, y)\) 是有定义的、从 \(I \times I\) 到 \(\mathbb{Z} = R/I\) 的交错 \(R\)-双线性映射。
+
+\item 设 \(R\) 是整环，\(F\) 是它的分式域。
+
+（a）把 \(F\) 看作 \(R\)-模，证明 \(\bigwedge^2 F = 0\).
+
+（b）设 \(I\) 是 \(F\) 的任意 \(R\)-子模（例如 \(R\) 中的任意理想）。证明当 \(i \geq 2\) 时 \(\bigwedge^i I\) 是挠 \(R\)-模（即对每个 \(x \in \bigwedge^i I\) 存在非零 \(r \in R\) 使 \(rx = 0\)）。
+
+（c）给出一个整环 \(R\) 与 \(F\) 中的 \(R\)-模 \(I\) 的例子，使对每个 \(i \geq 0\) 有 \(\bigwedge^i I \neq 0\)（参见推论 \ref{cor:11.37} 之后的例子）。
+
+\item 设 \(R = \mathbb{Z}[G]\) 是群 \(G = \{1, a\}\)（阶为 2）的群环。设 \(M = \mathbb{Z}e_1+\mathbb{Z}e_2\) 是以 \(e_1\) 与 \(e_2\) 为基的秩 2 自由 \(\mathbb{Z}\)-模。定义 \(a(e_1) = e_1+2e_2\)、\(a(e_2) = -e_2\). 证明这使 \(M\) 成为 \(R\)-模，且 \(R\)-模 \(\bigwedge^2 M\) 是以 \(e_1 \wedge e_2\) 为生成元的 2 阶群。
+
+\item 证明对任意 \(k\)-张量 \(z\) 有 \(z-(1/k!)\operatorname{Alt}(z) = (1/k!)\sum_{\sigma \in S_k}(z-\varepsilon(\sigma)\sigma z)\)，并用它证明命题 \ref{pro:11.40} 中 \(R\)-模同态 \((1/k!)\operatorname{Alt}\) 的核是 \(\mathcal{A}^k(M)\).
+
+\item 证明 \(\operatorname{Alt}^k\) 的像是 \(T^k(V)\) 中使对称群 \(S_k\) 中每个置换 \(\sigma\) 都作为纯量 \(\varepsilon(\sigma)\) 的乘法作用的唯一最大子空间。
+
+\item （a）证明若 \(f(x, y)\) 是 \(V\) 上的交错双线性映射（即对所有 \(x \in V\) 有 \(f(x, x) = 0\)），则对所有 \(x, y \in V\) 有 \(f(x, y) = -f(y, x)\).
+
+（b）假设在 \(F\) 中 \(-1 \neq 1\). 证明 \(f(x, y)\) 是 \(V\) 上的交错双线性映射（即对所有 \(x \in V\) 有 \(f(x, x) = 0\)）当且仅当对所有 \(x, y \in V\) 有 \(f(x, y) = -f(y, x)\).
+
+（c）假设在 \(F\) 中 \(-1 = 1\). 证明 \(V\) 上每个交错双线性形式 \(f(x, y)\) 都是对称的（即对所有 \(x, y \in V\) 有 \(f(x, y) = f(y, x)\)）。证明存在 \(V\) 上对称但非交错的 \(R\)-双线性映射。〔一种途径：证明 \(\mathcal{C}^2(V) \subseteq \mathcal{A}^2(V)\) 且 \(\mathcal{C}^2(V) \neq \mathcal{A}^2(V)\)（通过数维数）。另一种途径：具体构造一个对称但非交错的映射。〕
+
+\item 设 \(F\) 是任意满足 \(-1 \neq 1\) 的域，\(V\) 是 \(F\) 上的向量空间。证明 \(V \otimes_F V = \mathcal{S}^2(V) \oplus \bigwedge^2(V)\)，即每个 2-张量都可以唯一地写成对称张量与交错张量之和。
+
+\item 证明若 \(M\) 是 \(R\)-模 \(N\) 的直和项，则 \(T(M)\)（相应地 \(\mathcal{S}(M)\) 与 \(\bigwedge(M)\)）是 \(T(N)\)（相应地 \(\mathcal{S}(N)\) 与 \(\bigwedge(N)\)）的 \(R\)-子代数。
+\end{enumerate}
